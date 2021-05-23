@@ -7,7 +7,9 @@ class Sale < ApplicationRecord
   accepts_nested_attributes_for :sale_products, reject_if: :all_blank, allow_destroy: true
   enum payment_type: %i[Débito Crédito Dinheiro Débito_Dinheiro Crédito_Dinheiro Depósito Boleto]
   enum store_sale: %i[Sem_Loja PurchaseStoreRS PurchaseStoreSP]
-  scope :from_sale_store, -> (store = self.store_sales["Sem_Loja"]) {where("store_sale = ?", self.store_entrances[store])}
+  scope :from_sale_store, lambda { |store = store_sales['Sem_Loja']|
+                            where('store_sale = ?', store_entrances[store])
+                          }
 
   def self.integrate_orders(id, store_sale)
     sale = Sale.where(order_code: id).first
@@ -37,7 +39,8 @@ class Sale < ApplicationRecord
         order['result']['Item'].each do |item|
           product = Product.where(sku: item['sku']).or(Product.where(extra_sku: item['sku'])).first
           if product.present?
-            SaleProduct.create(quantity: item['quantidade'], value: item['valor_total'].to_f, product_id: product.id, sale_id: sale.id)
+            SaleProduct.create(quantity: item['quantidade'], value: item['valor_total'].to_f, product_id: product.id,
+                               sale_id: sale.id)
           else
             puts "Product Not Found - Pedido #{id}"
           end
@@ -56,18 +59,17 @@ class Sale < ApplicationRecord
                                  headers: { content: 'application/json',
                                             Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
       @order_page['result'].each do |order_page|
-        begin
-          SimploClient.create(name: order_page['Wspedido']['cliente_razaosocial'], 
-                              age: Time.now.year - Time.parse(order_page['Wspedido']['cliente_data_nascimento']).year,
-                              order_date: Time.parse(order_page['Wspedido']['data_pedido']))
-        rescue ArgumentError
-          puts 'erro'
-        end
+        SimploClient.create(name: order_page['Wspedido']['cliente_razaosocial'],
+                            age: Time.now.year - Time.parse(order_page['Wspedido']['cliente_data_nascimento']).year,
+                            order_date: Time.parse(order_page['Wspedido']['data_pedido']))
+      rescue ArgumentError
+        puts 'erro'
       end
     end
   end
   DATATABLE_COLUMNS = %w[customers.name order_code].freeze
-  DATATABLE_COLUMNS_ORDERING = %w[customers.name discount online order_code value disclosure exchange sales.created_at].freeze
+  DATATABLE_COLUMNS_ORDERING = %w[customers.name discount online order_code value disclosure exchange
+                                  sales.created_at].freeze
   class << self
     def datatable_filter(search_value, search_columns)
       return all if search_value.blank?
@@ -85,4 +87,3 @@ class Sale < ApplicationRecord
     end
   end
 end
-

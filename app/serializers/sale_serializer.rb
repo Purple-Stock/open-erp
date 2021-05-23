@@ -9,13 +9,13 @@ class SaleSerializer
 
   attribute :discount do |object|
     "R$#{object.discount.to_s.gsub('.', ',')}"
-  end  
+  end
 
   attribute :percentage do |object|
     "#{object.percentage}%"
   end
 
-   attribute :online do |object|
+  attribute :online do |object|
     if object.online
       'Sim'
     else
@@ -29,7 +29,7 @@ class SaleSerializer
     else
       'Não'
     end
-  end  
+  end
 
   attribute :disclosure do |object|
     if object.disclosure
@@ -43,8 +43,7 @@ class SaleSerializer
     "R$#{object.value.to_s.gsub('.', ',')}"
   end
 
-   attribute :created_at do |object|
-    object.created_at.strftime("%d/%m/%Y %H:%M")
+  attribute :created_at do |object|
+    object.created_at.strftime('%d/%m/%Y %H:%M')
   end
-
 end

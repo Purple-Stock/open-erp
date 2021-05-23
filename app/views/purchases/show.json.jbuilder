@@ -1,1 +1,1 @@
-json.partial! "purchases/purchase", purchase: @purchase
+json.partial! 'purchases/purchase', purchase: @purchase

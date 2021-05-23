@@ -19,15 +19,14 @@ class SimploOrder < ApplicationRecord
           order_page['Item'].each do |item|
             product = Product.where(sku: item['sku']).or(Product.where(extra_sku: item['sku'])).first
             if product.present?
-              SimploItem.create(sku: item['sku'], quantity: item['quantidade'].to_i, simplo_order_id: simplo_order.id, product_id: product.id)
+              SimploItem.create(sku: item['sku'], quantity: item['quantidade'].to_i, simplo_order_id: simplo_order.id,
+                                product_id: product.id)
             else
               SimploItem.create(sku: item['sku'], quantity: item['quantidade'].to_i, simplo_order_id: simplo_order.id)
             end
           end
-        else
-          if order.order_status != order_page['Wspedido']['pedidostatus_id']
-            order.update(order_status: order_page['Wspedido']['pedidostatus_id'])
-          end
+        elsif order.order_status != order_page['Wspedido']['pedidostatus_id']
+          order.update(order_status: order_page['Wspedido']['pedidostatus_id'])
         end
       rescue ArgumentError
         puts 'erro'
@@ -72,9 +71,9 @@ class SimploOrder < ApplicationRecord
                               Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
 
       HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
-        body: pc_data,
-        headers: { content: 'application/json',
-                    Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                   body: pc_data,
+                   headers: { content: 'application/json',
+                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
     rescue ArgumentError
       puts 'erro'
     end
@@ -82,9 +81,8 @@ class SimploOrder < ApplicationRecord
 
   def self.calendar
     Business::Calendar.new(
-                            working_days: %w[mon tue wed thu fri],
-                            holidays: ['20/11/2020','25/12/2020']
-                          )
+      working_days: %w[mon tue wed thu fri],
+      holidays: ['20/11/2020', '25/12/2020']
+    )
   end
 end
-

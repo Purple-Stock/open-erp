@@ -3,7 +3,9 @@ class PurchaseProduct < ApplicationRecord
   belongs_to :product
   acts_as_tenant :account
   enum store_entrance: %i[Sem_Loja PurchaseStoreRS PurchaseStoreSP]
-  scope :from_store, -> (store = self.store_entrances["Sem_Loja"]) {where("store_entrance = ?", self.store_entrances[store])}
+  scope :from_store, lambda { |store = store_entrances['Sem_Loja']|
+                       where('store_entrance = ?', store_entrances[store])
+                     }
 
   DATATABLE_COLUMNS = %w[custom_id name].freeze
 
@@ -26,12 +28,12 @@ class PurchaseProduct < ApplicationRecord
 
     def inventory_quantity(custom_id, quantity, store)
       product = Product.find_by(custom_id: custom_id)
-      purchase_product = product.purchase_products.from_store(store).sum("Quantity")
-      sale_products = product.sale_products.from_sale_store(store).sum("Quantity")
+      purchase_product = product.purchase_products.from_store(store).sum('Quantity')
+      sale_products = product.sale_products.from_sale_store(store).sum('Quantity')
       balance = purchase_product - sale_products
       purchase_quantity = quantity - balance
       purchase_store = 1
-      purchase_store = 2 if store == "PurchaseStoreSP"
+      purchase_store = 2 if store == 'PurchaseStoreSP'
       begin
         PurchaseProduct.create(product_id: product.id, quantity: purchase_quantity, store_entrance: purchase_store)
       rescue ArgumentError
