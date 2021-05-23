@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var defaultSchema = {\n  controllerAttribute: \"data-controller\",\n  actionAttribute: \"data-action\",\n  targetAttribute: \"data-target\"\n};","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { bless } from \"./blessing\";\n/** @hidden */\n\nexport function blessDefinition(definition) {\n  return {\n    identifier: definition.identifier,\n    controllerConstructor: bless(definition.controllerConstructor)\n  };\n}","map":null,"metadata":{},"sourceType":"module"}

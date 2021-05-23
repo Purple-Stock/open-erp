@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => 'Controle de Produtos dos Pedidos'%></h1>
+</div>
+<h3>Pedidos Pendentes:</h3>
+<h4><%= @simplo_orders.count %></h4>
+
+<table id="order_table" class="table-striped table-bordered table-responsive">
+  <thead>
+    <tr>
+      <th>Código Pedido</th>
+      <th>Nome</th>
+      <th>Dia do Pedido</th>
+      <th>Dias Da compra</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @simplo_orders.each do |simplo_order| %>
+      <tr>
+        <td><%= simplo_order.order_id %></td>
+        <td><%= simplo_order.client_name %></td>
+        <td><%= DateTime.parse(simplo_order.order_date).strftime("%-d/%-m/%Y %H:%M") %></td>
+        <td><%= @calendar.business_days_between(simplo_order.order_date, DateTime.now()) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

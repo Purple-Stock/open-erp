@@ -1,0 +1,18 @@
+<br><br><br>
+<div class="page-header">
+  <h1><%=t '.title', :default => 'Inserir pedidos Simplo 7'%></h1>
+</div>
+
+<%= form_with url: save_orders_path do |form| %>
+  <div class="form-group">
+    <div class="col-lg-4">
+      <%= form.text_field :number_orders, class: 'form-control form-control-sm', autocomplete: "email", placeholder: "Coloque os pedidos separados por vírgula"  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-4">
+      <%= select("sale", "origin", Sale.store_sales.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
+    </div>
+  </div>
+  <%= submit_tag("Integrar Pedido", :class => "btn btn-info") %>
+<% end %>

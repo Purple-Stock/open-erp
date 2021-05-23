@@ -1,0 +1,81 @@
+<%= form_for @product, :html => { :class => "form-horizontal product", :multipart => true } do |f| %>
+
+  <% if @product.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label t(:custom_id), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :custom_id, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:name), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :sku, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :sku, :class => 'form-control' %>
+    </div>
+  </div>
+    <div class="form-group">
+    <%= f.label :extra_sku, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :extra_sku, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:price), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :price, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :destaque, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :highlight %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:category_id), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= select("product", "category_id", Category.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:active), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :active  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :foto, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.file_field :image %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                products_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

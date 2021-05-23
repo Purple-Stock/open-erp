@@ -1,0 +1,30 @@
+<br><br>
+<div class="page-header">
+  <h1><%=t '.title', :default => 'Inventário de estoque'%></h1>
+</div>
+
+<%= form_with url: save_inventory_path do |form| %>
+  <div class="row">
+    <div class="form-group">
+      <%= form.label t(:product_id), :class => 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <%= form.select :product_id, Product.where(active: true).order(:custom_id).collect {|p| [ "#{p.custom_id} - #{p.name} ", p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= form.label 'Quantidade', :class => 'control-label col-md-1' %>
+      <div class="col-md-11">
+        <%= form.text_field :quantity, class: 'form-control form-control-sm', autocomplete: "email", placeholder: "Quantidade a ser transferida"  %>
+      </div>
+    </div>
+    <div class="form-group">
+       <%= form.label 'Loja Destino', :class => 'control-label col-md-1' %>
+      <div class="col-md-11">
+        <%= select("inventory", "destiny", Sale.store_sales.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <%= submit_tag("Salvar Inventário", :class => "btn btn-info") %>
+    </div>
+  </div>
+<% end %>

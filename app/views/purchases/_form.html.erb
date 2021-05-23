@@ -1,0 +1,51 @@
+<%= form_for @purchase, :html => { :class => "form-horizontal purchase" } do |f| %>
+
+  <% if @purchase.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @purchase.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :supplier_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :supplier_id, Supplier.all.collect {|p| [ p.name, p.id ] }, { :include_blank => 'Selecione um Fornecedor'}, :class => "form-control form-control-sm" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :value, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :value, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <h4>Produtos</h4>
+  <div class="form-group">
+    <div id="purchase_products">
+      <%= f.fields_for :purchase_products do |purchase_product| %>
+        <%= render 'purchase_product_fields', f: purchase_product %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association "Adicionar produtos", f, :purchase_products %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                purchases_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

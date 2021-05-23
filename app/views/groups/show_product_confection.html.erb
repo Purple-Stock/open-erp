@@ -1,0 +1,59 @@
+<div class="container">
+  <% @groups.each do |group|%>
+    <div class="col-sm-6 col-md-6 thumbnail">
+      <table class="table table-bordered table-responsive">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Entrada</th>
+            <th>Saída</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% 
+            sum_purchase = 0
+            total_purchase = 0
+            sum_sale = 0
+            total_sale = 0
+          %>
+          <% for i in 0..group.months - 1%>
+            <% date = Time.now - i.months %>
+            <% group.group_products.each do |group_product| %>
+                <%
+                  sum_purchase += group_product.product.count_month_purchase_product(date.year, date.month)
+                  sum_sale += group_product.product.count_month_sale_product(date.year, date.month)
+                %>
+                <tr>
+                  <td><%= group_product.product.custom_id %></td>
+                  <td><%= group_product.product.name.titleize + ' - ' + t(date.strftime("%B")) %></td>
+                  <td><%= group_product.product.count_month_purchase_product(date.year, date.month) %></td>
+                  <td><%= group_product.product.count_month_sale_product(date.year, date.month) %></td>
+                  <td><%= group_product.product.count_month_purchase_product(date.year, date.month).to_i - group_product.product.count_month_sale_product(date.year, date.month).to_i %></td>
+                </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+        <h3>Nome do Grupo: <%= group.description.titleize %></h3>
+        <h2><center><%= image_tag(group.group_products.first.product.image.attached? ? group.group_products.first.product.image : group.group_products.first.product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></center></h2>
+        <table class="table table-bordered">
+          <tr>
+            <td>Entrada: <%= total_purchase = sum_purchase %></td>
+            <td>Saída: <%= total_sale = sum_sale%></td>
+            <td>Saldo: <%= total_purchase - total_sale %></td>
+          </tr>
+          <tr>
+            <td>Entrada Média <%=group.months - 1%> meses: <%= total_purchase = (sum_purchase.to_f / (group.months - 1).to_f).round %></td>
+            <td>Saída Média <%=group.months - 1%> meses: <%= total_sale = (sum_sale.to_f / (group.months - 1).to_f).round %></td>
+            <td>Saldo: <%= total_purchase - total_sale %></td>
+          </tr>
+          <tr>
+            <td>Entrada Média <%=group.months%> meses: <%= total_purchase = (sum_purchase.to_f / group.months.to_f).round %></td>
+            <td>Saída Média<%=group.months%> meses: <%= total_sale = (sum_sale.to_f / group.months.to_f).round %></td>
+            <td>Saldo: <%= total_purchase - total_sale %></td>
+          </tr>
+      </table>
+   </div>
+  <% end %>
+</div>

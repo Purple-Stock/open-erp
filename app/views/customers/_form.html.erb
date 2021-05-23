@@ -1,0 +1,57 @@
+<%= form_for @customer, :html => { :class => "form-horizontal customer" } do |f| %>
+
+  <% if @customer.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @customer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :cpf, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :cpf, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:name), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:cellphone), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.telephone_field :cellphone, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:phone), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.telephone_field :phone, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                customers_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

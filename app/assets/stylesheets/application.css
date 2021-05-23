@@ -1,0 +1,70 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require bootstrap/scss/bootstrap
+ *= require fontawesome/rails
+ *= require select2/dist/css/select2
+ *= require izitoast/dist/css/iziToast
+ *= require stisla/style
+ *= require stisla/components
+ *= require_tree .
+ *= stub mobile
+ *= require_self
+ */
+
+.turbolinks-progress-bar {
+  background-color: #fd7e14;
+}
+
+.main-content {
+  min-height: 649px;
+}
+
+.table .btn-icon.btn-sm {
+  line-height: 15px;
+}
+
+.table thead th, .table td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+a[data-target='infinite-page.more'] {
+  display: none;
+}
+
+[data-controller='infinite-page'] {
+  position: relative;
+}
+
+[data-target='infinite-page.container'].loading:after {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 3rem;
+  height: 3rem;
+  opacity: 0.5;
+  border-radius: 100%;
+  margin: -2.2rem 0 0 -1rem;
+  content: '';
+}
+
+/** HIDE-SPINNERS-BEGIN **/
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+/** HIDE-SPINNERS-END **/
