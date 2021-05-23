@@ -454,7 +454,7 @@ select.form-control:not([size]):not([multiple]) {
 
 .imagecheck-caption {
   text-align: center;
-  padding: .25rem .25rem;
+  padding: .25rem;
   color: #9aa0ac;
   font-size: 0.875rem;
   transition: .3s color; }
@@ -614,7 +614,7 @@ select.form-control:not([size]):not([multiple]) {
     padding-top: 20px;
     padding-bottom: 20px; }
     .card .card-body .section-title {
-      margin: 30px 0 10px 0;
+      margin: 30px 0 10px;
       font-size: 16px; }
       .card .card-body .section-title:before {
         margin-top: 8px; }
@@ -1571,7 +1571,7 @@ h6 .badge {
   .navbar .form-inline .btn {
     border-radius: 0 3px 3px 0;
     background-color: #fff;
-    padding: 9px 15px 9px 15px;
+    padding: 9px 15px;
     border-color: transparent; }
   .navbar .form-inline .search-backdrop {
     position: fixed;
@@ -1604,7 +1604,7 @@ h6 .badge {
       color: #fff;
       font-size: 30px; }
     .navbar .form-inline .search-result .search-header {
-      padding: 13px 18px 2px 18px;
+      padding: 13px 18px 2px;
       text-transform: uppercase;
       letter-spacing: 1.3px;
       font-weight: 600;
@@ -2389,7 +2389,7 @@ pre {
     color: #191d21;
     font-weight: 600;
     position: relative;
-    margin: 30px 0 25px 0; }
+    margin: 30px 0 25px; }
     .section .section-title:before {
       content: ' ';
       border-radius: 5px;
