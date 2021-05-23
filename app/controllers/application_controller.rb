@@ -1,0 +1,23 @@
+class ApplicationController < ActionController::Base
+  include ForgeryProtection
+  include SetPlatform
+  before_action :authenticate_user!
+  set_current_tenant_through_filter
+  before_action :set_current_account
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def set_current_account
+    return unless current_user.present?
+    current_account = current_user.account
+    ActsAsTenant.current_tenant = current_account
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    added_attrs = [:company_name, :first_name, :cpf_cnpj, :phone, :last_name, :email, :password, :password_confirmation]
+    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+  end
+
+end

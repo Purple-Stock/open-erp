@@ -1,0 +1,10 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => 'Gerador de etiquetas'%></h1>
+</div>
+<%= form_with url: generate_print_tags_path do |form| %>
+  <%= form.label :product_name %>
+  <%= form.text_field :product_name %>
+  <%= form.label t(:quantity) %>
+  <%= form.number_field :quantity %>
+  <%= form.submit nil, :class => 'btn btn-primary' %>
+<% end %>

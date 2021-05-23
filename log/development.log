@@ -1,0 +1,904 @@
+  [1m[35m (99.1ms)[0m  [1m[35mCREATE DATABASE "inventory-control_development" ENCODING = 'unicode'[0m
+  [1m[35m (45.8ms)[0m  [1m[35mCREATE DATABASE "inventory-control_test" ENCODING = 'unicode'[0m
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5609893940275567740)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20190916161728)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190916161728"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20191012185504)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191012185504"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCustomers (20191012185506)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "name" character varying, "email" character varying, "cellphone" character varying, "phone" character varying, "cpf" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191012185506"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProducts (20191012185508)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "price" float, "bar_code" character varying, "image_url" character varying, "highlight" boolean, "category_id" bigint, "active" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_fb915499a4"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_products_on_category_id" ON "products"  ("category_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191012185508"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSales (20191012214051)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "sales" ("id" bigserial primary key, "value" float, "discount" float, "percentage" float, "online" boolean, "disclosure" boolean, "customer_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7c1f560977"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_sales_on_customer_id" ON "sales"  ("customer_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191012214051"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSaleProducts (20191012214053)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "sale_products" ("id" bigserial primary key, "quantity" integer, "value" float, "product_id" bigint, "sale_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_35f440f64a"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+, CONSTRAINT "fk_rails_d455fb70e2"
+FOREIGN KEY ("sale_id")
+  REFERENCES "sales" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_sale_products_on_product_id" ON "sale_products"  ("product_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_sale_products_on_sale_id" ON "sale_products"  ("sale_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191012214053"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSuppliers (20191012214054)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "suppliers" ("id" bigserial primary key, "name" character varying, "cnpj" character varying, "email" character varying, "cellphone" character varying, "phone" character varying, "address" character varying, "city" character varying, "state" character varying, "landmark" character varying, "note" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191012214054"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePurchases (20191012214056)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "purchases" ("id" bigserial primary key, "value" float, "supplier_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_fd0b101ea2"
+FOREIGN KEY ("supplier_id")
+  REFERENCES "suppliers" ("id")
+)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_purchases_on_supplier_id" ON "purchases"  ("supplier_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191012214056"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePurchaseProducts (20191012214058)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "purchase_products" ("id" bigserial primary key, "quantity" integer, "value" float, "product_id" bigint, "purchase_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_57ad37ee9d"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+, CONSTRAINT "fk_rails_af5429b901"
+FOREIGN KEY ("purchase_id")
+  REFERENCES "purchases" ("id")
+)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_purchase_products_on_product_id" ON "purchase_products"  ("product_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_purchase_products_on_purchase_id" ON "purchase_products"  ("purchase_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191012214058"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCustomIdToProduct (20191013002231)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "products" ADD "custom_id" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191013002231"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveStorageTables (20191102180750)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "byte_size" bigint NOT NULL, "checksum" character varying NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_active_storage_blobs_on_key" ON "active_storage_blobs"  ("key")[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments"  ("blob_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_active_storage_attachments_uniqueness" ON "active_storage_attachments"  ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191102180750"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPaymentTypeToSales (20191113013810)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "sales" ADD "payment_type" integer DEFAULT 0[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191113013810"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddExchangeToSales (20191120193819)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "sales" ADD "exchange" boolean DEFAULT FALSE[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191120193819"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGroups (20191121004325)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "groups" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191121004325"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGroupProducts (20191121004416)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "group_products" ("id" bigserial primary key, "group_id" bigint, "product_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_fcef542cf0"
+FOREIGN KEY ("group_id")
+  REFERENCES "groups" ("id")
+, CONSTRAINT "fk_rails_168b179691"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_group_products_on_group_id" ON "group_products"  ("group_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_group_products_on_product_id" ON "group_products"  ("product_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191121004416"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddMonthsToGroups (20191201042649)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "groups" ADD "months" integer DEFAULT 1[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191201042649"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveImageUrlFromProduct (20200607193928)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "products" DROP COLUMN "image_url"[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200607193928"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddSkuToProducts (20200621231244)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "products" ADD "sku" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200621231244"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOrderCodeToSales (20200622002219)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "sales" ADD "order_code" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200622002219"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePostData (20200629181858)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "post_data" ("id" bigserial primary key, "client_name" character varying, "cep" character varying, "state" character varying, "post_code" character varying, "post_type" character varying, "value" float, "send_date" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200629181858"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSimploProducts (20200713134711)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "simplo_products" ("id" bigserial primary key, "name" character varying, "sku" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200713134711"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddStoreEntranceToPurchaseProducts (20200716215608)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "purchase_products" ADD "store_entrance" integer DEFAULT 0[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200716215608"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddStoreSaleToSales (20200716223241)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "sales" ADD "store_sale" integer DEFAULT 0[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200716223241"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddExtraSkuToProducts (20200717231848)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "products" ADD "extra_sku" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200717231848"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSimploClients (20200903004457)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "simplo_clients" ("id" bigserial primary key, "name" character varying, "age" integer, "order_date" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200903004457"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSimploOrders (20200907023628)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "simplo_orders" ("id" bigserial primary key, "client_name" character varying, "order_id" character varying, "order_status" character varying, "order_date" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200907023628"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSimploItems (20200907023648)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "simplo_items" ("id" bigserial primary key, "sku" character varying, "quantity" integer, "simplo_order_id" bigint, "product_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_cdff93b294"
+FOREIGN KEY ("simplo_order_id")
+  REFERENCES "simplo_orders" ("id")
+, CONSTRAINT "fk_rails_32282dff19"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_simplo_items_on_simplo_order_id" ON "simplo_items"  ("simplo_order_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_simplo_items_on_product_id" ON "simplo_items"  ("product_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200907023648"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTotalChangeValueToSales (20201031135952)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "sales" ADD "total_exchange_value" float[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201031135952"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSimploItemSales (20201110130051)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "simplo_item_sales" ("id" bigserial primary key, "produto_id" character varying, "sku" character varying, "nome_produto" character varying, "quantidade" integer, "valor_unitario" float, "valor_total" float, "peso" float, "desconto" float, "data_pedido" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201110130051"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOrderIdToSimploItemSales (20201112163448)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "simplo_item_sales" ADD "order_id" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (1.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201112163448"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSimploOrderPayments (20201204001321)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "simplo_order_payments" ("id" bigserial primary key, "order_id" character varying, "client_name" character varying, "integrador" character varying, "pagamento_forma" character varying, "codigo_transacao" character varying, "parcelas" character varying, "total" character varying, "data_pedido" character varying, "order_status" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20201204001321"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAccounts (20210104184746)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" bigserial primary key, "company_name" character varying, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b1e30bebc8"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_accounts_on_user_id" ON "accounts"  ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210104184746"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAccountToProducts (20210104184748)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "products" ADD "account_id" integer[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_products_on_account_id" ON "products"  ("account_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210104184748"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAccountToCategories (20210104205220)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "categories" ADD "account_id" integer[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_categories_on_account_id" ON "categories"  ("account_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210104205220"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAccountToPurchaseProducts (20210104205754)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "purchase_products" ADD "account_id" integer[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_purchase_products_on_account_id" ON "purchase_products"  ("account_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210104205754"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAccountToSaleProducts (20210104210247)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "sale_products" ADD "account_id" integer[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_sale_products_on_account_id" ON "sale_products"  ("account_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210104210247"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAccountToSales (20210104211616)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "sales" ADD "account_id" integer[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_sales_on_account_id" ON "sales"  ("account_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210104211616"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAccountToCustomers (20210104212008)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "customers" ADD "account_id" integer[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_customers_on_account_id" ON "customers"  ("account_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210104212008"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddFullNameToUsers (20210104233115)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "first_name" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_name" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "company_name" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210104233115"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAccountToSuppliers (20210107094049)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "suppliers" ADD "account_id" integer[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_suppliers_on_account_id" ON "suppliers"  ("account_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210107094049"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DropCompanies (20210107131954)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "companies"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5609893940275567740)[0m
+Started GET "/" for ::1 at 2021-04-13 15:19:10 -0300
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (6.0.3.6) lib/active_record/migration.rb:586:in `check_pending!'
+activerecord (6.0.3.6) lib/active_record/migration.rb:564:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.6) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.1.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.1.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.6) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/rails/actions" for ::1 at 2021-04-13 15:19:13 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5609893940275567740)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DropCompanies (20210107131954)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "companies"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5609893940275567740)[0m
+  
+StandardError (An error has occurred, this and all later migrations canceled:
+
+PG::UndefinedTable: ERROR:  table "companies" does not exist
+):
+  
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/database_statements.rb:92:in `exec'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/database_statements.rb:92:in `block (2 levels) in execute'
+activesupport (6.0.3.6) lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+activesupport (6.0.3.6) lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+activesupport (6.0.3.6) lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/database_statements.rb:91:in `block in execute'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract_adapter.rb:722:in `block (2 levels) in log'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:26:in `block (2 levels) in synchronize'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract_adapter.rb:721:in `block in log'
+activesupport (6.0.3.6) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract_adapter.rb:712:in `log'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/database_statements.rb:90:in `execute'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/schema_statements.rb:58:in `drop_table'
+activerecord (6.0.3.6) lib/active_record/migration.rb:890:in `block in method_missing'
+activerecord (6.0.3.6) lib/active_record/migration.rb:858:in `block in say_with_time'
+/usr/share/rvm/rubies/ruby-2.6.6/lib/ruby/2.6.0/benchmark.rb:293:in `measure'
+activerecord (6.0.3.6) lib/active_record/migration.rb:858:in `say_with_time'
+activerecord (6.0.3.6) lib/active_record/migration.rb:879:in `method_missing'
+db/migrate/20210107131954_drop_companies.rb:3:in `change'
+activerecord (6.0.3.6) lib/active_record/migration.rb:828:in `exec_migration'
+activerecord (6.0.3.6) lib/active_record/migration.rb:812:in `block (2 levels) in migrate'
+/usr/share/rvm/rubies/ruby-2.6.6/lib/ruby/2.6.0/benchmark.rb:293:in `measure'
+activerecord (6.0.3.6) lib/active_record/migration.rb:811:in `block in migrate'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:471:in `with_connection'
+activerecord (6.0.3.6) lib/active_record/migration.rb:810:in `migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1002:in `migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1310:in `block in execute_migration_in_transaction'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1361:in `block in ddl_transaction'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/database_statements.rb:280:in `block in transaction'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/transaction.rb:280:in `block in within_new_transaction'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:26:in `block (2 levels) in synchronize'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/transaction.rb:278:in `within_new_transaction'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/database_statements.rb:280:in `transaction'
+activerecord (6.0.3.6) lib/active_record/transactions.rb:212:in `transaction'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1361:in `ddl_transaction'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1309:in `execute_migration_in_transaction'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1281:in `block in migrate_without_lock'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1280:in `each'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1280:in `migrate_without_lock'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1229:in `block in migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1382:in `with_advisory_lock'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1229:in `migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1061:in `up'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1036:in `migrate'
+activerecord (6.0.3.6) lib/active_record/tasks/database_tasks.rb:238:in `migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:135:in `block in <class:PendingMigrationError>'
+activesupport (6.0.3.6) lib/active_support/actionable_error.rb:28:in `dispatch'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/actionable_exceptions.rb:20:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.1.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.1.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.6) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for ::1 at 2021-04-13 15:20:40 -0300
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (6.0.3.6) lib/active_record/migration.rb:586:in `check_pending!'
+activerecord (6.0.3.6) lib/active_record/migration.rb:564:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.6) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.1.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.1.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.6) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/rails/actions" for ::1 at 2021-04-13 15:20:42 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5609893940275567740)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DropCompanies (20210107131954)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE "companies"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5609893940275567740)[0m
+  
+StandardError (An error has occurred, this and all later migrations canceled:
+
+PG::UndefinedTable: ERROR:  table "companies" does not exist
+):
+  
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/database_statements.rb:92:in `exec'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/database_statements.rb:92:in `block (2 levels) in execute'
+activesupport (6.0.3.6) lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+activesupport (6.0.3.6) lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+activesupport (6.0.3.6) lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/database_statements.rb:91:in `block in execute'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract_adapter.rb:722:in `block (2 levels) in log'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:26:in `block (2 levels) in synchronize'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract_adapter.rb:721:in `block in log'
+activesupport (6.0.3.6) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract_adapter.rb:712:in `log'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/database_statements.rb:90:in `execute'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/postgresql/schema_statements.rb:58:in `drop_table'
+activerecord (6.0.3.6) lib/active_record/migration.rb:890:in `block in method_missing'
+activerecord (6.0.3.6) lib/active_record/migration.rb:858:in `block in say_with_time'
+/usr/share/rvm/rubies/ruby-2.6.6/lib/ruby/2.6.0/benchmark.rb:293:in `measure'
+activerecord (6.0.3.6) lib/active_record/migration.rb:858:in `say_with_time'
+activerecord (6.0.3.6) lib/active_record/migration.rb:879:in `method_missing'
+db/migrate/20210107131954_drop_companies.rb:3:in `change'
+activerecord (6.0.3.6) lib/active_record/migration.rb:828:in `exec_migration'
+activerecord (6.0.3.6) lib/active_record/migration.rb:812:in `block (2 levels) in migrate'
+/usr/share/rvm/rubies/ruby-2.6.6/lib/ruby/2.6.0/benchmark.rb:293:in `measure'
+activerecord (6.0.3.6) lib/active_record/migration.rb:811:in `block in migrate'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:471:in `with_connection'
+activerecord (6.0.3.6) lib/active_record/migration.rb:810:in `migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1002:in `migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1310:in `block in execute_migration_in_transaction'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1361:in `block in ddl_transaction'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/database_statements.rb:280:in `block in transaction'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/transaction.rb:280:in `block in within_new_transaction'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:26:in `block (2 levels) in synchronize'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `handle_interrupt'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:25:in `block in synchronize'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `handle_interrupt'
+activesupport (6.0.3.6) lib/active_support/concurrency/load_interlock_aware_monitor.rb:21:in `synchronize'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/transaction.rb:278:in `within_new_transaction'
+activerecord (6.0.3.6) lib/active_record/connection_adapters/abstract/database_statements.rb:280:in `transaction'
+activerecord (6.0.3.6) lib/active_record/transactions.rb:212:in `transaction'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1361:in `ddl_transaction'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1309:in `execute_migration_in_transaction'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1281:in `block in migrate_without_lock'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1280:in `each'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1280:in `migrate_without_lock'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1229:in `block in migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1382:in `with_advisory_lock'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1229:in `migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1061:in `up'
+activerecord (6.0.3.6) lib/active_record/migration.rb:1036:in `migrate'
+activerecord (6.0.3.6) lib/active_record/tasks/database_tasks.rb:238:in `migrate'
+activerecord (6.0.3.6) lib/active_record/migration.rb:135:in `block in <class:PendingMigrationError>'
+activesupport (6.0.3.6) lib/active_support/actionable_error.rb:28:in `dispatch'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/actionable_exceptions.rb:20:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.1.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.1.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.6) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for ::1 at 2021-04-13 15:21:38 -0300
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (6.0.3.6) lib/active_record/migration.rb:586:in `check_pending!'
+activerecord (6.0.3.6) lib/active_record/migration.rb:564:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.3.6) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.1.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.1.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.1.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.6) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+request_store (1.5.0) lib/request_store/middleware.rb:19:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.6) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.6) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/rails/actions" for ::1 at 2021-04-13 15:21:40 -0300
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5609893940275567740)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddFieldsToUsers (20210118194615)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "users" ADD "cpf_cnpj" character varying[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "phone" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20210118194615"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-04-13 18:21:40.490828"], ["updated_at", "2021-04-13 18:21:40.490828"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5609893940275567740)[0m
+Started GET "/" for ::1 at 2021-04-13 15:21:40 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as HTML
+Completed 401 Unauthorized in 9ms (ActiveRecord: 0.0ms | Allocations: 1740)
+
+
+Started GET "/users/sign_in" for ::1 at 2021-04-13 15:21:40 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.7ms | Allocations: 524)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 6.4ms | Allocations: 3727)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/matheuspuppe/Desktop/github/web_purple_stock/public/packs
+[Webpacker] Hash: e5e0394aada62feda793
+Version: webpack 4.44.2
+Time: 5721ms
+Built at: 04/13/2021 3:21:48 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-bf7a34509fb13d349874.js   1.32 MiB  application  [emitted] [immutable]  application
+js/application-bf7a34509fb13d349874.js.map   1.48 MiB  application  [emitted] [dev]        application
+       js/products-b99272a423a7012a2666.js   6.31 KiB     products  [emitted] [immutable]  products
+   js/products-b99272a423a7012a2666.js.map   6.35 KiB     products  [emitted] [dev]        products
+                             manifest.json  682 bytes               [emitted]              
+Entrypoint application = js/application-bf7a34509fb13d349874.js js/application-bf7a34509fb13d349874.js.map
+Entrypoint products = js/products-b99272a423a7012a2666.js js/products-b99272a423a7012a2666.js.map
+[./app/javascript/app.js] 1.81 KiB {application} [built]
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/controllers sync recursive _controller\.js$] ./app/javascript/controllers sync _controller\.js$ 448 bytes {application} [built]
+[./app/javascript/controllers/date_controller.js] 3.07 KiB {application} [optional] [built]
+[./app/javascript/controllers/datetime_controller.js] 3.09 KiB {application} [optional] [built]
+[./app/javascript/controllers/hello_controller.js] 3.26 KiB {application} [optional] [built]
+[./app/javascript/controllers/index.js] 396 bytes {application} [built]
+[./app/javascript/helpers.js] 3.18 KiB {application} [built]
+[./app/javascript/packs/application.js] 2.25 KiB {application} [built]
+[./app/javascript/packs/products.js] 2.43 KiB {products} [built]
+[./app/javascript/vendors/stisla/scripts.js] 18 KiB {application} [built]
+[./app/javascript/vendors/stisla/stisla.js] 8.13 KiB {application} [built]
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 905 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 63 hidden modules
+
+  Rendered shared/_navbar.html.erb (Duration: 0.9ms | Allocations: 729)
+  Rendered shared/_sidebar.html.erb (Duration: 1.2ms | Allocations: 1216)
+  Rendered shared/_footer.html.erb (Duration: 0.2ms | Allocations: 95)
+  Rendered shared/_toastr.html.erb (Duration: 0.3ms | Allocations: 174)
+Completed 200 OK in 7302ms (Views: 7285.9ms | ActiveRecord: 4.2ms | Allocations: 187478)
+
+
+Started GET "/" for ::1 at 2021-05-23 03:55:14 -0300
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms | Allocations: 1216)
+
+
+Started GET "/users/sign_in" for ::1 at 2021-05-23 03:55:14 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.5ms | Allocations: 527)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 9.5ms | Allocations: 2919)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_navbar.html.erb (Duration: 1.0ms | Allocations: 732)
+  Rendered shared/_sidebar.html.erb (Duration: 1.4ms | Allocations: 1216)
+  Rendered shared/_footer.html.erb (Duration: 0.3ms | Allocations: 95)
+  Rendered shared/_toastr.html.erb (Duration: 0.6ms | Allocations: 174)
+Completed 200 OK in 171ms (Views: 127.6ms | ActiveRecord: 6.2ms | Allocations: 58752)
+
+
+Started POST "/users/sign_in" for ::1 at 2021-05-23 03:55:43 -0300
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"ODqOSwYEPYp31SPRC2EOLRhhrMPc7xC3HGDkLljO5BAknNE6UJUSE/u36OgvD1SiyxM5KkyJI9o7abvN9BMsBQ==", "user"=>{"email"=>"matheus.puppe@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Entrar"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "matheus.puppe@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_account'
+Completed 401 Unauthorized in 18ms (ActiveRecord: 6.2ms | Allocations: 3514)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"ODqOSwYEPYp31SPRC2EOLRhhrMPc7xC3HGDkLljO5BAknNE6UJUSE/u36OgvD1SiyxM5KkyJI9o7abvN9BMsBQ==", "user"=>{"email"=>"matheus.puppe@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Entrar"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 2.8ms | Allocations: 527)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 10.2ms | Allocations: 3089)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_navbar.html.erb (Duration: 0.8ms | Allocations: 716)
+  Rendered shared/_sidebar.html.erb (Duration: 1.2ms | Allocations: 1200)
+  Rendered shared/_footer.html.erb (Duration: 0.2ms | Allocations: 95)
+  Rendered shared/_toastr.html.erb (Duration: 0.3ms | Allocations: 163)
+Completed 200 OK in 357ms (Views: 112.1ms | ActiveRecord: 0.0ms | Allocations: 58530)
+
+
+Started GET "/users/sign_up" for ::1 at 2021-05-23 03:55:48 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.6ms | Allocations: 204)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 10.4ms | Allocations: 3341)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_navbar.html.erb (Duration: 0.1ms | Allocations: 41)
+  Rendered shared/_sidebar.html.erb (Duration: 0.1ms | Allocations: 40)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered shared/_toastr.html.erb (Duration: 0.1ms | Allocations: 17)
+Completed 200 OK in 29ms (Views: 27.8ms | ActiveRecord: 0.0ms | Allocations: 16880)
+
+
+Started POST "/users" for ::1 at 2021-05-23 03:56:19 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"acuUJ8uXyz2cUPhICYuJr0e/XOQ1a1rZp/KAhY1DIc66YkLJH4E++UVUkilsGHdxQkj5D2ri03/h1VS9tP3rhQ==", "user"=>{"company_name"=>"Tetas", "cpf_cnpj"=>"02399708024", "first_name"=>"Matheus", "last_name"=>"Puppe", "email"=>"matheus.puppe@gmail.com", "phone"=>"11-995597242", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Cadastrar"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:16:in `set_account'
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "matheus.puppe@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (2.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "last_name", "company_name", "cpf_cnpj", "phone") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "matheus.puppe@gmail.com"], ["encrypted_password", "$2a$12$yk8.xrODUcLXsiHuChcdQ.c54PN0L8e7nacSGF7O18NNzIczqPwDC"], ["created_at", "2021-05-23 06:56:19.888526"], ["updated_at", "2021-05-23 06:56:19.888526"], ["first_name", "Matheus"], ["last_name", "Puppe"], ["company_name", "Tetas"], ["cpf_cnpj", "02399708024"], ["phone", "11-995597242"]]
+  [1m[36mAccount Create (2.0ms)[0m  [1m[32mINSERT INTO "accounts" ("user_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["user_id", 1], ["created_at", "2021-05-23 06:56:19.893921"], ["updated_at", "2021-05-23 06:56:19.893921"]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:11:in `assign_account'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `assign_account'
+  [1m[36mAccount Update (0.3ms)[0m  [1m[33mUPDATE "accounts" SET "company_name" = $1, "updated_at" = $2 WHERE "accounts"."id" = $3[0m  [["company_name", "Tetas"], ["updated_at", "2021-05-23 06:56:19.904585"], ["id", 1]]
+  ↳ app/models/user.rb:12:in `assign_account'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 262ms (ActiveRecord: 11.1ms | Allocations: 23477)
+
+
+Started GET "/" for ::1 at 2021-05-23 03:56:19 -0300
+Processing by ProductsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.5ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_account'
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 11.4ms | Allocations: 5008)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_navbar.html.erb (Duration: 6.8ms | Allocations: 3934)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.6ms | Allocations: 231)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 90)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.4ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 56)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.3ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.6ms | Allocations: 56)
+  Rendered shared/_sidebar.html.erb (Duration: 6.4ms | Allocations: 1796)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered shared/_toastr.html.erb (Duration: 0.3ms | Allocations: 20)
+Completed 200 OK in 50ms (Views: 41.1ms | ActiveRecord: 0.9ms | Allocations: 26348)
+
+
+Started GET "/products_defer?draw=1&columns%5B0%5D%5Bdata%5D=attributes.custom_id&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=attributes.sku&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=false&columns%5B1%5D%5Borderable%5D=false&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=attributes.image_url&columns%5B2%5D%5Bname%5D=&columns%5B2%5D%5Bsearchable%5D=false&columns%5B2%5D%5Borderable%5D=false&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B3%5D%5Bdata%5D=attributes.price&columns%5B3%5D%5Bname%5D=&columns%5B3%5D%5Bsearchable%5D=false&columns%5B3%5D%5Borderable%5D=false&columns%5B3%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B3%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B4%5D%5Bdata%5D=attributes.name&columns%5B4%5D%5Bname%5D=&columns%5B4%5D%5Bsearchable%5D=true&columns%5B4%5D%5Borderable%5D=true&columns%5B4%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B4%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B5%5D%5Bdata%5D=attributes.count_purchase_product&columns%5B5%5D%5Bname%5D=&columns%5B5%5D%5Bsearchable%5D=false&columns%5B5%5D%5Borderable%5D=false&columns%5B5%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B5%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B6%5D%5Bdata%5D=attributes.count_sale_product&columns%5B6%5D%5Bname%5D=&columns%5B6%5D%5Bsearchable%5D=false&columns%5B6%5D%5Borderable%5D=false&columns%5B6%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B6%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B7%5D%5Bdata%5D=attributes.balance&columns%5B7%5D%5Bname%5D=&columns%5B7%5D%5Bsearchable%5D=false&columns%5B7%5D%5Borderable%5D=false&columns%5B7%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B7%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B8%5D%5Bdata%5D=attributes.category&columns%5B8%5D%5Bname%5D=&columns%5B8%5D%5Bsearchable%5D=false&columns%5B8%5D%5Borderable%5D=false&columns%5B8%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B8%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B9%5D%5Bdata%5D=attributes.active&columns%5B9%5D%5Bname%5D=&columns%5B9%5D%5Bsearchable%5D=false&columns%5B9%5D%5Borderable%5D=false&columns%5B9%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B9%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B10%5D%5Bdata%5D=attributes.id&columns%5B10%5D%5Bname%5D=&columns%5B10%5D%5Bsearchable%5D=false&columns%5B10%5D%5Borderable%5D=false&columns%5B10%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B10%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=desc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1621752915266" for ::1 at 2021-05-23 03:56:21 -0300
+Processing by ProductsController#index_defer as JSON
+  Parameters: {"draw"=>"1", "columns"=>{"0"=>{"data"=>"attributes.custom_id", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "1"=>{"data"=>"attributes.sku", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "2"=>{"data"=>"attributes.image_url", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "3"=>{"data"=>"attributes.price", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "4"=>{"data"=>"attributes.name", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "5"=>{"data"=>"attributes.count_purchase_product", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "6"=>{"data"=>"attributes.count_sale_product", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "7"=>{"data"=>"attributes.balance", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "8"=>{"data"=>"attributes.category", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "9"=>{"data"=>"attributes.active", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "10"=>{"data"=>"attributes.id", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}}, "order"=>{"0"=>{"column"=>"0", "dir"=>"desc"}}, "start"=>"0", "length"=>"10", "search"=>{"value"=>"", "regex"=>"false"}, "_"=>"1621752915266"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_account'
+  [1m[36mAccount Load (1.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_account'
+  [1m[35m (4.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "products" WHERE "products"."account_id" = $1 AND "products"."active" = $2 AND "products"."account_id" = $3[0m  [["account_id", 1], ["active", true], ["account_id", 1]]
+  ↳ app/controllers/products_controller.rb:13:in `index_defer'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "products" WHERE "products"."account_id" = $1 AND "products"."active" = $2[0m  [["account_id", 1], ["active", true]]
+  ↳ app/controllers/products_controller.rb:22:in `index_defer'
+  [1m[35mCACHE  (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "products" WHERE "products"."account_id" = $1 AND "products"."active" = $2[0m  [["account_id", 1], ["active", true]]
+  ↳ app/controllers/products_controller.rb:23:in `index_defer'
+  [1m[36mProduct Load (1.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."account_id" = $1 AND "products"."active" = $2 AND "products"."account_id" = $3 ORDER BY custom_id desc LIMIT $4 OFFSET $5[0m  [["account_id", 1], ["active", true], ["account_id", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/products_controller.rb:25:in `index_defer'
+Completed 200 OK in 86ms (Views: 0.7ms | ActiveRecord: 22.5ms | Allocations: 7635)
+
+
+Started GET "/products/new" for ::1 at 2021-05-23 03:56:25 -0300
+Processing by ProductsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.4ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_account'
+  Rendering products/new.html.erb within layouts/application
+  [1m[36mCategory Load (1.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."account_id" = $1[0m  [["account_id", 1]]
+  ↳ app/views/products/_form.html.erb:57:in `collect'
+  Rendered products/_form.html.erb (Duration: 15.3ms | Allocations: 6018)
+  Rendered products/new.html.erb within layouts/application (Duration: 16.8ms | Allocations: 7012)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_navbar.html.erb (Duration: 8.3ms | Allocations: 3884)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.5ms | Allocations: 231)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 91)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 55)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.3ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 56)
+  Rendered shared/_sidebar.html.erb (Duration: 4.7ms | Allocations: 1796)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered shared/_toastr.html.erb (Duration: 0.1ms | Allocations: 17)
+Completed 200 OK in 90ms (Views: 39.0ms | ActiveRecord: 12.5ms | Allocations: 47582)
+
+
+Started GET "/reports/payment" for ::1 at 2021-05-23 04:01:16 -0300
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ReportsController#payment as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.5ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_account'
+  Rendering reports/payment.html.erb within layouts/application
+  Rendered reports/payment.html.erb within layouts/application (Duration: 73.8ms | Allocations: 100066)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_navbar.html.erb (Duration: 5.8ms | Allocations: 4729)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.6ms | Allocations: 232)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 56)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.2ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 89)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 58)
+  Rendered shared/_sidebar.html.erb (Duration: 5.9ms | Allocations: 2983)
+  Rendered shared/_footer.html.erb (Duration: 0.2ms | Allocations: 95)
+  Rendered shared/_toastr.html.erb (Duration: 0.3ms | Allocations: 174)
+Completed 200 OK in 260ms (Views: 205.7ms | ActiveRecord: 9.5ms | Allocations: 170405)
+
+
+Started GET "/" for ::1 at 2021-05-23 04:01:29 -0300
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_account'
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 76.0ms | Allocations: 104552)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_navbar.html.erb (Duration: 4.6ms | Allocations: 4704)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.4ms | Allocations: 232)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 90)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 56)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 87)
+  Rendered shared/_sidebar_dropdown.html.erb (Duration: 0.1ms | Allocations: 56)
+  Rendered shared/_sidebar.html.erb (Duration: 4.4ms | Allocations: 2979)
+  Rendered shared/_footer.html.erb (Duration: 0.3ms | Allocations: 96)
+  Rendered shared/_toastr.html.erb (Duration: 0.4ms | Allocations: 174)
+Completed 200 OK in 230ms (Views: 181.5ms | ActiveRecord: 7.2ms | Allocations: 174832)
+
+
+Started GET "/products_defer?draw=1&columns%5B0%5D%5Bdata%5D=attributes.custom_id&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=attributes.sku&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=false&columns%5B1%5D%5Borderable%5D=false&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=attributes.image_url&columns%5B2%5D%5Bname%5D=&columns%5B2%5D%5Bsearchable%5D=false&columns%5B2%5D%5Borderable%5D=false&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B3%5D%5Bdata%5D=attributes.price&columns%5B3%5D%5Bname%5D=&columns%5B3%5D%5Bsearchable%5D=false&columns%5B3%5D%5Borderable%5D=false&columns%5B3%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B3%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B4%5D%5Bdata%5D=attributes.name&columns%5B4%5D%5Bname%5D=&columns%5B4%5D%5Bsearchable%5D=true&columns%5B4%5D%5Borderable%5D=true&columns%5B4%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B4%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B5%5D%5Bdata%5D=attributes.count_purchase_product&columns%5B5%5D%5Bname%5D=&columns%5B5%5D%5Bsearchable%5D=false&columns%5B5%5D%5Borderable%5D=false&columns%5B5%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B5%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B6%5D%5Bdata%5D=attributes.count_sale_product&columns%5B6%5D%5Bname%5D=&columns%5B6%5D%5Bsearchable%5D=false&columns%5B6%5D%5Borderable%5D=false&columns%5B6%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B6%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B7%5D%5Bdata%5D=attributes.balance&columns%5B7%5D%5Bname%5D=&columns%5B7%5D%5Bsearchable%5D=false&columns%5B7%5D%5Borderable%5D=false&columns%5B7%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B7%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B8%5D%5Bdata%5D=attributes.category&columns%5B8%5D%5Bname%5D=&columns%5B8%5D%5Bsearchable%5D=false&columns%5B8%5D%5Borderable%5D=false&columns%5B8%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B8%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B9%5D%5Bdata%5D=attributes.active&columns%5B9%5D%5Bname%5D=&columns%5B9%5D%5Bsearchable%5D=false&columns%5B9%5D%5Borderable%5D=false&columns%5B9%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B9%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B10%5D%5Bdata%5D=attributes.id&columns%5B10%5D%5Bname%5D=&columns%5B10%5D%5Bsearchable%5D=false&columns%5B10%5D%5Borderable%5D=false&columns%5B10%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B10%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=desc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1621753276595" for ::1 at 2021-05-23 04:01:30 -0300
+Processing by ProductsController#index_defer as JSON
+  Parameters: {"draw"=>"1", "columns"=>{"0"=>{"data"=>"attributes.custom_id", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "1"=>{"data"=>"attributes.sku", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "2"=>{"data"=>"attributes.image_url", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "3"=>{"data"=>"attributes.price", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "4"=>{"data"=>"attributes.name", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "5"=>{"data"=>"attributes.count_purchase_product", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "6"=>{"data"=>"attributes.count_sale_product", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "7"=>{"data"=>"attributes.balance", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "8"=>{"data"=>"attributes.category", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "9"=>{"data"=>"attributes.active", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}, "10"=>{"data"=>"attributes.id", "name"=>"", "searchable"=>"false", "orderable"=>"false", "search"=>{"value"=>"", "regex"=>"false"}}}, "order"=>{"0"=>{"column"=>"0", "dir"=>"desc"}}, "start"=>"0", "length"=>"10", "search"=>{"value"=>"", "regex"=>"false"}, "_"=>"1621753276595"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:10:in `set_current_account'
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `set_current_account'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "products" WHERE "products"."account_id" = $1 AND "products"."active" = $2 AND "products"."account_id" = $3[0m  [["account_id", 1], ["active", true], ["account_id", 1]]
+  ↳ app/controllers/products_controller.rb:13:in `index_defer'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "products" WHERE "products"."account_id" = $1 AND "products"."active" = $2[0m  [["account_id", 1], ["active", true]]
+  ↳ app/controllers/products_controller.rb:22:in `index_defer'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "products" WHERE "products"."account_id" = $1 AND "products"."active" = $2[0m  [["account_id", 1], ["active", true]]
+  ↳ app/controllers/products_controller.rb:23:in `index_defer'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."account_id" = $1 AND "products"."active" = $2 AND "products"."account_id" = $3 ORDER BY custom_id desc LIMIT $4 OFFSET $5[0m  [["account_id", 1], ["active", true], ["account_id", 1], ["LIMIT", 10], ["OFFSET", 0]]
+  ↳ app/controllers/products_controller.rb:25:in `index_defer'
+Completed 200 OK in 16ms (Views: 0.3ms | ActiveRecord: 3.2ms | Allocations: 6918)
+
+

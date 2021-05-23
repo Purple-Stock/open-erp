@@ -1,0 +1,2 @@
+class SimploClient < ApplicationRecord
+end

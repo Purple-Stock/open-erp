@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => 'Controle de Pedidos'%></h1>
+</div>
+<table id="order_table" class="table-striped table-bordered table-responsive">
+  <thead>
+    <tr>
+      <th>Id Pedido</th>
+      <th>Nome</th>
+      <th>Cidade</th>
+      <th>Estado</th>
+      <th>CEP</th>
+      <th>Valor Total</th>
+      <th>Data do pedido</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @send_orders.each do |order| %>
+      <tr>
+        <td><%= order["Wspedido"]["numero"] %></td>
+        <td><%= order["Wspedido"]["cliente_razaosocial"] %></td>
+        <td><%= order["Wspedido"]["entrega_cidade"] %></td>
+        <td><%= order["Wspedido"]["entrega_estado"] %></td>
+        <td><%= order["Wspedido"]["cliente_cep"] %></td>
+        <td><%= order["Wspedido"]["total_pedido"] %></td>
+        <td><%= DateTime.parse(order["Wspedido"]["data_pedido"]).strftime("%-d/%-m/%y %H:%M") %></td>
+        <td><%= order["Wspedido"]["pedidostatus_id"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

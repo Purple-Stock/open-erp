@@ -1,0 +1,23 @@
+<div class="nested-fields">
+  <div class='field'>
+    <%= f.label t(:product_id), :class => 'control-label col-lg-2'%>
+    <div class="col-lg-2 product">
+      <%= f.select :product_id, Product.all.collect {|p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "product-id form-control form-control-sm" %>
+    </div>
+  </div>
+  <div class='field'>
+    <%= f.label t(:quantity), :class => 'control-label col-lg-2'%>
+    <div class="col-lg-2">
+      <%= f.text_field :quantity, :class => 'quantity form-control', :onKeyUp => "fetchSaleProducts(this)" %>
+    </div>
+  </div>
+  <div class='field'>  
+    <%= f.label t(:value), :class => 'control-label col-lg-2'%>
+    <div class="col-lg-2">
+      <%= f.text_field :value, :class => 'form-control product-value' %>
+    </div>
+  </div>
+  <%= link_to_remove_association "Remover Produto", f, :class => 'control-label col-lg-5' %>
+ 
+  <br><br><br>
+</div>

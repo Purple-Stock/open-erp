@@ -1,0 +1,17 @@
+<%= form_with(model: group_product, local: true) do |form| %>
+  <% if group_product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(group_product.errors.count, "error") %> prohibited this group_product from being saved:</h2>
+
+      <ul>
+        <% group_product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

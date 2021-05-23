@@ -1,0 +1,51 @@
+<%= form_for @sale_product, :html => { :class => "form-horizontal sale_product" } do |f| %>
+
+  <% if @sale_product.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@sale_product.errors.count, "error") %> prohibited this sale_product from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @sale_product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label t(:quantity), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :quantity, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:value), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :value, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:product_id), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :product_id, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:sale_id), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :sale_id, Sale.all.collect {|p| [ p.value, p.id ] }, { :include_blank => 'Selecione uma venda'}, :class => "form-control form-control-sm" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                sale_products_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

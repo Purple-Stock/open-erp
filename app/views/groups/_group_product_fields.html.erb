@@ -1,0 +1,12 @@
+<div class="nested-fields">
+  <div class="field">
+    <%= f.label t(:product_id), :class => 'control-label col-lg-2'%>
+    <div class="col-lg-2">
+      <%= f.select :product_id, Product.where(active: true).collect {|p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
+    </div>
+  </div>
+
+  <%= link_to_remove_association "Remover Produto", f %>
+ 
+  <br><br><br>
+</div>
