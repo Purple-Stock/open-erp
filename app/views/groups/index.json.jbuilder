@@ -1,1 +1,1 @@
-json.array! @groups, partial: "groups/group", as: :group
+json.array! @groups, partial: 'groups/group', as: :group

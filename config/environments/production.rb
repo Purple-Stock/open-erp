@@ -1,7 +1,7 @@
 Rails.application.configure do
   config.force_ssl = true
   config.active_job.queue_adapter = :async
-  #config.action_controller.asset_host = ENV['CLOUDFRONT_URL']
+  # config.action_controller.asset_host = ENV['CLOUDFRONT_URL']
   config.cache_store = :redis_cache_store, { url: ENV['REDISCLOUD_URL'] }
 
   # config.middleware.use(
@@ -62,7 +62,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -91,7 +91,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)

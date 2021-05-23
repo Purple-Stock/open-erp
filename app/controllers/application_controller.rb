@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_account
     return unless current_user.present?
+
     current_account = current_user.account
     ActsAsTenant.current_tenant = current_account
   end
@@ -15,9 +16,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    added_attrs = [:company_name, :first_name, :cpf_cnpj, :phone, :last_name, :email, :password, :password_confirmation]
+    added_attrs = %i[company_name first_name cpf_cnpj phone last_name email password password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
-
 end

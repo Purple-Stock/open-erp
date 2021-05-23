@@ -8,7 +8,8 @@ class SalesController < ApplicationController
   def index; end
 
   def index_defer
-    @sales = Sale.includes(:sale_products, :customer).where(account_id: current_tenant).references(:customers).order(created_at: :desc)
+    @sales = Sale.includes(:sale_products,
+                           :customer).where(account_id: current_tenant).references(:customers).order(created_at: :desc)
     @pagy, @sales = pagy(@sales.datatable_filter(params['search']['value'], datatable_searchable_columns),
                          page: (params[:start].to_i / params[:length].to_i + 1),
                          items: params[:length].to_i)

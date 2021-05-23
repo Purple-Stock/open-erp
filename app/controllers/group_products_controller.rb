@@ -1,5 +1,5 @@
 class GroupProductsController < ApplicationController
-  before_action :set_group_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_group_product, only: %i[show edit update destroy]
 
   # GET /group_products
   # GET /group_products.json
@@ -9,8 +9,7 @@ class GroupProductsController < ApplicationController
 
   # GET /group_products/1
   # GET /group_products/1.json
-  def show
-  end
+  def show; end
 
   # GET /group_products/new
   def new
@@ -18,8 +17,7 @@ class GroupProductsController < ApplicationController
   end
 
   # GET /group_products/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /group_products
   # POST /group_products.json
@@ -62,13 +60,14 @@ class GroupProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group_product
-      @group_product = GroupProduct.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def group_product_params
-      params.fetch(:group_product, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_group_product
+    @group_product = GroupProduct.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def group_product_params
+    params.fetch(:group_product, {})
+  end
 end

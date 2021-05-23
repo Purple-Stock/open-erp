@@ -13,6 +13,6 @@ class User < ApplicationRecord
   end
 
   def set_account
-    self.build_account
+    build_account
   end
 end

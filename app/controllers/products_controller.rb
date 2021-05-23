@@ -19,8 +19,10 @@ class ProductsController < ApplicationController
     options = {}
     options[:meta] = {
       draw: params['draw'].to_i,
-      recordsTotal: Product.datatable_filter(params['search']['value'], datatable_searchable_columns).where(active: true).count,
-      recordsFiltered: Product.datatable_filter(params['search']['value'], datatable_searchable_columns).where(active: true).count
+      recordsTotal: Product.datatable_filter(params['search']['value'],
+                                             datatable_searchable_columns).where(active: true).count,
+      recordsFiltered: Product.datatable_filter(params['search']['value'],
+                                                datatable_searchable_columns).where(active: true).count
     }
     render json: ProductSerializer.new(@products, options).serializable_hash
   end

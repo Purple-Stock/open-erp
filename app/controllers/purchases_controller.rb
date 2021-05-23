@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :set_purchase, only: [:show, :edit, :update, :destroy]
+  before_action :set_purchase, only: %i[show edit update destroy]
 
   # GET /purchases
   # GET /purchases.json
@@ -9,8 +9,7 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/1
   # GET /purchases/1.json
-  def show
-  end
+  def show; end
 
   # GET /purchases/new
   def new
@@ -19,8 +18,7 @@ class PurchasesController < ApplicationController
   end
 
   # GET /purchases/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /purchases
   # POST /purchases.json
@@ -62,16 +60,17 @@ class PurchasesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_purchase
-      @purchase = Purchase.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def purchase_params
-      params.require(:purchase).permit(:value, :supplier_id,
-                                        purchase_products_attributes: [:id, :product_id, 
-                                                                       :quantity, :value, :store_entrance,
-                                                                       :_destroy])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_purchase
+    @purchase = Purchase.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def purchase_params
+    params.require(:purchase).permit(:value, :supplier_id,
+                                     purchase_products_attributes: %i[id product_id
+                                                                      quantity value store_entrance
+                                                                      _destroy])
+  end
 end

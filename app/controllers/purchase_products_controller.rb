@@ -1,5 +1,5 @@
 class PurchaseProductsController < ApplicationController
-  before_action :set_purchase_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_purchase_product, only: %i[show edit update destroy]
   include Pagy::Backend
   # GET /purchase_products
   # GET /purchase_products.json
@@ -9,23 +9,22 @@ class PurchaseProductsController < ApplicationController
     @purchase_products = PurchaseProduct.includes(:product).references(:products).where(account_id: current_tenant)
     @purchased_products_filtered = @purchase_products.filter_products(@purchase_products, params['search']['value'])
     @pagy, @purchase_products = pagy(@purchased_products_filtered,
-                            page: (params[:start].to_i / params[:length].to_i + 1),
-                            items: params[:length].to_i)
+                                     page: (params[:start].to_i / params[:length].to_i + 1),
+                                     items: params[:length].to_i)
     @purchase_products = @purchase_products.datatable_order(params['order']['0']['column'].to_i,
-                                         params['order']['0']['dir'])
+                                                            params['order']['0']['dir'])
     options = {}
     options[:meta] = {
-        draw: params['draw'].to_i,
-        recordsTotal: @purchased_products_filtered.size,
-        recordsFiltered: @purchased_products_filtered.size
+      draw: params['draw'].to_i,
+      recordsTotal: @purchased_products_filtered.size,
+      recordsFiltered: @purchased_products_filtered.size
     }
-    render json:  PurchaseProductSerializer.new(@purchase_products, options).serializable_hash
+    render json: PurchaseProductSerializer.new(@purchase_products, options).serializable_hash
   end
 
   # GET /purchase_products/1
   # GET /purchase_products/1.json
-  def show
-  end
+  def show; end
 
   # GET /purchase_products/new
   def new
@@ -38,8 +37,7 @@ class PurchaseProductsController < ApplicationController
   end
 
   # GET /purchase_products/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /purchase_products
   # POST /purchase_products.json
@@ -85,8 +83,10 @@ class PurchaseProductsController < ApplicationController
 
   def save_stock_transfer
     begin
-      PurchaseProduct.create(product_id: params['product_id'], quantity: -params['quantity'].to_i, store_entrance: params['stock_transfer']['origin'])
-      PurchaseProduct.create(product_id: params['product_id'], quantity: params['quantity'].to_i, store_entrance: params['stock_transfer']['destiny'])
+      PurchaseProduct.create(product_id: params['product_id'], quantity: -params['quantity'].to_i,
+                             store_entrance: params['stock_transfer']['origin'])
+      PurchaseProduct.create(product_id: params['product_id'], quantity: params['quantity'].to_i,
+                             store_entrance: params['stock_transfer']['destiny'])
     rescue ArgumentError
       puts 'erro'
     end
@@ -99,30 +99,30 @@ class PurchaseProductsController < ApplicationController
   def inventory_view; end
 
   def save_inventory
-    begin
-      product = Product.find(params['product_id'])
-      PurchaseProduct.inventory_quantity(product.custom_id, params['quantity'].to_i, params['inventory']['destiny'])
-      respond_to do |format|
-        format.html { redirect_to stock_transfer_path, notice: 'Inventário Concluído.' }
-      end
-    rescue ArgumentError
-      puts 'erro'
+    product = Product.find(params['product_id'])
+    PurchaseProduct.inventory_quantity(product.custom_id, params['quantity'].to_i, params['inventory']['destiny'])
+    respond_to do |format|
+      format.html { redirect_to stock_transfer_path, notice: 'Inventário Concluído.' }
     end
+  rescue ArgumentError
+    puts 'erro'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_purchase_product
-      @purchase_product = PurchaseProduct.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def purchase_product_params
-      params['purchase_product']['account_id'] = current_tenant.id
-      params.require(:purchase_product).permit(:quantity, :value, :product_id, :purchaseId, :created_at, :store_entrance, :account_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_purchase_product
+    @purchase_product = PurchaseProduct.find(params[:id])
+  end
 
-    def datatable_searchable_columns
-      {"0" => { "searchable" => true }, "1" => { "searchable" => true } }
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def purchase_product_params
+    params['purchase_product']['account_id'] = current_tenant.id
+    params.require(:purchase_product).permit(:quantity, :value, :product_id, :purchaseId, :created_at,
+                                             :store_entrance, :account_id)
+  end
+
+  def datatable_searchable_columns
+    { '0' => { 'searchable' => true }, '1' => { 'searchable' => true } }
+  end
 end
