@@ -1,0 +1,21 @@
+version: '3'
+   
+services:
+  postgres:
+    image: 'postgres:9.5'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+   
+  website:
+    depends_on:
+      - 'postgres'
+    build: .
+    ports:
+      - '9292:9292'
+    volumes:
+      - '.:/onebitbot'
+    environment:
+      - LANG=C.UTF-8
+   
+volumes:
+  postgres:
