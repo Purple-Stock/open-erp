@@ -1,4 +1,5 @@
 FROM ruby:2.6.6-slim
+RUN apt-get update && apt-get install -y git
 # Instala as nossas dependencias
 RUN apt-get update && apt-get install -qq -y --no-install-recommends \
   build-essential libpq-dev
