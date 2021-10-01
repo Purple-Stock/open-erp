@@ -15,9 +15,7 @@ class Sale < ApplicationRecord
     sale = Sale.where(order_code: id).first
     id = (id.to_i + 1).to_s
     if sale.nil?
-      order = HTTParty.get("https://purchasestore.com.br/ws/wspedidos/#{id}.json?",
-                           headers: { content: 'application/json',
-                                      Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      order = Requests::Order.new(id: id).call
 
       customer = Customer.where(cpf: order['result']['Wspedido']['cliente_cpfcnpj'].delete('.-')).first
       customer = Customer.where(cpf: order['result']['Wspedido']['cliente_cpfcnpj']).first if customer.nil?
@@ -55,9 +53,9 @@ class Sale < ApplicationRecord
 
   def self.save_name_age
     (1..4).each do |i|
-      @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-08-01&status=cancelado&page=#{i}",
-                                 headers: { content: 'application/json',
-                                            Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      custom_uri = "https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-08-01&status=cancelado&page=#{i}"
+      @order_page = Requests::Order.new(custom_uri: custom_uri).call
+
       @order_page['result'].each do |order_page|
         SimploClient.create(name: order_page['Wspedido']['cliente_razaosocial'],
                             age: Time.now.year - Time.parse(order_page['Wspedido']['cliente_data_nascimento']).year,
