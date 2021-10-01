@@ -1,13 +1,16 @@
 module Requests
   class Order
-    attr_reader :page, :id
+    attr_reader :page, :id, :custom_uri
 
-    def initialize(page: nil, id: nil)
+    def initialize(page: nil, id: nil, custom_uri: nil)
       @page = page
       @id = id
+      @custom_uri = custom_uri
     end
 
     def call
+      return custom_request if custom_uri
+
       make_request
     end
 
@@ -18,6 +21,10 @@ module Requests
       return HTTParty.get(uri_for_page, headers: headers) if page
 
       HTTParty.get(uri_for_id, headers: headers)
+    end
+
+    def custom_request
+      HTTParty.get(custom_uri, headers: headers)
     end
 
     def base_uri
