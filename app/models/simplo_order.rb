@@ -2,13 +2,11 @@ class SimploOrder < ApplicationRecord
   has_many :simplo_items
 
   def self.integrate_order_items
-    @order_page = HTTParty.get('https://purchasestore.com.br/ws/wspedidos.json',
-                               headers: { content: 'application/json',
-                                          Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+    @order_page = Requests::Order.new.call
+
     (1..@order_page['pagination']['page_count']).each do |i|
-      @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?page=#{i}",
-                                 headers: { content: 'application/json',
-                                            Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      @order_page = Requests::Order.new(page: i).call
+
       @order_page['result'].each do |order_page|
         order = SimploOrder.find_by(order_id: order_page['Wspedido']['numero'])
         if order.nil?
@@ -38,10 +36,7 @@ class SimploOrder < ApplicationRecord
     id = (order_number.to_i + 1).to_s
     data = { 'Wspedido': { 'Status': { 'id': order_status } } }
     begin
-      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
-                   body: data,
-                   headers: { content: 'application/json',
-                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      Updates::Order.new(id: id, data: data).call
     rescue ArgumentError
       puts 'erro'
     end
@@ -51,10 +46,7 @@ class SimploOrder < ApplicationRecord
     id = (order_number.to_i + 1).to_s
     data = { 'Wspedido': { 'Entrega': { 'rastreamento': post_code } } }
     begin
-      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
-                   body: data,
-                   headers: { content: 'application/json',
-                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      Updates::Order.new(id: id, data: data).call
     rescue ArgumentError
       puts 'erro'
     end
@@ -65,15 +57,8 @@ class SimploOrder < ApplicationRecord
     os_data = { 'Wspedido': { 'Status': { 'id': order_status } } }
     pc_data = { 'Wspedido': { 'Entrega': { 'rastreamento': post_code } } }
     begin
-      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
-                   body: os_data,
-                   headers: { content: 'application/json',
-                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
-
-      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
-                   body: pc_data,
-                   headers: { content: 'application/json',
-                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      Updates::Order.new(id: id, data: os_data).call
+      Updates::Order.new(id: id, data: pc_data).call
     rescue ArgumentError
       puts 'erro'
     end
