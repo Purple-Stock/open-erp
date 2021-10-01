@@ -78,9 +78,7 @@ class Product < ApplicationRecord
     end
 
     def integrate_product(id)
-      @order_page = HTTParty.get("https://purchasestore.com.br/ws/wsprodutos/#{id}.json",
-                                 headers: { content: 'application/json',
-                                            Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      @order_page = Requests::Product.new(id: id).call
       @order_page['result']['WsprodutoEstoque'].each do |order_page|
         Product.create(name: @order_page['result']['Wsproduto']['nome'],
                        sku: order_page['sku'],
