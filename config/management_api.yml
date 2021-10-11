@@ -1,0 +1,6 @@
+test:
+  base_url: https://purchasestore.com.br
+development:
+  base_url: https://purchasestore.com.br
+production:
+  base_url: https://purchasestore.com.br
