@@ -28,19 +28,19 @@ module Requests
     end
 
     def base_uri
-      'https://purchasestore.com.br/'
+      Rails.configuration.management_api[:base_url]
     end
 
     def uri_all_orders
-      "#{base_uri}wspedidos.json"
+      "#{base_uri}/wspedidos.json"
     end
 
     def uri_for_page
-      "#{base_uri}ws/wspedidos.json?page=#{page}"
+      "#{base_uri}/ws/wspedidos.json?page=#{page}"
     end
 
     def uri_for_id
-      "#{base_uri}ws/wspedidos/#{id}.json"
+      "#{base_uri}/ws/wspedidos/#{id}.json"
     end
 
     def headers
