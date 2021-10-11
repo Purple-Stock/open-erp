@@ -18,12 +18,16 @@ module Requests
       HTTParty.get(uri_for_id, headers: headers)
     end
 
+    def base_uri
+      Rails.configuration.management_api[:base_url]
+    end
+
     def uri_for_page
-      "https://purchasestore.com.br/ws/wsprodutos.json?page=#{page}"
+      "#{base_uri}/ws/wsprodutos.json?page=#{page}"
     end
 
     def uri_for_id
-      "https://purchasestore.com.br/ws/wsprodutos/#{id}.json"
+      "#{base_uri}/ws/wsprodutos/#{id}.json"
     end
 
     def headers
