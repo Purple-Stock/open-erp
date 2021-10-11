@@ -1,6 +1,6 @@
 test:
-  base_url: http://exemplo.com/api/v1
+  base_url: https://purchasestore.com.br
 development:
-  base_url: http://localhost:4000/api/v1
+  base_url: https://purchasestore.com.br
 production:
-  base_url: http://localhost:4000/api/v
+  base_url: https://purchasestore.com.br
