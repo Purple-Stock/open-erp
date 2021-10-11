@@ -27,5 +27,6 @@ module AwesomeRails
                  methods: %i[get post put patch delete options head]
       end
     end
+    config.management_api = config_for(:management_api)
   end
 end
