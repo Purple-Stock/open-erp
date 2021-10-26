@@ -93,7 +93,9 @@ GEM
     axlsx_styler (1.1.0)
       activesupport (>= 3.1)
       caxlsx (>= 2.0.2)
+    backport (1.2.0)
     bcrypt (3.1.16)
+    benchmark (0.2.0)
     bindex (0.8.1)
     bootsnap (1.9.1)
       msgpack (~> 1.0)
@@ -132,6 +134,7 @@ GEM
     diff-lcs (1.4.4)
     docile (1.4.0)
     dry-inflector (0.2.1)
+    e2mmap (0.1.0)
     equalizer (0.0.11)
     erubi (1.10.0)
     erubis (2.7.0)
@@ -163,6 +166,7 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    jaro_winkler (1.5.4)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
@@ -172,6 +176,10 @@ GEM
       thor (>= 0.14, < 2.0)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
+    kramdown (2.3.1)
+      rexml
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
     kwalify (0.7.2)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -193,10 +201,13 @@ GEM
     msgpack (1.4.2)
     multi_xml (0.6.0)
     nio4r (2.5.8)
+    nokogiri (1.12.5-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (3.11.0)
+    parallel (1.21.0)
     parser (3.0.2.0)
       ast (~> 2.4.1)
     path_expander (1.1.0)
@@ -266,6 +277,8 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    reverse_markdown (2.0.0)
+      nokogiri
     rexml (3.2.5)
     rodf (1.1.1)
       builder (>= 3.0)
@@ -290,6 +303,18 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
+    rubocop (1.22.2)
+      parallel (~> 1.10)
+      parser (>= 3.0.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.12.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.12.0)
+      parser (>= 3.0.1.1)
+    ruby-progressbar (1.11.0)
     ruby_parser (3.17.0)
       sexp_processor (~> 4.15, >= 4.15.1)
     rubycritic (4.6.1)
@@ -331,6 +356,21 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.3)
+    solargraph (0.44.0)
+      backport (~> 1.2)
+      benchmark
+      bundler (>= 1.17.2)
+      diff-lcs (~> 1.4)
+      e2mmap
+      jaro_winkler (~> 1.5)
+      kramdown (~> 2.3)
+      kramdown-parser-gfm (~> 1.1)
+      parser (~> 3.0)
+      reverse_markdown (>= 1.0.5, < 3)
+      rubocop (>= 0.52)
+      thor (~> 1.0)
+      tilt (~> 2.0)
+      yard (~> 0.9, >= 0.9.24)
     spreadsheet_architect (4.2.0)
       axlsx_styler (>= 1.0.0, < 2)
       caxlsx (>= 2.0.2, < 4)
@@ -352,6 +392,7 @@ GEM
     tty-which (0.4.2)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
+    unicode-display_width (2.1.0)
     useragent (0.16.10)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -378,9 +419,11 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yard (0.9.26)
     zeitwerk (2.5.1)
 
 PLATFORMS
+  x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
@@ -419,6 +462,7 @@ DEPENDENCIES
   selenium-webdriver
   serviceworker-rails
   sidekiq
+  solargraph
   spreadsheet_architect
   spring
   spring-watcher-listen (~> 2.0.0)
