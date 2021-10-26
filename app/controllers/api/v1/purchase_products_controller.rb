@@ -7,7 +7,7 @@ class Api::V1::PurchaseProductsController < ActionController::Base
     @target_records = []
     @products.each do |product|
       purchase_product = PurchaseProduct.new(product_id: product[:product_id], quantity: product[:quantity],
-                                             store_entrance: params[:store_entrance])
+                                             store_entrance: params[:store_entrance], account_id: product[:account_id])
       save_succeeded = false unless purchase_product.save
       @target_records << purchase_product
     end
@@ -32,7 +32,7 @@ class Api::V1::PurchaseProductsController < ActionController::Base
       purchase_quantity = product[:quantity] - balance
       begin
         purchase_product = PurchaseProduct.new(product_id: product[:product_id], quantity: purchase_quantity,
-                                               store_entrance: params[:store_entrance])
+                                               store_entrance: params[:store_entrance], account_id: product[:account_id])
         save_succeeded = false unless purchase_product.save
         @target_records << purchase_product
       rescue ArgumentError
