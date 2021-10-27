@@ -20,7 +20,7 @@
       <tr>
         <td><%= link_to category.id, category_path(category) %></td>
         <td><%= category.name %></td>
-        <td><%=l category.created_at %></td>
+        <td><%= category.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_category_path(category), :class => 'btn btn-default btn-xs' %>
