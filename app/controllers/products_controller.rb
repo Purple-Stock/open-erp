@@ -10,20 +10,27 @@ class ProductsController < ApplicationController
   def index; end
 
   def index_defer
-    @pagy, @products = pagy(Product.datatable_filter(params['search']['value'], datatable_searchable_columns).includes(:purchase_products, :sale_products, :category)
-                                                                                                             .where(active: true).where(account_id: current_tenant),
+    search_value_params = params.dig(:search, :value)
+
+    @pagy, @products = pagy(Product.datatable_filter(search_value_params, datatable_searchable_columns)
+                                   .includes(:purchase_products, :sale_products, :category)
+                                   .where(account_id: current_tenant),
                             page: (params[:start].to_i / params[:length].to_i + 1),
-                            items: params[:length].to_i)
-    @products = @products.datatable_order(params['order']['0']['column'].to_i,
-                                          params['order']['0']['dir'])
+                            items: params[:length].to_i
+                           )
+
+    order_params = params.dig(:order, :'0')
+    @products = @products.datatable_order(order_params.dig(:column).to_i, order_params.dig(:dir))
+
     options = {}
     options[:meta] = {
       draw: params['draw'].to_i,
-      recordsTotal: Product.datatable_filter(params['search']['value'],
-                                             datatable_searchable_columns).where(active: true).count,
-      recordsFiltered: Product.datatable_filter(params['search']['value'],
-                                                datatable_searchable_columns).where(active: true).count
+      recordsTotal: Product.datatable_filter(search_value_params,
+                                             datatable_searchable_columns).count,
+      recordsFiltered: Product.datatable_filter(search_value_params,
+                                                datatable_searchable_columns).count
     }
+
     render json: ProductSerializer.new(@products, options).serializable_hash
   end
 
@@ -95,6 +102,20 @@ class ProductsController < ApplicationController
         format.html { redirect_to products_path, notice: 'Cópia Produto feito com sucesso.' }
       else
         flash[:alert] = 'Erro, tente novamente'
+      end
+    end
+  end
+
+  def update_active
+    @product = Product.find(params[:id])
+
+    respond_to do |format|
+      if @product.update_active!
+        information_active = @product.active ? 'Ativado' : 'Desativado'
+        format.html { redirect_to products_path, notice: "#{@product.name} foi #{information_active}." }
+      else
+        flash[:alert] = @product.errors.full_messages
+        format.html { redirect_to products_path }
       end
     end
   end
