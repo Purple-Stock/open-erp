@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Sale < ApplicationRecord
-  belongs_to :customer
+  belongs_to :customer, optional: true
   acts_as_tenant :account
   has_many :sale_products, inverse_of: :sale, dependent: :destroy
   accepts_nested_attributes_for :sale_products, reject_if: :all_blank, allow_destroy: true
