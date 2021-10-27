@@ -8,16 +8,16 @@ RSpec.describe 'Product', type: :request do
     context 'with pagination params' do
       let!(:products) { create_list(:product, 20, account_id: account.id) }
 
-      let(:paginate_params) do 
-        { 
-          start: '0', length: '10', 
-          order: { '0': { column: '2', dir: 'asc' } } 
+      let(:paginate_params) do
+        {
+          start: '0', length: '10',
+          order: { '0': { column: '2', dir: 'asc' } }
         }
       end
 
       it 'returns 10 products' do
         login_user(account.user)
-        get url, params: paginate_params 
+        get url, params: paginate_params
 
         expect(body_json['data'].count).to eq 10
       end
@@ -31,7 +31,7 @@ RSpec.describe 'Product', type: :request do
 
         response = body_json['data'].map { |product| product['attributes']['id']  }
 
-        expect(response).to contain_exactly *expect_products
+        expect(response).to contain_exactly(*expect_products)
       end
 
       it 'returns success :status' do
