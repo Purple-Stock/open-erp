@@ -9,6 +9,14 @@ class Product < ApplicationRecord
   has_one_attached :image
   has_many :simplo_items
 
+  with_options presence: true do
+    validates :name
+    validates :price, numericality: { greater_than_or_equal_to: 0 }
+    validates :sku
+    validates :extra_sku
+    validates :custom_id
+  end
+
   def count_purchase_product
     rs = purchase_products.from_store('PurchaseStoreRS').sum('Quantity')
     sp = purchase_products.from_store('PurchaseStoreSP').sum('Quantity')
@@ -53,14 +61,24 @@ class Product < ApplicationRecord
     "Loja principal: #{rs}  Loja secundária: #{sp}"
   end
 
-  def self.generate_qrcode(url)
-    obj = { id: url.id, custom_id: url.custom_id, name: url.name }
-    RQRCode::QRCode.new(obj.to_json)
+  def update_active!
+    if active.eql? true
+      update_attributes(active: false)
+    else
+      update_attributes(active: true)
+    end
+  rescue StandardError
+    errors.add(:active, message: "não pode ser atualizado")
   end
 
-  DATATABLE_COLUMNS = %w[custom_id name].freeze
+  DATATABLE_COLUMNS = %w[custom_id name id].freeze
 
   class << self
+    def generate_qrcode(url)
+      obj = { id: url.id, custom_id: url.custom_id, name: url.name }
+      RQRCode::QRCode.new(obj.to_json)
+    end
+
     def datatable_filter(search_value, search_columns)
       return all if search_value.blank?
 
