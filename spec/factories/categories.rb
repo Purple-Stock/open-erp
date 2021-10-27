@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :category do
     name { FFaker::Internet.slug }
-    association :account
+
+    account_id { create(:account).id }
   end
 end
