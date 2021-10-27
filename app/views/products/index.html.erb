@@ -5,14 +5,15 @@
 </div>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_product_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary mb-5' %>
+
 <div class="table-responsive">
   <table id="product-ajax" class="table table-striped table" data-turbo="false"></table>
 </div>
-<%#= javascript_packs_with_chunks_tag 'products' %>
+
 <script>
 $(document).on('turbo:load').ready( function () {
-  $('#product_category_id').select2();
+
   $('#product-ajax').dataTable({
     ajax: {
     url: '/products_defer',
@@ -37,10 +38,15 @@ $(document).on('turbo:load').ready( function () {
         { title: "Saída", data: 'attributes.count_sale_product', "orderable": false, "searchable": false },
         { title: "Saldo", data: 'attributes.balance', "orderable": false, "searchable": false },
         { title: "Categoria", data: 'attributes.category', "orderable": false, "searchable": false },
-        { title: "Ativo", data: 'attributes.active', "searchable": false, "orderable": false },
+        { title: "Ativo", data: 'attributes.active', "searchable": false, "orderable": false,
+          render: function(active){
+                    return "<span class='badge bg-success fs-4 text-light'>" + active + "</span>";
+                  }
+        },
         { title: "Ações", data: 'attributes.id', "searchable": false, "orderable": false,  render: function(id){
             let html = '<a class="btn btn-default btn-xs" href="/products/'+ id + '">Ver</a><a class="btn btn-default btn-xs" href="/products/'+ id + '/edit">Editar</a><a data-confirm="Você tem certeza?" data-method="delete" rel="nofollow" class="btn btn-danger btn-xs" href="/products/'+ id + '">Deletar</a>';
             html += '<a class="btn btn-default btn-xs" href="/products/'+ id +'/duplicate">Duplicar</a>';
+            html += '<a class="btn btn-default btn-xs" href="/products/'+ id +'/update_active">Atualizar Ativação</a>'
             return html;
         }}
     ],
