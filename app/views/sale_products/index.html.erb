@@ -28,7 +28,7 @@
         <td><%= sale_product.value %></td>
         <td><%= sale_product.product.name %></td>
         <td><%= sale_product.sale_id %></td>
-        <td><%=l sale_product.created_at %></td>
+        <td><%= sale_product.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_sale_product_path(sale_product), :class => 'btn btn-default btn-xs' %>
