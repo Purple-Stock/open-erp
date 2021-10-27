@@ -20,7 +20,7 @@ class Product < ApplicationRecord
   def count_purchase_product
     rs = purchase_products.from_store('PurchaseStoreRS').sum('Quantity')
     sp = purchase_products.from_store('PurchaseStoreSP').sum('Quantity')
-    "Loja principal: #{rs}  Loja secundária: #{sp}"
+    "#{rs}"
   end
 
   def count_month_purchase_product(year, month)
@@ -46,7 +46,7 @@ class Product < ApplicationRecord
   def count_sale_product
     rs ||= sale_products.from_sale_store('PurchaseStoreRS').sum('Quantity')
     sp ||= sale_products.from_sale_store('PurchaseStoreSP').sum('Quantity')
-    "Loja principal: #{rs}  Loja secundária: #{sp}"
+    "#{rs}"
   end
 
   def sum_simplo_items
@@ -58,7 +58,7 @@ class Product < ApplicationRecord
     sp = purchase_products.from_store('PurchaseStoreSP').sum('Quantity')
     rs -= sale_products.from_sale_store('PurchaseStoreRS').sum('Quantity')
     sp -= sale_products.from_sale_store('PurchaseStoreSP').sum('Quantity')
-    "Loja principal: #{rs}  Loja secundária: #{sp}"
+    "#{rs}"
   end
 
   def update_active!
