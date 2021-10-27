@@ -9,7 +9,6 @@ module Api
       def remove_products
         save_succeeded = true
         @target_records = []
-        # byebug
         sale = Sale.new(store_sale: params[:store_sale], account_id: @products[0][:account_id])
         if sale.save
           @products.each do |product|
