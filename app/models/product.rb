@@ -11,10 +11,10 @@ class Product < ApplicationRecord
 
   with_options presence: true do
     validates :name
-    validates :price, numericality: { greater_than_or_equal_to: 0 }
-    validates :sku
-    validates :extra_sku
-    validates :custom_id
+    # validates :price, numericality: { greater_than_or_equal_to: 0 }
+    # validates :sku
+    # validates :extra_sku
+    # validates :custom_id
   end
 
   def count_purchase_product
