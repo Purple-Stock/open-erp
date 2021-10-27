@@ -11,7 +11,6 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(t(:name)) %></th>
-      <th><%= model_class.human_attribute_name(t(:created_at)) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -20,7 +19,6 @@
       <tr>
         <td><%= link_to category.id, category_path(category) %></td>
         <td><%= category.name %></td>
-        <td><%= category.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_category_path(category), :class => 'btn btn-default btn-xs' %>
