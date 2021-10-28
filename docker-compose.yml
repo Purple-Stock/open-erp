@@ -5,17 +5,24 @@ services:
     image: 'postgres:9.5'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
-   
+    environment:
+      POSTGRES_PASSWORD: password
+
   website:
+    tty: true
+    stdin_open: true
     depends_on:
       - 'postgres'
     build: .
     ports:
       - '9292:9292'
     volumes:
-      - '.:/onebitbot'
+      - '.:/open_erp'
     environment:
-      - LANG=C.UTF-8
+      DB_USER: postgres
+      DB_NAME: open_erp
+      DB_PASSWORD: password
+      DB_HOST: postgres
    
 volumes:
   postgres:
