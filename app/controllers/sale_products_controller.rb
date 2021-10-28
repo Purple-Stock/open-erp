@@ -68,6 +68,9 @@ class SaleProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def sale_product_params
-    params.require(:sale_product).permit(:quantity, :value, :product_id, :saleId)
+    params['sale_product']['account_id'] = current_tenant.id
+    sale = Sale.create(account_id: current_tenant.id, store_sale: 1)
+    params['sale_product']['sale_id'] = sale.id
+    params.require(:sale_product).permit(:quantity, :value, :product_id, :sale_id, :account_id)
   end
 end

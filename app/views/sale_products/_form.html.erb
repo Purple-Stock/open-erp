@@ -21,24 +21,24 @@
       <%= f.text_field :quantity, :class => 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
+  <!--<div class="form-group">
     <%= f.label t(:value), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :value, :class => 'form-control' %>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label t(:product_id), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :product_id, :class => 'form-control' %>
+  </div>-->
+    <div class="form-group">
+    <%= f.label t(:product_id), :class => 'control-label col-lg-2'%>
+    <div class="col-lg-2 product">
+      <%= f.select :product_id, Product.all.collect {|p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "product-id form-control form-control-sm" %>
     </div>
   </div>
-  <div class="form-group">
+  <!--<div class="form-group">
     <%= f.label t(:sale_id), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.select :sale_id, Sale.all.collect {|p| [ p.value, p.id ] }, { :include_blank => 'Selecione uma venda'}, :class => "form-control form-control-sm" %>
     </div>
-  </div>
+  </div>-->
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
