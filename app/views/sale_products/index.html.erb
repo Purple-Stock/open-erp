@@ -3,7 +3,7 @@
 <div class="page-header">
   <h1><%=t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
 </div>
-<%#= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to t('.new', :default => t("helpers.links.new")),
             new_sale_product_path,
             :class => 'btn btn-primary' %>
 <table id="stockTable" class="table table-striped">
