@@ -8,7 +8,6 @@ class ProductSerializer
   end
 
   attribute :balance do |object|
-    # object.count_purchase_product - object.count_sale_product
     object.balance
   end
 
