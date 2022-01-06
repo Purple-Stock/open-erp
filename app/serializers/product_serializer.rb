@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductSerializer
   include FastJsonapi::ObjectSerializer
 
@@ -7,9 +9,7 @@ class ProductSerializer
     "R$ #{object.price}"
   end
 
-  attribute :balance do |object|
-    object.balance
-  end
+  attribute :balance, &:balance
 
   attribute :category do |object|
     object.category.name
