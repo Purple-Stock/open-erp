@@ -2,7 +2,7 @@ class PurchaseProduct < ApplicationRecord
   belongs_to :purchase, optional: true
   belongs_to :product
   acts_as_tenant :account
-  enum store_entrance: %i[Sem_Loja PurchaseStoreRS PurchaseStoreSP]
+  enum store_entrance: %i[Sem_Loja LojaPrincipal LojaSecundaria]
   scope :from_store, lambda { |store = store_entrances['Sem_Loja']|
                        where('store_entrance = ?', store_entrances[store])
                      }
