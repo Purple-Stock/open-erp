@@ -12,7 +12,7 @@ $(document).on("turbo:load", function(){
     },
     serverSide: true,
     columns: [
-        { title: "Codigo Produto", data: 'attributes.custom_id' },
+        { title: "Codigo Produiito", data: 'attributes.id' },
         { title: "SKU", data: 'attributes.sku', "searchable": false, "orderable": false },
         { title: "Foto", data: 'attributes.image_url', "orderable": false, "searchable": false, render: function(image_url){
             return '<img src="' + image_url + '"width="250px" height="163px">';
@@ -35,7 +35,7 @@ $(document).on("turbo:load", function(){
         "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
     },
     columnDefs: [
-        { type: 'formatted-num', targets: 0 }
+        { type: 'num', targets: 0 }
     ],
     "order": [[ 0, "desc" ]],
     responsive: true,

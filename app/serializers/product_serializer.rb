@@ -11,6 +11,10 @@ class ProductSerializer
 
   attribute :balance, &:balance
 
+  attribute :custom_id do |object|
+    object.custom_id.to_i
+  end
+
   attribute :category do |object|
     object.category.name
   end
