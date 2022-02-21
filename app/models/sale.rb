@@ -6,7 +6,7 @@ class Sale < ApplicationRecord
   has_many :sale_products, inverse_of: :sale, dependent: :destroy
   accepts_nested_attributes_for :sale_products, reject_if: :all_blank, allow_destroy: true
   enum payment_type: %i[Débito Crédito Dinheiro Débito_Dinheiro Crédito_Dinheiro Depósito Boleto]
-  enum store_sale: %i[Sem_Loja PurchaseStoreRS PurchaseStoreSP]
+  enum store_sale: %i[Sem_Loja LojaPrincipal LojaSecundaria]
   scope :from_sale_store, lambda { |store = store_sales['Sem_Loja']|
                             where('store_sale = ?', store_entrances[store])
                           }
