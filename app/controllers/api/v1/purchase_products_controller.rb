@@ -22,8 +22,8 @@ class Api::V1::PurchaseProductsController < ActionController::Base
   def add_inventory_quantity
     save_succeeded = true
     @target_records = []
-    purchase_store = 'PurchaseStoreSP'
-    purchase_store = 'PurchaseStoreRS' if params[:store_entrance] == 1
+    purchase_store = 'LojaSecundaria'
+    purchase_store = 'LojaPrincipal' if params[:store_entrance] == 1
     @products.each do |product|
       product_found = Product.find(product[:product_id])
       purchase_product = product_found.purchase_products.from_store(purchase_store).sum('Quantity')

@@ -18,8 +18,8 @@ class Product < ApplicationRecord
   end
 
   def count_purchase_product
-    rs = purchase_products.from_store('PurchaseStoreRS').sum('Quantity')
-    sp = purchase_products.from_store('PurchaseStoreSP').sum('Quantity')
+    rs = purchase_products.from_store('LojaPrincipal').sum('Quantity')
+    sp = purchase_products.from_store('LojaSecundaria').sum('Quantity')
     "#{rs}"
   end
 
@@ -44,8 +44,8 @@ class Product < ApplicationRecord
   end
 
   def count_sale_product
-    rs ||= sale_products.from_sale_store('PurchaseStoreRS').sum('Quantity')
-    sp ||= sale_products.from_sale_store('PurchaseStoreSP').sum('Quantity')
+    rs ||= sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
+    sp ||= sale_products.from_sale_store('LojaSecundaria').sum('Quantity')
     "#{rs}"
   end
 
@@ -54,10 +54,10 @@ class Product < ApplicationRecord
   end
 
   def balance
-    rs = purchase_products.from_store('PurchaseStoreRS').sum('Quantity')
-    sp = purchase_products.from_store('PurchaseStoreSP').sum('Quantity')
-    rs -= sale_products.from_sale_store('PurchaseStoreRS').sum('Quantity')
-    sp -= sale_products.from_sale_store('PurchaseStoreSP').sum('Quantity')
+    rs = purchase_products.from_store('LojaPrincipal').sum('Quantity')
+    sp = purchase_products.from_store('LojaSecundaria').sum('Quantity')
+    rs -= sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
+    sp -= sale_products.from_sale_store('LojaSecundaria').sum('Quantity')
     "#{rs}"
   end
 
