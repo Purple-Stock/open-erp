@@ -32,6 +32,10 @@ pt-BR:
         remember_me: Lembrar de mim
         password: Senha
       link: Login com {provider}
+    shared:
+      link_to:
+        login: Acessar
+        signup: Cadastrar minha empresa
     unlocks:
       new:
         title: Reenviar instruções de desbloqueio
