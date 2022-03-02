@@ -1,0 +1,42 @@
+---
+pt-BR:
+  categories: 
+    one: Categoria
+    two: Categorias
+    list: Lista de Categorias
+    create: Criar Categoria
+  products:
+    one: Produto
+    two: Produtos
+    list: Lista de Produtos
+    create: Criar Produto
+  suppliers:
+    one: Fornecedor
+    two: Fornecedores
+    list: Lista de Fornecedores
+    create: Criar Fornecedor
+  entries:
+    one: Entrada
+    two: Entradas
+    list: Lista de Entradas
+    create: Criar Entrada
+  exits:
+    one: Saída
+    two: Saídas
+    list: Lista de Saídas
+    create: Criar Saída
+  sales:
+    one: Venda
+    two: Vendas
+    list: Lista de Vendas
+    create: Criar Vendas
+  customers:
+    one: Cliente
+    two: Clientes
+    list: Lista de Clientes
+    create: Criar Clientes
+  audits:
+    one: Relatório
+    two: Relatórios
+    products: Controle dos Pedidos
+    daily: Relatório Diário de Vendas
