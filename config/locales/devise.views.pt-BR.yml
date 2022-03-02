@@ -1,0 +1,44 @@
+pt-BR:
+  devise:
+    confirmations:
+      new:
+        title: Reenviar instruções de confirmação
+        submit: Reenviar instruções de confirmação
+      link: Não recebeu instruções de confirmação?
+    passwords:
+      edit:
+        title: Mudar sua senha
+        submit: Mudar minha senha
+      new:
+        title: Esqueceu sua senha?
+        submit: Me enviar instruções para reiniciar minha senha
+    registrations:
+      edit:
+        title: Editar {resource}
+        update: Atualizar
+        cancel:
+          title: Cancelar minha conta
+          message: Não está contente?
+          action: Cancelar minha conta
+          confirm: Tem certeza?
+        back: Voltar
+      new:
+        title: Registrar
+        submit: Registrar
+    sessions:
+      new:
+        title: Acesso
+        submit: Entrar
+        remember_me: Lembrar de mim
+        password: Senha
+      link: Login com {provider}
+    shared:
+      link_to:
+        login: Acessar
+        signup: Cadastrar minha empresa
+    unlocks:
+      new:
+        title: Reenviar instruções de desbloqueio
+        submit: Reenviar instruções de desbloqueio
+      link: Não recebeu instruções de desbloqueio?
+

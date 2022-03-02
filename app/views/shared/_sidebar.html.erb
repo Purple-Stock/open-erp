@@ -15,54 +15,54 @@
         </li>
 
         <li class="menu-header">Opções</li>
-          <%= render 'shared/sidebar_dropdown', title: 'Categorias', icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("categories.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('categories', crud_actions) %>">
-              <%= link_to 'Lista de Categorias', categories_path, class: 'nav-link' %>
-              <%= link_to 'Criar Categoria', new_category_path, class: 'nav-link' %>
+              <%= link_to t("categories.list"), categories_path, class: 'nav-link' %>
+              <%= link_to t("categories.create"), new_category_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: 'Produtos', icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("products.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('products', crud_actions) %>">
-              <%= link_to 'Lista de produtos', products_path, class: 'nav-link' %>
-              <%= link_to 'Criar produto', new_product_path, class: 'nav-link' %>
+              <%= link_to t("products.list"), products_path, class: 'nav-link' %>
+              <%= link_to t("products.create"), new_product_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: 'Fornecedores', icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("suppliers.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('suppliers', crud_actions) %>">
-              <%= link_to 'Lista de Fornecedores', suppliers_path, class: 'nav-link' %>
-              <%= link_to 'Criar Fornecedor', new_supplier_path, class: 'nav-link' %>
+              <%= link_to t("suppliers.list"), suppliers_path, class: 'nav-link' %>
+              <%= link_to t("suppliers.create"), new_supplier_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: 'Entradas', icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("entries.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('purchase_products', crud_actions) %>">
-              <%= link_to 'Lista de Entradas', purchase_products_path, class: 'nav-link' %>
-              <%= link_to 'Criar Entrada', new_purchase_product_path, class: 'nav-link' %>
+              <%= link_to t("entries.list"), purchase_products_path, class: 'nav-link' %>
+              <%= link_to t("entries.create"), new_purchase_product_path, class: 'nav-link' %>
               <%#= link_to 'Transferência de estoque', stock_transfer_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: 'Saídas', icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("exits.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('sale_products', crud_actions) %>">
-              <%= link_to 'Lista de Saídas', sale_products_path, class: 'nav-link' %>
-              <%= link_to 'Criar Saídas', new_sale_product_path, class: 'nav-link' %>
+              <%= link_to t("exits.list"), sale_products_path, class: 'nav-link' %>
+              <%= link_to t("exits.create"), new_sale_product_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: 'Vendas', icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("sales.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('sales', crud_actions) %>">
-              <%= link_to 'Lista de Vendas', sales_path, class: 'nav-link' %>
-              <%= link_to 'Criar Vendas', new_sale_path, class: 'nav-link' %>
+              <%= link_to t("sales.list"), sales_path, class: 'nav-link' %>
+              <%= link_to t("sales.create"), new_sale_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: 'Clientes', icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("customers.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('customers', crud_actions) %>">
-              <%= link_to 'Lista de Clientes', customers_path, class: 'nav-link' %>
-              <%= link_to 'Criar Clientes', new_customer_path, class: 'nav-link' %>
+              <%= link_to t("customers.list"), customers_path, class: 'nav-link' %>
+              <%= link_to t("customers.create"), new_customer_path, class: 'nav-link' %>
             </li>
           <% end %>
         <li class="menu-header">Gerencial</li>
-          <%= render 'shared/sidebar_dropdown', title: 'Relatórios', icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('reports', crud_actions) %>">
-              <%= link_to 'Controle de Pedidos Produtos', show_orders_products_stock_path, class: 'nav-link' %>
-              <%= link_to 'Relatório Diário de vendas', reports_daily_sale_path, class: 'nav-link' %>
+              <%= link_to t("audits.products"), show_orders_products_stock_path, class: 'nav-link' %>
+              <%= link_to t("audits.daily"), reports_daily_sale_path, class: 'nav-link' %>
               <%#= link_to 'Tempo dos pedidos', show_orders_business_day_path, class: 'nav-link' %>
               <%#= link_to 'Controle de Pedidos Online', show_orders_control_path, class: 'nav-link' %>
             </li>
