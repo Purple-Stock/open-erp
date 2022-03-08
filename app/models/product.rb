@@ -80,7 +80,11 @@ class Product < ApplicationRecord
 
       result = none
       search_columns.each do |key, value|
-        filter = where("#{DATATABLE_COLUMNS[key.to_i]} ILIKE ?", "%#{search_value}%")
+        if DATATABLE_COLUMNS[key.to_i] == 'custom_id'
+          filter = where("#{DATATABLE_COLUMNS[key.to_i]} = ?", search_value.to_i)
+        else
+          filter = where("#{DATATABLE_COLUMNS[key.to_i]} ILIKE ?", "%#{search_value}%")
+        end
         result = result.or(filter) if value['searchable']
       end
       result
