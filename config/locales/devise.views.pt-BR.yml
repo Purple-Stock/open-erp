@@ -23,8 +23,17 @@ pt-BR:
           confirm: Tem certeza?
         back: Voltar
       new:
-        title: Registrar
+        title: Cadastro
         submit: Registrar
+        company_name: Nome da empresa
+        tax_number: Cpf cnpj
+        first_name: Seu primeiro nome
+        last_name: Seu sobrenome
+        email: Email
+        phone: Telefone
+        password: Senha
+        password_confirmation: Confirmar senha
+        signup: Cadastrar
     sessions:
       new:
         title: Acesso
