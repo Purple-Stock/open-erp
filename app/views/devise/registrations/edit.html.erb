@@ -1,21 +1,21 @@
 <br><br>
-<h2>Editar Perfil</h2>
+<h2><%= t(".title") %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="form-group">
-    <%= f.label :first_name, :class => 'control-label col-lg-2' %><br />
+    <%= f.label :first_name, t(".first_name"), :class => 'control-label col-lg-2' %><br />
     <%= f.text_field :first_name, autofocus: true, autocomplete: "Nome", :class => 'form-control' %>
   </div>
   
   <div class="form-group">
-    <%= f.label :last_name, :class => 'control-label col-lg-2' %><br />
+    <%= f.label :last_name, t(".last_name"), :class => 'control-label col-lg-2' %><br />
     <%= f.text_field :last_name, autofocus: true, autocomplete: "Sobrenome", :class => 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :email, :class => 'control-label col-lg-2' %><br />
+    <%= f.label :email, t(".email"), :class => 'control-label col-lg-2' %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control' %>
   </div>
 
@@ -24,7 +24,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :password, :class => 'control-label col-lg-2' %> <i>(Deixe em branco se você não quiser mudar)</i><br />
+    <%= f.label :password, t(".password"), :class => 'control-label col-lg-2' %> <i>(Deixe em branco se você não quiser mudar)</i><br />
     <%= f.password_field :password, autocomplete: "new-password", :class => 'form-control' %>
     <% if @minimum_password_length %>
       <br />
@@ -33,17 +33,17 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :password_confirmation, :class => 'control-label col-lg-2' %><br />
+    <%= f.label :password_confirmation, t(".password_confirmation"), :class => 'control-label col-lg-2' %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :current_password, :class => 'control-label col-lg-2' %> <i>(Nós precisamos do seu password atual para confirmar as mudanças)</i><br />
+    <%= f.label :current_password, t(".current_password"), :class => 'control-label col-lg-2' %> <i>(Nós precisamos do seu password atual para confirmar as mudanças)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password", :class => 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Alterar dados", :class => 'btn btn-primary' %>
+    <%= f.submit t(".update"), :class => 'btn btn-primary' %>
   </div>
 <% end %>
 
@@ -51,4 +51,4 @@
 
 <p>Unhappy? <%#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p> -->
 
-<%= link_to "Voltar", :back %>
+<%= link_to t(".back"), :back %>

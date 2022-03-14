@@ -14,8 +14,15 @@ pt-BR:
         submit: Me enviar instruções para reiniciar minha senha
     registrations:
       edit:
-        title: Editar {resource}
-        update: Atualizar
+        title: Editar Perfil
+        first_name: Seu primeiro nome
+        last_name: Seu sobrenome
+        email: Email
+        password: Senha
+        password_confirmation: Confirmar senha
+        current_password: Senha atual
+        update: Alterar dados
+        back: Voltar
         cancel:
           title: Cancelar minha conta
           message: Não está contente?
@@ -23,8 +30,17 @@ pt-BR:
           confirm: Tem certeza?
         back: Voltar
       new:
-        title: Registrar
+        title: Cadastro
         submit: Registrar
+        company_name: Nome da empresa
+        tax_number: Cpf cnpj
+        first_name: Seu primeiro nome
+        last_name: Seu sobrenome
+        email: Email
+        phone: Telefone
+        password: Senha
+        password_confirmation: Confirmar senha
+        signup: Cadastrar
     sessions:
       new:
         title: Acesso
