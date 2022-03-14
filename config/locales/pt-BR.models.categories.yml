@@ -1,0 +1,10 @@
+---
+pt-BR:
+  categories:
+    one: Categoria
+    two: Categorias
+    name: Nome
+    created: Categoria Criada
+    updated: Categoria Atualizada
+    deleted: Categoria Deletada
+    new: Nova Categoria
