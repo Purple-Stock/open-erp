@@ -16,61 +16,61 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.name'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :cnpj, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.tax_number'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :cnpj, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :email, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.email'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :email, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :cellphone, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.cellphone'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :cellphone, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :phone, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.phone'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :phone, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :address, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.address'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :address, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :city, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.city'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :city, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :state, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.state'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :state, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :landmark, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.landmark'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :landmark, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :note, :class => 'control-label col-lg-2' %>
+    <%= f.label t('suppliers.note'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :note, :class => 'form-control' %>
     </div>
@@ -78,7 +78,7 @@
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= f.submit t('suppliers.submit.new'), :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 suppliers_path, :class => 'btn btn-default' %>
     </div>
