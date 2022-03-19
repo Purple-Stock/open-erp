@@ -1,0 +1,19 @@
+---
+pt-BR:
+  purchase_products:
+    new: Nova Entrada de Estoque
+    one: Entrada de Estoque
+    two: Entradas de Estoque
+    name: Nome
+    price: Preço
+    entry: Entrada
+    exit: Saída
+    balance: Saldo
+    qr_code: QR code
+    image: Imagem
+    highlight: Destaque
+    category: Categoria
+    active: Ativo
+    store_entry: Loja onde houve entrada
+    submit:
+      new: Adicionar ao Estoque

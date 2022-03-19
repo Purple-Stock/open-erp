@@ -1,24 +1,24 @@
 <br><br><br>
 <%- model_class = Supplier -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t 'suppliers.two', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:cnpj) %></th>
-      <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:cellphone) %></th>
-      <th><%= model_class.human_attribute_name(:phone) %></th>
-      <th><%= model_class.human_attribute_name(:address) %></th>
-      <th><%= model_class.human_attribute_name(:city) %></th>
-      <th><%= model_class.human_attribute_name(:state) %></th>
-      <th><%= model_class.human_attribute_name(:landmark) %></th>
-      <th><%= model_class.human_attribute_name(:note) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th><%= t('suppliers.name') %></th>
+      <th><%= t('suppliers.tax_number') %></th>
+      <th><%= t('suppliers.email') %></th>
+      <th><%= t('suppliers.cellphone') %></th>
+      <th><%= t('suppliers.phone') %></th>
+      <th><%= t('suppliers.address') %></th>
+      <th><%= t('suppliers.city') %></th>
+      <th><%= t('suppliers.state') %></th>
+      <th><%= t('suppliers.landmark') %></th>
+      <th><%= t('suppliers.note') %></th>
+      <th><%= t('suppliers.created_at') %></th>
+      <th><%= t('suppliers.actions') %></th>
     </tr>
   </thead>
   <tbody>
