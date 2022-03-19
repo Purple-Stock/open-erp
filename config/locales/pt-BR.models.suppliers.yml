@@ -16,5 +16,4 @@ pt-BR:
     note: Anotação
     created_at: Criado em
     actions: Ações
-    submit:
-      new: Novo
+    submit: Salvar
