@@ -1,7 +1,7 @@
 <br><br><br>
 <%- model_class = Product -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t 'products.two', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
@@ -9,25 +9,25 @@
   <dd><%= @product.custom_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:sku) %>:</strong></dt>
   <dd><%= @product.sku %></dd>  
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dt><strong><%= t('products.name') %>:</strong></dt>
   <dd><%= @product.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dt><strong><%= t('products.price') %>:</strong></dt>
   <dd><%= @product.price %></dd>  
-  <dt><strong>Entrada:</strong></dt>
+  <dt><strong><%= t('products.entry')%>:</strong></dt>
   <dd><%= @product.count_purchase_product %></dd>
-  <dt><strong>Saída:</strong></dt>
+  <dt><strong><%= t('products.exit')%>:</strong></dt>
   <dd><%= @product.count_sale_product %></dd>
-  <dt><strong>Saldo:</strong></dt>
+  <dt><strong><%= t('products.balance')%>:</strong></dt>
   <dd><%= @product.balance %></dd>
-  <dt><strong>QR Code</strong></dt>
+  <dt><strong><%= t('products.rq_code')%></strong></dt>
   <dd><%= image_tag(Product.generate_qrcode(@product).to_img.resize(300, 300).to_data_url) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
+  <dt><strong><%= t('products.image') %>:</strong></dt>
   <dd><%= image_tag(@product.image.attached? ? @product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:highlight) %>:</strong></dt>
+  <dt><strong><%= t('products.highlight') %>:</strong></dt>
   <dd><%= @product.highlight %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
+  <dt><strong><%= t('products.category') %>:</strong></dt>
   <dd><%= @product.category.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:active) %>:</strong></dt>
+  <dt><strong><%= t('products.active') %>:</strong></dt>
   <dd><%= @product.active %></dd>
 
 </dl>
