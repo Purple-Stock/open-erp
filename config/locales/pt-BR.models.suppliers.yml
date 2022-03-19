@@ -1,0 +1,19 @@
+---
+pt-BR:
+  suppliers:
+    new: Novo Fornecedor
+    one: Fornecedor
+    two: Fornecedores
+    name: Nome
+    tax_number: CNPJ
+    email: Email
+    cellphone: Celular
+    phone: Telefone
+    address: Endereço
+    landmark: Landmark
+    city: Cidade
+    state: Estado
+    note: Anotação
+    created_at: Criado em
+    actions: Ações
+    submit: Salvar
