@@ -28,7 +28,6 @@ pt-BR:
           message: Não está contente?
           action: Cancelar minha conta
           confirm: Tem certeza?
-        back: Voltar
       new:
         title: Cadastro
         submit: Registrar
