@@ -70,7 +70,7 @@ class SuppliersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def supplier_params
-    params['product']['account_id'] = current_tenant.id
+    # params['product']['account_id'] = current_tenant.id
     params.require(:supplier).permit(:name, :cnpj, :email, :cellphone,
                                      :phone, :address, :city, :state, :landmark,
                                      :note, :account_id)
