@@ -1,0 +1,15 @@
+---
+pt-BR:
+  products:
+    one: Produto
+    two: Produtos
+    name: Nome
+    price: Preço
+    entry: Entrada
+    exit: Saída
+    balance: Saldo
+    qr_code: QR code
+    image: Imagem
+    highlight: Destaque
+    category: Categoria
+    active: Ativo
