@@ -1,0 +1,13 @@
+---
+pt-BR:
+  customers:
+    one: Cliente
+    two: Clientes
+    name: Nome
+    created: Cliente Criado
+    updated: Cliente Atualizado
+    deleted: Cliente Deletado
+    new: Novo Cliente
+    submit: Salvar
+    edit:
+      title: Editar Cliente
