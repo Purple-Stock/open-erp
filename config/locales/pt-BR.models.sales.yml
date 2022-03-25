@@ -1,10 +1,16 @@
 ---
 pt-BR:
   sales:
+    created: Venda Criada
+    updated: Venda Alterada
+    destroyed: Venda Deletada
     new: Nova Venda
+    edit: Editar Venda
     one: Venda
     two: Vendas
-    name: Nome
+    value: Valor
+    discount: Desconto
+    percentage: Porcentagem
     customer: Cliente
     product: Produto
     add_products: Adicionar produtos
@@ -18,7 +24,9 @@ pt-BR:
     price: Preço
     online: Online
     order_code: Código do Pedido
-    visible: Divulgação
+    disclosure: Divulgação
     exchange: Troca
     total_exchange_value: Valor total da troca
     submit: Salvar
+    links:
+      integrate_orders: Integrar Pedidos
