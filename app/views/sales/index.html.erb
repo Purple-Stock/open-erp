@@ -4,7 +4,7 @@
   <h1><%=t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
 </div>
 
-<%= link_to "Integrar Pedidos", insert_orders_path, :class => 'btn btn-primary' %>
+<%= link_to t('sales.links.integrate_orders'), insert_orders_path, :class => 'btn btn-primary' %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_sale_path,
