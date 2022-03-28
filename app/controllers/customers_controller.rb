@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to @customer, notice: 'Cliente criado.' }
+        format.html { redirect_to @customer, notice: t('customers.created') }
         format.json { render :show, status: :created, location: @customer }
       else
         format.html { render :new }
@@ -40,7 +40,7 @@ class CustomersController < ApplicationController
   def update
     respond_to do |format|
       if @customer.update(customer_params)
-        format.html { redirect_to @customer, notice: 'Cliente Alterado.' }
+        format.html { redirect_to @customer, notice: t('customers.updated') }
         format.json { render :show, status: :ok, location: @customer }
       else
         format.html { render :edit }
@@ -54,7 +54,7 @@ class CustomersController < ApplicationController
   def destroy
     @customer.destroy
     respond_to do |format|
-      format.html { redirect_to customers_url, notice: 'Cliente deletado.' }
+      format.html { redirect_to customers_url, notice: t('customers.deleted') }
       format.json { head :no_content }
     end
   end

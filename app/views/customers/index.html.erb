@@ -28,7 +28,7 @@
         <td><%= customer.cellphone %></td>
         <td><%= customer.phone %></td>
         <td><%= customer.cpf %></td>
-        <td><%=l customer.created_at %></td>
+        <td><%= customer.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_customer_path(customer), :class => 'btn btn-default btn-xs' %>
