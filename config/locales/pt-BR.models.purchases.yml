@@ -1,0 +1,35 @@
+---
+pt-BR:
+  purchases:
+    select: 
+      supplier: Selecione um Fornecedor
+    created: Compra Criada
+    updated: Compra Alterada
+    destroyed: Compra Deletada
+    new: Nova Compra
+    edit: Editar Compra
+    one: Compra
+    two: Compras
+    value: Valor
+    discount: Desconto
+    percentage: Porcentagem
+    customer: Cliente
+    product: Produto
+    supplier: Fornecedor
+    add_products: Adicionar produtos
+    remove_product: Remover Produto
+    customer_name: Nome do Cliente
+    information: Dados da Compra
+    payment_type: Tipo de pagamento
+    created_at: Data de criação
+    discount: Desconto em R$
+    place: Local da Compra
+    price: Preço
+    online: Online
+    order_code: Código do Pedido
+    disclosure: Divulgação
+    exchange: Troca
+    total_exchange_value: Valor total da troca
+    submit: Salvar
+    links:
+      integrate_orders: Integrar Pedidos
