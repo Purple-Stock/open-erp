@@ -16,33 +16,33 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :supplier_id, :class => 'control-label col-lg-2' %>
+    <%= f.label t('purchases.supplier'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select :supplier_id, Supplier.all.collect {|p| [ p.name, p.id ] }, { :include_blank => 'Selecione um Fornecedor'}, :class => "form-control form-control-sm" %>
+      <%= f.select :supplier_id, Supplier.all.collect {|p| [ p.name, p.id ] }, { :include_blank => t('purchases.select.supplier')}, :class => "form-control form-control-sm" %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :value, :class => 'control-label col-lg-2' %>
+    <%= f.label t('purchases.value'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :value, :class => 'form-control' %>
     </div>
   </div>
 
-  <h4>Produtos</h4>
+  <h4><%= t('purchases.one') %></h4>
   <div class="form-group">
     <div id="purchase_products">
       <%= f.fields_for :purchase_products do |purchase_product| %>
         <%= render 'purchase_product_fields', f: purchase_product %>
       <% end %>
       <div class="links">
-        <%= link_to_add_association "Adicionar produtos", f, :purchase_products %>
+        <%= link_to_add_association t('purchases.add_products'), f, :purchase_products %>
       </div>
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= f.submit t('purchases.submit'), :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 purchases_path, :class => 'btn btn-default' %>
     </div>
