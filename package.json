@@ -7,7 +7,7 @@
     "@nathanvda/cocoon": "^1.2.14",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
+    "@rails/ujs": "^6.1.5",
     "@rails/webpacker": "5.4.3",
     "bootstrap": "^4.2.1",
     "cleave.js": "^1.4.7",
