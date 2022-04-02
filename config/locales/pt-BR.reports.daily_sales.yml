@@ -1,0 +1,10 @@
+---
+pt-BR:
+  daily_sales:
+    one: Relatório Diário de Venda
+    two: Relatório Diário de Vendas
+    date: Data
+    total_value: Valor Total da Venda
+    discount_total_value: Valor Total do Desconto
+    total: Total
+    exchange_total_value: Valor Total das Trocas
