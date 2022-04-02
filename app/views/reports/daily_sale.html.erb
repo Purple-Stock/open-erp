@@ -1,16 +1,16 @@
 <br><br><br>
 <div class="page-header">
-  <h1><%=t '.title', :default => 'Relatório Diário de vendas'%></h1>
+  <h1><%=t('daily_sales.two')%></h1>
   <br><br>
   <div class="row">
     <div class="col-lg-6">
       <table id="reportTable" class="table-striped table-bordered table-responsive">
         <thead>
           <tr>
-            <th>Data</th>
-            <th>Valor total Vendas</th>
-            <th>Valor total Descontos</th>
-            <th>Total</th>
+            <th><%= t('daily_sales.data') %></th>
+            <th><%= t('daily_sales.total_value') %></th>
+            <th><%= t('daily_sales.discount_total_value') %></th>
+            <th><%= t('daily_sales.total') %></th>
           </tr>
         </thead>
         <tbody>
@@ -29,8 +29,8 @@
       <table id="reportdiscountTable" class="table-striped table-bordered table-responsive">
         <thead>
           <tr>
-            <th>Data</th>
-            <th>Valor total Trocas</th>
+            <th><%= t('daily_sales.data') %></th>
+            <th><%= t('daily_sales.exchange_total_value') %></th>
           </tr>
         </thead>
         <tbody>
