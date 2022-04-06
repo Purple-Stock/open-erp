@@ -1,0 +1,32 @@
+---
+pt-BR:
+  sales:
+    created: Venda Criada
+    updated: Venda Alterada
+    destroyed: Venda Deletada
+    new: Nova Venda
+    edit: Editar Venda
+    one: Venda
+    two: Vendas
+    value: Valor
+    discount: Desconto
+    percentage: Porcentagem
+    customer: Cliente
+    product: Produto
+    add_products: Adicionar produtos
+    remove_product: Remover Produto
+    customer_name: Nome do Cliente
+    information: Dados da Venda
+    payment_type: Tipo de pagamento
+    created_at: Data de criação
+    discount: Desconto em R$
+    place: Local da Venda
+    price: Preço
+    online: Online
+    order_code: Código do Pedido
+    disclosure: Divulgação
+    exchange: Troca
+    total_exchange_value: Valor total da troca
+    submit: Salvar
+    links:
+      integrate_orders: Integrar Pedidos
