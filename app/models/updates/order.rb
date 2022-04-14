@@ -27,7 +27,7 @@ module Updates
 
     def headers
       { content: 'application/json',
-        Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' }
+        Appkey: '' }
     end
   end
 end
