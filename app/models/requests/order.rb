@@ -45,7 +45,7 @@ module Requests
 
     def headers
       { content: 'application/json',
-        Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' }
+        Appkey: '' }
     end
 
     def empty_params?
