@@ -15,47 +15,47 @@
     </div>
   <% end %>
 
-  <h4>Cliente</h4>
+  <h4><%= t('sales.customer') %></h4>
   <div class="form-group">
-    <%= f.label t(:customer_id), :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.customer_name'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= select("sale", "customer_id", Customer.all.collect {|p| [ "#{p.cpf} - #{p.name} ", p.id ] }, {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
     </div>
   </div>
 
-  <h4>Produtos</h4>
+  <h4><%= t('sales.product') %></h4>
   <div class="form-group">
     <div id="sale_products">
       <%= f.fields_for :sale_products do |sale_product| %>
         <%= render 'sale_product_fields', f: sale_product %>
       <% end %>
       <div class="links">
-        <%= link_to_add_association "Adicionar produtos", f, :sale_products %>
+        <%= link_to_add_association t('sales.add_products'), f, :sale_products %>
       </div>
     </div>
   </div>
 
-  <h4>Dados da Venda</h4>
+  <h4><%= t('sales.information') %></h4>
   <div class="form-group">
-    <%= f.label :local_venda, :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.information'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= select("sale", "store_sale", Sale.store_sales.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
     </div>
   </div>
     <div class="form-group">
-    <%= f.label :tipo_de_pagamento, :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.payment_type'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= select("sale", "payment_type", Sale.payment_types.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label t(:created_at), :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.created_at'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= datetime_local_field(:sale, :created_at) %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label t(:discount), :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.discount'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= f.text_field :discount, :class => 'form-control' %>
     </div>
@@ -67,25 +67,25 @@
     </div>
   </div>  
   <div class="form-group">
-    <%= f.label t(:order_code), :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.order_code'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= f.text_field :order_code %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :divulgação, :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.disclosure'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= f.check_box :disclosure %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :troca, :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.exchange'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= f.check_box :exchange %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label t(:total_exchange_value), :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales.total_exchange_value'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= f.text_field :total_exchange_value %>
     </div>
@@ -93,7 +93,7 @@
   
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-4">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= f.submit t('sales.submit'), :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 sales_path, :class => 'btn btn-default' %>
     </div>

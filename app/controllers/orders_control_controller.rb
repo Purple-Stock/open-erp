@@ -38,7 +38,7 @@ class OrdersControlController < ApplicationController
     (1..20).each do |i|
       @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?page=#{i}",
                                  headers: { content: 'application/json',
-                                            Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                                            Appkey: '' })
       @order_page['result'].each do |order_page|
         @orders << order_page
       end

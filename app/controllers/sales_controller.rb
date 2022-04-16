@@ -44,7 +44,7 @@ class SalesController < ApplicationController
     calc_value
     respond_to do |format|
       if @sale.save
-        format.html { redirect_to @sale, notice: 'Venda Criada.' }
+        format.html { redirect_to @sale, notice: t('sales.created') }
         format.json { render :show, status: :created, location: @sale }
       else
         format.html { render :new }
@@ -59,7 +59,7 @@ class SalesController < ApplicationController
     respond_to do |format|
       if @sale.update(sale_params)
         calc_value
-        format.html { redirect_to @sale, notice: 'Venda Alterada.' }
+        format.html { redirect_to @sale, notice: t('sales.updated') }
         format.json { render :show, status: :ok, location: @sale }
       else
         format.html { render :edit }
@@ -73,7 +73,7 @@ class SalesController < ApplicationController
   def destroy
     @sale.destroy
     respond_to do |format|
-      format.html { redirect_to sales_url, notice: 'Venda deletada.' }
+      format.html { redirect_to sales_url, notice: t('sales.destroyed') }
       format.json { head :no_content }
     end
   end
