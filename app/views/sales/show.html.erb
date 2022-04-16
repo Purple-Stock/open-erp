@@ -1,20 +1,21 @@
+<br><br><br>
 <%- model_class = Sale -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t 'sales.one', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:value) %>:</strong></dt>
+  <dt><strong><%= t('sales.value') %>:</strong></dt>
   <dd><%= @sale.value %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:discount) %>:</strong></dt>
+  <dt><strong><%= t('sales.discount') %>:</strong></dt>
   <dd><%= @sale.discount %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:percentage) %>:</strong></dt>
+  <dt><strong><%= t('sales.percentage') %>:</strong></dt>
   <dd><%= @sale.percentage %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:online) %>:</strong></dt>
+  <dt><strong><%= t('sales.online') %>:</strong></dt>
   <dd><%= @sale.online %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:disclosure) %>:</strong></dt>
+  <dt><strong><%= t('sales.disclosure') %>:</strong></dt>
   <dd><%= @sale.disclosure %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:customer_id) %>:</strong></dt>
+  <dt><strong><%= t('sales.customer') %>:</strong></dt>
   <dd><%= @sale.customer_id %></dd>
 </dl>
 
