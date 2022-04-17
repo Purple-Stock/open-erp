@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Product', type: :request do
+RSpec.describe 'Product' do
   describe 'GET /products_defer' do
     let!(:account) { create(:account) }
     let(:url) { '/products_defer' }
