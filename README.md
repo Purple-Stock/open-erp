@@ -71,6 +71,13 @@ executando o robocop e corrigindo qualquer alerta evidenciado:
 bundle exec rubocop
 ```
 
+
+## Demo
+
+Você pode testar o Open Erp com um clique no Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/puppe1990/open-erp)
+
 ## Contribuindo
 
 Este projeto existe graças a todas as pessoas que contribuem. Fique a vontade para contribuir! Essas aqui são boas [issues](https://github.com/puppe1990/open-erp/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) para começar! Se tiver dúvidas ou interesse em utilizar em algum negócio entre em contato em matheus.puppe@gmail.com
