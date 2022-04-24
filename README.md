@@ -94,4 +94,4 @@ Esse projeto existe graças ao esforço e dedicação dessas pessoas:
 
 ## Licença
 
-[MIT](https://github.com/remarkablemark/html-react-parser/blob/master/LICENSE)
+[MIT](https://github.com/puppe1990/open-erp/blob/master/LICENSE)
