@@ -1,17 +1,17 @@
 <div class="page-header">
-  <h1><%=t '.title', :default => 'Controle de Pedidos'%></h1>
+  <h1><%= t('orders_products.one') %></h1>
 </div>
 <table id="order_table" class="table-striped table-bordered table-responsive">
   <thead>
     <tr>
-      <th>Id Pedido</th>
-      <th>Nome</th>
-      <th>Cidade</th>
-      <th>Estado</th>
-      <th>CEP</th>
-      <th>Valor Total</th>
-      <th>Data do pedido</th>
-      <th>Status</th>
+      <th><%= t('orders_products.order_id') %></th>
+      <th><%= t('orders_products.name') %></th>
+      <th><%= t('orders_products.city') %></th>
+      <th><%= t('orders_products.state') %></th>
+      <th><%= t('orders_products.zip_code') %></th>
+      <th><%= t('orders_products.total_value') %></th>
+      <th><%= t('orders_products.total_value') %></th>
+      <th><%= t('orders_products.status') %></th>
     </tr>
   </thead>
   <tbody>
