@@ -1,0 +1,17 @@
+---
+pt-BR:
+  orders_products:
+    one: Controle do Pedido do Produto
+    two: Controle dos Pedidos de Produtos
+    code: Código do Produto
+    name: Nome
+    quantity_in_stock: Quantidade em Estoque
+    exit_quantity: Quantidade de Saída
+    order_quantity: Quantidade de Pedidos
+    order_id: ID do Pedido
+    city: Cidade
+    state: Estado
+    zip_code: CEP
+    total_value: Valor Total
+    order_date: Data do Pedido
+    status: Status
