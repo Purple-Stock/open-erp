@@ -16,33 +16,33 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label t(:quantity), :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales_products.quantity'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :quantity, :class => 'form-control' %>
     </div>
   </div>
   <!--<div class="form-group">
-    <%= f.label t(:value), :class => 'control-label col-lg-2' %>
+    <%= f.label t('sales_products.value'), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :value, :class => 'form-control' %>
     </div>
   </div>-->
     <div class="form-group">
-    <%= f.label t(:product_id), :class => 'control-label col-lg-2'%>
+    <%= f.label t('sales_products.product'), :class => 'control-label col-lg-2'%>
     <div class="col-lg-2 product">
-      <%= f.select :product_id, Product.all.collect {|p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "product-id form-control form-control-sm" %>
+      <%= f.select :product_id, Product.all.collect {|p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id ] }, { :include_blank => t('sales_products.select_dropdown.product')}, :class => "product-id form-control form-control-sm" %>
     </div>
   </div>
   <!--<div class="form-group">
     <%= f.label t(:sale_id), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select :sale_id, Sale.all.collect {|p| [ p.value, p.id ] }, { :include_blank => 'Selecione uma venda'}, :class => "form-control form-control-sm" %>
+      <%= f.select :sale_id, Sale.all.collect {|p| [ p.value, p.id ] }, { :include_blank => t('sales_products.select_dropdown.sale')}, :class => "form-control form-control-sm" %>
     </div>
   </div>-->
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= f.submit t('sales_products.submit'), :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 sale_products_path, :class => 'btn btn-default' %>
     </div>
