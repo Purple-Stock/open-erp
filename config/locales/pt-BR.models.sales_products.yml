@@ -1,0 +1,30 @@
+---
+pt-BR:
+  sales_products:
+    new: Nova Saída de Estoque
+    edit: Editar Saída de Estoque
+    one: Saída de Estoque
+    two: Saídas de Estoque
+    created: Saída de estoque criada
+    updated: Saída de estoque atualizada
+    destroyed: Saída de estoque deletada
+    name: Nome
+    price: Preço
+    entry: Entrada
+    exit: Saída
+    balance: Saldo
+    qr_code: QR code
+    image: Imagem
+    quantity: Quantidade
+    value: Valor
+    product: Produto
+    sales: Código da Venda
+    created_at: Data de Criação
+    highlight: Destaque
+    category: Categoria
+    active: Ativo
+    store_entry: Loja onde houve entrada
+    submit: Salvar
+    select_dropdown:
+      product: Selecione um Produto
+      sale: Selecione uma Venda

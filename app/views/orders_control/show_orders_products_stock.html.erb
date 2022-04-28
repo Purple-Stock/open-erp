@@ -1,14 +1,15 @@
+<br><br><br>
 <div class="page-header">
-  <h1><%=t '.title', :default => 'Controle de Produtos dos Pedidos'%></h1>
+  <h1><%= t('orders_products.two') %></h1>
 </div>
 <table id="order_table" class="table-striped table-bordered table-responsive">
   <thead>
     <tr>
-      <th>Código Produto</th>
-      <th>Nome</th>
-      <th>Quantidade estoque</th>
-      <th>Quantidade saída</th>
-      <th>Quantidade pedidos</th>
+      <th><%= t('orders_products.code') %></th>
+      <th><%= t('orders_products.name') %></th>
+      <th> <%= t('orders_products.quantity_in_stock') %></th>
+      <th><%= t('orders_products.exit_quantity') %></th>
+      <th><%= t('orders_products.order_quantity') %></th>
     </tr>
   </thead>
   <tbody>

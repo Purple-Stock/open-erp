@@ -1,12 +1,13 @@
+<br><br><br>
 <%- model_class = Purchase -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:value) %>:</strong></dt>
+  <dt><strong><%= t('purchases.value') %>:</strong></dt>
   <dd><%= @purchase.value %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:supplier_id) %>:</strong></dt>
+  <dt><strong><%= t('purchases.supplier') %>:</strong></dt>
   <dd><%= @purchase.supplier_id %></dd>
 </dl>
 
