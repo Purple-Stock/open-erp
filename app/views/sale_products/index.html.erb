@@ -1,7 +1,7 @@
 <br><br><br>
 <%- model_class = SaleProduct -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
+  <h1><%=t('sales_products.two') %></h1>
 </div>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_sale_product_path,
@@ -10,12 +10,12 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:foto) %></th>
-      <th><%= model_class.human_attribute_name(t(:quantity)) %></th>
-      <th><%= model_class.human_attribute_name(t(:value)) %></th>
-      <th><%= model_class.human_attribute_name(t(:product_id)) %></th>
-      <th><%= model_class.human_attribute_name(t(:sale_id)) %></th>
-      <th><%= model_class.human_attribute_name(t(:created_at)) %></th>
+      <th><%= t('sales_products.image') %></th>
+      <th><%= t('sales_products.quantity') %></th>
+      <th><%= t('sales_products.value') %></th>
+      <th><%= t('sales_products.product') %></th>
+      <th><%= t('sales_products.sales') %></th>
+      <th><%= t('sales_products.created_at') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>

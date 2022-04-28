@@ -1,14 +1,15 @@
+<br><br><br>
 <%- model_class = Purchase -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t 'purchases.two', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:value) %></th>
-      <th><%= model_class.human_attribute_name(:supplier_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= t('purchases.id') %></th>
+      <th><%= t('purchases.value') %></th>
+      <th><%= t('purchases.supplier') %></th>
+      <th><%= t('purchases.created_at') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -18,7 +19,7 @@
         <td><%= link_to purchase.id, purchase_path(purchase) %></td>
         <td><%= purchase.value %></td>
         <td><%= purchase.supplier_id %></td>
-        <td><%=l purchase.created_at %></td>
+        <td><%= purchase.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_purchase_path(purchase), :class => 'btn btn-default btn-xs' %>
