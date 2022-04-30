@@ -13,6 +13,7 @@ gem 'puma', '~> 4.3', '>= 4.3.12'
 gem 'sass-rails', '>= 6.0.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.3', '>= 4.3.0'
+gem 'psych', '< 4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
 # Use Redis adapter to run Action Cable in production
@@ -29,6 +30,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 
 gem "rubycritic", require: false
+
+gem 'net-smtp', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
