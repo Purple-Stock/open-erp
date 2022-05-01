@@ -87,5 +87,5 @@ gem 'jquery-rails'
 gem 'jsonapi-serializer'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.0'
-gem 'rqrcode_png'
+gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
