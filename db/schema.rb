@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_03_040146) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_04_025200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('accounts_id_seq'::regclass)" }, null: false
     t.string "company_name"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
