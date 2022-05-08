@@ -20,11 +20,11 @@ class ChangeGroupProductsIdToUuid < ActiveRecord::Migration[7.0]
     execute "ALTER TABLE products drop constraint products_pkey"
     execute "ALTER TABLE products ADD PRIMARY KEY (id)"
 
-    add_column :group_products, :group_id, :uuid
-    add_column :group_products, :product_id, :uuid
-    add_column :purchase_products, :product_id, :uuid
-    add_column :sale_products, :product_id, :uuid
-    add_column :simplo_items, :product_id, :uuid
+    add_column :group_products, :group_id, :uuid, foreign_key: true
+    add_column :group_products, :product_id, :uuid, foreign_key: true
+    add_column :purchase_products, :product_id, :uuid, foreign_key: true
+    add_column :sale_products, :product_id, :uuid, foreign_key: true
+    add_column :simplo_items, :product_id, :uuid, foreign_key: true
 
     add_index :group_products, :group_id
     add_index :group_products, :product_id
