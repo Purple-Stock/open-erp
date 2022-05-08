@@ -60,7 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_025200) do
     t.index ["account_id"], name: "index_categories_on_account_id"
   end
 
-  create_table "customers", force: :cascade do |t|
+  create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('customers_id_seq'::regclass)" }, null: false
     t.string "name"
     t.string "email"
     t.string "cellphone"
@@ -158,7 +159,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_025200) do
     t.float "percentage"
     t.boolean "online"
     t.boolean "disclosure"
-    t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "payment_type", default: 0
@@ -167,8 +167,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_025200) do
     t.integer "store_sale", default: 0
     t.float "total_exchange_value"
     t.integer "account_id"
+    t.uuid "customer_id"
     t.index ["account_id"], name: "index_sales_on_account_id"
-    t.index ["customer_id"], name: "index_sales_on_customer_id"
   end
 
   create_table "simplo_clients", force: :cascade do |t|
@@ -280,7 +280,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_025200) do
   add_foreign_key "purchases", "suppliers"
   add_foreign_key "sale_products", "products"
   add_foreign_key "sale_products", "sales"
-  add_foreign_key "sales", "customers"
   add_foreign_key "simplo_items", "products"
   add_foreign_key "simplo_items", "simplo_orders"
 end
