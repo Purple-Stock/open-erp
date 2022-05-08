@@ -504,6 +504,7 @@ DEPENDENCIES
   serviceworker-rails
   shoulda-matchers (~> 5.0)
   sidekiq
+  simplecov
   solargraph
   spreadsheet_architect
   spring
