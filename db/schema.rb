@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_08_040522) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_08_041049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -74,15 +74,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_040522) do
   end
 
   create_table "group_products", force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "group_id"
+    t.uuid "product_id"
     t.index ["group_id"], name: "index_group_products_on_group_id"
     t.index ["product_id"], name: "index_group_products_on_product_id"
   end
 
-  create_table "groups", force: :cascade do |t|
+  create_table "groups", id: :uuid, default: nil, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('groups_id_seq'::regclass)" }, null: false
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -101,7 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_040522) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "products", id: :uuid, default: nil, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('products_id_seq'::regclass)" }, null: false
     t.string "name"
     t.float "price"
     t.string "bar_code"
@@ -121,12 +123,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_040522) do
   create_table "purchase_products", force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
-    t.integer "product_id"
     t.integer "purchase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "store_entrance", default: 0
     t.integer "account_id"
+    t.uuid "product_id"
     t.index ["account_id"], name: "index_purchase_products_on_account_id"
     t.index ["product_id"], name: "index_purchase_products_on_product_id"
     t.index ["purchase_id"], name: "index_purchase_products_on_purchase_id"
@@ -143,11 +145,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_040522) do
   create_table "sale_products", force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
-    t.integer "product_id"
     t.integer "sale_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
+    t.uuid "product_id"
     t.index ["account_id"], name: "index_sale_products_on_account_id"
     t.index ["product_id"], name: "index_sale_products_on_product_id"
     t.index ["sale_id"], name: "index_sale_products_on_sale_id"
@@ -199,9 +201,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_040522) do
     t.string "sku"
     t.integer "quantity"
     t.integer "simplo_order_id"
-    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "product_id"
     t.index ["product_id"], name: "index_simplo_items_on_product_id"
     t.index ["simplo_order_id"], name: "index_simplo_items_on_simplo_order_id"
   end
@@ -273,14 +275,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_040522) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "group_products", "groups"
-  add_foreign_key "group_products", "products"
   add_foreign_key "products", "categories"
-  add_foreign_key "purchase_products", "products"
   add_foreign_key "purchase_products", "purchases"
   add_foreign_key "purchases", "suppliers"
-  add_foreign_key "sale_products", "products"
   add_foreign_key "sale_products", "sales"
-  add_foreign_key "simplo_items", "products"
   add_foreign_key "simplo_items", "simplo_orders"
 end
