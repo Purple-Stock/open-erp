@@ -16,7 +16,7 @@ class Product < ApplicationRecord
   def count_purchase_product
     rs = purchase_products.from_store('LojaPrincipal').sum('Quantity')
     sp = purchase_products.from_store('LojaSecundaria').sum('Quantity')
-    "#{rs}"
+    rs.to_s
   end
 
   def count_month_purchase_product(year, month)
@@ -42,7 +42,7 @@ class Product < ApplicationRecord
   def count_sale_product
     rs ||= sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
     sp ||= sale_products.from_sale_store('LojaSecundaria').sum('Quantity')
-    "#{rs}"
+    rs.to_s
   end
 
   def sum_simplo_items
@@ -54,7 +54,7 @@ class Product < ApplicationRecord
     sp = purchase_products.from_store('LojaSecundaria').sum('Quantity')
     rs -= sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
     sp -= sale_products.from_sale_store('LojaSecundaria').sum('Quantity')
-    "#{rs}"
+    rs.to_s
   end
 
   def update_active!
@@ -64,7 +64,7 @@ class Product < ApplicationRecord
       update_attributes(active: true)
     end
   rescue StandardError
-    errors.add(:active, message: "não pode ser atualizado")
+    errors.add(:active, message: 'não pode ser atualizado')
   end
 
   DATATABLE_COLUMNS = %w[custom_id name id].freeze
@@ -80,11 +80,11 @@ class Product < ApplicationRecord
 
       result = none
       search_columns.each do |key, value|
-        if DATATABLE_COLUMNS[key.to_i] == 'custom_id'
-          filter = where("#{DATATABLE_COLUMNS[key.to_i]} = ?", search_value.to_i)
-        else
-          filter = where("#{DATATABLE_COLUMNS[key.to_i]} ILIKE ?", "%#{search_value}%")
-        end
+        filter = if DATATABLE_COLUMNS[key.to_i] == 'custom_id'
+                   where("#{DATATABLE_COLUMNS[key.to_i]} = ?", search_value.to_i)
+                 else
+                   where("#{DATATABLE_COLUMNS[key.to_i]} ILIKE ?", "%#{search_value}%")
+                 end
         result = result.or(filter) if value['searchable']
       end
       result
@@ -96,7 +96,7 @@ class Product < ApplicationRecord
     end
 
     def integrate_product(id)
-      @order_page = Requests::Product.new(id: id).call
+      @order_page = Requests::Product.new(id:).call
       @order_page['result']['WsprodutoEstoque'].each do |order_page|
         Product.create(name: @order_page['result']['Wsproduto']['nome'],
                        sku: order_page['sku'],
