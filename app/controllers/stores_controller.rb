@@ -53,7 +53,7 @@ class StoresController < ApplicationController
   end
 
   def store_params
-    params['product']['account_id'] = current_tenant.id
+    params['store']['account_id'] = current_tenant.id
     params.require(:store).permit(:name, :address, :phone, :email, :account_id)
   end
 end
