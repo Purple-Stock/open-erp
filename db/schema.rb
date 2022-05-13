@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_13_022708) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_13_023519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -139,9 +139,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_022708) do
   create_table "purchases", id: :uuid, default: nil, force: :cascade do |t|
     t.bigint "integer_id", default: -> { "nextval('purchases_id_seq'::regclass)" }, null: false
     t.float "value"
-    t.integer "supplier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "supplier_id"
     t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
   end
 
@@ -242,7 +242,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_022708) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "suppliers", force: :cascade do |t|
+  create_table "suppliers", id: :uuid, default: nil, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('suppliers_id_seq'::regclass)" }, null: false
     t.string "name"
     t.string "cnpj"
     t.string "email"
@@ -279,6 +280,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_022708) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "purchases", "suppliers"
   add_foreign_key "simplo_items", "simplo_orders"
 end
