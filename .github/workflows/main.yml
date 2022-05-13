@@ -34,8 +34,9 @@ jobs:
           yarn install --check-files
           gem install bundler -v 2.2.29
           bundle install
-          bundle exec rails db:create
-          bundle exec rails db:migrate
-          bundle exec rails db:seed
+          bin/rails db:environment:set RAILS_ENV=development
+          bin/rails db:create
+          bin/rails db:migrate
+          bin/rails db:seed
           bundle exec rails webpacker:install
           bundle exec rspec
