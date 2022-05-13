@@ -31,6 +31,14 @@
               <%= link_to t("products.create"), new_product_path, class: 'nav-link' %>
             </li>
           <% end %>
+          <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-file-alt' do %>
+            <li class="<%= active_nav_item('stores', 'index') %>">
+              <%= link_to t("stores.list"), stores_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('stores', 'new') %>">
+              <%= link_to t("stores.create"), new_supplier_path, class: 'nav-link' %>
+            </li>
+          <% end %>
           <%= render 'shared/sidebar_dropdown', title: t("suppliers.two"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('suppliers', 'index') %>">
               <%= link_to t("suppliers.list"), suppliers_path, class: 'nav-link' %>
