@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_13_020800) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_13_022114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -91,7 +91,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_020800) do
     t.integer "months", default: 1
   end
 
-  create_table "post_data", force: :cascade do |t|
+  create_table "post_data", id: :uuid, default: nil, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('post_data_id_seq'::regclass)" }, null: false
     t.string "client_name"
     t.string "cep"
     t.string "state"
