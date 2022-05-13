@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_13_022114) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_13_022708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -148,17 +148,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_022114) do
   create_table "sale_products", force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
-    t.integer "sale_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
     t.uuid "product_id"
+    t.uuid "sale_id"
     t.index ["account_id"], name: "index_sale_products_on_account_id"
     t.index ["product_id"], name: "index_sale_products_on_product_id"
     t.index ["sale_id"], name: "index_sale_products_on_sale_id"
   end
 
-  create_table "sales", force: :cascade do |t|
+  create_table "sales", id: :uuid, default: nil, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('sales_id_seq'::regclass)" }, null: false
     t.float "value"
     t.float "discount"
     t.float "percentage"
@@ -279,6 +280,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_022114) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "purchases", "suppliers"
-  add_foreign_key "sale_products", "sales"
   add_foreign_key "simplo_items", "simplo_orders"
 end
