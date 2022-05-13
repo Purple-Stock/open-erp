@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_13_030216) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_13_030658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -190,7 +190,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_030216) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "simplo_item_sales", force: :cascade do |t|
+  create_table "simplo_item_sales", id: :uuid, default: nil, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('simplo_item_sales_id_seq'::regclass)" }, null: false
     t.string "produto_id"
     t.string "sku"
     t.string "nome_produto"
