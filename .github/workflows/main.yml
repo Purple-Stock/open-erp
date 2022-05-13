@@ -32,7 +32,6 @@ jobs:
         run: |
           sudo apt-get -yqq install libpq-dev
           yarn install --check-files
-          bin/rails db:environment:set RAILS_ENV=development
           gem install bundler -v 2.2.29
           bundle install
           bin/rails db:create
