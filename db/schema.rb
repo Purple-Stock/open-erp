@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -53,7 +53,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "categories", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('categories_id_seq'::regclass)" }, null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,7 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('customers_id_seq'::regclass)" }, null: false
     t.string "name"
     t.string "email"
     t.string "cellphone"
@@ -75,7 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "group_products", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('group_products_id_seq'::regclass)" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "group_id"
@@ -85,7 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "groups", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('groups_id_seq'::regclass)" }, null: false
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -93,7 +89,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "post_data", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('post_data_id_seq'::regclass)" }, null: false
     t.string "client_name"
     t.string "cep"
     t.string "state"
@@ -106,7 +101,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "products", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('products_id_seq'::regclass)" }, null: false
     t.string "name"
     t.float "price"
     t.string "bar_code"
@@ -124,7 +118,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "purchase_products", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('purchase_products_id_seq'::regclass)" }, null: false
     t.integer "quantity"
     t.float "value"
     t.datetime "created_at", null: false
@@ -139,7 +132,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "purchases", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('purchases_id_seq'::regclass)" }, null: false
     t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -148,7 +140,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "sale_products", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('sale_products_id_seq'::regclass)" }, null: false
     t.integer "quantity"
     t.float "value"
     t.datetime "created_at", null: false
@@ -162,7 +153,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "sales", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('sales_id_seq'::regclass)" }, null: false
     t.float "value"
     t.float "discount"
     t.float "percentage"
@@ -182,7 +172,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "simplo_clients", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('simplo_clients_id_seq'::regclass)" }, null: false
     t.string "name"
     t.integer "age"
     t.datetime "order_date", precision: nil
@@ -191,7 +180,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "simplo_item_sales", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('simplo_item_sales_id_seq'::regclass)" }, null: false
     t.string "produto_id"
     t.string "sku"
     t.string "nome_produto"
@@ -207,7 +195,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "simplo_items", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('simplo_items_id_seq'::regclass)" }, null: false
     t.string "sku"
     t.integer "quantity"
     t.datetime "created_at", null: false
@@ -219,7 +206,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "simplo_order_payments", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('simplo_order_payments_id_seq'::regclass)" }, null: false
     t.string "order_id"
     t.string "client_name"
     t.string "integrador"
@@ -234,7 +220,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "simplo_orders", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('simplo_orders_id_seq'::regclass)" }, null: false
     t.string "client_name"
     t.string "order_id"
     t.string "order_status"
@@ -244,7 +229,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "simplo_products", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('simplo_products_id_seq'::regclass)" }, null: false
     t.string "name"
     t.string "sku"
     t.datetime "created_at", null: false
@@ -252,7 +236,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "suppliers", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('suppliers_id_seq'::regclass)" }, null: false
     t.string "name"
     t.string "cnpj"
     t.string "email"
@@ -270,7 +253,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032413) do
   end
 
   create_table "users", id: :uuid, default: nil, force: :cascade do |t|
-    t.bigint "integer_id", default: -> { "nextval('users_id_seq'::regclass)" }, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
