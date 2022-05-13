@@ -1,0 +1,10 @@
+---
+pt-BR:
+  stores:
+    one: Loja
+    two: Lojas
+    name: Nome
+    created: Loja Criada
+    updated: Loja Atualizada
+    deleted: Loja Deletada
+    new: Nova Loja

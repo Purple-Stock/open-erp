@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :stores
   devise_for :users
   resources :accounts
   get '/info', to: 'companies#show'
