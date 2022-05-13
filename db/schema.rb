@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_13_025314) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_13_025817) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -147,7 +147,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_025314) do
     t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
   end
 
-  create_table "sale_products", force: :cascade do |t|
+  create_table "sale_products", id: :uuid, default: nil, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('sale_products_id_seq'::regclass)" }, null: false
     t.integer "quantity"
     t.float "value"
     t.datetime "created_at", null: false
