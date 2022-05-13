@@ -6,7 +6,7 @@ RSpec.describe 'Product' do
     let(:url) { '/products_defer' }
 
     context 'with pagination params' do
-      let!(:products) { create_list(:product, 20, account_id: account.id) }
+      let!(:products) { create_list(:product, 20, account: account) }
 
       let(:paginate_params) do
         {

@@ -2,6 +2,6 @@ FactoryBot.define do
   factory :category do
     name { FFaker::Internet.slug }
 
-    account_id { create(:account).id }
+    account { create(:account) }
   end
 end
