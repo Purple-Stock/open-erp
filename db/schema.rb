@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "categories", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["account_id"], name: "index_customers_on_account_id"
   end
 
-  create_table "group_products", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "group_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "group_id"
@@ -81,14 +81,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["product_id"], name: "index_group_products_on_product_id"
   end
 
-  create_table "groups", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "months", default: 1
   end
 
-  create_table "post_data", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "post_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "client_name"
     t.string "cep"
     t.string "state"
@@ -100,7 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.float "price"
     t.string "bar_code"
@@ -117,7 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  create_table "purchase_products", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "purchase_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
     t.datetime "created_at", null: false
@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["purchase_id"], name: "index_purchase_products_on_purchase_id"
   end
 
-  create_table "purchases", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "purchases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -139,7 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
   end
 
-  create_table "sale_products", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "sale_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
     t.datetime "created_at", null: false
@@ -152,7 +152,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["sale_id"], name: "index_sale_products_on_sale_id"
   end
 
-  create_table "sales", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "sales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.float "value"
     t.float "discount"
     t.float "percentage"
@@ -171,7 +171,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["customer_id"], name: "index_sales_on_customer_id"
   end
 
-  create_table "simplo_clients", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "simplo_clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.integer "age"
     t.datetime "order_date", precision: nil
@@ -179,7 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "simplo_item_sales", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "simplo_item_sales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "produto_id"
     t.string "sku"
     t.string "nome_produto"
@@ -194,7 +194,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.string "order_id"
   end
 
-  create_table "simplo_items", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "simplo_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "sku"
     t.integer "quantity"
     t.datetime "created_at", null: false
@@ -205,7 +205,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["simplo_order_id"], name: "index_simplo_items_on_simplo_order_id"
   end
 
-  create_table "simplo_order_payments", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "simplo_order_payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "order_id"
     t.string "client_name"
     t.string "integrador"
@@ -219,7 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "simplo_orders", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "simplo_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "client_name"
     t.string "order_id"
     t.string "order_status"
@@ -228,14 +228,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "simplo_products", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "simplo_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "sku"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "suppliers", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "suppliers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "cnpj"
     t.string "email"
@@ -252,7 +252,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["account_id"], name: "index_suppliers_on_account_id"
   end
 
-  create_table "users", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

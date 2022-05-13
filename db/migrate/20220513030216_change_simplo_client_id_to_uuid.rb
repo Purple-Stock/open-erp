@@ -1,6 +1,6 @@
 class ChangeSimploClientIdToUuid < ActiveRecord::Migration[7.0]
   def change
-    add_column :simplo_clients, :uuid, :uuid
+    add_column :simplo_clients, :uuid, :uuid, default: "gen_random_uuid()", null: false
 
     rename_column :simplo_clients, :id, :integer_id
     rename_column :simplo_clients, :uuid, :id

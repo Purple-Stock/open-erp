@@ -2,7 +2,7 @@ class ChangeUserIdToUuid < ActiveRecord::Migration[7.0]
   def change
     remove_column :accounts, :user_id
 
-    add_column :users, :uuid, :uuid
+    add_column :users, :uuid, :uuid, default: "gen_random_uuid()", null: false
     rename_column :users, :id, :integer_id
     rename_column :users, :uuid, :id
 

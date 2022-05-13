@@ -6,14 +6,14 @@ class ChangeGroupProductsIdToUuid < ActiveRecord::Migration[7.0]
     remove_column :sale_products, :product_id
     remove_column :simplo_items, :product_id
 
-    add_column :groups, :uuid, :uuid
+    add_column :groups, :uuid, :uuid, default: "gen_random_uuid()", null: false
     rename_column :groups, :id, :integer_id
     rename_column :groups, :uuid, :id
 
     execute "ALTER TABLE groups drop constraint groups_pkey"
     execute "ALTER TABLE groups ADD PRIMARY KEY (id)"
 
-    add_column :products, :uuid, :uuid
+    add_column :products, :uuid, :uuid, default: "gen_random_uuid()", null: false
     rename_column :products, :id, :integer_id
     rename_column :products, :uuid, :id
 

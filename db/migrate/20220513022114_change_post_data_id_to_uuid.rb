@@ -1,6 +1,6 @@
 class ChangePostDataIdToUuid < ActiveRecord::Migration[7.0]
   def change
-    add_column :post_data, :uuid, :uuid
+    add_column :post_data, :uuid, :uuid, default: "gen_random_uuid()", null: false
 
     rename_column :post_data, :id, :integer_id
     rename_column :post_data, :uuid, :id

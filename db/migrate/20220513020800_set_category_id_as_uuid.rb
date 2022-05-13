@@ -2,7 +2,7 @@ class SetCategoryIdAsUuid < ActiveRecord::Migration[7.0]
   def change
     remove_column :products, :category_id
 
-    add_column :categories, :uuid, :uuid
+    add_column :categories, :uuid, :uuid, default: "gen_random_uuid()", null: false
     rename_column :categories, :id, :integer_id
     rename_column :categories, :uuid, :id
 

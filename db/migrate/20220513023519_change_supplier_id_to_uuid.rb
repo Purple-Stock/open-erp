@@ -2,7 +2,7 @@ class ChangeSupplierIdToUuid < ActiveRecord::Migration[7.0]
   def change
     remove_column :purchases, :supplier_id
 
-    add_column :suppliers, :uuid, :uuid
+    add_column :suppliers, :uuid, :uuid, default: "gen_random_uuid()", null: false
     rename_column :suppliers, :id, :integer_id
     rename_column :suppliers, :uuid, :id
 

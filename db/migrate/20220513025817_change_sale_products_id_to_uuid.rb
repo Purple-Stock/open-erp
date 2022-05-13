@@ -1,6 +1,6 @@
 class ChangeSaleProductsIdToUuid < ActiveRecord::Migration[7.0]
   def change
-    add_column :sale_products, :uuid, :uuid
+    add_column :sale_products, :uuid, :uuid, default: "gen_random_uuid()", null: false
 
     rename_column :sale_products, :id, :integer_id
     rename_column :sale_products, :uuid, :id
