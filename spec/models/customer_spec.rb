@@ -6,7 +6,8 @@ RSpec.describe Customer, type: :model do
   it { should belong_to(:account) }
 
   context 'when create' do
-    let(:customer) { create(:customer) }
+    let(:account) { create(:account) }
+    let(:customer) { create(:customer, account: account) }
 
     it 'should be valid' do
       expect(customer).to be_valid
