@@ -269,6 +269,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "group_products", "groups"
+  add_foreign_key "group_products", "products"
+  add_foreign_key "products", "categories"
+  add_foreign_key "purchase_products", "products"
+  add_foreign_key "purchase_products", "purchases"
+  add_foreign_key "purchases", "suppliers"
+  add_foreign_key "sale_products", "products"
+  add_foreign_key "sale_products", "sales"
+  add_foreign_key "sales", "customers"
+  add_foreign_key "simplo_items", "products"
+  add_foreign_key "simplo_items", "simplo_orders"
 end
