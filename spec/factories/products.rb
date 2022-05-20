@@ -10,7 +10,7 @@ FactoryBot.define do
     price { rand(100..400) }
     active { true }
 
-    account_id { create(:account).id }
-    category_id { create(:category, account_id: account_id).id }
+    account { create(:account) }
+    category { create(:category, account: account) }
   end
 end

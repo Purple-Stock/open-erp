@@ -1,4 +1,4 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/puppe1990/open-erp/badge)](https://www.codefactor.io/repository/github/puppe1990/open-erp)
+[![CodeFactor](https://www.codefactor.io/repository/github/purple-stock/open-erp/badge)](https://www.codefactor.io/repository/github/purple-stock/open-erp)
 # OPEN ERP
 
 O **Open ERP** é utilizado para controle de estoque, gerador de notas fiscais, financeiro. Integrações com eccomerce e diversos ERPs. Desenvolvido em Ruby on Rails a ideia do projeto é seguir o Rails Way de desenvolvimento mantendo o projeto um monolíto utilizando as últimas novidades da comunidade Rails como Stimulus, Turbo Frames, Turbo Streams.
