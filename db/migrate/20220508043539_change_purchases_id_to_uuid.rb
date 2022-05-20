@@ -8,5 +8,7 @@ class ChangePurchasesIdToUuid < ActiveRecord::Migration[7.0]
     execute "ALTER TABLE purchases ADD PRIMARY KEY (id)"
     add_column :purchase_products, :purchase_id, :uuid, foreign_key: true
     add_index :purchase_products, :purchase_id
+
+    add_foreign_key :purchase_products, :purchases
   end
 end

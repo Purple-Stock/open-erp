@@ -11,5 +11,7 @@ class ChangeUserIdToUuid < ActiveRecord::Migration[7.0]
 
     add_column :accounts, :user_id, :uuid, foreign_key: true
     add_index :accounts, :user_id
+
+    add_foreign_key :accounts, :users
   end
 end

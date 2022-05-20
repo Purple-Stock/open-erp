@@ -12,5 +12,7 @@ class SetCategoryIdAsUuid < ActiveRecord::Migration[7.0]
     add_column :products, :category_id, :uuid, foreign_key: true
 
     add_index :products, :category_id
+
+    add_foreign_key :products, :categories
   end
 end
