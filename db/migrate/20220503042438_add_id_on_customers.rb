@@ -7,5 +7,6 @@ class AddIdOnCustomers < ActiveRecord::Migration[7.0]
     execute "ALTER TABLE customers drop constraint customers_pkey;"
     execute 'ALTER TABLE customers ADD PRIMARY KEY (id);'
     add_column :sales, :customer_id, :uuid, foreign_key: true
+    add_foreign_key :sales, :customers
   end
 end

@@ -11,5 +11,7 @@ class ChangeSimploOrderIdToUuid < ActiveRecord::Migration[7.0]
 
     add_column :simplo_items, :simplo_order_id, :uuid, foreign_key: true
     add_index :simplo_items, :simplo_order_id
+
+    add_foreign_key :simplo_items, :simplo_orders
   end
 end

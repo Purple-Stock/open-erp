@@ -31,5 +31,11 @@ class ChangeGroupProductsIdToUuid < ActiveRecord::Migration[7.0]
     add_index :purchase_products, :product_id
     add_index :sale_products, :product_id
     add_index :simplo_items, :product_id
+
+    add_foreign_key :group_products, :groups
+    add_foreign_key :group_products, :products
+    add_foreign_key :purchase_products, :products
+    add_foreign_key :sale_products, :products
+    add_foreign_key :simplo_items, :products
   end
 end

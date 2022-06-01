@@ -11,5 +11,7 @@ class ChangeSalesIdToUuid < ActiveRecord::Migration[7.0]
 
     add_column :sale_products, :sale_id, :uuid, foreign_key: true
     add_index :sale_products, :sale_id
+
+    add_foreign_key :sale_products, :sales
   end
 end

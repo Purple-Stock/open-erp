@@ -11,5 +11,7 @@ class ChangeSupplierIdToUuid < ActiveRecord::Migration[7.0]
 
     add_column :purchases, :supplier_id, :uuid, foreign_key: true
     add_index :purchases, :supplier_id
+
+    add_foreign_key :purchases, :suppliers
   end
 end
