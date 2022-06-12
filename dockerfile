@@ -1,4 +1,4 @@
-FROM ruby:3.1-slim
+FROM ruby:3.2-rc-slim-buster
 RUN apt-get update && apt-get install -y git
 # Instala as nossas dependencias
 RUN apt-get update && apt-get install -qq -y --no-install-recommends \

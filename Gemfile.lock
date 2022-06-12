@@ -230,6 +230,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.4-x86_64-linux)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (5.10.1)
       activesupport
@@ -410,10 +412,7 @@ GEM
       axlsx_styler (>= 1.0.0, < 2)
       caxlsx (>= 2.0.2, < 4)
       rodf (>= 1.0.0, < 2)
-    spring (2.1.1)
-    spring-watcher-listen (2.0.1)
-      listen (>= 2.7, < 4.0)
-      spring (>= 1.2, < 3.0)
+    spring (3.0.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -464,6 +463,7 @@ GEM
 PLATFORMS
   x86_64-darwin-19
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   acts_as_tenant
@@ -471,7 +471,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   business (~> 2.0)
   byebug
-  capybara (>= 2.15)
+  capybara (>= 3.36.0)
   cocoon
   devise
   factory_bot_rails
@@ -493,8 +493,8 @@ DEPENDENCIES
   rack-cors
   rack-ratelimit
   rack-timeout
-  rails (~> 7.0.0)
-  rails-i18n (~> 7.0.0)
+  rails (~> 7.0.2, >= 7.0.2.4)
+  rails-i18n (~> 7.0.3)
   ransack
   redis
   rqrcode_png!
@@ -509,8 +509,7 @@ DEPENDENCIES
   simplecov-formatter-badge
   solargraph
   spreadsheet_architect
-  spring
-  spring-watcher-listen (~> 2.0.0)
+  spring (= 3.0.0)
   web-console (>= 4.2.0)
   webdrivers
   webpacker (~> 4.3, >= 4.3.0)
