@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -56,8 +56,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
-    t.index ["account_id"], name: "index_categories_on_account_id"
+    t.integer "integer_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["integer_id"], name: "index_categories_on_integer_id"
   end
 
   create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -68,8 +69,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.string "cpf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
-    t.index ["account_id"], name: "index_customers_on_account_id"
+    t.integer "integer_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["integer_id"], name: "index_customers_on_integer_id"
   end
 
   create_table "group_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -111,10 +113,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.integer "custom_id"
     t.string "sku"
     t.string "extra_sku"
-    t.integer "account_id"
+    t.integer "integer_id"
     t.uuid "category_id"
-    t.index ["account_id"], name: "index_products_on_account_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["integer_id"], name: "index_products_on_integer_id"
   end
 
   create_table "purchase_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -123,10 +126,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "store_entrance", default: 0
-    t.integer "account_id"
+    t.integer "integer_id"
     t.uuid "product_id"
     t.uuid "purchase_id"
-    t.index ["account_id"], name: "index_purchase_products_on_account_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["integer_id"], name: "index_purchase_products_on_integer_id"
     t.index ["product_id"], name: "index_purchase_products_on_product_id"
     t.index ["purchase_id"], name: "index_purchase_products_on_purchase_id"
   end
@@ -136,6 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "supplier_id"
+    t.uuid "account_id"
     t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
   end
 
@@ -144,10 +149,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
+    t.integer "integer_id"
     t.uuid "product_id"
     t.uuid "sale_id"
-    t.index ["account_id"], name: "index_sale_products_on_account_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["integer_id"], name: "index_sale_products_on_integer_id"
     t.index ["product_id"], name: "index_sale_products_on_product_id"
     t.index ["sale_id"], name: "index_sale_products_on_sale_id"
   end
@@ -165,10 +171,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.string "order_code"
     t.integer "store_sale", default: 0
     t.float "total_exchange_value"
-    t.integer "account_id"
+    t.integer "integer_id"
     t.uuid "customer_id"
-    t.index ["account_id"], name: "index_sales_on_account_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
     t.index ["customer_id"], name: "index_sales_on_customer_id"
+    t.index ["integer_id"], name: "index_sales_on_integer_id"
   end
 
   create_table "simplo_clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -249,6 +256,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_13_032728) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["account_id"], name: "index_suppliers_on_account_id"
   end
 

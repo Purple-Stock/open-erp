@@ -471,7 +471,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   business (~> 2.0)
   byebug
-  capybara (>= 2.15)
+  capybara (>= 3.36.0)
   cocoon
   devise
   factory_bot_rails
@@ -493,8 +493,8 @@ DEPENDENCIES
   rack-cors
   rack-ratelimit
   rack-timeout
-  rails (~> 7.0.0)
-  rails-i18n (~> 7.0.0)
+  rails (~> 7.0.2, >= 7.0.2.4)
+  rails-i18n (~> 7.0.3)
   ransack
   redis
   rqrcode_png!
