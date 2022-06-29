@@ -1,36 +1,16 @@
 version: '3'
-
 services:
-  rails:
-    build: .
-    command: bash -c "bundle install && yarn install --check-files && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    container_name: 'open-erp'
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/open_erp
   postgres:
     image: 'postgres:9.5'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
-    environment:
-      POSTGRES_PASSWORD: password
-
-  website:
-    tty: true
-    stdin_open: true
-    depends_on:
-      - 'postgres'
-    build: .
     ports:
       - '5432:5432'
-    volumes:
-      - '.:/open_erp'
     environment:
-      DB_USER: postgres
-      DB_NAME: open_erp
-      DB_PASSWORD: password
-      DB_HOST: postgres
-
+      POSTGRES_PASSWORD: 'password'
+  redis:
+    image: 'redis:7.0.2'
+    ports:
+      - '6379:6379'
 volumes:
   postgres:
