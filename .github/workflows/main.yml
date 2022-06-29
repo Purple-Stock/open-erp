@@ -32,7 +32,7 @@ jobs:
         run: |
           sudo apt-get -yqq install libpq-dev
           gem install bundler -v 2.2.29
-          bin/rails bundle install
+          bundle install
           bin/rails db:create
           bin/rails db:migrate
           bin/rails db:seed
