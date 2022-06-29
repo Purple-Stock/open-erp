@@ -36,5 +36,6 @@ jobs:
           bin/rails db:create
           bin/rails db:migrate
           bin/rails db:seed
+          bin/rails gem install bundler -v 2.2.29
           bin/rails webpacker:install
           bin/rails bundle exec rspec
