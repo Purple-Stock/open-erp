@@ -8,7 +8,7 @@
     "@rails/actioncable": "^6.1.5",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.1.5",
-    "@rails/webpacker": "5.4.3",
+    "@rails/webpacker": "4.3.0",
     "bootstrap": "^4.2.1",
     "cleave.js": "^1.4.7",
     "izitoast": "^1.4.0",
@@ -22,6 +22,6 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.9.2"
   }
 }
