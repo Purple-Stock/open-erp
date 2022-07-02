@@ -427,6 +427,10 @@ GEM
     tilt (2.0.10)
     timeout (0.2.0)
     tty-which (0.4.2)
+    turbo-rails (1.1.1)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
@@ -508,6 +512,7 @@ DEPENDENCIES
   solargraph
   spreadsheet_architect
   spring (= 3.0.0)
+  turbo-rails
   web-console (>= 4.2.0)
   webdrivers
 
