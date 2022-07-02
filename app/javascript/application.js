@@ -7,3 +7,7 @@ window.$ = jquery
 
 import * as bootstrap from 'bootstrap'
 window.bootstrap = bootstrap
+
+import DataTable from "datatables"
+
+window.DataTable = DataTable();
