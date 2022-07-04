@@ -33,8 +33,8 @@ jobs:
           sudo apt-get -yqq install libpq-dev
           gem install bundler -v 2.2.29
           bundle install
-          bundle exec rails db:create
-          bundle exec rails db:migrate
-          bundle exec rails db:seed
-          bundle exec rails webpacker:install
+          bin/rails db:create
+          bin/rails db:migrate
+          bin/rails db:seed
+          bin/rails webpacker:install
           bundle exec rspec

@@ -412,10 +412,7 @@ GEM
       axlsx_styler (>= 1.0.0, < 2)
       caxlsx (>= 2.0.2, < 4)
       rodf (>= 1.0.0, < 2)
-    spring (2.1.1)
-    spring-watcher-listen (2.0.1)
-      listen (>= 2.7, < 4.0)
-      spring (>= 1.2, < 3.0)
+    spring (3.0.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -512,8 +509,7 @@ DEPENDENCIES
   simplecov-formatter-badge
   solargraph
   spreadsheet_architect
-  spring
-  spring-watcher-listen (~> 2.0.0)
+  spring (~> 3.0.0)
   web-console (>= 4.2.0)
   webdrivers
   webpacker (~> 4.3, >= 4.3.0)
