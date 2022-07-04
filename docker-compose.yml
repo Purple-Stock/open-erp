@@ -1,28 +1,16 @@
 version: '3'
-   
 services:
   postgres:
     image: 'postgres:9.5'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
-    environment:
-      POSTGRES_PASSWORD: password
-
-  website:
-    tty: true
-    stdin_open: true
-    depends_on:
-      - 'postgres'
-    build: .
     ports:
-      - '9292:9292'
-    volumes:
-      - '.:/open_erp'
+      - '5432:5432'
     environment:
-      DB_USER: postgres
-      DB_NAME: open_erp
-      DB_PASSWORD: password
-      DB_HOST: postgres
-   
+      POSTGRES_PASSWORD: 'password'
+  redis:
+    image: 'redis:7.0.2'
+    ports:
+      - '6379:6379'
 volumes:
   postgres:
