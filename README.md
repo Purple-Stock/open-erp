@@ -49,6 +49,24 @@ E acesse no ambiente local [http://localhost:3000](http://localhost:3000):
 bundle exec rails server
 ```
 
+## Docker
+Caso não queira configurar o banco de dados local, você pode utilizar o docker.
+
+Para buildar as imagens, execute:
+```sh
+docker image build -t open_erp .
+```
+
+Ao finalizar o build das imagens, basta subir os containers:
+```sh
+docker-compose up
+```
+
+Por fim, basta subir o rails server e acessar o ambiente local [http://localhost:3000](http://localhost:3000)
+```sh
+rails s
+```
+
 ## Testes
 
 Para executar os testes da aplicação e verificar se tudo está funcionando como
