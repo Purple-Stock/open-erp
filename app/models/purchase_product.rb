@@ -15,7 +15,11 @@ class PurchaseProduct < ApplicationRecord
 
       result = none
       DATATABLE_COLUMNS.each do |column|
-        filter = purchased_products.where("products.#{column} ILIKE ? ", "%#{search_value}%")
+        filter = if DATATABLE_COLUMNS[column.to_i] == 'custom_id'
+                   purchased_products.where("products.#{column} = ? ", search_value)
+                 else
+                   purchased_products.where("products.#{column} ILIKE ? ", "%#{search_value}%")
+                 end
         result = result.or(filter)
       end
       result
