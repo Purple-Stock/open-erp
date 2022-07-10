@@ -513,6 +513,7 @@ DEPENDENCIES
   spreadsheet_architect
   spring (= 3.0.0)
   turbo-rails
+
   web-console (>= 4.2.0)
   webdrivers
 

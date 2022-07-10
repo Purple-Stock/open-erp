@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "company_name"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id"
@@ -75,6 +76,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
   end
 
   create_table "group_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "product_id"
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "group_id"
@@ -107,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
     t.float "price"
     t.string "bar_code"
     t.boolean "highlight"
+    t.integer "category_id"
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -123,6 +128,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
   create_table "purchase_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
+    t.integer "product_id"
+    t.integer "purchase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "store_entrance", default: 0
@@ -137,6 +144,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
 
   create_table "purchases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.float "value"
+    t.integer "supplier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "supplier_id"
@@ -147,6 +155,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
   create_table "sale_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
+    t.integer "product_id"
+    t.integer "sale_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "integer_id"
@@ -164,6 +174,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
     t.float "percentage"
     t.boolean "online"
     t.boolean "disclosure"
+    t.integer "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "payment_type", default: 0
@@ -204,6 +215,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
   create_table "simplo_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "sku"
     t.integer "quantity"
+    t.integer "simplo_order_id"
+    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "product_id"
