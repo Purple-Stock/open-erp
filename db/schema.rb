@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_12_004618) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
-  create_table "accounts", force: :cascade do |t|
+  create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "company_name"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id"
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
@@ -50,15 +53,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
-    t.index ["account_id"], name: "index_categories_on_account_id"
+    t.integer "integer_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["integer_id"], name: "index_categories_on_integer_id"
   end
 
-  create_table "customers", force: :cascade do |t|
+  create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "cellphone"
@@ -66,27 +70,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.string "cpf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
-    t.index ["account_id"], name: "index_customers_on_account_id"
+    t.integer "integer_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["integer_id"], name: "index_customers_on_integer_id"
   end
 
-  create_table "group_products", force: :cascade do |t|
+  create_table "group_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "group_id"
     t.integer "product_id"
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "group_id"
+    t.uuid "product_id"
     t.index ["group_id"], name: "index_group_products_on_group_id"
     t.index ["product_id"], name: "index_group_products_on_product_id"
   end
 
-  create_table "groups", force: :cascade do |t|
+  create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "months", default: 1
   end
 
-  create_table "post_data", force: :cascade do |t|
+  create_table "post_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "client_name"
     t.string "cep"
     t.string "state"
@@ -98,7 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.float "price"
     t.string "bar_code"
@@ -110,12 +118,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.integer "custom_id"
     t.string "sku"
     t.string "extra_sku"
-    t.integer "account_id"
-    t.index ["account_id"], name: "index_products_on_account_id"
+    t.integer "integer_id"
+    t.uuid "category_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["integer_id"], name: "index_products_on_integer_id"
   end
 
-  create_table "purchase_products", force: :cascade do |t|
+  create_table "purchase_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
     t.integer "product_id"
@@ -123,34 +133,42 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "store_entrance", default: 0
-    t.integer "account_id"
-    t.index ["account_id"], name: "index_purchase_products_on_account_id"
+    t.integer "integer_id"
+    t.uuid "product_id"
+    t.uuid "purchase_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["integer_id"], name: "index_purchase_products_on_integer_id"
     t.index ["product_id"], name: "index_purchase_products_on_product_id"
     t.index ["purchase_id"], name: "index_purchase_products_on_purchase_id"
   end
 
-  create_table "purchases", force: :cascade do |t|
+  create_table "purchases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.float "value"
     t.integer "supplier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "supplier_id"
+    t.uuid "account_id"
     t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
   end
 
-  create_table "sale_products", force: :cascade do |t|
+  create_table "sale_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
     t.integer "product_id"
     t.integer "sale_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "account_id"
-    t.index ["account_id"], name: "index_sale_products_on_account_id"
+    t.integer "integer_id"
+    t.uuid "product_id"
+    t.uuid "sale_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["integer_id"], name: "index_sale_products_on_integer_id"
     t.index ["product_id"], name: "index_sale_products_on_product_id"
     t.index ["sale_id"], name: "index_sale_products_on_sale_id"
   end
 
-  create_table "sales", force: :cascade do |t|
+  create_table "sales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.float "value"
     t.float "discount"
     t.float "percentage"
@@ -164,12 +182,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.string "order_code"
     t.integer "store_sale", default: 0
     t.float "total_exchange_value"
-    t.integer "account_id"
-    t.index ["account_id"], name: "index_sales_on_account_id"
+    t.integer "integer_id"
+    t.uuid "customer_id"
+    t.uuid "account_id", default: -> { "gen_random_uuid()" }, null: false
     t.index ["customer_id"], name: "index_sales_on_customer_id"
+    t.index ["integer_id"], name: "index_sales_on_integer_id"
   end
 
-  create_table "simplo_clients", force: :cascade do |t|
+  create_table "simplo_clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.integer "age"
     t.datetime "order_date", precision: nil
@@ -177,7 +197,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "simplo_item_sales", force: :cascade do |t|
+  create_table "simplo_item_sales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "produto_id"
     t.string "sku"
     t.string "nome_produto"
@@ -192,18 +212,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.string "order_id"
   end
 
-  create_table "simplo_items", force: :cascade do |t|
+  create_table "simplo_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "sku"
     t.integer "quantity"
     t.integer "simplo_order_id"
     t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "product_id"
+    t.uuid "simplo_order_id"
     t.index ["product_id"], name: "index_simplo_items_on_product_id"
     t.index ["simplo_order_id"], name: "index_simplo_items_on_simplo_order_id"
   end
 
-  create_table "simplo_order_payments", force: :cascade do |t|
+  create_table "simplo_order_payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "order_id"
     t.string "client_name"
     t.string "integrador"
@@ -217,7 +239,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "simplo_orders", force: :cascade do |t|
+  create_table "simplo_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "client_name"
     t.string "order_id"
     t.string "order_status"
@@ -226,14 +248,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "simplo_products", force: :cascade do |t|
+  create_table "simplo_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "sku"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "suppliers", force: :cascade do |t|
+  create_table "suppliers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "cnpj"
     t.string "email"
@@ -247,10 +269,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["account_id"], name: "index_suppliers_on_account_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

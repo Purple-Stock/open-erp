@@ -4,15 +4,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.0"
+gem "rails", "~> 7.0.2", ">= 7.0.2.4"
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.3', '>= 4.3.12'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6.0.0'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.3', '>= 4.3.0'
 gem 'psych', '< 4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
@@ -29,9 +27,17 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
 
+gem 'turbo-rails'
+
 gem "rubycritic", require: false
 
 gem 'net-smtp', require: false
+
+gem 'autoprefixer-rails'
+
+gem 'sprockets'
+
+gem 'bootstrap-sass', '~> 3.3.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,7 +60,7 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '>= 3.36.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
   # Easy installation and use of web drivers to run system tests with browsers
@@ -89,6 +95,8 @@ gem 'cocoon'
 gem 'jquery-rails'
 gem 'jsonapi-serializer'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails-i18n', '~> 7.0.0'
+gem 'rails-i18n', '~> 7.0.3'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
+
+gem "importmap-rails", "~> 1.1"

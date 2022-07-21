@@ -3,4 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   include ChronologicalOrder
   include SpreadsheetArchitect
+
+  # Adjust default sort order
+  self.implicit_order_column = :created_at
 end

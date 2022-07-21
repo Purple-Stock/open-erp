@@ -1,6 +1,3 @@
-FROM ruby:3.1.2
-
-ENV NODE_VERSION 12
 # Seta nosso path
 ENV INSTALL_PATH /open_erp
 
