@@ -19,6 +19,10 @@
  *= stub mobile
  */
 
+  @import "bootstrap-sprockets";
+
+  @import "bootstrap";
+
 .turbolinks-progress-bar {
   background-color: #fd7e14;
 }
