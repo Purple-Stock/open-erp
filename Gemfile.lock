@@ -511,9 +511,8 @@ DEPENDENCIES
   simplecov-formatter-badge
   solargraph
   spreadsheet_architect
-  spring (= 3.0.0)
+  spring (~> 3.0.0)
   turbo-rails
-
   web-console (>= 4.2.0)
   webdrivers
 
