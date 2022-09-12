@@ -1,30 +1,35 @@
-<br><br><br>
 <%- model_class = Sale -%>
-<div class="page-header">
-  <h1><%=t 'sales.one', :default => model_class.model_name.human.titleize %></h1>
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t 'sales.one', :default => model_class.model_name.human.titleize %></h1>
+  </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= t('sales.value') %>:</strong></dt>
-  <dd><%= @sale.value %></dd>
-  <dt><strong><%= t('sales.discount') %>:</strong></dt>
-  <dd><%= @sale.discount %></dd>
-  <dt><strong><%= t('sales.percentage') %>:</strong></dt>
-  <dd><%= @sale.percentage %></dd>
-  <dt><strong><%= t('sales.online') %>:</strong></dt>
-  <dd><%= @sale.online %></dd>
-  <dt><strong><%= t('sales.disclosure') %>:</strong></dt>
-  <dd><%= @sale.disclosure %></dd>
-  <dt><strong><%= t('sales.customer') %>:</strong></dt>
-  <dd><%= @sale.customer_id %></dd>
-</dl>
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              sales_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_sale_path(@sale), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              sale_path(@sale),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+      <dl class="dl-horizontal">
+        <dt><strong><%= t('sales.value') %>:</strong></dt>
+        <dd><%= @sale.value %></dd>
+        <dt><strong><%= t('sales.discount') %>:</strong></dt>
+        <dd><%= @sale.discount %></dd>
+        <dt><strong><%= t('sales.percentage') %>:</strong></dt>
+        <dd><%= @sale.percentage %></dd>
+        <dt><strong><%= t('sales.online') %>:</strong></dt>
+        <dd><%= @sale.online %></dd>
+        <dt><strong><%= t('sales.disclosure') %>:</strong></dt>
+        <dd><%= @sale.disclosure %></dd>
+        <dt><strong><%= t('sales.customer') %>:</strong></dt>
+        <dd><%= @sale.customer_id %></dd>
+      </dl>
+
+      <%= link_to t('.back', :default => t("helpers.links.back")), sales_path, :class => 'btn btn-default' %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_sale_path(@sale), :class => 'btn btn-default' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")), sale_path(@sale), :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger' %>
+
+    </div>
+  </div>
+</div>
