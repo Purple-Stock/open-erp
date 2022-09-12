@@ -1,46 +1,54 @@
-<br><br><br>
 <%- model_class = SaleProduct -%>
-<div class="page-header">
-  <h1><%=t('sales_products.two') %></h1>
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t('sales_products.two') %></h1>
+  </div>
 </div>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_sale_product_path,
-            :class => 'btn btn-primary' %>
-<table id="stockTable" class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= t('sales_products.image') %></th>
-      <th><%= t('sales_products.quantity') %></th>
-      <th><%= t('sales_products.value') %></th>
-      <th><%= t('sales_products.product') %></th>
-      <th><%= t('sales_products.sales') %></th>
-      <th><%= t('sales_products.created_at') %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sale_products.each do |sale_product| %>
-      <tr>
-        <td><%= link_to sale_product.id, sale_product_path(sale_product) %></td>
-        <td><%= image_tag(sale_product.product.image.attached? ? sale_product.product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></td>
-        <td><%= sale_product.quantity %></td>
-        <td><%= sale_product.value %></td>
-        <td><%= sale_product.product.name %></td>
-        <td><%= sale_product.sale_id %></td>
-        <td><%= sale_product.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_sale_product_path(sale_product), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      sale_product_path(sale_product),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
+<div class="section-body">
+
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_sale_product_path, :class => 'btn btn-primary mb-3' %>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+
+        <table id="stockTable" class="table table-striped">
+          <thead>
+          <tr>
+            <th><%= model_class.human_attribute_name(:id) %></th>
+            <th><%= t('sales_products.image') %></th>
+            <th><%= t('sales_products.quantity') %></th>
+            <th><%= t('sales_products.value') %></th>
+            <th><%= t('sales_products.product') %></th>
+            <th><%= t('sales_products.sales') %></th>
+            <th><%= t('sales_products.created_at') %></th>
+            <th><%= t '.actions', :default => t("helpers.actions") %></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @sale_products.each do |sale_product| %>
+            <tr>
+              <td><%= link_to sale_product.id, sale_product_path(sale_product) %></td>
+              <td><%= image_tag(sale_product.product.image.attached? ? sale_product.product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></td>
+              <td><%= sale_product.quantity %></td>
+              <td><%= sale_product.value %></td>
+              <td><%= sale_product.product.name %></td>
+              <td><%= sale_product.sale_id %></td>
+              <td><%= sale_product.created_at %></td>
+              <td>
+                <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_sale_product_path(sale_product), :class => 'btn btn-default btn-xs' %>
+                <%= link_to t('.destroy', :default => t("helpers.links.destroy")), sale_product_path(sale_product), :method => :delete,
+                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                            :class => 'btn btn-xs btn-danger' %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
 
