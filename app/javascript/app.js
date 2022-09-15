@@ -1,4 +1,4 @@
-import { onDocumentReady } from "helpers"
+import { onDocumentReady } from "./helpers"
 
 class App {
 

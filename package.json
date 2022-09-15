@@ -1,27 +1,30 @@
 {
   "name": "purple_stock",
   "private": true,
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
-    "@hotwired/turbo": "^7.0.0-beta.2",
+    "@hotwired/stimulus": "^3.1.0",
+    "@hotwired/turbo-rails": "^7.1.3",
     "@nathanvda/cocoon": "^1.2.14",
-    "@rails/actioncable": "^6.1.5",
-    "@rails/activestorage": "^6.0.0",
+    "@rails/actioncable": "^7.0.4",
+    "@rails/activestorage": "^7.0.4",
     "@rails/ujs": "^6.1.5",
-    "@rails/webpacker": "4.3.0",
     "bootstrap": "^4.2.1",
     "cleave.js": "^1.4.7",
     "izitoast": "^1.4.0",
     "jquery": "^3.5.1",
     "jquery.nicescroll": "^3.7.6",
-    "node-sass": "^7.0.1",
     "popper.js": "^1.16.1",
     "select2": "^4.0.7-rc.0",
     "stimulus": "^2.0.0",
-    "waypoints": "^4.0.1"
+    "waypoints": "^4.0.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^4.9.2"
   }
 }
