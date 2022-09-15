@@ -209,8 +209,8 @@
             <i class="fas fa-cog"></i> Settings
           </a> %>
           <div class="dropdown-divider"></div>
-          <%= form_for(current_user, url: destroy_user_session_path, html: { method: :delete }) do |f| %>
-              <%= f.submit "Sair", class: "btn btn-danger" %>
+          <%=  link_to destroy_user_session_path, method: :delete, class: 'dropdown-item has-icon text-danger' do %>
+            <i class="fas fa-sign-out-alt"></i> Sair
           <% end %>
         </div>
       </li>
