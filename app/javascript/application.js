@@ -4,15 +4,16 @@
 // that code so it'll be compiled.
 
 // Core libraries
-require("@hotwired/turbo")
+import "@hotwired/turbo-rails"
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
-require("channels")
-
+require("./channels")
+import "./controllers"
 // jQuery (as a read only property so browser extensions can't clobber it)
 const jquery = require("jquery")
-const descriptor = { value: jquery, writable: false, configurable: false }
-Object.defineProperties(window, { $: descriptor, jQuery: descriptor })
+window.$ = window.jQuery = jquery
+// const descriptor = { value: jquery, writable: false, configurable: false }
+// Object.defineProperties(window, { $: descriptor, jQuery: descriptor })
 
 // App libraries
 require("bootstrap")
@@ -27,13 +28,13 @@ require("@nathanvda/cocoon")
 window.iziToast = require("izitoast")
 
 // Stisla
-require("vendors/stisla/stisla")
-require("vendors/stisla/scripts")
+require("./vendors/stisla/stisla")
+require("./vendors/stisla/scripts")
 
 // Application
-require("app").start()
+require("./app").start()
 
-import "controllers"
+
 
 $(document).ready( function () {
   $('#list').select2();

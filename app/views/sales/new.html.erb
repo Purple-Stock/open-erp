@@ -1,6 +1,16 @@
-<br><br><br>
 <%- model_class = Sale -%>
-<div class="page-header">
-  <h1><%=t 'sales.new', :default => [:'helpers.titles.new', 'New %{model}'], :model => t(model_class.model_name.human.titleize) %></h1>
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t 'sales.new', :default => [:'helpers.titles.new', 'New %{model}'], :model => t(model_class.model_name.human.titleize) %></h1>
+  </div>
 </div>
-<%= render :partial => 'form' %>
+
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
+
+      <%= render :partial => 'form' %>
+
+    </div>
+  </div>
+</div>
