@@ -46,3 +46,15 @@ yarn-debug.log*
 .yarn-integrity
 .env
 coverage/*
+
+.tool-versions
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+nbproject/*
+/nbproject/private/
