@@ -30,6 +30,14 @@ pt-BR:
   order_code: Código Pedido
   percentage: Porcentagem
   total_exchange_value: Valor troca
+  show: 'Visualizar'
+  new: 'Novo'
+  edit: 'Editar'
+  destroy: 'Apagar'
+  confirm: 'Você tem certeza?'
+  back: 'Voltar'
+  action: 'Ações'
+  save: 'Salvar'
   activerecord:
     errors:
       messages:
