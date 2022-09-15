@@ -5,6 +5,7 @@
 
 // Core libraries
 import "@hotwired/turbo-rails"
+
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("./channels")
@@ -24,6 +25,8 @@ require("cleave.js")
 require("waypoints/lib/noframework.waypoints")
 require("waypoints/lib/shortcuts/infinite")
 require("@nathanvda/cocoon")
+require("datatables")
+require("datatables.net")
 
 window.iziToast = require("izitoast")
 
@@ -34,53 +37,52 @@ require("./vendors/stisla/scripts")
 // Application
 require("./app").start()
 
+// $(document).ready( function () {
+document.addEventListener("turbo:load", () => {
+    $('#list').select2();
 
+    $('#stockTable').dataTable({
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+        },
+        columnDefs: [
+            {type: 'formatted-num', targets: 0}
+        ],
+        "order": [[0, "desc"]],
+        responsive: true,
+        stateSave: true
+    });
 
-$(document).ready( function () {
-  $('#list').select2();
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+        "formatted-num-pre": function (a) {
+            a = (a === "-" || a === "") ? 0 : a.replace(/[^\d\-\.]/g, "");
+            return parseFloat(a);
+        },
 
-  $('#stockTable').dataTable( {
-  "language": {
-          "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
-      },
-       columnDefs: [
-       { type: 'formatted-num', targets: 0 }
-    ],
-  "order": [[ 0, "desc" ]],
-  responsive: true,
-     stateSave: true
-  } );
+        "formatted-num-asc": function (a, b) {
+            return a - b;
+        },
 
-jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-    "formatted-num-pre": function ( a ) {
-        a = (a === "-" || a === "") ? 0 : a.replace( /[^\d\-\.]/g, "" );
-        return parseFloat( a );
-    },
- 
-    "formatted-num-asc": function ( a, b ) {
-        return a - b;
-    },
- 
-    "formatted-num-desc": function ( a, b ) {
-        return b - a;
-    }
-} );
-
-jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-    "date-uk-pre": function ( a ) {
-        if (a == null || a == "") {
-            return 0;
+        "formatted-num-desc": function (a, b) {
+            return b - a;
         }
-        var ukDatea = a.split('/');
-        return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
-    },
- 
-    "date-uk-asc": function ( a, b ) {
-        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-    },
- 
-    "date-uk-desc": function ( a, b ) {
-        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-    }
-} );
-} );
+    });
+
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+        "date-uk-pre": function (a) {
+            if (a == null || a == "") {
+                return 0;
+            }
+            var ukDatea = a.split('/');
+            return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+        },
+
+        "date-uk-asc": function (a, b) {
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+        },
+
+        "date-uk-desc": function (a, b) {
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+        }
+    });
+});
