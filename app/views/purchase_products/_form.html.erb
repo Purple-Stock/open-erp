@@ -3,61 +3,52 @@
   <% if @purchase_product.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@purchase_product.errors.count, "error") %> prohibited this purchase_product from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@purchase_product.errors.count, "error") %> prohibited this
+          purchase_product from being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
-        <% @purchase_product.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+          <% @purchase_product.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
         </ul>
       </div>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= f.label t(:product_id), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.select :product_id, Product.where(active: true).order(:custom_id).collect {|p| [ "#{p.custom_id} - #{p.name} ", p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
+  <div class="form-row">
+    <div class="form-group col-6">
+      <%= f.label t(:product_id), :class => 'control-label' %>
+      <%= f.select :product_id, Product.where(active: true).order(:custom_id).collect { |p| ["#{p.custom_id} - #{p.name} ", p.id] }, { :include_blank => 'Selecione um Produto' }, :class => "form-control form-control-sm" %>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label t(:quantity), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="form-group col-3">
+      <%= f.label t(:quantity), :class => 'control-label' %>
       <%= f.text_field :quantity, :class => 'form-control' %>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label t(:value), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="form-group col-3">
+      <%= f.label t(:value), :class => 'control-label' %>
       <%= f.text_field :value, :class => 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label t(:created_at), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <%= datetime_local_field(:purchase_product, :created_at) %>
+  <div class="form-row">
+    <div class="form-group col-6">
+      <%= f.label :created_at, t(:created_at), :class => 'control-label' %>
+      <%= f.text_field :created_at, :class => 'form-control datepicker' %>
     </div>
-  </div>
-    <div class="form-group">
-    <%= f.label t('purchase_products.store_entry'), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <%= select("purchase_product", "store_entrance", PurchaseProduct.store_entrances.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
+    <div class="form-group col-6">
+      <%= f.label t('purchase_products.store_entry'), :class => 'control-label' %>
+      <%= select("purchase_product", "store_entrance", PurchaseProduct.store_entrances.keys.to_a, {}, { include_blank: true, class: 'form-control form-control-sm' }) %>
     </div>
   </div>
   <!-- <div class="form-group">
-    <%#= f.label :purchase_id, :class => 'control-label col-lg-2' %>
+    <%#= f.label :purchase_id, :class => 'control-label' %>
     <div class="col-lg-10">
       <%#= f.select :purchase_id, Purchase.all.collect {|p| [ p.value, p.id ] }, { :include_blank => 'Selecione uma Compra'}, :class => "form-control form-control-sm" %>
     </div>
   </div> -->
 
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit t('purchase_products.submit.new'), :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                purchase_products_path, :class => 'btn btn-default' %>
-    </div>
+    <%= f.submit t('purchase_products.submit.new'), :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), purchase_products_path, :class => 'btn btn-default' %>
   </div>
 
 <% end %>
