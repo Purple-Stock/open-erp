@@ -27,6 +27,8 @@ require("waypoints/lib/shortcuts/infinite")
 require("@nathanvda/cocoon")
 require("datatables")
 require("datatables.net")
+require("datatables.net-bs4")
+require("datatables.net-select-bs4")
 
 window.iziToast = require("izitoast")
 
