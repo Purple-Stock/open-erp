@@ -1,5 +1,23 @@
 ---
 pt-BR:
+  activerecord:
+    models:
+      products:
+        one: "Produto"
+        other: "Produtos"
+    attributes:
+      product:
+        name: Nome
+        price: Preço
+        entry: Entrada
+        exit: Saída
+        balance: Saldo
+        qr_code: QR code
+        image: Imagem
+        highlight: Destaque
+        category: Categoria
+        active: Ativo
+
   products:
     one: Produto
     two: Produtos
