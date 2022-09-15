@@ -20,7 +20,7 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: postgresql://postgres:gil123@localhost:5433/inventory-control_development
+  url: postgresql://postgres:password@localhost/inventory-control_development
   host: <%= ENV['DB_HOST'] %>
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_USER'] %>

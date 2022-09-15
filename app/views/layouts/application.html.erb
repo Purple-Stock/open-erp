@@ -13,10 +13,10 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
     <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbo-track': 'reload' if platform.mobile_app? %>
 
-    <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico" />
+    <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-    <%#= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css"/>
+
   </head>
 
   <body>
@@ -41,5 +41,6 @@
     <script type="text/javascript" src="https://a.kabachnik.info/assets/js/onscan.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
+    <%= yield(:javascript) if content_for?(:javascript) %>
   </body>
 </html>
