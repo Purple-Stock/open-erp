@@ -11,7 +11,7 @@
     "@nathanvda/cocoon": "^1.2.14",
     "@rails/actioncable": "^7.0.4",
     "@rails/activestorage": "^7.0.4",
-    "@rails/ujs": "^6.1.5",
+    "@rails/ujs": "^6.1.6",
     "bootstrap": "^4.2.1",
     "cleave.js": "^1.4.7",
     "izitoast": "^1.4.0",
