@@ -15,7 +15,7 @@
     "@rails/ujs": "^6.1.6",
     "cleave.js": "^1.4.7",
     "izitoast": "^1.4.0",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.1",
     "jquery.nicescroll": "^3.7.6",
     "datatables": "^1.10.18",
     "datatables.net-responsive-bs4": "^2.2.3",
