@@ -22,8 +22,10 @@
 
 <%#= javascript_pack_tag 'purchase_products' %>
 
+<% content_for :javascript do %>
 <script>
-    $(document).ready(function () {
+    // $(document).ready(function () {
+        document.addEventListener("turbo:load", () => {
         $('#purchase_product_product_id').select2();
         $('#purchase_products_ajax').dataTable({
             ajax: {
@@ -73,3 +75,4 @@
         });
     });
 </script>
+<% end %>

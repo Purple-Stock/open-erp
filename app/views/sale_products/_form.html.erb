@@ -26,7 +26,7 @@
   </div>-->
     <div class="form-group col-8">
       <%= f.label t('sales_products.product'), :class => 'control-label' %>
-      <%= f.select :product_id, Product.all.collect { |p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id] }, { :include_blank => t('sales_products.select_dropdown.product') }, { :class => "product-id form-control form-control-sm select2" } %>
+      <%= f.select :product_id, Product.all.collect { |p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id] }, { :include_blank => t('sales_products.select_dropdown.product') }, { :class => "product-id form-control select2-list" } %>
     </div>
   </div>
   <!--<div class="form-group">

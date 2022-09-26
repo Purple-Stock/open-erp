@@ -5,9 +5,15 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index_defer tags_index_defer]
   before_action :set_product, only: %i[show edit update destroy]
   include Pagy::Backend
+  include ActionView::RecordIdentifier
   # GET /products
   # GET /products.json
-  def index; end
+  def index
+    products = Product.includes(:purchase_products, :sale_products, :category)
+                       .where(account_id: current_tenant)
+    @pagy, @products = pagy(products)
+
+   end
 
   def index_defer
     search_value_params = params.dig(:search, :value)
@@ -17,7 +23,7 @@ class ProductsController < ApplicationController
                                    .where(account_id: current_tenant),
                             page: (params[:start].to_i / params[:length].to_i + 1),
                             items: params[:length].to_i
-                           )
+    )
 
     order_params = params.dig(:order, :'0')
     @products = @products.datatable_order(order_params.dig(:column).to_i, order_params.dig(:dir))
@@ -88,6 +94,8 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Produto deletado.' }
       format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@product)) }
+
     end
   end
 

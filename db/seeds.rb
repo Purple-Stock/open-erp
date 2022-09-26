@@ -9,3 +9,19 @@
 p "Module User"
 
 FactoryBot.create(:user, password: '123456', email: 'fashion.store@email.com')
+
+puts 'Categories'
+50.times { FactoryBot.create(:category, name: Faker::Lorem.word) }
+50.times { Category.create(name: Faker::Lorem.word, account_id: 1) }
+50.times do
+  Product.create(
+    name: Faker::Commerce.product_name,
+    sku: Faker::Number.number(digits: 10),
+    extra_sku: Faker::Number.number(digits: 10),
+    price: Faker::Commerce.price,
+    active: true,
+    account_id: 1,
+    category_id: 1
+  )
+end
+50.times { Customer.create(name: Faker::Name.name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, cpf: Faker::Number.number(digits: 11), account_id: 1) }

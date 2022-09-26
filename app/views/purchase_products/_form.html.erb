@@ -18,7 +18,7 @@
   <div class="form-row">
     <div class="form-group col-6">
       <%= f.label t(:product_id), :class => 'control-label' %>
-      <%= f.select :product_id, Product.where(active: true).order(:custom_id).collect { |p| ["#{p.custom_id} - #{p.name} ", p.id] }, { :include_blank => 'Selecione um Produto' }, :class => "form-control form-control-sm" %>
+      <%= f.select :product_id, Product.where(active: true).order(:custom_id).collect { |p| ["#{p.custom_id} - #{p.name} ", p.id] }, { :include_blank => 'Selecione um Produto' }, :class => "form-control select2-list" %>
     </div>
     <div class="form-group col-3">
       <%= f.label t(:quantity), :class => 'control-label' %>
@@ -32,11 +32,11 @@
   <div class="form-row">
     <div class="form-group col-6">
       <%= f.label :created_at, t(:created_at), :class => 'control-label' %>
-      <%= f.text_field :created_at, :class => 'form-control datepicker' %>
+      <%= f.text_field :created_at, :class => 'form-control flatpick-input-date' %>
     </div>
     <div class="form-group col-6">
       <%= f.label t('purchase_products.store_entry'), :class => 'control-label' %>
-      <%= select("purchase_product", "store_entrance", PurchaseProduct.store_entrances.keys.to_a, {}, { include_blank: true, class: 'form-control form-control-sm' }) %>
+      <%= select("purchase_product", "store_entrance", PurchaseProduct.store_entrances.keys.to_a, {}, { include_blank: true, class: 'form-control select2-list' }) %>
     </div>
   </div>
   <!-- <div class="form-group">

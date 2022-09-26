@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :category do
-    name { FFaker::Internet.slug }
+    name { Faker::Lorem.word }
 
     account_id { create(:account).id }
   end
