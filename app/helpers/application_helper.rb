@@ -31,7 +31,7 @@ module ApplicationHelper
     number_with_delimiter number, options
   end
 
-  # data format "%d/%m/%Y %H:%m"
+  # date format "%d/%m/%Y %H:%m"
   def df(date)
     date.strftime("%d/%m/%Y %H:%m")
   end
