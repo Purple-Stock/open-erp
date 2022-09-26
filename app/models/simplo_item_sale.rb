@@ -1,5 +1,23 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: simplo_item_sales
+#
+#  id             :bigint           not null, primary key
+#  data_pedido    :datetime
+#  desconto       :float
+#  nome_produto   :string
+#  peso           :float
+#  quantidade     :integer
+#  sku            :string
+#  valor_total    :float
+#  valor_unitario :float
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  order_id       :string
+#  produto_id     :string
+#
 class SimploItemSale < ApplicationRecord
   def self.integrate_item_sale
     custom_uri = 'https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-11-01'

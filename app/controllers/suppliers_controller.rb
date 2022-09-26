@@ -2,11 +2,12 @@
 
 class SuppliersController < ApplicationController
   before_action :set_supplier, only: %i[show edit update destroy]
-
+  include Pagy::Backend
   # GET /suppliers
   # GET /suppliers.json
   def index
-    @suppliers = Supplier.all
+    suppliers = Supplier.where(account_id: current_tenant)
+    @pagy, @suppliers = pagy(suppliers)
   end
 
   # GET /suppliers/1

@@ -11,46 +11,43 @@
 
   <div class="card">
     <div class="card-body">
-
-      <div class="table-responsive">
-        <table id="stockTable" class="table table-striped">
-          <thead>
-          <tr>
-            <th><%= model_class.human_attribute_name(:id) %></th>
-            <th><%= model_class.human_attribute_name(t(:name)) %></th>
-            <th><%= model_class.human_attribute_name(:email) %></th>
-            <th><%= model_class.human_attribute_name(t(:cellphone)) %></th>
-            <th><%= model_class.human_attribute_name(t(:phone)) %></th>
-            <th><%= model_class.human_attribute_name(:cpf) %></th>
-            <th><%= model_class.human_attribute_name(t(:created_at)) %></th>
-            <th><%= t '.actions', :default => t("helpers.actions") %></th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @customers.each do |customer| %>
+      <%= turbo_frame_tag :customers do %>
+        <div class="table-responsive">
+          <table id="stockTable" class="table table-striped">
+            <thead>
             <tr>
-              <td><%= link_to customer.id, customer_path(customer) %></td>
-              <td><%= customer.name %></td>
-              <td><%= customer.email %></td>
-              <td><%= customer.cellphone %></td>
-              <td><%= customer.phone %></td>
-              <td><%= customer.cpf %></td>
-              <td><%= customer.created_at %></td>
-              <td>
-                <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                            edit_customer_path(customer), :class => 'btn btn-default btn-xs' %>
-                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                            customer_path(customer),
-                            :method => :delete,
-                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                            :class => 'btn btn-xs btn-danger' %>
-              </td>
+              <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= model_class.human_attribute_name(t(:name)) %></th>
+              <th><%= model_class.human_attribute_name(:email) %></th>
+              <th><%= model_class.human_attribute_name(t(:cellphone)) %></th>
+              <th><%= model_class.human_attribute_name(t(:phone)) %></th>
+              <th><%= model_class.human_attribute_name(:cpf) %></th>
+              <th><%= model_class.human_attribute_name(t(:created_at)) %></th>
+              <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
-          <% end %>
-          </tbody>
-        </table>
-
-      </div>
+            </thead>
+            <tbody>
+            <% @customers.each do |customer| %>
+              <%= tag.tr id: dom_id(customer) do %>
+                <td><%= link_to customer.id, customer_path(customer) %></td>
+                <td><%= customer.name %></td>
+                <td><%= customer.email %></td>
+                <td><%= customer.cellphone %></td>
+                <td><%= customer.phone %></td>
+                <td><%= customer.cpf %></td>
+                <td><%= df(customer.created_at) %></td>
+                <td>
+                  <%= link_to icon('fas fa-pencil-alt'), edit_customer_path(customer), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-eye'), customer, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-trash'), customer, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
+                </td>
+              <% end %>
+            <% end %>
+            </tbody>
+          </table>
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
