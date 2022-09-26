@@ -36,5 +36,4 @@ jobs:
           bin/rails db:create
           bin/rails db:migrate
           bin/rails db:seed
-          bin/rails webpacker:install
           bundle exec rspec
