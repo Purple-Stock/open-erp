@@ -11,40 +11,38 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive">
+      <%= turbo_frame_tag :purchases do %>
+        <div class="table-responsive">
 
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th><%= t('purchases.id') %></th>
-            <th><%= t('purchases.value') %></th>
-            <th><%= t('purchases.supplier') %></th>
-            <th><%= t('purchases.created_at') %></th>
-            <th><%= t '.actions', :default => t("helpers.actions") %></th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @purchases.each do |purchase| %>
+          <table class="table table-striped">
+            <thead>
             <tr>
-              <td><%= link_to purchase.id, purchase_path(purchase) %></td>
-              <td><%= purchase.value %></td>
-              <td><%= purchase.supplier_id %></td>
-              <td><%= purchase.created_at %></td>
-              <td>
-                <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                            edit_purchase_path(purchase), :class => 'btn btn-default btn-xs' %>
-                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                            purchase_path(purchase),
-                            :method => :delete,
-                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                            :class => 'btn btn-xs btn-danger' %>
-              </td>
+              <th><%= t('purchases.id') %></th>
+              <th><%= t('purchases.value') %></th>
+              <th><%= t('purchases.supplier') %></th>
+              <th><%= t('purchases.created_at') %></th>
+              <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
-          <% end %>
-          </tbody>
-        </table>
-
-      </div>
+            </thead>
+            <tbody>
+            <% @purchases.each do |purchase| %>
+              <%= tag.tr id: dom_id(purchase) do %>
+                <td><%= link_to purchase.id, purchase_path(purchase) %></td>
+                <td><%= purchase.value %></td>
+                <td><%= purchase.supplier_id %></td>
+                <td><%= purchase.created_at %></td>
+                <td>
+                  <%= link_to icon('fas fa-pencil-alt'), edit_purchase_path(purchase), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-eye'), purchase, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-trash'), purchase, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
+                </td>
+              <% end %>
+            <% end %>
+            </tbody>
+          </table>
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: simplo_orders
+#
+#  id           :bigint           not null, primary key
+#  client_name  :string
+#  order_date   :string
+#  order_status :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  order_id     :string
+#
 class SimploOrder < ApplicationRecord
   has_many :simplo_items
 

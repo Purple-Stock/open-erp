@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: simplo_products
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  sku        :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class SimploProduct < ApplicationRecord
   def simplo_products
     @products = Requests::Product.new(page: '1').call

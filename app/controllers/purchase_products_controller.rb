@@ -3,7 +3,10 @@ class PurchaseProductsController < ApplicationController
   include Pagy::Backend
   # GET /purchase_products
   # GET /purchase_products.json
-  def index; end
+  def index
+    purchase_products = PurchaseProduct.includes(:product).references(:products).where(account_id: current_tenant)
+    @pagy, @purchase_products = pagy(purchase_products)
+  end
 
   def index_defer
     @purchase_products = PurchaseProduct.includes(:product).references(:products).where(account_id: current_tenant)

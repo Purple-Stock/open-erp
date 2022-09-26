@@ -36,7 +36,6 @@
                   <%= link_to icon('fas fa-pencil-alt'), edit_category_path(category), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-eye'), category, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-trash'), category, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { :confirm => t('confirm'), toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm'), turbo_frame: :_self } %>
-                  <%= link_to icon('fas fa-trash'), category, title: t('destroy'), class: 'btn btn-danger', data: { :confirm => t('confirm'), toggle: 'tooltip', turbo_method: :delete, turbo_confirm: t('confirm')} %>
                 </td>
               <% end %>
               <%# end %>

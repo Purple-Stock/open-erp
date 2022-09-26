@@ -25,3 +25,4 @@ puts 'Categories'
   )
 end
 50.times { Customer.create(name: Faker::Name.name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number, cpf: Faker::Number.number(digits: 11), account_id: 1) }
+50.times { Supplier.create(name: Faker::Lorem.word, account_id: 1) }

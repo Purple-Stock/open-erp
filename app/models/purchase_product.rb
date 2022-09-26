@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: purchase_products
+#
+#  id             :bigint           not null, primary key
+#  quantity       :integer
+#  store_entrance :integer          default("Sem_Loja")
+#  value          :float
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  account_id     :integer
+#  product_id     :integer
+#  purchase_id    :integer
+#
+# Indexes
+#
+#  index_purchase_products_on_account_id   (account_id)
+#  index_purchase_products_on_product_id   (product_id)
+#  index_purchase_products_on_purchase_id  (purchase_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (product_id => products.id)
+#  fk_rails_...  (purchase_id => purchases.id)
+#
 class PurchaseProduct < ApplicationRecord
   belongs_to :purchase, optional: true
   belongs_to :product

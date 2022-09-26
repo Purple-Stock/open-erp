@@ -1,10 +1,11 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: %i[show edit update destroy]
-
+  include Pagy::Backend
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.where(account_id: current_tenant).last 500
+    customers = Customer.where(account_id: current_tenant)
+    @pagy, @customers = pagy(customers)
   end
 
   # GET /customers/1
