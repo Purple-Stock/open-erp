@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def page_title
     content_for(:page_title) || Rails.application.class.to_s.split('::').first
   end
@@ -29,9 +31,15 @@ module ApplicationHelper
     number_with_delimiter number, options
   end
 
+  # date format "%d/%m/%Y %H:%m"
+  def df(date)
+    date.strftime("%d/%m/%Y %H:%m")
+  end
+
   def localize(object, options = {})
     super(object, options) if object
   end
+
   alias l localize
 
   private

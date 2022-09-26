@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  account_id :integer
+#
+# Indexes
+#
+#  index_categories_on_account_id  (account_id)
+#
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
@@ -8,7 +22,7 @@ RSpec.describe Category, type: :model do
   end
 
   it 'save without account' do
-    category = Category.new(name: FFaker::Internet.slug)
+    category = Category.new(name: Faker::Lorem.word)
     expect(category).to_not be_valid
   end
 

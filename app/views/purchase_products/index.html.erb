@@ -13,63 +13,41 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive">
-        <table id="purchase_products_ajax" class="table table-striped table"></table>
-      </div>
+      <%= turbo_frame_tag :purchase_products do %>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= model_class.human_attribute_name(t(:custom_id)) %></th>
+              <th><%= model_class.human_attribute_name(t(:quantity)) %></th>
+              <th><%= model_class.human_attribute_name(t(:value)) %></th>
+              <th><%= model_class.human_attribute_name(t(:name)) %></th>
+              <th><%= model_class.human_attribute_name(t(:created_at)) %></th>
+              <th><%= t '.actions', :default => t("helpers.actions") %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @purchase_products.each do |purchase_product| %>
+              <%= tag.tr id: dom_id(purchase_product) do %>
+                <td><%= link_to purchase_product.id, product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
+                <td><%= purchase_product.custom_id %></td>
+                <td><%= purchase_product.quantity %></td>
+                <td><%= purchase_product.value %></td>
+                <td><%= purchase_product.name %></td>
+                <td><%= df(purchase_product.created_at) %></td>
+                <td>
+                  <%= link_to icon('fas fa-pencil-alt'), edit_purchase_product_path(purchase_product), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-eye'), purchase_product, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-trash'), purchase_product, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
+                </td>
+              <% end %>
+            <% end %>
+            </tbody>
+          </table>
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-
-<%#= javascript_pack_tag 'purchase_products' %>
-
-<script>
-    $(document).ready(function () {
-        $('#purchase_product_product_id').select2();
-        $('#purchase_products_ajax').dataTable({
-            ajax: {
-                url: '/purchase_products_defer',
-                deferRender: true,
-                dataSrc: function (json) {
-                    json.recordsTotal = json.meta.recordsTotal;
-                    json.recordsFiltered = json.meta.recordsFiltered;
-                    return json.data
-                }
-            },
-            serverSide: true,
-            columns: [
-                {title: "Código Produto", data: 'attributes.custom_id', searchable: true, orderable: true},
-                {
-                    title: "Foto",
-                    data: 'attributes.image_url',
-                    orderable: false,
-                    searchable: false,
-                    render: function (image_url) {
-                        return '<img src="' + image_url + '"width="250px" height="163px">';
-                    }
-                },
-                {title: "Quantidade", searchable: false, orderable: false, data: 'attributes.quantity'},
-                {title: "Valor", searchable: false, orderable: false, data: 'attributes.value'},
-                {title: "Nome Produto", searchable: true, orderable: true, data: 'attributes.name'},
-                {title: "Data de criação", searchable: false, orderable: false, data: 'attributes.created_at'},
-                {
-                    title: "Ações",
-                    searchable: false,
-                    orderable: false,
-                    data: 'attributes.id',
-                    render: function (id) {
-                        return '<a class="btn btn-default btn-xs" href="/purchase_products/' + id + '">Ver</a><a class="btn btn-default btn-xs" href="/purchase_products/' + id + '/edit">Editar</a><a data-confirm="Você tem certeza?" data-method="delete" rel="nofollow" class="btn btn-danger btn-xs" href="/purchase_products/' + id + '">Deletar</a>';
-                    }
-                }
-            ],
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
-            },
-            columnDefs: [
-                {type: 'formatted-num', targets: 0}
-            ],
-            "order": [[0, "desc"]],
-            responsive: true,
-            stateSave: true
-        });
-    });
-</script>

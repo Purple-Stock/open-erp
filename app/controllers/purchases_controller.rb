@@ -1,10 +1,11 @@
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: %i[show edit update destroy]
-
+  include Pagy::Backend
   # GET /purchases
   # GET /purchases.json
   def index
-    @purchases = Purchase.all
+    purchases = Purchase.where(account_id: current_tenant)
+    @pagy, @purchases = pagy(purchases)
   end
 
   # GET /purchases/1

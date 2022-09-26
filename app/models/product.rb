@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id          :bigint           not null, primary key
+#  active      :boolean
+#  bar_code    :string
+#  extra_sku   :string
+#  highlight   :boolean
+#  name        :string
+#  price       :float
+#  sku         :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  account_id  :integer
+#  category_id :integer
+#  custom_id   :integer
+#
+# Indexes
+#
+#  index_products_on_account_id   (account_id)
+#  index_products_on_category_id  (category_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (category_id => categories.id)
+#
 require 'rqrcode_png'
 
 class Product < ApplicationRecord

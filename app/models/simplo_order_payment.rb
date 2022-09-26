@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: simplo_order_payments
+#
+#  id               :bigint           not null, primary key
+#  client_name      :string
+#  codigo_transacao :string
+#  data_pedido      :string
+#  integrador       :string
+#  order_status     :string
+#  pagamento_forma  :string
+#  parcelas         :string
+#  total            :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  order_id         :string
+#
 class SimploOrderPayment < ApplicationRecord
   def self.integrate_orders
     request_by_date = 'https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-12-01'

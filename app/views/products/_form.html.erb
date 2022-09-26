@@ -22,7 +22,7 @@
     </div>
     <div class="form-group col-6">
       <%= f.label :category_id, t(:category_id), :class => 'control-label' %>
-      <%= select("product", "category_id", Category.all.collect { |p| [p.name, p.id] }, { include_blank: true }, { class: 'form-control select2' }) %>
+      <%= select("product", "category_id", Category.all.collect { |p| [p.name, p.id] }, { include_blank: true }, { class: 'form-control select2-list' }) %>
     </div>
   </div>
   <div class="form-group">
