@@ -79,6 +79,9 @@ GEM
       request_store (>= 1.0.5)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.581.0)
@@ -470,6 +473,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tenant
+  annotate
   aws-sdk-s3
   better_errors
   binding_of_caller

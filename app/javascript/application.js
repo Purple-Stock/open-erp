@@ -49,14 +49,8 @@ flatpickr.localize(Portuguese); // default locale is now Portuguese
 
 import Swal from 'sweetalert2';
 
-
+// Override setConfirmMethod on Turbo Rails with sweetalert2
 Turbo.setConfirmMethod((message, element) => {
-    console.log(message, element)
-
-    // let dialog = document.getElementById("turbo-confirm")
-    // dialog.querySelector("p").textContent = message
-    // dialog.showModal()
-
     return new Promise((resolve, reject) => {
         Swal.fire({
             title: message,
@@ -68,7 +62,6 @@ Turbo.setConfirmMethod((message, element) => {
             cancelButtonText: 'Cancelar',
             cancelButtonColor: '#d33',
             showCancelButton: true,
-
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
@@ -78,14 +71,11 @@ Turbo.setConfirmMethod((message, element) => {
                 )
                 resolve(true)
                 return true;
-            } else if (result.isDenied) {
-                Swal.fire('As alterações não foram são salvas', '', 'info')
-                reject(true)
-                return false;
             }
         })
     })
 })
+
 // $(document).ready( function () {
 document.addEventListener("turbo:load", () => {
     $('#list').select2();

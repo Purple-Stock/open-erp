@@ -11,56 +11,54 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th><%= model_class.human_attribute_name(:id) %></th>
-            <th><%= t('suppliers.name') %></th>
-            <th><%= t('suppliers.tax_number') %></th>
-            <th><%= t('suppliers.email') %></th>
-            <th><%= t('suppliers.cellphone') %></th>
-            <th><%= t('suppliers.phone') %></th>
-            <th><%= t('suppliers.address') %></th>
-            <th><%= t('suppliers.city') %></th>
-            <th><%= t('suppliers.state') %></th>
-            <th><%= t('suppliers.landmark') %></th>
-            <th><%= t('suppliers.note') %></th>
-            <th><%= t('suppliers.created_at') %></th>
-            <th><%= t('suppliers.actions') %></th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @suppliers.each do |supplier| %>
+      <%= turbo_frame_tag :suppliers do %>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
             <tr>
-              <td><%= link_to supplier.id, supplier_path(supplier) %></td>
-              <td><%= t(supplier.name) %></td>
-              <td><%= t(supplier.cnpj) %></td>
-              <td><%= t(supplier.email) %></td>
-              <td><%= t(supplier.cellphone) %></td>
-              <td><%= t(supplier.phone) %></td>
-              <td><%= t(supplier.address) %></td>
-              <td><%= t(supplier.city) %></td>
-              <td><%= t(supplier.state) %></td>
-              <td><%= t(supplier.landmark) %></td>
-              <td><%= t(supplier.note) %></td>
-              <td><%= t(supplier.created_at) %></td>
-              <td>
-                <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                            edit_supplier_path(supplier), :class => 'btn btn-default btn-xs' %>
-                <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                            supplier_path(supplier),
-                            :method => :delete,
-                            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                            :class => 'btn btn-xs btn-danger' %>
-              </td>
+              <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= t('suppliers.name') %></th>
+              <th><%= t('suppliers.tax_number') %></th>
+              <th><%= t('suppliers.email') %></th>
+              <th><%= t('suppliers.cellphone') %></th>
+              <th><%= t('suppliers.phone') %></th>
+              <th><%= t('suppliers.address') %></th>
+              <th><%= t('suppliers.city') %></th>
+              <th><%= t('suppliers.state') %></th>
+              <th><%= t('suppliers.landmark') %></th>
+              <th><%= t('suppliers.note') %></th>
+              <th><%= t('suppliers.created_at') %></th>
+              <th><%= t('suppliers.actions') %></th>
             </tr>
-          <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+            <% @suppliers.each do |supplier| %>
+              <%= tag.tr id: dom_id(supplier) do %>
+                <td><%= link_to supplier.id, supplier_path(supplier) %></td>
+                <td><%= t(supplier.name) %></td>
+                <td><%= t(supplier.cnpj) %></td>
+                <td><%= t(supplier.email) %></td>
+                <td><%= t(supplier.cellphone) %></td>
+                <td><%= t(supplier.phone) %></td>
+                <td><%= t(supplier.address) %></td>
+                <td><%= t(supplier.city) %></td>
+                <td><%= t(supplier.state) %></td>
+                <td><%= t(supplier.landmark) %></td>
+                <td><%= t(supplier.note) %></td>
+                <td><%= t(supplier.created_at) %></td>
+                <td>
+                  <%= link_to icon('fas fa-pencil-alt'), edit_supplier_path(supplier), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-eye'), supplier, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-trash'), supplier, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
+                </td>
+              <% end %>
+            <% end %>
+            </tbody>
+          </table>
 
-        <%#= link_to t('.new', :default => t("helpers.links.new")), new_supplier_path, :class => 'btn btn-primary' %>
-      </div>
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
