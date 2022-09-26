@@ -8,7 +8,7 @@ RSpec.describe Category, type: :model do
   end
 
   it 'save without account' do
-    category = Category.new(name: FFaker::Internet.slug)
+    category = Category.new(name: Faker::Lorem.word)
     expect(category).to_not be_valid
   end
 

@@ -19,7 +19,7 @@
   <h4><%= t('sales.customer') %></h4>
   <div class="form-group">
     <%= f.label :customer_id, t('sales.customer_name'), :class => 'control-label' %>
-    <%= select("sale", "customer_id", Customer.all.collect { |p| ["#{p.cpf} - #{p.name} ", p.id] }, {}, { include_blank: true, class: 'form-control' }) %>
+    <%= select("sale", "customer_id", Customer.all.collect { |p| ["#{p.cpf} - #{p.name} ", p.id] }, {}, { include_blank: true, class: 'form-control select2-list' }) %>
   </div>
 
   <h4><%= t('sales.product') %></h4>

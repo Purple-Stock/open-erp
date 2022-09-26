@@ -106,7 +106,13 @@ GEM
     backport (1.2.0)
     bcrypt (3.1.17)
     benchmark (0.2.0)
+    better_errors (2.9.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     bindex (0.8.1)
+    binding_of_caller (1.0.0)
+      debug_inspector (>= 0.0.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -135,6 +141,7 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crass (1.0.6)
+    debug_inspector (1.1.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.8.1)
@@ -154,7 +161,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    ffaker (2.21.0)
+    faker (2.23.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     flay (2.13.0)
       erubi (~> 1.10)
@@ -463,6 +471,8 @@ PLATFORMS
 DEPENDENCIES
   acts_as_tenant
   aws-sdk-s3
+  better_errors
+  binding_of_caller
   bootsnap
   business (~> 2.0)
   byebug
@@ -470,7 +480,7 @@ DEPENDENCIES
   cocoon
   devise
   factory_bot_rails
-  ffaker
+  faker
   geared_pagination
   httparty
   jbuilder

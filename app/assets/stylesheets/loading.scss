@@ -24,3 +24,7 @@
 [data-target='infinite-page.container'].loading:after {
   @include loader;
 }
+
+.loading-container { height: 2rem; }
+turbo-frame .loading-element { display: none; }
+turbo-frame[busy] .loading-element { display: block; }
