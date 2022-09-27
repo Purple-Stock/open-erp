@@ -12,6 +12,13 @@ module ApplicationHelper
   def active_nav_item(controller, actions)
     'active' if active_actions?(controller, actions)
   end
+  def active_nav_menu_item(paths = [])
+    class_active = nil
+    paths.each do |path|
+      class_active = 'active' if current_page?(path)
+    end
+    class_active
+  end
 
   def sort_link_turbo(attribute, *args)
     sort_link(attribute, *args.push({}, { data: { turbolinks_action: 'replace' } }))
