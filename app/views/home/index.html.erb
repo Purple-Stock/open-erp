@@ -91,7 +91,7 @@
                   <%= product.name %>
                 </td>
                 <td>
-                  <%= nc(product.price) %>
+                  <%= number_to_currency_pt_br(product.price) %>
                 </td>
                 <td>
                   <%= link_to icon('fas fa-pencil-alt'), edit_product_path(product), title: t('edit'), class: 'btn btn-primary btn-action mr-1', data: { toggle: 'tooltip', turbo: false } %>
