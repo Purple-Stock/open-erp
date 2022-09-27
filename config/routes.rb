@@ -49,6 +49,6 @@ Rails.application.routes.draw do
            as: 'add_inventory_quantity'
     end
   end
-  root to: 'products#index'
+  root to: 'home#index'
   mount Sidekiq::Web => '/sidekiq'
 end
