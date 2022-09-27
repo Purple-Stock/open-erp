@@ -38,6 +38,9 @@ pt-BR:
   back: 'Voltar'
   action: 'Ações'
   save: 'Salvar'
+  active_status:
+    active: 'Ativo'
+    inactive: 'Inativo'
   activerecord:
     errors:
       messages:
