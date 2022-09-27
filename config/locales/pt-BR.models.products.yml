@@ -9,8 +9,11 @@ pt-BR:
       product:
         name: Nome
         price: Preço
+        sku: SKU
         entry: Entrada
+        count_purchase_product: Entrada
         exit: Saída
+        count_sale_product: Saída
         balance: Saldo
         qr_code: QR code
         image: Imagem
@@ -22,6 +25,7 @@ pt-BR:
     one: Produto
     two: Produtos
     name: Nome
+    sku: SKU
     price: Preço
     entry: Entrada
     exit: Saída

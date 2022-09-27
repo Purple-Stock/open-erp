@@ -19,6 +19,15 @@
             <tr>
               <th><%= model_class.human_attribute_name(:id) %></th>
               <th><%= model_class.human_attribute_name(t(:name)) %></th>
+              <th><%= t('activerecord.attributes.product.sku') %></th>
+              <th><%= model_class.human_attribute_name(t(:custom_id)) %></th>
+              <th><%= model_class.human_attribute_name(t(:price)) %></th>
+              <th><%= t('activerecord.attributes.product.count_purchase_product') %></th>
+              <th><%= t('activerecord.attributes.product.count_sale_product') %></th>
+              <th><%= t('activerecord.attributes.product.balance') %></th>
+              <th><%= t('activerecord.attributes.product.category') %></th>
+              <th><%= model_class.human_attribute_name(t(:active)) %></th>
+
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
@@ -27,6 +36,14 @@
               <%= tag.tr id: dom_id(product) do %>
                 <td><%= link_to product.id, product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= product.name %></td>
+                <td><%= product.sku %></td>
+                <td><%= product.custom_id %></td>
+                <td><%= product.price %></td>
+                <td><%= product.count_purchase_product %></td>
+                <td><%= product.count_sale_product %></td>
+                <td><%= product.balance %></td>
+                <td><%= product.category.try(:name) %></td>
+                <td><%= raw display_status(product.active) %></td>
                 <td>
                   <%= link_to icon('fas fa-pencil-alt'), edit_product_path(product), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-eye'), product, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>

@@ -36,6 +36,15 @@ module ApplicationHelper
     date.strftime("%d/%m/%Y %H:%m")
   end
 
+  # date format "%d/%m/%Y %H:%m"
+  def display_status(status)
+    if status
+      "<span class='badge bg-success fs-4 text-light'>#{I18n.t('active_status.active')}</span>"
+    else
+      "<span class='badge bg-danger fs-4 text-light'>#{I18n.t('active_status.inactive')}</span>"
+    end
+  end
+
   def localize(object, options = {})
     super(object, options) if object
   end
