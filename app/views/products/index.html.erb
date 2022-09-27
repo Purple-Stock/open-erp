@@ -47,6 +47,8 @@
                 <td>
                   <%= link_to icon('fas fa-pencil-alt'), edit_product_path(product), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-eye'), product, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-clone'), meeting_duplicate_path(product), title: t('duplicate'), class: 'btn btn-warning', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-sync'), update_product_active_path(product), title: t('update_active'), class: 'btn btn-success', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-trash'), product, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
                 </td>
                 </tr>
