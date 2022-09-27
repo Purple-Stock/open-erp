@@ -51,7 +51,6 @@
                   <%= link_to icon('fas fa-sync'), update_product_active_path(product), title: t('update_active'), class: 'btn btn-success', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-trash'), product, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
                 </td>
-                </tr>
               <% end %>
             <% end %>
             </tbody>
