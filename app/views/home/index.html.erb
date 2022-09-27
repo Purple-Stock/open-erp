@@ -64,3 +64,85 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Últimos Produtos</h4>
+        <div class="card-header-action">
+          <%= link_to('Ver Todos', products_path, class: 'btn btn-primary', title: 'Ver Todos') %>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped mb-0">
+            <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Preço</th>
+              <th><%= t('action') %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @products.each do |product| %>
+              <tr>
+                <td>
+                  <%= product.name %>
+                </td>
+                <td>
+                  <%= nc(product.price) %>
+                </td>
+                <td>
+                  <%= link_to icon('fas fa-pencil-alt'), edit_product_path(product), title: t('edit'), class: 'btn btn-primary btn-action mr-1', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-eye'), product, title: t('show'), class: 'btn btn-info btn-action', data: { toggle: 'tooltip', turbo: false } %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Últimos Clientes</h4>
+        <div class="card-header-action">
+          <%= link_to('Ver Todos', customers_path, class: 'btn btn-primary', title: 'Ver Todos') %>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped mb-0">
+            <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th><%= t('action') %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @custumers.each do |customer| %>
+              <tr>
+                <td>
+                  <%= customer.name %>
+                </td>
+                <td>
+                  <%= customer.email %>
+                </td>
+                <td>
+                  <%= link_to icon('fas fa-pencil-alt'), edit_customer_path(customer), title: t('edit'), class: 'btn btn-primary btn-action mr-1', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-eye'), customer, title: t('show'), class: 'btn btn-info btn-action', data: { toggle: 'tooltip', turbo: false } %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
