@@ -38,7 +38,7 @@ bundle install
 Para configurar o banco de dados execute:
 
 ```sh
-cp .env.db.sample .env
+cp .env.example .env
 source .env
 bin/rails db:setup
 ```
