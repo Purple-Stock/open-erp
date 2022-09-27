@@ -34,10 +34,15 @@ pt-BR:
   new: 'Novo'
   edit: 'Editar'
   destroy: 'Apagar'
+  duplicate: 'Duplicar'
+  update_active: 'Atualizar Ativação'
   confirm: 'Você tem certeza?'
   back: 'Voltar'
   action: 'Ações'
   save: 'Salvar'
+  active_status:
+    active: 'Ativo'
+    inactive: 'Inativo'
   activerecord:
     errors:
       messages:
