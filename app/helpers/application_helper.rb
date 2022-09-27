@@ -30,7 +30,10 @@ module ApplicationHelper
   def nd(number, options = {})
     number_with_delimiter number, options
   end
-
+  # R$1234567890,50
+  def nc(value)
+    number_to_currency(value, unit: "R$", separator: ",", delimiter: "")
+  end
   # date format "%d/%m/%Y %H:%m"
   def df(date)
     date.strftime("%d/%m/%Y %H:%m")
