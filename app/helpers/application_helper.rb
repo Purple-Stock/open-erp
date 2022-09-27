@@ -38,8 +38,10 @@ module ApplicationHelper
     number_with_delimiter number, options
   end
 
-  # R$1234567890,50
-  def nc(number)
+  # number_to_currency_pt_br R$1234567890,50
+  # @param [Decimal] number
+  # @return [String] String formatted
+  def number_to_currency_pt_br(number)
     number_to_currency(number, unit: "R$", separator: ",", delimiter: "")
   end
 

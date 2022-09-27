@@ -38,7 +38,7 @@
                 <td><%= product.name %></td>
                 <td><%= product.sku %></td>
                 <td><%= product.custom_id %></td>
-                <td><%= nc(product.price) %></td>
+                <td><%= number_to_currency_pt_br(product.price) %></td>
                 <td><%= product.count_purchase_product %></td>
                 <td><%= product.count_sale_product %></td>
                 <td><%= product.balance %></td>
