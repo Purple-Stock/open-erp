@@ -25,7 +25,7 @@ default: &default
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-  port: <%= ENV.fetch("DB_PORT") { 5432 } %>
+#  port: <%#= ENV.fetch("DB_PORT") { 5432 } %>
 
 development:
   <<: *default
