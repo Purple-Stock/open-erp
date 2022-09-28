@@ -20,16 +20,16 @@
         </div>
       </div>
       <div class="card-body" data-controller="infinite-page">
-        <!--
-        <#= search_form_for @search, remote: true, data: { controller: 'turbolinks-form' }, html: { class: 'form-row' } do |f| #>
+        <%%= search_form_for @search, remote: true, data: { controller: 'turbolinks-form' }, html: { class: 'form-row' } do |f| %>
           <div class="form-group col-sm-10">
-            <#= f.text_field :name_cont, class: 'form-control m-input m-input--solid', placeholder: 'Name' #>
+          <!-- replace field  :name_cont to custom field model-->
+            <%%= f.text_field :name_cont, class: 'form-control m-input m-input--solid', placeholder: 'Name' %>
           </div>
           <div class="form-group col-sm-2 text-right">
-            <#= f.button icon('fas fa-search', 'Search'), name: nil, class: 'btn btn-icon icon-left btn-primary' #>
+            <%%= f.button icon('fas fa-search', 'Search'), name: nil, class: 'btn btn-icon icon-left btn-primary' %>
           </div>
-        <# end #>
-        -->
+        <%% end %>
+
         <div class="table-responsive">
           <table class="table table-striped table-md">
             <thead>
@@ -57,9 +57,9 @@
 <% end -%>
 <% end -%>
                   <td>
-                    <%%= link_to icon('fas fa-eye'), <%= model_resource_name %>, title: 'Show it', class: 'btn btn-icon btn-sm btn-info mr-1' %>
-                    <%%= link_to icon('fas fa-edit'), edit_<%= singular_route_name %>_path(<%= singular_table_name %>), title: 'Edit it', class: 'btn btn-icon btn-sm btn-warning mr-1' %>
-                    <%%= link_to icon('fas fa-trash'), <%= model_resource_name %>, title: 'Destroy it', class: 'btn btn-icon btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure?', remote: true } %>
+                    <%%= link_to icon('fas fa-pencil-alt'), edit_<%= singular_route_name %>_path(<%= singular_table_name %>), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+                    <%%= link_to icon('fas fa-eye'), <%= model_resource_name %>, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                    <%%= link_to icon('fas fa-trash'), <%= model_resource_name %>, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
                   </td>
                 </tr>
               <%% end %>
