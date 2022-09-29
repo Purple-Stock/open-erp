@@ -1,16 +1,45 @@
-version: '3'
+version: '3.7'
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    env_file:
+#      - rails.env
+    command:  bash -c "rm -f tmp/pids/server.pid && bin/dev"
+
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/app/node_modules
+
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DATABASE_URL: postgresql://postgres:password@postgres/inventory-control_development
+#      RAILS_MASTER_KEY: ''
+
+    ports:
+      - 3000:3000
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+
   postgres:
     image: 'postgres:9.5'
     volumes:
-      - 'postgres:/var/lib/postgresql/data'
+      - pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
     environment:
       POSTGRES_PASSWORD: 'password'
+
   redis:
     image: 'redis:7.0.2'
     ports:
       - '6379:6379'
 volumes:
-  postgres:
+  pgdata:
+  gem_cache:
+  node_modules:
