@@ -41,6 +41,7 @@ Para configurar o banco de dados execute:
 cp .env.example .env
 source .env
 bin/rails db:setup
+bin/dev # run app
 ```
 
 E acesse no ambiente local [http://localhost:3000](http://localhost:3000):
