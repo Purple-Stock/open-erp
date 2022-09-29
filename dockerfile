@@ -8,7 +8,7 @@ ENV APP_HOME /app
 ENV BUNDLE_APP_CONFIG="$APP_HOME/.bundle"
 ENV NODE_VERSION 16
 
-RUN apk add --update --no-cache \
+RUN apk add --update \
       binutils-gold \
       bash \
       build-base \
