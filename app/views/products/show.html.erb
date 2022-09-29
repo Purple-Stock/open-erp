@@ -31,7 +31,7 @@
         <dt><strong><%= t('products.highlight') %>:</strong></dt>
         <dd><%= @product.highlight %></dd>
         <dt><strong><%= t('products.category') %>:</strong></dt>
-        <dd><%= @product.category.name %></dd>
+        <dd><%= @product.category.try(:name) %></dd>
         <dt><strong><%= t('products.active') %>:</strong></dt>
         <dd><%= @product.active %></dd>
 
