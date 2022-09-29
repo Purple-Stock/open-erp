@@ -38,7 +38,7 @@
 <%= render 'shared/toastr' %>
 
 <!-- scripts -->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
 <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 <script type="text/javascript" src="https://a.kabachnik.info/assets/js/onscan.min.js"></script>
 <%= yield(:javascript) if content_for?(:javascript) %>
