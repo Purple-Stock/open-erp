@@ -1,43 +1,68 @@
-FROM ruby:3.1.2
+FROM ruby:3.1.2-alpine
+LABEL maintainer="gilcierweb@gmail.com"
 
-ENV NODE_VERSION 12
-# Seta nosso path
-ENV INSTALL_PATH /open_erp
+ENV RAILS_ENV development
+ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_LOG_TO_STDOUT true
+ENV APP_HOME /app
+ENV BUNDLE_APP_CONFIG="$APP_HOME/.bundle"
+ENV NODE_VERSION 16
 
-# Instala as nossas dependencias
-RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash -
+RUN apk add --update --no-cache \
+      binutils-gold \
+      bash \
+      build-base \
+      busybox \
+      ca-certificates \
+      curl \
+      file \
+      g++ \
+      gcc \
+      git \
+      graphicsmagick \
+      less \
+      libstdc++ \
+      libffi-dev \
+      libc-dev \
+      linux-headers \
+      libxml2-dev \
+      libxslt-dev \
+      libgcrypt-dev \
+      libffi-dev \
+      libsodium-dev \
+      make \
+      netcat-openbsd \
+      nodejs \
+      openssl \
+      pkgconfig \
+      postgresql-dev \
+      tzdata \
+      openssh-client \
+      rsync \
+      yaml-dev \
+      sqlite-dev \
+      ruby-dev \
+      zlib-dev \
+      yarn
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN ruby -v && node -v && yarn -v
+RUN echo 'gem: --no-ri --no-rdoc' > ~/.gemrc
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
 
-RUN apt-get update -qq
+COPY Gemfile Gemfile.lock ./
+COPY package.json yarn.lock ./
 
-RUN apt-get install -y --no-install-recommends nodejs postgresql-client \
-  locales yarn
-
-RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-RUN locale-gen
-RUN export LC_ALL="en_US.utf8"
-
-# Cria nosso diretório
-RUN mkdir -p $INSTALL_PATH
-
-# Seta o nosso path como o diretório principal
-WORKDIR $INSTALL_PATH
-
-
-# Copia o nosso Gemfile para dentro do container
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-COPY yarn.lock yarn.lock
-
-# Instala as Gems
-RUN bundle install
-# RUN npm install -g yarn
-RUN yarn install --force
+RUN gem install bundler -v 2.3.12
+RUN bundle check || bundle install
 RUN yarn install --check-files
 
 # Copia nosso código para dentro do container
-COPY . $INSTALL_PATH
+COPY . $APP_HOME
+
+RUN rm -f tmp/pids/server.pid
+
+EXPOSE 3000
+
 # Roda nosso servidor
-CMD rackup config.ru -o 0.0.0.0
+#CMD ["bin/dev"]

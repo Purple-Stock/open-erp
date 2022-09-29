@@ -1,0 +1,41 @@
+# Ignore bundler config.
+.bundle
+.bundleignore
+
+# Ignore all logfiles and tempfiles.
+log/
+tmp/
+
+# Ignore uploaded files in development.
+
+storage/
+public/assets
+
+# Byebug history
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+config/master.key
+
+# Node modules, yarn etc.
+public/packs
+public/packs-test
+node_modules
+yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+# Ignore environment files
+*.env
+.env
+
+# Ignore database dumps
+*.dump
+
+# Misc files
+.dockerignore
+.git
+.cache
+.DS_Store
+.bin
+.gitignore

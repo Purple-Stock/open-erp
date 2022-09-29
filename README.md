@@ -33,6 +33,7 @@ Para instalar as bibliotecas execute:
 
 ```sh
 bundle install
+yarn install
 ```
 
 Para configurar o banco de dados execute:
@@ -41,34 +42,43 @@ Para configurar o banco de dados execute:
 cp .env.example .env
 source .env
 bin/rails db:setup
-bin/dev # run app
+bin/dev # run app http://localhost:3000
 ```
 
 E acesse no ambiente local [http://localhost:3000](http://localhost:3000):
 
 ```sh
 bundle exec rails server
+bin/dev
 ```
 
-## Docker
-Caso não queira configurar o banco de dados local, você pode utilizar o docker.
-
-Para buildar as imagens, execute:
+## Docker and Docker Compose
+Para usar basta executar os comandos abaixo para rodar o banco e aplicação.
 ```sh
-docker image build -t open_erp .
+docker-compose build
+docker-compose up # run http://localhost:3000
+ 
+docker-compose up --build # run http://localhost:3000
+
+# Optional
+docker-compose ps
+docker-compose stop
+docker-compose down
+docker-compose run --rm app rails db:create
+docker-compose run --rm app rails db:setup db:migrate 
+docker-compose run --rm app rails db:migrate 
+docker-compose run --rm app rails db:seed 
+docker-compose run --rm app rails console
+docker-compose run --rm app rails rspec
+docker-compose run --rm app rails rubocop
+docker-compose run --rm app bash
+docker-compose run --rm app bundle install
+docker-compose run --rm app yarn install --check-files 
 ```
 
-Ao finalizar o build das imagens, basta subir os containers:
-```sh
-docker-compose up
-```
+A aplicação rails vai rodar atraves do Docker Compose [http://localhost:3000](http://localhost:3000)
 
-Por fim, basta subir o rails server e acessar o ambiente local [http://localhost:3000](http://localhost:3000)
-```sh
-rails s
-```
-
-## Testes
+## Testes sem Docker e Docker Compose 
 
 Para executar os testes da aplicação e verificar se tudo está funcionando como
 esperado execute:
