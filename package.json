@@ -11,9 +11,9 @@
     "@nathanvda/cocoon": "^1.2.14",
     "@rails/actioncable": "^7.0.4",
     "@rails/activestorage": "^7.0.4",
+    "@rails/ujs": "^6.1.6",
     "axios": "^0.27.2",
     "bootstrap": "^4.6.2",
-    "@rails/ujs": "^6.1.6",
     "cleave.js": "^1.4.7",
     "flatpickr": "^4.6.13",
     "izitoast": "^1.4.0",
@@ -28,5 +28,7 @@
     "webpack-cli": "^4.10.0"
   },
   "version": "0.1.0",
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-dev-server": "^4.11.1"
+  }
 }
