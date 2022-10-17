@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "company_name"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
@@ -71,8 +71,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
   end
 
   create_table "group_products", force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "product_id"
+    t.bigint "group_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_group_products_on_group_id"
@@ -103,7 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.float "price"
     t.string "bar_code"
     t.boolean "highlight"
-    t.integer "category_id"
+    t.bigint "category_id"
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -118,8 +118,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
   create_table "purchase_products", force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
-    t.integer "product_id"
-    t.integer "purchase_id"
+    t.bigint "product_id"
+    t.bigint "purchase_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "store_entrance", default: 0
@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
 
   create_table "purchases", force: :cascade do |t|
     t.float "value"
-    t.integer "supplier_id"
+    t.bigint "supplier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
@@ -140,8 +140,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
   create_table "sale_products", force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
-    t.integer "product_id"
-    t.integer "sale_id"
+    t.bigint "product_id"
+    t.bigint "sale_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
@@ -156,7 +156,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
     t.float "percentage"
     t.boolean "online"
     t.boolean "disclosure"
-    t.integer "customer_id"
+    t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "payment_type", default: 0
@@ -195,8 +195,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
   create_table "simplo_items", force: :cascade do |t|
     t.string "sku"
     t.integer "quantity"
-    t.integer "simplo_order_id"
-    t.integer "product_id"
+    t.bigint "simplo_order_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_simplo_items_on_product_id"
@@ -268,7 +268,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_163827) do
   end
 
   add_foreign_key "accounts", "users"
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "group_products", "groups"
   add_foreign_key "group_products", "products"
