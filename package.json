@@ -7,7 +7,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
     "@hotwired/stimulus": "^3.1.0",
-    "@hotwired/turbo-rails": "^7.2.0",
+    "@hotwired/turbo-rails": "^7.2.2",
     "@nathanvda/cocoon": "^1.2.14",
     "@rails/actioncable": "^7.0.4",
     "@rails/activestorage": "^7.0.4",
