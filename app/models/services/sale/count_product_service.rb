@@ -1,7 +1,6 @@
 module Services
   module Sale
     class CountProductService < ApplicationService
-
       attr_reader :product_id, :product_command
 
       def initialize(product_id, product_command)
@@ -18,20 +17,18 @@ module Services
         when 'balance_product'
           @product.balance
         else
-          raise "Not a product command"
+          raise 'Not a product command'
         end
       end
 
       private
 
       def count_purchase_product
-        # purchase_products.from_store('LojaPrincipal').sum('Quantity')
         from_store('LojaPrincipal').sum('Quantity')
       end
 
       def count_sale_product
         from_sale_store('LojaPrincipal').sum('Quantity')
-        # sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
       end
 
       def balance
