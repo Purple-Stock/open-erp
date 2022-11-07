@@ -118,3 +118,5 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.3'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
+gem 'rubocop-rails', '~> 2.17', '>= 2.17.2'
+gem 'rubocop-rspec', '~> 2.15'
