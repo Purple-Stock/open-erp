@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Services::Sale::CountProductService, type: :services do
+RSpec.describe Services::Product::CountProductService, type: :services do
 
 
   context 'when call the service' do
@@ -9,7 +9,7 @@ RSpec.describe Services::Sale::CountProductService, type: :services do
 
     it 'verify purchase count' do
       purchase_product
-      result = Services::Sale::CountProductService.call(product.id, 'purchase_product')
+      result = Services::Product::CountProductService.call(product, 'purchase_product')
       expect(purchase_product.quantity).to eq(result.to_i)
     end
 
