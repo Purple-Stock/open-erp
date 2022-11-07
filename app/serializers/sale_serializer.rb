@@ -37,7 +37,7 @@ class SaleSerializer
   end
 
   attribute :discount do |object|
-    "R$#{object.discount.to_s.gsub('.', ',')}"
+    "R$#{object.discount.to_s.tr('.', ',')}"
   end
 
   attribute :percentage do |object|
@@ -69,7 +69,7 @@ class SaleSerializer
   end
 
   attribute :value do |object|
-    "R$#{object.value.to_s.gsub('.', ',')}"
+    "R$#{object.value.to_s.tr('.', ',')}"
   end
 
   attribute :created_at do |object|

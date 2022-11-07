@@ -25,11 +25,11 @@ RSpec.describe 'Product' do
       it 'returns 10 first account products' do
         login_user(account.user)
         get url, params: paginate_params
-        expect_products = products[0..9].sort! { |a,b| b[:id] <=> a[:id]}
-                                        .as_json(only: %i(id))
+        expect_products = products[0..9].sort! { |a, b| b[:id] <=> a[:id] }
+                                        .as_json(only: %i[id])
                                         .map { |product| product['id'] }
 
-        response = body_json['data'].map { |product| product['attributes']['id']  }
+        response = body_json['data'].map { |product| product['attributes']['id'] }
 
         expect(response).to contain_exactly(*expect_products)
       end

@@ -36,7 +36,7 @@ class PurchaseProductSerializer
   end
 
   attribute :value do |object|
-    "R$#{object.value.to_s.gsub('.', ',')}"
+    "R$#{object.value.to_s.tr('.', ',')}"
   end
 
   attribute :image_url do |object|

@@ -17,14 +17,14 @@ module Requests
     private
 
     def make_resquest
-      return HTTParty.get(uri_all_orders, headers: headers) if empty_params?
-      return HTTParty.get(uri_for_page, headers: headers) if page
+      return HTTParty.get(uri_all_orders, headers:) if empty_params?
+      return HTTParty.get(uri_for_page, headers:) if page
 
-      HTTParty.get(uri_for_id, headers: headers)
+      HTTParty.get(uri_for_id, headers:)
     end
 
     def custom_request
-      HTTParty.get(custom_uri, headers: headers)
+      HTTParty.get(custom_uri, headers:)
     end
 
     def base_uri

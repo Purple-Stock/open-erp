@@ -26,7 +26,7 @@ class SimploOrderPayment < ApplicationRecord
 
       @order_page['result'].each do |order_page|
         custom_uri = "https://purchasestore.com.br/ws/wspedidos/numero/#{order_page['Wspedido']['numero']}.json"
-        order = Requests::Order.new(custom_uri: custom_uri).call
+        order = Requests::Order.new(custom_uri:).call
 
         puts "Pedido #{order_page['Wspedido']['numero']}"
         unless order['result']['Wspedido']['pedidostatus_id'] != '24' && order['result']['Wspedido']['pedidostatus_id'] != '1' && order['result']['Wspedido']['pedidostatus_id'] != '4'
