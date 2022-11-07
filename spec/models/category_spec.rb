@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -21,13 +23,13 @@ RSpec.describe Category, type: :model do
   end
 
   it 'save without account' do
-    category = Category.new(name: Faker::Lorem.word)
+    category = described_class.new(name: Faker::Lorem.word)
     expect(category).not_to be_valid
   end
 
   it 'category is not valid without name' do
     account = create(:account)
-    category = Category.new(name: nil, account_id: account.id)
+    category = described_class.new(name: nil, account_id: account.id)
     expect(category).not_to be_valid
   end
 end

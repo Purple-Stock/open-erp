@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Requests
   class Order
     attr_reader :page, :id, :custom_uri

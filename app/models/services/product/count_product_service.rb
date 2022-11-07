@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Services
   module Product
     class CountProductService < ApplicationService

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updates
   class Order
     attr_reader :id, :data

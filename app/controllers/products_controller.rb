@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
                             items: params[:length].to_i)
 
     order_params = params.dig(:order, :'0')
-    @products = @products.datatable_order(order_params.dig(:column).to_i, order_params.dig(:dir))
+    @products = @products.datatable_order(order_params[:column].to_i, order_params[:dir])
 
     options = {}
     options[:meta] = {

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePostData < ActiveRecord::Migration[6.0]
   def change
     create_table :post_data do |t|

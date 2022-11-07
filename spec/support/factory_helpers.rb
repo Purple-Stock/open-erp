@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FactoryHelpers
   def self.upload_file(src, content_type, binary = false)
     path = Rails.root.join(src)

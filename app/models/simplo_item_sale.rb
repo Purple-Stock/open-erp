@@ -42,7 +42,7 @@ class SimploItemSale < ApplicationRecord
                                 data_pedido: DateTime.parse(order_page['Wspedido']['data_pedido']),
                                 order_id: (item['pedido_id']).to_i - 1).to_s
         rescue ArgumentError
-          puts 'erro'
+          Rails.logger.debug 'erro'
         end
       end
     end

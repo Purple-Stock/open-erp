@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include ForgeryProtection
   include SetPlatform
@@ -8,7 +10,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def set_current_account
-    return unless current_user.present?
+    return if current_user.blank?
 
     current_account = current_user.account
     ActsAsTenant.current_tenant = current_account
