@@ -79,9 +79,9 @@ class Product < ApplicationRecord
   DATATABLE_COLUMNS = %w[custom_id name id].freeze
 
   class << self
-    def generate_qrcode(url)
-      obj = { id: url.id, custom_id: url.custom_id, name: url.name }
-      RQRCode::QRCode.new(obj.to_json)
+    def generate_qrcode(product)
+      object = { id: product.id, custom_id: product.custom_id, name: product.name }
+      RQRCode::QRCode.new(object.to_json)
     end
 
     def datatable_filter(search_value, search_columns)
