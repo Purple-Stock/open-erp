@@ -27,8 +27,6 @@
 #
 #  fk_rails_...  (category_id => categories.id)
 #
-require 'rqrcode_png'
-
 class Product < ApplicationRecord
   acts_as_tenant :account
   belongs_to :category
@@ -79,11 +77,6 @@ class Product < ApplicationRecord
   DATATABLE_COLUMNS = %w[custom_id name id].freeze
 
   class << self
-    def generate_qrcode(product)
-      object = { id: product.id, custom_id: product.custom_id, name: product.name }
-      RQRCode::QRCode.new(object.to_json)
-    end
-
     def datatable_filter(search_value, search_columns)
       return all if search_value.blank?
 
