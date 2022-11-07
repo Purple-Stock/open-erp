@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Requests
   class Product
     attr_reader :page, :id

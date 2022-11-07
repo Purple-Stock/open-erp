@@ -32,14 +32,14 @@ module Integrations
                 SaleProduct.create(quantity: item['quantidade'], value: item['valor_total'].to_f, product_id: product.id,
                                    sale_id: sale.id)
               else
-                puts "Product Not Found - Pedido #{id}"
+                Rails.logger.debug "Product Not Found - Pedido #{id}"
               end
             end
           else
-            puts "Error Save Customer - Pedido #{id}"
+            Rails.logger.debug "Error Save Customer - Pedido #{id}"
           end
         else
-          puts "Pedido #{id} já cadastrado"
+          Rails.logger.debug "Pedido #{id} já cadastrado"
         end
       end
 
@@ -50,10 +50,10 @@ module Integrations
 
           @order_page['result'].each do |order_page|
             SimploClient.create(name: order_page['Wspedido']['cliente_razaosocial'],
-                                age: Time.now.year - Time.parse(order_page['Wspedido']['cliente_data_nascimento']).year,
-                                order_date: Time.parse(order_page['Wspedido']['data_pedido']))
+                                age: Time.zone.now.year - Time.zone.parse(order_page['Wspedido']['cliente_data_nascimento']).year,
+                                order_date: Time.zone.parse(order_page['Wspedido']['data_pedido']))
           rescue ArgumentError
-            puts 'erro'
+            Rails.logger.debug 'erro'
           end
         end
       end

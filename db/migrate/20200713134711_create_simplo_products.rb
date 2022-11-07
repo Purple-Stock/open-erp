@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSimploProducts < ActiveRecord::Migration[6.0]
   def change
     create_table :simplo_products do |t|

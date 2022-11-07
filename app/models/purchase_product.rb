@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: purchase_products
@@ -62,7 +64,7 @@ class PurchaseProduct < ApplicationRecord
       begin
         PurchaseProduct.create(product_id: product.id, quantity: purchase_quantity, store_entrance: purchase_store)
       rescue ArgumentError
-        puts 'erro'
+        Rails.logger.debug 'erro'
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: simplo_order_payments
@@ -22,13 +24,13 @@ class SimploOrderPayment < ApplicationRecord
 
     (1..@order_page['pagination']['page_count']).each do |i|
       @order_page = Requests::Order.new(page: i).call
-      puts "Página #{i}"
+      Rails.logger.debug "Página #{i}"
 
       @order_page['result'].each do |order_page|
         custom_uri = "https://purchasestore.com.br/ws/wspedidos/numero/#{order_page['Wspedido']['numero']}.json"
         order = Requests::Order.new(custom_uri:).call
 
-        puts "Pedido #{order_page['Wspedido']['numero']}"
+        Rails.logger.debug "Pedido #{order_page['Wspedido']['numero']}"
         unless order['result']['Wspedido']['pedidostatus_id'] != '24' && order['result']['Wspedido']['pedidostatus_id'] != '1' && order['result']['Wspedido']['pedidostatus_id'] != '4'
           next
         end
@@ -44,7 +46,7 @@ class SimploOrderPayment < ApplicationRecord
                                     data_pedido: DateTime.parse(order['result']['Wspedido']['data_pedido']),
                                     order_id: order['result']['Wspedido']['numero'])
         rescue ArgumentError
-          puts 'erro'
+          Rails.logger.debug 'erro'
         end
       end
     end
