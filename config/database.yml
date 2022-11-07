@@ -20,15 +20,14 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV.fetch("DATABASE_URL") { 'postgresql://postgres:postgres@localhost/inventory-control_development' } %>
   host: <%= ENV['DB_HOST'] %>
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-  port: <%= ENV.fetch("DB_PORT") { 5432 } %>
 
 development:
   <<: *default
+  database: inventory-control_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -62,7 +61,6 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  url: <%= ENV.fetch("DATABASE_URL") { 'postgresql://postgres:postgres@localhost/inventory-control_test' } %>
   database: inventory-control_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
