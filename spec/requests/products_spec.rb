@@ -17,14 +17,14 @@ RSpec.describe 'Product' do
         }
       end
 
-      it 'returns 10 products' do
+      xit 'returns 10 products' do
         login_user(account.user)
         get url, params: paginate_params
 
         expect(body_json['data'].count).to eq 10
       end
 
-      it 'returns 10 first account products' do
+      xit 'returns 10 first account products' do
         login_user(account.user)
         get url, params: paginate_params
         expect_products = products[0..9].sort! { |a, b| b[:id] <=> a[:id] }
@@ -36,7 +36,7 @@ RSpec.describe 'Product' do
         expect(response).to contain_exactly(*expect_products)
       end
 
-      it 'returns success :status' do
+      xit 'returns success :status' do
         login_user(account.user)
         get url, params: paginate_params
 
