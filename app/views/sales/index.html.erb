@@ -33,7 +33,7 @@
             <% @sales.each do |sale| %>
               <%= tag.tr id: dom_id(sale) do %>
                 <td><%= link_to sale.id, sale_path(sale) %></td>
-                <td><%= sale.name %></td>
+                <td><%= sale.try(:name) %></td>
                 <td><%= sale.discount %></td>
                 <td><%= sale.online %></td>
                 <td><%= sale.order_code %></td>
