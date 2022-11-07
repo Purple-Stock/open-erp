@@ -27,8 +27,6 @@
 #
 #  fk_rails_...  (category_id => categories.id)
 #
-require 'rqrcode_png'
-
 class Product < ApplicationRecord
   acts_as_tenant :account
   belongs_to :category
@@ -79,11 +77,6 @@ class Product < ApplicationRecord
   DATATABLE_COLUMNS = %w[custom_id name id].freeze
 
   class << self
-    def generate_qrcode(url)
-      obj = { id: url.id, custom_id: url.custom_id, name: url.name }
-      RQRCode::QRCode.new(obj.to_json)
-    end
-
     def datatable_filter(search_value, search_columns)
       return all if search_value.blank?
 
@@ -102,20 +95,6 @@ class Product < ApplicationRecord
     def datatable_order(order_column_index, order_dir)
       order_column_index = 1 if order_column_index == 4
       order("#{Product::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
-    end
-
-    def integrate_product(id)
-      @order_page = Requests::Product.new(id:).call
-      @order_page['result']['WsprodutoEstoque'].each do |order_page|
-        Product.create(name: @order_page['result']['Wsproduto']['nome'],
-                       sku: order_page['sku'],
-                       price: order_page['valor_venda'],
-                       category_id: 1,
-                       active: true,
-                       account_id: 1)
-      rescue ArgumentError
-        Rails.logger.debug 'erro'
-      end
     end
   end
 end
