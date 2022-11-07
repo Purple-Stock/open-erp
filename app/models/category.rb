@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -18,5 +20,5 @@ class Category < ApplicationRecord
 
   # TODO, validates uniqueness of name
 
-  validates_presence_of :name
+  validates :name, presence: true
 end

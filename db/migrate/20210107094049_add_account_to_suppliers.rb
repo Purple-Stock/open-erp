@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAccountToSuppliers < ActiveRecord::Migration[6.0]
   def change
     add_column :suppliers, :account_id, :integer

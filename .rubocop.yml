@@ -1,0 +1,4 @@
+require: 
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance

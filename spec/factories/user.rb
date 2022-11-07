@@ -8,6 +8,6 @@ FactoryBot.define do
     company_name { Faker::Company.name }
     cpf_cnpj { Faker::Company.brazilian_company_number }
     phone { Faker::Number.number(digits: 10) }
-    password {Faker::Internet.password }
+    password { Faker::Internet.password }
   end
 end

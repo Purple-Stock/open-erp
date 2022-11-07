@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Services
   class ApplicationService
     def self.call(*args, &block)

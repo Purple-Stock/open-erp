@@ -21,7 +21,7 @@
 class SimploItemSale < ApplicationRecord
   def self.integrate_item_sale
     custom_uri = 'https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-11-01'
-    @order_page = Requests::Order.new(custom_uri: custom_uri).call
+    @order_page = Requests::Order.new(custom_uri:).call
 
     (1..@order_page['pagination']['page_count']).each do |i|
       @order_page = Requests::Order.new(page: i).call
@@ -42,7 +42,7 @@ class SimploItemSale < ApplicationRecord
                                 data_pedido: DateTime.parse(order_page['Wspedido']['data_pedido']),
                                 order_id: (item['pedido_id']).to_i - 1).to_s
         rescue ArgumentError
-          puts 'erro'
+          Rails.logger.debug 'erro'
         end
       end
     end

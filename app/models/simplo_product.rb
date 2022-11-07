@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: simplo_products
@@ -14,7 +16,7 @@ class SimploProduct < ApplicationRecord
     @products['result'].each do |product|
       name = product['Wsproduto']['nome']
       product['WsprodutoEstoque'].each do |sku_product|
-        SimploProduct.create(name: name, sku: sku_product['sku'])
+        SimploProduct.create(name:, sku: sku_product['sku'])
       end
     end
   end
