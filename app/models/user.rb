@@ -32,7 +32,7 @@ class User < ApplicationRecord
 
   def assign_account
     ac = Account.find_by(user_id: id)
-    ac.update(company_name: company_name)
+    ac.update(company_name:)
   end
 
   def set_account

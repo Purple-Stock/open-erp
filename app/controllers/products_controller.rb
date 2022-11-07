@@ -10,10 +10,9 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     products = Product.includes(:purchase_products, :sale_products, :category)
-                       .where(account_id: current_tenant)
+                      .where(account_id: current_tenant)
     @pagy, @products = pagy(products)
-
-   end
+  end
 
   def index_defer
     search_value_params = params.dig(:search, :value)
@@ -22,8 +21,7 @@ class ProductsController < ApplicationController
                                    .includes(:purchase_products, :sale_products, :category)
                                    .where(account_id: current_tenant),
                             page: (params[:start].to_i / params[:length].to_i + 1),
-                            items: params[:length].to_i
-    )
+                            items: params[:length].to_i)
 
     order_params = params.dig(:order, :'0')
     @products = @products.datatable_order(order_params.dig(:column).to_i, order_params.dig(:dir))
@@ -95,7 +93,6 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Produto deletado.' }
       format.json { head :no_content }
       format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@product)) }
-
     end
   end
 

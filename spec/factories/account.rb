@@ -5,4 +5,3 @@ FactoryBot.define do
     user_id { create(:user).id }
   end
 end
-

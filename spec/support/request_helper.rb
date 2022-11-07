@@ -2,8 +2,8 @@ module RequestHelper
   def body_json(symbolize_key: false)
     json = JSON.parse(response.body)
     symbolize_key ? json.symbolize_keys : json
-  rescue
-    return {}
+  rescue StandardError
+    {}
   end
 end
 

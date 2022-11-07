@@ -48,7 +48,7 @@ class SimploOrder < ApplicationRecord
     id = (order_number.to_i + 1).to_s
     data = { 'Wspedido': { 'Status': { 'id': order_status } } }
     begin
-      Updates::Order.new(id: id, data: data).call
+      Updates::Order.new(id:, data:).call
     rescue ArgumentError
       puts 'erro'
     end
@@ -58,7 +58,7 @@ class SimploOrder < ApplicationRecord
     id = (order_number.to_i + 1).to_s
     data = { 'Wspedido': { 'Entrega': { 'rastreamento': post_code } } }
     begin
-      Updates::Order.new(id: id, data: data).call
+      Updates::Order.new(id:, data:).call
     rescue ArgumentError
       puts 'erro'
     end
@@ -69,8 +69,8 @@ class SimploOrder < ApplicationRecord
     os_data = { 'Wspedido': { 'Status': { 'id': order_status } } }
     pc_data = { 'Wspedido': { 'Entrega': { 'rastreamento': post_code } } }
     begin
-      Updates::Order.new(id: id, data: os_data).call
-      Updates::Order.new(id: id, data: pc_data).call
+      Updates::Order.new(id:, data: os_data).call
+      Updates::Order.new(id:, data: pc_data).call
     rescue ArgumentError
       puts 'erro'
     end

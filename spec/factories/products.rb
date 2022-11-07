@@ -30,7 +30,7 @@ require_relative '../support/factory_helpers'
 FactoryBot.define do
   factory :product do
     name { Faker::Commerce.product_name }
-    custom_id { rand(99999).to_s }
+    custom_id { rand(99_999).to_s }
     sku { 'TESTESKU' }
     extra_sku { 'TESTESKU89' }
     image { FactoryHelpers.upload_file('spec/support/images/sem_imagem.jpeg', 'image/jpeg', true) }
@@ -38,6 +38,6 @@ FactoryBot.define do
     active { true }
 
     account_id { create(:account).id }
-    category_id { create(:category, account_id: account_id).id }
+    category_id { create(:category, account_id:).id }
   end
 end

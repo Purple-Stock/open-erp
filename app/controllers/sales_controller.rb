@@ -6,7 +6,8 @@ class SalesController < ApplicationController
   # GET /sales
   # GET /sales.json
   def index
-    sales = Sale.includes(:sale_products, :customer).where(account_id: current_tenant).references(:customers).order(created_at: :desc)
+    sales = Sale.includes(:sale_products,
+                          :customer).where(account_id: current_tenant).references(:customers).order(created_at: :desc)
     @pagy, @sales = pagy(sales)
   end
 
