@@ -3,7 +3,6 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users
   resources :accounts
-  get '/info', to: 'companies#show'
   resources :purchase_products
   get 'purchase_products_defer', to: 'purchase_products#index_defer'
   get 'inventory_view', to: 'purchase_products#inventory_view', as: 'inventory_view'
