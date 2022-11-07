@@ -39,9 +39,9 @@
                 <td><%= product.sku %></td>
                 <td><%= product.custom_id %></td>
                 <td><%= number_to_currency_pt_br(product.price) %></td>
-                <td><%= product.count_purchase_product %></td>
-                <td><%= product.count_sale_product %></td>
-                <td><%= product.balance %></td>
+                <td><%= Services::Product::CountProductService.call(product, 'purchase_product') %></td>
+                <td><%= Services::Product::CountProductService.call(product, 'sale_product') %></td>
+                <td><%= Services::Product::CountProductService.call(product, 'balance_product') %></td>
                 <td><%= product.category.try(:name) %></td>
                 <td><%= raw display_status(product.active) %></td>
                 <td>

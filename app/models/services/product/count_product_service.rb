@@ -1,10 +1,10 @@
 module Services
-  module Sale
+  module Product
     class CountProductService < ApplicationService
-      attr_reader :product_id, :product_command
+      attr_reader :product, :product_command
 
-      def initialize(product_id, product_command)
-        @product = Product.find(product_id)
+      def initialize(product, product_command)
+        @product = product
         @product_command = product_command
       end
 

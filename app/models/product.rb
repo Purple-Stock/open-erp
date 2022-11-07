@@ -40,12 +40,6 @@ class Product < ApplicationRecord
     validates :name
   end
 
-  def count_purchase_product
-    rs = purchase_products.from_store('LojaPrincipal').sum('Quantity')
-    sp = purchase_products.from_store('LojaSecundaria').sum('Quantity')
-    rs.to_s
-  end
-
   def count_month_purchase_product(year, month)
     first_day_month = Time.new(year, month.to_i, 1)
     last_day_month = first_day_month.end_of_month
@@ -66,22 +60,8 @@ class Product < ApplicationRecord
     sum
   end
 
-  def count_sale_product
-    rs ||= sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
-    sp ||= sale_products.from_sale_store('LojaSecundaria').sum('Quantity')
-    rs.to_s
-  end
-
   def sum_simplo_items
     simplo_items.map(&:quantity).sum
-  end
-
-  def balance
-    rs = purchase_products.from_store('LojaPrincipal').sum('Quantity')
-    sp = purchase_products.from_store('LojaSecundaria').sum('Quantity')
-    rs -= sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
-    sp -= sale_products.from_sale_store('LojaSecundaria').sum('Quantity')
-    rs.to_s
   end
 
   def update_active!
