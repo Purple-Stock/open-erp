@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: products
@@ -41,20 +43,20 @@ class Product < ApplicationRecord
   end
 
   def count_month_purchase_product(year, month)
-    first_day_month = Time.new(year, month.to_i, 1)
+    first_day_month = Time.zone.local(year, month.to_i, 1)
     last_day_month = first_day_month.end_of_month
     sum = 0
-    purchase_products.where(created_at: first_day_month..last_day_month).each do |pp|
+    purchase_products.where(created_at: first_day_month..last_day_month).find_each do |pp|
       sum += pp.quantity
     end
     sum
   end
 
   def count_month_sale_product(year, month)
-    first_day_month = Time.new(year, month.to_i, 1)
+    first_day_month = Time.zone.local(year, month.to_i, 1)
     last_day_month = first_day_month.end_of_month
     sum = 0
-    sale_products.where(created_at: first_day_month..last_day_month).each do |pp|
+    sale_products.where(created_at: first_day_month..last_day_month).find_each do |pp|
       sum += pp.quantity
     end
     sum
@@ -66,9 +68,9 @@ class Product < ApplicationRecord
 
   def update_active!
     if active.eql? true
-      update_attributes(active: false)
+      update(active: false)
     else
-      update_attributes(active: true)
+      update(active: true)
     end
   rescue StandardError
     errors.add(:active, message: 'não pode ser atualizado')
@@ -112,7 +114,7 @@ class Product < ApplicationRecord
                        active: true,
                        account_id: 1)
       rescue ArgumentError
-        puts 'erro'
+        Rails.logger.debug 'erro'
       end
     end
   end

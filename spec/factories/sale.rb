@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../support/factory_helpers'
 
 FactoryBot.define do
@@ -6,7 +8,7 @@ FactoryBot.define do
     online { [true, false].sample }
     customer_id { create(:customer).id }
     payment_type { rand(0..6) }
-    #store_sale
+    # store_sale
     total_exchange_value { rand(100..400) }
 
     account_id { create(:account).id }

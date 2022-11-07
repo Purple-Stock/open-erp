@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TestCapybaraHelper
   def select2(value = nil, from: nil)
     find(:label, text: from).click

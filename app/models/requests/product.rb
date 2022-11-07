@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Requests
   class Product
     attr_reader :page, :id
@@ -14,8 +16,9 @@ module Requests
     private
 
     def make_resquest
-      return HTTParty.get(uri_for_page, headers: headers) if page
-      HTTParty.get(uri_for_id, headers: headers)
+      return HTTParty.get(uri_for_page, headers:) if page
+
+      HTTParty.get(uri_for_id, headers:)
     end
 
     def base_uri

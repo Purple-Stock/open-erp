@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   include Pagy::Frontend
 
@@ -12,6 +14,7 @@ module ApplicationHelper
   def active_nav_item(controller, actions)
     'active' if active_actions?(controller, actions)
   end
+
   def active_nav_menu_item(paths = [])
     class_active = nil
     paths.each do |path|
@@ -42,12 +45,12 @@ module ApplicationHelper
   # @param [Decimal] number
   # @return [String] String formatted
   def number_to_currency_pt_br(number)
-    number_to_currency(number, unit: "R$", separator: ",", delimiter: "")
+    number_to_currency(number, unit: 'R$', separator: ',', delimiter: '')
   end
 
   # date format "%d/%m/%Y %H:%m"
   def df(date)
-    date.strftime("%d/%m/%Y %H:%m")
+    date.strftime('%d/%m/%Y %H:%m')
   end
 
   # date format "%d/%m/%Y %H:%m"

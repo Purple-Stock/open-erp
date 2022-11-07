@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: customers
@@ -19,16 +21,15 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
-  it { should have_many(:sales) }
+  it { is_expected.to have_many(:sales) }
 
-  it { should belong_to(:account) }
+  it { is_expected.to belong_to(:account) }
 
   context 'when create' do
     let(:customer) { create(:customer) }
 
-    it 'should be valid' do
+    it 'is valid' do
       expect(customer).to be_valid
     end
   end
-
 end

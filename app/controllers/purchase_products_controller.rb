@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PurchaseProductsController < ApplicationController
   before_action :set_purchase_product, only: %i[show edit update destroy]
   include Pagy::Backend
@@ -91,7 +93,7 @@ class PurchaseProductsController < ApplicationController
       PurchaseProduct.create(product_id: params['product_id'], quantity: params['quantity'].to_i,
                              store_entrance: params['stock_transfer']['destiny'])
     rescue ArgumentError
-      puts 'erro'
+      Rails.logger.debug 'erro'
     end
     respond_to do |format|
       format.html { redirect_to stock_transfer_path, notice: 'Transferência Concluída.' }
@@ -108,7 +110,7 @@ class PurchaseProductsController < ApplicationController
       format.html { redirect_to stock_transfer_path, notice: 'Inventário Concluído.' }
     end
   rescue ArgumentError
-    puts 'erro'
+    Rails.logger.debug 'erro'
   end
 
   private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupProductsController < ApplicationController
   before_action :set_group_product, only: %i[show edit update destroy]
 
