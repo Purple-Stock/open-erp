@@ -64,16 +64,6 @@ class Product < ApplicationRecord
     simplo_items.map(&:quantity).sum
   end
 
-  def update_active!
-    if active.eql? true
-      update(active: false)
-    else
-      update(active: true)
-    end
-  rescue StandardError
-    errors.add(:active, message: 'não pode ser atualizado')
-  end
-
   DATATABLE_COLUMNS = %w[custom_id name id].freeze
 
   class << self
