@@ -112,7 +112,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if Services::Product::UpdateProductStatus.call(@product)
+      if Services::Product::UpdateStatus.call(@product)
         information_active = @product.active ? 'Ativado' : 'Desativado'
         format.html { redirect_to products_path, notice: "#{@product.name} foi #{information_active}." }
       else
