@@ -30,11 +30,11 @@
             <tbody>
             <% @purchase_products.each do |purchase_product| %>
               <%= tag.tr id: dom_id(purchase_product) do %>
-                <td><%= link_to purchase_product.id, product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
-                <td><%= purchase_product.custom_id %></td>
+                <td><%= link_to purchase_product.id, product_path(purchase_product.product), data: { toggle: 'tooltip', turbo: false } %></td>
+                <td><%= purchase_product.try(:custom_id) %></td>
                 <td><%= purchase_product.quantity %></td>
                 <td><%= purchase_product.value %></td>
-                <td><%= purchase_product.name %></td>
+                <td><%= purchase_product.try(:name) %></td>
                 <td><%= df(purchase_product.created_at) %></td>
                 <td>
                   <%= link_to icon('fas fa-pencil-alt'), edit_purchase_product_path(purchase_product), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
