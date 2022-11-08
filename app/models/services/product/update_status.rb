@@ -2,7 +2,7 @@
 
 module Services
   module Product
-    class UpdateProductStatus < ApplicationService
+    class UpdateStatus < ApplicationService
       attr_reader :product
 
       def initialize(product)

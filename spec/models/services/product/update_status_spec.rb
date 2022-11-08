@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Services::Product::UpdateProductStatus, type: :services do
+RSpec.describe Services::Product::UpdateStatus, type: :services do
   context 'when call the service' do
     let(:product) { create(:product) }
 
