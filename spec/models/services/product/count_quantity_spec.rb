@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Services::Product::CountProductService, type: :services do
+RSpec.describe Services::Product::CountQuantity, type: :services do
   context 'when call the service' do
     let(:product) { create(:product) }
     let(:purchase_product) { create(:purchase_product, product_id: product.id) }

@@ -2,7 +2,7 @@
 
 module Services
   module Product
-    class CountProductService < ApplicationService
+    class CountQuantity < ApplicationService
       attr_reader :product, :product_command
 
       def initialize(product, product_command)

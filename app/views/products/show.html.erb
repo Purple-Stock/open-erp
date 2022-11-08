@@ -19,11 +19,11 @@
         <dt><strong><%= t('products.price') %>:</strong></dt>
         <dd><%= @product.price %></dd>
         <dt><strong><%= t('products.entry') %>:</strong></dt>
-        <dd><%= Services::Product::CountProductService.call(@product, 'purchase_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(@product, 'purchase_product') %></dd>
         <dt><strong><%= t('products.exit') %>:</strong></dt>
-        <dd><%= Services::Product::CountProductService.call(@product, 'sale_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(@product, 'sale_product') %></dd>
         <dt><strong><%= t('products.balance') %>:</strong></dt>
-        <dd><%= Services::Product::CountProductService.call(@product, 'balance_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(@product, 'balance_product') %></dd>
         <dt><strong><%= t('products.rq_code') %></strong></dt>
         <dd><%= image_tag(Services::Product::GenerateQrCode.call(@product)) %></dd>
         <dt><strong><%= t('products.image') %>:</strong></dt>
