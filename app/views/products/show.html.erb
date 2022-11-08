@@ -25,7 +25,7 @@
         <dt><strong><%= t('products.balance') %>:</strong></dt>
         <dd><%= Services::Product::CountProductService.call(@product, 'balance_product') %></dd>
         <dt><strong><%= t('products.rq_code') %></strong></dt>
-        <dd><%= image_tag(Product.generate_qrcode(@product).to_img.resize(300, 300).to_data_url) %></dd>
+        <dd><%= image_tag(Services::Product::GenerateQrCode.call(@product)) %></dd>
         <dt><strong><%= t('products.image') %>:</strong></dt>
         <dd><%= image_tag(@product.image.attached? ? @product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd>
         <dt><strong><%= t('products.highlight') %>:</strong></dt>
