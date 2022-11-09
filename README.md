@@ -1,4 +1,4 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/purple-stock/open-erp/badge)](https://www.codefactor.io/repository/github/purple-stock/open-erp)
+[![Maintainability](https://api.codeclimate.com/v1/badges/08231e31f9e94ae977af/maintainability)](https://codeclimate.com/github/Purple-Stock/open-erp/maintainability)
 # OPEN ERP
 
 O **Open ERP** é utilizado para controle de estoque, gerador de notas fiscais, financeiro. Integrações com eccomerce e diversos ERPs. É uma alternativa Open Source para o Bling ERP. Desenvolvido em Ruby on Rails a ideia do projeto é seguir o Rails Way de desenvolvimento mantendo o projeto um monolíto utilizando as últimas novidades da comunidade Rails como Stimulus, Turbo Frames, Turbo Streams.
