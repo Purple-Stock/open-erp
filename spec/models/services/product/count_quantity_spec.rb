@@ -9,7 +9,7 @@ RSpec.describe Services::Product::CountQuantity, type: :services do
 
     it 'verify purchase count' do
       purchase_product
-      result = described_class.call(product, 'purchase_product')
+      result = described_class.call(product: product, product_command: 'purchase_product')
       expect(purchase_product.quantity).to eq(result.to_i)
     end
 
