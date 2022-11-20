@@ -5,7 +5,7 @@ module Services
     class GenerateQrCode < ApplicationService
       attr_reader :product, :width, :height
 
-      def initialize(product, width: 300, height: 300)
+      def initialize(product:, width: 300, height: 300)
         @product = product
         @width = width
         @height = height

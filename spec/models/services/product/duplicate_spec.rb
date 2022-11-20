@@ -7,7 +7,7 @@ RSpec.describe Services::Product::Duplicate, type: :services do
     let(:product) { create(:product) }
 
     it 'change for copy name' do
-      result = described_class.call(product)
+      result = described_class.call(product: product)
       expect(Product.last.sku).to eq(product.sku)
       expect(Product.last.name).to eq("#{product.name} Cópia")
     end
