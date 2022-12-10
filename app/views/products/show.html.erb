@@ -19,13 +19,13 @@
         <dt><strong><%= t('products.price') %>:</strong></dt>
         <dd><%= @product.price %></dd>
         <dt><strong><%= t('products.entry') %>:</strong></dt>
-        <dd><%= Services::Product::CountProductService.call(@product, 'purchase_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'purchase_product') %></dd>
         <dt><strong><%= t('products.exit') %>:</strong></dt>
-        <dd><%= Services::Product::CountProductService.call(@product, 'sale_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'sale_product') %></dd>
         <dt><strong><%= t('products.balance') %>:</strong></dt>
-        <dd><%= Services::Product::CountProductService.call(@product, 'balance_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'balance_product') %></dd>
         <dt><strong><%= t('products.rq_code') %></strong></dt>
-        <dd><%= image_tag(Services::Product::GenerateQrCode.call(@product)) %></dd>
+        <dd><%= image_tag(Services::Product::GenerateQrCode.call(product: @product)) %></dd>
         <dt><strong><%= t('products.image') %>:</strong></dt>
         <dd><%= image_tag(@product.image.attached? ? @product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd>
         <dt><strong><%= t('products.highlight') %>:</strong></dt>

@@ -5,7 +5,7 @@ module Services
     class Duplicate < ApplicationService
       attr_reader :product
 
-      def initialize(product)
+      def initialize(product:)
         @product = product
       end
 
