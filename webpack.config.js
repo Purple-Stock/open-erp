@@ -3,9 +3,13 @@ const webpack = require("webpack")
 
 module.exports = {
   mode: "production",
-  devtool: "false",
+  devtool: "source-map",
   entry: {
     application: "./app/javascript/application.js"
+  }, 
+  performance: {
+       maxEntrypointSize: 512000,
+       maxAssetSize: 512000
   },
   output: {
     filename: "[name].js",
