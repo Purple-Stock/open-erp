@@ -42,10 +42,10 @@
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
                   edit_product_path(@product), :class => 'btn btn-default' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                  product_path(@product),
-                  :method => 'delete',
-                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                  :class => 'btn btn-danger' %>
+                  product_path(@product), 
+                  title: t('destroy'), class: 'btn btn-danger', 
+                  method: :delete, 
+                  data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
     </div>
   </div>
 </div>
