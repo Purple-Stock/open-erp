@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     added_attrs = %i[company_name first_name cpf_cnpj phone last_name email password password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
-  end
+  end 
 
   private
 
@@ -32,5 +32,6 @@ class ApplicationController < ActionController::Base
     else
       'application'
     end
-  end
+  end  
+
 end
