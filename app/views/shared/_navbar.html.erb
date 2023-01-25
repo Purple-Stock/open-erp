@@ -9,7 +9,7 @@
        <%= select_tag :language, options_for_select([["Portuguese",""],["English", ""]]), { :class => "form-control" } %>
       </li>
 
-    <%= form_tag set_locale_path, method: :post, id: 'set_locale' do %>
+    <%= form_tag set_locale_path, method: :get, id: 'set_locale' do %>
       <%= select_tag "locale", options_for_select(I18n.available_locales, I18n.locale.to_s), onchange: ("$('#set_locale').submit();"), id: 'set_locale' %>
     <% end %>
 

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :accounts
   resources :purchase_products
-  get 'locale/set_locale', to: 'locales#set_locale'
+  get 'set_locale', to: 'locales#set_locale'
   get 'purchase_products_defer', to: 'purchase_products#index_defer'
   get 'inventory_view', to: 'purchase_products#inventory_view', as: 'inventory_view'
   post 'save_inventory', to: 'purchase_products#save_inventory', as: 'save_inventory'
