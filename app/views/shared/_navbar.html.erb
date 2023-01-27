@@ -6,12 +6,11 @@
     </ul>
     <ul class="navbar-nav navbar-right ml-auto">
       <li class="navbar-nav navbar-right">      
-       <%= select_tag :language, options_for_select([["Portuguese",""],["English", ""]]), { :class => "form-control" } %>
-      </li>
-
-    <%= form_tag set_locale_path, method: :get, id: 'set_locale' do %>
-      <%= select_tag "locale", options_for_select(I18n.available_locales, I18n.locale.to_s), onchange: ("$('#set_locale').submit();"), id: 'set_locale' %>
-    <% end %>
+        <%= form_tag set_locale_path, method: :get, id: 'set_locale' do %>
+         <%= select_tag :locale, options_for_select(I18n.available_locales.map{ |locale|
+          [I18n.t('language_name', locale: locale), locale.to_s]}), {class: "form-control", prompt: t('select_language'), onchange: "this.form.submit()", id: 'set_locale'} %>
+        <% end %>        
+      </li>    
 
       <li class="dropdown">
         <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">

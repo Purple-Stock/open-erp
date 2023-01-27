@@ -1,5 +1,7 @@
 ---
 pt-BR:
+  language_name: "Português"
+  select_idiom: "Selecione o idioma"
   name: Nome
   price: Preço
   created_at: Data de criação
