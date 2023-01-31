@@ -5,11 +5,11 @@
       <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
     </ul>
     <ul class="navbar-nav navbar-right ml-auto">
-      <li class="navbar-nav navbar-right">      
+      <li class="navbar-nav navbar-right">   
         <%= form_tag set_locale_path, method: :get, id: 'set_locale' do %>
-         <%= select_tag :locale, options_for_select(I18n.available_locales.map{ |locale| [I18n.t('language_name', locale: locale), locale.to_s]}), 
+         <%= select_tag :locale, options_for_select(I18n.available_locales.map{ |locale| [ t('language_name', locale: locale), locale.to_s]}), 
          {class: "form-control", prompt: t('select_idiom'), onchange: "this.form.submit()", id: 'set_locale'} %>
-        <% end %>        
+        <% end %>              
       </li>    
 
       <li class="dropdown">
