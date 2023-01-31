@@ -2,8 +2,10 @@ class LocalesController < ApplicationController
   
   before_action :set_locale
 
-  def default_url_options
-    { locale: I18n.locale }
+  def default_url_option
+    cookie.delete(:locale)
+    locale =  I18n.locale
+    redirect_to request.referrer    
   end
 
   def set_locale

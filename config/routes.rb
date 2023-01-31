@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :accounts
   resources :purchase_products
   get 'set_locale', to: 'locales#set_locale'
+  get 'default_url_option', to: 'locales#default_url_option'
   get 'purchase_products_defer', to: 'purchase_products#index_defer'
   get 'inventory_view', to: 'purchase_products#inventory_view', as: 'inventory_view'
   post 'save_inventory', to: 'purchase_products#save_inventory', as: 'save_inventory'

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include ForgeryProtection
   include SetPlatform
   before_action :authenticate_user!
-  before_action :set_locale_from_cookie
+  before_action :set_locale_from_cookie # Keeps the system with the same translation selected before by user.
   set_current_tenant_through_filter
   before_action :set_current_account
   before_action :configure_permitted_parameters, if: :devise_controller?
