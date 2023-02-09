@@ -1,4 +1,4 @@
-FROM ruby:3.1.2-alpine
+FROM ruby:3.2.1-alpine
 LABEL maintainer="gilcierweb@gmail.com"
 
 ENV RAILS_ENV development
