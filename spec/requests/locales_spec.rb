@@ -7,7 +7,6 @@ RSpec.describe "Locales", type: :request do
     it "returns http found" do
       get set_locale_path
       expect(response).to have_http_status(:found)
-    end
-  end
-
+    end  
+  end  
 end
