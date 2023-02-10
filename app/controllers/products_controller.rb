@@ -88,11 +88,16 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Produto deletado.' }
-      format.json { head :no_content }
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@product)) }
+    begin
+      @product.destroy
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: 'Produto deletado.' }
+        format.json { head :no_content }
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@product)) }
+      end
+    rescue ActiveRecord::InvalidForeignKey
+      # Handle invalid foreign key by raising a custom error message
+      raise "Can't delete product because it has associated records"
     end
   end
 
@@ -100,7 +105,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if @product != nil? && Services::Product::Duplicate.call(@product)
+      if @product != nil? && Services::Product::Duplicate.call(product: @product)
         format.html { redirect_to products_path, notice: 'Cópia Produto feito com sucesso.' }
       else
         flash[:alert] = 'Erro, tente novamente'
@@ -112,7 +117,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if Services::Product::UpdateStatus.call(@product)
+      if Services::Product::UpdateStatus.call(product: @product)
         information_active = @product.active ? 'Ativado' : 'Desativado'
         format.html { redirect_to products_path, notice: "#{@product.name} foi #{information_active}." }
       else

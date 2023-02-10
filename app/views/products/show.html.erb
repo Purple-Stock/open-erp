@@ -19,13 +19,13 @@
         <dt><strong><%= t('products.price') %>:</strong></dt>
         <dd><%= @product.price %></dd>
         <dt><strong><%= t('products.entry') %>:</strong></dt>
-        <dd><%= Services::Product::CountQuantity.call(@product, 'purchase_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'purchase_product') %></dd>
         <dt><strong><%= t('products.exit') %>:</strong></dt>
-        <dd><%= Services::Product::CountQuantity.call(@product, 'sale_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'sale_product') %></dd>
         <dt><strong><%= t('products.balance') %>:</strong></dt>
-        <dd><%= Services::Product::CountQuantity.call(@product, 'balance_product') %></dd>
+        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'balance_product') %></dd>
         <dt><strong><%= t('products.rq_code') %></strong></dt>
-        <dd><%= image_tag(Services::Product::GenerateQrCode.call(@product)) %></dd>
+        <dd><%= image_tag(Services::Product::GenerateQrCode.call(product: @product)) %></dd>
         <dt><strong><%= t('products.image') %>:</strong></dt>
         <dd><%= image_tag(@product.image.attached? ? @product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd>
         <dt><strong><%= t('products.highlight') %>:</strong></dt>
@@ -42,10 +42,10 @@
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
                   edit_product_path(@product), :class => 'btn btn-default' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                  product_path(@product),
-                  :method => 'delete',
-                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                  :class => 'btn btn-danger' %>
+                  product_path(@product), 
+                  title: t('destroy'), class: 'btn btn-danger', 
+                  method: :delete, 
+                  data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
     </div>
   </div>
 </div>
