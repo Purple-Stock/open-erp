@@ -69,4 +69,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
+  # This fixes the error: "Devise could not find the `Warden::Proxy` instance on your request environment" when running rspec controller tests
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end

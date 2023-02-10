@@ -14,7 +14,8 @@ module AwesomeRails
     config.load_defaults 7.0
 
     config.app                            = config_for(:config)
-    config.i18n.default_locale            = 'pt-BR'
+    config.i18n.default_locale            = :"pt-BR"
+    config.i18n.available_locales         = [:default, :"pt-BR", :en ] # added :default option here to appear in the dropdown language switch
     config.time_zone                      = 'America/Sao_Paulo'
     config.generators.scaffold_stylesheet = false
 
