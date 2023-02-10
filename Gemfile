@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.2", ">= 7.0.2.4"
+gem "rails", "~> 7.0.4", ">= 7.0.4.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -81,7 +81,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem 'shoulda-matchers', '~> 5.0'
+  gem 'shoulda-matchers', '~> 5.2', '>= 5.2.0'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'simplecov'
   gem 'simplecov-formatter-badge', require: false
@@ -92,7 +92,7 @@ group :production do
   gem 'rack-ratelimit'
   gem 'rack-timeout'
   gem 'redis'
-  gem 'sidekiq', '>= 7.0.0'
+  gem 'sidekiq', '>= 7.0.1'
 end
 
 gem 'geared_pagination'
@@ -100,7 +100,7 @@ gem 'platform_agent'
 gem 'ransack'
 gem 'spreadsheet_architect'
 
-gem 'httparty'
+gem 'httparty', '>= 0.21.0'
 
 gem 'nokogiri'
 
@@ -115,7 +115,7 @@ gem 'cocoon'
 # gem 'jquery-rails'
 gem 'jsonapi-serializer'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails-i18n', '~> 7.0.3'
+gem 'rails-i18n', '~> 7.0.5'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
 gem 'rubocop-rails', require: false
