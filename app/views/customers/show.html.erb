@@ -15,9 +15,9 @@
         <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
         <dd><%= @customer.email %></dd>
         <dt><strong><%= model_class.human_attribute_name(:cellphone) %>:</strong></dt>
-        <dd><%= @customer.cellphone %></dd>
+        <dd><%= number_to_phone(@customer.cellphone, pattern: /(\d{1,4})(\d{5})(\d{4})$/, area_code: true) %></dd>
         <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
-        <dd><%= @customer.phone %></dd>
+        <dd><%= number_to_phone(@customer.phone, pattern: /(\d{1,4})(\d{4})(\d{4})$/, area_code: true) %></dd>
         <dt><strong><%= model_class.human_attribute_name(:cpf) %>:</strong></dt>
         <dd><%= @customer.cpf %></dd>
       </dl>
