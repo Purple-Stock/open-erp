@@ -44,8 +44,8 @@ class Product < ApplicationRecord
     first_day_month = Time.zone.local(year, month.to_i, 1)
     last_day_month = first_day_month.end_of_month
     sum = 0
-    purchase_products.where(created_at: first_day_month..last_day_month).find_each do |pp|
-      sum += pp.quantity
+    purchase_products.where(created_at: first_day_month..last_day_month).find_each do |purchase_product|
+      sum += purchase_product.quantity
     end
     sum
   end
@@ -54,8 +54,8 @@ class Product < ApplicationRecord
     first_day_month = Time.zone.local(year, month.to_i, 1)
     last_day_month = first_day_month.end_of_month
     sum = 0
-    sale_products.where(created_at: first_day_month..last_day_month).find_each do |pp|
-      sum += pp.quantity
+    sale_products.where(created_at: first_day_month..last_day_month).find_each do |sale_product|
+      sum += sale_product.quantity
     end
     sum
   end
