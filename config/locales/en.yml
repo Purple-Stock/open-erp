@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  language_name: "English"
+  select_idiom: "Select an idiom"
   hello: "Hello world"
 
 # Custom formats
