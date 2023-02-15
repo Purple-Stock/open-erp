@@ -32,8 +32,8 @@
                 <td><%= link_to customer.id, customer_path(customer) %></td>
                 <td><%= customer.name %></td>
                 <td><%= customer.email %></td>
-                <td><%= customer.cellphone %></td>
-                <td><%= customer.phone %></td>
+                <td><%= number_to_phone(customer.cellphone, pattern: /(\d{1,4})(\d{5})(\d{4})$/, area_code: true) %></td>
+                <td><%= number_to_phone(customer.phone, pattern: /(\d{1,4})(\d{4})(\d{4})$/, area_code: true) %></td>
                 <td><%= customer.cpf %></td>
                 <td><%= df(customer.created_at) %></td>
                 <td>
