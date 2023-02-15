@@ -31,5 +31,25 @@ RSpec.describe Customer, type: :model do
     it 'is valid' do
       expect(customer).to be_valid
     end
+
+    it 'is valid when phone is a number' do
+      customer.phone = '1195963325'
+      expect(customer).to be_valid
+    end
+  
+    it 'is valid when cellphone is a number' do
+      customer.cellphone = '1195963325'
+      expect(customer).to be_valid
+    end
+  
+    it 'is invalid when phone is not a number' do
+      customer.phone = 'Im not a number'
+      expect(customer).not_to be_valid
+    end
+  
+    it 'is invalid when cellphone is not a number' do
+      customer.cellphone = 'Im not a number'
+      expect(customer).not_to be_valid
+    end  
   end
 end

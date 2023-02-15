@@ -21,4 +21,6 @@
 class Customer < ApplicationRecord
   has_many :sales
   acts_as_tenant :account
+
+  validates :phone, :cellphone, numericality: { only_integer: true }, allow_blank: true
 end
