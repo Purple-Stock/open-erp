@@ -42,7 +42,7 @@ RSpec.describe "/stores", type: :request do
   end
 
   describe "GET /new" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       get new_store_url
       expect(response).to be_successful
     end

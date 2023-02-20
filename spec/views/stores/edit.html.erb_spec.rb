@@ -6,7 +6,8 @@ RSpec.describe "stores/edit", type: :view do
       name: "MyString",
       address: "MyString",
       phone: "MyString",
-      email: "MyString"
+      email: "MyString",
+      account_id: create(:account).id
     ))
   end
 
