@@ -35,6 +35,7 @@ class Product < ApplicationRecord
   has_many :group_products
   has_one_attached :image
   has_many :simplo_items
+  has_one :store
 
   with_options presence: true do
     validates :name
