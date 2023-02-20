@@ -1,8 +1,35 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: purchase_products
+#
+#  id             :bigint           not null, primary key
+#  quantity       :integer
+#  store_entrance :integer          default("Sem_Loja")
+#  value          :float
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  account_id     :integer
+#  product_id     :integer
+#  purchase_id    :integer
+#
+# Indexes
+#
+#  index_purchase_products_on_account_id   (account_id)
+#  index_purchase_products_on_product_id   (product_id)
+#  index_purchase_products_on_purchase_id  (purchase_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (product_id => products.id)
+#  fk_rails_...  (purchase_id => purchases.id)
+#
 class PurchaseProduct < ApplicationRecord
   belongs_to :purchase, optional: true
   belongs_to :product
   acts_as_tenant :account
-  enum store_entrance: %i[Sem_Loja LojaPrincipal LojaSecundaria]
+  enum store_entrance: { Sem_Loja: 0, LojaPrincipal: 1, LojaSecundaria: 2 }
   scope :from_store, lambda { |store = store_entrances['Sem_Loja']|
                        where('store_entrance = ?', store_entrances[store])
                      }
@@ -27,7 +54,7 @@ class PurchaseProduct < ApplicationRecord
     end
 
     def inventory_quantity(custom_id, quantity, store)
-      product = Product.find_by(custom_id: custom_id)
+      product = Product.find_by(custom_id:)
       purchase_product = product.purchase_products.from_store(store).sum('Quantity')
       sale_products = product.sale_products.from_sale_store(store).sum('Quantity')
       balance = purchase_product - sale_products
@@ -37,7 +64,7 @@ class PurchaseProduct < ApplicationRecord
       begin
         PurchaseProduct.create(product_id: product.id, quantity: purchase_quantity, store_entrance: purchase_store)
       rescue ArgumentError
-        puts 'erro'
+        Rails.logger.debug 'erro'
       end
     end
   end

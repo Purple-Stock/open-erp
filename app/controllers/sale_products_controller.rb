@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 class SaleProductsController < ApplicationController
   before_action :set_sale_product, only: %i[show edit update destroy]
-
+  include Pagy::Backend
   # GET /sale_products
   # GET /sale_products.json
   def index
-    @sale_products = SaleProduct.where(account_id: current_tenant).last 500
+    sale_products = SaleProduct.where(account_id: current_tenant)
+    @pagy, @sale_products = pagy(sale_products)
   end
 
   # GET /sale_products/1

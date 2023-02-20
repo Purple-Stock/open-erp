@@ -1,22 +1,27 @@
-<br><br><br>
 <%- model_class = Purchase -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t '.title', :default => model_class.model_name.human.titleize %></h1>
+  </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= t('purchases.value') %>:</strong></dt>
-  <dd><%= @purchase.value %></dd>
-  <dt><strong><%= t('purchases.supplier') %>:</strong></dt>
-  <dd><%= @purchase.supplier_id %></dd>
-</dl>
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              purchases_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_purchase_path(@purchase), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              purchase_path(@purchase),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+      <dl class="dl-horizontal">
+        <dt><strong><%= t('purchases.value') %>:</strong></dt>
+        <dd><%= @purchase.value %></dd>
+        <dt><strong><%= t('purchases.supplier') %>:</strong></dt>
+        <dd><%= @purchase.supplier_id %></dd>
+      </dl>
+
+      <%= link_to t('.back', :default => t("helpers.links.back")), purchases_path, :class => 'btn btn-default' %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_purchase_path(@purchase), :class => 'btn btn-default' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")), purchase_path(@purchase), :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger' %>
+
+    </div>
+  </div>
+</div>

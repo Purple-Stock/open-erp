@@ -1,39 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Purple Stock</title>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  <title>Purple Stock</title>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
-    <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbo-track': 'reload' if platform.mobile_app? %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbo-track': 'reload' if platform.mobile_app? %>
 
-    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
-    <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes"></head>
-  </head>
+  <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <%= yield(:head) if content_for?(:head) %>
+</head>
 
-  <body>
-    <div id="app">
-      <div class="main-wrapper main-wrapper-1">
-        <div class="navbar-bg"></div>
-        <%= render 'shared/navbar' %>
-        <%= render 'shared/sidebar' %>
-        <div class="main-content">
-          <%= content_for?(:content) ? yield(:content) : yield %>
-        </div>
-        <%= render 'shared/footer' %>
-      </div>
+<body>
+<div id="app">
+  <div class="main-wrapper main-wrapper-1">
+    <div class="navbar-bg"></div>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/sidebar' %>
+    <div class="main-content">
+      <section class="section">
+        <%= content_for?(:content) ? yield(:content) : yield %>
+      </section>
     </div>
-    <%= render 'shared/toastr' %>
-  </body>
-  <script type="text/javascript" src="https://a.kabachnik.info/assets/js/onscan.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <%= render 'shared/footer' %>
+  </div>
+</div>
+<%= render 'shared/toastr' %>
 
+<!-- scripts -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
+<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+<script type="text/javascript" src="https://a.kabachnik.info/assets/js/onscan.min.js"></script>
+<%= yield(:javascript) if content_for?(:javascript) %>
+</body>
 </html>

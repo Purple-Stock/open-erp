@@ -1,28 +1,35 @@
-version: '3'
-   
-services:
-  postgres:
-    image: 'postgres:9.5'
-    volumes:
-      - 'postgres:/var/lib/postgresql/data'
-    environment:
-      POSTGRES_PASSWORD: password
+version: '3.7'
 
-  website:
-    tty: true
-    stdin_open: true
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    env_file:
+#      - rails.env
     depends_on:
-      - 'postgres'
-    build: .
-    ports:
-      - '9292:9292'
+      - database
+      - redis
+    ports: 
+      - '3000:3000'
     volumes:
-      - '.:/open_erp'
+      - .:/app
+      - node_modules:/app/node_modules
+    env_file: .env
     environment:
-      DB_USER: postgres
-      DB_NAME: open_erp
-      DB_PASSWORD: password
-      DB_HOST: postgres
-   
+      RAILS_ENV: development
+
+  database:
+    image: postgres:12.1
+    volumes:
+    - db_data:/var/lib/postgresql/data
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    image: 'redis:7.0.2'
+    ports:
+      - '6379:6379'
 volumes:
-  postgres:
+  db_data:
+  gem_cache:
+  node_modules:

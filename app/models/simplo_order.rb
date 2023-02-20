@@ -1,3 +1,17 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: simplo_orders
+#
+#  id           :bigint           not null, primary key
+#  client_name  :string
+#  order_date   :string
+#  order_status :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  order_id     :string
+#
 class SimploOrder < ApplicationRecord
   has_many :simplo_items
 
@@ -13,7 +27,7 @@ class SimploOrder < ApplicationRecord
           simplo_order = SimploOrder.create(client_name: order_page['Wspedido']['cliente_razaosocial'],
                                             order_id: order_page['Wspedido']['numero'],
                                             order_status: order_page['Wspedido']['pedidostatus_id'],
-                                            order_date: Time.parse(order_page['Wspedido']['data_pedido']))
+                                            order_date: Time.zone.parse(order_page['Wspedido']['data_pedido']))
           order_page['Item'].each do |item|
             product = Product.where(sku: item['sku']).or(Product.where(extra_sku: item['sku'])).first
             if product.present?
@@ -27,7 +41,7 @@ class SimploOrder < ApplicationRecord
           order.update(order_status: order_page['Wspedido']['pedidostatus_id'])
         end
       rescue ArgumentError
-        puts 'erro'
+        Rails.logger.debug 'erro'
       end
     end
   end
@@ -36,9 +50,9 @@ class SimploOrder < ApplicationRecord
     id = (order_number.to_i + 1).to_s
     data = { 'Wspedido': { 'Status': { 'id': order_status } } }
     begin
-      Updates::Order.new(id: id, data: data).call
+      Updates::Order.new(id:, data:).call
     rescue ArgumentError
-      puts 'erro'
+      Rails.logger.debug 'erro'
     end
   end
 
@@ -46,9 +60,9 @@ class SimploOrder < ApplicationRecord
     id = (order_number.to_i + 1).to_s
     data = { 'Wspedido': { 'Entrega': { 'rastreamento': post_code } } }
     begin
-      Updates::Order.new(id: id, data: data).call
+      Updates::Order.new(id:, data:).call
     rescue ArgumentError
-      puts 'erro'
+      Rails.logger.debug 'erro'
     end
   end
 
@@ -57,10 +71,10 @@ class SimploOrder < ApplicationRecord
     os_data = { 'Wspedido': { 'Status': { 'id': order_status } } }
     pc_data = { 'Wspedido': { 'Entrega': { 'rastreamento': post_code } } }
     begin
-      Updates::Order.new(id: id, data: os_data).call
-      Updates::Order.new(id: id, data: pc_data).call
+      Updates::Order.new(id:, data: os_data).call
+      Updates::Order.new(id:, data: pc_data).call
     rescue ArgumentError
-      puts 'erro'
+      Rails.logger.debug 'erro'
     end
   end
 

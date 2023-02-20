@@ -5,7 +5,11 @@ class SalesController < ApplicationController
   include Pagy::Backend
   # GET /sales
   # GET /sales.json
-  def index; end
+  def index
+    sales = Sale.includes(:sale_products,
+                          :customer).where(account_id: current_tenant).references(:customers).order(created_at: :desc)
+    @pagy, @sales = pagy(sales)
+  end
 
   def index_defer
     @sales = Sale.includes(:sale_products,

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <title>Purple Stock</title>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbo-track': 'reload' if platform.mobile_app? %>
+
+  <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css"/>
+
+</head>
+
+<body>
+<div id="app">
+  <section class="section">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+
+          <div class="login-brand">
+            <%= image_tag('stisla-fill.svg', alt: 'logo', width: 100, class: 'shadow-light rounded-circle') %>
+          </div>
+
+          <%= yield %>
+
+          <%= render 'shared/footer_auth' %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%= render 'shared/toastr' %>
+</div>
+
+<!-- scripts -->
+<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+<script type="text/javascript" src="https://a.kabachnik.info/assets/js/onscan.min.js"></script>
+
+</body>
+</html>

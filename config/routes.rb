@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 
-Rails.application.routes.draw do
-  resources :stores
+Rails.application.routes.draw do  
   devise_for :users
   resources :accounts
-  get '/info', to: 'companies#show'
   resources :purchase_products
+  resources :stores
+  get 'set_locale', to: 'locales#set_locale'
   get 'purchase_products_defer', to: 'purchase_products#index_defer'
   get 'inventory_view', to: 'purchase_products#inventory_view', as: 'inventory_view'
   post 'save_inventory', to: 'purchase_products#save_inventory', as: 'save_inventory'
@@ -30,8 +32,6 @@ Rails.application.routes.draw do
   resources :categories
   resources :groups
   resources :group_products
-  get 'companies/new'
-  post 'companies/create'
   get 'group_lists', to: 'groups#show_group_product', as: 'show_group_product'
   get 'confection_lists', to: 'groups#show_product_confection', as: 'show_product_confection'
   get 'orders_control', to: 'orders_control#show_orders_control', as: 'show_orders_control'
@@ -50,6 +50,6 @@ Rails.application.routes.draw do
                                                        as: 'add_inventory_quantity'
     end
   end
-  root to: 'products#index'
+  root to: 'home#index'
   mount Sidekiq::Web => '/sidekiq'
 end

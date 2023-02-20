@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updates
   class Order
     attr_reader :id, :data
@@ -14,7 +16,7 @@ module Updates
     private
 
     def make_update
-      HTTParty.put(uri_for_update, body: data, headers: headers)
+      HTTParty.put(uri_for_update, body: data, headers:)
     end
 
     def base_uri
