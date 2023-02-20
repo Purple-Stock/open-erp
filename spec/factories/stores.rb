@@ -4,5 +4,6 @@ FactoryBot.define do
     address { "MyString" }
     phone { "MyString" }
     email { "MyString" }
+    account_id { create(:account).id }
   end
 end
