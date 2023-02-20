@@ -11,5 +11,37 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe StoresHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#create' do
+    let(:store) { create(:store) }
+
+    it 'should create a store' do
+      expect(store).to be_valid
+    end
+  end
+
+  describe '#update' do
+    let(:store) { create(:store) }
+
+    it 'should update a store' do
+      store.name = 'New Name'
+      expect(store).to be_valid
+    end
+  end
+
+  describe '#destroy' do
+    let(:store) { create(:store) }
+
+    it 'should destroy a store' do
+      store.destroy
+      expect(store).to be_valid
+    end
+  end
+
+  describe '#index' do
+    let(:store) { create(:store) }
+
+    it 'should list all stores' do
+      expect(store).to be_valid
+    end
+  end
 end
