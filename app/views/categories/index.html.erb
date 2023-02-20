@@ -1,36 +1,51 @@
-<br><br><br>
 <%- model_class = Category -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
+  </div>
 </div>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_category_path,
-            :class => 'btn btn-primary' %>
-<table id="stockTable" class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(t(:name)) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= link_to category.id, category_path(category) %></td>
-        <td><%= category.name %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_category_path(category), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      category_path(category),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
+<div class="section-body">
 
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_category_path, :class => 'btn btn-primary mb-3' %>
+
+  <div class="card">
+    <div class="card-body">
+      <%= turbo_frame_tag :categories do %>
+        <div class="table-responsive">
+
+          <div class="loading-container">
+            <div class="loading-element"> Loading...</div>
+          </div>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= model_class.human_attribute_name(t(:name)) %></th>
+              <th><%= t '.actions', :default => t("helpers.actions") %></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <% @categories.each do |category| %>
+              <%#= turbo_stream category do %>
+              <%= tag.tr id: dom_id(category) do %>
+                <td><%= link_to category.id, category_path(category), data: { toggle: 'tooltip', turbo: false } %></td>
+                <td><%= category.name %></td>
+                <td>
+                  <%= link_to icon('fas fa-pencil-alt'), edit_category_path(category), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-eye'), category, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-trash'), category, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { :confirm => t('confirm'), toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm'), turbo_frame: :_self } %>
+                </td>
+              <% end %>
+              <%# end %>
+            <% end %>
+            </tbody>
+          </table>
+
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

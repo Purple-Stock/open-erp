@@ -1,13 +1,14 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/puppe1990/open-erp/badge)](https://www.codefactor.io/repository/github/puppe1990/open-erp)
+[![Maintainability](https://api.codeclimate.com/v1/badges/08231e31f9e94ae977af/maintainability)](https://codeclimate.com/github/Purple-Stock/open-erp/maintainability)
+[![Ruby](https://github.com/Purple-Stock/open-erp/actions/workflows/main.yml/badge.svg)](https://github.com/Purple-Stock/open-erp/actions/workflows/main.yml)
 # OPEN ERP
 
-O **Open ERP** é utilizado para controle de estoque, gerador de notas fiscais, financeiro. Integrações com eccomerce e diversos ERPs. Desenvolvido em Ruby on Rails a ideia do projeto é seguir o Rails Way de desenvolvimento mantendo o projeto um monolíto utilizando as últimas novidades da comunidade Rails como Stimulus, Turbo Frames, Turbo Streams.
+O **Open ERP** é utilizado para controle de estoque, gerador de notas fiscais, financeiro. Integrações com eccomerce e diversos ERPs. É uma alternativa Open Source para o Bling ERP. Desenvolvido em Ruby on Rails a ideia do projeto é seguir o Rails Way de desenvolvimento mantendo o projeto um monolíto utilizando as últimas novidades da comunidade Rails como Stimulus, Turbo Frames, Turbo Streams.
 
 A página oficial do projeto está em [página institucional](https://purplestock.com.br/)
 
 Este Projeto também é integrado com o aplicativo de QR CODE https://github.com/Purple-Stock/open-erp-qr-code-reader e o sistema gerador de etiquetas PIMACO de produtos com QR CODE https://github.com/Purple-Stock/open-erp-pimaco-print-tags.
 
-![Captura de Tela 2022-04-24 às 11 59 42](https://user-images.githubusercontent.com/8432835/164982735-d0e2899f-f077-45d9-a70c-81ac9c3f7102.png)
+![Screenshot from 2022-11-04 19-30-07](https://user-images.githubusercontent.com/8432835/200084193-5c591172-c698-4e95-a849-f49f781a2b25.png)
 
 
 ## Desenvolvimento
@@ -33,23 +34,52 @@ Para instalar as bibliotecas execute:
 
 ```sh
 bundle install
+yarn install
 ```
 
 Para configurar o banco de dados execute:
 
 ```sh
-cp .env.db.sample .env
+cp .env.example .env
 source .env
 bin/rails db:setup
+bin/dev # run app http://localhost:3000
 ```
 
 E acesse no ambiente local [http://localhost:3000](http://localhost:3000):
 
 ```sh
 bundle exec rails server
+bin/dev
 ```
 
-## Testes
+## Docker and Docker Compose
+Para usar basta executar os comandos abaixo para rodar o banco e aplicação.
+```sh
+docker-compose build
+docker-compose up # run http://localhost:3000
+ 
+docker-compose up --build # run http://localhost:3000
+
+# Optional
+docker-compose ps
+docker-compose stop
+docker-compose down
+docker-compose run --rm app rails db:create
+docker-compose run --rm app rails db:setup db:migrate 
+docker-compose run --rm app rails db:migrate 
+docker-compose run --rm app rails db:seed 
+docker-compose run --rm app rails console
+docker-compose run --rm app rails rspec
+docker-compose run --rm app rails rubocop
+docker-compose run --rm app bash
+docker-compose run --rm app bundle install
+docker-compose run --rm app yarn install --check-files 
+```
+
+A aplicação rails vai rodar atraves do Docker Compose [http://localhost:3000](http://localhost:3000)
+
+## Testes sem Docker e Docker Compose 
 
 Para executar os testes da aplicação e verificar se tudo está funcionando como
 esperado execute:

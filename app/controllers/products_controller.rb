@@ -5,9 +5,14 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index_defer tags_index_defer]
   before_action :set_product, only: %i[show edit update destroy]
   include Pagy::Backend
+  include ActionView::RecordIdentifier
   # GET /products
   # GET /products.json
-  def index; end
+  def index
+    products = Product.includes(:purchase_products, :sale_products, :category)
+                      .where(account_id: current_tenant)
+    @pagy, @products = pagy(products)
+  end
 
   def index_defer
     search_value_params = params.dig(:search, :value)
@@ -16,11 +21,10 @@ class ProductsController < ApplicationController
                                    .includes(:purchase_products, :sale_products, :category)
                                    .where(account_id: current_tenant),
                             page: (params[:start].to_i / params[:length].to_i + 1),
-                            items: params[:length].to_i
-                           )
+                            items: params[:length].to_i)
 
     order_params = params.dig(:order, :'0')
-    @products = @products.datatable_order(order_params.dig(:column).to_i, order_params.dig(:dir))
+    @products = @products.datatable_order(order_params[:column].to_i, order_params[:dir])
 
     options = {}
     options[:meta] = {
@@ -84,10 +88,16 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Produto deletado.' }
-      format.json { head :no_content }
+    begin
+      @product.destroy
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: 'Produto deletado.' }
+        format.json { head :no_content }
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@product)) }
+      end
+    rescue ActiveRecord::InvalidForeignKey
+      # Handle invalid foreign key by raising a custom error message
+      raise "Can't delete product because it has associated records"
     end
   end
 
@@ -95,10 +105,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if @product != nil?
-        product_clone = @product.dup
-        product_clone.name = "#{product_clone.name} Cópia"
-        product_clone.save
+      if @product != nil? && Services::Product::Duplicate.call(product: @product)
         format.html { redirect_to products_path, notice: 'Cópia Produto feito com sucesso.' }
       else
         flash[:alert] = 'Erro, tente novamente'
@@ -110,7 +117,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if @product.update_active!
+      if Services::Product::UpdateStatus.call(product: @product)
         information_active = @product.active ? 'Ativado' : 'Desativado'
         format.html { redirect_to products_path, notice: "#{@product.name} foi #{information_active}." }
       else

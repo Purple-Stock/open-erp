@@ -1,5 +1,7 @@
 ---
 pt-BR:
+  language_name: "Português"
+  select_idiom: "Selecione um idioma"
   name: Nome
   price: Preço
   created_at: Data de criação
@@ -30,6 +32,19 @@ pt-BR:
   order_code: Código Pedido
   percentage: Porcentagem
   total_exchange_value: Valor troca
+  show: 'Visualizar'
+  new: 'Novo'
+  edit: 'Editar'
+  destroy: 'Apagar'
+  duplicate: 'Duplicar'
+  update_active: 'Atualizar Ativação'
+  confirm: 'Você tem certeza?'
+  back: 'Voltar'
+  action: 'Ações'
+  save: 'Salvar'
+  active_status:
+    active: 'Ativo'
+    inactive: 'Inativo'
   activerecord:
     errors:
       messages:

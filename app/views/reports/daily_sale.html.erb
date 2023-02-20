@@ -1,47 +1,59 @@
-<br><br><br>
-<div class="page-header">
-  <h1><%=t('daily_sales.two')%></h1>
-  <br><br>
-  <div class="row">
-    <div class="col-lg-6">
-      <table id="reportTable" class="table-striped table-bordered table-responsive">
-        <thead>
-          <tr>
-            <th><%= t('daily_sales.data') %></th>
-            <th><%= t('daily_sales.total_value') %></th>
-            <th><%= t('daily_sales.discount_total_value') %></th>
-            <th><%= t('daily_sales.total') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @total_daily.each do |daily| %>
-            <tr>
-              <td><%= (daily.created_at + 1.days).strftime("%d/%m/%Y") %></td>
-              <td><%= @value = daily.value.round(2) %></td>
-              <td><%= @discount = daily.discount.present? ? daily.discount.round(2) : 0.0 %></td>
-              <td><%= (@value - @discount).round(2) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-lg-6">
-      <table id="reportdiscountTable" class="table-striped table-bordered table-responsive">
-        <thead>
-          <tr>
-            <th><%= t('daily_sales.data') %></th>
-            <th><%= t('daily_sales.exchange_total_value') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @exchange_daily.each do |exchange_daily| %>
-            <tr>
-              <td><%= (exchange_daily.created_at + 1.days).strftime("%d/%m/%Y") %></td>
-              <td><%= exchange_daily.total_exchange_value.present? ? exchange_daily.total_exchange_value.round(2) : 0.0 %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t('daily_sales.two') %></h1>
+  </div>
+</div>
+
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <div class="row">
+          <div class="col-lg-6">
+
+            <table id="order_table" class="table table-striped table-bordered">
+              <thead>
+              <tr>
+                <th><%= t('daily_sales.data') %></th>
+                <th><%= t('daily_sales.total_value') %></th>
+                <th><%= t('daily_sales.discount_total_value') %></th>
+                <th><%= t('daily_sales.total') %></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @total_daily.each do |daily| %>
+                <tr>
+                  <td><%= (daily.created_at + 1.days).strftime("%d/%m/%Y") %></td>
+                  <td><%= @value = daily.value.round(2) %></td>
+                  <td><%= @discount = daily.discount.present? ? daily.discount.round(2) : 0.0 %></td>
+                  <td><%= (@value - @discount).round(2) %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-6">
+            <table id="reportdiscountTable" class="table table-striped table-bordered">
+              <thead>
+              <tr>
+                <th><%= t('daily_sales.data') %></th>
+                <th><%= t('daily_sales.exchange_total_value') %></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @exchange_daily.each do |exchange_daily| %>
+                <tr>
+                  <td><%= (exchange_daily.created_at + 1.days).strftime("%d/%m/%Y") %></td>
+                  <td><%= exchange_daily.total_exchange_value.present? ? exchange_daily.total_exchange_value.round(2) : 0.0 %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

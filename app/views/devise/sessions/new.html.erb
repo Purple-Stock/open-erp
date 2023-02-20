@@ -1,27 +1,32 @@
-<br><br><br>
-<h2><%= t(".title") %></h2>
+<div class="card card-primary">
+  <div class="card-header"><h2><%= t(".title") %></h2></div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+  <div class="card-body">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'needs-validation' }) do |f| %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, t(".password") %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <%= f.check_box :remember_me, class: 'custom-control-input' %>
+            <%= f.label :remember_me, t(".remember_me"), class: 'custom-control-label' %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit t(".submit"), class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password, t(".password") %><br />
-    <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me, t(".remember_me") %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit t(".submit"), class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>
 
 <%= render "devise/shared/links" %>

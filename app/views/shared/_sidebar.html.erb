@@ -2,10 +2,10 @@
   <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
-        <%= link_to current_user.account.company_name, root_path  %>
+        <%= link_to current_user.account.company_name, root_path %>
       </div>
       <div class="sidebar-brand sidebar-brand-sm">
-        <%= link_to 'PS', root_path %>
+        <%= link_to 'OP', root_path %>
       </div>
       <ul class="sidebar-menu" data-controller="sidebar">
         <li class="<%= active_nav_item('home', 'index') %>">
@@ -81,22 +81,28 @@
             </li>
           <% end %>
         <li class="menu-header">Gerencial</li>
-          <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-file-alt' do %>
-            <li class="<%= active_nav_item('reports', crud_actions) %>">
-              <%= link_to t("audits.products"), show_orders_products_stock_path, class: 'nav-link' %>
-              <%= link_to t("audits.daily"), reports_daily_sale_path, class: 'nav-link' %>
-              <%#= link_to 'Tempo dos pedidos', show_orders_business_day_path, class: 'nav-link' %>
-              <%#= link_to 'Controle de Pedidos Online', show_orders_control_path, class: 'nav-link' %>
-            </li>
-          <% end %>
+        <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-chart-line' do %>
+          <li class="<%= active_nav_menu_item([show_orders_products_stock_path]) %>">
+            <%= link_to t("audits.products"), show_orders_products_stock_path, class: 'nav-link' %>
+          </li>
+          <li class="<%= active_nav_menu_item([reports_daily_sale_path]) %>">
+            <%= link_to t("audits.daily"), reports_daily_sale_path, class: 'nav-link' %>
+          </li>
+          <!--          <li class="<%#= active_nav_menu_item([show_orders_business_day_path]) %>">-->
+          <%#= link_to 'Tempo dos pedidos', show_orders_business_day_path, class: 'nav-link' %>
+          <!--          </li>-->
+          <!--          <li class="<%#= active_nav_menu_item([show_orders_control_path]) %>">-->
+          <%#= link_to 'Controle de Pedidos Online', show_orders_control_path, class: 'nav-link' %>
+          <!--          </li>-->
+        <% end %>
         </li>
-       <!-- <li class="menu-header">Planos</li>
-          <%= render 'shared/sidebar_dropdown', title: 'Métodos de pagamento', icon: 'fas fa-file-alt' do %>
-            <li class="<%= active_nav_item('reports', crud_actions) %>">
-              <%= link_to 'Pagar', payment_path, class: 'nav-link' %>
-            </li>
-          <% end %>
-        </li>-->
+        <!--        <li class="menu-header">Planos</li>-->
+        <%#= render 'shared/sidebar_dropdown', title: 'Métodos de pagamento', icon: 'fas fa-file-alt' do %>
+        <!--          <li class="<%#= active_nav_item('reports', crud_actions) %>">-->
+        <%#= link_to 'Pagar', payment_path, class: 'nav-link' %>
+        <!--          </li>-->
+        <%# end %>
+        <!--        </li>-->
       </ul>
     </aside>
   </div>

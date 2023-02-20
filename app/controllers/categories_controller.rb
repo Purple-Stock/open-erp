@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
-
+  include Pagy::Backend
+  include ActionView::RecordIdentifier
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.where(account_id: current_tenant)
+    categories = Category.where(account_id: current_tenant)
+    @pagy, @categories = pagy(categories)
   end
 
   # GET /categories/1
@@ -56,6 +60,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to categories_url, notice: I18n.t('categories.deleted') }
       format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@category)) }
     end
   end
 

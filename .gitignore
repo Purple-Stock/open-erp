@@ -16,6 +16,9 @@
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
 
 /node_modules
 /yarn-error.log
@@ -38,10 +41,29 @@ latest.dump.2
 config/cable.yml
 /tmp/cache/bootsnap-load-path-cache
 /tmp/cache/webpacker/last-compilation-digest-development
+
+/public/assets
 /public/packs
 /public/packs-test
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
 /node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.env
 coverage/*
+
+.tool-versions
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+nbproject/*
+/nbproject/private/

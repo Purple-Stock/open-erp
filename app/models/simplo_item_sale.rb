@@ -1,9 +1,27 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: simplo_item_sales
+#
+#  id             :bigint           not null, primary key
+#  data_pedido    :datetime
+#  desconto       :float
+#  nome_produto   :string
+#  peso           :float
+#  quantidade     :integer
+#  sku            :string
+#  valor_total    :float
+#  valor_unitario :float
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  order_id       :string
+#  produto_id     :string
+#
 class SimploItemSale < ApplicationRecord
   def self.integrate_item_sale
     custom_uri = 'https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-11-01'
-    @order_page = Requests::Order.new(custom_uri: custom_uri).call
+    @order_page = Requests::Order.new(custom_uri:).call
 
     (1..@order_page['pagination']['page_count']).each do |i|
       @order_page = Requests::Order.new(page: i).call
@@ -24,7 +42,7 @@ class SimploItemSale < ApplicationRecord
                                 data_pedido: DateTime.parse(order_page['Wspedido']['data_pedido']),
                                 order_id: (item['pedido_id']).to_i - 1).to_s
         rescue ArgumentError
-          puts 'erro'
+          Rails.logger.debug 'erro'
         end
       end
     end

@@ -3,49 +3,40 @@
   <% if @sale_product.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@sale_product.errors.count, "error") %> prohibited this sale_product from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@sale_product.errors.count, "error") %> prohibited this sale_product from
+          being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
-        <% @sale_product.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+          <% @sale_product.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
         </ul>
       </div>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= f.label t('sales_products.quantity'), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+  <div class="form-row">
+    <div class="form-group col-4">
+      <%= f.label t('sales_products.quantity'), :class => 'control-label' %>
       <%= f.text_field :quantity, :class => 'form-control' %>
     </div>
-  </div>
-  <!--<div class="form-group">
-    <%= f.label t('sales_products.value'), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :value, :class => 'form-control' %>
-    </div>
+    <!--<div class="form-group">
+    <%#= f.label t('sales_products.value'), :class => 'control-label' %>
+  <%#= f.text_field :value, :class => 'form-control' %>
   </div>-->
-    <div class="form-group">
-    <%= f.label t('sales_products.product'), :class => 'control-label col-lg-2'%>
-    <div class="col-lg-2 product">
-      <%= f.select :product_id, Product.all.collect {|p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id ] }, { :include_blank => t('sales_products.select_dropdown.product')}, :class => "product-id form-control form-control-sm" %>
+    <div class="form-group col-8">
+      <%= f.label t('sales_products.product'), :class => 'control-label' %>
+      <%= f.select :product_id, Product.all.collect { |p| ["#{p.custom_id} - #{p.name} - #{p.price}", p.id] }, { :include_blank => t('sales_products.select_dropdown.product') }, { :class => "product-id form-control select2-list" } %>
     </div>
   </div>
   <!--<div class="form-group">
-    <%= f.label t(:sale_id), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.select :sale_id, Sale.all.collect {|p| [ p.value, p.id ] }, { :include_blank => t('sales_products.select_dropdown.sale')}, :class => "form-control form-control-sm" %>
-    </div>
+    <%#= f.label t(:sale_id), :class => 'control-label' %>
+  <%#= f.select :sale_id, Sale.all.collect {|p| [ p.value, p.id ] }, { :include_blank => t('sales_products.select_dropdown.sale')}, :class => "form-control form-control-sm" %>
   </div>-->
 
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit t('sales_products.submit'), :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                sale_products_path, :class => 'btn btn-default' %>
-    </div>
+    <%= f.submit t('sales_products.submit'), :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), sale_products_path, :class => 'btn btn-default' %>
   </div>
 
 <% end %>

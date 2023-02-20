@@ -1,0 +1,42 @@
+---
+en:
+  categories: 
+    one: Category
+    two: Categories
+    list: Categories list
+    create: Create Category
+  products:
+    one: Product
+    two: Products
+    list: Products list
+    create: Create Product
+  suppliers:
+    one: Supplier
+    two: Suppliers
+    list: Suppliers list
+    create: Create Supplier
+  entries:
+    one: Entry
+    two: Entries
+    list: Entries list
+    create: Create Entry
+  exits:
+    one: Exit
+    two: Exits
+    list: Exits list
+    create: Create Exit
+  sales:
+    one: Sale
+    two: Sales
+    list: Sales list
+    create: Create Sale
+  customers:
+    one: Customer
+    two: Customers
+    list: Customers list
+    create: Create Customer
+  audits:
+    one: Audit
+    two: Audits
+    products: Orders controls
+    daily: Sale daily audits

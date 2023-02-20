@@ -1,3 +1,34 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: sales
+#
+#  id                   :bigint           not null, primary key
+#  disclosure           :boolean
+#  discount             :float
+#  exchange             :boolean          default(FALSE)
+#  online               :boolean
+#  order_code           :string
+#  payment_type         :integer          default("Débito")
+#  percentage           :float
+#  store_sale           :integer          default("Sem_Loja")
+#  total_exchange_value :float
+#  value                :float
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  account_id           :integer
+#  customer_id          :integer
+#
+# Indexes
+#
+#  index_sales_on_account_id   (account_id)
+#  index_sales_on_customer_id  (customer_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (customer_id => customers.id)
+#
 class SaleSerializer
   include FastJsonapi::ObjectSerializer
 
@@ -8,7 +39,7 @@ class SaleSerializer
   end
 
   attribute :discount do |object|
-    "R$#{object.discount.to_s.gsub('.', ',')}"
+    "R$#{object.discount.to_s.tr('.', ',')}"
   end
 
   attribute :percentage do |object|
@@ -40,7 +71,7 @@ class SaleSerializer
   end
 
   attribute :value do |object|
-    "R$#{object.value.to_s.gsub('.', ',')}"
+    "R$#{object.value.to_s.tr('.', ',')}"
   end
 
   attribute :created_at do |object|
