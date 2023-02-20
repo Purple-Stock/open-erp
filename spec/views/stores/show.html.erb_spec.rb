@@ -6,7 +6,8 @@ RSpec.describe "stores/show", type: :view do
       name: "Name",
       address: "Address",
       phone: "Phone",
-      email: "Email"
+      email: "Email",
+      account: create(:account)
     ))
   end
 
