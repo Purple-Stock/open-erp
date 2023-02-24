@@ -8,7 +8,7 @@
 #  value       :float
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  supplier_id :integer
+#  supplier_id :bigint
 #
 # Indexes
 #
