@@ -10,4 +10,6 @@ class ImportCustomerCSV
 	column :name
 	column :phone
 	column :account_id  
+
+	identifier :email 
 end
