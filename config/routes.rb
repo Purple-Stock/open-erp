@@ -28,7 +28,13 @@ Rails.application.routes.draw do
   get 'products_tags_defer', to: 'products#tags_index_defer'
   get '/products/:id/duplicate', to: 'products#duplicate', as: 'meeting_duplicate'
   get '/products/:id/update_active', to: 'products#update_active', as: 'update_product_active'
-  resources :customers
+  
+  resources :customers do
+    collection do
+      post :import
+    end
+  end
+
   resources :categories
   resources :groups
   resources :group_products
