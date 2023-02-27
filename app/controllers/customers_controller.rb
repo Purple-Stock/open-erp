@@ -72,7 +72,7 @@ class CustomersController < ApplicationController
         redirect_to customers_path, notice: "Não foi possível importar o arquivo: #{import.report.message}"
       end
     else
-      redirect_to customers_path, notice: 'Nenhum arquivo foi selecionado'
+      redirect_to customers_path, alert: 'Selecione um arquivo.'  
     end      
   end
 
