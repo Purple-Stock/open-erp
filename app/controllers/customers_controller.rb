@@ -63,13 +63,17 @@ class CustomersController < ApplicationController
   end
 
   def import
-    import = ImportCustomerCSV.new(file: params[:file]) # file is send by form
-    import.run!
-    if import.report.success?
-      redirect_to customers_path, success: 'Arquivo importado com sucesso!'
+    if params[:file].present?
+      import = ImportCustomerCSV.new(file: params[:file]) # file is send by form
+      import.run!
+      if import.report.success?
+        redirect_to customers_path, notice: 'Arquivo importado com sucesso!'
+      else
+        redirect_to customers_path, notice: "Não foi possível importar o arquivo: #{import.report.message}"
+      end
     else
-      redirect_to customers_path, success: "Não foi possível importar o arquivo: #{import.report.message}"
-    end  
+      redirect_to customers_path, notice: 'Nenhum arquivo foi selecionado'
+    end      
   end
 
   private
