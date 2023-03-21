@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.4", ">= 7.0.4.2"
+gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -82,7 +82,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem 'shoulda-matchers', '~> 5.2', '>= 5.2.0'
+  gem 'shoulda-matchers', '~> 5.3', '>= 5.3.0'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'simplecov'
   gem 'simplecov-formatter-badge', require: false
@@ -93,7 +93,7 @@ group :production do
   gem 'rack-ratelimit'
   gem 'rack-timeout'
   gem 'redis'
-  gem 'sidekiq', '>= 7.0.3'
+  gem 'sidekiq', '>= 7.0.6'
 end
 
 gem 'geared_pagination'
@@ -122,3 +122,4 @@ gem 'serviceworker-rails'
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
+gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
