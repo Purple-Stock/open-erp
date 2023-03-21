@@ -6,6 +6,13 @@ GIT
       chunky_png
       rqrcode (< 1.0.0)
 
+GIT
+  remote: https://github.com/Purple-Stock/bling_api
+  revision: 3c3b4f878de752d133be7269e6183a47cb57b45e
+  specs:
+    bling_api (0.1.0)
+      httparty (~> 0.21.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -481,6 +488,7 @@ DEPENDENCIES
   aws-sdk-s3
   better_errors
   binding_of_caller
+  bling_api!
   bootsnap
   business (~> 2.0)
   byebug
