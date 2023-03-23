@@ -62,7 +62,9 @@
 
       <div class="actions">
         <%= f.submit t(".signup"), :class => 'btn btn-primary btn-lg btn-block' %>
+        <%= link_to t(".back_to_login"), new_user_session_path, :class => 'btn btn-link' %>
       </div>
+
     <% end %>
   </div>
 </div>
