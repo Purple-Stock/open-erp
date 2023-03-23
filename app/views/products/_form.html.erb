@@ -1,5 +1,17 @@
 <%= form_for @product, :html => { :class => "form-horizontal product", :multipart => true } do |f| %>
 
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="alert alert-danger" role="alert">
+      <%= alert %>
+    </div>
+  <% end %>
+
   <% if @product.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
