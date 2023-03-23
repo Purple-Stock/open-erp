@@ -7,7 +7,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
     "@hotwired/stimulus": "^3.1.1",
-    "@hotwired/turbo-rails": "^7.2.5",
+    "@hotwired/turbo-rails": "^7.3.0",
     "@nathanvda/cocoon": "^1.2.14",
     "@rails/actioncable": "^7.0.4",
     "@rails/activestorage": "^7.0.4",
@@ -22,7 +22,7 @@
     "popper.js": "^1.16.1",
     "select2": "^4.0.7-rc.0",
     "stimulus": "^2.0.0",
-    "sweetalert2": "^11.7.1",
+    "sweetalert2": "^11.7.3",
     "waypoints": "^4.0.1",
     "webpack": "^5.76.0",
     "webpack-cli": "^4.10.0"
