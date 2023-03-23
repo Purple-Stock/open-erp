@@ -1,3 +1,15 @@
+<% if notice %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-danger" role="alert">
+    <%= alert %>
+  </div>
+<% end %>
+
 <div class="card card-primary">
   <div class="card-header"><h2><%= t(".title") %></h2></div>
 
