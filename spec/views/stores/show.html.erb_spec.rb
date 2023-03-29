@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "stores/show", type: :view do
   before(:each) do
-    @store = assign(:store, Store.create!(
-      name: "Name",
-      address: "Address",
-      phone: "Phone",
-      email: "Email",
-      account: create(:account)
-    ))
+    @store = assign(:store, create(:store))
   end
 
   it "renders attributes in <p>" do

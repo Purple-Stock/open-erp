@@ -1,5 +1,16 @@
 <%= form_for @category, :html => { :class => "form-horizontal category" } do |f| %>
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
 
+  <% if alert %>
+    <div class="alert alert-danger" role="alert">
+      <%= alert %>
+    </div>
+  <% end %>
+  
   <% if @category.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
