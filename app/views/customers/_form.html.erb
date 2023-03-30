@@ -19,24 +19,24 @@
 
   <div class="form-group">
     <%= f.label t(:name), :class => 'control-label' %>
-    <%= f.text_field :name, :class => 'form-control' %>
+    <%= f.text_field :name, :class => 'form-control', 'data-mask' => 'text' %>
   </div>
   <div class="form-group">
     <%= f.label :email, :class => 'control-label' %>
-    <%= f.text_field :email, :class => 'form-control' %>
+    <%= f.text_field :email, :class => 'form-control', 'data-mask' => 'email' %>
   </div>
   <div class="form-row">
     <div class="form-group col-4">
       <%= f.label :cpf, :class => 'control-label' %>
-      <%= f.text_field :cpf, :class => 'form-control' %>
+      <%= f.text_field :cpf, :class => 'form-control', 'data-mask' => 'cpf' %>
     </div>
     <div class="form-group col-4">
       <%= f.label t(:cellphone), :class => 'control-label' %>
-      <%= f.telephone_field :cellphone, :class => 'form-control' %>
+      <%= f.telephone_field :cellphone, :class => 'form-control', 'data-mask' => 'phone' %>
     </div>
     <div class="form-group col-4">
       <%= f.label t(:phone), :class => 'control-label' %>
-      <%= f.telephone_field :phone, :class => 'form-control' %>
+      <%= f.telephone_field :phone, :class => 'form-control', 'data-mask' => 'phone' %>
     </div>
   </div>
 
@@ -46,3 +46,44 @@
   </div>
 
 <% end %>
+
+<script>
+  const maskInputs = document.querySelectorAll('[data-mask]');
+
+  maskInputs.forEach(function(input) {
+    const maskType = input.dataset.mask;
+    if (maskType === 'text') {
+      return; // No mask needed
+    } else if (maskType === 'email') {
+      input.addEventListener('input', function() {
+        const value = input.value;
+        if (value.includes('@') && value.includes('.')) {
+          input.setCustomValidity('');
+        } else {
+          input.setCustomValidity('Please enter a valid email address');
+        }
+      });
+    } else if (maskType === 'cpf') {
+      input.addEventListener('input', function() {
+        const value = input.value;
+        input.value = value
+          .replace(/\D/g, '') // Remove any non-numeric characters
+          .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'); // Apply the CPF mask
+      });
+    } else if (maskType === 'phone') {
+      input.addEventListener('input', function() {
+        const value = input.value;
+        input.value = value
+          .replace(/\D/g, '') // Remove any non-numeric characters
+          .replace(/(\d{2})(\d{1,4})(\d{1,4})/, '($1) $2-$3'); // Apply the phone mask
+      });
+    } else if (maskType === 'cellphone') {
+      input.addEventListener('input', function() {
+        const value = input.value;
+        input.value = value
+          .replace(/\D/g, '') // Remove any non-numeric characters
+          .replace(/(\d{2})(\d{1,5})(\d{1,4})/, '($1) $2-$3'); // Apply the cellphone mask
+      });
+    }
+  });
+</script>
