@@ -39,6 +39,7 @@ class Product < ApplicationRecord
 
   with_options presence: true do
     validates :name
+    validates :price, numericality: { greater_than: 0 }
   end
 
   def count_month_purchase_product(year, month)
