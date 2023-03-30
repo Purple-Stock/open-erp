@@ -1,5 +1,11 @@
 <%= form_for @customer, :html => { :class => "form-horizontal customer" } do |f| %>
 
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
   <% if @customer.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
