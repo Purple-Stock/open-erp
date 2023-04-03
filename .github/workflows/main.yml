@@ -16,11 +16,10 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: open_erp_test
-        ports:
-          - 5432:5432
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: 12345
+          RAILS_ENV: test
 
     steps:
       - name: Checkout repository
