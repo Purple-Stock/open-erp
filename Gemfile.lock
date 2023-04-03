@@ -408,7 +408,7 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
-    simplecov-formatter-badge (0.1.0)
+    simplecov-badge (2.0.2)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
     solargraph (0.48.0)
@@ -529,7 +529,7 @@ DEPENDENCIES
   shoulda-matchers (~> 5.3, >= 5.3.0)
   sidekiq (>= 7.0.6)
   simplecov
-  simplecov-formatter-badge
+  simplecov-badge
   solargraph
   spreadsheet_architect
   spring (~> 3.0.0)
