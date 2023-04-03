@@ -1,53 +1,57 @@
+name: CI
+
+on: [push, pull_request]
+
 jobs:
-  build_and_test:
+  build:
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:11
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: open_erp_test
-          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_PASSWORD: ""
         ports:
           - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.2
+          ruby-version: 3.1.2
 
       - name: Install dependencies
         run: |
-          sudo apt-get install -y postgresql-client
-          gem install bundler
+          bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           yarn install --check-files
 
-      - name: Set up database
+      - name: Setup test database
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/open_erp_test
+          DATABASE_URL: postgres://postgres:@localhost:5432/inventory-control_test
         run: |
-          cp .env.example .env
-          source .env
           bin/rails db:create
           bin/rails db:schema:load
 
-      - name: Run tests with coverage
+      - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/open_erp_test
+          DATABASE_URL: postgres://postgres:@localhost:5432/inventory-control_test
+        run: bundle exec rspec
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
+
+      - name: Check code coverage
         run: |
-          export CI=true
-          bundle exec rspec
+          coverage_percent=$(grep -oP '(?<=Coverage\s\()\d+.\d+(?=%)' coverage/.last_run.json)
+          echo "Code coverage: $coverage_percent%"
+          if (( $(echo "$coverage_percent < 80" | bc -l) )); then
+            echo "Code coverage is below 80%."
+            exit 1
+          fi
