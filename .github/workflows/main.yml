@@ -16,10 +16,11 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          PGHOST: localhost
-          PGUSER: postgres
-          PGPASSWORD: 12345
-          RAILS_ENV: test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: open_erp_test
+        ports:
+          - 5432:5432
 
     steps:
       - name: Checkout repository
@@ -38,6 +39,9 @@ jobs:
           yarn install --check-files
 
       - name: Set up database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/open_erp_test
         run: |
           cp .env.example .env
           source .env
