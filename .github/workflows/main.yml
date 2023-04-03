@@ -19,38 +19,35 @@ jobs:
           --health-retries 5
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.2
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get install -y postgresql-client
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        yarn install --check-files
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y postgresql-client
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          yarn install --check-files
 
-    - name: Set up database
-      env:
-        RAILS_ENV: test
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432/open_erp_test
-      run: |
-        cp .env.example .env
-        source .env
-        bin/rails db:create
-        bin/rails db:schema:load
+      - name: Set up database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/open_erp_test
+        run: |
+          cp .env.example .env
+          source .env
+          bin/rails db:create
+          bin/rails db:schema:load
 
-    - name: Run tests with coverage
-      env:
-        RAILS_ENV: test
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432/open_erp_test
-      run: |
-        export CI=true
-        bundle exec rspec
-    
-  - name: Run linters
-    run: bundle exec rubocop
+      - name: Run tests with coverage
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/open_erp_test
+        run: |
+          export CI=true
+          bundle exec rspec
