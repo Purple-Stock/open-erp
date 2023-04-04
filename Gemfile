@@ -93,7 +93,7 @@ group :production do
   gem 'rack-ratelimit'
   gem 'rack-timeout'
   gem 'redis'
-  gem 'sidekiq', '>= 7.0.6'
+  gem 'sidekiq', '>= 7.0.7'
 end
 
 gem 'geared_pagination'
