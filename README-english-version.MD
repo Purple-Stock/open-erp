@@ -8,7 +8,7 @@ The official project page is available at [institutional page](https://purplesto
 
 This project is also integrated with the QR CODE app https://github.com/Purple-Stock/open-erp-qr-code-reader and the PIMACO product label generator with QR CODE https://github.com/Purple-Stock/open-erp-pimaco-print-tags.
 
-![Screenshot from 2022-11-04 19-30-07](https://user-images.githubusercontent.com/8432835/200084193-5c591172-c698-4e95-a849-f49-a849-f49f781a2b25.png)
+![Screenshot from 2022-11-04 19-30-07](https://user-images.githubusercontent.com/8432835/200084193-5c591172-c698-4e95-a849-f49f781a2b25.png)
 
 ## Development
 
