@@ -3,6 +3,8 @@
 ![Coverage Badge](coverage/coverage.svg)
 
 # OPEN ERP
+[README TO ENGLISH SPEAKERS](https://github.com/Purple-Stock/open-erp/blob/main/README-english-version.MD)
+
 
 O **Open ERP** é utilizado para controle de estoque, gerador de notas fiscais, financeiro. Integrações com eccomerce e diversos ERPs. É uma alternativa Open Source para o Bling ERP. Desenvolvido em Ruby on Rails a ideia do projeto é seguir o Rails Way de desenvolvimento mantendo o projeto um monolíto utilizando as últimas novidades da comunidade Rails como Stimulus, Turbo Frames, Turbo Streams.
 
