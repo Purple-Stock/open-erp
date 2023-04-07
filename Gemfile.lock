@@ -399,7 +399,7 @@ GEM
     sexp_processor (4.16.1)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
-    sidekiq (7.0.7)
+    sidekiq (7.0.8)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -527,7 +527,7 @@ DEPENDENCIES
   selenium-webdriver
   serviceworker-rails
   shoulda-matchers (~> 5.3, >= 5.3.0)
-  sidekiq (>= 7.0.7)
+  sidekiq (>= 7.0.8)
   simplecov
   simplecov-badge
   solargraph
