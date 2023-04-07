@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :store do
-    name { "My Store" }
-    address { "123 Main St" }
-    phone { "555-123-4567" }
-    email { "store@example.com" }
+    name { Faker::Company.name }
+    address { Faker::Address.street_address }
+    phone { Faker::PhoneNumber.phone_number }
+    email { Faker::Internet.email }
     account_id { create(:account).id }
-
   end
 end

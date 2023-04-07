@@ -84,8 +84,7 @@ group :test do
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 5.3', '>= 5.3.0'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'simplecov'
-  gem 'simplecov-formatter-badge', require: false
+  gem 'simplecov', '~> 0.21.2'
 
 end
 
@@ -93,7 +92,8 @@ group :production do
   gem 'rack-ratelimit'
   gem 'rack-timeout'
   gem 'redis'
-  gem 'sidekiq', '>= 7.0.6'
+  gem 'sidekiq', '>= 7.0.8'
+
 end
 
 gem 'geared_pagination'
