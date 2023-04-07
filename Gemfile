@@ -84,8 +84,7 @@ group :test do
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 5.3', '>= 5.3.0'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'simplecov', require: false
-  gem 'simplecov-badge'
+  gem 'simplecov', '~> 0.21.2'
 
 end
 
