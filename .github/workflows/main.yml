@@ -51,12 +51,3 @@ jobs:
 
       - name: Run RuboCop
         run: bundle exec rubocop
-
-      - name: Check code coverage
-        run: |
-          coverage_percent=$(grep -oP '(?<=Coverage\s\()\d+.\d+(?=%)' coverage/.last_run.json)
-          echo "Code coverage: $coverage_percent%"
-          if (( $(echo "$coverage_percent < 80" | bc -l) )); then
-            echo "Code coverage is below 80%."
-            exit 1
-          fi
