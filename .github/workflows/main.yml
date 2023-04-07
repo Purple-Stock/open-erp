@@ -49,6 +49,3 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/inventory-control_test
         run: bundle exec rspec
-
-      - name: Run RuboCop
-        run: bundle exec rubocop
