@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'customer/import_customer_csv'
 
 class CustomersController < ApplicationController
   before_action :set_customer, only: %i[show edit update destroy]
@@ -64,13 +65,10 @@ class CustomersController < ApplicationController
 
   def import    
     return redirect_to request.referer, alert: 'Selecione um arquivo csv' unless params[:file].present?
-
-    return redirect_to request.referer, alert: 'Somente permitidos arquivos .csv' unless params[:file].content_type == 'text/csv'
-
     import = ImportCustomerCSV.new(file: params[:file])
     import.run!
     if import.report.success?
-      redirect_to customers_path, notice: 'Clientes/atualizados com sucesso!'
+      redirect_to customers_path, notice: 'Clientes importados / atualizados com sucesso!'
     else
       redirect_to request.referer, alert: "Não foi possível importar o arquivo: #{import.report.message}"
     end      
