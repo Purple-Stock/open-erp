@@ -1,5 +1,4 @@
-name: Ruby
-
+name: CI
 on: [pull_request]
 
 jobs:
@@ -7,33 +6,46 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      db:
-        image: postgres:11
-        ports: [ '5432:5432' ]
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: inventory-control_test
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        env:
-          POSTGRES_PASSWORD: 12345
+
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.2
-      - name: Run the default task
+
+      - name: Install dependencies
         env:
-          PGHOST: localhost
-          PGUSER: postgres
-          PGPASSWORD: 12345
           RAILS_ENV: test
         run: |
-          sudo apt-get -yqq install libpq-dev
-          gem install bundler -v 2.2.29
-          bundle install
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          yarn install --check-files
+
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/inventory-control_test
+        run: |
           bin/rails db:create
-          bin/rails db:migrate
-          bin/rails db:seed
-          bundle exec rspec
+          bin/rails db:schema:load
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/inventory-control_test
+        run: bundle exec rspec

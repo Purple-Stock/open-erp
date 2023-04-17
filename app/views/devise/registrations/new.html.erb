@@ -1,3 +1,15 @@
+<% if notice %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-danger" role="alert">
+    <%= alert %>
+  </div>
+<% end %>
+
 <div class="card card-primary">
   <div class="card-header"><h2><%= t(".title") %></h2></div>
 
@@ -7,32 +19,32 @@
 
       <div class="form-group">
         <%= f.label :company_name, t(".company_name"), :class => 'control-label' %><br/>
-        <%= f.text_field :company_name, autofocus: true, autocomplete: "Nome", :class => 'form-control' %>
+        <%= f.text_field :company_name, autofocus: true, autocomplete: "Nome", :class => 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :cpf_cnpj, t(".tax_number"), :class => 'control-label' %><br/>
-        <%= f.text_field :cpf_cnpj, autofocus: true, autocomplete: "insira cpf ou cnpj", :class => 'form-control' %>
+        <%= f.text_field :cpf_cnpj, autofocus: true, autocomplete: "insira cpf ou cnpj", :class => 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :first_name, t(".first_name"), :class => 'control-label' %><br/>
-        <%= f.text_field :first_name, autofocus: true, autocomplete: "Nome", :class => 'form-control' %>
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "Nome", :class => 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :last_name, t(".last_name"), :class => 'control-label' %><br/>
-        <%= f.text_field :last_name, autofocus: true, autocomplete: "Sobrenome", :class => 'form-control' %>
+        <%= f.text_field :last_name, autofocus: true, autocomplete: "Sobrenome", :class => 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :email, t(".email"), :class => 'control-label' %><br/>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :phone, t(".phone"), :class => 'control-label' %><br/>
-        <%= f.telephone_field :phone, autofocus: true, autocomplete: "telefone", :class => 'form-control' %>
+        <%= f.telephone_field :phone, autofocus: true, autocomplete: "telefone", :class => 'form-control', required: true %>
       </div>
 
       <div class="form-group">
@@ -40,17 +52,19 @@
         <% if @minimum_password_length %>
           <em>Mínimo (<%= @minimum_password_length %> caracteres)</em>
         <% end %><br/>
-        <%= f.password_field :password, autocomplete: "new-password", :class => 'form-control' %>
+        <%= f.password_field :password, autocomplete: "new-password", :class => 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :password_confirmation, t(".password_confirmation"), :class => 'control-label' %><br/>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => 'form-control' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => 'form-control', required: true %>
       </div>
 
       <div class="actions">
         <%= f.submit t(".signup"), :class => 'btn btn-primary btn-lg btn-block' %>
+        <%= link_to t(".back_to_login"), new_user_session_path, :class => 'btn btn-link' %>
       </div>
+
     <% end %>
   </div>
 </div>
