@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "stores/edit", type: :view do
   before(:each) do
-    @store = assign(:store, Store.create!(
-      name: "MyString",
-      address: "MyString",
-      phone: "MyString",
-      email: "MyString",
-      account_id: create(:account).id
-    ))
+    @store = assign(:store, create(:store))
   end
 
   it "renders the edit store form" do

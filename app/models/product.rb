@@ -30,7 +30,7 @@
 #
 class Product < ApplicationRecord
   acts_as_tenant :account
-  belongs_to :category
+  belongs_to :category, optional: true
   has_many :purchase_products
   has_many :sale_products
   has_many :group_products
@@ -40,6 +40,7 @@ class Product < ApplicationRecord
 
   with_options presence: true do
     validates :name
+    validates :price, numericality: { greater_than: 0 }
   end
 
   def count_month_purchase_product(year, month)

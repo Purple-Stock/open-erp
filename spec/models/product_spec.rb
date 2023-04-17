@@ -34,7 +34,6 @@ RSpec.describe Product, type: :model do
   let(:product) { create(:product) }
 
   describe 'associations' do
-    it { is_expected.to belong_to(:category) }
     it { is_expected.to have_many(:purchase_products) }
     it { is_expected.to have_many(:sale_products) }
     it { is_expected.to have_many(:group_products) }

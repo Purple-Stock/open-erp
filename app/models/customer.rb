@@ -22,6 +22,10 @@ class Customer < ApplicationRecord
   has_many :sales
   acts_as_tenant :account
 
-  validates :phone, numericality: { only_integer: true }, allow_blank: true
-  validates :cellphone, numericality: { only_integer: true }, allow_blank: true
+  validates :name, presence: true
+  validates :cpf, presence: true, uniqueness: true, length: { is: 11 }, allow_blank: true
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :phone, presence: true
+  validates :cellphone, presence: true
+
 end
