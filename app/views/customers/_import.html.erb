@@ -1,0 +1,8 @@
+<%= form_tag import_customers_path, multipart: true, class: "row g-3 mb-2" do %>
+	<div class="col-auto">
+		<%= file_field_tag :file, accept: ".csv", class: "form-control" %>
+	</div>
+	<div class="col-auto">   
+		<%= submit_tag "Importar arquivo .csv", class: "form-control btn btn-primary" %>
+	</div>
+<% end %>
