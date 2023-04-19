@@ -11,8 +11,8 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  account_id     :integer
-#  product_id     :integer
-#  purchase_id    :integer
+#  product_id     :bigint
+#  purchase_id    :bigint
 #
 # Indexes
 #

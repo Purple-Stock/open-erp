@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: sale_products
+#
+#  id         :bigint           not null, primary key
+#  quantity   :integer
+#  value      :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  account_id :integer
+#  product_id :bigint
+#  sale_id    :bigint
+#
+# Indexes
+#
+#  index_sale_products_on_account_id  (account_id)
+#  index_sale_products_on_product_id  (product_id)
+#  index_sale_products_on_sale_id     (sale_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (product_id => products.id)
+#  fk_rails_...  (sale_id => sales.id)
+#
 require 'rails_helper'
 
 # Define the test suite

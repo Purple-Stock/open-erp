@@ -9,8 +9,8 @@
 #  sku             :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  product_id      :integer
-#  simplo_order_id :integer
+#  product_id      :bigint
+#  simplo_order_id :bigint
 #
 # Indexes
 #
