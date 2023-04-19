@@ -10,8 +10,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  account_id :integer
-#  product_id :integer
-#  sale_id    :integer
+#  product_id :bigint
+#  sale_id    :bigint
 #
 # Indexes
 #
