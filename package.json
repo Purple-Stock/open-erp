@@ -22,7 +22,7 @@
     "popper.js": "^1.16.1",
     "select2": "^4.0.7-rc.0",
     "stimulus": "^2.0.0",
-    "sweetalert2": "^11.7.5",
+    "sweetalert2": "^11.7.12",
     "waypoints": "^4.0.1",
     "webpack": "^5.82.1",
     "webpack-cli": "^4.10.0"
