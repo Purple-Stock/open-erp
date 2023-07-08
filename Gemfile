@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.4", ">= 7.0.4.3"
+gem "rails", "~> 7.0.5", ">= 7.0.5.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -15,7 +15,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails"
+gem "jsbundling-rails", ">= 1.1.2"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -59,7 +59,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 6.0.2'
   gem 'faker'
   gem 'factory_bot_rails'
   gem 'solargraph'
@@ -118,7 +118,7 @@ gem 'cocoon'
 # gem 'jquery-rails'
 gem 'jsonapi-serializer'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails-i18n', '~> 7.0.6'
+gem 'rails-i18n', '~> 7.0.7'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
 gem 'rubocop-rails', require: false
