@@ -73,15 +73,18 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  # describe '#count_month_sale_product' do
-  #  it 'returns the sum of quantities for sale products in the given month' do
-  #    year = Time.zone.now.year
-  #    month = Time.zone.now.month
-  #    create(:sale_product, product: product, quantity: 5, created_at: Time.zone.local(year, month, 15))
-  #    create(:sale_product, product: product, quantity: 3, created_at: Time.zone.local(year, month, 20))
-  #    expect(product.count_month_sale_product(year, month)).to eq(8)
-  #  end
-  # end
+  describe '#count_month_sale_product' do
+    let(:account) { create(:account) }
+
+    it 'returns the sum of quantities for sale products in the given month' do
+      year = Time.zone.now.year
+      month = Time.zone.now.month
+      create(:sale_product, product:, account:, quantity: 5, created_at: Time.zone.local(year, month, 15))
+      create(:sale_product, product:, account:, quantity: 3, created_at: Time.zone.local(year, month, 20))
+
+      expect(product.count_month_sale_product(year, month)).to eq(8)
+    end
+  end
 
   # describe '#sum_simplo_items' do
   #  it 'returns the sum of quantities for simplo items' do
