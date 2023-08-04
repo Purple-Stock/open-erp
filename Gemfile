@@ -90,13 +90,12 @@ group :test do
 
 end
 
-group :production do
-  gem 'rack-ratelimit'
-  gem 'rack-timeout'
-  gem 'redis'
-  gem 'sidekiq', '>= 7.0.8'
-
-end
+# group :production do
+#   gem 'rack-ratelimit'
+#   gem 'rack-timeout'
+#   gem 'redis'
+#   gem 'sidekiq', '>= 7.0.8'
+# end
 
 gem 'geared_pagination'
 gem 'platform_agent'
