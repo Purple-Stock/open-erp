@@ -266,10 +266,8 @@ GEM
     rack (2.2.8)
     rack-cors (2.0.1)
       rack (>= 2.0.0)
-    rack-ratelimit (1.2.1)
     rack-test (2.1.0)
       rack (>= 1.3)
-    rack-timeout (0.6.3)
     rails (7.0.6)
       actioncable (= 7.0.6)
       actionmailbox (= 7.0.6)
@@ -311,8 +309,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbs (2.8.4)
-    redis (5.0.6)
-      redis-client (>= 0.9.0)
     redis-client (0.15.0)
       connection_pool
     reek (6.1.4)
@@ -522,12 +518,9 @@ DEPENDENCIES
   pry-byebug
   puma (~> 5.0)
   rack-cors
-  rack-ratelimit
-  rack-timeout
   rails (~> 7.0.5, >= 7.0.5.1)
   rails-i18n (~> 7.0.7)
   ransack
-  redis
   rqrcode_png!
   rspec-rails (>= 6.0.2)
   rubocop-performance
@@ -551,7 +544,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.1.3p185
+   ruby 3.2.1p31
 
 BUNDLED WITH
-   2.3.26
+   2.4.6
