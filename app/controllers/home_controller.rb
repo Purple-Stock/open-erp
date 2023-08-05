@@ -32,6 +32,7 @@ class HomeController < ApplicationController
       shipping_service = shipping['volumes'][0]['servico']
       counter += 1 if shipping_service == 'Mercado Envios Flex'
     end
+    counter
   end
 
   def format_last_update(time)
