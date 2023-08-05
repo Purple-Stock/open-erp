@@ -19,6 +19,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <%= yield(:head) if content_for?(:head) %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 
 <body>
