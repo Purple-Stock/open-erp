@@ -5,7 +5,7 @@ module Api
     module Bling
       class OrdersController < ApplicationController
         def show
-          @orders = Services.Bling.Order.call(order_command: 'find_orders')
+          @orders = Services::Bling::Order.call(order_command: 'find_orders')
         end
       end
     end
