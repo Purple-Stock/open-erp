@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   post 'orders_control/import_post_mail' => 'orders_control#import_post_mail', as: 'import_post_mail'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      get 'bling/pedidos', to: 'bling/orders#show', as: 'show'
       get 'products/:custom_id', to: 'products#show', as: 'show'
       get 'sale_products/:id', to: 'products#show_product', as: 'show_product'
       get 'products', to: 'products#index', as: 'index'
