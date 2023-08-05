@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.0.5", ">= 7.0.5.1"
@@ -27,7 +27,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -91,11 +91,10 @@ group :test do
 end
 
 group :production do
-  gem 'rack-ratelimit'
-  gem 'rack-timeout'
-  gem 'redis'
-  gem 'sidekiq', '>= 7.0.8'
+#   gem 'rack-ratelimit'
+#   gem 'rack-timeout'
 
+  gem 'sidekiq', '>= 7.0.8'
 end
 
 gem 'geared_pagination'
