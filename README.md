@@ -44,15 +44,15 @@ Para configurar o banco de dados execute:
 ```sh
 cp .env.example .env
 source .env
-bin/rails db:setup
-bin/dev # run app http://localhost:3000
+./bin/rails db:setup
+./bin/dev # run app http://localhost:3000
 ```
 
 E acesse no ambiente local [http://localhost:3000](http://localhost:3000):
 
 ```sh
 bundle exec rails server
-bin/dev
+./bin/dev
 ```
 
 ## Docker and Docker Compose
