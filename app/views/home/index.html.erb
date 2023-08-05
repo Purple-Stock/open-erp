@@ -16,7 +16,7 @@
 
         <div class="card mb-4">
         
-          <div class="card-body text-center">
+          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts >= 1 %>">
           
             <h5 class="card-title">
               <%= loja_name %>
