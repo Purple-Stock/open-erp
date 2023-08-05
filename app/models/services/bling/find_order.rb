@@ -2,17 +2,18 @@
 
 module Services
   module Bling
-    class Order < ApplicationService
+    class FindOrder < ApplicationService
       attr_accessor :order_command
 
-      def initialize(order_command:)
+      def initialize(id:, order_command:)
+        @id = id
         @order_command = order_command
       end
 
       def call
         case order_command
-        when 'find_orders'
-          find_orders
+        when 'find_order'
+          find_order
         else
           raise 'Not a order command'
         end
@@ -20,20 +21,13 @@ module Services
 
       private
 
-      def find_orders
-        url = URI('https://www.bling.com.br/Api/v3/pedidos/vendas')
-        params = {
-          pagina: 1,
-          limite: 100,
-          idsSituacoes: [15]
-        }
+      def find_order
+        url = URI("https://www.bling.com.br/Api/v3/pedidos/vendas/#{@id}")
 
         headers = {
           'Accept' => 'application/json',
           'Authorization' => "Bearer 61993e55431496330b14fcdd9b3bf4ca7b1ad9ef"
         }
-
-        url.query = URI.encode_www_form(params)
 
         http = Net::HTTP.new(url.host, url.port)
         http.use_ssl = true
