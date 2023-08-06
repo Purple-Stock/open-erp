@@ -22,11 +22,12 @@ module Services
       private
 
       def find_order
+        token = bling_token
         url = URI("https://www.bling.com.br/Api/v3/pedidos/vendas/#{@id}")
 
         headers = {
           'Accept' => 'application/json',
-          'Authorization' => "Bearer 61993e55431496330b14fcdd9b3bf4ca7b1ad9ef"
+          'Authorization' => "Bearer #{token}"
         }
 
         http = Net::HTTP.new(url.host, url.port)
@@ -41,6 +42,10 @@ module Services
         data
       rescue StandardError => e
         "Error: #{e.message}"
+      end
+
+      def bling_token
+        BlingData.find_by(account_id: current_tenant.id)
       end
     end
   end
