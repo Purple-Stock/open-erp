@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     begin 
-      response = Services::Bling::Order.call(order_command: 'find_orders')
+      response = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id)
 
       @orders = response['data']
 
@@ -30,7 +30,7 @@ class HomeController < ApplicationController
   def count_mercado_envios_flex(order_ids)
     counter = 0
     order_ids.each do |order_id|
-      response = Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order')
+      response = Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order', tenant: current_user.account.id)
       order = response['data']
 
       shipping = order['transporte']

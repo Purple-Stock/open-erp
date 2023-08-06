@@ -24,7 +24,7 @@ module Api
                                        'Accept' => '1.0',
                                        'Authorization' => "Basic #{Base64.strict_encode64("#{params[:code]}")}"
                                      })
-            BlingData.create(access_token: response[:access_token],
+            BlingDatum.create(access_token: response[:access_token],
                              expires_in: response[:expires_in],
                              expires_at: Time.zone.now + response[:expires_in].seconds,
                              token_type: response[:token_type],
