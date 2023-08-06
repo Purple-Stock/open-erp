@@ -3,9 +3,9 @@
 module Services
   module Bling
     class FindOrder < ApplicationService
-      attr_accessor :order_command
+      attr_accessor :id, :order_command, :tenant
 
-      def initialize(id:, order_command:)
+      def initialize(id:, order_command:, tenant:)
         @id = id
         @order_command = order_command
       end
@@ -45,7 +45,7 @@ module Services
       end
 
       def bling_token
-        BlingData.find_by(account_id: current_tenant.id)
+        BlingDatum.find_by(account_id: tenant).access_token
       end
     end
   end
