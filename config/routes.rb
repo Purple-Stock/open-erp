@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get 'bling/pedidos', to: 'bling/orders#show', as: 'show_bling_orders'
+      get 'bling/get-token' => 'bling/orders#get_token'
       get 'products/:custom_id', to: 'products#show', as: 'show'
       get 'sale_products/:id', to: 'products#show_product', as: 'show_product'
       get 'products', to: 'products#index', as: 'index'
