@@ -1,18 +1,23 @@
 class HomeController < ApplicationController
   def index
-    response = Services::Bling::Order.call(order_command: 'find_orders')
+    begin 
+      response = Services::Bling::Order.call(order_command: 'find_orders')
 
-    @orders = response['data']
+      @orders = response['data']
 
-    order_ids = @orders.select { |order| order['loja']['id'] == 204_061_683 }.map { |order| order['id'] }
+      order_ids = @orders.select { |order| order['loja']['id'] == 204_061_683 }.map { |order| order['id'] }
 
-    @mercado_envios_flex_counts = count_mercado_envios_flex(order_ids)
+      @mercado_envios_flex_counts = count_mercado_envios_flex(order_ids)
 
-    @store_name = get_loja_name
+      @store_name = get_loja_name
 
-    @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
+      @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
 
-    @last_update = format_last_update(Time.current)
+      @last_update = format_last_update(Time.current)
+    rescue StandardError => e
+      Rails.logger.error(e.message)
+      redirect_to home_last_updates_path
+    end
   end
 
   def last_updates
