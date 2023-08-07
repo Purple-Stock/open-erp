@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/home/last_updates', to: 'home#last_updates', as: 'home_last_updates'
+
   resources :categories
   resources :groups
   resources :group_products
@@ -47,6 +49,8 @@ Rails.application.routes.draw do
   post 'orders_control/import_post_mail' => 'orders_control#import_post_mail', as: 'import_post_mail'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      get 'bling/pedidos', to: 'bling/orders#show', as: 'show_bling_orders'
+      get 'bling/get-token' => 'bling/orders#get_token'
       get 'products/:custom_id', to: 'products#show', as: 'show'
       get 'sale_products/:id', to: 'products#show_product', as: 'show_product'
       get 'products', to: 'products#index', as: 'index'
