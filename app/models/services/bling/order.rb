@@ -31,21 +31,19 @@ module Services
 
         headers = {
           'Accept' => 'application/json',
-          'Authorization' => "Bearer 44c4c1eb88e2e65029bc3feafcaf2d808731b7c7"
+          'Authorization' => 'Bearer 44c4c1eb88e2e65029bc3feafcaf2d808731b7c7'
         }
 
         all_orders = []
 
         # Fetch data from the first two pages
         (1..2).each do |page|
-          response = HTTParty.get(base_url, query: params.merge(pagina: page), headers: headers)
+          response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
 
-          if response.success?
-            data = JSON.parse(response.body)
-            all_orders.concat(data['data'])
-          else
-            raise "Error: #{response.code} - #{response.message}"
-          end
+          raise "Error: #{response.code} - #{response.message}" unless response.success?
+
+          data = JSON.parse(response.body)
+          all_orders.concat(data['data'])
         end
 
         { 'data' => all_orders }
