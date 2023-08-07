@@ -15,7 +15,7 @@ module Services
         when 'find_orders'
           find_orders
         else
-          raise 'Not a order command'
+          raise 'Not an order command'
         end
       end
 
@@ -23,32 +23,34 @@ module Services
 
       def find_orders
         token = bling_token
-        url = URI('https://www.bling.com.br/Api/v3/pedidos/vendas')
+        base_url = 'https://www.bling.com.br/Api/v3/pedidos/vendas'
         params = {
-          pagina: 1,
           limite: 100,
           idsSituacoes: [15]
         }
 
         headers = {
           'Accept' => 'application/json',
-          'Authorization' => "Bearer #{token}"
+          'Authorization' => "Bearer 44c4c1eb88e2e65029bc3feafcaf2d808731b7c7"
         }
 
-        url.query = URI.encode_www_form(params)
+        all_orders = []
 
-        http = Net::HTTP.new(url.host, url.port)
-        http.use_ssl = true
+        # Fetch data from the first two pages
+        (1..2).each do |page|
+          response = HTTParty.get(base_url, query: params.merge(pagina: page), headers: headers)
 
-        request = Net::HTTP::Get.new(url, headers)
+          if response.success?
+            data = JSON.parse(response.body)
+            all_orders.concat(data['data'])
+          else
+            raise "Error: #{response.code} - #{response.message}"
+          end
+        end
 
-        response = http.request(request)
-
-        data = JSON.parse(response.read_body)
-
-        data
+        { 'data' => all_orders }
       rescue StandardError => e
-        "Error: #{e.message}"
+        { error: "Error: #{e.message}" }
       end
 
       def bling_token
