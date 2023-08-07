@@ -13,6 +13,11 @@
             <i class="fas fa-fire"></i> <span>Dashboard</span>
           <% end %>
         </li>
+        <li class="<%= active_nav_item('home', 'last_updates') %>">
+          <%= link_to home_last_updates_path, class: "nav-link" do %>
+            <i class="fas fa-sync-alt"></i> <span>Últimas atualizações</span>
+          <% end %>
+        </li>
 
         <li class="menu-header">Opções</li>
           <%= render 'shared/sidebar_dropdown', title: t("categories.two"), icon: 'fas fa-file-alt' do %>
