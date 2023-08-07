@@ -31,7 +31,7 @@ module Services
 
         headers = {
           'Accept' => 'application/json',
-          'Authorization' => 'Bearer 44c4c1eb88e2e65029bc3feafcaf2d808731b7c7'
+          'Authorization' => "Bearer #{token}"
         }
 
         all_orders = []
