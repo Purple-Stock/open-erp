@@ -37,6 +37,9 @@ class HomeController < ApplicationController
       shipping = order['transporte']
       shipping_service = shipping['volumes'][0]['servico']
       counter += 1 if shipping_service == 'Mercado Envios Flex'
+    rescue StandardError => e
+      Rails.logger.error('Not Mercado Envios Flex')
+      Rails.logger.error(e.message)
     end
     counter
   end
