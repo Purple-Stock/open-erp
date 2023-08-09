@@ -446,7 +446,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stimulus-rails (1.2.1)
+    stimulus-rails (1.2.2)
       railties (>= 6.0.0)
     thor (1.2.2)
     thread_safe (0.3.6)
@@ -539,7 +539,7 @@ DEPENDENCIES
   spreadsheet_architect
   spring (~> 3.0.0)
   sprockets-rails
-  stimulus-rails
+  stimulus-rails (>= 1.2.2)
   turbo-rails
   tzinfo-data
   web-console (>= 4.2.0)
