@@ -3,11 +3,12 @@
 module Services
   module Bling
     class Order < ApplicationService
-      attr_accessor :order_command, :tenant
+      attr_accessor :order_command, :tenant, :situation
 
-      def initialize(order_command:, tenant:)
+      def initialize(order_command:, tenant:, situation:)
         @order_command = order_command
         @tenant = tenant
+        @situation = situation
       end
 
       def call
@@ -26,7 +27,7 @@ module Services
         base_url = 'https://www.bling.com.br/Api/v3/pedidos/vendas'
         params = {
           limite: 100,
-          idsSituacoes: [15]
+          idsSituacoes: [situation]
         }
 
         headers = {
@@ -52,7 +53,7 @@ module Services
       end
 
       def bling_token
-        BlingDatum.find_by(account_id: @tenant).access_token
+        "b5630e6c4c2948087ac006a53163c133bd74428b"
       end
     end
   end
