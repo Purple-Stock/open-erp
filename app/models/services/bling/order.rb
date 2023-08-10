@@ -53,7 +53,7 @@ module Services
       end
 
       def bling_token
-        "b5630e6c4c2948087ac006a53163c133bd74428b"
+        BlingDatum.find_by(account_id: @tenant).access_token
       end
     end
   end
