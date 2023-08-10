@@ -94,6 +94,36 @@ class SalesController < ApplicationController
     end
   end
 
+  def sales_checkout; end
+
+  def verify_sales
+    content = params[:content]
+
+    # Split the content by newlines to get an array of lines
+    lines = content.split("\n")
+
+    # Initialize an empty array to collect results or errors
+    results = []
+    byebug
+    lines.each do |line|
+
+      service = Services::Bling::UpdateOrderSituation.new(id: line, tenant: current.tenant.id, new_situation_id: new_situation_id)
+      result = service.call
+
+      # Store the result or an error message for this line
+      if result.is_a?(Hash) && result["situacao"]
+        results << "Line #{line}: Order situation updated successfully!"
+      else
+        results << "Line #{line}: Failed to update order situation - #{result}"
+      end
+    end
+
+    # Decide what to do with the results
+    # Here, I'm simply joining them into a string and redirecting to the root path with a notice.
+    # Depending on your application's needs, you might want to render a view to display these results, or handle them differently.
+    redirect_to root_path, notice: results.join("\n")
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

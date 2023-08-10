@@ -69,12 +69,15 @@
               <%= link_to t("exits.create"), new_sale_product_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("sales.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("sales.three"), icon: 'fas fa-file-alt' do %>
             <li class="<%= active_nav_item('sales', 'index') %>">
               <%= link_to t("sales.list"), sales_path, class: 'nav-link' %>
             </li>
             <li class="<%= active_nav_item('sales', 'new') %>">
               <%= link_to t("sales.create"), new_sale_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('sales', 'sales_checkout') %>">
+              <%= link_to t("sales.sales_checkout"), sales_checkout_path, class: 'nav-link' %>
             </li>
           <% end %>
           <%= render 'shared/sidebar_dropdown', title: t("customers.two"), icon: 'fas fa-file-alt' do %>

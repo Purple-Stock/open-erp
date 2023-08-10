@@ -8,6 +8,7 @@ pt-BR:
     edit: Editar Venda
     one: Venda
     two: Vendas
+    three: Pedidos
     value: Valor
     discount: Desconto
     percentage: Porcentagem
@@ -28,5 +29,6 @@ pt-BR:
     exchange: Troca
     total_exchange_value: Valor total da troca
     submit: Salvar
+    sales_checkout: Checkout de vendas
     links:
       integrate_orders: Integrar Pedidos

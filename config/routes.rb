@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :suppliers
   resources :sales
   get 'sales_defer', to: 'sales#index_defer'
+  get 'sales_checkout', to: 'sales#sales_checkout', as: 'sales_checkout'
+  post 'verify_sales', to: 'sales#verify_sales', as: 'verify_sales'
   get 'insert_orders', to: 'sales#insert_orders', as: 'insert_orders'
   post 'save_orders', to: 'sales#save_orders', as: 'save_orders'
   get 'stock_transfer', to: 'purchase_products#stock_transfer', as: 'stock_transfer'
@@ -28,7 +30,6 @@ Rails.application.routes.draw do
   get 'products_tags_defer', to: 'products#tags_index_defer'
   get '/products/:id/duplicate', to: 'products#duplicate', as: 'meeting_duplicate'
   get '/products/:id/update_active', to: 'products#update_active', as: 'update_product_active'
-  
   resources :customers do
     collection do
       post :import
