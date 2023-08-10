@@ -1,8 +1,16 @@
 class HomeController < ApplicationController
   def index
-    response = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id)
+    in_progress = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 15)
 
-    @orders = response['data']
+    @orders = in_progress['data']
+
+    checked = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 24)
+
+    @orders_checked = checked['data']
+    
+    attended = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 9)
+    
+    @orders_attended = attended['data']
 
     order_ids = @orders.select { |order| order['loja']['id'] == 204_061_683 }.map { |order| order['id'] }
 
