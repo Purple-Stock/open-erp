@@ -10,17 +10,17 @@
       <ul class="sidebar-menu" data-controller="sidebar">
         <li class="<%= active_nav_item('home', 'index') %>">
           <%= link_to root_path, class: "nav-link" do %>
-            <i class="fas fa-fire"></i> <span>Dashboard</span>
+            <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
           <% end %>
         </li>
         <li class="<%= active_nav_item('home', 'last_updates') %>">
           <%= link_to home_last_updates_path, class: "nav-link" do %>
-            <i class="fas fa-sync-alt"></i> <span>Últimas atualizações</span>
+            <i class="fas fa-history"></i> <span>Últimas atualizações</span>
           <% end %>
         </li>
 
         <li class="menu-header">Opções</li>
-          <%= render 'shared/sidebar_dropdown', title: t("categories.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("categories.two"), icon: 'fas fa-th-list' do %>
             <li class="<%= active_nav_item('categories', 'index') %>">
               <%= link_to t("categories.list"), categories_path, class: 'nav-link' %>
             </li>
@@ -28,7 +28,7 @@
               <%= link_to t("categories.create"), new_category_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("products.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("products.two"), icon: 'fas fa-box-open' do %>
             <li class="<%= active_nav_item('products', 'index') %>">
               <%= link_to t("products.list"), products_path, class: 'nav-link' %>
             </li>
@@ -36,7 +36,7 @@
               <%= link_to t("products.create"), new_product_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-store' do %>
             <li class="<%= active_nav_item('stores', 'index') %>">
               <%= link_to t("stores.list"), stores_path, class: 'nav-link' %>
             </li>
@@ -44,7 +44,7 @@
               <%= link_to t("stores.create"), new_store_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("suppliers.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("suppliers.two"), icon: 'fas fa-truck' do %>
             <li class="<%= active_nav_item('suppliers', 'index') %>">
               <%= link_to t("suppliers.list"), suppliers_path, class: 'nav-link' %>
             </li>
@@ -52,7 +52,7 @@
               <%= link_to t("suppliers.create"), new_supplier_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("entries.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("entries.two"), icon: 'fas fa-warehouse' do %>
             <li class="<%= active_nav_item('purchase_products', 'index') %>">
               <%= link_to t("entries.list"), purchase_products_path, class: 'nav-link' %>
             </li>
@@ -61,7 +61,7 @@
               <%#= link_to 'Transferência de estoque', stock_transfer_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("exits.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("exits.two"), icon: 'fas fa-sign-out-alt' do %>
             <li class="<%= active_nav_item('sale_products', 'index') %>">
               <%= link_to t("exits.list"), sale_products_path, class: 'nav-link' %>
             </li>
@@ -69,7 +69,7 @@
               <%= link_to t("exits.create"), new_sale_product_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("sales.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("sales.two"), icon: 'fas fa-shopping-cart' do %>
             <li class="<%= active_nav_item('sales', 'index') %>">
               <%= link_to t("sales.list"), sales_path, class: 'nav-link' %>
             </li>
@@ -77,7 +77,7 @@
               <%= link_to t("sales.create"), new_sale_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("customers.two"), icon: 'fas fa-file-alt' do %>
+          <%= render 'shared/sidebar_dropdown', title: t("customers.two"), icon: 'fas fa-users' do %>
             <li class="<%= active_nav_item('customers', 'index') %>">
               <%= link_to t("customers.list"), customers_path, class: 'nav-link' %>
             </li>
