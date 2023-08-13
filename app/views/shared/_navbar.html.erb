@@ -22,6 +22,9 @@
           <a href="<%= edit_user_registration_path %>" class="dropdown-item has-icon">
             <i class="far fa-user"></i> Perfil
           </a>
+          <a href="<%= integrations_list_path %>" class="dropdown-item has-icon">
+            <i class="fas fa-cogs"></i> Integrações
+          </a>
           <div class="dropdown-divider"></div>
           <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item has-icon text-danger', data: { turbo_method: :delete } do %>
             <i class="fas fa-sign-out-alt"></i> Sair

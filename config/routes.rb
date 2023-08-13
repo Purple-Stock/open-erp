@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   end
 
   get '/home/last_updates', to: 'home#last_updates', as: 'home_last_updates'
+  get '/integrations/index', to: 'integrations#index', as: 'integrations_list'
 
   resources :categories
   resources :groups
