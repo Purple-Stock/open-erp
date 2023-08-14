@@ -1,0 +1,36 @@
+<h1>Bling Data</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Access Token</th>
+      <th>Expires At</th>
+      <th>Expires In</th>
+      <th>Refresh Token</th>
+      <th>Scope</th>
+      <th>Token Type</th>
+      <th>Account ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bling_data.each do |bling_datum| %>
+      <tr>
+        <td><%= bling_datum.access_token %></td>
+        <td><%= bling_datum.expires_at %></td>
+        <td><%= bling_datum.expires_in %></td>
+        <td><%= bling_datum.refresh_token %></td>
+        <td><%= bling_datum.scope %></td>
+        <td><%= bling_datum.token_type %></td>
+        <td><%= bling_datum.account_id %></td>
+        <td>
+          <%= link_to 'Show', bling_datum %>
+          <%= link_to 'Edit', edit_bling_datum_path(bling_datum) %>
+          <%= link_to 'Destroy', bling_datum, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Bling Datum', new_bling_datum_path %>

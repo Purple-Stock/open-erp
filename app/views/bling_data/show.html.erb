@@ -1,0 +1,39 @@
+<h1>Bling Datum</h1>
+
+<p>
+  <strong>Access Token:</strong>
+  <%= @bling_datum.access_token %>
+</p>
+
+<p>
+  <strong>Expires At:</strong>
+  <%= @bling_datum.expires_at %>
+</p>
+
+<p>
+  <strong>Expires In:</strong>
+  <%= @bling_datum.expires_in %>
+</p>
+
+<p>
+  <strong>Refresh Token:</strong>
+  <%= @bling_datum.refresh_token %>
+</p>
+
+<p>
+  <strong>Scope:</strong>
+  <%= @bling_datum.scope %>
+</p>
+
+<p>
+  <strong>Token Type:</strong>
+  <%= @bling_datum.token_type %>
+</p>
+
+<p>
+  <strong>Account ID:</strong>
+  <%= @bling_datum.account_id %>
+</p>
+
+<%= link_to 'Edit', edit_bling_datum_path(@bling_datum) %> |
+<%= link_to 'Back', bling_data_path %>
