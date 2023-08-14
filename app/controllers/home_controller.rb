@@ -4,13 +4,13 @@ class HomeController < ApplicationController
 
     @orders = in_progress['data']
 
-    checked = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 24)
+    checkeds = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 24)
 
-    @orders_checked = checked['data']
+    @checked_orders = checkeds['data']
     
-    attended = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 9)
+    pendings = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 94871)
     
-    @orders_attended = attended['data']
+    @pending_orders = pendings['data']
 
     order_ids = @orders.select { |order| order['loja']['id'] == 204_061_683 }.map { |order| order['id'] }
 
