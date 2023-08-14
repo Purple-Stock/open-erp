@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post 'save_stock_transfer', to: 'purchase_products#save_stock_transfer', as: 'save_stock_transfer'
   resources :sale_products
   resources :products
+  resources :bling_data
   get 'products_defer', to: 'products#index_defer'
   get 'products_tags_defer', to: 'products#tags_index_defer'
   get '/products/:id/duplicate', to: 'products#duplicate', as: 'meeting_duplicate'
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   get '/home/last_updates', to: 'home#last_updates', as: 'home_last_updates'
+  get '/integrations/index', to: 'integrations#index', as: 'integrations_list'
 
   resources :categories
   resources :groups
