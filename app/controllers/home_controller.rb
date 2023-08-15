@@ -12,6 +12,10 @@ class HomeController < ApplicationController
     
     @pending_orders = pendings['data']
 
+    printed = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 95745)
+    
+    @printed_orders = printed['data']
+
     order_ids = @orders.select { |order| order['loja']['id'] == 204_061_683 }.map { |order| order['id'] }
 
     @mercado_envios_flex_counts = count_mercado_envios_flex(order_ids)
