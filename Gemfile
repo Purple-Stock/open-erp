@@ -117,7 +117,7 @@ gem 'cocoon'
 # gem 'jquery-rails'
 gem 'jsonapi-serializer'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails-i18n', '~> 7.0.7'
+gem 'rails-i18n', '~> 7.0.8'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
 gem 'rubocop-rails', require: false

@@ -8,6 +8,7 @@ module Services
       def initialize(id:, order_command:, tenant:)
         @id = id
         @order_command = order_command
+        @tenant = tenant 
       end
 
       def call
