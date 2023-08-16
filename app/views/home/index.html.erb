@@ -89,44 +89,53 @@
   </div>
 
 </div>
+
 <div class="container">
   <br><br><br>
   <h1>Pedidos Pendentes</h1>
 
-
   <div class="row justify-content-center">
-
     <% @loja_ids.each do |loja_id| %>
-    
       <% loja_name = @store_name[loja_id] %>
-      
       <% pending_orders = @pending_orders.select { |o| o["loja"]["id"] == loja_id } %>
-      
-      <div class="col-md-4">
 
+      <div class="col-md-4">
         <div class="card mb-4">
-        
           <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts >= 1 %>">
-          
             <h5 class="card-title">
               <%= loja_name %>
             </h5>
-
             <p>
               Pedidos: <%= pending_orders.count %>
             </p>
-        
+            <% if pending_orders.any? %>
+              <h6>Itens:</h6>
+              <ul>
+                <% grouped_items = Hash.new(0) %>
+                <% pending_orders.each do |order| %>
+                  <% order_id = order["id"] %>
+                  <% bling_order_item = BlingOrderItem.find_by(bling_order_id: order_id) %>
+                  <% if bling_order_item %>
+                    <% codigo = bling_order_item.codigo %>
+                    <% grouped_items[codigo] += bling_order_item.quantidade %>
+                  <% end %>
+                <% end %>
+                <% sorted_items = grouped_items.sort_by { |codigo, total_quantity| total_quantity }.reverse %>
+                <% sorted_items.each do |codigo, total_quantity| %>
+                  <li><strong>Código:</strong> <%= codigo %></li>
+                  <strong>Quantidade:</strong> <%= total_quantity %>
+                <% end %>
+              </ul>
+            <% end %>
           </div>
-        
         </div>
-      
       </div>
-
     <% end %>
-
   </div>
-
 </div>
+
+
+
 <div class="container">
   <br><br><br>
   <h1>Pedidos Verificados</h1>
