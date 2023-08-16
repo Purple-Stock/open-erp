@@ -110,20 +110,41 @@
             </p>
             <% if pending_orders.any? %>
               <h6>Itens:</h6>
-              <ul>
-                <% grouped_items = Hash.new(0) %>
-                <% pending_orders.each do |order| %>
-                  <% order_id = order["id"] %>
-                  <% bling_order_item = BlingOrderItem.find_by(bling_order_id: order_id) %>
-                  <% if bling_order_item %>
-                    <% codigo = bling_order_item.codigo %>
-                    <% grouped_items[codigo] += bling_order_item.quantidade %>
-                  <% end %>
+              <% codigo_to_bling_data = Hash.new { |h, k| h[k] = { quantidade_total: 0, links: [] } } %>
+              <% pending_orders.each do |order| %>
+                <% order_id = order["id"] %>
+                <% bling_order_item = BlingOrderItem.find_by(bling_order_id: order_id) %>
+                <% if bling_order_item %>
+                  <% codigo = bling_order_item.codigo %>
+                  <% quantidade = bling_order_item.quantidade %>
+                  <% bling_order_id = bling_order_item.bling_order_id %>
+                  <% codigo_to_bling_data[codigo][:quantidade_total] += quantidade %>
+                  <% codigo_to_bling_data[codigo][:links] << { bling_id: bling_order_id, quantidade: quantidade } %>
                 <% end %>
-                <% sorted_items = grouped_items.sort_by { |codigo, total_quantity| total_quantity }.reverse %>
-                <% sorted_items.each do |codigo, total_quantity| %>
-                  <li><strong>Código:</strong> <%= codigo %></li>
-                  <strong>Quantidade:</strong> <%= total_quantity %>
+              <% end %>
+              <ul>
+                <% codigo_to_bling_data.each do |codigo, bling_data| %>
+                  <li>
+                    <strong>Código:</strong> <%= codigo %> | <strong>Quantidade Total:</strong> <%= bling_data[:quantidade_total] %>
+                    <br>
+                    <strong>Links:</strong>
+                    <div class="accordion" id="accordion<%= codigo %>">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading<%= codigo %>">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= codigo %>" aria-expanded="false" aria-controls="collapse<%= codigo %>">
+                            Clique para ver os links
+                          </button>
+                        </h2>
+                        <div id="collapse<%= codigo %>" class="accordion-collapse collapse" aria-labelledby="heading<%= codigo %>" data-bs-parent="#accordion<%= codigo %>">
+                          <div class="accordion-body">
+                            <% bling_data[:links].each do |data| %>
+                              <a href='https://www.bling.com.br/vendas.php#edit/<%= data[:bling_id] %>'>Pedido: <%= data[:bling_id] %> | Quantidade: <%= data[:quantidade] %></a><br>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
                 <% end %>
               </ul>
             <% end %>
@@ -133,6 +154,12 @@
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
 
 
 
