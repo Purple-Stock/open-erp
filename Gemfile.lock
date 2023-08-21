@@ -260,7 +260,7 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.3)
-    puma (5.6.6)
+    puma (5.6.7)
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
@@ -517,7 +517,7 @@ DEPENDENCIES
   pg (~> 1.1)
   platform_agent
   pry-byebug
-  puma (~> 5.0)
+  puma (~> 5.6, >= 5.6.7)
   rack-cors
   rails (~> 7.0.7)
   rails-i18n (~> 7.0.8)
