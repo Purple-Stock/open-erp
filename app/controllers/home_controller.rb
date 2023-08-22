@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
   def index
+    date_expires = token_expires_at
+
+    refresh_token if date_expires < DateTime.now
+
     in_progress = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
                                               situation: 15)
 
@@ -11,11 +15,11 @@ class HomeController < ApplicationController
 
     pendings = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
                                            situation: 94_871)
-                                           
+
     @pending_orders = pendings['data']
 
     update_orders_data
-                                           
+
     printed = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
                                           situation: 95_745)
 
@@ -29,7 +33,7 @@ class HomeController < ApplicationController
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
 
-    @expires_at = format_last_update(token_expires_at)
+    @expires_at = format_last_update(date_expires)
 
     @last_update = format_last_update(Time.current)
   rescue StandardError => e
@@ -94,11 +98,10 @@ class HomeController < ApplicationController
       end
     end
   end
-  
 
   def fetch_order_data(order_id)
     Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
-      tenant: current_user.account.id)
+                                    tenant: current_user.account.id)
   end
 
   def format_last_update(time)
@@ -107,6 +110,51 @@ class HomeController < ApplicationController
 
   def token_expires_at
     BlingDatum.find_by(account_id: current_tenant.id).expires_at
+  end
+
+  def refresh_token
+    refresh_token = BlingDatum.find_by(account_id: current_tenant.id).refresh_token
+    client_id = ENV['CLIENT_ID']
+    client_secret = ENV['CLIENT_SECRET']
+    credentials = Base64.strict_encode64("#{client_id}:#{client_secret}")
+
+    begin
+      byebug
+      @response = HTTParty.post('https://bling.com.br/Api/v3/oauth/token',
+                                body: {
+                                  grant_type: 'refresh_token',
+                                  refresh_token:
+                                },
+                                headers: {
+                                  'Content-Type' => 'application/x-www-form-urlencoded',
+                                  'Accept' => '1.0',
+                                  'Authorization' => "Basic #{credentials}"
+                                })
+
+      verify_tokens
+    rescue StandardError => e
+      Rails.logger.error(e.message)
+    end
+  end
+
+  def verify_tokens
+    tokens = BlingDatum.find_by(account_id: current_tenant.id)
+    if tokens.nil?
+      BlingDatum.create(access_token: @response['access_token'],
+                        expires_in: @response['expires_in'],
+                        expires_at: Time.zone.now + @response['expires_in'].seconds,
+                        token_type: @response['token_type'],
+                        scope: @response['scope'],
+                        refresh_token: @response['refresh_token'],
+                        account_id: current_tenant.id)
+    else
+      tokens.update(access_token: @response['access_token'],
+                    expires_in: @response['expires_in'],
+                    expires_at: Time.zone.now + @response['expires_in'].seconds,
+                    token_type: @response['token_type'],
+                    scope: @response['scope'],
+                    refresh_token: @response['refresh_token'])
+    end
   end
 
   def get_loja_name
