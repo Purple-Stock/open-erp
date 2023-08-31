@@ -119,7 +119,6 @@ class HomeController < ApplicationController
     credentials = Base64.strict_encode64("#{client_id}:#{client_secret}")
 
     begin
-      byebug
       @response = HTTParty.post('https://bling.com.br/Api/v3/oauth/token',
                                 body: {
                                   grant_type: 'refresh_token',
