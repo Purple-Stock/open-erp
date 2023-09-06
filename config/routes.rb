@@ -2,8 +2,12 @@
 
 require 'sidekiq/web'
 
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
   devise_for :users
+  authenticate :user, ->(user) { user.admin? } do
+    mount GoodJob::Engine => 'good_job'
+  end
+
   resources :accounts
   resources :purchase_products
   resources :stores
