@@ -482,7 +482,7 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (4.2.0)
+    web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -557,11 +557,11 @@ DEPENDENCIES
   stimulus-rails (>= 1.2.2)
   turbo-rails
   tzinfo-data
-  web-console (>= 4.2.0)
+  web-console (>= 4.2.1)
   webdrivers
 
 RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.10
+   2.4.6
