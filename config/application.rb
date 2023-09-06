@@ -27,6 +27,7 @@ module AwesomeRails
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.management_api = config_for(:management_api)  
+    config.management_api = config_for(:management_api)
+    config.active_job.queue_adapter = :good_job
   end
 end
