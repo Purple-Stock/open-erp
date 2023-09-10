@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.7", ">= 7.0.7.1"
+gem "rails", "~> 7.0.8"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -120,7 +120,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.8'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
-gem 'rubocop-rails', require: false
+gem 'rubocop-rails', '>= 2.21.0', require: false
 gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
