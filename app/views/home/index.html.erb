@@ -142,43 +142,6 @@
   </div>
 </div>
 
-<div class="container">
-  <br><br><br>
-  <h1>Pedidos Verificados</h1>
-
-
-  <div class="row justify-content-center">
-
-    <% @loja_ids.each do |loja_id| %>
-    
-      <% loja_name = @store_name[loja_id] %>
-      
-      <% checked_orders = @checked_orders.select { |o| o["loja"]["id"] == loja_id } %>
-      
-      <div class="col-md-4">
-
-        <div class="card mb-4">
-        
-          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts >= 1 %>">
-          
-            <h5 class="card-title">
-              <%= loja_name %>
-            </h5>
-
-            <p>
-              Pedidos: <%= checked_orders.count %>
-            </p>
-        
-          </div>
-        
-        </div>
-      
-      </div>
-
-    <% end %>
-
-  </div>
-
 </div>
 <script>
   setInterval(function() {
