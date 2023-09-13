@@ -211,7 +211,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
-    jsbundling-rails (1.1.2)
+    jsbundling-rails (1.2.0)
       railties (>= 6.0.0)
     json (2.6.3)
     jsonapi-serializer (2.2.0)
@@ -239,7 +239,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
-    minitest (5.19.0)
+    minitest (5.20.0)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     net-imap (0.3.7)
@@ -323,7 +323,7 @@ GEM
       ffi (~> 1.0)
     rbs (2.8.4)
     redis (4.8.1)
-    redis-client (0.16.0)
+    redis-client (0.17.0)
       connection_pool
     reek (6.1.4)
       kwalify (~> 0.7.0)
@@ -422,7 +422,7 @@ GEM
     sexp_processor (4.17.0)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
-    sidekiq (7.1.2)
+    sidekiq (7.1.4)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -523,7 +523,7 @@ DEPENDENCIES
   good_job (~> 3.18)
   httparty (>= 0.21.0)
   jbuilder
-  jsbundling-rails (>= 1.1.2)
+  jsbundling-rails (>= 1.2.0)
   jsonapi-serializer
   listen (~> 3.2)
   net-smtp
@@ -548,7 +548,7 @@ DEPENDENCIES
   selenium-webdriver
   serviceworker-rails
   shoulda-matchers (~> 5.3, >= 5.3.0)
-  sidekiq (>= 7.0.8)
+  sidekiq (>= 7.1.3)
   simplecov (~> 0.21.2)
   solargraph
   spreadsheet_architect
@@ -564,4 +564,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.10
+   2.4.6
