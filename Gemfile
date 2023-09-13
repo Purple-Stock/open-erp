@@ -15,7 +15,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.6", ">= 5.6.7"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", ">= 1.1.2"
+gem "jsbundling-rails", ">= 1.2.0"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -94,7 +94,7 @@ group :production do
 #   gem 'rack-ratelimit'
 #   gem 'rack-timeout'
 
-  gem 'sidekiq', '>= 7.0.8'
+  gem 'sidekiq', '>= 7.1.3'
 end
 
 gem 'geared_pagination'
