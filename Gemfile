@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.7", ">= 7.0.7.1"
+gem "rails", "~> 7.0.8"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -15,7 +15,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.6", ">= 5.6.7"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", ">= 1.1.2"
+gem "jsbundling-rails", ">= 1.2.0"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -68,7 +68,7 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.2'
-  gem 'web-console', '>= 4.2.0'
+  gem 'web-console', '>= 4.2.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 
   gem 'spring', '~> 3.0.0'
@@ -94,7 +94,7 @@ group :production do
 #   gem 'rack-ratelimit'
 #   gem 'rack-timeout'
 
-  gem 'sidekiq', '>= 7.0.8'
+  gem 'sidekiq', '>= 7.1.3'
 end
 
 gem 'geared_pagination'
@@ -120,7 +120,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.8'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
-gem 'rubocop-rails', require: false
+gem 'rubocop-rails', '>= 2.21.0', require: false
 gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
