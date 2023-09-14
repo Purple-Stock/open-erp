@@ -126,3 +126,5 @@ gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
 gem "good_job", "~> 3.18"
+
+gem "friendly_id", "~> 5.5"

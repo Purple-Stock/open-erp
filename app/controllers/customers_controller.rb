@@ -78,7 +78,7 @@ class CustomersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_customer
-    @customer = Customer.find(params[:id])
+    @customer = Customer.friendly.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

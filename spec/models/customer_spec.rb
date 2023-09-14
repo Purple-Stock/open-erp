@@ -10,6 +10,7 @@
 #  email      :string
 #  name       :string
 #  phone      :string
+#  slug       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  account_id :integer
@@ -17,6 +18,7 @@
 # Indexes
 #
 #  index_customers_on_account_id  (account_id)
+#  index_customers_on_slug        (slug) UNIQUE
 #
 require 'rails_helper'
 
