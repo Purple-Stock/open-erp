@@ -361,7 +361,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rubocop (1.56.2)
+    rubocop (1.56.3)
       base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -382,7 +382,7 @@ GEM
     rubocop-performance (1.19.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.21.0)
+    rubocop-rails (2.21.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
@@ -541,7 +541,7 @@ DEPENDENCIES
   rqrcode_png!
   rspec-rails (>= 6.0.2)
   rubocop-performance
-  rubocop-rails (>= 2.21.0)
+  rubocop-rails (>= 2.21.1)
   rubocop-rspec
   rubycritic
   sassc-rails
