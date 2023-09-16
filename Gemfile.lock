@@ -91,8 +91,8 @@ GEM
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.812.0)
-    aws-sdk-core (3.181.0)
+    aws-partitions (1.824.0)
+    aws-sdk-core (3.181.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -146,7 +146,6 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.2.2)
-    connection_pool (2.4.1)
     crass (1.0.6)
     csv-importer (0.8.2)
       virtus
@@ -211,7 +210,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
-    jsbundling-rails (1.2.0)
+    jsbundling-rails (1.2.1)
       railties (>= 6.0.0)
     json (2.6.3)
     jsonapi-serializer (2.2.0)
@@ -261,7 +260,7 @@ GEM
       ast (~> 2.4.1)
       racc
     path_expander (1.1.1)
-    pg (1.5.3)
+    pg (1.5.4)
     platform_agent (1.0.1)
       activesupport (>= 5.2.0)
       useragent (~> 0.16.3)
@@ -322,9 +321,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbs (2.8.4)
-    redis (4.8.1)
-    redis-client (0.17.0)
-      connection_pool
     reek (6.1.4)
       kwalify (~> 0.7.0)
       parser (~> 3.2.0)
@@ -386,7 +382,7 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.23.2)
+    rubocop-rspec (2.24.0)
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
@@ -422,11 +418,6 @@ GEM
     sexp_processor (4.17.0)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
-    sidekiq (7.1.4)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.14.0)
     simplecov (0.21.2)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -453,7 +444,7 @@ GEM
       caxlsx (>= 3.3.0, < 4)
       rodf (>= 1.0.0, < 2)
     spring (3.0.0)
-    sprockets (4.2.0)
+    sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
     sprockets-rails (3.4.2)
@@ -464,7 +455,7 @@ GEM
       railties (>= 6.0.0)
     thor (1.2.2)
     thread_safe (0.3.6)
-    tilt (2.2.0)
+    tilt (2.3.0)
     timeout (0.4.0)
     tty-which (0.4.2)
     turbo-rails (1.4.0)
@@ -537,7 +528,6 @@ DEPENDENCIES
   rails (~> 7.0.8)
   rails-i18n (~> 7.0.8)
   ransack
-  redis (~> 4.0)
   rqrcode_png!
   rspec-rails (>= 6.0.2)
   rubocop-performance
@@ -548,7 +538,6 @@ DEPENDENCIES
   selenium-webdriver
   serviceworker-rails
   shoulda-matchers (~> 5.3, >= 5.3.0)
-  sidekiq (>= 7.1.3)
   simplecov (~> 0.21.2)
   solargraph
   spreadsheet_architect
@@ -564,4 +553,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.6
+   2.4.19
