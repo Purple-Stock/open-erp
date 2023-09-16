@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'sidekiq/web'
+#require 'sidekiq/web'
 
 Rails.application.routes.draw do
   devise_for :users
@@ -67,5 +67,5 @@ Rails.application.routes.draw do
     end
   end
   root to: 'home#index'
-  mount Sidekiq::Web => '/sidekiq'
+  #mount Sidekiq::Web => '/sidekiq'
 end
