@@ -321,6 +321,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbs (2.8.4)
+    redis (4.8.1)
     reek (6.1.4)
       kwalify (~> 0.7.0)
       parser (~> 3.2.0)
@@ -373,9 +374,9 @@ GEM
       parser (>= 3.2.1.0)
     rubocop-capybara (2.18.0)
       rubocop (~> 1.41)
-    rubocop-factory_bot (2.23.1)
+    rubocop-factory_bot (2.24.0)
       rubocop (~> 1.33)
-    rubocop-performance (1.19.0)
+    rubocop-performance (1.19.1)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     rubocop-rails (2.21.1)
@@ -528,6 +529,7 @@ DEPENDENCIES
   rails (~> 7.0.8)
   rails-i18n (~> 7.0.8)
   ransack
+  redis (~> 4.0)
   rqrcode_png!
   rspec-rails (>= 6.0.2)
   rubocop-performance
@@ -553,4 +555,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.6
+   2.4.19
