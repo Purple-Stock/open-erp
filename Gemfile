@@ -27,7 +27,7 @@ gem "stimulus-rails", ">= 1.2.2"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-#gem "redis", "~> 4.0"
+gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -125,4 +125,4 @@ gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
-gem "good_job", "~> 3.18"
+gem "good_job", "~> 3.18", ">= 3.18.3"
