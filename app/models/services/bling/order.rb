@@ -3,12 +3,13 @@
 module Services
   module Bling
     class Order < ApplicationService
-      attr_accessor :order_command, :tenant, :situation
+      attr_accessor :order_command, :tenant, :situation, :options
 
-      def initialize(order_command:, tenant:, situation:)
+      def initialize(order_command:, tenant:, situation:, options: {})
         @order_command = order_command
         @tenant = tenant
         @situation = situation
+        @options = options
       end
 
       def call
@@ -29,6 +30,8 @@ module Services
           limite: 100,
           idsSituacoes: [situation]
         }
+
+        params.merge!(options)
 
         headers = {
           'Accept' => 'application/json',
