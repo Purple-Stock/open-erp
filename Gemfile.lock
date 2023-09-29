@@ -161,6 +161,10 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     e2mmap (0.1.0)
     equalizer (0.0.11)
     erubi (1.12.0)
@@ -509,6 +513,7 @@ DEPENDENCIES
   cocoon
   csv-importer
   devise
+  dotenv-rails
   factory_bot_rails
   faker
   geared_pagination

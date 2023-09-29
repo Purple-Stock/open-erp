@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
 
+# dotenv-rails must be on the top
+gem 'dotenv-rails', groups: %i[development test]
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.0.8"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
