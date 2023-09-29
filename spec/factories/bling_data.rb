@@ -19,10 +19,10 @@
 #
 FactoryBot.define do
   factory :bling_datum do
-    access_token { "MyString" }
+    access_token { ENV['ACCESS_TOKEN'] }
     expires_in { 1 }
     token_type { "MyString" }
     scope { "MyText" }
-    refresh_token { "MyString" }
+    refresh_token { ENV['REFRESH_TOKEN'] }
   end
 end
