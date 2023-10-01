@@ -104,7 +104,9 @@
             <p>
               Pedidos: <%= pending_orders.count %>
             </p>
-            <% if pending_orders.any? %>
+            <%
+=begin%>
+ <% if pending_orders.any? %>
               <h6>Itens:</h6>
               <% codigo_to_bling_ids = Hash.new { |h, k| h[k] = [] } %>
               <% pending_orders.each do |order| %>
@@ -134,7 +136,9 @@
                   </li>
                 <% end %>
               </ul>
-            <% end %>
+            <% end %> 
+<%
+=end%>
           </div>
         </div>
       </div>
