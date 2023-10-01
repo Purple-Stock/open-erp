@@ -120,9 +120,9 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.8'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
-gem 'rubocop-rails', '>= 2.21.1', require: false
+gem 'rubocop-rails', '>= 2.21.2', require: false
 gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
-gem "good_job", "~> 3.18", ">= 3.18.3"
+gem "good_job", "~> 3.19", ">= 3.19.0"

@@ -82,7 +82,7 @@
   dependencies:
     jquery "^3.3.1"
 
-"@rails/actioncable@^7.0", "@rails/actioncable@^7.0.5":
+"@rails/actioncable@^7.0":
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.0.7.tgz#03b5faa8642a80211708e8f1754cf424e9228718"
   integrity sha512-NqHf4XDkeVaNk/r+TBo2aAMkjPyRPEfZkSqCTijfWukW1zTZ2XLDfvFzbpRCuWZ6gxItgoa/FkILZm27HRh2yg==
@@ -91,6 +91,12 @@
   version "7.0.8"
   resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-7.0.8.tgz#7ea8a656b5621e0dc57f51e3ad2f06c3af30d3ea"
   integrity sha512-CxPyCxTV0HIaZP8qqH11tkESNl8TrQsIAesAgeOXDOl0BkaN6nC0/Mq2/0ngezBu9CZbFzfHtP2g6Yl8BWkV8g==
+
+"@rails/actioncable@^7.0.8":
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.0.8.tgz#f44e7517f2d1570f1eabeea457dbeb17ed3a2d12"
+  integrity sha512-GjYQv89ZOOfbFw8VMNUOG33GXzyAA/TCVoD+742Ob4svm1XXUkd+w+ewqUXd+7VHQtV35y1/O78AGIPeJDTy/g==
+
   dependencies:
     spark-md5 "^3.0.1"
 
