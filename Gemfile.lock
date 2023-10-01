@@ -191,7 +191,7 @@ GEM
       addressable (>= 2.5.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    good_job (3.18.3)
+    good_job (3.19.0)
       activejob (>= 6.0.0)
       activerecord (>= 6.0.0)
       concurrent-ruby (>= 1.0.2)
@@ -512,7 +512,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   geared_pagination
-  good_job (~> 3.18, >= 3.18.3)
+  good_job (~> 3.19, >= 3.19.0)
   httparty (>= 0.21.0)
   jbuilder
   jsbundling-rails (>= 1.2.0)
@@ -555,4 +555,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.19
+   2.4.6
