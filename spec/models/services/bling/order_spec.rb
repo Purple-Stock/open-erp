@@ -30,11 +30,22 @@ RSpec.describe Services::Bling::Order, type: :services do
     end
 
     context 'when options have array of situations' do
-      let(:options) { { situations: [15] } }
+      context 'when situation is 15' do
+        let(:options) { { idsSituacoes: [15] } }
 
-      it 'is has situation id equal situation in options' do
-        result = described_class.call(order_command: order_command, tenant: 1, situation:, options: options)
-        result['data'][0]['situacao']['id']
+        it 'is has situation id equal situation in options' do
+          result = described_class.call(order_command: order_command, tenant: 1, situation:, options: options)
+          expect(result['data'][0]['situacao']['id']).to eq(options[:idsSituacoes].first)
+        end
+      end
+
+      context 'when situation is 9' do
+        let(:options) { { idsSituacoes: [9] } }
+
+        it 'is has situation id equal situation in options' do
+          result = described_class.call(order_command: order_command, tenant: 1, situation:, options: options)
+          expect(result['data'][0]['situacao']['id']).to eq(options[:idsSituacoes].first)
+        end
       end
     end
   end
