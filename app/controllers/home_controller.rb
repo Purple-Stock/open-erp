@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    @current_order_items = BlingOrderItem.where(situation_id: %w[94871 15 24 95745])
+                                         .date_range_in_a_day(Time.zone.today)
     date_expires = token_expires_at
 
     refresh_token if date_expires < DateTime.now
