@@ -68,7 +68,11 @@ class HomeController < ApplicationController
   end
 
   def update_orders_data
+    @in_progress = @orders
     BlingOrderItemCreatorJob.perform_later(@pending_orders, current_user)
+    BlingOrderItemCreatorJob.perform_later(@checked_orders, current_user)
+    BlingOrderItemCreatorJob.perform_later(@printed_orders, current_user)
+    BlingOrderItemCreatorJob.perform_later(@in_progress, current_user)
   end
 
   def fetch_order_data(order_id)
