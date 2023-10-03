@@ -5,6 +5,7 @@
 #  id                 :bigint           not null, primary key
 #  aliquotaIPI        :decimal(, )
 #  codigo             :string
+#  date               :datetime
 #  desconto           :decimal(, )
 #  descricao          :text
 #  descricaoDetalhada :text
@@ -18,4 +19,22 @@
 #  store_id           :string
 #
 class BlingOrderItem < ApplicationRecord
+  # TODO, refactor me separating the tables
+  # There are features hard to implement without this separation.
+  STORE_ID_NAME_KEY_VALUE = {
+    '204219105' => 'Shein',
+    '203737982' => 'Shopee',
+    '203467890' => 'Simplo 7',
+    '204061683' => 'Mercado Livre'
+  }.freeze
+
+  scope :date_range_in_a_day, lambda { |date|
+    initial_date = date.beginning_of_day
+    end_date = date.end_of_day
+    where(date: initial_date..end_date)
+  }
+
+  def store_name
+    STORE_ID_NAME_KEY_VALUE["#{store_id}"]
+  end
 end

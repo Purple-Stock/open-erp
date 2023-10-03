@@ -71,4 +71,5 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   # This fixes the error: "Devise could not find the `Warden::Proxy` instance on your request environment" when running rspec controller tests
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end
