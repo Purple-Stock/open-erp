@@ -13,6 +13,10 @@ Rails.application.configure do
   # Turn false under Spring and add config.action_view.cache_template_loading = true.
   config.cache_classes = true
 
+  # Configure what happens when an asset lookup is performed and nothing is found.
+  # If you turn off "asset fallback" then an error will be raised when an asset cannot be found.
+  config.assets.unknown_asset_fallback = true
+
   # Eager loading loads your whole application. When running a single test locally,
   # this probably isn't necessary. It's a good idea to do in a continuous integration
   # system, or in some way before deploying your code.
