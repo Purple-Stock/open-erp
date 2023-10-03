@@ -1,0 +1,158 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?idsSituacoes%5B%5D=15&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 03 Oct 2023 15:16:29 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '12416'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=2c80236c1a791e72
+      Set-Cookie:
+      - PHPSESSID=5dt7gu9p10e7djbsc3vfcimc4l; path=/; secure; HttpOnly
+      - PHPSESSID=el64hijqkt3mstmv65fu0pqru5; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8106257f9ddc1aec-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":18876457340,"numero":28462,"numeroLoja":"GSHNSK24B00NV4H","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":81.4,"total":81.4,"contato":{"id":16352823987,"nome":"Viviane
+        Alves da silva cunha","tipoPessoa":"F","numeroDocumento":"163.385.237-70"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876402601,"numero":28461,"numeroLoja":"GSHNSK37B0012H4","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352811446,"nome":"Ana
+        Beatriz Mac\u00eado da Silva","tipoPessoa":"F","numeroDocumento":"197.853.497-30"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876402506,"numero":28460,"numeroLoja":"GSHNSB52B0002BS","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352811433,"nome":"Ana
+        paula Alvira sais","tipoPessoa":"F","numeroDocumento":"740.290.960-34"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876402325,"numero":28459,"numeroLoja":"GSHNSF58U000TSD","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352811385,"nome":"Maria
+        Eduarda Martins de Azevedo","tipoPessoa":"F","numeroDocumento":"124.942.028-84"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876394331,"numero":28458,"numeroLoja":"16754I16751","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":103.9,"contato":{"id":16352809245,"nome":"Ariane
+        Meireles","tipoPessoa":"F","numeroDocumento":"476.003.098-07"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18876232095,"numero":28457,"numeroLoja":"GSHNSK33B00MUCT","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352773786,"nome":"Gabriela
+        Da Silva Oliveira","tipoPessoa":"F","numeroDocumento":"869.904.105-58"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876231915,"numero":28456,"numeroLoja":"GSHNSK19A000E1A","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352773768,"nome":"maiane
+        montoanelli","tipoPessoa":"F","numeroDocumento":"065.257.909-48"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876231755,"numero":28455,"numeroLoja":"GSHNSF42B00N1HM","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16327449102,"nome":"Isabela
+        Caetano","tipoPessoa":"F","numeroDocumento":"092.153.688-76"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876231613,"numero":28454,"numeroLoja":"GSHNSF124001B33","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352773727,"nome":"Alex
+        Costa sousa","tipoPessoa":"F","numeroDocumento":"064.382.312-31"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876070875,"numero":28453,"numeroLoja":"GSHNSK61900MPQS","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352737539,"nome":"Liriel
+        Rosa","tipoPessoa":"F","numeroDocumento":"159.909.167-44"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18876070642,"numero":28452,"numeroLoja":"GSHNSK33A00M41Y","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352737463,"nome":"Lucilene
+        Da Silva Ribeiro","tipoPessoa":"F","numeroDocumento":"273.433.718-51"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875995632,"numero":28451,"numeroLoja":"GSHNSK15A00NNHR","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352721130,"nome":"Leticia
+        Lima","tipoPessoa":"F","numeroDocumento":"109.090.586-60"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875829004,"numero":28448,"numeroLoja":"GSHNSK09A00NM00","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":81.4,"total":81.4,"contato":{"id":16352684898,"nome":"Maria
+        Nascimento","tipoPessoa":"F","numeroDocumento":"146.118.256-55"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875828758,"numero":28447,"numeroLoja":"GSHNSK58A000N2A","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352684852,"nome":"Ellen
+        giovana Souza pinto","tipoPessoa":"F","numeroDocumento":"612.495.963-19"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875828504,"numero":28446,"numeroLoja":"GSHNSK58A00094A","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352684708,"nome":"Rayane
+        Castro","tipoPessoa":"F","numeroDocumento":"016.842.225-59"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875530572,"numero":28445,"numeroLoja":"GSHNSK62900NDCE","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":89.9,"contato":{"id":16352622079,"nome":"Ester
+        Isabel Barbosa","tipoPessoa":"F","numeroDocumento":"705.817.404-08"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875530338,"numero":28444,"numeroLoja":"GSHNSK60A00MBUR","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":79.9,"total":79.9,"contato":{"id":16352622050,"nome":"Fabiana
+        Silva","tipoPessoa":"F","numeroDocumento":"358.366.788-39"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875530154,"numero":28443,"numeroLoja":"GSHNSK46A001NQK","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352622021,"nome":"Livia
+        Almeida","tipoPessoa":"F","numeroDocumento":"177.568.256-08"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875529967,"numero":28442,"numeroLoja":"GSHNSK089000PCN","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352621975,"nome":"Maria
+        Elenir De Lima Morais","tipoPessoa":"F","numeroDocumento":"008.593.403-84"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875361391,"numero":28441,"numeroLoja":"GSHNSK5890001KP","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352587023,"nome":"Fl\u00e1via
+        Costa","tipoPessoa":"F","numeroDocumento":"127.292.766-02"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875225766,"numero":28440,"numeroLoja":"GSHNSK1590012Q6","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352562392,"nome":"Talita
+        Reis","tipoPessoa":"F","numeroDocumento":"069.861.845-90"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18875225624,"numero":28439,"numeroLoja":"GSHNSK089000VT6","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352562346,"nome":"Beatriz
+        Da silva faleta","tipoPessoa":"F","numeroDocumento":"087.761.165-30"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18874888709,"numero":28438,"numeroLoja":"GSHNSK08S00MLSM","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352497004,"nome":"Maria
+        Eduarda Xavier Petter","tipoPessoa":"F","numeroDocumento":"026.414.500-38"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18874598429,"numero":28437,"numeroLoja":"GSHNSK52S001ENT","data":"2023-10-03","dataSaida":"2023-10-03","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16352445195,"nome":"luciene
+        passos","tipoPessoa":"F","numeroDocumento":"171.529.616-89"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18872904006,"numero":28358,"numeroLoja":"16753I16750","data":"2023-10-02","dataSaida":"2023-10-02","dataPrevista":"0000-00-00","totalProdutos":99.9,"total":118.14,"contato":{"id":15660989725,"nome":"Victoria
+        Ranali","tipoPessoa":"F","numeroDocumento":"378.802.268-00"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18868783133,"numero":28255,"numeroLoja":"16752I16749","data":"2023-10-02","dataSaida":"2023-10-02","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":105.38,"contato":{"id":15876144610,"nome":"Luana
+        Silva","tipoPessoa":"F","numeroDocumento":"132.540.136-62"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18853620284,"numero":27794,"numeroLoja":"16747I16744","data":"2023-09-29","dataSaida":"2023-09-29","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":64.91,"contato":{"id":16306322456,"nome":"Emilly
+        Santos","tipoPessoa":"F","numeroDocumento":"505.453.668-01"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18843772030,"numero":27551,"numeroLoja":"16742I16739","data":"2023-09-27","dataSaida":"2023-09-27","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":111.04,"contato":{"id":16343904133,"nome":"MILENA
+        KELLY CAMBRAIA cambraia","tipoPessoa":"F","numeroDocumento":"294.341.488-39"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18842026696,"numero":27528,"numeroLoja":"16741I16738","data":"2023-09-27","dataSaida":"2023-09-27","dataPrevista":"0000-00-00","totalProdutos":129.9,"total":149.9,"contato":{"id":16187060498,"nome":"Camila
+        Ninoska Chiara","tipoPessoa":"F","numeroDocumento":"520.143.078-30"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18832497792,"numero":27316,"numeroLoja":"16737I16734","data":"2023-09-25","dataSaida":"2023-09-25","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":74.94,"contato":{"id":16340962276,"nome":"Maria
+        Luiza Vinelli","tipoPessoa":"F","numeroDocumento":"157.008.167-09"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18826463665,"numero":27230,"numeroLoja":"16735I16732","data":"2023-09-24","dataSaida":"2023-09-24","dataPrevista":"0000-00-00","totalProdutos":32.5,"total":52.5,"contato":{"id":16337320365,"nome":"Jhenifer
+        Santos","tipoPessoa":"F","numeroDocumento":"581.112.498-88"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18822027050,"numero":27056,"numeroLoja":"16727I16724","data":"2023-09-23","dataSaida":"2023-09-23","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":69.9,"contato":{"id":16337920119,"nome":"esther
+        pereira","tipoPessoa":"F","numeroDocumento":"445.975.108-93"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18820323588,"numero":27005,"numeroLoja":"16724I16721","data":"2023-09-22","dataSaida":"2023-09-22","dataPrevista":"0000-00-00","totalProdutos":123.54,"total":143.54,"contato":{"id":16337320365,"nome":"Jhenifer
+        Santos","tipoPessoa":"F","numeroDocumento":"581.112.498-88"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18818384323,"numero":26977,"numeroLoja":"16722I16719","data":"2023-09-22","dataSaida":"2023-09-22","dataPrevista":"0000-00-00","totalProdutos":70,"total":83,"contato":{"id":16336817578,"nome":"Luana
+        Lagoas","tipoPessoa":"F","numeroDocumento":"412.842.478-13"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18818378970,"numero":26975,"numeroLoja":"16721I16718","data":"2023-09-22","dataSaida":"2023-09-22","dataPrevista":"0000-00-00","totalProdutos":129.9,"total":136.91,"contato":{"id":16336816382,"nome":"Rafaela
+        Tomilhero","tipoPessoa":"F","numeroDocumento":"484.477.618-51"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18816596432,"numero":26960,"numeroLoja":"16720I16717","data":"2023-09-22","dataSaida":"2023-09-22","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":89.9,"contato":{"id":16336447881,"nome":"Erica
+        trajano","tipoPessoa":"F","numeroDocumento":"497.654.258-05"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18815023524,"numero":26918,"numeroLoja":"16719I16716","data":"2023-09-21","dataSaida":"2023-09-21","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":59.92,"contato":{"id":16335844694,"nome":"Stephanie
+        Lima","tipoPessoa":"F","numeroDocumento":"499.891.848-60"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}}]}'
+  recorded_at: Tue, 03 Oct 2023 15:16:29 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?idsSituacoes%5B%5D=15&limite=100&pagina=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 03 Oct 2023 15:16:31 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '11'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=16ffffd9e8cfff73
+      Set-Cookie:
+      - PHPSESSID=3j3r1fvjs1sh0nlil45v0teqa4; path=/; secure; HttpOnly
+      - PHPSESSID=v6ogdpg31tv6v2tkd68vh7pjg8; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 81062587487200e9-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[]}'
+  recorded_at: Tue, 03 Oct 2023 15:16:31 GMT
+recorded_with: VCR 6.2.0

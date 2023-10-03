@@ -1,0 +1,122 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?dataFinal=2022-12-31&dataInicial=2022-12-31&idsSituacoes%5B%5D=9&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 03 Oct 2023 14:36:44 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '361'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=e35fd4264e5e11a6
+      Set-Cookie:
+      - PHPSESSID=u425kt0305b150pjark8tg6p01; path=/; secure; HttpOnly
+      - PHPSESSID=uroh1plamn0lv29pn0lo58em5l; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8105eb41bc56a5e5-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":18025447261,"numero":14106,"numeroLoja":"GSHNT501T001DTF","data":"2022-12-31","dataSaida":"2023-04-22","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":69.9,"contato":{"id":16114208402,"nome":"Victoria
+        khethelyn Andrade e silva","tipoPessoa":"F","numeroDocumento":"075.451.141-32"},"situacao":{"id":9,"valor":1},"loja":{"id":204219105}}]}'
+  recorded_at: Tue, 03 Oct 2023 14:36:44 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?dataFinal=2022-12-31&dataInicial=2022-12-31&idsSituacoes%5B%5D=9&limite=100&pagina=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 03 Oct 2023 14:36:45 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '11'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=0bc5d5ceee92f509
+      Set-Cookie:
+      - PHPSESSID=5meqbk8cb56ai5egvgfp128k21; path=/; secure; HttpOnly
+      - PHPSESSID=jfosir14br3oed1cvgdvfep4f9; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8105eb4948f400c4-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[]}'
+  recorded_at: Tue, 03 Oct 2023 14:36:45 GMT
+recorded_with: VCR 6.2.0

@@ -12,20 +12,20 @@
     
       <% loja_name = @store_name[loja_id] %>
       
-      <% orders = @orders.select { |o| o["loja"]["id"] == loja_id } %>
+      <% orders = @orders&.select { |o| o["loja"]["id"] == loja_id } %>
       
       <div class="col-md-4">
 
         <div class="card mb-4">
         
-          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts >= 1 %>">
+          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts.present? && @mercado_envios_flex_counts >= 1 %>">
           
             <h5 class="card-title">
               <%= loja_name %>
             </h5>
 
             <p>
-              Pedidos: <%= orders.count %>
+              Pedidos: <%= orders&.count %>
             </p>
 
             <% if loja_id == 204_061_683 %>
@@ -47,6 +47,28 @@
   </div>
 
 </div>
+
+<div class="container">
+  <br><br><br>
+  <h1>Pedidos de Hoje</h1>
+  <div class="row justify-content-center">
+    <% @current_order_items.group_by(&:store_id).each do |store_id, items| %>
+      <% loja_name = items.first.store_name %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <%= loja_name %>
+            </h5>
+            <p>
+              Pedidos: <%= items.count %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 <div class="container">
   <br><br><br>
   <h1>Pedidos Impressos</h1>
@@ -58,20 +80,20 @@
     
       <% loja_name = @store_name[loja_id] %>
       
-      <% printed_orders = @printed_orders.select { |o| o["loja"]["id"] == loja_id } %>
+      <% printed_orders = @printed_orders&.select { |o| o["loja"]["id"] == loja_id } %>
       
       <div class="col-md-4">
 
         <div class="card mb-4">
         
-          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts >= 1 %>">
+          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts.present? && @mercado_envios_flex_counts >= 1 %>">
           
             <h5 class="card-title">
               <%= loja_name %>
             </h5>
 
             <p>
-              Pedidos: <%= printed_orders.count %>
+              Pedidos: <%= printed_orders&.count %>
             </p>
         
           </div>
@@ -93,16 +115,16 @@
   <div class="row justify-content-center">
     <% @loja_ids.each do |loja_id| %>
       <% loja_name = @store_name[loja_id] %>
-      <% pending_orders = @pending_orders.select { |o| o["loja"]["id"] == loja_id } %>
+      <% pending_orders = @pending_orders&.select { |o| o["loja"]["id"] == loja_id } %>
 
       <div class="col-md-4">
         <div class="card mb-4">
-          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts >= 1 %>">
+          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts.present? && @mercado_envios_flex_counts >= 1 %>">
             <h5 class="card-title">
               <%= loja_name %>
             </h5>
             <p>
-              Pedidos: <%= pending_orders.count %>
+              Pedidos: <%= pending_orders&.count %>
             </p>
             <%
 =begin%>
