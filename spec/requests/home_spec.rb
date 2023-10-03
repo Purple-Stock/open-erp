@@ -13,7 +13,9 @@ RSpec.describe 'orders control' do
     end
 
     it 'is a successful response' do
-      expect(response).to be_successful
+      VCR.use_cassette('bling_order_situation') do
+        expect(response).to be_successful
+      end
     end
   end
 end
