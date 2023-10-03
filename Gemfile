@@ -90,7 +90,8 @@ group :test do
   gem 'shoulda-matchers', '~> 5.3', '>= 5.3.0'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'simplecov', '~> 0.21.2'
-
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do
