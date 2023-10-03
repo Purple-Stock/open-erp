@@ -19,13 +19,17 @@ RSpec.describe Services::Bling::Order, type: :services do
       let(:options) { { dataInicial: '2022-12-31', dataFinal: '2022-12-31' } }
 
       it 'is has data equal initial date' do
-        result = described_class.call(order_command: order_command, tenant: 1, situation: situation, options: options)
-        expect(result['data'][0].fetch('data')).to eq('2022-12-31')
+        VCR.use_cassette('bling_order_current_day', erb: true) do
+          result = described_class.call(order_command: order_command, tenant: 1, situation: situation, options: options)
+          expect(result['data'][0].fetch('data')).to eq('2022-12-31')
+        end
       end
 
       it 'counts by 1' do
-        result = described_class.call(order_command: order_command, tenant: 1, situation: situation, options: options)
-        expect(result['data'].count).to eq(1)
+        VCR.use_cassette('bling_order_current_day', erb: true) do
+          result = described_class.call(order_command: order_command, tenant: 1, situation: situation, options: options)
+          expect(result['data'].count).to eq(1)
+        end
       end
     end
 
@@ -34,8 +38,10 @@ RSpec.describe Services::Bling::Order, type: :services do
         let(:options) { { idsSituacoes: [15] } }
 
         it 'is has situation id equal situation in options' do
-          result = described_class.call(order_command: order_command, tenant: 1, situation:, options: options)
-          expect(result['data'][0]['situacao']['id']).to eq(options[:idsSituacoes].first)
+          VCR.use_cassette('bling_order_situation', erb: true) do
+            result = described_class.call(order_command: order_command, tenant: 1, situation:, options: options)
+            expect(result['data'][0]['situacao']['id']).to eq(options[:idsSituacoes].first)
+          end
         end
       end
 
@@ -43,8 +49,10 @@ RSpec.describe Services::Bling::Order, type: :services do
         let(:options) { { idsSituacoes: [9] } }
 
         it 'is has situation id equal situation in options' do
-          result = described_class.call(order_command: order_command, tenant: 1, situation:, options: options)
-          expect(result['data'][0]['situacao']['id']).to eq(options[:idsSituacoes].first)
+          VCR.use_cassette('bling_order_situation_9', erb: true) do
+            result = described_class.call(order_command: order_command, tenant: 1, situation:, options: options)
+            expect(result['data'][0]['situacao']['id']).to eq(options[:idsSituacoes].first)
+          end
         end
       end
     end
