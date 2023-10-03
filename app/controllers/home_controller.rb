@@ -27,7 +27,7 @@ class HomeController < ApplicationController
 
     @printed_orders = printed['data']
 
-    order_ids = @orders.select { |order| order['loja']['id'] == 204_061_683 }.map { |order| order['id'] }
+    order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
 
     @mercado_envios_flex_counts = count_mercado_envios_flex(order_ids)
 
@@ -51,6 +51,8 @@ class HomeController < ApplicationController
   private
 
   def count_mercado_envios_flex(order_ids)
+    return if order_ids.blank?
+
     counter = 0
     order_ids.each do |order_id|
       response = Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
