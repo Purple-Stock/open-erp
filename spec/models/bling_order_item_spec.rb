@@ -20,5 +20,10 @@
 require 'rails_helper'
 
 RSpec.describe BlingOrderItem, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#store_name' do
+    it 'has name' do
+      subject.store_id = '204219105'
+      expect(subject.store_name).to eq('Shein')
+    end
+  end
 end
