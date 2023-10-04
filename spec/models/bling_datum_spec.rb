@@ -20,5 +20,23 @@
 require 'rails_helper'
 
 RSpec.describe BlingDatum, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'associations' do
+    it { is_expected.to have_db_column(:account_id) }
+    it { is_expected.to have_db_index(:account_id) }
+  end
+
+  describe 'create' do
+    let(:expires_at) { Time.zone.local(13) }
+    let(:bling_datum) { FactoryBot.create(:bling_datum, expires_at: expires_at) }
+
+    context 'when it is valid' do
+      it 'is valid' do
+        expect(bling_datum).to be_valid
+      end
+
+      it 'is has expires date' do
+        expect(bling_datum.expires_at).to eq(expires_at)
+      end
+    end
+  end
 end
