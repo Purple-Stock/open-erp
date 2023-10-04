@@ -5,6 +5,7 @@
 #  id                 :bigint           not null, primary key
 #  aliquotaIPI        :decimal(, )
 #  codigo             :string
+#  date               :datetime
 #  desconto           :decimal(, )
 #  descricao          :text
 #  descricaoDetalhada :text
