@@ -63,6 +63,21 @@
             <p>
               Pedidos: <%= items.count %>
             </p>
+            <p>
+              Total: <%= number_to_currency_pt_br items.sum(&:valor) %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @current_order_items.blank? %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <p>
+              Os pedidos do dia aparecerão aqui
+            </p>
           </div>
         </div>
       </div>
