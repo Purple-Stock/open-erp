@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    @current_order_items = BlingOrderItem.where(situation_id: %w[94871 15 24 95745])
+                                         .date_range_in_a_day(Time.zone.today)
     date_expires = token_expires_at
 
     refresh_token if date_expires < DateTime.now
@@ -25,7 +27,7 @@ class HomeController < ApplicationController
 
     @printed_orders = printed['data']
 
-    order_ids = @orders.select { |order| order['loja']['id'] == 204_061_683 }.map { |order| order['id'] }
+    order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
 
     @mercado_envios_flex_counts = count_mercado_envios_flex(order_ids)
 
@@ -49,6 +51,8 @@ class HomeController < ApplicationController
   private
 
   def count_mercado_envios_flex(order_ids)
+    return if order_ids.blank?
+
     counter = 0
     order_ids.each do |order_id|
       response = Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
@@ -66,37 +70,11 @@ class HomeController < ApplicationController
   end
 
   def update_orders_data
-    @pending_orders.each do |order_data|
-      order_id = order_data['id']
-
-      if BlingOrderItem.exists?(bling_order_id: order_id)
-        bling_order_items = BlingOrderItem.where(bling_order_id: order_id)
-        if order_data['situacao']['id'] != bling_order_items[0].situation_id
-          bling_order_items.each do |bling_order_item|
-            bling_order_item.update(situation_id: order_data['situacao']['id'])
-          end
-        end
-        next # Skip to the next order
-      end
-
-      fetched_order_data = fetch_order_data(order_id)
-
-      fetched_order_data['data']['itens'].each do |item_data|
-        BlingOrderItem.create!(
-          bling_order_id: order_id,
-          codigo: item_data['codigo'],
-          unidade: item_data['unidade'],
-          quantidade: item_data['quantidade'],
-          desconto: item_data['desconto'],
-          valor: item_data['valor'],
-          aliquotaIPI: item_data['aliquotaIPI'],
-          descricao: item_data['descricao'],
-          descricaoDetalhada: item_data['descricaoDetalhada'],
-          situation_id: fetched_order_data['data']['situacao']['id'],
-          store_id: fetched_order_data['data']['loja']['id']
-        )
-      end
-    end
+    @in_progress = @orders
+    BlingOrderItemCreatorJob.perform_later(@pending_orders, current_user)
+    BlingOrderItemCreatorJob.perform_later(@checked_orders, current_user)
+    BlingOrderItemCreatorJob.perform_later(@printed_orders, current_user)
+    BlingOrderItemCreatorJob.perform_later(@in_progress, current_user)
   end
 
   def fetch_order_data(order_id)
