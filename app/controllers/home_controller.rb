@@ -95,7 +95,6 @@ class HomeController < ApplicationController
     client_id = ENV['CLIENT_ID']
     client_secret = ENV['CLIENT_SECRET']
     credentials = Base64.strict_encode64("#{client_id}:#{client_secret}")
-
     begin
       @response = HTTParty.post('https://bling.com.br/Api/v3/oauth/token',
                                 body: {
@@ -116,22 +115,11 @@ class HomeController < ApplicationController
 
   def verify_tokens
     tokens = BlingDatum.find_by(account_id: current_tenant.id)
-    if tokens.nil?
-      BlingDatum.create(access_token: @response['access_token'],
-                        expires_in: @response['expires_in'],
-                        expires_at: Time.zone.now + @response['expires_in'].seconds,
-                        token_type: @response['token_type'],
-                        scope: @response['scope'],
-                        refresh_token: @response['refresh_token'],
-                        account_id: current_tenant.id)
-    else
-      tokens.update(access_token: @response['access_token'],
-                    expires_in: @response['expires_in'],
-                    expires_at: Time.zone.now + @response['expires_in'].seconds,
-                    token_type: @response['token_type'],
-                    scope: @response['scope'],
-                    refresh_token: @response['refresh_token'])
-    end
+    tokens.update(access_token: @response['access_token'],
+                  expires_in: @response['expires_in'],
+                  expires_at: Time.zone.now + @response['expires_in'].seconds,
+                  token_type: @response['token_type'],
+                  scope: @response['scope'])
   end
 
   def get_loja_name
