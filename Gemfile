@@ -6,6 +6,8 @@ ruby '3.2.2'
 # dotenv-rails must be on the top
 gem 'dotenv-rails', groups: %i[development test]
 
+gem 'inherited_resources'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.1.0"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
