@@ -1,5 +1,13 @@
 <div class="container">
   <br><br><br>
+  <% if @monthly_revenue_estimation.present? %>
+    <p>Estimativa da receita do mês atual: <%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %>
+      Estimativa da quantidade do mês atual: <%= @monthly_revenue_estimation.quantity %>.
+      Com o ticket médio de: <%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
+  <% else %>
+    <p><%= link_to 'Estimar receita e quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
+  <% end %>
+
   <h1>Pedidos Em andamento(Pagos)</h1>
   
   <p>Última Atualização: <%= @last_update %></p>
