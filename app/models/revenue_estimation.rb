@@ -20,6 +20,8 @@ class RevenueEstimation < ApplicationRecord
 
   before_save :calculate_average_ticket
 
+  scope :current_month, -> { where(date: Date.today.beginning_of_month...Date.today.end_of_month) }
+
   private
 
   def calculate_average_ticket
