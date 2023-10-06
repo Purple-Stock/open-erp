@@ -20,22 +20,24 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th><%= model_class.human_attribute_name('date') %></th>
+              <th><%= model_class.human_attribute_name(:date) %></th>
               <th><%= model_class.human_attribute_name(:quantity) %></th>
               <th><%= model_class.human_attribute_name(:revenue) %></th>
+              <th><%= model_class.human_attribute_name(:average_ticket) %></th>
             </tr>
             </thead>
             <tbody>
 
-            <% @revenue_estimations.each do |revenue_estimations| %>
-              <%#= turbo_stream revenue_estimations do %>
-              <%= tag.tr id: dom_id(revenue_estimations) do %>
-                <td><%= link_to revenue_estimations.id, revenue_estimations_path(revenue_estimations), data: { toggle: 'tooltip', turbo: false } %></td>
-                <td><%= revenue_estimations.name %></td>
+            <% @revenue_estimations.each do |revenue_estimation| %>
+              <%#= turbo_stream revenue_estimation do %>
+              <%= tag.tr id: dom_id(revenue_estimation) do %>
+                <td><%= revenue_estimation.date %></td>
+                <td><%= revenue_estimation.quantity %></td>
+                <td><%= number_to_currency_pt_br revenue_estimation.revenue %></td>
+                <td><%= number_to_currency_pt_br revenue_estimation.average_ticket %></td>
                 <td>
-                  <%= link_to icon('fas fa-pencil-alt'), edit_revenue_estimation_path(revenue_estimations), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
-                  <%= link_to icon('fas fa-eye'), revenue_estimations, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
-                  <%= link_to icon('fas fa-trash'), revenue_estimations, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { :confirm => t('confirm'), toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm'), turbo_frame: :_self } %>
+                  <%= link_to icon('fas fa-pencil-alt'), edit_revenue_estimation_path(revenue_estimation), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-trash'), revenue_estimation, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { :confirm => t('confirm'), toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm'), turbo_frame: :_self } %>
                 </td>
               <% end %>
               <%# end %>
