@@ -20,7 +20,7 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th><%= model_class.human_attribute_name(:date) %></th>
+              <th><%= model_class.human_attribute_name(:month) %></th>
               <th><%= model_class.human_attribute_name(:quantity) %></th>
               <th><%= model_class.human_attribute_name(:revenue) %></th>
               <th><%= model_class.human_attribute_name(:average_ticket) %></th>
@@ -31,7 +31,7 @@
             <% @revenue_estimations.each do |revenue_estimation| %>
               <%#= turbo_stream revenue_estimation do %>
               <%= tag.tr id: dom_id(revenue_estimation) do %>
-                <td><%= revenue_estimation.date %></td>
+                <td><%= revenue_estimation.date.month %></td>
                 <td><%= revenue_estimation.quantity %></td>
                 <td><%= number_to_currency_pt_br revenue_estimation.revenue %></td>
                 <td><%= number_to_currency_pt_br revenue_estimation.average_ticket %></td>
