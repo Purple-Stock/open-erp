@@ -19,6 +19,7 @@ class RevenueEstimation < ApplicationRecord
   attr_accessor :month
 
   validates :revenue, :quantity, :date, presence: :true
+  validates :revenue, :quantity, numericality: :true
 
   before_save :calculate_average_ticket
   before_validation :set_date
