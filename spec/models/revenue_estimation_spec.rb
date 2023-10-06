@@ -19,6 +19,8 @@ RSpec.describe RevenueEstimation, type: :model do
     it { is_expected.to validate_presence_of(:revenue) }
     it { is_expected.to validate_presence_of(:quantity) }
     it { is_expected.to validate_presence_of(:date) }
+    it { is_expected.to validate_numericality_of(:revenue) }
+    it { is_expected.to validate_numericality_of(:quantity) }
   end
 
   describe '#save' do
