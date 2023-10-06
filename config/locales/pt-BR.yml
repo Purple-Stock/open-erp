@@ -13,6 +13,8 @@ pt-BR:
   Category: Categoria
   Purchase Products: Entradas de Estoque
   Purchase Product: Entrada de Estoque
+  Revenue Estimations: Estimativas da Receita
+  Revenue Estimation: Estimativa da Receita
   Sale Products: Saídas de Estoque
   Sale Product: Saída de Estoque
   Product: Produto
@@ -207,7 +209,8 @@ pt-BR:
       submit: Salvar %{model}
       confirm: Você tem certeza?
     titles:
-      new: Novo %{model}
+      new: Criar %{model}
+      edit: Editar %{model}
     actions: Ações
   number:
     currency:

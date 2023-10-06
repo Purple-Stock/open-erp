@@ -5,6 +5,9 @@ pt-BR:
       revenue_estimations:
         one: Estimativa da Receita
         other: Estimativas da Receita
+        titles:
+          new: Criar Estimativa da Receita
+          edit: Editar Estimativa da Receita
     attributes:
       revenue_estimation:
         revenue: Receita
