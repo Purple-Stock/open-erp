@@ -21,13 +21,27 @@ RSpec.describe RevenueEstimation, type: :model do
     it { is_expected.to validate_presence_of(:date) }
   end
 
-  describe '#avarage_ticket' do
-    it 'is 20' do
-      subject.quantity = 5
-      subject.revenue = 100.0
-      subject.date = Date.new(2023, 10)
-      subject.save
-      expect(subject.average_ticket).to eq(20.0)
+  describe '#save' do
+    context 'valid' do
+      before do
+        allow(Date).to receive(:today).and_return Date.new(2022, 10, 3)
+        subject.quantity = 5
+        subject.revenue = 100.0
+        subject.month = 10
+        subject.save
+      end
+
+      it 'is 20' do
+        expect(subject.average_ticket).to eq(20.0)
+      end
+
+      it 'has date year' do
+        expect(subject.date.year).to eq(2022)
+      end
+
+      it 'has month' do
+        expect(subject.date.month).to eq(10)
+      end
     end
   end
 end
