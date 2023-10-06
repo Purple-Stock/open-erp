@@ -29,8 +29,8 @@
   <% end %>
   <div class="form-row">
     <div class="form-group col-6">
-      <%= f.label :date, :class => 'control-label' %>
-      <%= f.text_field :date, :class => 'form-control', value: Date.today.strftime('%d-%m-%Y') %>
+      <%= f.label :month, :class => 'control-label' %>
+      <%= f.number_field :month, :class => 'form-control', value: f.object.date&.month %>
     </div>
 
     <div class="form-group col-6">
