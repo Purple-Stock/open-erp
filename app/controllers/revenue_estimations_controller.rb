@@ -6,6 +6,6 @@ class RevenueEstimationsController < ApplicationController
   def resource_params
     return [] if request.get?
 
-    params.require(:revenue_estimation).permit(:date, :average_ticket, :revenue, :quantity)
+    params.require(:revenue_estimation).permit(:date, :month, :average_ticket, :revenue, :quantity)
   end
 end
