@@ -17,24 +17,22 @@ require 'rails_helper'
 RSpec.describe RevenueEstimation, type: :model do
   describe '#validations' do
     it { is_expected.to validate_presence_of(:revenue) }
-    it { is_expected.to validate_presence_of(:quantity) }
     it { is_expected.to validate_presence_of(:date) }
     it { is_expected.to validate_numericality_of(:revenue) }
-    it { is_expected.to validate_numericality_of(:quantity) }
   end
 
   describe '#save' do
     context 'valid' do
       before do
         allow(Date).to receive(:today).and_return Date.new(2022, 10, 3)
-        subject.quantity = 5
-        subject.revenue = 100.0
+        subject.revenue = 1000.0
+        subject.average_ticket = 10
         subject.month = 10
         subject.save
       end
 
-      it 'is 20' do
-        expect(subject.average_ticket).to eq(20.0)
+      it 'calculates quantity based on average ticket and revenue estimated' do
+        expect(subject.quantity).to eq(100)
       end
 
       it 'has date year' do
