@@ -7,7 +7,7 @@ ruby '3.2.2'
 gem 'dotenv-rails', groups: %i[development test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.8"
+gem "rails", "~> 7.1.0"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -15,7 +15,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.6", ">= 5.6.7"
+gem "puma", "~> 6.0", ">= 6.0.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", ">= 1.2.0"
@@ -129,4 +129,4 @@ gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
-gem "good_job", "~> 3.19", ">= 3.19.0"
+gem "good_job", "~> 3.19", ">= 3.19.1"
