@@ -26,6 +26,11 @@ class RevenueEstimation < ApplicationRecord
 
   scope :current_month, -> { where(date: Date.today.beginning_of_month...Date.today.end_of_month) }
 
+  def daily_quantity
+    number_of_days = Date.today.at_end_of_month.day
+    quantity / number_of_days
+  end
+
   private
 
   def calculate_quantity
