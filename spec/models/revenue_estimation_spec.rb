@@ -35,6 +35,10 @@ RSpec.describe RevenueEstimation, type: :model do
         expect(subject.quantity).to eq(100)
       end
 
+      it 'has daily_quantity' do
+        expect(subject.daily_quantity).to eq(3)
+      end
+
       it 'has date year' do
         expect(subject.date.year).to eq(2022)
       end
