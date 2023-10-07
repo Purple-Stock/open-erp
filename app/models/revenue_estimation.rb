@@ -18,18 +18,18 @@
 class RevenueEstimation < ApplicationRecord
   attr_accessor :month
 
-  validates :revenue, :quantity, :date, presence: :true
-  validates :revenue, :quantity, numericality: :true
+  validates :revenue, :average_ticket, :date, presence: :true
+  validates :revenue, numericality: :true
 
-  before_save :calculate_average_ticket
+  before_save :calculate_quantity
   before_validation :set_date
 
   scope :current_month, -> { where(date: Date.today.beginning_of_month...Date.today.end_of_month) }
 
   private
 
-  def calculate_average_ticket
-    self.average_ticket = revenue / quantity
+  def calculate_quantity
+    self.quantity = (revenue / average_ticket).to_i
   end
 
   def set_date
