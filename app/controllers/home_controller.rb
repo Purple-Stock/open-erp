@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :set_monthly_revenue_estimation, only: :index
+
   def index
     @current_order_items = BlingOrderItem.where(situation_id: %w[94871 15 24 95745])
                                          .date_range_in_a_day(Time.zone.today)
@@ -49,6 +51,10 @@ class HomeController < ApplicationController
   end
 
   private
+
+  def set_monthly_revenue_estimation
+    @monthly_revenue_estimation = RevenueEstimation.current_month.take
+  end
 
   def count_mercado_envios_flex(order_ids)
     return if order_ids.blank?
