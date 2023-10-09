@@ -19,6 +19,16 @@ class OrdersControlController < ApplicationController
                        .where(account_id: current_tenant.id)
                        .order(custom_id: :desc)
   end
+  
+  def show_pending_orders
+    @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
+    @store_name = get_loja_name
+
+    pendings = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
+      situation: 94_871)
+  
+    @pending_orders = pendings['data']
+  end
 
   def show_orders_business_day
     @simplo_orders = SimploOrder.where(order_status: %w[2 30 31]).order(order_id: :asc)
@@ -43,5 +53,14 @@ class OrdersControlController < ApplicationController
         @orders << order_page
       end
     end
+  end
+
+  def get_loja_name
+    {
+      204_219_105 => 'Shein',
+      203_737_982 => 'Shopee',
+      203_467_890 => 'Simplo 7',
+      204_061_683 => 'Mercado Livre'
+    }
   end
 end
