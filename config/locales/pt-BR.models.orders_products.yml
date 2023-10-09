@@ -3,6 +3,7 @@ pt-BR:
   orders_products:
     one: Controle do Pedido do Produto
     two: Controle dos Pedidos de Produtos
+    three: Produtos Faltantes
     code: Código do Produto
     name: Nome
     quantity_in_stock: Quantidade em Estoque

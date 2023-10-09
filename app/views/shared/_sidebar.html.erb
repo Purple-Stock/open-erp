@@ -87,6 +87,9 @@
           <% end %>
         <li class="menu-header">Gerencial</li>
         <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-chart-line' do %>
+          <li class="<%= active_nav_menu_item([show_pending_orders_path]) %>">
+            <%= link_to t("audits.pendings"), show_pending_orders_path, class: 'nav-link' %>
+          </li>
           <li class="<%= active_nav_menu_item([show_orders_products_stock_path]) %>">
             <%= link_to t("audits.products"), show_orders_products_stock_path, class: 'nav-link' %>
           </li>
