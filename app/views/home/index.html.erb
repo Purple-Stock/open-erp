@@ -74,7 +74,7 @@
               </p>
           <% end %>
             <p>
-              Pedidos: <%= items.count %>
+              Pedidos: <%= items.group_by(&:bling_order_id).compact.count %>
             </p>
             <p>
               Total: <%= number_to_currency_pt_br items.sum(&:valor) %>
