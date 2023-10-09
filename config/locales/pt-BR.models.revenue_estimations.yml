@@ -1,0 +1,21 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      revenue_estimations:
+        one: Estimativa da Receita
+        other: Estimativas da Receita
+        titles:
+          new: Criar Estimativa da Receita
+          edit: Editar Estimativa da Receita
+    attributes:
+      revenue_estimation:
+        revenue: Receita
+        date: Data
+        average_ticket: Ticket Médio
+        quantity: Quantidade
+        created: Estimativa da Receita Criada
+        updated: Estimativa da Receita Atualizada
+        deleted: Estimativa da Receita Deletada
+        new: Nova Estimativa da Receita
+        month: Número do Mês
