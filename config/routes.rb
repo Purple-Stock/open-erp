@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     mount GoodJob::Engine => 'good_job'
   end
 
+  resources :revenue_estimations
   resources :accounts
   resources :purchase_products
   resources :stores

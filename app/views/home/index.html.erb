@@ -1,5 +1,13 @@
 <div class="container">
   <br><br><br>
+  <% if @monthly_revenue_estimation.present? %>
+    <p>A meta da quantidade a ser vendida nesse mês é de: <%= @monthly_revenue_estimation.quantity %>.
+      Baseados em uma meta da receita de: <%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %>
+      e com um ticket médio de: <%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
+  <% else %>
+    <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
+  <% end %>
+
   <h1>Pedidos Em andamento(Pagos)</h1>
   
   <p>Última Atualização: <%= @last_update %></p>
@@ -60,6 +68,11 @@
             <h5 class="card-title">
               <%= loja_name %>
             </h5>
+            <% if @monthly_revenue_estimation.present? %>
+              <p>
+                Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
+              </p>
+          <% end %>
             <p>
               Pedidos: <%= items.count %>
             </p>
