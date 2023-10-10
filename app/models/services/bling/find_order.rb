@@ -46,7 +46,7 @@ module Services
       end
 
       def bling_token
-        BlingDatum.find_by(account_id: tenant).access_token
+        @bling_token ||= BlingDatum.find_by(account_id: tenant).access_token
       end
     end
   end
