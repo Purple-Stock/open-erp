@@ -37,7 +37,15 @@ RSpec.describe BlingOrderItemCreatorJob, type: :job do
       VCR.use_cassette('printed_order_items_situation', erb: true) do
         expect do
           subject.send(:create_printed_order_items)
-        end.to change(BlingOrderItem, :count).by(8)
+        end.to change(BlingOrderItem, :count).by(212)
+      end
+    end
+
+    it 'counts by 220 verified bling order items' do
+      VCR.use_cassette('verified_order_items_situation', erb: true) do
+        expect do
+          subject.send(:create_verified_order_items)
+        end.to change(BlingOrderItem, :count).by(220)
       end
     end
   end
