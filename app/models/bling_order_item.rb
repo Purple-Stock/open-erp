@@ -28,6 +28,15 @@ class BlingOrderItem < ApplicationRecord
     '204061683' => 'Mercado Livre'
   }.freeze
 
+  class Status
+    IN_PROGRESS = 15
+    CHECKED = 24
+    PENDING = 94_871
+    PRINTED = 95_745
+    CANCELED = 12
+    ALL = [IN_PROGRESS, CHECKED, PENDING, PRINTED, CANCELED].freeze
+  end
+
   scope :date_range_in_a_day, lambda { |date|
     initial_date = date.beginning_of_day
     end_date = date.end_of_day
