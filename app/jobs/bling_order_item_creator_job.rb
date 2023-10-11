@@ -62,6 +62,16 @@ class BlingOrderItemCreatorJob < ApplicationJob
     create_orders(@verified_orders)
   end
 
+  def create_canceled_order_items
+    canceled = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
+                                          situation: 12)
+
+    @canceled_orders = canceled['data']
+    return if @canceled_orders.blank?
+
+    create_orders(@canceled_orders)
+  end
+
 
   def fetch_order_data(order_id)
     Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
