@@ -4,74 +4,17 @@ class BlingOrderItemCreatorJob < ApplicationJob
 
   def perform(account_id)
     @account_id = account_id
-    create_in_progress_order_items
-    create_checked_order_items
-    create_pending_order_items
-    create_printed_order_items
+    BlingOrderItem::Status::ALL.each do |status|
+      orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
+                                           situation: status)
+      orders = orders['data']
+      next if orders.blank?
+
+      create_orders(orders)
+    end
   end
 
   private
-
-  def create_in_progress_order_items
-    in_progress = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                              situation: 15)
-
-    @in_progress_orders = in_progress['data']
-    return if @in_progress_orders.blank?
-
-    create_orders(@in_progress_orders)
-  end
-
-  def create_checked_order_items
-    checked = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                          situation: 24)
-
-    @checked_orders = checked['data']
-    return if @checked_orders.blank?
-
-    create_orders(@checked_orders)
-  end
-
-  def create_pending_order_items
-    pending = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                          situation: 94_871)
-
-    @pending_orders = pending['data']
-    return if @pending_orders.blank?
-
-    create_orders(@pending_orders)
-  end
-
-  def create_printed_order_items
-    printed = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                          situation: 95_745)
-
-    @printed_orders = printed['data']
-    return if @printed_orders.blank?
-
-    create_orders(@printed_orders)
-  end
-
-  def create_verified_order_items
-    verified = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                          situation: 101_065)
-
-    @verified_orders = verified['data']
-    return if @verified_orders.blank?
-
-    create_orders(@verified_orders)
-  end
-
-  def create_canceled_order_items
-    canceled = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                          situation: 12)
-
-    @canceled_orders = canceled['data']
-    return if @canceled_orders.blank?
-
-    create_orders(@canceled_orders)
-  end
-
 
   def fetch_order_data(order_id)
     Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
