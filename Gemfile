@@ -23,10 +23,10 @@ gem "puma", "~> 6.0", ">= 6.0.0"
 gem "jsbundling-rails", ">= 1.2.0"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+gem "turbo-rails", ">= 1.5.0"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails", ">= 1.2.2"
+gem "stimulus-rails", ">= 1.3.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
