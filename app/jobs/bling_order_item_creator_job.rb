@@ -83,6 +83,11 @@ class BlingOrderItemCreatorJob < ApplicationJob
       end
 
       fetched_order_data = fetch_order_data(order_id)
+      begin
+        fetched_order_data['data']['itens']
+      rescue
+        next
+      end
 
       fetched_order_data['data']['itens'].each do |item_data|
         BlingOrderItem.create!(
