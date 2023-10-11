@@ -4,9 +4,8 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  authenticate :user, ->(user) { user.admin? } do
-    mount GoodJob::Engine => 'good_job'
-  end
+
+  mount GoodJob::Engine => 'good_job'
 
   resources :revenue_estimations
   resources :accounts
@@ -34,7 +33,7 @@ Rails.application.routes.draw do
   get 'products_tags_defer', to: 'products#tags_index_defer'
   get '/products/:id/duplicate', to: 'products#duplicate', as: 'meeting_duplicate'
   get '/products/:id/update_active', to: 'products#update_active', as: 'update_product_active'
-  
+
   resources :customers do
     collection do
       post :import
