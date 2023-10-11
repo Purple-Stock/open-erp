@@ -8,7 +8,6 @@ RSpec.describe BlingOrderItemCreatorJob, type: :job do
   describe '#perform_now' do
     before do
       BlingOrderItem.destroy_all
-      subject.account_id = user.account.id
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
     end
 
