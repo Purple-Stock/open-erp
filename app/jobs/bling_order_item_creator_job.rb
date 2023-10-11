@@ -52,6 +52,16 @@ class BlingOrderItemCreatorJob < ApplicationJob
     create_orders(@printed_orders)
   end
 
+  def create_verified_order_items
+    verified = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
+                                          situation: 101_065)
+
+    @verified_orders = verified['data']
+    return if @verified_orders.blank?
+
+    create_orders(@verified_orders)
+  end
+
 
   def fetch_order_data(order_id)
     Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
