@@ -49,5 +49,13 @@ RSpec.describe BlingOrderItemCreatorJob, type: :job do
         end.to change(BlingOrderItem, :count).by(220)
       end
     end
+
+    it 'counts by 216 canceled bling order items' do
+      VCR.use_cassette('canceled_order_items_situation', erb: true) do
+        expect do
+          subject.send(:create_canceled_order_items)
+        end.to change(BlingOrderItem, :count).by(216)
+      end
+    end
   end
 end
