@@ -2,11 +2,11 @@ class HomeController < ApplicationController
   before_action :set_monthly_revenue_estimation, only: :index
 
   def index
-    @current_order_items = BlingOrderItem.where(situation_id: %w[94871 15 24 95745])
+    @current_order_items = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745])
                                          .date_range_in_a_day(Time.zone.today)
     date_expires = token_expires_at
 
-    refresh_token if date_expires < DateTime.now
+    refresh_token if date_expires < DateTime.now && Rails.env.eql?('production')
 
     in_progress = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
                                               situation: 15)
@@ -21,8 +21,6 @@ class HomeController < ApplicationController
                                            situation: 94_871)
 
     @pending_orders = pendings['data']
-
-    update_orders_data
 
     printed = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
                                           situation: 95_745)
@@ -75,13 +73,6 @@ class HomeController < ApplicationController
     counter
   end
 
-  def update_orders_data
-    @in_progress = @orders
-    BlingOrderItemCreatorJob.perform_later(@pending_orders, current_user)
-    BlingOrderItemCreatorJob.perform_later(@checked_orders, current_user)
-    BlingOrderItemCreatorJob.perform_later(@printed_orders, current_user)
-    BlingOrderItemCreatorJob.perform_later(@in_progress, current_user)
-  end
 
   def fetch_order_data(order_id)
     Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
