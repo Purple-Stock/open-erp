@@ -30,11 +30,12 @@ class BlingOrderItem < ApplicationRecord
 
   class Status
     IN_PROGRESS = 15
-    CHECKED = 24
+    CHECKED = 10_1065
+    VERIFIED = 24
     PENDING = 94_871
     PRINTED = 95_745
     CANCELED = 12
-    ALL = [IN_PROGRESS, CHECKED, PENDING, PRINTED, CANCELED].freeze
+    ALL = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, CANCELED].freeze
   end
 
   scope :date_range_in_a_day, lambda { |date|
