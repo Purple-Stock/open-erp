@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :set_monthly_revenue_estimation, only: :index
 
   def index
-    @current_order_items = BlingOrderItem.where(situation_id: %w[94871 15 24 95745])
+    @current_order_items = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745])
                                          .date_range_in_a_day(Time.zone.today)
     date_expires = token_expires_at
 
