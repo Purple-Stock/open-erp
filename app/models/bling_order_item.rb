@@ -30,7 +30,7 @@ class BlingOrderItem < ApplicationRecord
 
   class Status
     IN_PROGRESS = 15
-    CHECKED = 10_1065
+    CHECKED = 101_065
     VERIFIED = 24
     PENDING = 94_871
     PRINTED = 95_745
