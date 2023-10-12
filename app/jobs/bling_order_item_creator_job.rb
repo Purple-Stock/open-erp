@@ -4,7 +4,7 @@ class BlingOrderItemCreatorJob < ApplicationJob
 
   def perform(account_id)
     @account_id = account_id
-    BlingOrderItem::Status::ALL.each do |status|
+    list_status_situation.each do |status|
       orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
                                            situation: status)
       orders = orders['data']
@@ -15,6 +15,10 @@ class BlingOrderItemCreatorJob < ApplicationJob
   end
 
   private
+
+  def list_status_situation
+    BlingOrderItem::Status::ALL
+  end
 
   def fetch_order_data(order_id)
     Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
