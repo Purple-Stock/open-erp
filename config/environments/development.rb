@@ -71,4 +71,17 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.good_job.enable_cron = true
+  config.good_job.cron = {
+    # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
+    frequent_task: { # each recurring job must have a unique key
+                     cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                     class: "BlingOrderItemCreatorJob", # name of the job class as a String; must reference an Active Job job class
+                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+                     set: { priority: -10 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+                     description: "Create Order Items per situation", # optional description that appears in Dashboard
+    },
+    # etc.
+  }
 end
