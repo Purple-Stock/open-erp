@@ -96,6 +96,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.good_job.enable_cron = true
   config.good_job.cron = {
     # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
     frequent_task: { # each recurring job must have a unique key
