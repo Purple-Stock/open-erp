@@ -29,7 +29,9 @@ default: &default
 development:
   <<: *default
   database: inventory-control_development
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5).to_i + 1 + 2 + ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i %>
 
+  # check best practices for good_job https://github.com/bensheldon/good_job#database-connections
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -83,8 +85,18 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+# check best practices for good job https://github.com/bensheldon/good_job#database-connections
 production:
   <<: *default
   database: inventory-control_production
   username: inventory-control
   password: <%= ENV['INVENTORY-CONTROL_DATABASE_PASSWORD'] %>
+  pool: <%= 1 + 2 + ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i %>
+
+# check best practices for good job https://github.com/bensheldon/good_job#database-connections
+staging:
+  <<: *default
+  database: inventory-control_staging
+  username: inventory-control
+  password: <%= ENV['INVENTORY-CONTROL_DATABASE_PASSWORD'] %>
+  pool: <%= 1 + 2 + ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i %>
