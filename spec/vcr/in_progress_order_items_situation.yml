@@ -1,0 +1,3941 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?idsSituacoes%5B%5D=15&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:18 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '18842'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=d400d96d90a58b20
+      Set-Cookie:
+      - PHPSESSID=2vlnb9rdkbdssla54uc57e1l4t; path=/; secure; HttpOnly
+      - PHPSESSID=l2ile60u86sdabsgmb2j30bf4n; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2b6cee91b12-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":18928665224,"numero":31048,"numeroLoja":"GSHNSP33A000EP2","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367924703,"nome":"Lucineide
+        Souza","tipoPessoa":"F","numeroDocumento":"010.437.364-41"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928665119,"numero":31047,"numeroLoja":"GSHNSP1090020AY","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367924655,"nome":"Sherlien
+        Vitoria","tipoPessoa":"F","numeroDocumento":"167.873.626-09"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928657820,"numero":31046,"numeroLoja":"231011NAY1X3FC","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-29","totalProdutos":59.9,"total":59.9,"contato":{"id":16367923083,"nome":"Maria
+        Clara Neves Da Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18928520124,"numero":31045,"numeroLoja":"GSHNSP19A002RUA","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367893633,"nome":"Ang\u00e9lica
+        Azevedo","tipoPessoa":"F","numeroDocumento":"237.322.368-62"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928363182,"numero":31044,"numeroLoja":"GSHNSP54A00092J","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367862659,"nome":"Joana
+        Sarmento","tipoPessoa":"F","numeroDocumento":"527.095.664-00"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928362975,"numero":31043,"numeroLoja":"GSHNSP47A000V9N","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367862577,"nome":"Mikaelly
+        Silva","tipoPessoa":"F","numeroDocumento":"353.520.538-73"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928175215,"numero":31041,"numeroLoja":"GSHNSP19A00M2VR","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":81.4,"total":81.4,"contato":{"id":16367823760,"nome":"Estefany
+        Santos","tipoPessoa":"F","numeroDocumento":"069.027.702-47"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928175055,"numero":31040,"numeroLoja":"GSHNSP06A00N3TB","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367823729,"nome":"Larissa
+        Correia","tipoPessoa":"F","numeroDocumento":"132.821.304-81"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928027335,"numero":31039,"numeroLoja":"GSHNSP58W001AXT","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367794107,"nome":"Jenifer
+        Canan Maia","tipoPessoa":"F","numeroDocumento":"110.142.649-79"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928027170,"numero":31038,"numeroLoja":"GSHNSP58A00MET9","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367794053,"nome":"Bianca
+        Krugina","tipoPessoa":"F","numeroDocumento":"906.535.640-15"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928026999,"numero":31037,"numeroLoja":"GSHNSP54A001TCS","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367794020,"nome":"Graziela
+        De Paula","tipoPessoa":"F","numeroDocumento":"102.267.409-94"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928026855,"numero":31036,"numeroLoja":"GSHNSP2110004X5","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":89.9,"contato":{"id":16367793985,"nome":"Maria
+        jose Almeida","tipoPessoa":"F","numeroDocumento":"014.196.433-20"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18928025908,"numero":31035,"numeroLoja":"GSHNSP132001YJ1","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":69.9,"contato":{"id":16367793774,"nome":"Madalena
+        Marques","tipoPessoa":"F","numeroDocumento":"926.038.234-34"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18927980772,"numero":31034,"numeroLoja":"16831I16828","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":109.29,"total":122.36,"contato":{"id":16367784119,"nome":"Yasmim
+        de Oliveira Pereira","tipoPessoa":"F","numeroDocumento":"431.708.738-30"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18927822297,"numero":31033,"numeroLoja":"GSHNSP4090012VV","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":69.9,"contato":{"id":16367753166,"nome":"Yasmin
+        Mendes","tipoPessoa":"F","numeroDocumento":"134.330.587-09"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18927252711,"numero":31026,"numeroLoja":"231011N3NSFN5B","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-30","totalProdutos":59.9,"total":59.21,"contato":{"id":16367647755,"nome":"Evelyn
+        Silva de Carvalho","tipoPessoa":"F","numeroDocumento":"204.079.947-85"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18926669341,"numero":31020,"numeroLoja":"231011N1161TM5","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-12-19","totalProdutos":59.9,"total":70.12,"contato":{"id":16367554303,"nome":"Jessica
+        Figueiredo dos santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18925435127,"numero":30997,"numeroLoja":"231011MCHPX5NE","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-25","totalProdutos":59.9,"total":52.82,"contato":{"id":16367320835,"nome":"Maria
+        Fernanda Jesus dos Santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18925388763,"numero":30991,"numeroLoja":"231011M97G2GR5","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.31,"contato":{"id":16367298802,"nome":"Jamile
+        Oliveira Da Fonseca","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18925316610,"numero":30978,"numeroLoja":"231011M6KFNFA6","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16367264212,"nome":"Iasmin
+        Tasca","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18925260430,"numero":30963,"numeroLoja":"231011M5ED8UE0","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":61.38,"contato":{"id":16367237017,"nome":"Luciana
+        Mendes Dos Santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18925137762,"numero":30956,"numeroLoja":"231011M3VD09BA","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.77,"contato":{"id":16367172365,"nome":"Ester
+        Sales Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18925015987,"numero":30948,"numeroLoja":"231011M2J9G7F5","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.13,"contato":{"id":16367110408,"nome":"Manuella
+        Bousfield","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18924674724,"numero":30911,"numeroLoja":"231011KYGGDQ01","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-25","totalProdutos":49.9,"total":49.9,"contato":{"id":16308464185,"nome":"Gildete
+        Nascimento Felipe","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18924652252,"numero":30905,"numeroLoja":"231011KYA2EPPU","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16366920644,"nome":"Dacilla
+        Luyza Rodrigues Dos Santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18924580341,"numero":30904,"numeroLoja":"231011KXR007PP","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.9,"contato":{"id":16366884924,"nome":"isabela
+        cavalcanti bras","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18924392386,"numero":30890,"numeroLoja":"231011KWA4SYUF","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":89.9,"total":106.01,"contato":{"id":16366791343,"nome":"livia
+        de souza silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18924378681,"numero":30889,"numeroLoja":"16829I16826","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":103.9,"contato":{"id":16366786002,"nome":"sarah
+        franca","tipoPessoa":"F","numeroDocumento":"449.885.068-86"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18924325213,"numero":30888,"numeroLoja":"231011KVTJ1GW5","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.9,"contato":{"id":16366761909,"nome":"Felipe
+        Bertelli","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18924194749,"numero":30877,"numeroLoja":"231011KUQ8XCJW","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-04","totalProdutos":49.9,"total":49.9,"contato":{"id":16366696629,"nome":"Elias
+        Almeida Fernandes","tipoPessoa":"F","numeroDocumento":"121.977.056-60"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18924158776,"numero":30871,"numeroLoja":"231011KUEBQVT5","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":47.69,"contato":{"id":16366678716,"nome":"Maria
+        Clara Da Silva Soares","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18924050960,"numero":30860,"numeroLoja":"231011KTHXVGM1","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-30","totalProdutos":59.9,"total":59.9,"contato":{"id":16366626085,"nome":"Vera
+        Alice","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18923688093,"numero":30843,"numeroLoja":"231011KQVX3JBY","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-30","totalProdutos":49.9,"total":49.9,"contato":{"id":16366475458,"nome":"Ketlhy
+        Tania Paula dos Santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18923575038,"numero":30829,"numeroLoja":"231011KPT44U9E","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":59.9,"contato":{"id":16366422149,"nome":"Jos\u00e9
+        Wilter Nascimento De Castro","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18923541972,"numero":30828,"numeroLoja":"231011KPFU58KF","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.9,"contato":{"id":16366407358,"nome":"Lara
+        Leticia Ventura Da Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18923480255,"numero":30818,"numeroLoja":"231011KNV1WXBT","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-04","totalProdutos":59.9,"total":59.19,"contato":{"id":16366379238,"nome":"Iraildes
+        Dias Da Concei\u00e7\u00e3o","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18923060463,"numero":30790,"numeroLoja":"231011KHV4S9TX","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-25","totalProdutos":49.9,"total":61.37,"contato":{"id":16366206166,"nome":"Brenda
+        Gomes Da Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18923010112,"numero":30783,"numeroLoja":"231011KHE2KFU4","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-26","totalProdutos":49.9,"total":49.9,"contato":{"id":16366187693,"nome":"Aline
+        Cristina Silv\u00e9rio","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18922793872,"numero":30769,"numeroLoja":"231011KFQHBQB8","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-29","totalProdutos":59.9,"total":71.38,"contato":{"id":16366121031,"nome":"Josiany","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18922514767,"numero":30761,"numeroLoja":"16828I16825","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":85.69,"contato":{"id":16309452684,"nome":"Yasmin
+        Soares","tipoPessoa":"F","numeroDocumento":"465.531.058-80"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18922468205,"numero":30755,"numeroLoja":"231011KDHW2N6F","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":59.9,"contato":{"id":16366030946,"nome":"Sheldon
+        Soares Rodrigues","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18922125850,"numero":30741,"numeroLoja":"16827I16824","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":111.04,"contato":{"id":16365943985,"nome":"Patricia
+        Perroud","tipoPessoa":"F","numeroDocumento":"416.125.428-83"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18922067578,"numero":30740,"numeroLoja":"231011KB6GSJB5","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-04","totalProdutos":49.9,"total":49.9,"contato":{"id":16365928511,"nome":"Juliane
+        Alves Barbosa","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18921971736,"numero":30732,"numeroLoja":"231011KAQH2K0B","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16365908175,"nome":"Maria
+        Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18921902009,"numero":30731,"numeroLoja":"16826I16823","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":69.9,"contato":{"id":16365889378,"nome":"Julia
+        Nobre","tipoPessoa":"F","numeroDocumento":"479.141.668-63"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18921701119,"numero":30717,"numeroLoja":"231011K96BK393","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.9,"contato":{"id":16365835368,"nome":"Lavinia","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18921466772,"numero":30712,"numeroLoja":"16823I16820","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":30,"total":40.12,"contato":{"id":16365771593,"nome":"Manuela
+        Ramos","tipoPessoa":"F","numeroDocumento":"198.640.158-85"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18921329410,"numero":30706,"numeroLoja":"231011K73GVAKS","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-15","totalProdutos":49.9,"total":49.9,"contato":{"id":16365735610,"nome":"Andrey
+        De Souza Oliveira","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18920636365,"numero":30671,"numeroLoja":"231011K3BUDHNY","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":59.9,"contato":{"id":16365543909,"nome":"Lira
+        Evelyn Ap\u00f3stolo Andrade","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18920151524,"numero":30648,"numeroLoja":"231011K0Q36P6W","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-25","totalProdutos":59.9,"total":59.9,"contato":{"id":16365314086,"nome":"Hemilly
+        Justiny Oliveira Santos Amorim","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18920063826,"numero":30640,"numeroLoja":"231011K0714YSE","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.75,"contato":{"id":16365370603,"nome":"Antonia
+        Cl\u00e1udia Rodrigues Fernandes","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18919608640,"numero":30628,"numeroLoja":"231010JWF8K0D3","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.9,"contato":{"id":16365214349,"nome":"Marceliane
+        Barros","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18919320040,"numero":30614,"numeroLoja":"231010JUUB9RA0","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-25","totalProdutos":59.9,"total":59.9,"contato":{"id":16365128837,"nome":"Vanessa
+        Gomes Zechner","tipoPessoa":"F","numeroDocumento":"034.520.917-67"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18919168260,"numero":30608,"numeroLoja":"231010JU117676","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.63,"contato":{"id":16365090278,"nome":"Ana
+        luza Gomes","tipoPessoa":"F","numeroDocumento":"054.643.056-29"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18918949138,"numero":30603,"numeroLoja":"231010JSWY575S","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-07","totalProdutos":49.9,"total":49.9,"contato":{"id":16365035806,"nome":"Shaieny
+        Vit\u00f3ria Da Silva Nascimento","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18918271250,"numero":30579,"numeroLoja":"231010JPNG52B7","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.74,"contato":{"id":16364866712,"nome":"Ana
+        Paula do Nascimento Arruda","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}},{"id":18896554221,"numero":29235,"numeroLoja":"2310068W05ERAX","data":"2023-10-06","dataSaida":"2023-10-06","dataPrevista":"2023-10-24","totalProdutos":49.9,"total":48.86,"contato":{"id":16358269063,"nome":"Z\u00e9lia
+        Ferreira Da Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982}}]}'
+  recorded_at: Wed, 11 Oct 2023 14:34:18 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?idsSituacoes%5B%5D=15&limite=100&pagina=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:19 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '11'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=8a39a21ff851a805
+      Set-Cookie:
+      - PHPSESSID=03hgu9842o31cpirruo3e9ap69; path=/; secure; HttpOnly
+      - PHPSESSID=psateqdaqjfu7e069t3djk0ueo; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2bdeee351f3-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[]}'
+  recorded_at: Wed, 11 Oct 2023 14:34:20 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928665224
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:21 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1373'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=04ed7182d768f046
+      Set-Cookie:
+      - PHPSESSID=260uqa4eu1p41sv87nmhi2vl6i; path=/; secure; HttpOnly
+      - PHPSESSID=d0ml6fobta3bmnck26k30aqcpb; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2c4afc31aab-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928665224,"numero":31048,"numeroLoja":"GSHNSP33A000EP2","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367924703,"nome":"Lucineide
+        Souza","tipoPessoa":"F","numeroDocumento":"010.437.364-41"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219375813,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:P","descricaoDetalhada":"","produto":{"id":15973680258},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426541105,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Lucineide
+        Souza","endereco":"Rua Dom Jos\u00e9 Tomaz","numero":"995","complemento":"","municipio":"Natal","uf":"RN","cep":"59022250","bairro":"Tirol","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:21 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928665119
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:22 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1399'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=e96b9ad415b08d6b
+      Set-Cookie:
+      - PHPSESSID=00bi2a538l3tdff8riuujnn5g8; path=/; secure; HttpOnly
+      - PHPSESSID=j76ah0b6eqrfroapk7ufrbqq9j; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2cb5c984cdf-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928665119,"numero":31047,"numeroLoja":"GSHNSP1090020AY","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367924655,"nome":"Sherlien
+        Vitoria","tipoPessoa":"F","numeroDocumento":"167.873.626-09"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219375761,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-G","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:G","descricaoDetalhada":"","produto":{"id":15957707541},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426541047,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Sherlien
+        Vitoria","endereco":"Ant\u00f4nio Honorato de Oliveira","numero":"21","complemento":"","municipio":"Carmo
+        do Cajuru","uf":"MG","cep":"35557000","bairro":"Adelino Mano","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:22 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928657820
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1511'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=31e1fcaba8f4a9fb
+      Set-Cookie:
+      - PHPSESSID=h3fca31dlogrma4oe5q4ivsmaa; path=/; secure; HttpOnly
+      - PHPSESSID=q252e9o6kr9cuprevql8vjt5jr; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2d21ab800c1-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928657820,"numero":31046,"numeroLoja":"231011NAY1X3FC","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-29","totalProdutos":59.9,"total":59.9,"contato":{"id":16367923083,"nome":"Maria
+        Clara Neves Da Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219372588,"codigo":"CONJ-FEND-TOP-NUDE-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":15977501218},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426538117,"dataVencimento":"2023-11-10","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Maria
+        Clara Neves Da Silva","endereco":"Rua Ge\u00f3rgia","numero":"465","complemento":"
+        S\u00e3o Paulo","municipio":"S\u00e3o Paulo","uf":"SP","cep":"04559010","bairro":"Brooklin
+        Paulista","nomePais":""},"volumes":[{"id":15230647378,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:23 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928520124
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:24 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1419'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=bc81dddd59ccb663
+      Set-Cookie:
+      - PHPSESSID=eium7b3t0964foon4alfthiud4; path=/; secure; HttpOnly
+      - PHPSESSID=vlq1nqu2dmn0dq8p1mtqata522; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2d8de4f02e3-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928520124,"numero":31045,"numeroLoja":"GSHNSP19A002RUA","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367893633,"nome":"Ang\u00e9lica
+        Azevedo","tipoPessoa":"F","numeroDocumento":"237.322.368-62"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219310467,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426478474,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Ang\u00e9lica
+        Azevedo","endereco":"Rua Joaquim Marques Castelhano","numero":"780","complemento":"","municipio":"Porto
+        Ferreira","uf":"SP","cep":"13664282","bairro":"Jardim Independ\u00eancia","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:24 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928363182
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:25 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1375'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=ed324c425b75bff5
+      Set-Cookie:
+      - PHPSESSID=g7jtdqev1v33nucii692qgit4g; path=/; secure; HttpOnly
+      - PHPSESSID=hr2nn35gp5qeh4md9gqhr02qfk; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2df7e15a597-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928363182,"numero":31044,"numeroLoja":"GSHNSP54A00092J","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367862659,"nome":"Joana
+        Sarmento","tipoPessoa":"F","numeroDocumento":"527.095.664-00"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219244307,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426413920,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Joana
+        Sarmento","endereco":"Rua projetada","numero":"02","complemento":"","municipio":"Mariz\u00f3polis","uf":"PB","cep":"58819000","bairro":"Vila
+        nova","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:25 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928362975
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:26 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1414'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=d570bc1de06ceae3
+      Set-Cookie:
+      - PHPSESSID=8ib3tn9k227umv8b05or4flncc; path=/; secure; HttpOnly
+      - PHPSESSID=k3pha9trltb7dcctiq0d3oo8v9; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2e67b3ea614-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928362975,"numero":31043,"numeroLoja":"GSHNSP47A000V9N","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367862577,"nome":"Mikaelly
+        Silva","tipoPessoa":"F","numeroDocumento":"353.520.538-73"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219244180,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:P","descricaoDetalhada":"","produto":{"id":15973680258},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426413794,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Mikaelly
+        Silva","endereco":"Rua Ant\u00f4nio Bisognini(Jd Tup\u00e3)","numero":"7505","complemento":"","municipio":"S\u00e3o
+        Bernardo do Campo","uf":"SP","cep":"09831550","bairro":"Dos Finco","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:26 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928175215
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1688'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=b21bc966e746d8e9
+      Set-Cookie:
+      - PHPSESSID=8ppdrp83s71hf0s27hra0arill; path=/; secure; HttpOnly
+      - PHPSESSID=nni3ricrphr8k0mr7b311h006e; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2ee0e7e1b31-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928175215,"numero":31041,"numeroLoja":"GSHNSP19A00M2VR","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":81.4,"total":81.4,"contato":{"id":16367823760,"nome":"Estefany
+        Santos","tipoPessoa":"F","numeroDocumento":"069.027.702-47"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219162521,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":40.7,"aliquota":0,"valor":0}},{"id":16219162522,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:P","descricaoDetalhada":"","produto":{"id":15973680258},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426335789,"dataVencimento":"2023-11-10","valor":81.4,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Estefany
+        Santos","endereco":"Primeira avenida","numero":"131","complemento":"","municipio":"Pedra
+        Branca do Amapari","uf":"AP","cep":"68945000","bairro":"Nova colina","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:27 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928175055
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1424'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=3cad8253090aa30d
+      Set-Cookie:
+      - PHPSESSID=2jsjqg27ok90letr8i566k7gt1; path=/; secure; HttpOnly
+      - PHPSESSID=hv2v1tij9q45nbd274tb49jnuo; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2f4ee3e1cf9-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928175055,"numero":31040,"numeroLoja":"GSHNSP06A00N3TB","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367823729,"nome":"Larissa
+        Correia","tipoPessoa":"F","numeroDocumento":"132.821.304-81"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219162444,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-G","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:G","descricaoDetalhada":"","produto":{"id":15973680260},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426335720,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Larissa
+        Correia","endereco":"Rua Doutor Valdevino Greg\u00f3rio de Andrade","numero":"800","complemento":"","municipio":"Jo\u00e3o
+        Pessoa","uf":"PB","cep":"58063480","bairro":"Valentina de Figueiredo","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:28 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928027335
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:29 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1385'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=0f5d36732e7019ab
+      Set-Cookie:
+      - PHPSESSID=69eu3oveh3osqbd6lhhtub31h8; path=/; secure; HttpOnly
+      - PHPSESSID=hjlcj72pd7m8sonb80qjm4qk2v; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d2fbd887a473-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928027335,"numero":31039,"numeroLoja":"GSHNSP58W001AXT","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367794107,"nome":"Jenifer
+        Canan Maia","tipoPessoa":"F","numeroDocumento":"110.142.649-79"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219099943,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426274820,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Jenifer
+        Canan Maia","endereco":"Prefeito albino  cerutti cella","numero":"36","complemento":"","municipio":"Armaz\u00e9m","uf":"SC","cep":"88740000","bairro":"","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:29 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928027170
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:30 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1385'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=229b9b828c5f2f53
+      Set-Cookie:
+      - PHPSESSID=2btppiv56qeb5gop10lrut4me3; path=/; secure; HttpOnly
+      - PHPSESSID=i06t6pdflt2dg9nc27bedgj56k; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3029f6b00c1-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928027170,"numero":31038,"numeroLoja":"GSHNSP58A00MET9","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367794053,"nome":"Bianca
+        Krugina","tipoPessoa":"F","numeroDocumento":"906.535.640-15"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219099852,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:P","descricaoDetalhada":"","produto":{"id":15973680258},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426274754,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Bianca
+        Krugina","endereco":"Rua Ix\u00f3rias","numero":"1295","complemento":"","municipio":"Lucas
+        do Rio Verde","uf":"MT","cep":"78455000","bairro":"Bandeirantes","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:30 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928026999
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:32 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1383'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=b0fe406ef8baa6a9
+      Set-Cookie:
+      - PHPSESSID=j0805i4cnkjo5v8g95toi70k11; path=/; secure; HttpOnly
+      - PHPSESSID=t6esdnj3rejf22f609o0s2dikn; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d30938b2014e-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928026999,"numero":31037,"numeroLoja":"GSHNSP54A001TCS","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16367794020,"nome":"Graziela
+        De Paula","tipoPessoa":"F","numeroDocumento":"102.267.409-94"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219099789,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426274663,"dataVencimento":"2023-11-10","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Graziela
+        De Paula","endereco":"rua arthur belini","numero":"2317","complemento":"","municipio":"Mandaguari","uf":"PR","cep":"86975000","bairro":"jd
+        cristina","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:32 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928026855
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:33 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1386'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=ce1a93e7e226df4d
+      Set-Cookie:
+      - PHPSESSID=081c6qkupf4mi2m87p5uvi78vu; path=/; secure; HttpOnly
+      - PHPSESSID=un3a1vovt04jkp3ofp1s34060p; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3100f316b1e-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928026855,"numero":31036,"numeroLoja":"GSHNSP2110004X5","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":89.9,"contato":{"id":16367793985,"nome":"Maria
+        jose Almeida","tipoPessoa":"F","numeroDocumento":"014.196.433-20"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219099718,"codigo":"Vest-Longo-Bojo-Romano-Nude-PP","unidade":"UN","quantidade":1,"desconto":0,"valor":89.9,"aliquotaIPI":0,"descricao":"Vestido
+        Romano Longo com Bojo Cor:Nude;Tamanho:PP","descricaoDetalhada":"","produto":{"id":16112725062},"comissao":{"base":89.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426274598,"dataVencimento":"2023-11-10","valor":89.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Maria
+        jose Almeida","endereco":"Rua Mariana de castro q 15","numero":"S\/n","complemento":"","municipio":"Guadalupe","uf":"PI","cep":"64840000","bairro":"Centro","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:33 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18928025908
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:34 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1384'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=82a28abae7e8af8f
+      Set-Cookie:
+      - PHPSESSID=dt6156phpflh4hd236pleeo1as; path=/; secure; HttpOnly
+      - PHPSESSID=mfcr75d5tqdu1vklk9g5ld8k4t; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d316aedd4b28-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18928025908,"numero":31035,"numeroLoja":"GSHNSP132001YJ1","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":69.9,"contato":{"id":16367793774,"nome":"Madalena
+        Marques","tipoPessoa":"F","numeroDocumento":"926.038.234-34"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219099323,"codigo":"CONJ-FEND-TOP-NUDE-PP","unidade":"Unidad","quantidade":1,"desconto":0,"valor":69.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15977501204},"comissao":{"base":69.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426274233,"dataVencimento":"2023-11-10","valor":69.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Madalena
+        Marques","endereco":"Rua tenente Paulo winteler","numero":"68","complemento":"","municipio":"Satuba","uf":"AL","cep":"57120000","bairro":"Centro","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:34 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18927980772
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:35 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2361'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=ca67d9ed8a62d2ab
+      Set-Cookie:
+      - PHPSESSID=64h9a4a5g21p3b5udmbttjlsef; path=/; secure; HttpOnly
+      - PHPSESSID=vvbfr1j1kre473ppd2mg5o1q2f; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d31d7c511d09-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18927980772,"numero":31034,"numeroLoja":"16831I16828","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":109.29,"total":122.36,"contato":{"id":16367784119,"nome":"Yasmim
+        de Oliveira Pereira","tipoPessoa":"F","numeroDocumento":"431.708.738-30"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219080866,"codigo":"BIQ-MARQUINHA-FIO-Rosa-M","unidade":"UN","quantidade":1,"desconto":0,"valor":36.43,"aliquotaIPI":0,"descricao":"Biqu\u00edni
+        de Marquinha de Fita Fio Duplo com Calcinha Tamanho:M;Cor:Rosa","descricaoDetalhada":"","produto":{"id":16141716243},"comissao":{"base":36.43,"aliquota":0,"valor":0}},{"id":16219080867,"codigo":"BIQ-MARQUINHA-FIO-Branco-M","unidade":"UN","quantidade":1,"desconto":0,"valor":36.43,"aliquotaIPI":0,"descricao":"Biqu\u00edni
+        de Marquinha de Fita Fio Duplo com Calcinha Tamanho:M;Cor:Branco","descricaoDetalhada":"","produto":{"id":16141716245},"comissao":{"base":36.43,"aliquota":0,"valor":0}},{"id":16219080868,"codigo":"BIQ-MARQUINHA-FIO-Preto-M","unidade":"UN","quantidade":1,"desconto":0,"valor":36.43,"aliquotaIPI":0,"descricao":"Biqu\u00edni
+        de Marquinha de Fita Fio Duplo com Calcinha Tamanho:M;Cor:Preto","descricaoDetalhada":"","produto":{"id":16141716248},"comissao":{"base":36.43,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426256632,"dataVencimento":"2023-11-10","valor":61.18,"observacoes":"M\u00e9todo
+        de pagamento: Paypal\\n","formaPagamento":{"id":1135275}},{"id":16426256633,"dataVencimento":"2023-12-10","valor":61.18,"observacoes":"M\u00e9todo
+        de pagamento: Paypal\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":13.07,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Yasmim
+        de Oliveira Pereira","endereco":"Rua Jos\u00e9 Alves de Paiva","numero":"410","complemento":"casa","municipio":"S\u00e3o
+        Jos\u00e9 dos Campos","uf":"SP","cep":"12248511","bairro":"Jardim Santa In\u00eas
+        II","nomePais":""},"volumes":[{"id":15230592623,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:35 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18927822297
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:36 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1385'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=4b51cd0f41a13062
+      Set-Cookie:
+      - PHPSESSID=ngki69ka9pgrnqrb8goqv6p6n1; path=/; secure; HttpOnly
+      - PHPSESSID=ugg7tsu82figeb9cvksff7fjtm; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3245e9aa4de-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18927822297,"numero":31033,"numeroLoja":"GSHNSP4090012VV","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":69.9,"contato":{"id":16367753166,"nome":"Yasmin
+        Mendes","tipoPessoa":"F","numeroDocumento":"134.330.587-09"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16219013256,"codigo":"CONJ-FEND-TOP-NUDE-PP","unidade":"Unidad","quantidade":1,"desconto":0,"valor":69.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15977501204},"comissao":{"base":69.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16426192109,"dataVencimento":"2023-11-10","valor":69.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Yasmin
+        Mendes","endereco":"Rua Maria Quit\u00e9ria","numero":"111","complemento":"","municipio":"Rio
+        de Janeiro","uf":"RJ","cep":"22410040","bairro":"Ipanema","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:36 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18927252711
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:37 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1522'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=562adc8826d41ea1
+      Set-Cookie:
+      - PHPSESSID=flgq91v133hq9se2bughirv08c; path=/; secure; HttpOnly
+      - PHPSESSID=j6r3vvd1j94100mav5nioorrdv; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d32beda351fe-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18927252711,"numero":31026,"numeroLoja":"231011N3NSFN5B","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-30","totalProdutos":59.9,"total":59.21,"contato":{"id":16367647755,"nome":"Evelyn
+        Silva de Carvalho","tipoPessoa":"F","numeroDocumento":"204.079.947-85"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.69,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16218798067,"codigo":"CONJ-FEND-TOP-NUDE-M","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:M","descricaoDetalhada":"","produto":{"id":15977501234},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425982533,"dataVencimento":"2023-11-10","valor":59.21,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Evelyn
+        Silva de Carvalho","endereco":"Rua Mariana","numero":"71","complemento":"
+        Duque de Caxias","municipio":"Duque de Caxias","uf":"RJ","cep":"25255520","bairro":"Vila
+        Bonan\u00e7a","nomePais":""},"volumes":[{"id":15230536680,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:37 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18926669341
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1521'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=05a26c2bb1601dcd
+      Set-Cookie:
+      - PHPSESSID=4aivdq70cg6a3t2f0ufdluq8h4; path=/; secure; HttpOnly
+      - PHPSESSID=iluude2cc19unuml76b6kfefiq; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d332beae0309-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18926669341,"numero":31020,"numeroLoja":"231011N1161TM5","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-12-19","totalProdutos":59.9,"total":70.12,"contato":{"id":16367554303,"nome":"Jessica
+        Figueiredo dos santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16218630742,"codigo":"CONJ-FEND-TOP-NUDE-M","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:M","descricaoDetalhada":"","produto":{"id":15977501234},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425815644,"dataVencimento":"2023-11-10","valor":70.12,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":10.22,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Jessica
+        Figueiredo dos santos","endereco":"Paran\u00e1","numero":"1002","complemento":"
+        Bairro Alto do Vilas","municipio":"Porto Seguro","uf":"BA","cep":"45816000","bairro":"Arraial
+        D''Ajuda","nomePais":""},"volumes":[{"id":15230498060,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:38 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18925435127
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:39 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1526'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=c52c4d69ef3b6b9d
+      Set-Cookie:
+      - PHPSESSID=cqe1lucek0pq6ui771q0c6anqk; path=/; secure; HttpOnly
+      - PHPSESSID=rs3pnv7sboenebk3mijul6d0l2; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3395ec4a58b-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18925435127,"numero":30997,"numeroLoja":"231011MCHPX5NE","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-25","totalProdutos":59.9,"total":52.82,"contato":{"id":16367320835,"nome":"Maria
+        Fernanda Jesus dos Santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":7.08,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16218277621,"codigo":"CONJ-FEND-TOP-NUDE-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":15977501218},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425476534,"dataVencimento":"2023-11-10","valor":52.82,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Maria
+        Fernanda Jesus dos Santos","endereco":"R Laplace","numero":"166","complemento":"
+        Santo Andr\u00e9","municipio":"Santo Andr\u00e9","uf":"SP","cep":"09131130","bairro":"Vila
+        Su\u00ed\u00e7a","nomePais":""},"volumes":[{"id":15230400780,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:39 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18925388763
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:40 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1500'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=49008096bf7b48e9
+      Set-Cookie:
+      - PHPSESSID=8rr8a2oo64hnkstmvm8oh3tv33; path=/; secure; HttpOnly
+      - PHPSESSID=u9fo4v0pggqt6pods997i63qa0; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3400b8f6025-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18925388763,"numero":30991,"numeroLoja":"231011M97G2GR5","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.31,"contato":{"id":16367298802,"nome":"Jamile
+        Oliveira Da Fonseca","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.59,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16218249209,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425451617,"dataVencimento":"2023-11-10","valor":49.31,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Jamile
+        Oliveira Da Fonseca","endereco":"Av. Leopoldo Leme Verneque","numero":"61","complemento":"Apia\u00ed","municipio":"Apia\u00ed","uf":"SP","cep":"18320000","bairro":"Centro","nomePais":""},"volumes":[{"id":15230392488,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:40 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18925316610
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:41 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1471'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=f267ab4bd84cd3eb
+      Set-Cookie:
+      - PHPSESSID=4hghn0qid5gb9rknqvug94u7ch; path=/; secure; HttpOnly
+      - PHPSESSID=ncj0td7eo6enb3bigsrevdkvjs; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3470a25601f-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18925316610,"numero":30978,"numeroLoja":"231011M6KFNFA6","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16367264212,"nome":"Iasmin
+        Tasca","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16218201873,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425410545,"dataVencimento":"2023-11-10","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Iasmin
+        Tasca","endereco":"Rom\u00e3o Fagundes","numero":"190","complemento":" Perd\u00f5es","municipio":"Perd\u00f5es","uf":"MG","cep":"37260000","bairro":"Vila
+        nova","nomePais":""},"volumes":[{"id":15230378935,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:41 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18925260430
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:43 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1497'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=26c2017ac947cca9
+      Set-Cookie:
+      - PHPSESSID=6bh8r8nit4u1u8epeqqr14doa4; path=/; secure; HttpOnly
+      - PHPSESSID=l8j29jp5296vbtth1cu23sfor0; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d34e0ee4a4fc-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18925260430,"numero":30963,"numeroLoja":"231011M5ED8UE0","data":"2023-10-11","dataSaida":"2023-10-11","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":61.38,"contato":{"id":16367237017,"nome":"Luciana
+        Mendes Dos Santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16218167035,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425379371,"dataVencimento":"2023-11-10","valor":61.38,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":11.48,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Luciana
+        Mendes Dos Santos","endereco":"Rua Sistema Solar","numero":"73","complemento":"
+        Csa","municipio":"S\u00e3o Mateus","uf":"ES","cep":"29942380","bairro":"Vit\u00f3ria","nomePais":""},"volumes":[{"id":15230367826,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:43 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18925137762
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:44 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1586'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=f281fbf8a5e85cf9
+      Set-Cookie:
+      - PHPSESSID=it9j1msjru3q9drle29j4gq57c; path=/; secure; HttpOnly
+      - PHPSESSID=m0pvamfu193n0kjnnohlpmfv8s; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d354ce161acd-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18925137762,"numero":30956,"numeroLoja":"231011M3VD09BA","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.77,"contato":{"id":16367172365,"nome":"Ester
+        Sales Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.13,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16218081880,"codigo":"CONJ-FEND-TOP-NUDE-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":15977501218},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425305905,"dataVencimento":"2023-11-09","valor":59.77,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Ester
+        Sales Silva","endereco":"Quadra QR 403  Conjunto 5 A lote 2 Resid\u00eancia
+        Lima","numero":"403","complemento":"Quadra QR 403  Conjunto 5 A lote 2 Resid\u00eancia
+        Lima","municipio":"Bras\u00edlia","uf":"DF","cep":"72319100","bairro":"Samambaia
+        Norte (Samambaia)","nomePais":""},"volumes":[{"id":15230340432,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:44 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18925015987
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:45 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1488'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=ec047892001609ec
+      Set-Cookie:
+      - PHPSESSID=for8vv0lkfnhg1lcmd3uh7h7mc; path=/; secure; HttpOnly
+      - PHPSESSID=gt676l5k6lbqo8n87nid51k78h; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d35ba9f401c3-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18925015987,"numero":30948,"numeroLoja":"231011M2J9G7F5","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.13,"contato":{"id":16367110408,"nome":"Manuella
+        Bousfield","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.77,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16218002051,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425235923,"dataVencimento":"2023-11-09","valor":49.13,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Manuella
+        Bousfield","endereco":"R Sto Ant\u00f4nio","numero":"1200","complemento":"Ap
+        1102","municipio":"S\u00e3o Jos\u00e9","uf":"SC","cep":"88117351","bairro":"Barreiros","nomePais":""},"volumes":[{"id":15230313959,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:45 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924674724
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:46 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1488'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=1f18f3f2518d9eda
+      Set-Cookie:
+      - PHPSESSID=ge26jpdunujihts13v9531cjii; path=/; secure; HttpOnly
+      - PHPSESSID=v8p1654gqc87d3g8em0ifj13ub; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3625cffa48c-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924674724,"numero":30911,"numeroLoja":"231011KYGGDQ01","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-25","totalProdutos":49.9,"total":49.9,"contato":{"id":16308464185,"nome":"Gildete
+        Nascimento Felipe","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217773540,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425035825,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Gildete
+        Nascimento Felipe","endereco":"R Olga","numero":"42","complemento":"Bloco
+        4 - Ap.22","municipio":"Barueri","uf":"SP","cep":"06436390","bairro":"Parque
+        dos Camargos","nomePais":""},"volumes":[{"id":15230237125,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:46 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924652252
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:47 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1521'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=e0f92d8b513dc57c
+      Set-Cookie:
+      - PHPSESSID=00a0tt0u7c22ik6tvoorb246l7; path=/; secure; HttpOnly
+      - PHPSESSID=l49pik6mbb68j8ebbiahk1j032; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d369ed17a523-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924652252,"numero":30905,"numeroLoja":"231011KYA2EPPU","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16366920644,"nome":"Dacilla
+        Luyza Rodrigues Dos Santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217757613,"codigo":"VEST-LONG-TOP-SAI-FEND-VERMELHO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Vermelho;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15973680261},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16425022092,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Dacilla
+        Luyza Rodrigues Dos Santos","endereco":"Manoelo Pereira de Almeida","numero":"76","complemento":"
+        Gongogi","municipio":"Gongogi","uf":"BA","cep":"45540000","bairro":"Nascer
+        Borges","nomePais":""},"volumes":[{"id":15230232259,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:47 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924580341
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:48 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1480'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=533f55a6b27b4e2d
+      Set-Cookie:
+      - PHPSESSID=3b4p1rlh9v25s2ije8mksu8q3g; path=/; secure; HttpOnly
+      - PHPSESSID=pbskrrecjo62jr0aqhqmn592pd; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d370ccd1a5ad-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924580341,"numero":30904,"numeroLoja":"231011KXR007PP","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.9,"contato":{"id":16366884924,"nome":"isabela
+        cavalcanti bras","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217710835,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424981593,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"isabela
+        cavalcanti bras","endereco":"Rua Cabo Reis","numero":"24","complemento":"casa
+        verde.","municipio":"Rio de Janeiro","uf":"RJ","cep":"21060410","bairro":"Ramos","nomePais":""},"volumes":[{"id":15230216501,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:48 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924392386
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:49 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1512'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=c2782bd0cb678974
+      Set-Cookie:
+      - PHPSESSID=a8524vjc0frlhekalkeeba1oas; path=/; secure; HttpOnly
+      - PHPSESSID=vb8li7i6ujpq05jnmmlm4a98ef; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d377a9441ac3-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924392386,"numero":30890,"numeroLoja":"231011KWA4SYUF","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":89.9,"total":106.01,"contato":{"id":16366791343,"nome":"livia
+        de souza silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217588801,"codigo":"Vest-Longo-Bojo-Romano-Nude-P","unidade":"UN","quantidade":1,"desconto":0,"valor":89.9,"aliquotaIPI":0,"descricao":"Vestido
+        Romano Longo com Bojo Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":16112725063},"comissao":{"base":89.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424874150,"dataVencimento":"2023-11-09","valor":106.01,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":16.11,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"livia
+        de souza silva","endereco":"Rua Vereador Doutor Alfredo Am\u00e9rico Leite","numero":"290","complemento":"casa","municipio":"Garanhuns","uf":"PE","cep":"55298250","bairro":"Heli\u00f3polis","nomePais":""},"volumes":[{"id":15230176871,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:49 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924378681
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:50 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1815'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=809fe137363f1854
+      Set-Cookie:
+      - PHPSESSID=9tf7q05de74a0f9kjlsdtvng2f; path=/; secure; HttpOnly
+      - PHPSESSID=nel6gk4mb7l009mitm0vqga2u6; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d37e9f85a6b2-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924378681,"numero":30889,"numeroLoja":"16829I16826","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":103.9,"contato":{"id":16366786002,"nome":"sarah
+        franca","tipoPessoa":"F","numeroDocumento":"449.885.068-86"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217581766,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":37.92,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":37.92,"aliquota":0,"valor":0}},{"id":16217581767,"codigo":"CONJ-FEND-TOP-PRETO-PP","unidade":"Unidad","quantidade":1,"desconto":0,"valor":53.12,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15994593241},"comissao":{"base":53.12,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424867894,"dataVencimento":"2023-11-09","valor":103.9,"observacoes":"M\u00e9todo
+        de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":12.86,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"sarah
+        franca","endereco":"Rua Orm\u00e1dio Pinola Filho","numero":"469","complemento":"A","municipio":"Jaguari\u00fana","uf":"SP","cep":"13910260","bairro":"Parque
+        Florian\u00f3polis","nomePais":""},"volumes":[{"id":15230174356,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:50 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924325213
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:51 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1495'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=b14052f4bc775a8f
+      Set-Cookie:
+      - PHPSESSID=bs4h14vielecvfn9kv3sa894oi; path=/; secure; HttpOnly
+      - PHPSESSID=h7nmef8um64mr6l4g81r8nca1p; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d38558e8a5f8-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924325213,"numero":30888,"numeroLoja":"231011KVTJ1GW5","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.9,"contato":{"id":16366761909,"nome":"Felipe
+        Bertelli","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217550284,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-M","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:M","descricaoDetalhada":"","produto":{"id":15957707539},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424839789,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Felipe
+        Bertelli","endereco":"Avenida Autom\u00f3vel Clube","numero":"500","complemento":"
+        Cap Santa Cruz","municipio":"Duque de Caxias","uf":"RJ","cep":"25255030","bairro":"Vila
+        Santa Cruz","nomePais":""},"volumes":[{"id":15230164012,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:51 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924194749
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:53 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1518'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=dc72fbe25f17c2ed
+      Set-Cookie:
+      - PHPSESSID=1k528n4jlo3aa3a7nf0jhl6opi; path=/; secure; HttpOnly
+      - PHPSESSID=eon8b26qk8c47nncdq530p427u; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d38c4ea8a5d4-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924194749,"numero":30877,"numeroLoja":"231011KUQ8XCJW","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-04","totalProdutos":49.9,"total":49.9,"contato":{"id":16366696629,"nome":"Elias
+        Almeida Fernandes","tipoPessoa":"F","numeroDocumento":"121.977.056-60"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217465079,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424762623,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Elias
+        Almeida Fernandes","endereco":"Maria Augusta","numero":"97","complemento":"
+        Santa Maria de Itabira","municipio":"Santa Maria de Itabira","uf":"MG","cep":"35910000","bairro":"Lambari","nomePais":""},"volumes":[{"id":15230135858,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:53 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924158776
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:54 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1520'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=2b5eafe2b9f5d602
+      Set-Cookie:
+      - PHPSESSID=a8t1a6t3nihrg4647q4t7isosg; path=/; secure; HttpOnly
+      - PHPSESSID=dbnjg1eaui8mbkh0oqj1omf96d; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d392ff59a5bf-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924158776,"numero":30871,"numeroLoja":"231011KUEBQVT5","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":47.69,"contato":{"id":16366678716,"nome":"Maria
+        Clara Da Silva Soares","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":2.21,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217440870,"codigo":"VEST-LONG-TOP-SAI-FEND-VERMELHO-M","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Vermelho;Tamanho:M","descricaoDetalhada":"","produto":{"id":15973680265},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424740776,"dataVencimento":"2023-11-09","valor":47.69,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Maria
+        Clara Da Silva Soares","endereco":"Rua das Carolinas","numero":" 157-A","complemento":"Casa-
+        A","municipio":"Jaboat\u00e3o dos Guararapes","uf":"PE","cep":"54430340","bairro":"Candeias","nomePais":""},"volumes":[{"id":15230127646,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:54 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18924050960
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:55 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1476'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=39eac0cd885a6db4
+      Set-Cookie:
+      - PHPSESSID=51c2pdj56tm65ra4oh7vqmlrk9; path=/; secure; HttpOnly
+      - PHPSESSID=6tkf4lgkfann5a7ce46mim47fo; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d399cfc1011b-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18924050960,"numero":30860,"numeroLoja":"231011KTHXVGM1","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-30","totalProdutos":59.9,"total":59.9,"contato":{"id":16366626085,"nome":"Vera
+        Alice","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217368861,"codigo":"CONJ-FEND-TOP-NUDE-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":15977501218},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424676677,"dataVencimento":"2023-11-09","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Vera
+        Alice","endereco":"Rua Ant\u00f4nio Mariano de Abreu","numero":"575","complemento":"Casa","municipio":"Belo
+        Horizonte","uf":"MG","cep":"31995000","bairro":"Paulo VI","nomePais":""},"volumes":[{"id":15230103752,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:55 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18923688093
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:56 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1528'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=9a94722810fdbb4b
+      Set-Cookie:
+      - PHPSESSID=79bi5715m7tooll4012h4ngqic; path=/; secure; HttpOnly
+      - PHPSESSID=rjnmhhcm8ibgeh6ksth02m1f1p; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3a08d671acf-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18923688093,"numero":30843,"numeroLoja":"231011KQVX3JBY","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-30","totalProdutos":49.9,"total":49.9,"contato":{"id":16366475458,"nome":"Ketlhy
+        Tania Paula dos Santos","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217166867,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424493769,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Ketlhy
+        Tania Paula dos Santos","endereco":"Das Mangueiras- Novo retiro","numero":"919","complemento":"
+        Pr\u00f3ximo ao beco da Lagoa","municipio":"Esmeraldas","uf":"MG","cep":"32807062","bairro":"Novo
+        Retiro","nomePais":""},"volumes":[{"id":15230036197,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:56 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18923575038
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:57 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1536'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=81e4e0866c128299
+      Set-Cookie:
+      - PHPSESSID=58aibkidphiv8gojktvkcef6kq; path=/; secure; HttpOnly
+      - PHPSESSID=j6tpajkaqfcicj3lgbnqvhrdv1; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3a7997f0322-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18923575038,"numero":30829,"numeroLoja":"231011KPT44U9E","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":59.9,"contato":{"id":16366422149,"nome":"Jos\u00e9
+        Wilter Nascimento De Castro","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217094386,"codigo":"CONJ-FEND-TOP-BRANCO-G","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Branco;Tamanho:G","descricaoDetalhada":"","produto":{"id":15979076305},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424426665,"dataVencimento":"2023-11-09","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Jos\u00e9
+        Wilter Nascimento De Castro","endereco":"R Helv\u00e9cio Mte","numero":"636","complemento":"
+        Proximo ao zezito","municipio":"Fortaleza","uf":"CE","cep":"60420040","bairro":"Vila
+        Uni\u00e3o","nomePais":""},"volumes":[{"id":15230013945,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:57 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18923541972
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:58 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1534'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=cf994e7f78fd977a
+      Set-Cookie:
+      - PHPSESSID=j374ivjj0ns8j38c4090slu99j; path=/; secure; HttpOnly
+      - PHPSESSID=ncn6vecmm0mg30aef7fl4r8ifl; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3af8d8c1ac6-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18923541972,"numero":30828,"numeroLoja":"231011KPFU58KF","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.9,"contato":{"id":16366407358,"nome":"Lara
+        Leticia Ventura Da Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217073593,"codigo":"CONJ-FEND-TOP-VERMELHO-GG","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Vermelho;Tamanho:GG","descricaoDetalhada":"","produto":{"id":16088177008},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424407664,"dataVencimento":"2023-11-09","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Lara
+        Leticia Ventura Da Silva","endereco":"Quadra SHCGN 706 Bloco H","numero":"30","complemento":"Quadra
+        SHCGN 706 Bloco H","municipio":"Bras\u00edlia","uf":"DF","cep":"70740708","bairro":"Asa
+        Norte","nomePais":""},"volumes":[{"id":15230007729,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:58 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18923480255
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:34:59 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1538'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=e683389ff9d7cab2
+      Set-Cookie:
+      - PHPSESSID=fvjb0oh8sokmb4g9src0nhekdb; path=/; secure; HttpOnly
+      - PHPSESSID=lh1nd1j78tquifijidv293a2qn; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3b73ca351f3-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18923480255,"numero":30818,"numeroLoja":"231011KNV1WXBT","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-04","totalProdutos":59.9,"total":59.19,"contato":{"id":16366379238,"nome":"Iraildes
+        Dias Da Concei\u00e7\u00e3o","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.71,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16217034264,"codigo":"VEST-LONG-FEND-ARGO-VERMELHO-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"VESTIDO
+        LONGO FENDA COM ARGOLA cor:Vermelho;tamanho:P","descricaoDetalhada":"","produto":{"id":15974450549},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424371461,"dataVencimento":"2023-11-09","valor":59.19,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Iraildes
+        Dias Da Concei\u00e7\u00e3o","endereco":"Rua Jos\u00e9 le\u00e3o","numero":"0169","complemento":"
+        Avenida","municipio":"Dias d''\u00c1vila","uf":"BA","cep":"42850000","bairro":"Santa
+        Helena","nomePais":""},"volumes":[{"id":15229995919,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:34:59 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18923060463
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1497'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=105fd81af09da119
+      Set-Cookie:
+      - PHPSESSID=i1stijkrqjb7i9ib452p1tn941; path=/; secure; HttpOnly
+      - PHPSESSID=sg833qnp94nnni4depntgfme7m; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3be0cdea690-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18923060463,"numero":30790,"numeroLoja":"231011KHV4S9TX","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-25","totalProdutos":49.9,"total":61.37,"contato":{"id":16366206166,"nome":"Brenda
+        Gomes Da Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.01,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216768281,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424121172,"dataVencimento":"2023-11-09","valor":61.37,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":11.48,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Brenda
+        Gomes Da Silva","endereco":"Rua Jos\u00e9 Costalonga","numero":"251","complemento":"Casa","municipio":"Presidente
+        Kennedy","uf":"ES","cep":"29350000","bairro":"Centro","nomePais":""},"volumes":[{"id":15229920570,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:01 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18923010112
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:02 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1508'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=cfc33cf5bf77a791
+      Set-Cookie:
+      - PHPSESSID=ae840knf3vrc8th63nhasvk51h; path=/; secure; HttpOnly
+      - PHPSESSID=ufvjrl9uqpqdcfpkbpe0gpo9qk; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3c4ecd64b2e-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18923010112,"numero":30783,"numeroLoja":"231011KHE2KFU4","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-26","totalProdutos":49.9,"total":49.9,"contato":{"id":16366187693,"nome":"Aline
+        Cristina Silv\u00e9rio","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216736563,"codigo":"VEST-LONG-TOP-SAI-FEND-VERMELHO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Vermelho;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15973680261},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16424090353,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Aline
+        Cristina Silv\u00e9rio","endereco":"Rua Bentoca","numero":"46","complemento":"
+        Ja\u00fa","municipio":"Ja\u00fa","uf":"SP","cep":"17220018","bairro":"Jardim
+        Olaria (Potunduva)","nomePais":""},"volumes":[{"id":15229912173,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:02 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18922793872
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1484'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=57e3d0f10523e55f
+      Set-Cookie:
+      - PHPSESSID=2o20bj2hurl0vujf3cised3fq5; path=/; secure; HttpOnly
+      - PHPSESSID=9ecgdgm31uvgo8oesd5otlcvvq; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3cbbce551ae-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18922793872,"numero":30769,"numeroLoja":"231011KFQHBQB8","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-29","totalProdutos":59.9,"total":71.38,"contato":{"id":16366121031,"nome":"Josiany","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216611201,"codigo":"CONJ-FEND-TOP-BRANCO-M","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Branco;Tamanho:M","descricaoDetalhada":"","produto":{"id":15979076304},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423966270,"dataVencimento":"2023-11-09","valor":71.38,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":11.48,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Josiany","endereco":"Rua
+        das Nascentes","numero":"308","complemento":" Igreja assembleia de Deus","municipio":"Serra","uf":"ES","cep":"29161692","bairro":"Jardim
+        Carapina","nomePais":""},"volumes":[{"id":15229884569,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:03 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18922514767
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:04 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1809'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=d87b0569e5a4fc0b
+      Set-Cookie:
+      - PHPSESSID=a90glnduletbq3l04hnovkfijm; path=/; secure; HttpOnly
+      - PHPSESSID=qht3il5ub0eq5c2oddim5c7j15; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3d27e47a4ae-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18922514767,"numero":30761,"numeroLoja":"16828I16825","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":85.69,"contato":{"id":16309452684,"nome":"Yasmin
+        Soares","tipoPessoa":"F","numeroDocumento":"465.531.058-80"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":18.21,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216455855,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-M","unidade":"1","quantidade":1,"desconto":0,"valor":37.92,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:M","descricaoDetalhada":"","produto":{"id":15973680259},"comissao":{"base":37.92,"aliquota":0,"valor":0}},{"id":16216455856,"codigo":"CONJ-FEND-TOP-VERMELHO-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":53.12,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Vermelho;Tamanho:P","descricaoDetalhada":"","produto":{"id":16085668347},"comissao":{"base":53.12,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423818490,"dataVencimento":"2023-11-09","valor":85.69,"observacoes":"M\u00e9todo
+        de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":12.86,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Yasmin
+        Soares","endereco":"Rua Silverstone","numero":"849","complemento":"Casa 3B","municipio":"Jandira","uf":"SP","cep":"06634000","bairro":"Jardim
+        S\u00e3o Jo\u00e3o","nomePais":""},"volumes":[{"id":15229852155,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:04 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18922468205
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:05 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1495'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=7664254fe3508cfb
+      Set-Cookie:
+      - PHPSESSID=h7da6t3d5ollfhkgq0599u6kq1; path=/; secure; HttpOnly
+      - PHPSESSID=ipj8fulh9clindf9odd1iu9l49; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3d96d9d00de-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18922468205,"numero":30755,"numeroLoja":"231011KDHW2N6F","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":59.9,"contato":{"id":16366030946,"nome":"Sheldon
+        Soares Rodrigues","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216428804,"codigo":"CONJ-FEND-TOP-NUDE-M","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:M","descricaoDetalhada":"","produto":{"id":15977501234},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423792790,"dataVencimento":"2023-11-09","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Sheldon
+        Soares Rodrigues","endereco":"Rua Silva Ba\u00edma","numero":"638","complemento":"
+        Fortaleza","municipio":"Fortaleza","uf":"CE","cep":"60526065","bairro":"Dom
+        Lustosa","nomePais":""},"volumes":[{"id":15229846782,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:05 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18922125850
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:06 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1763'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=06e631ad5e465929
+      Set-Cookie:
+      - PHPSESSID=7v2c86nvbboi4i0efva3ils38i; path=/; secure; HttpOnly
+      - PHPSESSID=g1uu88q2vroc729ebll290qtmn; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3e11e0000ea-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18922125850,"numero":30741,"numeroLoja":"16827I16824","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":111.04,"contato":{"id":16365943985,"nome":"Patricia
+        Perroud","tipoPessoa":"F","numeroDocumento":"416.125.428-83"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216249479,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":37.92,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":37.92,"aliquota":0,"valor":0}},{"id":16216249480,"codigo":"CONJ-FEND-TOP-PRETO-PP","unidade":"Unidad","quantidade":1,"desconto":0,"valor":53.12,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15994593241},"comissao":{"base":53.12,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423623575,"dataVencimento":"2023-11-09","valor":111.04,"observacoes":"M\u00e9todo
+        de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":20,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":1,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Patricia
+        Perroud","endereco":"Rua Washington Lu\u00eds","numero":"45","complemento":"apto
+        14","municipio":"S\u00e3o Caetano do Sul","uf":"SP","cep":"09581120","bairro":"S\u00e3o
+        Jos\u00e9","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:06 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18922067578
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:07 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1503'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=15b23bc234bc45ce
+      Set-Cookie:
+      - PHPSESSID=6ivqm79nt4ndlsnvhqp75saulv; path=/; secure; HttpOnly
+      - PHPSESSID=q6bj6tp8bb7a123endfsnh9gp0; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3e80f2ca51d-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18922067578,"numero":30740,"numeroLoja":"231011KB6GSJB5","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-04","totalProdutos":49.9,"total":49.9,"contato":{"id":16365928511,"nome":"Juliane
+        Alves Barbosa","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216218832,"codigo":"VEST-LONG-TOP-SAI-FEND-NUDE-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Nude;Tamanho:PP","descricaoDetalhada":"","produto":{"id":16098394424},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423593737,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Juliane
+        Alves Barbosa","endereco":"Domingos pereira almeida","numero":"696","complemento":"Casa
+        proximo a cx dagua","municipio":"Uba\u00ed","uf":"MG","cep":"39320000","bairro":"Jardim
+        brasil","nomePais":""},"volumes":[{"id":15229803948,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:07 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18921971736
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1469'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=d1efc1c081723dd8
+      Set-Cookie:
+      - PHPSESSID=cm8m8h4l64qab22tm1lvmpotic; path=/; secure; HttpOnly
+      - PHPSESSID=sfecac0bavjr5hq2iguuah4lsh; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3eebf83a4d7-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18921971736,"numero":30732,"numeroLoja":"231011KAQH2K0B","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16365908175,"nome":"Maria
+        Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216176657,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423553833,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Maria
+        Silva","endereco":"Rua Viriato Augusto","numero":"41","complemento":" Rafael
+        Jambeiro","municipio":"Rafael Jambeiro","uf":"BA","cep":"44520000","bairro":"Argoim","nomePais":""},"volumes":[{"id":15229795211,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:08 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18921902009
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:09 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1443'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=c4fd9a7e77a3aa7c
+      Set-Cookie:
+      - PHPSESSID=61hbbmko55q2tmj12bgl9d2706; path=/; secure; HttpOnly
+      - PHPSESSID=msrfh27k30urv1521r4t1tl0hh; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d3f55fbe1b0e-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18921902009,"numero":30731,"numeroLoja":"16826I16823","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":69.9,"contato":{"id":16365889378,"nome":"Julia
+        Nobre","tipoPessoa":"F","numeroDocumento":"479.141.668-63"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216139720,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423519924,"dataVencimento":"2023-11-09","valor":69.9,"observacoes":"M\u00e9todo
+        de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":20,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":1,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Julia
+        Nobre","endereco":"Rua Iaru\u00e7u","numero":"43","complemento":"Apto 13","municipio":"S\u00e3o
+        Paulo","uf":"SP","cep":"08223190","bairro":"Cidade Ant\u00f4nio Estev\u00e3o
+        de Carvalho","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:09 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18921701119
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:11 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1481'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=c889a2dff0051fb6
+      Set-Cookie:
+      - PHPSESSID=nspdmfoleblnpe5the433uqe6q; path=/; secure; HttpOnly
+      - PHPSESSID=ood15t58an2sf91apjdmmbjjhg; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d4002f7e019d-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18921701119,"numero":30717,"numeroLoja":"231011K96BK393","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.9,"contato":{"id":16365835368,"nome":"Lavinia","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16216034180,"codigo":"VEST-LONG-TOP-SAI-FEND-NUDE-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Nude;Tamanho:PP","descricaoDetalhada":"","produto":{"id":16098394424},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423421654,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Lavinia","endereco":"Rua
+        Madalena Pontes Mendes","numero":" 195E","complemento":"Casa do port\u00e3o
+        de a\u00e7o","municipio":"Salvador","uf":"BA","cep":"40715382","bairro":"Rio
+        Sena","nomePais":""},"volumes":[{"id":15229767626,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:11 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18921466772
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:12 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1489'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=3427744138731892
+      Set-Cookie:
+      - PHPSESSID=570fopn1dj4ev5gcuokk3kstgl; path=/; secure; HttpOnly
+      - PHPSESSID=s8ba2mcn6dm4ghdlp87uj752ub; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d407093251d8-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18921466772,"numero":30712,"numeroLoja":"16823I16820","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"0000-00-00","totalProdutos":30,"total":40.12,"contato":{"id":16365771593,"nome":"Manuela
+        Ramos","tipoPessoa":"F","numeroDocumento":"198.640.158-85"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16215907176,"codigo":"VEST-OMBRO-A-OMBRO-LAZINHA-Preto-P","unidade":"UN","quantidade":1,"desconto":0,"valor":30,"aliquotaIPI":0,"descricao":"VESTIDO
+        L\u00c3ZINHA OMBRO A OMBRO Tamanho:P;Cor:Preto","descricaoDetalhada":"","produto":{"id":16093464519},"comissao":{"base":30,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423304322,"dataVencimento":"2023-11-09","valor":40.12,"observacoes":"M\u00e9todo
+        de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":10.12,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Manuela
+        Ramos","endereco":"Rua Manguari","numero":"501","complemento":"Ap 101 D","municipio":"S\u00e3o
+        Paulo","uf":"SP","cep":"02167080","bairro":"Jardim Andara\u00ed","nomePais":""},"volumes":[{"id":15229741059,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:12 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18921329410
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:13 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1523'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=5cda4e2566a1f8f5
+      Set-Cookie:
+      - PHPSESSID=eel81vm596t0nvd56knoo1rqn1; path=/; secure; HttpOnly
+      - PHPSESSID=kvg6hd4rihr3o7ejse2nen1v9p; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d40deb084d30-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18921329410,"numero":30706,"numeroLoja":"231011K73GVAKS","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-15","totalProdutos":49.9,"total":49.9,"contato":{"id":16365735610,"nome":"Andrey
+        De Souza Oliveira","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16215839257,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16423240173,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Andrey
+        De Souza Oliveira","endereco":"Estrada da Praia","numero":" 0","complemento":"
+        Vilagem do Porto de itacimirim","municipio":"Cama\u00e7ari","uf":"BA","cep":"42840754","bairro":"Itacimirim
+        (Monte Gordo)","nomePais":""},"volumes":[{"id":15229727008,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:13 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18920636365
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:18 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1528'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=b050b57f103998e6
+      Set-Cookie:
+      - PHPSESSID=13lhs89v6oaskndean8a9r59k4; path=/; secure; HttpOnly
+      - PHPSESSID=rtsco4b2a68nt9uebqservkkps; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d414980900ff-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18920636365,"numero":30671,"numeroLoja":"231011K3BUDHNY","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":59.9,"contato":{"id":16365543909,"nome":"Lira
+        Evelyn Ap\u00f3stolo Andrade","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16215485383,"codigo":"CONJ-FEND-TOP-BRANCO-M","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Branco;Tamanho:M","descricaoDetalhada":"","produto":{"id":15979076304},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16422907824,"dataVencimento":"2023-11-09","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Lira
+        Evelyn Ap\u00f3stolo Andrade","endereco":"Rua do c\u00e9u","numero":"19","complemento":"
+        Pr\u00f3ximo ao bar de diogo","municipio":"Itaparica","uf":"BA","cep":"44460000","bairro":"Amoreiras","nomePais":""},"volumes":[{"id":15229649326,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:18 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18920151524
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:20 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1562'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=f602d4e4843cde5e
+      Set-Cookie:
+      - PHPSESSID=51amors8rdqpv4fmifs2ev8idq; path=/; secure; HttpOnly
+      - PHPSESSID=8lrl3g0tgcreud386ea8f1igrq; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d4347843011b-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18920151524,"numero":30648,"numeroLoja":"231011K0Q36P6W","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-25","totalProdutos":59.9,"total":59.9,"contato":{"id":16365314086,"nome":"Hemilly
+        Justiny Oliveira Santos Amorim","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16215231360,"codigo":"CONJ-FEND-TOP-NUDE-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":15977501218},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16422665227,"dataVencimento":"2023-11-09","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Hemilly
+        Justiny Oliveira Santos Amorim","endereco":"Rua do Mandi","numero":"596","complemento":"Casa
+        verde com varanda","municipio":"Santana de Parna\u00edba","uf":"SP","cep":"06535250","bairro":"Cidade
+        S\u00e3o Pedro - Gleba B","nomePais":""},"volumes":[{"id":15229590427,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:20 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18920063826
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:22 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1546'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=afa9fecb6ed30881
+      Set-Cookie:
+      - PHPSESSID=3sdp5jjhecm03io8th83btvjjc; path=/; secure; HttpOnly
+      - PHPSESSID=tfl76kd44e4m6lmm221im5igd5; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d43f4a4051fe-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18920063826,"numero":30640,"numeroLoja":"231011K0714YSE","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.75,"contato":{"id":16365370603,"nome":"Antonia
+        Cl\u00e1udia Rodrigues Fernandes","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.15,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16215184690,"codigo":"VEST-LONG-TOP-SAI-FEND-VERMELHO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Vermelho;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15973680261},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16422619956,"dataVencimento":"2023-11-09","valor":49.75,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Antonia
+        Cl\u00e1udia Rodrigues Fernandes","endereco":"Joaquim Pereira da Silveira","numero":"277","complemento":"
+        Itaitinga","municipio":"Itaitinga","uf":"CE","cep":"61880000","bairro":"Parque
+        Genezare","nomePais":""},"volumes":[{"id":15229579537,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:22 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18919608640
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1524'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=4609615fc563580c
+      Set-Cookie:
+      - PHPSESSID=5cjg3c3182gbepgv1e636njgks; path=/; secure; HttpOnly
+      - PHPSESSID=vitqd9cb3ctij9u2nltdm57jme; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d449f937a537-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18919608640,"numero":30628,"numeroLoja":"231010JWF8K0D3","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.9,"contato":{"id":16365214349,"nome":"Marceliane
+        Barros","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16214918944,"codigo":"CONJ-FEND-TOP-VERMELHO-M","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Vermelho;Tamanho:M","descricaoDetalhada":"","produto":{"id":16085668349},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16422368337,"dataVencimento":"2023-11-09","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Marceliane
+        Barros","endereco":"Rua 31","numero":"31","complemento":" S\u00e3o sebasti\u00e3o","municipio":"Bras\u00edlia","uf":"DF","cep":"71691137","bairro":"Setor
+        Tradicional (S\u00e3o Sebasti\u00e3o)","nomePais":""},"volumes":[{"id":15229511502,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:23 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18919320040
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:24 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1515'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=3e75cae31d5ae666
+      Set-Cookie:
+      - PHPSESSID=2suh6td6oc17ba1i26g1b9a91i; path=/; secure; HttpOnly
+      - PHPSESSID=m8v362t9jpg363iank222om2mp; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d450fd2e1ced-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18919320040,"numero":30614,"numeroLoja":"231010JUUB9RA0","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-25","totalProdutos":59.9,"total":59.9,"contato":{"id":16365128837,"nome":"Vanessa
+        Gomes Zechner","tipoPessoa":"F","numeroDocumento":"034.520.917-67"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16214765132,"codigo":"CONJ-FEND-TOP-NUDE-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":15977501218},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16422225499,"dataVencimento":"2023-11-09","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Vanessa
+        Gomes Zechner","endereco":"Rua Alexandre Martins de Figueiredo","numero":"86","complemento":"Casa","municipio":"Vit\u00f3ria","uf":"ES","cep":"29072070","bairro":"Solon
+        Borges","nomePais":""},"volumes":[{"id":15229476864,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:24 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18919168260
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:25 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1479'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=2b97cfb11a1e3a5a
+      Set-Cookie:
+      - PHPSESSID=21rdqarmo3usje8966cb3kgl33; path=/; secure; HttpOnly
+      - PHPSESSID=fdjmp1j2c6reqen7slel8ipo4h; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d457fcad01d5-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18919168260,"numero":30608,"numeroLoja":"231010JU117676","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.63,"contato":{"id":16365090278,"nome":"Ana
+        luza Gomes","tipoPessoa":"F","numeroDocumento":"054.643.056-29"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.27,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16214687040,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-M","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:M","descricaoDetalhada":"","produto":{"id":15957707539},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16422152874,"dataVencimento":"2023-11-09","valor":49.63,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Ana
+        luza Gomes","endereco":"Rua Iara","numero":"248","complemento":"Casa","municipio":"Santa
+        Luzia","uf":"MG","cep":"33125570","bairro":"S\u00e3o Benedito","nomePais":""},"volumes":[{"id":15229461010,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:25 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18918949138
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:26 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1509'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=9e05b4c6682a9132
+      Set-Cookie:
+      - PHPSESSID=6vber8596d4rb4tng5uk6975au; path=/; secure; HttpOnly
+      - PHPSESSID=ju55n0sgija4iqjsc1037a52h6; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d45ee9a101b6-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18918949138,"numero":30603,"numeroLoja":"231010JSWY575S","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-11-07","totalProdutos":49.9,"total":49.9,"contato":{"id":16365035806,"nome":"Shaieny
+        Vit\u00f3ria Da Silva Nascimento","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16214579354,"codigo":"VEST-LONG-TOP-SAI-FEND-VERMELHO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Vermelho;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15973680261},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16422053603,"dataVencimento":"2023-11-09","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Shaieny
+        Vit\u00f3ria Da Silva Nascimento","endereco":"Pouso Alegre","numero":"247","complemento":"
+        Ipaba","municipio":"Ipaba","uf":"MG","cep":"35198000","bairro":"Centro","nomePais":""},"volumes":[{"id":15229437740,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:26 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18918271250
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1547'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=dfea066dd756b3e5
+      Set-Cookie:
+      - PHPSESSID=1pngag0m9bogvmi1u9f9pj6088; path=/; secure; HttpOnly
+      - PHPSESSID=52o97unfefumb8krjl33unelu1; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d465de72010e-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18918271250,"numero":30579,"numeroLoja":"231010JPNG52B7","data":"2023-10-10","dataSaida":"2023-10-10","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.74,"contato":{"id":16364866712,"nome":"Ana
+        Paula do Nascimento Arruda","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0.16,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16214257388,"codigo":"CONJ-FEND-TOP-NUDE-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":59.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":15977501218},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16421752792,"dataVencimento":"2023-11-09","valor":59.74,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Ana
+        Paula do Nascimento Arruda","endereco":"qc 06 conjunto 06 casa 41 - Riacho
+        Fundo II","numero":"71882256","complemento":" 71882256","municipio":"Bras\u00edlia","uf":"DF","cep":"71882256","bairro":"Riacho
+        Fundo II","nomePais":""},"volumes":[{"id":15229366036,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:27 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18896554221
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2023 14:35:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1535'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=b446e784c0f08009
+      Set-Cookie:
+      - PHPSESSID=5asp9b4smvln0qsg73rt6ff0vp; path=/; secure; HttpOnly
+      - PHPSESSID=jqmcreii0tqiiop28o2bs6l9fb; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8147d46cec4d00ff-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18896554221,"numero":29235,"numeroLoja":"2310068W05ERAX","data":"2023-10-06","dataSaida":"2023-10-06","dataPrevista":"2023-10-24","totalProdutos":49.9,"total":48.86,"contato":{"id":16358269063,"nome":"Z\u00e9lia
+        Ferreira Da Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":1.04,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16202928565,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16410828970,"dataVencimento":"2023-11-05","valor":48.86,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Z\u00e9lia
+        Ferreira Da Silva","endereco":"Rua C\u00e9sar Xar\u00e1","numero":"368","complemento":"
+        Oficina ao lado do nota 10","municipio":"Itabora\u00ed","uf":"RJ","cep":"24804781","bairro":"Venda
+        das Pedras","nomePais":""},"volumes":[{"id":15226656403,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Wed, 11 Oct 2023 14:35:28 GMT
+recorded_with: VCR 6.2.0

@@ -27,4 +27,10 @@ RSpec.describe BlingOrderItem, type: :model do
       expect(subject.store_name).to eq('Shein')
     end
   end
+
+  describe '#Status::ALL' do
+    it 'has status all' do
+      expect(described_class::Status::ALL).to eq([15, 101_065, 24, 94_871, 95_745, 12])
+    end
+  end
 end

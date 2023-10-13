@@ -1,10 +1,31 @@
 class BlingOrderItemCreatorJob < ApplicationJob
   queue_as :default
-  attr_accessor :current_user
+  attr_accessor :account_id
 
-  def perform(orders, current_user)
-    # TODO, refactor me with find or create by active record method
-    @current_user = current_user
+  def perform(account_id)
+    @account_id = account_id
+    list_status_situation.each do |status|
+      orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
+                                           situation: status)
+      orders = orders['data']
+      next if orders.blank?
+
+      create_orders(orders)
+    end
+  end
+
+  private
+
+  def list_status_situation
+    BlingOrderItem::Status::ALL
+  end
+
+  def fetch_order_data(order_id)
+    Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
+                                    tenant: account_id)
+  end
+
+  def create_orders(orders)
     orders.each do |order_data|
       order_id = order_data['id']
 
@@ -19,6 +40,11 @@ class BlingOrderItemCreatorJob < ApplicationJob
       end
 
       fetched_order_data = fetch_order_data(order_id)
+      begin
+        fetched_order_data['data']['itens']
+      rescue
+        next
+      end
 
       fetched_order_data['data']['itens'].each do |item_data|
         BlingOrderItem.create!(
@@ -37,12 +63,5 @@ class BlingOrderItemCreatorJob < ApplicationJob
         )
       end
     end
-  end
-
-  private
-
-  def fetch_order_data(order_id)
-    Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
-                                    tenant: current_user.account.id)
   end
 end
