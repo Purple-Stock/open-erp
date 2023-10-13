@@ -15,11 +15,6 @@ FactoryBot.create(:user, password: '123456', email: 'fashion.store@email.com')
 FactoryBot.create(:bling_datum, account_id: 1, expires_at: (Time.zone.local(13) + 3.days),
                                 access_token: ENV['ACCESS_TOKEN'], refresh_token: ENV['REFRESH_TOKEN'])
 
-FactoryBot.create_list(:bling_order_item, 2, valor: 1.5, store_id: '204219105', situation_id: '94871', date: Time.zone.today)
-FactoryBot.create_list(:bling_order_item, 2, valor: 10.5, store_id: '203737982', situation_id: '94871', date: Time.zone.today)
-FactoryBot.create_list(:bling_order_item, 2, valor: 100.5, store_id: '203467890', situation_id: '94871', date: Time.zone.today)
-FactoryBot.create_list(:bling_order_item, 2, valor: 50.5, store_id: '204061683', situation_id: '94871', date: Time.zone.today)
-
 Rails.logger.debug 'Categories'
 50.times { FactoryBot.create(:category, name: Faker::Lorem.word) }
 50.times { Category.create(name: Faker::Lorem.word, account_id: 1) }
