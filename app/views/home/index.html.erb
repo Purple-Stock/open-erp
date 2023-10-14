@@ -9,8 +9,9 @@
   <% end %>
 
   <div class="container">
-    <br><br><br>
     <h1>Pedidos de Hoje</h1>
+    <p>Última Atualização: <%= @last_update %></p>
+    <p>Token Expira: <%= @expires_at %></p>
     <div class="row justify-content-center">
       <% @current_order_items.group_by(&:store_id).each do |store_id, items| %>
         <% loja_name = items.first.store_name %>
@@ -51,10 +52,6 @@
   </div>
 
   <h1>Pedidos Em andamento(Pagos)</h1>
-  
-  <p>Última Atualização: <%= @last_update %></p>
-
-  <p>Token Expira: <%= @expires_at %></p>
 
   <div class="row justify-content-center">
 
