@@ -1,0 +1,9 @@
+<%= form_with(model: shein_order, data: { controller: 'validation' }) do |form| %>
+  <div class="form-group">
+    <%= form.label :data %>
+    <%= form.text_field :data, class: 'form-control' %>
+  </div>
+  <div class="card-footer pl-0">
+    <%= form.submit class: 'btn btn-success' %>
+  </div>
+<% end %>
