@@ -1,0 +1,6 @@
+<!-- app/views/shein_orders/upload.html.erb -->
+
+<%= form_with(url: import_shein_orders_path, local: true, method: :post, multipart: true) do %>
+  <%= file_field_tag :file, accept: '.xlsx, .xls' %>
+  <%= submit_tag "Upload" %>
+<% end %>
