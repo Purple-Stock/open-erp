@@ -133,6 +133,6 @@ gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
 gem "good_job", "~> 3.19", ">= 3.19.1"
 
-gem 'roo' # for reading Excel files
-gem 'roo-xls' # for additional Excel file types
-gem 'activerecord-import' # for efficient bulk inserts/updates
+gem 'roo'
+gem 'roo-xls'
+gem 'activerecord-import'
