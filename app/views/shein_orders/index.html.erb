@@ -1,0 +1,57 @@
+<!-- app/views/shein_orders/index.html.erb -->
+
+<section class="section">
+  <div class="section-header d-mobile-none">
+    <h1>Shein Orders</h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item"><%= link_to 'Dashboard', root_path %></div>
+      <div class="breadcrumb-item">List of Shein Orders</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="card">
+      <div class="card-header">
+        <%= link_to 'Upload Excel', upload_shein_orders_path, class: 'btn btn-primary' %>
+        <h4>List of Shein Orders</h4>
+        <div class="card-header-action">
+          <%= link_to icon('fas fa-plus', 'New Shein Order'), new_shein_order_path, class: 'btn btn-icon icon-left btn-primary' %>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-md">
+            <thead>
+              <tr>
+                <th>Número do Pedido</th>
+                <th>Status do Pedido</th>
+                <th>Limite de Tempo para Coletar</th>
+                <th>Tempo Restante</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @shein_orders.each do |shein_order| %>
+                <tr>
+                  <td><%= shein_order.data['Número do pedido'] %></td>
+                  <td><%= shein_order.data['Status do pedido'] %></td>
+                  <td><%= shein_order.data['Limite de tempo para coletar'] %></td>
+                  <td><%= time_remaining(shein_order) %></td>
+                  <td><%= order_status(shein_order) %></td>
+                  <td>
+                    <%= link_to icon('fas fa-pencil-alt'), edit_shein_order_path(shein_order), title: t('edit'), class: 'btn btn-primary' %>
+                    <%= link_to icon('fas fa-eye'), shein_order, title: t('show'), class: 'btn btn-info' %>
+                    <%= link_to icon('fas fa-trash'), shein_order, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { confirm: t('confirm') } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% content_for(:page_title, 'List of Shein Orders') %>
