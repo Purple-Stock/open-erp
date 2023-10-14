@@ -69,6 +69,8 @@ GEM
     activerecord (7.0.8)
       activemodel (= 7.0.8)
       activesupport (= 7.0.8)
+    activerecord-import (1.5.0)
+      activerecord (>= 4.2)
     activestorage (7.0.8)
       actionpack (= 7.0.8)
       activejob (= 7.0.8)
@@ -353,6 +355,13 @@ GEM
     rodf (1.2.0)
       builder (>= 3.0)
       rubyzip (>= 1.0)
+    roo (2.10.0)
+      nokogiri (~> 1)
+      rubyzip (>= 1.3.0, < 3.0.0)
+    roo-xls (1.2.0)
+      nokogiri
+      roo (>= 2.0.0, < 3)
+      spreadsheet (> 0.9.0)
     rouge (4.1.3)
     rqrcode (0.10.1)
       chunky_png (~> 1.0)
@@ -402,6 +411,7 @@ GEM
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
+    ruby-ole (1.2.12.2)
     ruby-progressbar (1.13.0)
     ruby_parser (3.20.3)
       sexp_processor (~> 4.16)
@@ -456,6 +466,8 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
+    spreadsheet (1.3.0)
+      ruby-ole
     spreadsheet_architect (5.0.0)
       caxlsx (>= 3.3.0, < 4)
       rodf (>= 1.0.0, < 2)
@@ -516,6 +528,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-import
   acts_as_tenant
   annotate
   aws-sdk-s3
@@ -552,6 +565,8 @@ DEPENDENCIES
   rails-i18n (~> 7.0.8)
   ransack
   redis (~> 4.0)
+  roo
+  roo-xls
   rqrcode_png!
   rspec-rails (>= 6.0.2)
   rubocop-performance
