@@ -8,6 +8,48 @@
     <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
   <% end %>
 
+  <div class="container">
+    <br><br><br>
+    <h1>Pedidos de Hoje</h1>
+    <div class="row justify-content-center">
+      <% @current_order_items.group_by(&:store_id).each do |store_id, items| %>
+        <% loja_name = items.first.store_name %>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <%= loja_name %>
+              </h5>
+              <% if @monthly_revenue_estimation.present? %>
+                <p>
+                  Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
+                </p>
+            <% end %>
+              <p>
+                Pedidos: <%= items.group_by(&:bling_order_id).compact.count %>
+              </p>
+              <p>
+                Total: <%= number_to_currency_pt_br items.sum(&:valor) %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @current_order_items.blank? %>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <p>
+                Os pedidos do dia aparecerão aqui
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <h1>Pedidos Em andamento(Pagos)</h1>
   
   <p>Última Atualização: <%= @last_update %></p>
@@ -56,47 +98,6 @@
 
 </div>
 
-<div class="container">
-  <br><br><br>
-  <h1>Pedidos de Hoje</h1>
-  <div class="row justify-content-center">
-    <% @current_order_items.group_by(&:store_id).each do |store_id, items| %>
-      <% loja_name = items.first.store_name %>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <h5 class="card-title">
-              <%= loja_name %>
-            </h5>
-            <% if @monthly_revenue_estimation.present? %>
-              <p>
-                Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
-              </p>
-          <% end %>
-            <p>
-              Pedidos: <%= items.group_by(&:bling_order_id).compact.count %>
-            </p>
-            <p>
-              Total: <%= number_to_currency_pt_br items.sum(&:valor) %>
-            </p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
-    <% if @current_order_items.blank? %>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <p>
-              Os pedidos do dia aparecerão aqui
-            </p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
 <div class="container">
   <br><br><br>
   <h1>Pedidos Impressos</h1>
