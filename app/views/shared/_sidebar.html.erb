@@ -8,11 +8,14 @@
         <%= link_to 'OP', root_path %>
       </div>
       <ul class="sidebar-menu" data-controller="sidebar">
-        <li class="<%= active_nav_item('home', 'index') %>">
-          <%= link_to root_path, class: "nav-link" do %>
-            <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
-          <% end %>
-        </li>
+        <%= render 'shared/sidebar_dropdown', title: t("dashboards.title"), icon: 'fas fa-tachometer-alt' do %>
+          <li class="<%= active_nav_item('home', 'index') %>">
+            <%= link_to t("dashboards.one"), root_path, class: 'nav-link' %>
+          </li>
+          <li class="<%= active_nav_item('shein_orders', 'index') %>">
+            <%= link_to t("dashboards.two"), shein_orders_path, class: 'nav-link' %>
+          </li>
+        <% end %>
         <li class="<%= active_nav_item('home', 'last_updates') %>">
           <%= link_to home_last_updates_path, class: "nav-link" do %>
             <i class="fas fa-history"></i> <span>Últimas atualizações</span>

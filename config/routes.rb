@@ -3,6 +3,13 @@
 #require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :shein_orders do 
+    collection do
+      get :upload
+      post :import
+    end
+  end
+  
   devise_for :users
 
   mount GoodJob::Engine => 'good_job'
