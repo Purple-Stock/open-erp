@@ -87,17 +87,17 @@
 
   <div class="row justify-content-center">
 
-    <% @loja_ids.each do |loja_id| %>
-    
-      <% loja_name = @store_name[loja_id] %>
-      
-      <% orders = @orders&.select { |o| o["loja"]["id"] == loja_id } %>
+    <% @in_progress_order_items.group_by(&:store_id).each do |store_id, items| %>
+
+      <% loja_name = items.first.store_name %>
+
+      <% orders = items.group_by(&:bling_order_id).compact %>
       
       <div class="col-md-4">
 
         <div class="card mb-4">
         
-          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts.present? && @mercado_envios_flex_counts >= 1 %>">
+          <div class="card-body text-center">
           
             <h5 class="card-title">
               <%= loja_name %>
@@ -107,7 +107,7 @@
               Pedidos: <%= orders&.count %>
             </p>
 
-            <% if loja_id == 204_061_683 %>
+            <% if loja_name.eql?('Mercado Livre') %>
             
               <p>
                 Mercado Envios Flex: <%= @mercado_envios_flex_counts %>  
