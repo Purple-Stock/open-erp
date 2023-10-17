@@ -87,6 +87,10 @@
 
   <%= render 'order_items', order_items: @in_progress_order_items if @in_progress_order_items.present? %>
 
+  <h1>Pedidos Feitos de Hoje(Checados e Verificados)</h1>
+
+  <%= render 'order_items', order_items: @current_done_order_items if @current_done_order_items.present? %>
+
 </div>
 
 <div class="container">
