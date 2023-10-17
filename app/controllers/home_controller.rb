@@ -4,24 +4,6 @@ class HomeController < ApplicationController
                 :get_pending_order_items, only: :index
   include SheinOrdersHelper
 
-  def get_in_progress_order_items
-    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
-  end
-
-  def get_printed_order_items
-    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED)
-  end
-
-  def get_pending_order_items
-    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
-  end
-
-  def get_current_done_order_items
-    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::CHECKED,
-                                                                    BlingOrderItem::Status::VERIFIED])
-                                              .date_range_in_a_day(Time.zone.today)
-  end
-
   def index
     @current_order_items = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745])
                                          .date_range_in_a_day(Time.zone.today)
@@ -60,11 +42,30 @@ class HomeController < ApplicationController
 
   private
 
+  def get_in_progress_order_items
+    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
+  end
+
+  def get_printed_order_items
+    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED)
+  end
+
+  def get_pending_order_items
+    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
+  end
+
+  def get_current_done_order_items
+    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::CHECKED,
+                                                                    BlingOrderItem::Status::VERIFIED])
+                                              .date_range_in_a_day(Time.zone.today)
+  end
+
   def set_monthly_revenue_estimation
     @monthly_revenue_estimation = RevenueEstimation.current_month.take
   end
 
   def count_mercado_envios_flex(order_ids)
+    # TODO, get it from the database directly.
     return if order_ids.blank?
 
     counter = 0
