@@ -96,6 +96,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.good_job.smaller_number_is_higher_priority = true
+
   config.good_job.enable_cron = true
   config.good_job.cron = {
     # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
@@ -103,8 +105,15 @@ Rails.application.configure do
                      cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
                      class: "BlingOrderItemCreatorJob", # name of the job class as a String; must reference an Active Job job class
                      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
-                     set: { priority: -10 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+                     set: { priority: 2 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
                      description: "Create Order Items per situation", # optional description that appears in Dashboard
+    },
+    current_done_order_items_task: { # each recurring job must have a unique key
+                                     cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                                     class: "CurrentDoneBlingOrderItemJob", # name of the job class as a String; must reference an Active Job job class
+                                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+                                     set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+                                     description: "Create Order Items at the current day with statuses checked and verified", # optional description that appears in Dashboard
     },
     # etc.
   }
