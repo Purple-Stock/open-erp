@@ -85,45 +85,7 @@
 
   <h1>Pedidos Em andamento(Pagos)</h1>
 
-  <div class="row justify-content-center">
-
-    <% @in_progress_order_items.group_by(&:store_id).each do |store_id, items| %>
-
-      <% loja_name = items.first.store_name %>
-
-      <% orders = items.group_by(&:bling_order_id).compact %>
-      
-      <div class="col-md-4">
-
-        <div class="card mb-4">
-        
-          <div class="card-body text-center">
-          
-            <h5 class="card-title">
-              <%= loja_name %>
-            </h5>
-
-            <p>
-              Pedidos: <%= orders&.count %>
-            </p>
-
-            <% if loja_name.eql?('Mercado Livre') %>
-            
-              <p>
-                Mercado Envios Flex: <%= @mercado_envios_flex_counts %>  
-              </p>
-            
-            <% end %>
-        
-          </div>
-        
-        </div>
-      
-      </div>
-
-    <% end %>
-
-  </div>
+  <%= render 'order_items', order_items: @in_progress_order_items if @in_progress_order_items.present? %>
 
 </div>
 
