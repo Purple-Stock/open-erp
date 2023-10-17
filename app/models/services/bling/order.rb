@@ -41,12 +41,14 @@ module Services
         all_orders = []
 
         # Fetch data from the first two pages
-        (1..2).each do |page|
+        (1..5).each do |page|
           response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
 
           raise "Error: #{response.code} - #{response.message}" unless response.success?
 
           data = JSON.parse(response.body)
+          break if data['data'].blank?
+
           all_orders.concat(data['data'])
         end
 
