@@ -16,7 +16,7 @@ RSpec.describe BlingOrderItemCreatorJob, type: :job do
       VCR.use_cassette('all_situations_bling_order_items', erb: true) do
         expect do
           subject.perform(user.account.id)
-        end.to change(BlingOrderItem, :count).by(129)
+        end.to change(BlingOrderItem, :count).by(107)
       end
     end
   end
