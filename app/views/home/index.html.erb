@@ -85,76 +85,20 @@
 
   <h1>Pedidos Em andamento(Pagos)</h1>
 
-  <%= render 'order_items', order_items: @in_progress_order_items if @in_progress_order_items.present? %>
+  <%= render 'order_items', order_items: @in_progress_order_items %>
 
   <h1>Pedidos Feitos de Hoje(Checados e Verificados)</h1>
 
-  <%= render 'order_items', order_items: @current_done_order_items if @current_done_order_items.present? %>
+  <%= render 'order_items', order_items: @current_done_order_items %>
 
-</div>
-
-<div class="container">
-  <br><br><br>
   <h1>Pedidos Impressos</h1>
 
+  <%= render 'order_items', order_items: @printed_order_items %>
 
-  <div class="row justify-content-center">
-
-    <% @loja_ids.each do |loja_id| %>
-    
-      <% loja_name = @store_name[loja_id] %>
-      
-      <% printed_orders = @printed_orders&.select { |o| o["loja"]["id"] == loja_id } %>
-      
-      <div class="col-md-4">
-
-        <div class="card mb-4">
-        
-          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts.present? && @mercado_envios_flex_counts >= 1 %>">
-          
-            <h5 class="card-title">
-              <%= loja_name %>
-            </h5>
-
-            <p>
-              Pedidos: <%= printed_orders&.count %>
-            </p>
-        
-          </div>
-        
-        </div>
-      
-      </div>
-
-    <% end %>
-
-  </div>
-
-</div>
-
-<div class="container">
-  <br><br><br>
   <h1>Pedidos Pendentes</h1>
 
-  <div class="row justify-content-center">
-    <% @loja_ids.each do |loja_id| %>
-      <% loja_name = @store_name[loja_id] %>
-      <% pending_orders = @pending_orders&.select { |o| o["loja"]["id"] == loja_id } %>
+  <%= render 'order_items', order_items: @pending_order_items %>
 
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts.present? && @mercado_envios_flex_counts >= 1 %>">
-            <h5 class="card-title">
-              <%= loja_name %>
-            </h5>
-            <p>
-              Pedidos: <%= pending_orders&.count %>
-            </p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
 </div>
 
 </div>
