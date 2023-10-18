@@ -5,15 +5,19 @@ module SheinOrdersHelper
     collection_deadline = parse_portuguese_date(shein_order.data['Limite de tempo para coletar'])
     
     if collection_deadline
-      time_remaining = collection_deadline - Time.zone.now.to_datetime
-      days_remaining = time_remaining.to_i
-      hours_remaining = (time_remaining % 1 * 24).to_i
-      minutes_remaining = (time_remaining * 24 % 1 * 60).to_i
+      # Adjust the time zone difference to +3 hours (180 minutes)
+      time_difference = collection_deadline.to_i - Time.zone.now.to_datetime.to_i + (3 * 60 * 60)
+
+      # Calculate days, hours, and minutes
+      days_remaining = time_difference / (24 * 60 * 60)
+      hours_remaining = (time_difference % (24 * 60 * 60)) / (60 * 60)
+      minutes_remaining = (time_difference % (60 * 60)) / 60
 
       # Add a negative sign if the time remaining is negative
-      sign = time_remaining.negative? ? "-" : ""
-      
-      "#{sign}#{days_remaining.abs}d #{hours_remaining.abs}h #{minutes_remaining.abs}m"
+      sign = time_difference.negative? ? "-" : ""
+
+      # Format the result
+      formatted_result = "#{sign}#{days_remaining.abs}d #{hours_remaining.abs}h #{minutes_remaining.abs}m"
     else
       "Invalid Date"
     end
