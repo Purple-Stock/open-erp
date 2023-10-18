@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_action :set_monthly_revenue_estimation, only: :index
+  include SheinOrdersHelper
 
   def index
     @current_order_items = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745])
@@ -7,6 +8,13 @@ class HomeController < ApplicationController
     date_expires = token_expires_at
 
     refresh_token if date_expires < DateTime.now && Rails.env.eql?('production')
+
+    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN'])                                
+                                    .count
+    
+    @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
+    @expired_orders = @shein_orders.select { |order| order_status(order) == "Atrasado" }
+    @expired_orders_count = @expired_orders.count
 
     in_progress = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
                                               situation: 15)
