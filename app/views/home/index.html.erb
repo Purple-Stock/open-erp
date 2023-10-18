@@ -51,6 +51,38 @@
     </div>
   </div>
 
+  <div class="container">
+    <br><br><br>
+    <h1>Status Shein</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              Pedidos a ser coletados
+            </h5>
+            <p>
+              Quantidade de Pedidos: <%= @shein_orders_count %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              Status dos Pedidos Expirados
+            </h5>
+            <p>
+              Quantidade de Pedidos: <%= @expired_orders_count %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <h1>Pedidos Em andamento(Pagos)</h1>
 
   <div class="row justify-content-center">
