@@ -102,19 +102,35 @@ Rails.application.configure do
   config.good_job.cron = {
     # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
     frequent_task: { # each recurring job must have a unique key
-                     cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                     cron: "*/10 * * * *", # cron-style scheduling format by fugit gem
                      class: "BlingOrderItemCreatorJob", # name of the job class as a String; must reference an Active Job job class
                      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
                      set: { priority: 2 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
-                     description: "Create Order Items per situation", # optional description that appears in Dashboard
+                     description: "Create Order Items per situation" # optional description that appears in Dashboard
     },
     in_progress_order_items_task: { # each recurring job must have a unique key
                                     cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
                                     class: "InProgressOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
                                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
                                     set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
-                                    description: "Create Order Items with status in progress", # optional description that appears in Dashboard
+                                    description: "Create Order Items with status in progress" # optional description that appears in Dashboard
     },
+
+    pending_order_items_task: { # each recurring job must have a unique key
+                                cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                                class: "PendingOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
+                                args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+                                set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+                                description: "Create Order Items with pending status" # optional description that appears in Dashboard
+    },
+
+    printed_order_items_task: { # each recurring job must have a unique key
+                                cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                                class: "PrintedOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
+                                args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+                                set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+                                description: "Create Order Items with printed status" # optional description that appears in Dashboard
+    }
     # etc.
   }
 end
