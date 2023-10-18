@@ -51,7 +51,7 @@ class HomeController < ApplicationController
   end
 
   def get_pending_order_items
-    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
+    @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
   end
 
   def get_current_done_order_items
