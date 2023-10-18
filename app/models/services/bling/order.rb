@@ -41,7 +41,7 @@ module Services
         all_orders = []
 
         # Fetch data from the first two pages
-        (1..5).each do |page|
+        (1..).each do |page|
           response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
 
           raise "Error: #{response.code} - #{response.message}" unless response.success?
