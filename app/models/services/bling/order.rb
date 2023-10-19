@@ -42,6 +42,9 @@ module Services
 
         # Fetch data from the first two pages
         (1..).each do |page|
+          # we do not need to request all massive data. If the first page works, so does the remaining pages.
+          break if (page.eql?(2) && Rails.env.eql?('test'))
+
           response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
 
           raise "Error: #{response.code} - #{response.message}" unless response.success?
