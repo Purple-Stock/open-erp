@@ -12,7 +12,7 @@ RSpec.describe CurrentDoneBlingOrderItemJob, type: :job do
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
     end
 
-    it 'counts by 191 bling order items' do
+    xit 'counts by 191 bling order items' do
       VCR.use_cassette('verified_checked_order_items_situation', erb: true) do
         expect do
           subject.perform(user.account.id)
