@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Services::Bling::Order, type: :services do
+  BlingDatum.destroy_all
   let!(:bling_datum) { FactoryBot.create(:bling_datum, account_id: 1) }
   let(:order_command) { 'find_orders' }
   let(:situation) { 15 }

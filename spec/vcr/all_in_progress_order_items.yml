@@ -21,18 +21,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:37 GMT
+      - Thu, 19 Oct 2023 12:51:20 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '27834'
+      - '28841'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=4a0e1a750551d1e8
+      - intid;desc=4f49a3bda89e318c
       Set-Cookie:
-      - PHPSESSID=5thmq3sn1julvmlcehohsnnb1a; path=/; secure; HttpOnly
-      - PHPSESSID=rml2fol7ltl91m9hjcct9buf7u; path=/; secure; HttpOnly
+      - PHPSESSID=6lk88cdr6754f4m7j12holq8oh; path=/; secure; HttpOnly
+      - PHPSESSID=ktojmnvpkhgiqma0a5bfni9mdl; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -54,10 +54,13 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912c3ce4d1a8c-GRU
+      - 818926e04a411b1c-GRU
     body:
       encoding: ASCII-8BIT
-      string: '{"data":[{"id":18971028142,"numero":32746,"numeroLoja":"GSHN9W459000J46","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380027484,"nome":"Nat\u00e1lia
+      string: '{"data":[{"id":18971174289,"numero":32749,"numeroLoja":"GSHN9W649001E0F","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380056993,"nome":"Monique
+        \u00c1vila","tipoPessoa":"F","numeroDocumento":"149.575.534-75"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18971174063,"numero":32748,"numeroLoja":"GSHN9W409002CEQ","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380056966,"nome":"Jos\u00e9lia
+        Freitas","tipoPessoa":"F","numeroDocumento":"090.777.573-09"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18971173898,"numero":32747,"numeroLoja":"GSHN9W3490016UN","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":69.9,"contato":{"id":16380056937,"nome":"Raimunda
+        Nonata","tipoPessoa":"F","numeroDocumento":"629.325.613-16"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18971028142,"numero":32746,"numeroLoja":"GSHN9W459000J46","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380027484,"nome":"Nat\u00e1lia
         Franco Feitoza","tipoPessoa":"F","numeroDocumento":"102.656.743-28"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18970894351,"numero":32745,"numeroLoja":"GSHN9W23900ME7W","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380000371,"nome":"Nicole
         Galbier","tipoPessoa":"F","numeroDocumento":"397.511.768-08"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18970894192,"numero":32744,"numeroLoja":"GSHN9W59S00236R","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380000331,"nome":"Kamilly
         Felix Silva","tipoPessoa":"F","numeroDocumento":"148.539.606-94"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105}},{"id":18970894028,"numero":32743,"numeroLoja":"GSHN9W22S00053N","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380000292,"nome":"Camila
@@ -141,7 +144,199 @@ http_interactions:
         Reis","tipoPessoa":"F","numeroDocumento":"058.156.790-03"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18944431599,"numero":31687,"numeroLoja":"16847I16844","data":"2023-10-14","dataSaida":"2023-10-14","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":60.25,"contato":{"id":16372639901,"nome":"Yasmin
         Santana","tipoPessoa":"F","numeroDocumento":"468.016.208-27"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}},{"id":18944019362,"numero":31661,"numeroLoja":"16846I16843","data":"2023-10-14","dataSaida":"2023-10-14","dataPrevista":"0000-00-00","totalProdutos":59.9,"total":75.02,"contato":{"id":16206338808,"nome":"paloma
         Borges","tipoPessoa":"F","numeroDocumento":"069.338.325-97"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890}}]}'
-  recorded_at: Thu, 19 Oct 2023 12:37:37 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:21 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18971174289
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Oct 2023 12:51:21 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1393'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=f73d2765934d8646
+      Set-Cookie:
+      - PHPSESSID=59kh8bouasciplh3kmejafbd2k; path=/; secure; HttpOnly
+      - PHPSESSID=gcoeb6eij0c74m99ua2v51mnnl; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 818926e919451ab8-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18971174289,"numero":32749,"numeroLoja":"GSHN9W649001E0F","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380056993,"nome":"Monique
+        \u00c1vila","tipoPessoa":"F","numeroDocumento":"149.575.534-75"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16241129438,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16447204072,"dataVencimento":"2023-11-18","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Monique
+        \u00c1vila","endereco":"3* travessa rua Josu\u00e9 Vicente","numero":"116","complemento":"","municipio":"Primavera","uf":"PE","cep":"55510000","bairro":"Centro","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:22 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18971174063
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Oct 2023 12:51:22 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1378'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=fc1398a1e61fc8a2
+      Set-Cookie:
+      - PHPSESSID=4aqce6qoti894v10mv1256gbi0; path=/; secure; HttpOnly
+      - PHPSESSID=gr2veq5r9h0qnaji2t1fsgmmsp; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 818926ef9a6001ab-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18971174063,"numero":32748,"numeroLoja":"GSHN9W409002CEQ","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380056966,"nome":"Jos\u00e9lia
+        Freitas","tipoPessoa":"F","numeroDocumento":"090.777.573-09"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16241129382,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15973680256},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16447204015,"dataVencimento":"2023-11-18","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Jos\u00e9lia
+        Freitas","endereco":"Rua da pescada","numero":"33","complemento":"","municipio":"Raposa","uf":"MA","cep":"65138000","bairro":"Maresia","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:23 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18971173898
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 19 Oct 2023 12:51:24 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1374'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=58b9d478159ed7e2
+      Set-Cookie:
+      - PHPSESSID=olpnbogtaidr9gqurmj3kmau87; path=/; secure; HttpOnly
+      - PHPSESSID=q45nm0ipjkkicatbdu3sa2c1p4; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 818926f64a97028f-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":18971173898,"numero":32747,"numeroLoja":"GSHN9W3490016UN","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":69.9,"contato":{"id":16380056937,"nome":"Raimunda
+        Nonata","tipoPessoa":"F","numeroDocumento":"629.325.613-16"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16241129317,"codigo":"CONJ-FEND-TOP-BRANCO-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":69.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Branco;Tamanho:P","descricaoDetalhada":"","produto":{"id":15979076302},"comissao":{"base":69.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16447203963,"dataVencimento":"2023-11-18","valor":69.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Raimunda
+        Nonata","endereco":"Arrodeador","numero":"10","complemento":"","municipio":"Araioses","uf":"MA","cep":"65570000","bairro":"Arrodeador","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:24 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18971028142
@@ -165,7 +360,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:38 GMT
+      - Thu, 19 Oct 2023 12:51:25 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -173,10 +368,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=6f1fc0b4133b2df8
+      - intid;desc=52704df87ca50739
       Set-Cookie:
-      - PHPSESSID=t58h3t7m8qa2j7u7qalb93h7k5; path=/; secure; HttpOnly
-      - PHPSESSID=v47qs70t4qa2h37m293sobh6ql; path=/; secure; HttpOnly
+      - PHPSESSID=tbv0qgb06rmm6r4i4tfidrf82i; path=/; secure; HttpOnly
+      - PHPSESSID=uq58oqcsab3k4f466vn58hv5r6; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -198,14 +393,14 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912cdc8454b4c-GRU
+      - 818926fc7a2a1ab2-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18971028142,"numero":32746,"numeroLoja":"GSHN9W459000J46","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380027484,"nome":"Nat\u00e1lia
         Franco Feitoza","tipoPessoa":"F","numeroDocumento":"102.656.743-28"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16241066979,"codigo":"VEST-LONG-TOP-SAI-FEND-VERMELHO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
         LONGO top + saia fenda Cor:Vermelho;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15973680261},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16447147718,"dataVencimento":"2023-11-18","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Nat\u00e1lia
         Franco Feitoza","endereco":"Rua Argentina- at\u00e9 2998\/2999","numero":"2917","complemento":"","municipio":"Barretos","uf":"SP","cep":"14783192","bairro":"Am\u00e9rica","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:38 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:25 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18970894351
@@ -229,7 +424,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:39 GMT
+      - Thu, 19 Oct 2023 12:51:26 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -237,10 +432,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=2525ee508fbaf581
+      - intid;desc=2fc67add91bbe194
       Set-Cookie:
-      - PHPSESSID=3pecdnsia58a6g6janhtcm19lv; path=/; secure; HttpOnly
-      - PHPSESSID=d3meiij791epf3vm25j9i41vek; path=/; secure; HttpOnly
+      - PHPSESSID=0gcvpei7luq670e76sb75di4ct; path=/; secure; HttpOnly
+      - PHPSESSID=4eujdqqbn33khl67ldc1505vpv; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -262,7 +457,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912d43d00a5c5-GRU
+      - 81892702694e1cf7-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18970894351,"numero":32745,"numeroLoja":"GSHN9W23900ME7W","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380000371,"nome":"Nicole
@@ -270,7 +465,7 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16447095943,"dataVencimento":"2023-11-18","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Nicole
         Galbier","endereco":"Avenida Jos\u00e9 de Oliveira Bairro: Ballista","numero":"244","complemento":"","municipio":"Mat\u00e3o","uf":"SP","cep":"15990277","bairro":"Jardim
         Ballista","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:39 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:26 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18970894192
@@ -294,7 +489,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:40 GMT
+      - Thu, 19 Oct 2023 12:51:27 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -302,10 +497,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=f41e44911d3899af
+      - intid;desc=9e4f77910b613757
       Set-Cookie:
-      - PHPSESSID=hqq966nh30ajb7srn48plk10h9; path=/; secure; HttpOnly
-      - PHPSESSID=ur6iv9e83ives1g48lfp5j5krm; path=/; secure; HttpOnly
+      - PHPSESSID=c7ivp80noukkuho0h81po4sc4c; path=/; secure; HttpOnly
+      - PHPSESSID=js1d1gatim1oaoau6130acplt2; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -327,7 +522,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912daae991acc-GRU
+      - 81892708ce69a5d3-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18970894192,"numero":32744,"numeroLoja":"GSHN9W59S00236R","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380000331,"nome":"Kamilly
@@ -335,7 +530,7 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16447095867,"dataVencimento":"2023-11-18","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Kamilly
         Felix Silva","endereco":"Rua moassy","numero":"48","complemento":"","municipio":"Contagem","uf":"MG","cep":"32341170","bairro":"Novo
         Eldorado","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:40 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:27 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18970894028
@@ -359,7 +554,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:41 GMT
+      - Thu, 19 Oct 2023 12:51:28 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -367,10 +562,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=04aa12022f9de56e
+      - intid;desc=70905ee5b59495ad
       Set-Cookie:
-      - PHPSESSID=n4jn2h3gklas9qoetc56ci4vau; path=/; secure; HttpOnly
-      - PHPSESSID=umroirj14m9m3oqrlhehp1ovgs; path=/; secure; HttpOnly
+      - PHPSESSID=8a25o3vlegg02eafool4sh71h9; path=/; secure; HttpOnly
+      - PHPSESSID=op6ra9a549joekv1grnlkk7vtq; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -392,7 +587,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912e1288da556-GRU
+      - 8189270f5c9a1aa7-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18970894028,"numero":32743,"numeroLoja":"GSHN9W22S00053N","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16380000292,"nome":"Camila
@@ -401,7 +596,7 @@ http_interactions:
         Concei\u00e7\u00e3o Lisboa","endereco":"Rua de cima","numero":"39","complemento":"Casa
         de Ademilda","municipio":"P\u00e3o de A\u00e7\u00facar","uf":"AL","cep":"57400000","bairro":"Zona
         rural","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:41 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:28 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18969181560
@@ -425,7 +620,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:42 GMT
+      - Thu, 19 Oct 2023 12:51:29 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -433,10 +628,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=69cbc78a8c5ae06d
+      - intid;desc=ec21115de9b52ef1
       Set-Cookie:
-      - PHPSESSID=671fip0b1uuks9nllel6no95pk; path=/; secure; HttpOnly
-      - PHPSESSID=qhc6nouqk9u2khqip2p9aiap81; path=/; secure; HttpOnly
+      - PHPSESSID=0ci66fk6td3anf3ndhlsnpnt1u; path=/; secure; HttpOnly
+      - PHPSESSID=kc8o3ujks32n6meer2aq27p6ja; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -458,7 +653,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912e7ac50a498-GRU
+      - 818927159e2a010c-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18969181560,"numero":32713,"numeroLoja":"231019B9DRAQQ1","data":"2023-10-19","dataSaida":"2023-10-19","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.9,"contato":{"id":16265414029,"nome":"Jessica
@@ -468,7 +663,7 @@ http_interactions:
         Alpes 1 bloco 18 ap 12","municipio":"Itu","uf":"SP","cep":"13308240","bairro":"Vila
         Martins","nomePais":""},"volumes":[{"id":15235616222,"servico":"Logistica
         Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:42 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:29 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18969081128
@@ -492,7 +687,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:43 GMT
+      - Thu, 19 Oct 2023 12:51:30 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -500,10 +695,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=bcef7d04d5f65b43
+      - intid;desc=3a0add865358cba2
       Set-Cookie:
-      - PHPSESSID=3u71b9t3adhpu4tqhp4rv44d37; path=/; secure; HttpOnly
-      - PHPSESSID=autdva5l86si4crre29ticoov3; path=/; secure; HttpOnly
+      - PHPSESSID=iuhf4nivnhfehmhimb1uh90u20; path=/; secure; HttpOnly
+      - PHPSESSID=qccc6jt8clad7fkn5feglimtcf; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -525,7 +720,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912edfe341ac3-GRU
+      - 8189271c0aa11b24-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18969081128,"numero":32708,"numeroLoja":"231019B4TQU54W","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-13","totalProdutos":59.9,"total":59.9,"contato":{"id":16379648609,"nome":"Ana
@@ -534,7 +729,7 @@ http_interactions:
         Rafaela Ferreira Inacio","endereco":"Rua Josefino Sim\u00f5es","numero":"17","complemento":"
         Quintal","municipio":"Cariacica","uf":"ES","cep":"29151065","bairro":"Alto
         Lage","nomePais":""},"volumes":[{"id":15235592731,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:43 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:30 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18969056464
@@ -558,18 +753,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:44 GMT
+      - Thu, 19 Oct 2023 12:51:31 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1545'
+      - '1571'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=03bdd109ef018a97
+      - intid;desc=b8a2c8889502fa33
       Set-Cookie:
-      - PHPSESSID=a9gbfribjno4o9okmh9ch4gjb5; path=/; secure; HttpOnly
-      - PHPSESSID=s5bh6j3op826v1b70k94na9pv2; path=/; secure; HttpOnly
+      - PHPSESSID=dikf3afn573bup29e4q37f2ugi; path=/; secure; HttpOnly
+      - PHPSESSID=qq24kcoaavn03m53mkgv1k7osa; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -591,7 +786,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912f42e06a4d7-GRU
+      - 81892722ece21a91-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18969056464,"numero":32703,"numeroLoja":"231019B3WKSAJ1","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-31","totalProdutos":89.9,"total":89.9,"contato":{"id":16379636503,"nome":"Giovanna
@@ -600,8 +795,8 @@ http_interactions:
         Henrique da Silva","endereco":"Avenida  Abdias Jose dos Santos","numero":"5707","complemento":"Bloco
         2 \/ Apartamento 1507","municipio":"S\u00e3o Gon\u00e7alo","uf":"RJ","cep":"24756151","bairro":"Rio
         do Ouro","nomePais":""},"volumes":[{"id":15235588111,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:44 GMT
+        Shopee","codigoRastreamento":"BR2313102039685SPXLM832425"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:31 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18969031492
@@ -625,18 +820,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:45 GMT
+      - Thu, 19 Oct 2023 12:51:32 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1581'
+      - '1607'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=0fb4e45f4b660369
+      - intid;desc=cfc77e9179084a75
       Set-Cookie:
-      - PHPSESSID=002tq8l8s3imr44c2d8su45j9k; path=/; secure; HttpOnly
-      - PHPSESSID=u1obomtdkba2fqrjvool8on897; path=/; secure; HttpOnly
+      - PHPSESSID=bi87d3ld38n24kcm835l58anvh; path=/; secure; HttpOnly
+      - PHPSESSID=ee3a0k55avcc6s8o3l76mheg0k; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -658,7 +853,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818912fa5ae700ea-GRU
+      - 8189272948fc1b1f-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18969031492,"numero":32702,"numeroLoja":"231019B361ST55","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-30","totalProdutos":59.9,"total":68.15,"contato":{"id":16379624614,"nome":"Ana
@@ -667,8 +862,8 @@ http_interactions:
         Cl\u00e1udia Evangelista Dos Santos Silva","endereco":"Churrascaria santa
         rita","numero":"373","complemento":" Orl\u00e2ndia","municipio":"Orl\u00e2ndia","uf":"SP","cep":"14620000","bairro":"Rodovia
         Anhanguera","nomePais":""},"volumes":[{"id":15235583256,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:45 GMT
+        Shopee","codigoRastreamento":"BR231107195722YSPXLM834711"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:32 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968983874
@@ -692,18 +887,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:46 GMT
+      - Thu, 19 Oct 2023 12:51:33 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1497'
+      - '1523'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=73351e3b27c0653a
+      - intid;desc=cd63ee6be384ceb5
       Set-Cookie:
-      - PHPSESSID=2ipuoul7u2vervi5m73v4p6hql; path=/; secure; HttpOnly
-      - PHPSESSID=r2j52n1a95h7n7mme79tto7cfj; path=/; secure; HttpOnly
+      - PHPSESSID=jm4rlqsqp589k2e9gru59srjup; path=/; secure; HttpOnly
+      - PHPSESSID=tqvd7r2dau03do0mudg074pgc0; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -725,7 +920,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891300890da4ff-GRU
+      - 818927300ffa00e3-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968983874,"numero":32696,"numeroLoja":"231019B20JYJAG","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-07","totalProdutos":59.9,"total":59.9,"contato":{"id":16379601486,"nome":"Cailane
@@ -733,8 +928,8 @@ http_interactions:
         TOP MANGA LONGA + SAIA COM FENDA Cor:Branco;Tamanho:M","descricaoDetalhada":"","produto":{"id":15979076304},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16446525174,"dataVencimento":"2023-11-17","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Cailane
         Santos Batista","endereco":"Caminho 04","numero":"13","complemento":" Salvador","municipio":"Salvador","uf":"BA","cep":"41307115","bairro":"Moradas
         da Lagoa","nomePais":""},"volumes":[{"id":15235572909,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:46 GMT
+        Shopee","codigoRastreamento":"BR234977544968CSPXLM834171"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:33 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968974615
@@ -758,7 +953,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:47 GMT
+      - Thu, 19 Oct 2023 12:51:34 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -766,10 +961,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=e575cf1d0c8c5e8c
+      - intid;desc=b51c56b4f788ca0c
       Set-Cookie:
-      - PHPSESSID=ct7iv4rabift80fbdmh196eh2a; path=/; secure; HttpOnly
-      - PHPSESSID=dmvqohpsege23q3p3d8kj7ti60; path=/; secure; HttpOnly
+      - PHPSESSID=43t5dihkhtagmmgh429ir51tea; path=/; secure; HttpOnly
+      - PHPSESSID=qh9b80p6nvneemcv2c4sephshm; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -791,7 +986,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913092a8000ed-GRU
+      - 818927363ce21aab-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968974615,"numero":32694,"numeroLoja":"16866I16863","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":92.95,"contato":{"id":16379597128,"nome":"Giovanna
@@ -800,7 +995,7 @@ http_interactions:
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":12.04,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Giovanna
         Dos Santos Stecca","endereco":"Avenida Novo Osasco","numero":"895","complemento":"casa
         1","municipio":"Osasco","uf":"SP","cep":"06056010","bairro":"Bussocaba","nomePais":""},"volumes":[{"id":15235570641,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:47 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:34 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968967639
@@ -824,18 +1019,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:48 GMT
+      - Thu, 19 Oct 2023 12:51:35 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1508'
+      - '1523'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=89c90c49c29a6a7e
+      - intid;desc=2b2001d4bc9830c8
       Set-Cookie:
-      - PHPSESSID=8tseiqpa8p3e5efndck9a8nvbk; path=/; secure; HttpOnly
-      - PHPSESSID=obmnarkdpntbo4gqbh4l8bnnon; path=/; secure; HttpOnly
+      - PHPSESSID=4m39n04gvqnoal76p1a6kudujj; path=/; secure; HttpOnly
+      - PHPSESSID=cank15cqrenca3uoh88a9f6qbh; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -857,7 +1052,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189130fdb60a507-GRU
+      - 8189273c8a2501c2-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968967639,"numero":32693,"numeroLoja":"231019B1MGSXN6","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-02","totalProdutos":49.9,"total":60.17,"contato":{"id":16379594020,"nome":"milene
@@ -865,8 +1060,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16446515549,"dataVencimento":"2023-11-17","valor":60.17,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":10.32,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"milene
         araujo","endereco":"Rua M\u00e1rio Natalino Jord\u00e3o","numero":"25","complemento":"
         Angra dos Reis","municipio":"Angra dos Reis","uf":"RJ","cep":"23916080","bairro":"Monsuaba","nomePais":""},"volumes":[{"id":15235569130,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:48 GMT
+        Shopee","codigoRastreamento":"BR2355633404165"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:35 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968960849
@@ -890,18 +1085,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:49 GMT
+      - Thu, 19 Oct 2023 12:51:36 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1517'
+      - '1543'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=b2142f67680b73f7
+      - intid;desc=b0d9badd92437280
       Set-Cookie:
-      - PHPSESSID=65mv6jm40rs1qvtq5ru2ghho8d; path=/; secure; HttpOnly
-      - PHPSESSID=cil851rsbho3s1tfk7rets7esf; path=/; secure; HttpOnly
+      - PHPSESSID=5iotktrbj2ipje8m3r3vvcd7b7; path=/; secure; HttpOnly
+      - PHPSESSID=b4tuba7ba5497gfmua24h55npi; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -923,7 +1118,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891315dcd0a6b5-GRU
+      - 81892742dfb4031b-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968960849,"numero":32686,"numeroLoja":"231019B1FJF8XJ","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.13,"contato":{"id":16379590541,"nome":"Manuela
@@ -932,8 +1127,8 @@ http_interactions:
         Tavares Alves","endereco":"Rua La\u00eds Grangeiro de Queiroz","numero":"315","complemento":"
         Aracaju","municipio":"Aracaju","uf":"SE","cep":"49041123","bairro":"In\u00e1cio
         Barbosa","nomePais":""},"volumes":[{"id":15235567616,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:49 GMT
+        Shopee","codigoRastreamento":"BR239580439040ESPXLM833629"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:36 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968925143
@@ -957,18 +1152,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:50 GMT
+      - Thu, 19 Oct 2023 12:51:37 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1501'
+      - '1527'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=7761c3ad5d37d476
+      - intid;desc=6ce85a8880b9af11
       Set-Cookie:
-      - PHPSESSID=afr6tg4716elvvmhmomc8ltqfj; path=/; secure; HttpOnly
-      - PHPSESSID=gsgof50beegl8d7vq9rrsu94j0; path=/; secure; HttpOnly
+      - PHPSESSID=3o6g682ceij24legfv45ifa043; path=/; secure; HttpOnly
+      - PHPSESSID=lgngtv2efb86g5tsebu5il00iv; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -990,7 +1185,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189131c38b1015a-GRU
+      - 81892749badd6050-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968925143,"numero":32684,"numeroLoja":"231019B0QDY2YK","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":54.21,"contato":{"id":16379573544,"nome":"luiza
@@ -999,8 +1194,8 @@ http_interactions:
         madureira","endereco":"Rua Mauro C\u00e2ndido","numero":"57","complemento":"
         Mococa","municipio":"Mococa","uf":"SP","cep":"13733550","bairro":"Residencial
         Carlito Quilici","nomePais":""},"volumes":[{"id":15235560047,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:50 GMT
+        Shopee","codigoRastreamento":"BR237242458922ZSPXLM836668"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:37 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968922986
@@ -1024,18 +1219,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:51 GMT
+      - Thu, 19 Oct 2023 12:51:38 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1517'
+      - '1543'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=2c4352f08f9529d9
+      - intid;desc=ff54d67e6c89e0a7
       Set-Cookie:
-      - PHPSESSID=hs6d8g1sleur37j9t914r287tl; path=/; secure; HttpOnly
-      - PHPSESSID=qf3v56qdpfdoc3vbt7kijmjp3n; path=/; secure; HttpOnly
+      - PHPSESSID=pc8vrmdor6uavl95dalbjrk6s4; path=/; secure; HttpOnly
+      - PHPSESSID=u5ha97kpgeu5rsp3hso4j1eqm0; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1057,7 +1252,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913229a6300ff-GRU
+      - 818927500fea00e2-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968922986,"numero":32673,"numeroLoja":"231019B0P0739V","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-05","totalProdutos":49.9,"total":49.9,"contato":{"id":16379572510,"nome":"Thamires
@@ -1065,8 +1260,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16446487695,"dataVencimento":"2023-11-17","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Thamires
         Nogueira Martins","endereco":"Travessa Waldemar Evaldo Baldo","numero":"37","complemento":"Casa","municipio":"Te\u00f3filo
         Otoni","uf":"MG","cep":"39800594","bairro":"Novo Horizonte","nomePais":""},"volumes":[{"id":15235559615,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:52 GMT
+        Shopee","codigoRastreamento":"BR231294459124GSPXLM834982"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:38 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968841644
@@ -1090,18 +1285,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:53 GMT
+      - Thu, 19 Oct 2023 12:51:39 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1536'
+      - '1551'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=264067ff6bb53309
+      - intid;desc=815a23a9709d7d6a
       Set-Cookie:
-      - PHPSESSID=a3edivnual5htchji7rp8nqllb; path=/; secure; HttpOnly
-      - PHPSESSID=urp5nm577q9rm4rpj6mvt6oq0c; path=/; secure; HttpOnly
+      - PHPSESSID=hfcs67iqj19c0vcg42qvmnbbh1; path=/; secure; HttpOnly
+      - PHPSESSID=r559necf8bvtsb5afqa0dmoq72; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1123,7 +1318,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913292952011b-GRU
+      - 81892756bf4f014e-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968841644,"numero":32665,"numeroLoja":"231019AY4948F0","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16379534892,"nome":"EDNA
@@ -1132,8 +1327,8 @@ http_interactions:
         PESSOA DOS SANTOS SOARES","endereco":"R Colombo Leoni","numero":"23","complemento":"
         S\u00e3o Paulo","municipio":"S\u00e3o Paulo","uf":"SP","cep":"05846210","bairro":"Conjunto
         Promorar S\u00e3o Luis","nomePais":""},"volumes":[{"id":15235543309,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:53 GMT
+        Shopee","codigoRastreamento":"BR235130902923B"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:39 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968778535
@@ -1157,18 +1352,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:53 GMT
+      - Thu, 19 Oct 2023 12:51:40 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1534'
+      - '1560'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=31f7af57b843bfbf
+      - intid;desc=45c7ac064160404c
       Set-Cookie:
-      - PHPSESSID=7b6et9tl0nttlbigivhcpj9fnq; path=/; secure; HttpOnly
-      - PHPSESSID=qd2drp0n1ps4e7iv9g8sr0fprb; path=/; secure; HttpOnly
+      - PHPSESSID=cp3v4mgslpe9t3f0n44kn0ni9e; path=/; secure; HttpOnly
+      - PHPSESSID=td6kg863aqufkdk1vbamdcp4g5; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1190,7 +1385,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189132f7c0b1d38-GRU
+      - 8189275d08db00fe-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968778535,"numero":32662,"numeroLoja":"231019AWYT56RU","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":56.8,"contato":{"id":16379504972,"nome":"Andrey
@@ -1198,8 +1393,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Branco;Tamanho:M","descricaoDetalhada":"","produto":{"id":15973680259},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16446403039,"dataVencimento":"2023-11-17","valor":56.8,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":6.9,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Andrey
         Bomfim Souza Alcantara Santos","endereco":"Rua Ant\u00f4nio Souza Montes","numero":"118","complemento":"Casa","municipio":"Aracaju","uf":"SE","cep":"49042060","bairro":"S\u00e3o
         Conrado","nomePais":""},"volumes":[{"id":15235530540,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:54 GMT
+        Shopee","codigoRastreamento":"BR233073258630HSPXLM834682"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:40 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968662746
@@ -1223,7 +1418,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:54 GMT
+      - Thu, 19 Oct 2023 12:51:41 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1231,10 +1426,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=c3e6b5619f0442e1
+      - intid;desc=14334e831e93c057
       Set-Cookie:
-      - PHPSESSID=8dm7i4elqskeuviv0i41fip724; path=/; secure; HttpOnly
-      - PHPSESSID=mruuhdnj9athku1h1a4gl5fg8i; path=/; secure; HttpOnly
+      - PHPSESSID=n3ge3t1tkrterrq1iivq5mjdkm; path=/; secure; HttpOnly
+      - PHPSESSID=o1eplsc48o0a1prns0hvntlasp; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1256,7 +1451,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913359da451d2-GRU
+      - 81892763985c010f-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968662746,"numero":32645,"numeroLoja":"16865I16862","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":65.45,"contato":{"id":16379452339,"nome":"Alana
@@ -1265,7 +1460,7 @@ http_interactions:
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":15.55,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":5,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Alana","endereco":"Rua
         A","numero":"28","complemento":"Mercearia da Rita","municipio":"Barra Mansa","uf":"RJ","cep":"27322340","bairro":"Santa
         Rita de C\u00e1ssia","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:54 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:41 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968371978
@@ -1289,18 +1484,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:55 GMT
+      - Thu, 19 Oct 2023 12:51:42 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1501'
+      - '1527'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=9235c4717582e35f
+      - intid;desc=9335cecce2002d6d
       Set-Cookie:
-      - PHPSESSID=dgf0qpreqvkp1me5rjbgvn3n00; path=/; secure; HttpOnly
-      - PHPSESSID=m5gfrt72jp7mjun554gngurnd0; path=/; secure; HttpOnly
+      - PHPSESSID=0sk9ajlvj8qpgi0pi5c808rko1; path=/; secure; HttpOnly
+      - PHPSESSID=oh18c81hmokf0296oej24j5o51; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1322,7 +1517,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189133bbfd1a4ef-GRU
+      - 81892769afe21ab2-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968371978,"numero":32632,"numeroLoja":"231019AQ4YAPD9","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16379327951,"nome":"Stephanie
@@ -1330,8 +1525,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16446168270,"dataVencimento":"2023-11-17","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Stephanie
         Ruas","endereco":"Rua Nicanor Pimenta","numero":"193","complemento":" Nova
         Igua\u00e7u","municipio":"Nova Igua\u00e7u","uf":"RJ","cep":"26281040","bairro":"Comendador
-        Soares","nomePais":""},"volumes":[{"id":15235454325,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:55 GMT
+        Soares","nomePais":""},"volumes":[{"id":15235454325,"servico":"Logistica Shopee","codigoRastreamento":"BR239203905446MSPXLM835724"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:42 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968352440
@@ -1355,18 +1550,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:56 GMT
+      - Thu, 19 Oct 2023 12:51:43 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1510'
+      - '1536'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=5e1dab1ab3ca8d39
+      - intid;desc=17c43a8672c24008
       Set-Cookie:
-      - PHPSESSID=obpjrr5ridauol8quobi6r29jo; path=/; secure; HttpOnly
-      - PHPSESSID=ovdtir6j8gbgcjbgqincev1ar9; path=/; secure; HttpOnly
+      - PHPSESSID=o9muutcgav0cjsu5dofqa5nk8v; path=/; secure; HttpOnly
+      - PHPSESSID=rmp4o0dngvcmhuv4lg6a4usdqm; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1388,7 +1583,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891341becf0118-GRU
+      - 818927703ebda5aa-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968352440,"numero":32631,"numeroLoja":"231019APSNUYXJ","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.9,"contato":{"id":16379320205,"nome":"Emily
@@ -1396,8 +1591,8 @@ http_interactions:
         TOP MANGA LONGA + SAIA COM FENDA Cor:Vermelho;Tamanho:PP","descricaoDetalhada":"","produto":{"id":16085668343},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16446157325,"dataVencimento":"2023-11-17","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Emily
         Proc\u00f3pio","endereco":"R das Margaridas","numero":"115","complemento":"Casa
         1","municipio":"Francisco Morato","uf":"SP","cep":"07990090","bairro":"Bel\u00e9m
-        Capela","nomePais":""},"volumes":[{"id":15235451060,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:56 GMT
+        Capela","nomePais":""},"volumes":[{"id":15235451060,"servico":"Logistica Shopee","codigoRastreamento":"BR232799073950ZSPXLM833492"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:43 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968262979
@@ -1421,18 +1616,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:57 GMT
+      - Thu, 19 Oct 2023 12:51:44 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1518'
+      - '1544'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=57940523e4906893
+      - intid;desc=b6ffc2a9651c45b1
       Set-Cookie:
-      - PHPSESSID=bba90mkajc50u9fjk3rp874tuu; path=/; secure; HttpOnly
-      - PHPSESSID=gcpbabs7vfc2kek0epo0jcedrv; path=/; secure; HttpOnly
+      - PHPSESSID=b8ks9k3rnnm5lrore36jmf2tto; path=/; secure; HttpOnly
+      - PHPSESSID=nu9givtbbt345tqi1fsnqt49k9; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1454,7 +1649,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913481aec4cf7-GRU
+      - 818927771e264b3b-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968262979,"numero":32620,"numeroLoja":"231019AN7QHXJB","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":59.9,"contato":{"id":16313979961,"nome":"yasmim
@@ -1463,8 +1658,8 @@ http_interactions:
         caetano","endereco":"Avenida Bar\u00e3o de Trimbohy","numero":"244","complemento":"
         S\u00e3o Mateus","municipio":"S\u00e3o Mateus","uf":"ES","cep":"29942510","bairro":"Nova
         S\u00e3o Mateus","nomePais":""},"volumes":[{"id":15235435509,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:58 GMT
+        Shopee","codigoRastreamento":"BR2383792398861SPXLM836655"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:44 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968066797
@@ -1488,18 +1683,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:59 GMT
+      - Thu, 19 Oct 2023 12:51:45 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1539'
+      - '1566'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=dc9db345ae30fcf3
+      - intid;desc=953effcf62abf4b3
       Set-Cookie:
-      - PHPSESSID=1o7qhqe2cgba2dsqtnmasot5m8; path=/; secure; HttpOnly
-      - PHPSESSID=m6gpj4l28inubsc7sa89m2ahqc; path=/; secure; HttpOnly
+      - PHPSESSID=aicfme0uud21um9vp63cammaqb; path=/; secure; HttpOnly
+      - PHPSESSID=v5qpvutbmi3118jvsefvofkf21; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1521,7 +1716,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189134ea88b0184-GRU
+      - 8189277d5e2201a8-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968066797,"numero":32606,"numeroLoja":"231019AJ59JN4T","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-06","totalProdutos":49.9,"total":49.9,"contato":{"id":16379211537,"nome":"Raissa
@@ -1530,8 +1725,8 @@ http_interactions:
         Karoline","endereco":"Rua Francisco de Holanda","numero":"68","complemento":"
         Q70 segunda casa de esquina","municipio":"Macei\u00f3","uf":"AL","cep":"57073735","bairro":"Cidade
         Universit\u00e1ria","nomePais":""},"volumes":[{"id":15235405955,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:37:59 GMT
+        Shopee","codigoRastreamento":"BR2306638837602SPXLM1042663"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:45 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18968049861
@@ -1555,7 +1750,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:37:59 GMT
+      - Thu, 19 Oct 2023 12:51:46 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1563,10 +1758,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=9ff2897b18685a0c
+      - intid;desc=3c4ca8ee24aebb87
       Set-Cookie:
-      - PHPSESSID=clkp69o36b5ag2ogmmqevubmf1; path=/; secure; HttpOnly
-      - PHPSESSID=mtvnoribg3f25oce9f1l9868bb; path=/; secure; HttpOnly
+      - PHPSESSID=0sa7vohu4tobisqct9i8q1ls7c; path=/; secure; HttpOnly
+      - PHPSESSID=u3qd6tu8im65ihph2k5en1vll3; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1588,7 +1783,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891354efa0030c-GRU
+      - 818927839948a56b-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18968049861,"numero":32605,"numeroLoja":"16864I16861","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":103.9,"contato":{"id":16379206378,"nome":"Monick
@@ -1599,7 +1794,7 @@ http_interactions:
         Diniz","endereco":"Rua Cora\u00e7\u00e3o Sertanejo","numero":"510","complemento":"Apto
         12 D","municipio":"S\u00e3o Paulo","uf":"SP","cep":"08421550","bairro":"Conjunto
         Habitacional Fazenda do Carmo","nomePais":""},"volumes":[{"id":15235403748,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:00 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:46 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18967159896
@@ -1623,18 +1818,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:00 GMT
+      - Thu, 19 Oct 2023 12:51:47 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1511'
+      - '1537'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=707b9a2ecf881dc1
+      - intid;desc=0d757f6cb1a0a01d
       Set-Cookie:
-      - PHPSESSID=2ms9h3knfh4ncm9im41913j48k; path=/; secure; HttpOnly
-      - PHPSESSID=eeenq7nt4tib9h14eo0g14dc12; path=/; secure; HttpOnly
+      - PHPSESSID=5qbu4i78jabmi2aqn13a57dp97; path=/; secure; HttpOnly
+      - PHPSESSID=8lgn6s007phmpfsp7nainnct2s; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1656,7 +1851,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189135b2b960167-GRU
+      - 81892789ff536055-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18967159896,"numero":32575,"numeroLoja":"231019AAEPVKYX","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.9,"contato":{"id":16378994057,"nome":"Leticia
@@ -1664,8 +1859,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:M","descricaoDetalhada":"","produto":{"id":15957707539},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16445533419,"dataVencimento":"2023-11-17","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Leticia
         tomaz vitorino","endereco":"Avenida Miguel Caparr\u00f3s","numero":"680","complemento":"Casa","municipio":"Piracicaba","uf":"SP","cep":"13426145","bairro":"Parque
         \u00c1gua Branca","nomePais":""},"volumes":[{"id":15235320435,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:01 GMT
+        Shopee","codigoRastreamento":"BR2317212562444SPXLM833481"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:47 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18967049612
@@ -1689,18 +1884,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:01 GMT
+      - Thu, 19 Oct 2023 12:51:48 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1518'
+      - '1544'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=2c0bb39c7aab0b64
+      - intid;desc=f3692f723bceb3c2
       Set-Cookie:
-      - PHPSESSID=155mtcdhntm4qph815qvnl88uq; path=/; secure; HttpOnly
-      - PHPSESSID=bstmhq2rohl67a47se0q6trsi9; path=/; secure; HttpOnly
+      - PHPSESSID=42tlsmrrc4eosl1tgjr0e8okfj; path=/; secure; HttpOnly
+      - PHPSESSID=cev27660ohov20vasspul0sqqb; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1722,7 +1917,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189136139696050-GRU
+      - 818927902acf1b21-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18967049612,"numero":32569,"numeroLoja":"231019A9MPWBWK","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.58,"contato":{"id":16377945631,"nome":"Esthefanny
@@ -1730,8 +1925,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16445479694,"dataVencimento":"2023-11-17","valor":49.58,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Esthefanny
         Calazans","endereco":"Avenida Dona Ruyce Ferraz Alvim","numero":"2997","complemento":"Apartamento
         31 blocco F","municipio":"Diadema","uf":"SP","cep":"09961540","bairro":"Casa
-        Grande","nomePais":""},"volumes":[{"id":15235309907,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:01 GMT
+        Grande","nomePais":""},"volumes":[{"id":15235309907,"servico":"Logistica Shopee","codigoRastreamento":"BR237682893681WSPXLM835521"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:48 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18966953561
@@ -1755,18 +1950,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:02 GMT
+      - Thu, 19 Oct 2023 12:51:49 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1569'
+      - '1595'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=f75b6fcb0c22872a
+      - intid;desc=fbf2669f55d505c0
       Set-Cookie:
-      - PHPSESSID=5p1aqn88fjg0lvb7q6hfgn74f1; path=/; secure; HttpOnly
-      - PHPSESSID=ffqg1s33ii25vlv34ka9tl20r6; path=/; secure; HttpOnly
+      - PHPSESSID=9ko3m4o60aj44ja3coqif8elk7; path=/; secure; HttpOnly
+      - PHPSESSID=shv169pp3b64m0nodqbo0b9rfe; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1788,7 +1983,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913675f1f1af2-GRU
+      - 818927962ccca5a3-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18966953561,"numero":32568,"numeroLoja":"231019A8XBXY63","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16378942484,"nome":"Alanna
@@ -1797,8 +1992,8 @@ http_interactions:
         Vit\u00f3ria De Oliveira Batista","endereco":"Rua Vera L\u00facia Corr\u00eaa
         de Souza Dutra","numero":"40","complemento":" Mercadinho do nei","municipio":"Vit\u00f3ria","uf":"ES","cep":"29032364","bairro":"Nova
         Palestina","nomePais":""},"volumes":[{"id":15235301726,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:03 GMT
+        Shopee","codigoRastreamento":"BR2392280615523SPXLM833875"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:49 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18966616077
@@ -1822,7 +2017,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:04 GMT
+      - Thu, 19 Oct 2023 12:51:50 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1830,10 +2025,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=9ce1fe03af1a34b1
+      - intid;desc=20e097e9e0a5efef
       Set-Cookie:
-      - PHPSESSID=bdia17qounn8bfmsk6ammva0ah; path=/; secure; HttpOnly
-      - PHPSESSID=c59a9dh9h1ohubtd27sfgl722r; path=/; secure; HttpOnly
+      - PHPSESSID=61q5hkcbfnaarqbnb8p9lki816; path=/; secure; HttpOnly
+      - PHPSESSID=kqdeqrs9pn4u1m8muq46u98lfo; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1855,7 +2050,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189136dcb831b24-GRU
+      - 8189279c4b5a4d35-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18966616077,"numero":32557,"numeroLoja":"16863I16860","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":103.9,"contato":{"id":16378864622,"nome":"Fernanda
@@ -1867,7 +2062,7 @@ http_interactions:
         de pagamento: Paypal\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":12.86,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Fernanda
         Barbeiro","endereco":"Rua Dom Jo\u00e3o Maria Ogno","numero":"506","complemento":"","municipio":"S\u00e3o
         Paulo","uf":"SP","cep":"03530050","bairro":"Vila Matilde","nomePais":""},"volumes":[{"id":15235268888,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:04 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:50 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18966605317
@@ -1891,18 +2086,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:05 GMT
+      - Thu, 19 Oct 2023 12:51:51 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1501'
+      - '1527'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=e6409df928ef4704
+      - intid;desc=287da358b19fb1ec
       Set-Cookie:
-      - PHPSESSID=e82cur5hjle5elcs314b2qed7o; path=/; secure; HttpOnly
-      - PHPSESSID=k836lgv711jl7vf4et3oq2ue6g; path=/; secure; HttpOnly
+      - PHPSESSID=363d1dsm9neu616j2d6na78tpt; path=/; secure; HttpOnly
+      - PHPSESSID=ns78k6rape3lbsjrek85lt8d69; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1924,7 +2119,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913753cda0195-GRU
+      - 818927a2dbdf018d-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18966605317,"numero":32556,"numeroLoja":"231019A6C5R7KJ","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-15","totalProdutos":59.9,"total":59.48,"contato":{"id":16378861514,"nome":"Thamiris
@@ -1932,8 +2127,8 @@ http_interactions:
         TOP MANGA LONGA + SAIA COM FENDA Cor:Preto;Tamanho:G","descricaoDetalhada":"","produto":{"id":15994593244},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16445268989,"dataVencimento":"2023-11-17","valor":59.48,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Thamiris
         Bandeira Goulart","endereco":"R Jacinto Gomes","numero":"73","complemento":"Ap11","municipio":"Porto
         Alegre","uf":"RS","cep":"90040270","bairro":"Santana","nomePais":""},"volumes":[{"id":15235267919,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:05 GMT
+        Shopee","codigoRastreamento":"BR2303693027410SPXLM834778"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:51 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18966284274
@@ -1957,7 +2152,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:06 GMT
+      - Thu, 19 Oct 2023 12:51:52 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -1965,10 +2160,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=dbd14ff1c1ad3bc0
+      - intid;desc=6dba0c1e93389c0f
       Set-Cookie:
-      - PHPSESSID=558cotip0pfb4dsq48u4hssvck; path=/; secure; HttpOnly
-      - PHPSESSID=7n0fbk1gukkgbghblg54a0b5i7; path=/; secure; HttpOnly
+      - PHPSESSID=ddopn3ei5meqppm77rhjkmghiq; path=/; secure; HttpOnly
+      - PHPSESSID=ph3gunur593ltiutdnbneei68r; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -1990,7 +2185,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189137b7e1b018d-GRU
+      - 818927a92e6f1b1f-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18966284274,"numero":32549,"numeroLoja":"16862I16859","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":109.9,"contato":{"id":16378784036,"nome":"Lyvia
@@ -1999,7 +2194,7 @@ http_interactions:
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":20,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":1,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Lyvia
         Gon\u00e7alves","endereco":"Rua Doutor Pedro Ribeiro","numero":"119","complemento":"casa","municipio":"Santo
         Andr\u00e9","uf":"SP","cep":"09185260","bairro":"Jardim Jamaica","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:06 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:52 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18966181872
@@ -2023,7 +2218,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:07 GMT
+      - Thu, 19 Oct 2023 12:51:53 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -2031,10 +2226,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=34582dede4f6b6bb
+      - intid;desc=510a96d3da51cc49
       Set-Cookie:
-      - PHPSESSID=aui95rfl77muo87kkgtns0mdba; path=/; secure; HttpOnly
-      - PHPSESSID=lu1p2l6ufjogob9cv2tn7hplth; path=/; secure; HttpOnly
+      - PHPSESSID=etql0m21vc5uonbc42oiiusrqb; path=/; secure; HttpOnly
+      - PHPSESSID=q1mfsq7k589364l9kmt1ofnjdn; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2056,7 +2251,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913819e8d1ab1-GRU
+      - 818927af5b551b31-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18966181872,"numero":32546,"numeroLoja":"16861I16858","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":60.25,"contato":{"id":16378758739,"nome":"marianne
@@ -2065,7 +2260,7 @@ http_interactions:
         de pagamento: Paypal\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":10.35,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"marianne
         fernandes","endereco":"Rua Maisa Matarazzo","numero":"329","complemento":"casa","municipio":"Itaquaquecetuba","uf":"SP","cep":"08580810","bairro":"Jardim
         S\u00e3o Manoel","nomePais":""},"volumes":[{"id":15235225937,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:07 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:53 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18966141198
@@ -2089,18 +2284,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:08 GMT
+      - Thu, 19 Oct 2023 12:51:54 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1535'
+      - '1550'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=f127f41f39bb5d9e
+      - intid;desc=6d32d5d116cb0583
       Set-Cookie:
-      - PHPSESSID=1ibbiqjr6jjjjc618v2fcu3hs9; path=/; secure; HttpOnly
-      - PHPSESSID=smgpcvbn0spjjl87qcaul1179t; path=/; secure; HttpOnly
+      - PHPSESSID=9jj838953oogaufni66sobf566; path=/; secure; HttpOnly
+      - PHPSESSID=cdbmu59jt9nbr1avosf52amn66; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2122,7 +2317,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891387fe48a601-GRU
+      - 818927b58a931ac6-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18966141198,"numero":32545,"numeroLoja":"231019A2X9J1YP","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":49.49,"contato":{"id":16378749253,"nome":"Anna
@@ -2130,8 +2325,8 @@ http_interactions:
         TOP MANGA LONGA + SAIA COM FENDA Cor:Vermelho;Tamanho:P","descricaoDetalhada":"","produto":{"id":16085668347},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16445044968,"dataVencimento":"2023-11-17","valor":49.49,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Anna
         Mel Lima Oliveira","endereco":"Rua alvorada","numero":"10","complemento":"
         Rua alvorada lote 10 quadra 10","municipio":"Cachoeiras de Macacu","uf":"RJ","cep":"28695000","bairro":"Papucaia","nomePais":""},"volumes":[{"id":15235222036,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:08 GMT
+        Shopee","codigoRastreamento":"BR234184427638Q"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:54 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18966132373
@@ -2155,7 +2350,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:09 GMT
+      - Thu, 19 Oct 2023 12:51:55 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -2163,10 +2358,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=b2931e050870418c
+      - intid;desc=ceaa916fdca4db88
       Set-Cookie:
-      - PHPSESSID=8lm7kfm98enl4t5cofplsns9gn; path=/; secure; HttpOnly
-      - PHPSESSID=vv6171c6sb0lsqg676u6fbgt1u; path=/; secure; HttpOnly
+      - PHPSESSID=42oj6ekrfo5tmrkmttms76bphj; path=/; secure; HttpOnly
+      - PHPSESSID=unrg4k29qlvhafv07kotevc3rq; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2188,7 +2383,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189138dfe400120-GRU
+      - 818927bbc808a4b0-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18966132373,"numero":32544,"numeroLoja":"16860I16857","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":69.9,"contato":{"id":16378747071,"nome":"Sabrina
@@ -2197,7 +2392,7 @@ http_interactions:
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":20,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":1,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Sabrina
         Araujo Q Assis","endereco":"Rua dos L\u00edrios","numero":"5","complemento":"","municipio":"Carapicu\u00edba","uf":"SP","cep":"06386530","bairro":"Jardim
         Ana Maria","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:09 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:55 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18965938082
@@ -2221,18 +2416,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:10 GMT
+      - Thu, 19 Oct 2023 12:51:56 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1495'
+      - '1510'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=fceb2afb86d05e66
+      - intid;desc=b7ced0c2e7e94868
       Set-Cookie:
-      - PHPSESSID=behqtdkjv4l7ucnirsbi91gj2a; path=/; secure; HttpOnly
-      - PHPSESSID=dcjerinc04threul0dm97smhca; path=/; secure; HttpOnly
+      - PHPSESSID=1mt29k5oqs035k12pkoacat4tj; path=/; secure; HttpOnly
+      - PHPSESSID=u2ki3g8i1odtusfvv062c95joe; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2254,7 +2449,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913949fa04d24-GRU
+      - 818927c26ca4031e-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18965938082,"numero":32540,"numeroLoja":"231019A1A4KWC2","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-05","totalProdutos":49.9,"total":44.15,"contato":{"id":16378698976,"nome":"Nycolle
@@ -2262,8 +2457,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444939078,"dataVencimento":"2023-11-17","valor":44.15,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Nycolle
         Neves","endereco":"Pra\u00e7a Ananias Paiva","numero":"158","complemento":"Casa","municipio":"Santo
         Ant\u00f4nio do Amparo","uf":"MG","cep":"37262000","bairro":"Centro","nomePais":""},"volumes":[{"id":15235200536,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:10 GMT
+        Shopee","codigoRastreamento":"BR235698156328C"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:56 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18965828825
@@ -2287,7 +2482,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:11 GMT
+      - Thu, 19 Oct 2023 12:51:57 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -2295,10 +2490,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=563d9a2f5a277a6b
+      - intid;desc=fec6a4a3dcfcd122
       Set-Cookie:
-      - PHPSESSID=3m61egrvdkmmbfu37j8q5o4v7t; path=/; secure; HttpOnly
-      - PHPSESSID=n2i8ja8ou94djrlg158o3eg7jn; path=/; secure; HttpOnly
+      - PHPSESSID=h3pcjqhsvidlkafng4edp3jee8; path=/; secure; HttpOnly
+      - PHPSESSID=i1h4ojb3d2gvcmeuf45dogn31i; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2320,7 +2515,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189139b6a5a1d21-GRU
+      - 818927c8780ba55f-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18965828825,"numero":32534,"numeroLoja":"16859I16856","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":106.06,"contato":{"id":15963837816,"nome":"Samanta
@@ -2329,7 +2524,7 @@ http_interactions:
         de pagamento: Paypal\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":16.16,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":7,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Samanta  Caroline","endereco":"Rua
         Osvaldo Evangelista Santos","numero":"95","complemento":"","municipio":"Nova
         Lima","uf":"MG","cep":"34012880","bairro":"Santa Rita","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:11 GMT
+  recorded_at: Thu, 19 Oct 2023 12:51:57 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18965743000
@@ -2353,18 +2548,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:12 GMT
+      - Thu, 19 Oct 2023 12:51:58 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1521'
+      - '1547'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=21adc775d9faa3d8
+      - intid;desc=a326ac23f13d99f1
       Set-Cookie:
-      - PHPSESSID=d615p2u61it8a5addghmem5p7h; path=/; secure; HttpOnly
-      - PHPSESSID=uqs1n8aqc0i2j608ufakupbv7j; path=/; secure; HttpOnly
+      - PHPSESSID=9jfjpa80allb5vdf21bt4c0b48; path=/; secure; HttpOnly
+      - PHPSESSID=li6h6ak9rk50mobkmub2ir8t36; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2386,7 +2581,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913a56ae11aa9-GRU
+      - 818927d0195d6b18-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18965743000,"numero":32532,"numeroLoja":"2310189YK0AERU","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-01","totalProdutos":45,"total":45,"contato":{"id":16378646110,"nome":"Kaylane
@@ -2394,8 +2589,8 @@ http_interactions:
         MANGA \u00daNICA COM FENDA GOLA DIAGONAL Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":16093499863},"comissao":{"base":45,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444832471,"dataVencimento":"2023-11-17","valor":45,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Kaylane
         Santos De Jesus","endereco":"Avenida Nogueira da Gama","numero":"1050","complemento":"
         Top center ao lado da vivo","municipio":"Linhares","uf":"ES","cep":"29900040","bairro":"Centro","nomePais":""},"volumes":[{"id":15235177411,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:12 GMT
+        Shopee","codigoRastreamento":"BR233593277536YSPXLM834885"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:59 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18965691855
@@ -2419,18 +2614,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:14 GMT
+      - Thu, 19 Oct 2023 12:51:59 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1505'
+      - '1531'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=e5a3b17a4d722bc0
+      - intid;desc=0c6cd24df243a95f
       Set-Cookie:
-      - PHPSESSID=6geg5ju1heqshbpjju2fku7r0c; path=/; secure; HttpOnly
-      - PHPSESSID=mr4c59go56dvqg2rst3ccund5o; path=/; secure; HttpOnly
+      - PHPSESSID=cbm0r7lv0bjr1c8gavr1k6jum2; path=/; secure; HttpOnly
+      - PHPSESSID=qv8rlgop0d6o25si41uh4na3ka; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2452,7 +2647,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913ad3ec61aa0-GRU
+      - 818927d68ac9a4c2-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18965691855,"numero":32530,"numeroLoja":"2310189Y39S440","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":59.9,"contato":{"id":16378631728,"nome":"Tainara
@@ -2460,8 +2655,8 @@ http_interactions:
         TOP MANGA LONGA + SAIA COM FENDA Cor:Branco;Tamanho:G","descricaoDetalhada":"","produto":{"id":15979076305},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444803413,"dataVencimento":"2023-11-17","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Tainara
         Da Silva Nogueira","endereco":"Rua Humait\u00e1","numero":"67","complemento":"
         Resende","municipio":"Resende","uf":"RJ","cep":"27510200","bairro":"Nova Liberdade","nomePais":""},"volumes":[{"id":15235171169,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:14 GMT
+        Shopee","codigoRastreamento":"BR2353460605735SPXLM834509"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:51:59 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18965633964
@@ -2485,18 +2680,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:17 GMT
+      - Thu, 19 Oct 2023 12:52:00 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2151'
+      - '2178'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=820765681cad7ff0
+      - intid;desc=dac7fb0a4aeb649f
       Set-Cookie:
-      - PHPSESSID=6cg2c2fuk61muq1dvv6t0ljgso; path=/; secure; HttpOnly
-      - PHPSESSID=6rhka3elibjgmravo4sq2joh2a; path=/; secure; HttpOnly
+      - PHPSESSID=fatsm81uf2si0lgg3apqdghif9; path=/; secure; HttpOnly
+      - PHPSESSID=s5b0lr2bclv42j9q5scimo6oen; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2518,7 +2713,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913c049dd1d0f-GRU
+      - 818927dc8dce0199-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18965633964,"numero":32524,"numeroLoja":"2310189XHWT2NA","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-02","totalProdutos":179.7,"total":187.17,"contato":{"id":16378615659,"nome":"Camila
@@ -2528,8 +2723,8 @@ http_interactions:
         TOP MANGA LONGA + SAIA COM FENDA Cor:Preto;Tamanho:G","descricaoDetalhada":"","produto":{"id":15994593244},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444771623,"dataVencimento":"2023-11-17","valor":187.17,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":7.47,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Camila
         Cristina Alves","endereco":"Rua H\u00e9lio Alves dos Santos","numero":"540","complemento":"casa","municipio":"Uberl\u00e2ndia","uf":"MG","cep":"38414296","bairro":"Luizote
         de Freitas","nomePais":""},"volumes":[{"id":15235163799,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:17 GMT
+        Shopee","codigoRastreamento":"BR2300681992146SPXLM1041530"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:52:01 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18965574716
@@ -2553,18 +2748,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:18 GMT
+      - Thu, 19 Oct 2023 12:52:01 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1521'
+      - '1536'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=20ae8d1facea8bb3
+      - intid;desc=5164f146e10496a7
       Set-Cookie:
-      - PHPSESSID=7io8jpj9a684mtiopai7tn2gnu; path=/; secure; HttpOnly
-      - PHPSESSID=id8vlfplri1h94nv62geb4o74t; path=/; secure; HttpOnly
+      - PHPSESSID=64m1bihpopvkr8futca84van7a; path=/; secure; HttpOnly
+      - PHPSESSID=guh6ctek4r4lqrnvtoh8806utt; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2586,7 +2781,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913c9fde5012c-GRU
+      - 818927e358511b1f-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18965574716,"numero":32520,"numeroLoja":"2310189X0W5WMX","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16378599100,"nome":"Raphaella
@@ -2594,8 +2789,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444738880,"dataVencimento":"2023-11-17","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Raphaella
         De Jesus Lisboa eu","endereco":"Rua Nereu Rangel Pestana","numero":"70","complemento":"Ap
         1009 B1","municipio":"S\u00e3o Paulo","uf":"SP","cep":"02845080","bairro":"Brasil\u00e2ndia","nomePais":""},"volumes":[{"id":15235156282,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:19 GMT
+        Shopee","codigoRastreamento":"BR2329389940287"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:52:02 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18965173116
@@ -2619,18 +2814,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:23 GMT
+      - Thu, 19 Oct 2023 12:52:02 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1531'
+      - '1557'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=efefdcd14dc0fab0
+      - intid;desc=e7741ccd8d134e77
       Set-Cookie:
-      - PHPSESSID=pnu11i7bc67ch1ruh40p8j5hf5; path=/; secure; HttpOnly
-      - PHPSESSID=qdks6obma633h1irbt4bae88ot; path=/; secure; HttpOnly
+      - PHPSESSID=sefing8cs9fqesgnpfpfq4blp2; path=/; secure; HttpOnly
+      - PHPSESSID=tfcsq40juaeoinq7apvsv9fuu9; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2652,7 +2847,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818913e9ffb71ab0-GRU
+      - 818927e96ab61d09-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18965173116,"numero":32510,"numeroLoja":"2310189TX1WRCF","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.9,"contato":{"id":16378505116,"nome":"J\u00falia
@@ -2661,8 +2856,8 @@ http_interactions:
         Daniel Da Silva","endereco":"Rua Viriato Lopes","numero":"160","complemento":"
         Barra do Pira\u00ed","municipio":"Barra do Pira\u00ed","uf":"RJ","cep":"27113565","bairro":"Doutor
         Mesquita","nomePais":""},"volumes":[{"id":15235114611,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:26 GMT
+        Shopee","codigoRastreamento":"BR230494708814ESPXLM832129"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:52:03 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18964916344
@@ -2686,18 +2881,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:33 GMT
+      - Thu, 19 Oct 2023 12:52:03 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1521'
+      - '1538'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=e6f8d983125713cb
+      - intid;desc=429c49c2b0c6c850
       Set-Cookie:
-      - PHPSESSID=9p1vsamaab11nr8gp0bu7i97iq; path=/; secure; HttpOnly
-      - PHPSESSID=a89g60baajhfp4qbhodg0jfjei; path=/; secure; HttpOnly
+      - PHPSESSID=krhkrri1knnbllpensrsg956r8; path=/; secure; HttpOnly
+      - PHPSESSID=vj4vd2a8eij8vc13bqlkkacgls; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2719,16 +2914,16 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891423eb841ab1-GRU
+      - 818927efb9b51d32-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18964916344,"numero":32506,"numeroLoja":"2310189S8WFF68","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-02","totalProdutos":49.9,"total":57.9,"contato":{"id":16378446275,"nome":"Thauane
         Rodrigues Feliciano","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":18971017514},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16238124715,"codigo":"VEST-LONG-TOP-SAI-FEND-NUDE-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
         LONGO top + saia fenda Cor:Nude;Tamanho:PP","descricaoDetalhada":"","produto":{"id":16098394424},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444424961,"dataVencimento":"2023-11-17","valor":57.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":8,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Thauane
-        Rodrigues Feliciano","endereco":"Rua Ant\u00f4nio dos Santos","numero":"311","complemento":"
-        Rio de Janeiro","municipio":"Rio de Janeiro","uf":"RJ","cep":"21360400","bairro":"Madureira","nomePais":""},"volumes":[{"id":15235089759,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:35 GMT
+        Rodrigues Feliciano","endereco":"Rua Frei Bento","numero":"186","complemento":"
+        A\u00e7ougue Carlu","municipio":"Rio de Janeiro","uf":"RJ","cep":"21360400","bairro":"Madureira","nomePais":""},"volumes":[{"id":15235089759,"servico":"Logistica
+        Shopee","codigoRastreamento":"BR234147805840ESPXLM834115"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:52:04 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18964866161
@@ -2752,18 +2947,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:41 GMT
+      - Thu, 19 Oct 2023 12:52:05 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1519'
+      - '1545'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=08061774ae86844b
+      - intid;desc=1ebd286a2f3f6749
       Set-Cookie:
-      - PHPSESSID=emd6e43vhua7v6d33va8ogd8ig; path=/; secure; HttpOnly
-      - PHPSESSID=injvk1p6b4fs6jvknvi9vrlm5c; path=/; secure; HttpOnly
+      - PHPSESSID=4328nvt3dec5976e7fu47pp7t2; path=/; secure; HttpOnly
+      - PHPSESSID=intphbfb9se957nonmnm78mo8l; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2785,7 +2980,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914585b990114-GRU
+      - 818927f6381a010e-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18964866161,"numero":32502,"numeroLoja":"2310189RXDDYKP","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-02","totalProdutos":59.9,"total":59.9,"contato":{"id":16378431971,"nome":"\u00c9rica
@@ -2793,8 +2988,8 @@ http_interactions:
         LONGO FENDA COM ARGOLA cor:Nude;tamanho:P","descricaoDetalhada":"","produto":{"id":16099764317},"comissao":{"base":59.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444401948,"dataVencimento":"2023-11-17","valor":59.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"\u00c9rica
         Adriana Dias Silva","endereco":"Avenida Seis de Dezembro","numero":" 335A","complemento":"
         Belford Roxo","municipio":"Belford Roxo","uf":"RJ","cep":"26110140","bairro":"Redentor","nomePais":""},"volumes":[{"id":15235084964,"servico":"Logistica
-        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:54 GMT
+        Shopee","codigoRastreamento":"BR232748802729NSPXLM832387"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:52:05 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18964774929
@@ -2818,18 +3013,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:55 GMT
+      - Thu, 19 Oct 2023 12:52:06 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1543'
+      - '1569'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=d16f1d98a38b06a8
+      - intid;desc=ff38c9c532ff4398
       Set-Cookie:
-      - PHPSESSID=8ju0i07pa8c1a8a3mfe8stpkfh; path=/; secure; HttpOnly
-      - PHPSESSID=9cmjlftqtl1fgnshcv63hhfvkp; path=/; secure; HttpOnly
+      - PHPSESSID=06rdrtdftoc0esv8e2c7a6sd2s; path=/; secure; HttpOnly
+      - PHPSESSID=7b33v4g7f8kmu9gmi41qsn2k6f; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2851,7 +3046,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914b17acc6b1a-GRU
+      - 818927fccaca031a-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18964774929,"numero":32501,"numeroLoja":"2310189RBRRT9V","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.9,"contato":{"id":16378408669,"nome":"S\u00e2mela
@@ -2859,8 +3054,8 @@ http_interactions:
         LONGO top + saia fenda Cor:Vermelho;Tamanho:P","descricaoDetalhada":"","produto":{"id":15973680263},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444361816,"dataVencimento":"2023-11-17","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"S\u00e2mela
         Arag\u00e3o de Souza","endereco":"Quadra QR 218 Conjunto N","numero":"06","complemento":"Quadra
         QR 218 Conjunto N","municipio":"Bras\u00edlia","uf":"DF","cep":"72548514","bairro":"Santa
-        Maria","nomePais":""},"volumes":[{"id":15235075654,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:55 GMT
+        Maria","nomePais":""},"volumes":[{"id":15235075654,"servico":"Logistica Shopee","codigoRastreamento":"BR238946028655USPXLM834947"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:52:06 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18964352088
@@ -2884,7 +3079,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:58 GMT
+      - Thu, 19 Oct 2023 12:52:07 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -2892,10 +3087,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=8a1ba346d2daaace
+      - intid;desc=f8bab982d52db51b
       Set-Cookie:
-      - PHPSESSID=eav383gak71rmh7dj5931mcr9l; path=/; secure; HttpOnly
-      - PHPSESSID=uuubt40rpr6l1m9o651vhmnq45; path=/; secure; HttpOnly
+      - PHPSESSID=82nbkd474c7br5lrutgvm4opst; path=/; secure; HttpOnly
+      - PHPSESSID=omrcbvhf8016hga9nn9d65ivp9; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2917,7 +3112,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914c33f65a641-GRU
+      - 818928032a341ab1-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18964352088,"numero":32494,"numeroLoja":"16857I16854","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":97.5,"total":117.5,"contato":{"id":15601595184,"nome":"Desir\u00e9e
@@ -2929,7 +3124,7 @@ http_interactions:
         Santos","endereco":"Travessa Francisca de G\u00f3es Monteiro","numero":"03","complemento":"\u00daltima
         casa da Travessa","municipio":"S\u00e3o Paulo","uf":"SP","cep":"02223230","bairro":"Jardim
         Brasil (Zona Norte)","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:58 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:07 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18964201410
@@ -2953,18 +3148,18 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:38:59 GMT
+      - Thu, 19 Oct 2023 12:52:08 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1483'
+      - '1509'
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=be87e4c3b8f108f4
+      - intid;desc=b8e581a010b8eea1
       Set-Cookie:
-      - PHPSESSID=0sbhtfsls906m37m8pajt5uvna; path=/; secure; HttpOnly
-      - PHPSESSID=dnprpk1cjulkhbj1je8fhvdkmj; path=/; secure; HttpOnly
+      - PHPSESSID=b7vgdgs352g3nstojdfjn4u8nm; path=/; secure; HttpOnly
+      - PHPSESSID=dfb7r3jf8c9f5vfosn60iggmtv; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -2986,15 +3181,15 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914cb6db5a507-GRU
+      - 818928096ad551d1-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18964201410,"numero":32491,"numeroLoja":"2310189MS4X69M","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-08","totalProdutos":49.9,"total":49.9,"contato":{"id":16378292388,"nome":"Roseane
         Dos Santos Silva","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":18971018202},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16237799376,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
         LONGO top + saia fenda Cor:Branco;Tamanho:P","descricaoDetalhada":"","produto":{"id":15973680258},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16444121820,"dataVencimento":"2023-11-17","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Roseane
         Dos Santos Silva","endereco":"Rua da paz","numero":"136","complemento":" Pilar","municipio":"Pilar","uf":"AL","cep":"57150000","bairro":"Rua
-        da paz","nomePais":""},"volumes":[{"id":15235022398,"servico":"Logistica Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:38:59 GMT
+        da paz","nomePais":""},"volumes":[{"id":15235022398,"servico":"Logistica Shopee","codigoRastreamento":"BR2311652104456SPXLM836202"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
+  recorded_at: Thu, 19 Oct 2023 12:52:08 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18963041958
@@ -3018,7 +3213,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:00 GMT
+      - Thu, 19 Oct 2023 12:52:09 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3026,10 +3221,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=12f894f139a4bb19
+      - intid;desc=0480c5d5aa0fdcf5
       Set-Cookie:
-      - PHPSESSID=0lruf9jc0tpfoctibo4ac4pkqo; path=/; secure; HttpOnly
-      - PHPSESSID=5ci6fr8g8fruu8ngafaipkego9; path=/; secure; HttpOnly
+      - PHPSESSID=7l67lofb13b8f9nk6c3i6to76c; path=/; secure; HttpOnly
+      - PHPSESSID=vav6cenrm7hn2b8n2citff67i7; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3051,7 +3246,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914d17afea5b9-GRU
+      - 8189280fbf80a50d-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18963041958,"numero":32472,"numeroLoja":"16856I16853","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":103.9,"contato":{"id":16378077098,"nome":"Bruna
@@ -3061,7 +3256,7 @@ http_interactions:
         de pagamento: Paypal\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":12.86,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Bruna
         Freitas","endereco":"Rua Tapuia","numero":"703","complemento":"Casa","municipio":"Indaiatuba","uf":"SP","cep":"13335510","bairro":"Vila
         Maria Helena","nomePais":""},"volumes":[{"id":15234929085,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:00 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:09 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18962888122
@@ -3085,7 +3280,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:03 GMT
+      - Thu, 19 Oct 2023 12:52:10 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3093,10 +3288,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=7378f1ff8ef7cee4
+      - intid;desc=29ccc4f367283d01
       Set-Cookie:
-      - PHPSESSID=aggq3tvn3tenfdt9a5ft5oq699; path=/; secure; HttpOnly
-      - PHPSESSID=glqu46r7brm9917h6a73ami6tr; path=/; secure; HttpOnly
+      - PHPSESSID=bnr9v7o68kodbrj6s8klpm9hhl; path=/; secure; HttpOnly
+      - PHPSESSID=dp1l29ndkhjtv607dop0vn6036; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3118,7 +3313,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914e0bf6e018d-GRU
+      - 81892815dd356055-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18962888122,"numero":32456,"numeroLoja":"23101895QNBN3X","data":"2023-10-18","dataSaida":"2023-10-18","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.69,"contato":{"id":16378033602,"nome":"Lucas
@@ -3127,7 +3322,7 @@ http_interactions:
         Lima Da Cunha","endereco":"Rua Izidoro Lopes","numero":"144","complemento":"
         Duque de Caxias","municipio":"Duque de Caxias","uf":"RJ","cep":"25231220","bairro":"Capivari","nomePais":""},"volumes":[{"id":15234909895,"servico":"Logistica
         Shopee","codigoRastreamento":"BR233397214293OSPXLM829376"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:03 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:10 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18962551294
@@ -3151,7 +3346,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:05 GMT
+      - Thu, 19 Oct 2023 12:52:11 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3159,10 +3354,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=5fd9e449cfeea380
+      - intid;desc=556054e442c78d1c
       Set-Cookie:
-      - PHPSESSID=9ufmv66pv7vit9mnh9brudnbfl; path=/; secure; HttpOnly
-      - PHPSESSID=vqolmaitutgjn9rs3mk5fic88s; path=/; secure; HttpOnly
+      - PHPSESSID=kf4le1htaja7tq3kbl91hhsdj3; path=/; secure; HttpOnly
+      - PHPSESSID=vufghc6sfodqqu3vmp6o1ur91d; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3184,7 +3379,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914ebaff202fd-GRU
+      - 8189281c1c534cf7-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18962551294,"numero":32421,"numeroLoja":"2310188H7SUBJC","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-11-18","totalProdutos":49.9,"total":49.85,"contato":{"id":16377542585,"nome":"Milene
@@ -3193,7 +3388,7 @@ http_interactions:
         Dos Santos Branco","endereco":"Rua Santo Ant\u00f4nio dos Pobres","numero":"1018","complemento":"
         Canoas","municipio":"Canoas","uf":"RS","cep":"92325310","bairro":"Harmonia","nomePais":""},"volumes":[{"id":15234831231,"servico":"Logistica
         Shopee","codigoRastreamento":"BR2389577765453SPXLM829882"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:05 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:11 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18962546286
@@ -3217,7 +3412,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:06 GMT
+      - Thu, 19 Oct 2023 12:52:12 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3225,10 +3420,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=6013cccc731d66c8
+      - intid;desc=88aa7d555c09286b
       Set-Cookie:
-      - PHPSESSID=0skmoaq99ch3s1lpknt26nnp8v; path=/; secure; HttpOnly
-      - PHPSESSID=7ck0rjih8majrm3r9kpvpck2n8; path=/; secure; HttpOnly
+      - PHPSESSID=ldv4tcr5qiojretqa1o6jf7efp; path=/; secure; HttpOnly
+      - PHPSESSID=retseru9tecghmnhaq1nrfomq8; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3250,7 +3445,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914f219dc01c2-GRU
+      - 818928248aeb1b17-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18962546286,"numero":32420,"numeroLoja":"16855I16852","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"0000-00-00","totalProdutos":40,"total":50.24,"contato":{"id":16377877130,"nome":"carlos
@@ -3258,7 +3453,7 @@ http_interactions:
         MANGA \u00daNICA COM FENDA GOLA DIAGONAL Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":16093499863},"comissao":{"base":40,"aliquota":0,"valor":0}}],"parcelas":[{"id":16443484614,"dataVencimento":"2023-11-16","valor":50.24,"observacoes":"M\u00e9todo
         de pagamento: Paypal\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":10.24,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"carlos
         almeida","endereco":"Rua Alagoas","numero":"20","complemento":"apt 106","municipio":"Santos","uf":"SP","cep":"11065120","bairro":"Gonzaga","nomePais":""},"volumes":[{"id":15234830297,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:06 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:12 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18962459040
@@ -3282,7 +3477,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:07 GMT
+      - Thu, 19 Oct 2023 12:52:14 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3290,10 +3485,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=2aecc81180f95736
+      - intid;desc=90ebe11b99812785
       Set-Cookie:
-      - PHPSESSID=00rc150ajsp09h0uph21vh43ah; path=/; secure; HttpOnly
-      - PHPSESSID=7i236cmfopku2mqblnkejsmq09; path=/; secure; HttpOnly
+      - PHPSESSID=cufslao3npb5sq58i3ke10bafv; path=/; secure; HttpOnly
+      - PHPSESSID=s1qe7h5tagqhabe4es5mrb85gc; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3315,7 +3510,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914f8cddc031b-GRU
+      - 8189282b09e11aef-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18962459040,"numero":32411,"numeroLoja":"2310188FJA2JW5","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":55.06,"contato":{"id":16377837738,"nome":"Sabrina
@@ -3325,7 +3520,7 @@ http_interactions:
         L 13","complemento":" Bar do luis mineiro","municipio":"Petr\u00f3polis","uf":"RJ","cep":"25610200","bairro":"Estrada
         da Saudade","nomePais":""},"volumes":[{"id":15234814419,"servico":"Logistica
         Shopee","codigoRastreamento":"BR230296683959OSPXLM830260"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:07 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:14 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18962279551
@@ -3349,7 +3544,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:08 GMT
+      - Thu, 19 Oct 2023 12:52:15 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3357,10 +3552,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=a14d32dee017854c
+      - intid;desc=bdc0c606ea8a25aa
       Set-Cookie:
-      - PHPSESSID=45f2lkffkce33pqk92h21s1ns3; path=/; secure; HttpOnly
-      - PHPSESSID=8r9pin7ertr8r8krkmp46ufsmg; path=/; secure; HttpOnly
+      - PHPSESSID=nrcnlsjl9vblcldhqi46irpec4; path=/; secure; HttpOnly
+      - PHPSESSID=u3q78gt7vgvq7c07roqsg5rlg4; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3382,7 +3577,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818914ff5ce30156-GRU
+      - 818928355f7a1a9d-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18962279551,"numero":32397,"numeroLoja":"2000006694354774","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"0000-00-00","totalProdutos":103.55,"total":115.52,"contato":{"id":16377754810,"nome":"Andreina
@@ -3391,7 +3586,7 @@ http_interactions:
         de pagamento: account_money","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":11.97,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Andreina
         Soares Da Silva","endereco":"Rua Pedro Machado Rezende","numero":"618","complemento":"","municipio":"Itaj\u00e1","uf":"GO","cep":"75815000","bairro":"Jardim
         Planalto","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"03.007.331\/0001-41","nomeUsuario":"PURCHASESTORE"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:08 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:15 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18962108015
@@ -3415,7 +3610,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:09 GMT
+      - Thu, 19 Oct 2023 12:52:16 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3423,10 +3618,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=7cec807d84b30e8f
+      - intid;desc=af7e78ba36172b85
       Set-Cookie:
-      - PHPSESSID=33eik39m9517det4uho96qep5l; path=/; secure; HttpOnly
-      - PHPSESSID=4c4n0pvl0hiq5hfh403o88rnol; path=/; secure; HttpOnly
+      - PHPSESSID=pfljmkjufo5vk3dhafc4f8b3kv; path=/; secure; HttpOnly
+      - PHPSESSID=u9fsbbvighasqpp22e81reii3o; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3448,7 +3643,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915062e641b31-GRU
+      - 8189283c0ab9a531-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18962108015,"numero":32384,"numeroLoja":"23101889UC15T0","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.9,"contato":{"id":16377678450,"nome":"Bruno
@@ -3458,7 +3653,7 @@ http_interactions:
         Itatinga","municipio":"Itatinga","uf":"SP","cep":"18690000","bairro":"Jardim
         Horizonte","nomePais":""},"volumes":[{"id":15234745307,"servico":"Logistica
         Shopee","codigoRastreamento":"BR234499631450DSPXLM828984"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:09 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:16 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18962097520
@@ -3482,7 +3677,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:10 GMT
+      - Thu, 19 Oct 2023 12:52:17 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3490,10 +3685,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=30792bdb73ead852
+      - intid;desc=7e3d81a04ed8162c
       Set-Cookie:
-      - PHPSESSID=8n1jprmrf9qkc8hiupcmbgt13o; path=/; secure; HttpOnly
-      - PHPSESSID=o30pnj03ush29usp2q3j413gr0; path=/; secure; HttpOnly
+      - PHPSESSID=1hhbt05bp2cevbkvktmb383toi; path=/; secure; HttpOnly
+      - PHPSESSID=65sl5ep7o41laviosb12jb1kci; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3515,7 +3710,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189150e18031b1d-GRU
+      - 818928422df701ad-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18962097520,"numero":32383,"numeroLoja":"23101889NUYC8W","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-11-01","totalProdutos":59.9,"total":80.33,"contato":{"id":16377674162,"nome":"Cristiana
@@ -3524,7 +3719,7 @@ http_interactions:
         Ara\u00fajo Dos Santos","endereco":"Manoelito sampaio Santos","numero":"78","complemento":"
         Pr\u00f3ximo mercadinho oliveira","municipio":"Ipir\u00e1","uf":"BA","cep":"44600000","bairro":"Jaquar\u00e3o","nomePais":""},"volumes":[{"id":15234743122,"servico":"Logistica
         Shopee","codigoRastreamento":"BR235273110735YSPXLM830568"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:10 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:17 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18962066627
@@ -3548,7 +3743,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:12 GMT
+      - Thu, 19 Oct 2023 12:52:18 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3556,10 +3751,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=76a819255aff3986
+      - intid;desc=30e5529f03f9f587
       Set-Cookie:
-      - PHPSESSID=n3lcbktn166mhk0vp58dfomd7o; path=/; secure; HttpOnly
-      - PHPSESSID=v3tm36pdss1b2troc6s9cgi97g; path=/; secure; HttpOnly
+      - PHPSESSID=4jhr83h6vo31u87uagc6fta2f3; path=/; secure; HttpOnly
+      - PHPSESSID=h8fl2ghkbdtit0nu2ff2p7p9u4; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3581,7 +3776,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915170e770110-GRU
+      - 818928487b7f015a-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18962066627,"numero":32378,"numeroLoja":"231018896C2515","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-11-15","totalProdutos":49.9,"total":49.9,"contato":{"id":16377659988,"nome":"Camila
@@ -3591,7 +3786,7 @@ http_interactions:
         Ruy Barbosa","municipio":"Ruy Barbosa","uf":"BA","cep":"46800000","bairro":"Manoel
         Antonio","nomePais":""},"volumes":[{"id":15234736919,"servico":"Logistica
         Shopee","codigoRastreamento":"BR2370342405033SPXLM830715"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:12 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:18 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18961687503
@@ -3615,7 +3810,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:13 GMT
+      - Thu, 19 Oct 2023 12:52:19 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3623,10 +3818,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=cd938c566030ca84
+      - intid;desc=223f11ddf5f93c52
       Set-Cookie:
-      - PHPSESSID=082dkckmtqh5dfnv5r6h54263f; path=/; secure; HttpOnly
-      - PHPSESSID=1kve0eg96gafq39p6h7k4pfbci; path=/; secure; HttpOnly
+      - PHPSESSID=enrf2ffo2ovk7jiei65ppgd9lh; path=/; secure; HttpOnly
+      - PHPSESSID=oc9po11kslp39achqeqe7uiq3k; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3648,7 +3843,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189151e084b018d-GRU
+      - 8189284ebcb10167-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18961687503,"numero":32356,"numeroLoja":"2310188391CGG2","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-11-07","totalProdutos":59.9,"total":59.9,"contato":{"id":16035555555,"nome":"Dhullya
@@ -3657,7 +3852,7 @@ http_interactions:
         Dos Santos Oliveira","endereco":"S\u00e3o Sebasti\u00e3o","numero":"201","complemento":"CASA
         EM CIMA DO BAR DE MARCELO","municipio":"Porto Seguro","uf":"BA","cep":"45810000","bairro":"Arei\u00e3o\/Ant\u00f4nio
         Tito","nomePais":""},"volumes":[{"id":15234671196,"servico":"Logistica Shopee","codigoRastreamento":"BR238152140344I"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:13 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:19 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18961610582
@@ -3681,7 +3876,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:14 GMT
+      - Thu, 19 Oct 2023 12:52:20 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3689,10 +3884,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=c5464f3b966999bd
+      - intid;desc=3ec69e25e1c80bff
       Set-Cookie:
-      - PHPSESSID=1m2322k3apmcd9mp0v2rdlatgn; path=/; secure; HttpOnly
-      - PHPSESSID=hc31p5ht6e10umraria74t3hs3; path=/; secure; HttpOnly
+      - PHPSESSID=9pcvb2sgaa01ou7v6dnt6ovlme; path=/; secure; HttpOnly
+      - PHPSESSID=hick832qcqvcld0rhavqfdmo70; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3714,7 +3909,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915252907a484-GRU
+      - 81892854f8b11aa8-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18961610582,"numero":32352,"numeroLoja":"2310188260S3HQ","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-30","totalProdutos":49.9,"total":49.42,"contato":{"id":16377483655,"nome":"Carla
@@ -3722,7 +3917,7 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:M","descricaoDetalhada":"","produto":{"id":15957707539},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16442946871,"dataVencimento":"2023-11-16","valor":49.42,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Carla
         Barreto","endereco":"Avenida Fluminense","numero":"275","complemento":" Ubatuba","municipio":"Ubatuba","uf":"SP","cep":"11689388","bairro":"Estufa
         II","nomePais":""},"volumes":[{"id":15234659587,"servico":"Logistica Shopee","codigoRastreamento":"BR238096551190CSPXLM830902"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:14 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:20 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18961151321
@@ -3746,7 +3941,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:15 GMT
+      - Thu, 19 Oct 2023 12:52:22 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3754,10 +3949,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=aaa32e765d16dce1
+      - intid;desc=c6ddfae5291ebad8
       Set-Cookie:
-      - PHPSESSID=2271nsu7qegodod6odd28k8vtg; path=/; secure; HttpOnly
-      - PHPSESSID=5mg9ai4875ale1g7adod7kv4qa; path=/; secure; HttpOnly
+      - PHPSESSID=fncfndd5o3jvdjie14bkgbe6pm; path=/; secure; HttpOnly
+      - PHPSESSID=lk2cfec6p4vvhu668s9nsibaga; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3779,7 +3974,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189152b4d2e1aa7-GRU
+      - 8189286139a61d0f-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18961151321,"numero":32339,"numeroLoja":"2310187WTME3JU","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-30","totalProdutos":99.8,"total":99.8,"contato":{"id":16377367578,"nome":"Luana
@@ -3790,7 +3985,7 @@ http_interactions:
         Luzia","uf":"MG","cep":"33130370","bairro":"S\u00e3o Cosme de Cima (S\u00e3o
         Benedito)","nomePais":""},"volumes":[{"id":15234608900,"servico":"Logistica
         Shopee","codigoRastreamento":"BR2302701605669SPXLM832279"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:15 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:22 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18961130327
@@ -3814,7 +4009,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:16 GMT
+      - Thu, 19 Oct 2023 12:52:23 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3822,10 +4017,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=995094250a4dd4b7
+      - intid;desc=78a1779fc8df4457
       Set-Cookie:
-      - PHPSESSID=8e3r16l4upg1i5glsttgek94e4; path=/; secure; HttpOnly
-      - PHPSESSID=q2iee36pgmbg1obcc9u5k4aljv; path=/; secure; HttpOnly
+      - PHPSESSID=aec8sd5me7likv49gtb546ip6d; path=/; secure; HttpOnly
+      - PHPSESSID=ju4rl09bm8p1s3atrm4kb9b4o2; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3847,7 +4042,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915316cdda526-GRU
+      - 81892867ab1401b3-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18961130327,"numero":32336,"numeroLoja":"2310187WNM7FV6","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":49.9,"contato":{"id":16377361750,"nome":"Roberta","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":18964127525},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16236241924,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-M","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
@@ -3855,7 +4050,7 @@ http_interactions:
         veriador jose teixeira de vasconcelos","numero":"395","complemento":" Sandovalina","municipio":"Sandovalina","uf":"SP","cep":"19250000","bairro":"Jardim
         alberto sanfelice","nomePais":""},"volumes":[{"id":15234606108,"servico":"Logistica
         Shopee","codigoRastreamento":"BR239194900703ISPXLM832708"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:16 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:23 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18960039633
@@ -3879,7 +4074,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:17 GMT
+      - Thu, 19 Oct 2023 12:52:24 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3887,10 +4082,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=4c3f5625d7601955
+      - intid;desc=d550cc1bb32cf955
       Set-Cookie:
-      - PHPSESSID=hqj4cpumdqcmmdm04plcnihtfd; path=/; secure; HttpOnly
-      - PHPSESSID=lkdbjj2t4f5hsqcjofnga1kif0; path=/; secure; HttpOnly
+      - PHPSESSID=8086ajunh3eav0nj2nmfprr0qr; path=/; secure; HttpOnly
+      - PHPSESSID=q258i1pfcm02kng8uju2lhthog; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3912,7 +4107,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891537aaf41b30-GRU
+      - 8189286f98381d05-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18960039633,"numero":32306,"numeroLoja":"16854I16851","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":69.41,"contato":{"id":16377130758,"nome":"Ana
@@ -3921,7 +4116,7 @@ http_interactions:
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":19.51,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Ana
         Beatriz","endereco":"Rua Jorge Chamas Sobrinho","numero":"465","complemento":"1","municipio":"Pirassununga","uf":"SP","cep":"13630620","bairro":"Jardim
         Margarida","nomePais":""},"volumes":[{"id":15234504299,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:17 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:24 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18959627797
@@ -3945,7 +4140,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:18 GMT
+      - Thu, 19 Oct 2023 12:52:25 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -3953,10 +4148,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=0e5982a45b17364f
+      - intid;desc=9d39231543f4d0dc
       Set-Cookie:
-      - PHPSESSID=684rh8enf33rti77fq2bv55tl9; path=/; secure; HttpOnly
-      - PHPSESSID=iba1b2foea6foli4uk8922a4sm; path=/; secure; HttpOnly
+      - PHPSESSID=ahk0jnrumcpiu9337vic18jpbj; path=/; secure; HttpOnly
+      - PHPSESSID=r84j4kepumg43pflahdlmdvg1i; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -3978,7 +4173,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189153eb962a48c-GRU
+      - 818928763b951a8f-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18959627797,"numero":32293,"numeroLoja":"2310187K2YKW6H","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-28","totalProdutos":49.9,"total":54.25,"contato":{"id":16377033899,"nome":"Erica
@@ -3988,7 +4183,7 @@ http_interactions:
         Monte Mor","municipio":"Monte Mor","uf":"SP","cep":"13197230","bairro":"Parque
         Residencial S\u00e3o Clemente","nomePais":""},"volumes":[{"id":15234464067,"servico":"Logistica
         Shopee","codigoRastreamento":"BR232661285401HSPXLM831699"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:18 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:25 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18959422373
@@ -4012,7 +4207,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:19 GMT
+      - Thu, 19 Oct 2023 12:52:26 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4020,10 +4215,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=7425ace8aebb9d5c
+      - intid;desc=71943185ae00cde2
       Set-Cookie:
-      - PHPSESSID=e3haedc1d9a3hi9ae8fv06snpq; path=/; secure; HttpOnly
-      - PHPSESSID=vjotdd9dfpgsgodfvkgkjnpscq; path=/; secure; HttpOnly
+      - PHPSESSID=l9vc9ee1klcmqt9uums3ru2r2s; path=/; secure; HttpOnly
+      - PHPSESSID=n2rnk5tmef4hncll7ijb3tdi8s; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4045,7 +4240,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189154749fa1b30-GRU
+      - 8189287c5a066050-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18959422373,"numero":32285,"numeroLoja":"2310187HHVXBUM","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16376982309,"nome":"Ana
@@ -4054,7 +4249,7 @@ http_interactions:
         Gabrielle Mendes Dos Santos","endereco":"Elena s\u00e1","numero":"02","complemento":"
         Arataca","municipio":"Arataca","uf":"BA","cep":"45695000","bairro":"Vila englantina","nomePais":""},"volumes":[{"id":15234442580,"servico":"Logistica
         Shopee","codigoRastreamento":"BR238368306195MSPXLM831477"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:19 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:26 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18959224601
@@ -4078,7 +4273,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:20 GMT
+      - Thu, 19 Oct 2023 12:52:27 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4086,10 +4281,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=e459f1539f55e664
+      - intid;desc=e148cb7e09d3cbd4
       Set-Cookie:
-      - PHPSESSID=4euu3rfb8ip6vt0g9fbunie2kc; path=/; secure; HttpOnly
-      - PHPSESSID=hpno8ike1ak6kp1882vmouu1te; path=/; secure; HttpOnly
+      - PHPSESSID=7kj6k9io1g11jbdlnsq6m0v3m6; path=/; secure; HttpOnly
+      - PHPSESSID=8s4fuu21i9thul23fvn577qmcn; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4111,7 +4306,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189154d8cfe0112-GRU
+      - 818928826e0f6043-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18959224601,"numero":32281,"numeroLoja":"2310187G3QNDNR","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-30","totalProdutos":49.9,"total":49.9,"contato":{"id":16376915947,"nome":"Izabela
@@ -4120,7 +4315,7 @@ http_interactions:
         Cristina Pantaleao","endereco":"Rua Cl\u00e1udia M\u00e1rcia Vieira","numero":"245","complemento":"
         favor ligar 031987502555","municipio":"Conselheiro Lafaiete","uf":"MG","cep":"36400261","bairro":"Arc\u00e1dia","nomePais":""},"volumes":[{"id":15234421836,"servico":"Logistica
         Shopee","codigoRastreamento":"BR230352858069TSPXLM831471"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:20 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:27 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18958978948
@@ -4144,7 +4339,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:21 GMT
+      - Thu, 19 Oct 2023 12:52:28 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4152,10 +4347,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=18eab6369beac505
+      - intid;desc=ca319b3f797062df
       Set-Cookie:
-      - PHPSESSID=epaup928j18gbo60gqle6sn57f; path=/; secure; HttpOnly
-      - PHPSESSID=rlp779b2s2k5a9k3ppckkcebao; path=/; secure; HttpOnly
+      - PHPSESSID=f1emh5llrmdfubj6o4ch8gcd98; path=/; secure; HttpOnly
+      - PHPSESSID=j6oalri11n3qjf9bg3bib8t7k6; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4177,7 +4372,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891553ec001b24-GRU
+      - 81892889bcf01a9a-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18958978948,"numero":32273,"numeroLoja":"16853I16850","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":79.36,"contato":{"id":16376866101,"nome":"camila
@@ -4186,7 +4381,7 @@ http_interactions:
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":29.46,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":3,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"camila  perera","endereco":"Rua
         Marechal Deodoro","numero":"220","complemento":"apto 1402","municipio":"Bento
         Gon\u00e7alves","uf":"RS","cep":"95700010","bairro":"Centro","nomePais":""},"volumes":[{"id":15234392819,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:21 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:28 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18958843694
@@ -4210,7 +4405,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:22 GMT
+      - Thu, 19 Oct 2023 12:52:29 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4218,10 +4413,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=4b7565947da52c5b
+      - intid;desc=02f0e3ad4a8e0449
       Set-Cookie:
-      - PHPSESSID=8lubha7mdmlcc1fib999l65rld; path=/; secure; HttpOnly
-      - PHPSESSID=opjkgs1rmp7g1kkllp4t3h89u5; path=/; secure; HttpOnly
+      - PHPSESSID=mgsa936s9gqnnsgbonaiadplm0; path=/; secure; HttpOnly
+      - PHPSESSID=o15co3ucsd7mffke98930ga7ue; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4243,7 +4438,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189155a8e7d0167-GRU
+      - 8189288fcd56013a-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18958843694,"numero":32261,"numeroLoja":"16852I16849","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":103.9,"contato":{"id":16376832557,"nome":"Renata
@@ -4253,7 +4448,7 @@ http_interactions:
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":12.86,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Renata
         Faustino Santos","endereco":"Rua Ferdinando Bertoni","numero":"143","complemento":"","municipio":"S\u00e3o
         Paulo","uf":"SP","cep":"03663020","bairro":"Vila R\u00e9","nomePais":""},"volumes":[{"id":15234377580,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:22 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:29 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18956348454
@@ -4277,7 +4472,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:23 GMT
+      - Thu, 19 Oct 2023 12:52:30 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4285,10 +4480,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=26e981712dc113b6
+      - intid;desc=1e94cc5084b6e301
       Set-Cookie:
-      - PHPSESSID=31t0od8rd3sbmpdtp3goqtb6p7; path=/; secure; HttpOnly
-      - PHPSESSID=ejsfkrm57vuppm8alcgaqarnak; path=/; secure; HttpOnly
+      - PHPSESSID=isgqf008jl95u7s3o2ph7tln40; path=/; secure; HttpOnly
+      - PHPSESSID=mm4svbos02al0501l18g0l3h2p; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4310,7 +4505,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891560dc9d6b08-GRU
+      - 8189289698bf02e3-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18956348454,"numero":32213,"numeroLoja":"2310176UKPEK2Y","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-25","totalProdutos":59.9,"total":59.9,"contato":{"id":16376342075,"nome":"Ana
@@ -4319,7 +4514,7 @@ http_interactions:
         Beatriz Oliveira Coutinho","endereco":"R Lisboa","numero":"28","complemento":"Casa","municipio":"Ribeir\u00e3o
         Pires","uf":"SP","cep":"09407230","bairro":"Barro Branco","nomePais":""},"volumes":[{"id":15234160310,"servico":"Logistica
         Shopee","codigoRastreamento":"BR233035304794LSPXLM830420"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:23 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:31 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18956331824
@@ -4343,7 +4538,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:25 GMT
+      - Thu, 19 Oct 2023 12:52:32 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4351,10 +4546,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=ea37ec68c92a0e9e
+      - intid;desc=b5b6388665822921
       Set-Cookie:
-      - PHPSESSID=6u4uiscrmhj1ag3abqqovqig2a; path=/; secure; HttpOnly
-      - PHPSESSID=stbjq6fbffaocrnhpej0jtcj4k; path=/; secure; HttpOnly
+      - PHPSESSID=ih79je5ejjpm2c3e8j7kv6f1ln; path=/; secure; HttpOnly
+      - PHPSESSID=n09v9ptceordr2ekl3f5rnr4rs; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4376,7 +4571,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891569acce010c-GRU
+      - 818928a3c81ca59d-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18956331824,"numero":32212,"numeroLoja":"2310176UCQAFB3","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-29","totalProdutos":49.9,"total":55.64,"contato":{"id":16376336644,"nome":"L\u00edlique
@@ -4386,7 +4581,7 @@ http_interactions:
         Perto do bar do elias","municipio":"Simon\u00e9sia","uf":"MG","cep":"36930000","bairro":"Nossa
         senhora aparecida","nomePais":""},"volumes":[{"id":15234157853,"servico":"Logistica
         Shopee","codigoRastreamento":"BR2397932989154SPXLM830746"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:25 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:33 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18956063516
@@ -4410,7 +4605,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:26 GMT
+      - Thu, 19 Oct 2023 12:52:34 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4418,10 +4613,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=7da2ad9186e7cb34
+      - intid;desc=bb0a29a9e3ae9504
       Set-Cookie:
-      - PHPSESSID=72c9ip1vns589h9n2drlen5dpd; path=/; secure; HttpOnly
-      - PHPSESSID=f52adg3ne861gickpd0jnn9uu6; path=/; secure; HttpOnly
+      - PHPSESSID=fuibllu7a7d8run0ni2vfib8dt; path=/; secure; HttpOnly
+      - PHPSESSID=heb6dutk42a0hm2eskllr2l535; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4443,7 +4638,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189156ffd921b1b-GRU
+      - 818928adeb0a0290-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18956063516,"numero":32192,"numeroLoja":"2310176846MBHV","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-25","totalProdutos":49.9,"total":49.59,"contato":{"id":16376239343,"nome":"Erika
@@ -4453,7 +4648,7 @@ http_interactions:
         7 apartamento 14","municipio":"Barueri","uf":"SP","cep":"06423260","bairro":"Conjunto
         Habitacional Mirante dos Altos","nomePais":""},"volumes":[{"id":15234103377,"servico":"Logistica
         Shopee","codigoRastreamento":"BR2370559878745SPXLM831676"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:26 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:34 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18956039818
@@ -4477,7 +4672,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:27 GMT
+      - Thu, 19 Oct 2023 12:52:35 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4485,10 +4680,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=56446565736ec8d6
+      - intid;desc=c6cc4d109b2ce6fb
       Set-Cookie:
-      - PHPSESSID=6db7uva7tscbaj2aco1hsuhtrb; path=/; secure; HttpOnly
-      - PHPSESSID=gdmns5hq69nt00r6loppe2393d; path=/; secure; HttpOnly
+      - PHPSESSID=pccs38hshchqs2vvesfmb2h6h5; path=/; secure; HttpOnly
+      - PHPSESSID=r7rhdm8alqhvcqcj8ie7kgkfg5; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4510,7 +4705,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915763f661a91-GRU
+      - 818928b6edad1af6-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18956039818,"numero":32185,"numeroLoja":"23101766PERRP4","data":"2023-10-17","dataSaida":"2023-10-17","dataPrevista":"2023-10-28","totalProdutos":59.9,"total":59.9,"contato":{"id":16376227436,"nome":"Jheniffer
@@ -4519,7 +4714,7 @@ http_interactions:
         Oliveira","endereco":"Rua Frei Dami\u00e3o","numero":"109","complemento":"
         Praia Grande","municipio":"Praia Grande","uf":"SP","cep":"11711140","bairro":"Princesa","nomePais":""},"volumes":[{"id":15234098195,"servico":"Logistica
         Shopee","codigoRastreamento":"BR238074958398LSPXLM832619"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:27 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:35 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18955769686
@@ -4543,7 +4738,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:28 GMT
+      - Thu, 19 Oct 2023 12:52:37 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4551,10 +4746,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=3233bad921e00111
+      - intid;desc=9e39690327858c3e
       Set-Cookie:
-      - PHPSESSID=48b6qqqq7kdh88jsdbdrgutp0r; path=/; secure; HttpOnly
-      - PHPSESSID=4cfqt713p6g6krig8gr64e7ic4; path=/; secure; HttpOnly
+      - PHPSESSID=kjg1ff97sgecdqdfj6ftpg4mdf; path=/; secure; HttpOnly
+      - PHPSESSID=v6ip24vvh8fbvinoqstgl1tukm; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4576,7 +4771,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189157c6be61ab2-GRU
+      - 818928bf1c270308-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18955769686,"numero":32158,"numeroLoja":"2310175YE1MM6V","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-11-05","totalProdutos":49.9,"total":49.9,"contato":{"id":16376086580,"nome":"Maria
@@ -4586,7 +4781,7 @@ http_interactions:
         Presidente Prudente","municipio":"Presidente Prudente","uf":"SP","cep":"19050730","bairro":"Vila
         Liberdade","nomePais":""},"volumes":[{"id":15234045155,"servico":"Logistica
         Shopee","codigoRastreamento":"BR232363043509KSPXLM831396"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:28 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:37 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18955445707
@@ -4610,7 +4805,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:29 GMT
+      - Thu, 19 Oct 2023 12:52:38 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4618,10 +4813,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=89aebab1c6ec3505
+      - intid;desc=553a0b975a0e0397
       Set-Cookie:
-      - PHPSESSID=bo6s7egdmhbs2ophves6f251oi; path=/; secure; HttpOnly
-      - PHPSESSID=p79fa58qtn7iqcrb0oc3hv3kk1; path=/; secure; HttpOnly
+      - PHPSESSID=4p6plg0d7frcl8gm87ba4i62ns; path=/; secure; HttpOnly
+      - PHPSESSID=s43ge2565h923f14nd0llslqef; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4643,7 +4838,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891582bc63a51f-GRU
+      - 818928ca0a4fa5af-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18955445707,"numero":32140,"numeroLoja":"2310175TA7MJ7W","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-11-04","totalProdutos":49.9,"total":49.9,"contato":{"id":16375930469,"nome":"Marizete
@@ -4652,7 +4847,7 @@ http_interactions:
         Barbosa Gon\u00e7alves","endereco":"Quadra QR 18","numero":"15","complemento":"Quadra
         QR 18","municipio":"Planaltina","uf":"GO","cep":"73754018","bairro":"Itapu\u00e3
         I","nomePais":""},"volumes":[{"id":15233978773,"servico":"Logistica Shopee","codigoRastreamento":"BR238200493823VSPXLM831385"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:29 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:39 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18955152418
@@ -4676,7 +4871,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:30 GMT
+      - Thu, 19 Oct 2023 12:52:40 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4684,10 +4879,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=78898933960a5786
+      - intid;desc=ee305da11b582362
       Set-Cookie:
-      - PHPSESSID=e4arfogkkfpln9jq8jq2251vp5; path=/; secure; HttpOnly
-      - PHPSESSID=holn0v60lt3kpcab8jeec8d268; path=/; secure; HttpOnly
+      - PHPSESSID=ngviqc5ojcesrvanh1rmam6n99; path=/; secure; HttpOnly
+      - PHPSESSID=shg6ba5kun7u8ri7ji8t791n4d; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4709,7 +4904,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 81891588e8f1a595-GRU
+      - 818928d249b8010b-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18955152418,"numero":32117,"numeroLoja":"2310175NPVNHR9","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16375196585,"nome":"Taissa
@@ -4718,7 +4913,7 @@ http_interactions:
         Ribeiro Da Gra\u00e7a","endereco":"Rua Jos\u00e9 Maria da Silva Paranhos","numero":"442","complemento":"
         Colombo","municipio":"Colombo","uf":"PR","cep":"83409470","bairro":"Guarani","nomePais":""},"volumes":[{"id":15233922330,"servico":"Logistica
         Shopee","codigoRastreamento":"BR235646276461OSPXLM829009"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:30 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:40 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18955100140
@@ -4742,7 +4937,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:31 GMT
+      - Thu, 19 Oct 2023 12:52:41 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4750,10 +4945,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=1b0c7bdcd6005a9e
+      - intid;desc=ea09b6e099a62a0d
       Set-Cookie:
-      - PHPSESSID=58i49htu8hm9si9ch7uchf9c8v; path=/; secure; HttpOnly
-      - PHPSESSID=5kro4cnbjr1vm45gftvvj9ucd0; path=/; secure; HttpOnly
+      - PHPSESSID=39og21qhh017h5ubj8sgjr97i2; path=/; secure; HttpOnly
+      - PHPSESSID=9ecnp9s13ehte6n6nomoptp8le; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4775,7 +4970,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189158f0bed1ab6-GRU
+      - 818928dab9a40133-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18955100140,"numero":32115,"numeroLoja":"16851I16848","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"0000-00-00","totalProdutos":32.5,"total":53.26,"contato":{"id":16375781322,"nome":"Gabriela
@@ -4784,7 +4979,7 @@ http_interactions:
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":20.76,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":7,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Gabriela
         Rama","endereco":"Avenida Crist\u00f3v\u00e3o Colombo","numero":"3084","complemento":"Sala
         307","municipio":"Porto Alegre","uf":"RS","cep":"90560004","bairro":"Floresta","nomePais":""},"volumes":[{"id":15233913286,"servico":"PAC","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:31 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:41 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18955087451
@@ -4808,7 +5003,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:32 GMT
+      - Thu, 19 Oct 2023 12:52:42 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4816,10 +5011,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=28f94078ac17ceef
+      - intid;desc=5b6f9e5ea424daf0
       Set-Cookie:
-      - PHPSESSID=7a47fd1c9tuupkcfnpqu0vudqo; path=/; secure; HttpOnly
-      - PHPSESSID=mcfsv66k9d6t0ebqojv6cnn1l8; path=/; secure; HttpOnly
+      - PHPSESSID=ikl8tqolf2690ue8jbjk5s7mt3; path=/; secure; HttpOnly
+      - PHPSESSID=nlbcgrgt1ebc1ljkc13tmibcf9; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4841,7 +5036,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189159569f2a6b5-GRU
+      - 818928e20d4da620-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18955087451,"numero":32110,"numeroLoja":"2310175MPRK2U3","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":48.97,"contato":{"id":16282903075,"nome":"Thais
@@ -4851,7 +5046,7 @@ http_interactions:
         do Guanabara","numero":"904","complemento":"Bloco 12B APT 305","municipio":"S\u00e3o
         Gon\u00e7alo","uf":"RJ","cep":"24415000","bairro":"Vila Lage","nomePais":""},"volumes":[{"id":15233911032,"servico":"Logistica
         Shopee","codigoRastreamento":"BR236555813700ASPXLM830184"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:32 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:42 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18953482457
@@ -4875,7 +5070,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:33 GMT
+      - Thu, 19 Oct 2023 12:52:44 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4883,10 +5078,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=fbc5c7f1f21afcb6
+      - intid;desc=d293fa0a5670e256
       Set-Cookie:
-      - PHPSESSID=0uch3sfjk9fplmb0afqpjl4l90; path=/; secure; HttpOnly
-      - PHPSESSID=lhsemh8f93bn2kmr2hiuh2laju; path=/; secure; HttpOnly
+      - PHPSESSID=erce8aiv8v4mnh4pv4v7kbqs2b; path=/; secure; HttpOnly
+      - PHPSESSID=haf5jdicaa31t2gj0c35d6qn07; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4908,7 +5103,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 8189159bbe00a4f9-GRU
+      - 818928ea5891a4ba-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18953482457,"numero":32067,"numeroLoja":"2310175741BGE0","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.72,"contato":{"id":16375365207,"nome":"Mayara
@@ -4918,7 +5113,7 @@ http_interactions:
         28972200. (22998754881 ) ligar","municipio":"Araruama","uf":"RJ","cep":"28974010","bairro":"Salinas
         (Praia Seca)","nomePais":""},"volumes":[{"id":15233744427,"servico":"Logistica
         Shopee","codigoRastreamento":"BR238666848743TSPXLM832492"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:33 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:44 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18952916761
@@ -4942,7 +5137,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:34 GMT
+      - Thu, 19 Oct 2023 12:52:46 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -4950,10 +5145,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=5aaed73c3328ec01
+      - intid;desc=d04adb623e9de7b4
       Set-Cookie:
-      - PHPSESSID=cek8jnk149kl4gr1p8sf5drpmm; path=/; secure; HttpOnly
-      - PHPSESSID=n9tf86gf1pl24mo24k8c5r5054; path=/; secure; HttpOnly
+      - PHPSESSID=15mvfgt2mp3e5siiv8s31ubk9r; path=/; secure; HttpOnly
+      - PHPSESSID=6bb6c5rfmppe97fpkhh37vs97a; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -4975,7 +5170,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915a1ddd81d34-GRU
+      - 818928f7cb8b1b2e-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18952916761,"numero":32050,"numeroLoja":"23101753AQVK1F","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-10-31","totalProdutos":59.9,"total":59.9,"contato":{"id":16375236796,"nome":"Erika
@@ -4984,7 +5179,7 @@ http_interactions:
         Moreira de andrade","endereco":"Travessa francisca goulart","numero":"51","complemento":"
         Cambuquira","municipio":"Cambuquira","uf":"MG","cep":"37420000","bairro":"Fatima","nomePais":""},"volumes":[{"id":15233688920,"servico":"Logistica
         Shopee","codigoRastreamento":"BR238172084431HSPXLM1040308"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:34 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:46 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18952237345
@@ -5008,7 +5203,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:35 GMT
+      - Thu, 19 Oct 2023 12:52:47 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5016,10 +5211,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=d9728ff8f0dae261
+      - intid;desc=9b77d2ff22cd1258
       Set-Cookie:
-      - PHPSESSID=d0b8r2n35qka6hrqvum0krua18; path=/; secure; HttpOnly
-      - PHPSESSID=sgqrd7u9mutl0604j0gjph2ehg; path=/; secure; HttpOnly
+      - PHPSESSID=0o6tol9lppjgnmvud098rudqe2; path=/; secure; HttpOnly
+      - PHPSESSID=s1fptkger2e1r9nnu8f737oeek; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5041,7 +5236,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915a80fce6043-GRU
+      - 818928fe6bcf1b20-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18952237345,"numero":32020,"numeroLoja":"2310164X9XV08D","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-10-31","totalProdutos":49.9,"total":49.9,"contato":{"id":16375070124,"nome":"Jhenniffer
@@ -5050,7 +5245,7 @@ http_interactions:
         Da Silva Fernandes","endereco":"Rio de Janeiro","numero":"100","complemento":"
         Silva Jardim","municipio":"Silva Jardim","uf":"RJ","cep":"28820000","bairro":"Fazenda
         Brasil","nomePais":""},"volumes":[{"id":15233615802,"servico":"Logistica Shopee","codigoRastreamento":"BR238869618423L"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:35 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:47 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18951985359
@@ -5074,7 +5269,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:36 GMT
+      - Thu, 19 Oct 2023 12:52:48 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5082,10 +5277,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=faeaf99dda0ea4f1
+      - intid;desc=7c493059b7fa8dfa
       Set-Cookie:
-      - PHPSESSID=edhiljcp53tk8fs0nlmc1t0pov; path=/; secure; HttpOnly
-      - PHPSESSID=obiusu30ao5od37jg2poegktf1; path=/; secure; HttpOnly
+      - PHPSESSID=lbl7a3r4v4i0rb126dujebch7p; path=/; secure; HttpOnly
+      - PHPSESSID=orm10v3b0luq6kvtdvjsvdo8fh; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5107,7 +5302,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915ae98390116-GRU
+      - 81892905582e00de-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18951985359,"numero":32010,"numeroLoja":"2310164VBSE4DP","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-10-30","totalProdutos":69.9,"total":69.89,"contato":{"id":15757935699,"nome":"Ver\u00f4nica
@@ -5116,7 +5311,7 @@ http_interactions:
         Carla Dos Santos","endereco":"Rua Ivonette Delboni","numero":"315","complemento":"
         Port\u00e3o azul","municipio":"Indaiatuba","uf":"SP","cep":"13340121","bairro":"Jardim
         Brasil","nomePais":""},"volumes":[{"id":15233588073,"servico":"Logistica Shopee","codigoRastreamento":"BR238383994465YSPXLM822808"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:36 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:48 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18951924936
@@ -5140,7 +5335,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:37 GMT
+      - Thu, 19 Oct 2023 12:52:49 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5148,10 +5343,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=2cec4a5c29f850dc
+      - intid;desc=eeb865b0568e8b14
       Set-Cookie:
-      - PHPSESSID=sa7iffrtr5rivapf2n22c8s65b; path=/; secure; HttpOnly
-      - PHPSESSID=uank9sa0gl7cdag040ucojtuv2; path=/; secure; HttpOnly
+      - PHPSESSID=3sgu7knmnucrljus1jdg5nmcb8; path=/; secure; HttpOnly
+      - PHPSESSID=t8co2utmethllhfupdkhq4mv45; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5173,7 +5368,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915b4feac028f-GRU
+      - 8189290d1e9e01c1-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18951924936,"numero":32009,"numeroLoja":"2310164UY9UMHM","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.9,"contato":{"id":16374994121,"nome":"Samyra
@@ -5182,7 +5377,7 @@ http_interactions:
         Cristina De Campos Lima Marinho","endereco":"Rua Paulo de Aquino","numero":"8","complemento":"
         Rio de Janeiro","municipio":"Rio de Janeiro","uf":"RJ","cep":"21645500","bairro":"Anchieta","nomePais":""},"volumes":[{"id":15233582471,"servico":"Logistica
         Shopee","codigoRastreamento":"BR2336071238017SPXLM823594"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:37 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:49 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18951846113
@@ -5206,7 +5401,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:38 GMT
+      - Thu, 19 Oct 2023 12:52:50 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5214,10 +5409,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=f8eb62b264d7c6b5
+      - intid;desc=e9bc64500f632672
       Set-Cookie:
-      - PHPSESSID=15me4q82bi7jn0t9fif7dv6bvd; path=/; secure; HttpOnly
-      - PHPSESSID=rqmloslgqdj37mb0k9uqvc48h2; path=/; secure; HttpOnly
+      - PHPSESSID=heodngrmgegnuin9r5m7tehe2g; path=/; secure; HttpOnly
+      - PHPSESSID=q79sevb4a4pvvr14luoq6fuce6; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5239,7 +5434,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915bb28a00308-GRU
+      - 81892913be1ca55c-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18951846113,"numero":32001,"numeroLoja":"2310164UH6SG7E","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-11-01","totalProdutos":49.9,"total":49.9,"contato":{"id":16374978409,"nome":"Sarah
@@ -5248,7 +5443,7 @@ http_interactions:
         Vit\u00f3ria Batista Dos Santos","endereco":"Rua dos Cajueiros","numero":"139","complemento":"
         Rio de Janeiro","municipio":"Rio de Janeiro","uf":"RJ","cep":"23530074","bairro":"Sepetiba","nomePais":""},"volumes":[{"id":15233575809,"servico":"Logistica
         Shopee","codigoRastreamento":"BR2325554403639SPXLM822617"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:38 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:50 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18951543045
@@ -5272,7 +5467,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:39 GMT
+      - Thu, 19 Oct 2023 12:52:51 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5280,10 +5475,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=39ef2aa87e9b52f9
+      - intid;desc=15ae71f20d7e6a05
       Set-Cookie:
-      - PHPSESSID=8hqlf1k7126pvssb17enkqvqq8; path=/; secure; HttpOnly
-      - PHPSESSID=uo8qfugqek6i6o0cr86ugtfieu; path=/; secure; HttpOnly
+      - PHPSESSID=c5el53mauadgjunbtboubke3lc; path=/; secure; HttpOnly
+      - PHPSESSID=fethrvc5t9m78dj97pohd7so89; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5305,7 +5500,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915c1a8a01a8b-GRU
+      - 8189291a3e3d1aa5-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18951543045,"numero":31996,"numeroLoja":"2310164ST2F8P6","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"2023-11-14","totalProdutos":59.9,"total":61.47,"contato":{"id":16374914977,"nome":"Rayffa
@@ -5315,7 +5510,7 @@ http_interactions:
         Perto do verd\u00e3o da colina","municipio":"Corumb\u00e1","uf":"MS","cep":"79311013","bairro":"Cristo
         Redentor","nomePais":""},"volumes":[{"id":15233546771,"servico":"Logistica
         Shopee","codigoRastreamento":"BR2379580737328"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:39 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:51 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18951382809
@@ -5339,7 +5534,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:40 GMT
+      - Thu, 19 Oct 2023 12:52:52 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5347,10 +5542,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=66030b50603bcab5
+      - intid;desc=a84f5f622fc35ce5
       Set-Cookie:
-      - PHPSESSID=0h92bjfle6gbcltpfgcu7tjapf; path=/; secure; HttpOnly
-      - PHPSESSID=cvr9budj90muvke9rkmrin6mg9; path=/; secure; HttpOnly
+      - PHPSESSID=12lulsf68dfuqt248898octjf3; path=/; secure; HttpOnly
+      - PHPSESSID=ecublr0svri4o10753v2l32hgr; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5372,7 +5567,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915ca681f01ad-GRU
+      - 818929206dbb51cb-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18951382809,"numero":31991,"numeroLoja":"2000006681131416","data":"2023-10-16","dataSaida":"2023-10-16","dataPrevista":"0000-00-00","totalProdutos":103.55,"total":103.55,"contato":{"id":16374885800,"nome":"Magna
@@ -5380,7 +5575,7 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:M","descricaoDetalhada":"","produto":{"id":15957707539},"comissao":{"base":103.55,"aliquota":0,"valor":0}}],"parcelas":[{"id":16438284842,"dataVencimento":"2023-11-15","valor":103.55,"observacoes":"M\u00e9todo
         de pagamento: pix","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"magna
         Jacinta borges","endereco":"Jo\u00e3o De Brito Pimenta","numero":"431","complemento":"casa","municipio":"Cambuquira","uf":"MG","cep":"37420000","bairro":"centro","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"03.007.331\/0001-41","nomeUsuario":"PURCHASESTORE"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:40 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:52 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18946674795
@@ -5404,7 +5599,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:41 GMT
+      - Thu, 19 Oct 2023 12:52:53 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5412,10 +5607,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=7190d77cd928a57b
+      - intid;desc=ee5a89b3e5ad5ee2
       Set-Cookie:
-      - PHPSESSID=5pcklsbqerhb03eq0jro3hmpf8; path=/; secure; HttpOnly
-      - PHPSESSID=icvvcco0t1nomuq3ugid02i02t; path=/; secure; HttpOnly
+      - PHPSESSID=273lg8tv143u5357r5l64q6o0i; path=/; secure; HttpOnly
+      - PHPSESSID=fldbjvpqq991i7a3uinq5gsi6m; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5437,7 +5632,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915d0a8aca608-GRU
+      - 81892926cfb4023d-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18946674795,"numero":31856,"numeroLoja":"2310162P2VV58Y","data":"2023-10-15","dataSaida":"2023-10-15","dataPrevista":"2023-11-02","totalProdutos":49.9,"total":48.44,"contato":{"id":16373666780,"nome":"Denise
@@ -5446,7 +5641,7 @@ http_interactions:
         Dias Ara\u00fajo","endereco":"Rua Visconde de Cairu","numero":"564","complemento":"
         Residencial Cairu bloco C 304","municipio":"Xanxer\u00ea","uf":"SC","cep":"89820000","bairro":"Vista
         alegre","nomePais":""},"volumes":[{"id":15233013521,"servico":"Logistica Shopee","codigoRastreamento":"BR231024347212M"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"35.635.824\/0001-12","nomeUsuario":"372186496"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:41 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:53 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18945251570
@@ -5470,7 +5665,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:42 GMT
+      - Thu, 19 Oct 2023 12:52:54 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5478,10 +5673,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=0d83482217630f66
+      - intid;desc=d15012e89fcd6cef
       Set-Cookie:
-      - PHPSESSID=puva0dhbpu3lvppuhu7hra5dma; path=/; secure; HttpOnly
-      - PHPSESSID=vudtjfemaa15rvm7aq3020299r; path=/; secure; HttpOnly
+      - PHPSESSID=0vfermg1slhvq12o6oqh03c2af; path=/; secure; HttpOnly
+      - PHPSESSID=r7862pfmhlim3l0hpofn42ovh1; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5503,7 +5698,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915d70915031e-GRU
+      - 8189292d0815a5bf-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18945251570,"numero":31757,"numeroLoja":"2000006673500438","data":"2023-10-14","dataSaida":"2023-10-14","dataPrevista":"0000-00-00","totalProdutos":119.9,"total":119.9,"contato":{"id":16373008768,"nome":"Fabiana
@@ -5512,7 +5707,7 @@ http_interactions:
         de pagamento: account_money","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Fabiana
         Silva Dos Santos","endereco":"Avenida Bernardina","numero":"72","complemento":"casa","municipio":"Salvador","uf":"BA","cep":"40220665","bairro":"Engenho
         Velho da Federa\u00e7\u00e3o","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"03.007.331\/0001-41","nomeUsuario":"PURCHASESTORE"}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:42 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:54 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18945014570
@@ -5536,7 +5731,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:43 GMT
+      - Thu, 19 Oct 2023 12:52:55 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5544,10 +5739,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=13dde8833684aadc
+      - intid;desc=98d32a8e3a16c708
       Set-Cookie:
-      - PHPSESSID=bnpfodp72pf18bctemu9lrhrc8; path=/; secure; HttpOnly
-      - PHPSESSID=fn8ela20g29u6fdk8cnh8dfer0; path=/; secure; HttpOnly
+      - PHPSESSID=el90cn2jhi0q3dsvk6287bqstr; path=/; secure; HttpOnly
+      - PHPSESSID=luerltnkn0a64l1fcp1hm1a6p1; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5569,7 +5764,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915dd7d9302fa-GRU
+      - 81892933ab5d019f-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18945014570,"numero":31737,"numeroLoja":"16850I16847","data":"2023-10-14","dataSaida":"2023-10-14","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":65.87,"contato":{"id":16372886136,"nome":"Andrielly
@@ -5577,7 +5772,7 @@ http_interactions:
         LONGO top + saia fenda Cor:Preto;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15957707535},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16435403959,"dataVencimento":"2023-11-13","valor":65.87,"observacoes":"M\u00e9todo
         de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":20.96,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":7,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Andrielly
         Reis","endereco":"Rua S\u00e3o Jo\u00e3o Batista","numero":"1300","complemento":"casa","municipio":"Canoas","uf":"RS","cep":"92325330","bairro":"Harmonia","nomePais":""},"volumes":[{"id":15232685473,"servico":"PAC","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:43 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:56 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18944431599
@@ -5601,7 +5796,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:44 GMT
+      - Thu, 19 Oct 2023 12:52:57 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5609,10 +5804,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=90dc17ca4463c395
+      - intid;desc=64c4d2e159e20a00
       Set-Cookie:
-      - PHPSESSID=2df7o5etdmjcr28q0id8hbcfm7; path=/; secure; HttpOnly
-      - PHPSESSID=690mr4fatj7qfktu0d35s2t359; path=/; secure; HttpOnly
+      - PHPSESSID=5vv9b2hlg9jgu4d1fro7clj2lp; path=/; secure; HttpOnly
+      - PHPSESSID=fjfsmrqbbql9j5m22fkafb4iuq; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5634,7 +5829,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915e38a1b00ed-GRU
+      - 8189293afbdfa6b5-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18944431599,"numero":31687,"numeroLoja":"16847I16844","data":"2023-10-14","dataSaida":"2023-10-14","dataPrevista":"0000-00-00","totalProdutos":49.9,"total":60.25,"contato":{"id":16372639901,"nome":"Yasmin
@@ -5643,7 +5838,7 @@ http_interactions:
         de pagamento: Pagar.me\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":10.35,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":2,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Yasmin
         Santana","endereco":"Avenida Rangel Pestana","numero":"1119","complemento":"Apto
         1809","municipio":"S\u00e3o Paulo","uf":"SP","cep":"03001000","bairro":"Br\u00e1s","nomePais":""},"volumes":[{"id":15232590207,"servico":"SEDEX","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:44 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:57 GMT
 - request:
     method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/18944019362
@@ -5667,7 +5862,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 19 Oct 2023 12:39:45 GMT
+      - Thu, 19 Oct 2023 12:52:58 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -5675,10 +5870,10 @@ http_interactions:
       Connection:
       - keep-alive
       Server-Timing:
-      - intid;desc=dbcdf880e8004fa7
+      - intid;desc=d0630421dfa94338
       Set-Cookie:
-      - PHPSESSID=1np07dt1n7f06091dccrtcc1qt; path=/; secure; HttpOnly
-      - PHPSESSID=u1uo4ohfcfcdj6q0j72vium5kq; path=/; secure; HttpOnly
+      - PHPSESSID=442qtiniqeasv22g8vdtopibr6; path=/; secure; HttpOnly
+      - PHPSESSID=tluml7j8ri7hrvfeukt7lh6jnk; path=/; secure; HttpOnly
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Cache-Control:
@@ -5700,7 +5895,7 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 818915e9da5b013c-GRU
+      - 8189294409660294-GRU
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"id":18944019362,"numero":31661,"numeroLoja":"16846I16843","data":"2023-10-14","dataSaida":"2023-10-14","dataPrevista":"0000-00-00","totalProdutos":59.9,"total":75.02,"contato":{"id":16206338808,"nome":"paloma
@@ -5709,5 +5904,5 @@ http_interactions:
         de pagamento: Paypal\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":15.12,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":7,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Paloma","endereco":"Avenida
         Aliomar Baleeiro","numero":"120","complemento":"residencial S\u00e3o Louren\u00e7o","municipio":"Salvador","uf":"BA","cep":"41385160","bairro":"Sete
         de Abril","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
-  recorded_at: Thu, 19 Oct 2023 12:39:45 GMT
+  recorded_at: Thu, 19 Oct 2023 12:52:58 GMT
 recorded_with: VCR 6.2.0

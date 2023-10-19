@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
-  before_action :set_monthly_revenue_estimation, only: :index
+  before_action :set_monthly_revenue_estimation, :get_in_progress_order_items, :get_printed_order_items,
+                :get_pending_order_items, only: :index
   include SheinOrdersHelper
 
   def index
@@ -9,31 +10,13 @@ class HomeController < ApplicationController
 
     refresh_token if date_expires < DateTime.now && Rails.env.eql?('production')
 
-    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN'])                                
+    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN'])
                                     .count
-    
+
     @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
     @expired_orders = @shein_orders.select { |order| order_status(order) == "Atrasado" }
     @expired_orders_count = @expired_orders.count
 
-    in_progress = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
-                                              situation: 15)
-
-    @orders = in_progress['data']
-
-    checkeds = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id, situation: 24)
-
-    @checked_orders = checkeds['data']
-
-    pendings = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
-                                           situation: 94_871)
-
-    @pending_orders = pendings['data']
-
-    printed = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
-                                          situation: 95_745)
-
-    @printed_orders = printed['data']
 
     order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
 
@@ -58,11 +41,24 @@ class HomeController < ApplicationController
 
   private
 
+  def get_in_progress_order_items
+    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
+  end
+
+  def get_printed_order_items
+    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED)
+  end
+
+  def get_pending_order_items
+    @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
+  end
+
   def set_monthly_revenue_estimation
     @monthly_revenue_estimation = RevenueEstimation.current_month.take
   end
 
   def count_mercado_envios_flex(order_ids)
+    # TODO, get it from the database directly.
     return if order_ids.blank?
 
     counter = 0
