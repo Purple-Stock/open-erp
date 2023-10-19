@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+  <% if order_items.present? %>
+    <% order_items.group_by(&:store_id).each do |store_id, items| %>
+
+      <% loja_name = items.first.store_name %>
+
+      <% orders = items.group_by(&:bling_order_id).compact %>
+
+      <div class="col-md-4">
+
+        <div class="card mb-4">
+
+          <div class="card-body text-center">
+
+            <h5 class="card-title">
+              <%= loja_name %>
+            </h5>
+
+            <p>
+              Pedidos: <%= orders&.count %>
+            </p>
+
+            <% if loja_name.eql?('Mercado Livre') %>
+
+              <p>
+                Mercado Envios Flex: <%= @mercado_envios_flex_counts %>
+              </p>
+
+            <% end %>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    <% end %>
+  <% else %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <p>
+              Os pedidos aparecerão aqui
+            </p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
