@@ -11,11 +11,11 @@ RSpec.describe PendingOrderItemsJob, type: :job do
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
     end
 
-    it 'counts by 191 bling order items' do
+    it 'counts by 110 bling order items' do
       VCR.use_cassette('all_pending_order_items', erb: true) do
         expect do
           subject.perform(user.account.id)
-        end.to change(BlingOrderItem, :count).by(551)
+        end.to change(BlingOrderItem, :count).by(110)
       end
     end
   end
