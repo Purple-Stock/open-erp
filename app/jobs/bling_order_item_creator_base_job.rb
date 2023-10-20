@@ -1,6 +1,6 @@
 class BlingOrderItemCreatorBaseJob < ApplicationJob
   queue_as :default
-  attr_accessor :account_id
+  attr_accessor :account_id, :alteration_date
 
   def list_status_situation
     BlingOrderItem::Status::ALL
@@ -45,7 +45,8 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
           descricaoDetalhada: item_data['descricaoDetalhada'],
           situation_id: fetched_order_data['data']['situacao']['id'],
           store_id: fetched_order_data['data']['loja']['id'],
-          date: fetched_order_data['data']['data']
+          date: fetched_order_data['data']['data'],
+          alteration_date: alteration_date
         )
       end
     end
