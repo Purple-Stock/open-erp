@@ -37,6 +37,7 @@ class BlingOrderItem < ApplicationRecord
     PRINTED = 95_745
     CANCELED = 12
     ALL = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, CANCELED].freeze
+    EXCLUDE_DONE = [IN_PROGRESS, PENDING, PRINTED, CANCELED].freeze
   end
 
   scope :date_range_in_a_day, lambda { |date|
