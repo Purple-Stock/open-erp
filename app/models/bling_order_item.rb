@@ -4,6 +4,7 @@
 #
 #  id                 :bigint           not null, primary key
 #  aliquotaIPI        :decimal(, )
+#  alteration_date    :datetime
 #  codigo             :string
 #  date               :datetime
 #  desconto           :decimal(, )
