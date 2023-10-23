@@ -1,6 +1,6 @@
 class BlingOrderItemCreatorBaseJob < ApplicationJob
   queue_as :default
-  attr_accessor :account_id
+  attr_accessor :account_id, :alteration_date
 
   def list_status_situation
     BlingOrderItem::Status::ALL
@@ -17,9 +17,10 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
 
       if BlingOrderItem.exists?(bling_order_id: order_id)
         bling_order_items = BlingOrderItem.where(bling_order_id: order_id)
-        if order_data['situacao']['id'] != bling_order_items[0].situation_id
+        if order_data['situacao']['id'] != bling_order_items[0].situation_id.to_i
+          @alteration_date = Date.today.strftime('%Y-%m-%d')
           bling_order_items.each do |bling_order_item|
-            bling_order_item.update(situation_id: order_data['situacao']['id'])
+            bling_order_item.update(situation_id: order_data['situacao']['id'], alteration_date: alteration_date)
           end
         end
         next # Skip to the next order
@@ -45,7 +46,8 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
           descricaoDetalhada: item_data['descricaoDetalhada'],
           situation_id: fetched_order_data['data']['situacao']['id'],
           store_id: fetched_order_data['data']['loja']['id'],
-          date: fetched_order_data['data']['data']
+          date: fetched_order_data['data']['data'],
+          alteration_date: alteration_date
         )
       end
     end
