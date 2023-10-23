@@ -105,6 +105,14 @@ Rails.application.configure do
                      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
                      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
                      description: "Create Order Items with printed status" # optional description that appears in Dashboard
+    },
+
+    current_done_order_items_task: { # each recurring job must have a unique key
+                     cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                     class: "CurrentDoneBlingOrderItemJob", # name of the job class as a String; must reference an Active Job job class
+                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+                     set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+                     description: "Create Order Items statuses are checked and verified" # optional description that appears in Dashboard
     }
     # etc.
   }
