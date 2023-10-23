@@ -17,9 +17,10 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
 
       if BlingOrderItem.exists?(bling_order_id: order_id)
         bling_order_items = BlingOrderItem.where(bling_order_id: order_id)
-        if order_data['situacao']['id'] != bling_order_items[0].situation_id
+        if order_data['situacao']['id'] != bling_order_items[0].situation_id.to_i
+          @alteration_date = Date.today.strftime('%Y-%m-%d')
           bling_order_items.each do |bling_order_item|
-            bling_order_item.update(situation_id: order_data['situacao']['id'])
+            bling_order_item.update(situation_id: order_data['situacao']['id'], alteration_date: alteration_date)
           end
         end
         next # Skip to the next order
