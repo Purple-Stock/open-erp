@@ -34,4 +34,13 @@ RSpec.describe BlingOrderItem, type: :model do
       expect(described_class::Status::ALL).to eq([15, 101_065, 24, 94_871, 95_745, 12])
     end
   end
+
+  describe 'self.date_range' do
+    before { BlingOrderItem.destroy_all }
+
+    it 'counts 1' do
+      FactoryBot.create(:bling_order_item, date: '2023-10-24')
+      expect(described_class.date_range('2023-10-23', nil).length).to eq(1)
+    end
+  end
 end
