@@ -46,6 +46,13 @@ class BlingOrderItem < ApplicationRecord
     where(date: initial_date..end_date)
   }
 
+  scope :date_range, lambda { |initial_date, final_date|
+    initial_date = initial_date.to_date.beginning_of_day
+    final_date = final_date.try(:to_date).try(:end_of_day)
+    date_range = initial_date..final_date
+    where(date: date_range)
+  }
+
   def store_name
     STORE_ID_NAME_KEY_VALUE["#{store_id}"]
   end
