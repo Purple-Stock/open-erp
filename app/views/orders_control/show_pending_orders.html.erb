@@ -8,10 +8,10 @@
   <div class="row justify-content-center">
     
     <% if @pending_order_items.present? %>
-      <% @pending_order_items.group_by(&:store_id).each do |store_id, items| %>
+      <% @pending_order_items.group_by(&:store_id).each do |store_id, store_items| %>
 
-        <% loja_name = items.first.store_name %>
-        <% orders = items.group_by(&:bling_order_id).compact %>
+        <% loja_name = store_items.first.store_name %>
+        <% unique_orders = store_items.uniq { |item| item.bling_order_id } %>
 
         <div class="col-md-4">
           <div class="card mb-4">
@@ -20,12 +20,12 @@
                 <%= loja_name %>
               </h5>
               <p>
-                Pedidos: <%= orders&.count %>
+                Pedidos: <%= unique_orders.count %>
               </p>
 
               <h6>Itens:</h6>
               <% codigo_to_bling_ids = Hash.new { |h, k| h[k] = [] } %>
-              <% items.each do |order| %>
+              <% unique_orders.each do |order| %>
                 <% codigo = order.codigo %>
                 <% bling_order_id = order.bling_order_id %>
                 <% codigo_to_bling_ids[codigo] << bling_order_id %>
