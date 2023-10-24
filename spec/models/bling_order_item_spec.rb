@@ -36,11 +36,47 @@ RSpec.describe BlingOrderItem, type: :model do
   end
 
   describe 'self.date_range' do
-    before { BlingOrderItem.destroy_all }
+    before do
+      described_class.destroy_all
+      [23, 24, 25].each do |day|
+        FactoryBot.create(:bling_order_item, date: "2023-10-#{day}")
+      end
+    end
 
-    it 'counts 1' do
-      FactoryBot.create(:bling_order_item, date: '2023-10-24')
-      expect(described_class.date_range('2023-10-23', nil).length).to eq(1)
+    context 'when it has initial date' do
+      let(:initial_date) { '2023-10-23' }
+      let(:final_date) { nil }
+
+      it 'counts 3' do
+        expect(described_class.date_range(initial_date, final_date).length).to eq(3)
+      end
+    end
+
+    context 'when it has initial date and final_date' do
+      let(:initial_date) { '2023-10-23' }
+      let(:final_date) { '2023-10-24' }
+
+      it 'counts 2' do
+        expect(described_class.date_range(initial_date, final_date).length).to eq(2)
+      end
+    end
+
+    context 'when it has final_date only' do
+      let(:initial_date) { nil }
+      let(:final_date) { '2023-10-24' }
+
+      it 'counts 2' do
+        expect(described_class.date_range(initial_date, final_date).length).to eq(2)
+      end
+    end
+
+    context 'when initial_date and final_date are nil' do
+      let(:initial_date) { nil }
+      let(:final_date) { nil }
+
+      it 'counts 3' do
+        expect(described_class.date_range(initial_date, final_date).length).to eq(3)
+      end
     end
   end
 end
