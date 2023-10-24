@@ -6,54 +6,72 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <% @loja_ids.each do |loja_id| %>
-      <% loja_name = @store_name[loja_id] %>
-      <% pending_orders = @pending_orders&.select { |o| o["loja"]["id"] == loja_id } %>
+    
+    <% if @pending_order_items.present? %>
+      <% @pending_order_items.group_by(&:store_id).each do |store_id, items| %>
 
+        <% loja_name = items.first.store_name %>
+        <% orders = items.group_by(&:bling_order_id).compact %>
+
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <h5 class="card-title">
+                <%= loja_name %>
+              </h5>
+              <p>
+                Pedidos: <%= orders&.count %>
+              </p>
+
+              <h6>Itens:</h6>
+              <% codigo_to_bling_ids = Hash.new { |h, k| h[k] = [] } %>
+              <% items.each do |order| %>
+                <% codigo = order.codigo %>
+                <% bling_order_id = order.bling_order_id %>
+                <% codigo_to_bling_ids[codigo] << bling_order_id %>
+              <% end %>
+
+              <% ordered_codigos = codigo_to_bling_ids.keys.sort_by { |codigo| -codigo_to_bling_ids[codigo].size } %>
+              <ul>
+                <% ordered_codigos.each do |codigo| %>
+                  <% bling_ids = codigo_to_bling_ids[codigo] %>
+                  <li>
+                    <a href="#" data-toggle="collapse" data-target="#collapse<%= store_id %>-<%= codigo %>">
+                      <strong>Código:</strong> <%= codigo %> (Quantidade Total: <%= bling_ids.size %>)
+                    </a>
+                    <div id="collapse<%= store_id %>-<%= codigo %>" class="collapse">
+                      <strong>Links:</strong><br>
+                      <% bling_ids.each do |bling_id| %>
+                        <a href='https://www.bling.com.br/vendas.php#edit/<%= bling_id %>'>Pedido: <%= bling_id %></a>
+                        <br>
+                      <% end %>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+
+              <% if loja_name.eql?('Mercado Livre') %>
+                <p>
+                  Mercado Envios Flex: <%= @mercado_envios_flex_counts %>
+                </p>
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    <% else %>
       <div class="col-md-4">
         <div class="card mb-4">
-          <div class="card-body text-center <%= 'bg-danger' if loja_id == 204_061_683 && @mercado_envios_flex_counts.present? && @mercado_envios_flex_counts >= 1 %>">
-            <h5 class="card-title">
-              <%= loja_name %>
-            </h5>
+          <div class="card-body text-center">
             <p>
-              Pedidos: <%= pending_orders&.count %>
+              Os pedidos aparecerão aqui
             </p>
-
-      <% if pending_orders.any? %>
-          <h6>Itens:</h6>
-          <% codigo_to_bling_ids = Hash.new { |h, k| h[k] = [] } %>
-          <% pending_orders.each do |order| %>
-            <% order_id = order["id"] %>
-            <% bling_order_item = BlingOrderItem.find_by(bling_order_id: order_id) %>
-            <% if bling_order_item %>
-              <% codigo = bling_order_item.codigo %>
-              <% bling_order_id = bling_order_item.bling_order_id %>
-              <% codigo_to_bling_ids[codigo] << bling_order_id %>
-            <% end %>
-          <% end %>
-          <% ordered_codigos = codigo_to_bling_ids.keys.sort_by { |codigo| -codigo_to_bling_ids[codigo].size } %>
-          <ul>
-            <% ordered_codigos.each do |codigo| %>
-              <% bling_ids = codigo_to_bling_ids[codigo] %>
-                <li>
-                  <a href="#" data-toggle="collapse" data-target="#collapse<%= loja_id %>-<%= codigo %>">
-                    <strong>Código:</strong> <%= codigo %> (Quantidade Total: <%= bling_ids.size %>)
-                  </a>
-                  <div id="collapse<%= loja_id %>-<%= codigo %>" class="collapse">
-                    <strong>Links:</strong><br>
-                    <% bling_ids.each do |bling_id| %>
-                      <a href='https://www.bling.com.br/vendas.php#edit/<%= bling_id %>'>Pedido: <%= bling_id %></a>
-                      <br>
-                    <% end %>
-                  </div>
-                </li>
-            <% end %>
-          </ul>
-            <% end %> 
           </div>
         </div>
       </div>
     <% end %>
+
   </div>
 </div>
