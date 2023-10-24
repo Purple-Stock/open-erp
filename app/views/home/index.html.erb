@@ -95,6 +95,10 @@
 
   <%= render 'order_items', order_items: @pending_order_items %>
 
+  <h1>Pedidos Feitos do dia(checados e verificados)</h1>
+
+  <%= render 'order_items', order_items: @current_done_order_items %>
+
 </div>
 
 </div>
