@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   before_action :set_monthly_revenue_estimation, :get_in_progress_order_items, :get_printed_order_items,
-                :get_pending_order_items, only: :index
+                :get_pending_order_items, :current_done_order_items, only: :index
   include SheinOrdersHelper
 
   def index
@@ -43,6 +43,15 @@ class HomeController < ApplicationController
 
   def get_in_progress_order_items
     @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
+  end
+
+  def current_done_order_items
+    initial_date = Time.zone.today.beginning_of_day
+    end_date = Time.zone.today.end_of_day
+    date_range = initial_date..end_date
+    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
+                                                                    BlingOrderItem::Status::CHECKED],
+                                                     alteration_date: date_range)
   end
 
   def get_printed_order_items

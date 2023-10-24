@@ -10,4 +10,8 @@ class BlingOrderItemCreatorJob < BlingOrderItemCreatorBaseJob
       create_orders(orders)
     end
   end
+
+  def list_status_situation
+    BlingOrderItem::Status::EXCLUDE_DONE
+  end
 end
