@@ -21,13 +21,7 @@ class OrdersControlController < ApplicationController
   end
   
   def show_pending_orders
-    @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
-    @store_name = get_loja_name
-
-    pendings = Services::Bling::Order.call(order_command: 'find_orders', tenant: current_user.account.id,
-      situation: 94_871)
-  
-    @pending_orders = pendings['data']
+    @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
   end
 
   def show_orders_business_day
