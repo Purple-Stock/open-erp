@@ -11,9 +11,10 @@
     <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
   <% end %>
 
-  <div class="container">
-    <h1>Pesquisar por data</h1>
-    <div class="row">
+  <div class="col-12 col-md-12 col-xl4 bordered-section">
+    <div class="container">
+      <h1>Pesquisar por data</h1>
+      <div class="row">
         <%= form_tag(root_path, method: :get) do %>
           <div class="input-group mb-5">
             <div class="col-3">
@@ -26,12 +27,13 @@
             </div>
             <div class="col-3"><%= button_tag('Pesquisar...', class: 'btn btn-light') %></div>
         <% end %>
-            <div class="col-3"><%= link_to('Filtrar hoje', class: 'btn btn-light') %></div>
-          </div>
+        <div class="col-3"><%= link_to('Filtrar hoje', class: 'btn btn-light') %></div>
         </div>
-
-        <%= render 'order_items', order_items: @search %>
+      </div>
+    </div>
+    <%= render 'order_items', order_items: @search %>
   </div>
+
   <div class="col-12 col-md-12 col-xl4 bordered-section">
     <h1>Pedidos Feitos do dia(checados e verificados)</h1>
     <%= render 'order_items', order_items: @current_done_order_items %>
