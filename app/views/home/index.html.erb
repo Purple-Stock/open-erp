@@ -1,5 +1,8 @@
-<div class="container">
-  <br><br><br>
+<div class="container-ultra-wide">
+<div class="section">
+    <br>
+    <p>Última Atualização: <%= @last_update %></p>
+    <p>Token Expira: <%= @expires_at %></p>
   <% if @monthly_revenue_estimation.present? %>
     <p>A meta da quantidade a ser vendida nesse mês é de: <%= @monthly_revenue_estimation.quantity %>.
       Baseados em uma meta da receita de: <%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %>
@@ -8,10 +11,9 @@
     <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
   <% end %>
 
-  <div class="container">
+  <div class="row">
+  <div class="col-12 col-md-12 col-xl4 bordered-section">
     <h1>Pedidos de Hoje</h1>
-    <p>Última Atualização: <%= @last_update %></p>
-    <p>Token Expira: <%= @expires_at %></p>
     <% if @date_expires < Time.now %>
       <a target="_blank" href="https://www.bling.com.br/OAuth2/views/authorization.php?response_type=code&client_id=<%= ENV['CLIENT_ID']%>&state=323eb862289daff1f11ee6c23edb4f6e&scopes=98308+98309+98310+98313+98314+98565+98619+101584+507943+575904+5990556+6631498+106168710+182224097+199272829+200802821+220621674+318257547+318257550+318257553+318257556+318257559+318257561+318257565+318257568+318257570+318257573+318257576+318257583+333936575+363921589+363921590+363921591+363921592+363921598+363921599+363953167+363953556+363953706+791588404+875116881+875116885+1649295804+1780272711+1869535257+5862218180+6239411327+6239420709+13645012976+13645012997+13645012998">Atualizar Token</a>
     <% end %>
@@ -32,7 +34,7 @@
               <p>
                 Pedidos: <%= items.group_by(&:bling_order_id).compact.count %>
               </p>
-              <p>
+              <p class="hidden-value">
                 Total: <%= number_to_currency_pt_br items.sum(&:valor) %>
               </p>
             </div>
@@ -53,9 +55,11 @@
       <% end %>
     </div>
   </div>
-
-  <div class="container">
-    <br><br><br>
+  <div class="col-12 col-md-12 col-xl4 bordered-section">
+    <h1>Pedidos Feitos do dia(checados e verificados)</h1>
+    <%= render 'order_items', order_items: @current_done_order_items %>
+  </div>
+  <div class="col-12 col-md-12 col-xl4 bordered-section">
     <h1>Status Shein</h1>
     <div class="row justify-content-center">
       <div class="col-md-4">
@@ -111,27 +115,26 @@
       </div>
     </div>
   </div>
-
-
-  <h1>Pedidos Em andamento(Pagos)</h1>
-
-  <%= render 'order_items', order_items: @in_progress_order_items %>
-
-  <h1>Pedidos Impressos</h1>
-
-  <%= render 'order_items', order_items: @printed_order_items %>
-
-  <h1>Pedidos Pendentes</h1>
-
-  <%= render 'order_items', order_items: @pending_order_items %>
-
-  <h1>Pedidos Feitos do dia(checados e verificados)</h1>
-
-  <%= render 'order_items', order_items: @current_done_order_items %>
-
+</div>
+  <div class="row">
+    <div class="col-12 col-md-12 col-xl4 bordered-section">
+      <h1>Pedidos Impressos</h1>
+      <%= render 'order_items', order_items: @printed_order_items %>
+    </div>
+    <div class="col-12 col-md-12 col-xl4 bordered-section">
+      <h1>Pedidos Pendentes</h1>
+      <%= render 'order_items', order_items: @pending_order_items %>
+    </div>
+    <div class="col-12 col-md-12 col-xl4 bordered-section">
+      <h1>Pedidos Em andamento(Pagos)</h1>
+      <%= render 'order_items', order_items: @in_progress_order_items %>
+    </div>
+  </div>
 </div>
 
 </div>
+</div>
+
 <script>
   setInterval(function() {
       window.location.reload();
