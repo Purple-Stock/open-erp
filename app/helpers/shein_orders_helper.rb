@@ -23,6 +23,10 @@ module SheinOrdersHelper
     end
   end
 
+  def sum_shein_values(orders, type)
+    orders.sum("CAST(data ->> '#{type}' AS DECIMAL)")
+  end
+
   def order_status(shein_order)
     collection_deadline = parse_portuguese_date(shein_order.data['Limite de tempo para coletar'])
     
