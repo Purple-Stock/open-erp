@@ -6,12 +6,15 @@ class HomeController < ApplicationController
   def index
     @current_order_items = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745])
                                          .date_range_in_a_day(Time.zone.today)
-    date_expires = token_expires_at
+    @date_expires = token_expires_at
 
-    refresh_token if date_expires < DateTime.now && Rails.env.eql?('production')
+    refresh_token if @date_expires < DateTime.now && Rails.env.eql?('production')
 
     @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN'])
                                     .count
+
+    @shein_pending_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['Pendente'])
+                                     .count
 
     @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
     @expired_orders = @shein_orders.select { |order| order_status(order) == "Atrasado" }
@@ -26,7 +29,7 @@ class HomeController < ApplicationController
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
 
-    @expires_at = format_last_update(date_expires)
+    @expires_at = format_last_update(@date_expires)
 
     @last_update = format_last_update(Time.current)
   rescue StandardError => e
