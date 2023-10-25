@@ -20,6 +20,7 @@ class HomeController < ApplicationController
     @expired_orders = @shein_orders.select { |order| order_status(order) == "Atrasado" }
     @expired_orders_count = @expired_orders.count
 
+    finance_per_status
 
     order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
 
@@ -46,6 +47,13 @@ class HomeController < ApplicationController
 
   def get_in_progress_order_items
     @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
+  end
+
+  def finance_per_status
+    @pendings = SheinOrder.where("data ->> 'Status do pedido' = ?", "Pendente")
+    @to_be_colected = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser coletado pela SHEIN")
+    @to_be_sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser enviado pela SHEIN")
+    @sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "Enviado")
   end
 
   def current_done_order_items
