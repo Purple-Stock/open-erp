@@ -12,6 +12,9 @@
     <h1>Pedidos de Hoje</h1>
     <p>Última Atualização: <%= @last_update %></p>
     <p>Token Expira: <%= @expires_at %></p>
+    <% if @date_expires < Time.now %>
+      <a target="_blank" href="https://www.bling.com.br/OAuth2/views/authorization.php?response_type=code&client_id=<%= ENV['CLIENT_ID']%>&state=323eb862289daff1f11ee6c23edb4f6e&scopes=98308+98309+98310+98313+98314+98565+98619+101584+507943+575904+5990556+6631498+106168710+182224097+199272829+200802821+220621674+318257547+318257550+318257553+318257556+318257559+318257561+318257565+318257568+318257570+318257573+318257576+318257583+333936575+363921589+363921590+363921591+363921592+363921598+363921599+363953167+363953556+363953706+791588404+875116881+875116885+1649295804+1780272711+1869535257+5862218180+6239411327+6239420709+13645012976+13645012997+13645012998">Atualizar Token</a>
+    <% end %>
     <div class="row justify-content-center">
       <% @current_order_items.group_by(&:store_id).each do |store_id, items| %>
         <% loja_name = items.first.store_name %>
@@ -59,10 +62,16 @@
         <div class="card mb-4">
           <div class="card-body text-center">
             <h5 class="card-title">
-              Pedidos a serem coletados
+              Pendentes Shein
             </h5>
             <p>
-              Quantidade de Pedidos: <%= @shein_orders_count %>
+              Quantidade de Pedidos: <%= @shein_pending_count %>
+            </p>
+            <p>
+              Em Andamento Bling: <%= @in_progress = @in_progress_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %>
+            </p>
+            <p>
+              Diferença: <%= @shein_pending_count - @in_progress %>
             </p>
           </div>
         </div>
@@ -71,7 +80,28 @@
         <div class="card mb-4">
           <div class="card-body text-center">
             <h5 class="card-title">
-              Status dos Pedidos Atrasados
+              Pedidos a serem coletados
+            </h5>
+            <p>
+              Quantidade de Pedidos: <%= @shein_orders_count %>
+            </p>
+            <p>
+              Pendentes Bling: <%= @pending = @pending_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %>
+            </p>
+            <p>
+              Impressos Bling: <%= @printed = @printed_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %>
+            </p>
+            <p>
+              Diferença: <%= @shein_orders_count - @pending - @printed%>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              Pedidos Atrasados
             </h5>
             <p>
               Quantidade de Pedidos: <%= @expired_orders_count %>
