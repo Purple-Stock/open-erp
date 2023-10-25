@@ -50,7 +50,6 @@ class HomeController < ApplicationController
   end
 
   def finance_per_status
-    @value = 0
     @pendings = SheinOrder.where("data ->> 'Status do pedido' = ?", "Pendente")
     @to_be_colected = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser coletado pela SHEIN")
     @to_be_sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser enviado pela SHEIN")
