@@ -17,17 +17,17 @@
       <div class="row">
         <%= form_tag(root_path, method: :get) do %>
           <div class="input-group mb-5">
-            <div class="col-3">
+            <div class="col-sm">
               Data inicial
               <%= date_field('bling_order_item', 'initial_date', value: Date.today.strftime) %>
             </div>
-            <div class="col-3">
+            <div class="col-sm">
               Data final
               <%= date_field('bling_order_item', 'final_date', value: Date.today.strftime) %>
             </div>
-            <div class="col-3"><%= button_tag('Pesquisar...', class: 'btn btn-light') %></div>
+            <div class="col-sm"><%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %></div>
         <% end %>
-        <div class="col-3"><%= link_to('Filtrar hoje', class: 'btn btn-light') %></div>
+        <div class="col-sm"><%= link_to('Filtrar hoje', class: 'btn btn-light mb-3') %></div>
         </div>
       </div>
     </div>
