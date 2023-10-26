@@ -4,9 +4,9 @@ class HomeController < ApplicationController
   include SheinOrdersHelper
 
   def index
-    initial_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil) || Time.zone.today.beginning_of_day
-    final_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :final_date, nil) || Time.zone.today.end_of_day
-    @search = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745]).date_range(initial_date, final_date)
+    @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil) || Time.zone.today.beginning_of_day
+    @second_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :final_date, nil) || Time.zone.today.end_of_day
+    @search = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745]).date_range(@first_date, @second_date)
     @date_expires = token_expires_at
 
     refresh_token if @date_expires < DateTime.now && Rails.env.eql?('production')
