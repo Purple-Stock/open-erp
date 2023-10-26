@@ -19,11 +19,11 @@
           <div class="input-group mb-5">
             <div class="col-sm">
               Data inicial
-              <%= date_field('bling_order_item', 'initial_date', value: Date.today.strftime) %>
+              <%= date_field('bling_order_item', 'initial_date', value: Date.new(@first_date.to_date.year, @first_date.to_date.month, @first_date.to_date.day).strftime) %>
             </div>
             <div class="col-sm">
               Data final
-              <%= date_field('bling_order_item', 'final_date', value: Date.today.strftime) %>
+              <%= date_field('bling_order_item', 'final_date', value: Date.new(@second_date.to_date.year, @second_date.to_date.month, @second_date.to_date.day).strftime) %>
             </div>
             <div class="col-sm"><%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %></div>
         <% end %>
