@@ -29,5 +29,6 @@ FactoryBot.define do
     aliquotaIPI { "9.99" }
     descricao { "MyText" }
     descricaoDetalhada { "MyText" }
+    store { create(:store) }
   end
 end
