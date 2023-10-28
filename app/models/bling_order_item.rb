@@ -40,6 +40,8 @@ class BlingOrderItem < ApplicationRecord
     EXCLUDE_DONE = [IN_PROGRESS, PENDING, PRINTED, CANCELED].freeze
   end
 
+  belongs_to :store
+
   scope :date_range_in_a_day, lambda { |date|
     initial_date = date.beginning_of_day
     end_date = date.end_of_day
