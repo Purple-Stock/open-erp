@@ -34,6 +34,10 @@ class HomeController < ApplicationController
     @expires_at = format_last_update(@date_expires)
 
     @last_update = format_last_update(Time.current)
+
+    @grouped_printed_order_items = group_order_items(@printed_order_items)
+    @grouped_pending_order_items = group_order_items(@pending_order_items)
+    @grouped_in_progress_order_items = group_order_items(@in_progress_order_items)
   rescue StandardError => e
     Rails.logger.error(e.message)
     redirect_to home_last_updates_path
@@ -45,10 +49,6 @@ class HomeController < ApplicationController
   end
 
   private
-
-  def get_in_progress_order_items
-    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
-  end
 
   def finance_per_status
     @pendings = SheinOrder.where("data ->> 'Status do pedido' = ?", "Pendente")
@@ -66,12 +66,24 @@ class HomeController < ApplicationController
                                                      alteration_date: date_range)
   end
 
+  def get_in_progress_order_items
+    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
+  end
+
   def get_printed_order_items
     @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED)
   end
 
   def get_pending_order_items
     @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
+  end
+
+  def group_order_items(order_items)
+    order_items
+      .includes(:store)
+      .group_by { |item| item.store.name }
+      .sort_by(&:first)
+      .to_h
   end
 
   def set_monthly_revenue_estimation
