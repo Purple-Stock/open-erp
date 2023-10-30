@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Finance Data</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Renda (Income)</th>
+      <th>Despesa (Expense)</th>
+      <th>Montante Fixo (Fixed Amount)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @finance_data.each do |data| %>
+      <tr>
+        <td><%= data.date.strftime('%d-%m-%Y') %></td>
+        <td><%= number_to_currency(data.income, unit: "BRL", separator: ",", delimiter: ".") %></td>
+        <td><%= number_to_currency(data.expense, unit: "BRL", separator: ",", delimiter: ".") %></td>
+        <td><%= number_to_currency(data.fixed_amount, unit: "BRL", separator: ",", delimiter: ".") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Finance Data', new_finance_datum_path %>
