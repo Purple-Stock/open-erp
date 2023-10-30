@@ -3,6 +3,9 @@
 #require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  #mount Sidekiq::Web => '/sidekiq'
+  mount GoodJob::Engine => 'good_job'
+
   resources :shein_dashboards
   resources :shein_orders do 
     collection do
@@ -10,10 +13,15 @@ Rails.application.routes.draw do
       post :import
     end
   end
+
+  resources :finance_data do
+    collection do
+      get :upload
+      post :import
+    end
+  end
   
   devise_for :users
-
-  mount GoodJob::Engine => 'good_job'
 
   resources :revenue_estimations
   resources :accounts
@@ -76,5 +84,4 @@ Rails.application.routes.draw do
     end
   end
   root to: 'home#index'
-  #mount Sidekiq::Web => '/sidekiq'
 end
