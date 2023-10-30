@@ -15,6 +15,11 @@
             <h5 class="card-title">
               <%= loja_name %>
             </h5>
+            <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
+              <p>
+                Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
+              </p>
+            <% end %>
 
             <p>
               Pedidos: <%= orders&.count %>
