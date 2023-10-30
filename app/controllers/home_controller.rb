@@ -70,15 +70,6 @@ class HomeController < ApplicationController
     @sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "Enviado")
   end
 
-  def current_done_order_items
-    initial_date = Time.zone.today.beginning_of_day
-    end_date = Time.zone.today.end_of_day
-    date_range = initial_date..end_date
-    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                                    BlingOrderItem::Status::CHECKED],
-                                                     alteration_date: date_range)
-  end
-
   def get_printed_order_items
     @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED)
   end
