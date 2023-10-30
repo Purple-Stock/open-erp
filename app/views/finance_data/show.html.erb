@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="section-header d-mobile-none">
+    <h1>Finance Data</h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item"><%= link_to 'Dashboard', root_path %></div>
+      <div class="breadcrumb-item"><%= link_to 'Finance Data', finance_data_path %></div>
+      <div class="breadcrumb-item">Show Finance Datum</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="card">
+      <div class="card-header">
+        <h4>Show Finance Datum</h4>
+      </div>
+      <div class="card-body">
+        <dl class="row">
+          <dt class="col-sm-3">Date:</dt>
+          <dd class="col-sm-9"><%= l(@finance_datum.date) %></dd>
+          <dt class="col-sm-3">Income:</dt>
+          <dd class="col-sm-9"><%= np(@finance_datum.income) %></dd>
+          <dt class="col-sm-3">Expense:</dt>
+          <dd class="col-sm-9"><%= np(@finance_datum.expense) %></dd>
+          <dt class="col-sm-3">Fixed amount:</dt>
+          <dd class="col-sm-9"><%= np(@finance_datum.fixed_amount) %></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= link_to icon('fas fa-edit', 'Edit'), edit_finance_datum_path(@finance_datum), class: 'btn btn btn-icon icon-left btn-warning' %>
+<%= link_to icon('fas fa-arrow-left', 'Back'), finance_data_path, class: 'btn btn-icon icon-left btn-secondary d-mobile-none' %>
+
+<% content_for(:page_title, 'Show Finance Datum') %>

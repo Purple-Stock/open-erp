@@ -12,6 +12,6 @@ class BlingOrderItemCreatorJob < BlingOrderItemCreatorBaseJob
   end
 
   def list_status_situation
-    BlingOrderItem::Status::EXCLUDE_DONE
+    BlingOrderItem::Status::ALL
   end
 end
