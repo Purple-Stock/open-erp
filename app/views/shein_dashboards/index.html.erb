@@ -1,0 +1,86 @@
+<div class="container-ultra-wide">
+<div class="section">
+  <div class="col-12 col-md-12 col-xl4 bordered-section">
+    <div class="container">
+      <div class="row">
+  <div class="col-12 col-md-12 col-xl4 bordered-section">
+    <h1>A receber por status da Shein</h1>
+    <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">
+            Pendente
+          </h5>
+          <p>
+            Preço total do produto: <%= pending_total_price = sum_shein_values(@pendings, 'Preço do produto') %>
+          </p>
+          <p>
+            Receita estimada: <%= pending_estimated = sum_shein_values(@pendings, 'Receita estimada') %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">
+            A ser coletado
+          </h5>
+          <p>
+            Preço total do produto: <%= to_be_colected_total_price = sum_shein_values(@to_be_colected, 'Preço do produto') %>
+          </p>
+          <p>
+            Receita estimada: <%= to_be_colected_estimated = sum_shein_values(@to_be_colected, 'Receita estimada') %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">
+            A ser Enviado
+          </h5>
+          <p>
+            Preço total do produto: <%= to_be_sent_total_price = sum_shein_values(@to_be_sent, 'Preço do produto') %>
+          </p>
+          <p>
+            Receita estimada: <%= to_be_sent_estimated = sum_shein_values(@to_be_sent, 'Receita estimada') %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">
+            Enviado
+          </h5>
+          <p>
+            Preço total do produto: <%= sent_total_price = sum_shein_values(@sent, 'Preço do produto') %>
+          </p>
+          <p>
+            Receita estimada: <%=  sent_estimated = sum_shein_values(@sent, 'Receita estimada') %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">
+            Total
+          </h5>
+          <p>
+            Preço total do produto: <%= pending_total_price + to_be_colected_total_price + to_be_sent_total_price + sent_total_price %>
+          </p>
+          <p>
+            Receita estimada: <%= pending_estimated + to_be_colected_estimated + to_be_sent_estimated + sent_estimated %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
