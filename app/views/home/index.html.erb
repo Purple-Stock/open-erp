@@ -31,11 +31,11 @@
         </div>
       </div>
     </div>
-    <%= render 'order_items', order_items: @search %>
+    <%= render 'order_items', order_items: @bling_order_items %>
   </div>
 
   <div class="col-12 col-md-12 col-xl4 bordered-section">
-    <h1>Pedidos Feitos do dia(checados e verificados)</h1>
+    <h1>Pedidos Feitos(checados e verificados)</h1>
     <%= render 'order_items', order_items: @current_done_order_items %>
   </div>
   <div class="col-12 col-md-12 col-xl4 bordered-section">
