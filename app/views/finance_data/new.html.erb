@@ -1,0 +1,24 @@
+<section class="section">
+  <div class="section-header d-mobile-none">
+    <h1>Finance Data</h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item"><%= link_to 'Dashboard', root_path %></div>
+      <div class="breadcrumb-item"><%= link_to 'Finance Data', finance_data_path %></div>
+      <div class="breadcrumb-item">New Finance Datum</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="card">
+      <div class="card-header">
+        <h4>New Finance Datum</h4>
+      </div>
+      <div class="card-body">
+        <%= render 'form', finance_datum: @finance_datum %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= link_to icon('fas fa-arrow-left', 'Back'), finance_data_path, class: 'btn btn-icon icon-left btn-secondary d-mobile-none' %>
+
+<% content_for(:page_title, 'New Finance Datum') %>

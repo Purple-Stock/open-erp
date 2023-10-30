@@ -1,11 +1,10 @@
 class HomeController < ApplicationController
-  before_action :set_monthly_revenue_estimation, :get_in_progress_order_items, :get_printed_order_items,
-                :get_pending_order_items, :current_done_order_items, only: :index
+  before_action :date_range, :bling_order_items, :current_done_order_items, :set_monthly_revenue_estimation,
+                :get_in_progress_order_items, :get_printed_order_items,
+                :get_pending_order_items, only: :index
   include SheinOrdersHelper
 
   def index
-    @current_order_items = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745])
-                                         .date_range_in_a_day(Time.zone.today)
     @date_expires = token_expires_at
 
     refresh_token if @date_expires < DateTime.now && Rails.env.eql?('production')
@@ -19,8 +18,6 @@ class HomeController < ApplicationController
     @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
     @expired_orders = @shein_orders.select { |order| order_status(order) == "Atrasado" }
     @expired_orders_count = @expired_orders.count
-
-    finance_per_status
 
     order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
 
@@ -45,6 +42,23 @@ class HomeController < ApplicationController
 
   private
 
+  def date_range
+    @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil) || Time.zone.today.beginning_of_day
+    @second_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :final_date, nil) || Time.zone.today.end_of_day
+    @date_range = @first_date..@second_date
+  end
+
+  def bling_order_items
+    @bling_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED)
+                                       .date_range(@first_date, @second_date)
+  end
+
+  def current_done_order_items
+    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
+                                                                    BlingOrderItem::Status::CHECKED],
+                                                     alteration_date: @date_range)
+  end
+
   def get_in_progress_order_items
     @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
   end
@@ -54,15 +68,6 @@ class HomeController < ApplicationController
     @to_be_colected = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser coletado pela SHEIN")
     @to_be_sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser enviado pela SHEIN")
     @sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "Enviado")
-  end
-
-  def current_done_order_items
-    initial_date = Time.zone.today.beginning_of_day
-    end_date = Time.zone.today.end_of_day
-    date_range = initial_date..end_date
-    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                                    BlingOrderItem::Status::CHECKED],
-                                                     alteration_date: date_range)
   end
 
   def get_printed_order_items
