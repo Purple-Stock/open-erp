@@ -3,6 +3,7 @@
 #require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :shein_dashboards
   resources :shein_orders do 
     collection do
       get :upload
