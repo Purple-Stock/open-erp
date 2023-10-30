@@ -88,10 +88,18 @@
               <%= link_to t("customers.create"), new_customer_path, class: 'nav-link' %>
             </li>
           <% end %>
+          <%= render 'shared/sidebar_dropdown', title: t("uploads.one"), icon: 'fas fa-upload' do %>
+            <li class="<%= active_nav_item('customers', 'index') %>">
+              <%= link_to t("uploads.shein_orders"), upload_shein_orders_path, class: 'nav-link' %>
+            </li>
+          <% end %>
         <li class="menu-header">Gerencial</li>
         <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-chart-line' do %>
           <li class="<%= active_nav_menu_item([show_pending_orders_path]) %>">
             <%= link_to t("audits.pendings"), show_pending_orders_path, class: 'nav-link' %>
+          </li>
+          <li class="<%= active_nav_menu_item([shein_dashboards_path]) %>">
+            <%= link_to t("audits.finance"), shein_dashboards_path, class: 'nav-link' %>
           </li>
           <li class="<%= active_nav_menu_item([show_orders_products_stock_path]) %>">
             <%= link_to t("audits.products"), show_orders_products_stock_path, class: 'nav-link' %>
@@ -101,7 +109,9 @@
           </li>
         <% end %>
 
-        <li class="menu-header">Estimativas</li>
+        <%
+=begin%>
+ <li class="menu-header">Estimativas</li>
         <%= render 'shared/sidebar_dropdown', title: t("activerecord.models.revenue_estimations.other"), icon: 'fas fa-chart-line' do %>
           <li class="<%= active_nav_menu_item([revenue_estimations_path]) %>">
             <%= link_to t("activerecord.models.revenue_estimations.other"), revenue_estimations_path, class: 'nav-link' %>
@@ -113,7 +123,9 @@
           <%#= link_to 'Controle de Pedidos Online', show_orders_control_path, class: 'nav-link' %>
           <!--          </li>-->
         <% end %>
-        </li>
+        </li> 
+<%
+=end%>
         <!--        <li class="menu-header">Planos</li>-->
         <%#= render 'shared/sidebar_dropdown', title: 'Métodos de pagamento', icon: 'fas fa-file-alt' do %>
         <!--          <li class="<%#= active_nav_item('reports', crud_actions) %>">-->
