@@ -38,12 +38,20 @@ class BlingOrderItem < ApplicationRecord
     CANCELED = 12
     ALL = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, CANCELED].freeze
     EXCLUDE_DONE = [IN_PROGRESS, PENDING, PRINTED, CANCELED].freeze
+    WITHOUT_CANCELLED = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED].freeze
   end
 
   scope :date_range_in_a_day, lambda { |date|
     initial_date = date.beginning_of_day
     end_date = date.end_of_day
     where(date: initial_date..end_date)
+  }
+
+  scope :date_range, lambda { |initial_date, final_date|
+    initial_date = initial_date.try(:to_date).try(:beginning_of_day)
+    final_date = final_date.try(:to_date).try(:end_of_day)
+    date_range = initial_date..final_date
+    where(date: date_range)
   }
 
   def store_name
