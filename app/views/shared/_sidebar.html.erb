@@ -92,6 +92,9 @@
             <li class="<%= active_nav_item('customers', 'index') %>">
               <%= link_to t("uploads.shein_orders"), upload_shein_orders_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('customers', 'index') %>">
+              <%= link_to t("uploads.finance"), upload_finance_data_path, class: 'nav-link' %>
+            </li>
           <% end %>
         <li class="menu-header">Gerencial</li>
         <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-chart-line' do %>
