@@ -3,6 +3,31 @@
   <div class="col-12 col-md-12 col-xl4 bordered-section">
     <div class="container">
       <div class="row">
+                  <div class="col-12 col-md-12 col-xl4 bordered-section">
+            <h1>Minha Renda Shein</h1>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Renda (Income)</th>
+                    <th>Despesa (Expense)</th>
+                    <th>Montante Fixo (Fixed Amount)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @finance_data.each do |finance_record| %>
+                    <tr>
+                      <td><%= finance_record.date.strftime('%d-%m-%Y') %></td>
+                      <td><%= number_to_currency(finance_record.income, unit: "R$", separator: ",", delimiter: ".", format: "%u %n", precision: 2) %></td>
+                      <td><%= number_to_currency(finance_record.expense, unit: "R$", separator: ",", delimiter: ".", format: "%u %n", precision: 2) %></td>
+                      <td><%= number_to_currency(finance_record.fixed_amount, unit: "R$", separator: ",", delimiter: ".", format: "%u %n", precision: 2) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
   <div class="col-12 col-md-12 col-xl4 bordered-section">
     <h1>A receber por status da Shein</h1>
     <div class="row">
