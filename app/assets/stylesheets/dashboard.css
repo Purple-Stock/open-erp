@@ -39,9 +39,9 @@ display: none;
 }
 
 @media (min-width: 2400px) {
-  .col-xl-4 {
-      flex: 0 0 25%;
-      max-width: 25%;
+  .col-xl-3 {
+    flex: 0 0 33.33%; /* Each column takes up about 33.33% of the container's width */
+    max-width: 33.33%;
   }
 }
 
