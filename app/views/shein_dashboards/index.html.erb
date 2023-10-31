@@ -98,10 +98,10 @@
             Total
           </h5>
           <p>
-            Preço total do produto: <%= pending_total_price + to_be_colected_total_price + to_be_sent_total_price + sent_total_price %>
+            Preço total do produto: <%= number_to_currency(pending_total_price + to_be_colected_total_price + to_be_sent_total_price + sent_total_price, unit: "R$", separator: ",", delimiter: ".", format: "%u %n", precision: 2) %>
           </p>
           <p>
-            Receita estimada: <%= pending_estimated + to_be_colected_estimated + to_be_sent_estimated + sent_estimated %>
+            Receita estimada: <%= number_to_currency(pending_estimated + to_be_colected_estimated + to_be_sent_estimated + sent_estimated, unit: "R$", separator: ",", delimiter: ".", format: "%u %n", precision: 2) %>
           </p>
         </div>
       </div>
