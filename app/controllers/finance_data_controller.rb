@@ -50,32 +50,7 @@ class FinanceDataController < ApplicationController
 
   private
 
-  def process_and_save_file(file)
-    # Function to convert date from Portuguese to English format
-    def convert_date(date_str)
-      portuguese_to_english_months = {
-        'janeiro' => 'January',
-        'fevereiro' => 'February',
-        'março' => 'March',
-        'abril' => 'April',
-        'maio' => 'May',
-        'junho' => 'June',
-        'julho' => 'July',
-        'agosto' => 'August',
-        'setembro' => 'September',
-        'outubro' => 'October',
-        'novembro' => 'November',
-        'dezembro' => 'December'
-      }
-      
-      portuguese_to_english_months.each do |pt_month, en_month|
-        if date_str.include?(pt_month)
-          return Date.strptime(date_str.gsub(pt_month, en_month), '%d %B %Y')
-        end
-      end
-      nil
-    end
-    
+  def process_and_save_file(file)    
     # Load the Excel file from the uploaded file
     xlsx = Roo::Spreadsheet.open(file)
   
@@ -111,11 +86,38 @@ class FinanceDataController < ApplicationController
       end
       results[date]['Montante Fixo'] += value
     end
-    #byebug
     # Save the results into the database
     results.each do |date, data|
-      FinanceDatum.create(date: date, income: data['Renda'], expense: data['Despesa'], fixed_amount: data['Montante Fixo'])
+      finance_record = FinanceDatum.find_or_initialize_by(date: date)
+      finance_record.income = data['Renda']
+      finance_record.expense = data['Despesa']
+      finance_record.fixed_amount = data['Montante Fixo']
+      finance_record.save
     end
+  end
+
+  def convert_date(date_str)
+    portuguese_to_english_months = {
+      'janeiro' => 'January',
+      'fevereiro' => 'February',
+      'março' => 'March',
+      'abril' => 'April',
+      'maio' => 'May',
+      'junho' => 'June',
+      'julho' => 'July',
+      'agosto' => 'August',
+      'setembro' => 'September',
+      'outubro' => 'October',
+      'novembro' => 'November',
+      'dezembro' => 'December'
+    }
+    
+    portuguese_to_english_months.each do |pt_month, en_month|
+      if date_str.include?(pt_month)
+        return Date.strptime(date_str.gsub(pt_month, en_month), '%d %B %Y')
+      end
+    end
+    nil
   end
   
   def set_finance_data
