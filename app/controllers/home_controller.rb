@@ -1,14 +1,10 @@
 class HomeController < ApplicationController
-  before_action :date_range, :bling_order_items, :current_done_order_items, :set_monthly_revenue_estimation,
+  before_action :refresh_token, :date_range, :bling_order_items, :current_done_order_items, :set_monthly_revenue_estimation,
                 :get_in_progress_order_items, :get_printed_order_items,
                 :get_pending_order_items, only: :index
   include SheinOrdersHelper
 
   def index
-    @date_expires = token_expires_at
-
-    refresh_token if @date_expires < DateTime.now && Rails.env.eql?('production')
-
     @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN'])
                                     .count
 
@@ -26,10 +22,6 @@ class HomeController < ApplicationController
     @store_name = get_loja_name
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
-
-    @expires_at = format_last_update(@date_expires)
-
-    @last_update = format_last_update(Time.current)
   rescue StandardError => e
     Rails.logger.error(e.message)
     redirect_to home_last_updates_path
@@ -113,14 +105,19 @@ class HomeController < ApplicationController
   end
 
   def token_expires_at
-    BlingDatum.find_by(account_id: current_tenant.id).expires_at
+    BlingDatum.find_by(account_id: current_tenant.id).try(:expires_at)
   end
 
   def refresh_token
+    @date_expires = token_expires_at
+    return if @date_expires.blank? || @date_expires > DateTime.now && Rails.env.eql?('production')
+
     refresh_token = BlingDatum.find_by(account_id: current_tenant.id).refresh_token
     client_id = ENV['CLIENT_ID']
     client_secret = ENV['CLIENT_SECRET']
     credentials = Base64.strict_encode64("#{client_id}:#{client_secret}")
+    @expires_at = format_last_update(@date_expires)
+    @last_update = format_last_update(Time.current)
     begin
       @response = HTTParty.post('https://bling.com.br/Api/v3/oauth/token',
                                 body: {
