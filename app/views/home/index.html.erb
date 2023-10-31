@@ -1,122 +1,106 @@
 <div class="container-ultra-wide">
-<div class="section">
+  <div class="section">
     <br>
     <p>Última Atualização: <%= @last_update %></p>
     <p>Token Expira: <%= @expires_at %></p>
-  <% if @monthly_revenue_estimation.present? %>
-    <p>A meta da quantidade a ser vendida nesse mês é de: <%= @monthly_revenue_estimation.quantity %>.
-      Baseados em uma meta da receita de: <%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %>
-      e com um ticket médio de: <%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
-  <% else %>
-    <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
-  <% end %>
+    <% if @monthly_revenue_estimation.present? %>
+      <p>A meta da quantidade a ser vendida nesse mês é de: <%= @monthly_revenue_estimation.quantity %>.
+          Baseados em uma meta da receita de: <%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %>
+          e com um ticket médio de: <%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
+    <% else %>
+      <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
+    <% end %>
 
-  <div class="col-12 col-md-12 col-xl4 bordered-section">
-    <div class="container">
+    <div class="row">
       <h1>Pesquisar por data</h1>
-      <div class="row">
-        <%= form_tag(root_path, method: :get) do %>
-          <div class="input-group mb-5">
-            <div class="col-sm">
+      <%= form_tag(root_path, method: :get) do %>
+        <div class="input-group mb-5">
+          <div class="col-sm">
               Data inicial
               <%= date_field('bling_order_item', 'initial_date', value: Date.new(@first_date.to_date.year, @first_date.to_date.month, @first_date.to_date.day).strftime) %>
-            </div>
-            <div class="col-sm">
+          </div>
+          <div class="col-sm">
               Data final
               <%= date_field('bling_order_item', 'final_date', value: Date.new(@second_date.to_date.year, @second_date.to_date.month, @second_date.to_date.day).strftime) %>
+          </div>
+          <div class="col-sm">
+              <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %>
+          </div>
+        </div>
+        <div class="col-sm">
+            <%= link_to('Filtrar hoje', root_path, class: 'btn btn-light mb-3') %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-xl4 col-3-grid bordered-section">
+        <h1>Pedidos Concluidos(Pagos)</h1>
+        <%= render 'order_items', order_items: @bling_order_items, show_revenue_estimation: true %>
+      </div>
+
+      <div class="col-12 col-md-12 col-xl4 col-3-grid bordered-section">
+        <h1>Pedidos Feitos(checados e verificados)</h1>
+        <%= render 'order_items', order_items: @current_done_order_items, show_revenue_estimation: false %>
+      </div>
+
+      <div class="col-12 col-md-12 col-xl4 col-3-grid bordered-section">
+        <h1>Status Shein</h1>
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h5 class="card-title">Pendentes Shein</h5>
+                <p>Quantidade de Pedidos: <%= @shein_pending_count %></p>
+                <p>Em Andamento Bling: <%= @in_progress = @in_progress_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
+                <p>Diferença: <%= @shein_pending_count - @in_progress %></p>
+              </div>
             </div>
-            <div class="col-sm"><%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %></div>
-        <% end %>
-        <div class="col-sm"><%= link_to('Filtrar hoje', root_path, class: 'btn btn-light mb-3') %></div>
+          </div>
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h5 class="card-title">Pedidos a serem coletados</h5>
+                <p>Quantidade de Pedidos: <%= @shein_orders_count %></p>
+                <p>Pendentes Bling: <%= @pending = @pending_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
+                <p>Impressos Bling: <%= @printed = @printed_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
+                <p>Diferença: <%= @shein_orders_count - @pending - @printed%></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h5 class="card-title">Pedidos Atrasados</h5>
+                <p>Quantidade de Pedidos: <%= @expired_orders_count %></p>
+            </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <%= render 'order_items', order_items: @bling_order_items, show_revenue_estimation: true %>
   </div>
 
-  <div class="col-12 col-md-12 col-xl4 bordered-section">
-    <h1>Pedidos Feitos(checados e verificados)</h1>
-    <%= render 'order_items', order_items: @current_done_order_items, show_revenue_estimation: false %>
-  </div>
-  <div class="col-12 col-md-12 col-xl4 bordered-section">
-    <h1>Status Shein</h1>
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <h5 class="card-title">
-              Pendentes Shein
-            </h5>
-            <p>
-              Quantidade de Pedidos: <%= @shein_pending_count %>
-            </p>
-            <p>
-              Em Andamento Bling: <%= @in_progress = @in_progress_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %>
-            </p>
-            <p>
-              Diferença: <%= @shein_pending_count - @in_progress %>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <h5 class="card-title">
-              Pedidos a serem coletados
-            </h5>
-            <p>
-              Quantidade de Pedidos: <%= @shein_orders_count %>
-            </p>
-            <p>
-              Pendentes Bling: <%= @pending = @pending_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %>
-            </p>
-            <p>
-              Impressos Bling: <%= @printed = @printed_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %>
-            </p>
-            <p>
-              Diferença: <%= @shein_orders_count - @pending - @printed%>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <h5 class="card-title">
-              Pedidos Atrasados
-            </h5>
-            <p>
-              Quantidade de Pedidos: <%= @expired_orders_count %>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
   <div class="row">
-    <div class="col-12 col-md-12 col-xl4 bordered-section">
-      <h1>Pedidos Impressos</h1>
-      <%= render 'order_items', order_items: @printed_order_items, show_revenue_estimation: false %>
-    </div>
-    <div class="col-12 col-md-12 col-xl4 bordered-section">
-      <h1>Pedidos Pendentes</h1>
-      <%= render 'order_items', order_items: @pending_order_items, show_revenue_estimation: false %>
-    </div>
-    <div class="col-12 col-md-12 col-xl4 bordered-section">
-      <h1>Pedidos Em andamento(Pagos)</h1>
-      <%= render 'order_items', order_items: @in_progress_order_items, show_revenue_estimation: false %>
+      <div class="col-12 col-md-12 col-xl4 col-3-grid bordered-section">
+        <h1>Pedidos Impressos</h1>
+        <%= render 'order_items', order_items: @printed_order_items, show_revenue_estimation: false %>
+      </div>
+
+      <div class="col-12 col-md-12 col-xl4 col-3-grid bordered-section">
+        <h1>Pedidos Pendentes</h1>
+        <%= render 'order_items', order_items: @pending_order_items, show_revenue_estimation: false %>
+      </div>
+
+      <div class="col-12 col-md-12 col-xl4 col-3-grid bordered-section">
+        <h1>Pedidos Em andamento(Pagos)</h1>
+        <%= render 'order_items', order_items: @in_progress_order_items, show_revenue_estimation: false %>
+      </div>
     </div>
   </div>
-</div>
-
-</div>
 </div>
 
 <script>
-  setInterval(function() {
-      window.location.reload();
-  }, 60000);
+    setInterval(function() {
+        window.location.reload();
+    }, 60000);
 </script>
