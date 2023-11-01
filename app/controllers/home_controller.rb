@@ -110,7 +110,7 @@ class HomeController < ApplicationController
 
   def refresh_token
     @date_expires = token_expires_at
-    return if @date_expires.blank? || @date_expires > DateTime.now && Rails.env.eql?('production')
+    return if @date_expires.blank? || (@date_expires > DateTime.now && !Rails.env.eql?('production'))
 
     refresh_token = BlingDatum.find_by(account_id: current_tenant.id).refresh_token
     client_id = ENV['CLIENT_ID']
