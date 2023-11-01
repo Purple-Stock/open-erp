@@ -9,7 +9,7 @@ gem 'dotenv-rails', groups: %i[development test]
 gem 'inherited_resources', '1.14.0'
 
 # Bundle Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.8"
+gem "rails", "~> 7.1.0"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -126,12 +126,12 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.8'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
-gem 'rubocop-rails', '>= 2.21.2', require: false
+gem 'rubocop-rails', '>= 2.22.0', require: false
 gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
-gem "good_job", "~> 3.19", ">= 3.19.1"
+gem "good_job", "~> 3.20", ">= 3.20.0"
 
 gem 'roo'
 gem 'roo-xls'
