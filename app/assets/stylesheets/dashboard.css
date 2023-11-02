@@ -17,9 +17,63 @@
 display: none;
 }
 
-@media (min-width: 2400px) {
-  .col-xl4 {
-      flex: 0 0 25%;
-      max-width: 25%;
+@media (max-width: 767px) {
+  .col-xl-4 {
+      flex: 0 0 100%;
+      max-width: 100%;
   }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .col-xl-4 {
+      flex: 0 0 50%;
+      max-width: 50%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 2399px) {
+  .col-xl-4 {
+      flex: 0 0 33.33%;
+      max-width: 33.33%;
+  }
+}
+
+@media (min-width: 2400px) {
+  .col-xl-3 {
+    flex: 0 0 33.33%; /* Each column takes up about 33.33% of the container's width */
+    max-width: 33.33%;
+  }
+}
+
+.section {
+  padding: 20px 10px; /* Reduced horizontal padding */
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 20px; /* Increased padding for larger screens */
+  }
+  
+}
+
+@media (min-width: 768px) and (max-width: 1366px) {
+  .col-3-grid {
+    flex: 0 0 33.33%; /* Each column takes up about 33.33% of the container's width */
+    max-width: 33.33%;
+  }
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1em;
 }

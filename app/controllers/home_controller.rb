@@ -1,16 +1,10 @@
 class HomeController < ApplicationController
-  before_action :set_monthly_revenue_estimation, :get_in_progress_order_items, :get_printed_order_items,
-                :get_pending_order_items, :current_done_order_items, only: :index
+  before_action :refresh_token, :date_range, :bling_order_items, :current_done_order_items, :set_monthly_revenue_estimation,
+                :get_in_progress_order_items, :get_printed_order_items,
+                :get_pending_order_items, only: :index
   include SheinOrdersHelper
 
   def index
-    @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil) || Time.zone.today.beginning_of_day
-    @second_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :final_date, nil) || Time.zone.today.end_of_day
-    @search = BlingOrderItem.where(situation_id: %w[15 101065 24 94871 95745]).date_range(@first_date, @second_date)
-    @date_expires = token_expires_at
-
-    refresh_token if @date_expires < DateTime.now && Rails.env.eql?('production')
-
     @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN'])
                                     .count
 
@@ -20,8 +14,6 @@ class HomeController < ApplicationController
     @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
     @expired_orders = @shein_orders.select { |order| order_status(order) == "Atrasado" }
     @expired_orders_count = @expired_orders.count
-
-    finance_per_status
 
     order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
 
@@ -49,6 +41,27 @@ class HomeController < ApplicationController
   end
 
   private
+
+  def date_range
+    @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil) || Time.zone.today.beginning_of_day
+    @second_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :final_date, nil) || Time.zone.today.end_of_day
+    @date_range = @first_date..@second_date
+  end
+
+  def bling_order_items
+    @bling_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED)
+                                       .date_range(@first_date, @second_date)
+  end
+
+  def current_done_order_items
+    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
+                                                                    BlingOrderItem::Status::CHECKED],
+                                                     alteration_date: @date_range)
+  end
+
+  def get_in_progress_order_items
+    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
+  end
 
   def finance_per_status
     @pendings = SheinOrder.where("data ->> 'Status do pedido' = ?", "Pendente")
@@ -121,14 +134,19 @@ class HomeController < ApplicationController
   end
 
   def token_expires_at
-    BlingDatum.find_by(account_id: current_tenant.id).expires_at
+    BlingDatum.find_by(account_id: current_tenant.id).try(:expires_at)
   end
 
   def refresh_token
+    @date_expires = token_expires_at
+    return if @date_expires.blank? || (@date_expires > DateTime.now && !Rails.env.eql?('production'))
+
     refresh_token = BlingDatum.find_by(account_id: current_tenant.id).refresh_token
     client_id = ENV['CLIENT_ID']
     client_secret = ENV['CLIENT_SECRET']
     credentials = Base64.strict_encode64("#{client_id}:#{client_secret}")
+    @expires_at = format_last_update(@date_expires)
+    @last_update = format_last_update(Time.current)
     begin
       @response = HTTParty.post('https://bling.com.br/Api/v3/oauth/token',
                                 body: {
