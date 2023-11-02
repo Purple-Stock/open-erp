@@ -1,6 +1,7 @@
 <div class="row justify-content-center">
   <% if order_items.present? %>
-    <% order_items.group_by(&:store_id).each do |store_id, items| %>
+    <% grouped_order_items = order_items.group_by(&:store_id) %>
+    <% grouped_order_items.each do |store_id, items| %>
 
       <% loja_name = items.first.store_name %>
 
@@ -39,6 +40,20 @@
 
       </div>
 
+    <% end %>
+    <% absent_stores(grouped_order_items).each do | absent_store |%>
+      <div class="col-md-12">
+        <div class="card mb-12">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <%= BlingOrderItem::STORE_ID_NAME_KEY_VALUE[absent_store] %>
+            </h5>
+            <p class="<%= 'text-success' if printed %>">
+              Pedidos: 0
+            </p>
+          </div>
+        </div>
+      </div>
     <% end %>
   <% else %>
       <div class="col-md-12">
