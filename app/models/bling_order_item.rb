@@ -41,7 +41,6 @@ class BlingOrderItem < ApplicationRecord
     WITHOUT_CANCELLED = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED].freeze
   end
 
-  belongs_to :store
 
   scope :date_range_in_a_day, lambda { |date|
     initial_date = date.beginning_of_day
