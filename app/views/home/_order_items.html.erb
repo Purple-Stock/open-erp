@@ -2,7 +2,6 @@
   <% if order_items.present? %>
     <% order_items.each do |store_name, items| %>
      <% orders = items.group_by(&:bling_order_id).compact %>
-
       <div class="col-md-12">
 
         <div class="card mb-12">
@@ -36,6 +35,20 @@
 
       </div>
 
+    <% end %>
+    <% absent_stores(grouped_order_items).each do | absent_store |%>
+      <div class="col-md-12">
+        <div class="card mb-12">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <%= BlingOrderItem::STORE_ID_NAME_KEY_VALUE[absent_store] %>
+            </h5>
+            <p class="<%= 'text-success' if printed %>">
+              Pedidos: 0
+            </p>
+          </div>
+        </div>
+      </div>
     <% end %>
   <% else %>
       <div class="col-md-12">
