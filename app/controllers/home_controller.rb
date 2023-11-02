@@ -49,8 +49,10 @@ class HomeController < ApplicationController
   end
 
   def bling_order_items
-    @bling_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED)
-                                       .date_range(@first_date, @second_date)
+    base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED)
+                               .date_range(@first_date, @second_date)
+
+    @bling_order_items = group_order_items(base_query)
   end
 
   def current_done_order_items
@@ -93,8 +95,8 @@ class HomeController < ApplicationController
 
   def group_order_items(order_items)
     order_items
-      .includes(:store)
-      .group_by { |item| item.store.name }
+      .group_by(&:store_id)
+      .transform_keys { |store_id| get_loja_name.fetch(store_id.to_i, store_id) }
       .sort_by(&:first)
       .to_h
   end
