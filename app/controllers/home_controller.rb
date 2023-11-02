@@ -132,7 +132,7 @@ class HomeController < ApplicationController
   end
 
   def format_last_update(time)
-    time.strftime('%d-%m-%Y %H:%M:%S')
+    time&.strftime('%d-%m-%Y %H:%M:%S')
   end
 
   def token_expires_at
