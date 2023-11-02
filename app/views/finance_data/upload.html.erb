@@ -1,7 +1,6 @@
-<!-- app/views/shein_orders/upload.html.erb -->
 <br><br>
-<h1>Atualizar dados pedidos Shein com planilha</h1>
-<%= form_with(url: import_shein_orders_path, local: true, method: :post, multipart: true) do %>
+<h1>Atualizar dados Financeiros Shein com planilha</h1>
+<%= form_with(url: import_finance_data_path, local: true, method: :post, multipart: true) do %>
   <div class="row">
     <div class="col-md-12">
       <%= file_field_tag :file, accept: '.xlsx, .xls' %>
@@ -11,3 +10,4 @@
     </div>
   </div>
 <% end %>
+
