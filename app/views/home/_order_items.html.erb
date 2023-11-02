@@ -3,15 +3,20 @@
     <% order_items.each do |store_name, items| %>
      <% orders = items.group_by(&:bling_order_id).compact %>
 
-      <div class="col-md-4">
+      <div class="col-md-12">
 
-        <div class="card mb-4">
+        <div class="card mb-12">
 
-          <div class="card-body text-center">
+          <div class="card-body text-center <%= 'bg-danger text-dark' if printed %>">
 
             <h5 class="card-title">
               <%= store_name %>
             </h5>
+            <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
+              <p>
+                Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
+              </p>
+            <% end %>
 
             <p>
               Pedidos: <%= orders&.count %>
@@ -33,8 +38,8 @@
 
     <% end %>
   <% else %>
-      <div class="col-md-4">
-        <div class="card mb-4">
+      <div class="col-md-12">
+        <div class="card mb-12">
           <div class="card-body text-center">
             <p>
               Os pedidos aparecerão aqui
