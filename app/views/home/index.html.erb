@@ -2,12 +2,22 @@
   <section class="mt-5 section bordered-section">
     <p>Última Atualização: <%= @last_update %></p>
     <p>Token Expira: <%= @expires_at %></p>
-    <% if @monthly_revenue_estimation.present? %>
-      <h1>A meta da quantidade de venda nesse mês: <%= @monthly_revenue_estimation.quantity %>
-      </h1>
-    <% else %>
-      <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
-    <% end %>
+    <h1 class="text-center">Metas</h1>
+    <div class="row justify-content-center">
+        <% if @monthly_revenue_estimation.present? %>
+          <div class="col-sm text-center">
+            <p>Meta de quantidade: <%= @monthly_revenue_estimation.quantity %></p>
+          </div>
+          <div class="col-sm text-center">
+            <p>Meta de receita: <%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></p>
+          </div>
+          <div class="col-sm text-center">
+            <p>Ticket Médio: <%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
+          </div>
+        <% else %>
+          <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
+        <% end %>
+    </div>
   </section>
 
   <section class="mt-5 section bordered-section">
