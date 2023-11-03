@@ -22,6 +22,14 @@ class HomeController < ApplicationController
     @store_name = get_loja_name
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
+
+    @expires_at = format_last_update(@date_expires)
+
+    @last_update = format_last_update(Time.current)
+
+    @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
+    @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
+    @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
   rescue StandardError => e
     Rails.logger.error(e.message)
     redirect_to home_last_updates_path
@@ -41,8 +49,10 @@ class HomeController < ApplicationController
   end
 
   def bling_order_items
-    @bling_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED)
-                                       .date_range(@first_date, @second_date)
+    base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED)
+                               .date_range(@first_date, @second_date)
+
+    @bling_order_items = BlingOrderItem.group_order_items(base_query)
   end
 
   def current_done_order_items
@@ -60,6 +70,19 @@ class HomeController < ApplicationController
     @to_be_colected = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser coletado pela SHEIN")
     @to_be_sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser enviado pela SHEIN")
     @sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "Enviado")
+  end
+
+  def current_done_order_items
+    initial_date = Time.zone.today.beginning_of_day
+    end_date = Time.zone.today.end_of_day
+    date_range = initial_date..end_date
+    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
+                                                                    BlingOrderItem::Status::CHECKED],
+                                                     alteration_date: date_range)
+  end
+
+  def get_in_progress_order_items
+    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
   end
 
   def get_printed_order_items
@@ -101,7 +124,7 @@ class HomeController < ApplicationController
   end
 
   def format_last_update(time)
-    time.strftime('%d-%m-%Y %H:%M:%S')
+    time&.strftime('%d-%m-%Y %H:%M:%S')
   end
 
   def token_expires_at
