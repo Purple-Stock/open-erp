@@ -54,6 +54,17 @@ class BlingOrderItem < ApplicationRecord
     where(date: date_range)
   }
 
+  def self.group_order_items(base_query)
+    grouped_order_items = {}
+    STORE_ID_NAME_KEY_VALUE.each_value { |store| grouped_order_items[store] = [] }
+
+    grouped_order_items.merge!(
+      base_query
+      .group_by(&:store_id)
+      .transform_keys { |store_id| STORE_ID_NAME_KEY_VALUE.fetch(store_id) }
+    )
+  end
+
   def store_name
     STORE_ID_NAME_KEY_VALUE["#{store_id}"]
   end

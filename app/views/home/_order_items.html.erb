@@ -1,58 +1,39 @@
 <div class="row justify-content-center">
   <% if order_items.present? %>
-    <% grouped_order_items = order_items.group_by(&:store_id) %>
-    <% grouped_order_items.each do |store_id, items| %>
-
-      <% loja_name = items.first.store_name %>
-
-      <% orders = items.group_by(&:bling_order_id).compact %>
-
-      <div class="col-md-12">
-
+  <% order_items.each do |store_name, items| %>
+    <% orders = items.group_by(&:bling_order_id).compact %>
+     <div class="col-md-12">
+     <% if orders.count > 0 %>
         <div class="card mb-12">
-
           <div class="card-body text-center <%= 'bg-danger text-dark' if printed %>">
-
             <h5 class="card-title">
-              <%= loja_name %>
+              <%= store_name %>
             </h5>
             <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
               <p>
                 Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
               </p>
             <% end %>
-
             <p>
               Pedidos: <%= orders&.count %>
             </p>
-
-            <% if loja_name.eql?('Mercado Livre') %>
-
+            <% if store_name.eql?('Mercado Livre') %>
               <p>
                 Mercado Envios Flex: <%= @mercado_envios_flex_counts %>
               </p>
-
             <% end %>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    <% end %>
-    <% absent_stores(grouped_order_items).each do | absent_store |%>
-      <div class="col-md-12">
-        <div class="card mb-12">
-          <div class="card-body text-center">
-            <h5 class="card-title">
-              <%= BlingOrderItem::STORE_ID_NAME_KEY_VALUE[absent_store] %>
-            </h5>
-            <p class="<%= 'text-success' if printed %>">
-              Pedidos: 0
-            </p>
           </div>
         </div>
+     <% else %>
+        <div class="card card-body text-center">
+          <h5 class="card-title">
+            <%= store_name %>
+          </h5>
+          <p class="<%= 'text-success' if printed %>">
+            Pedidos: 0
+          </p>
+        </div>
+     <% end %>
       </div>
     <% end %>
   <% else %>
