@@ -27,9 +27,9 @@ class HomeController < ApplicationController
 
     @last_update = format_last_update(Time.current)
 
-    @grouped_printed_order_items = group_order_items(@printed_order_items)
-    @grouped_pending_order_items = group_order_items(@pending_order_items)
-    @grouped_in_progress_order_items = group_order_items(@in_progress_order_items)
+    @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
+    @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
+    @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
   rescue StandardError => e
     Rails.logger.error(e.message)
     redirect_to home_last_updates_path
@@ -52,7 +52,7 @@ class HomeController < ApplicationController
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED)
                                .date_range(@first_date, @second_date)
 
-    @bling_order_items = group_order_items(base_query)
+    @bling_order_items = BlingOrderItem.group_order_items(base_query)
   end
 
   def current_done_order_items
@@ -91,14 +91,6 @@ class HomeController < ApplicationController
 
   def get_pending_order_items
     @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
-  end
-
-  def group_order_items(order_items)
-    order_items
-      .group_by(&:store_id)
-      .transform_keys { |store_id| get_loja_name.fetch(store_id.to_i, store_id) }
-      .sort_by(&:first)
-      .to_h
   end
 
   def set_monthly_revenue_estimation
