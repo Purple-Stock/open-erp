@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   #mount Sidekiq::Web => '/sidekiq'
   mount GoodJob::Engine => 'good_job'
 
+  resources :bling_order_item_histories, only: :index
   resources :shein_dashboards
   resources :shein_orders do 
     collection do
