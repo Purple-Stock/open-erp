@@ -1,39 +1,66 @@
 <div class="container-ultra-wide">
-  <div class="section">
-    <br>
+  <section class="mt-5 section bordered-section">
     <p>Última Atualização: <%= @last_update %></p>
     <p>Token Expira: <%= @expires_at %></p>
-    <% if @monthly_revenue_estimation.present? %>
-      <p>A meta da quantidade a ser vendida nesse mês é de: <%= @monthly_revenue_estimation.quantity %>.
-          Baseados em uma meta da receita de: <%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %>
-          e com um ticket médio de: <%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
-    <% else %>
-      <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
-    <% end %>
+    <h1 class="text-center">Metas
+      <span class="bi bi-eye-slash" id="eye-slash">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+          <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+          <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+          <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+        </svg>
+      </span>
 
-    <div class="row">
+      <span class="bi bi-eye" id="eye" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+      </svg>
+      </span>
+    </h1>
+    <div class="row justify-content-center">
+        <% if @monthly_revenue_estimation.present? %>
+          <div class="col-sm text-center">
+            <p>Meta de quantidade: <%= @monthly_revenue_estimation.quantity %></p>
+          </div>
+          <div class="col-sm text-center">
+            <p>Meta de receita: <span id="revenue-estimation" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></span></p>
+          </div>
+          <div class="col-sm text-center">
+            <p>Ticket Médio: <span id="average-ticket" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></span></p>
+          </div>
+        <% else %>
+          <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
+        <% end %>
+    </div>
+  </section>
+
+  <section class="mt-5 section bordered-section">
+    <div class="row p-4">
       <h1>Pesquisar por data</h1>
       <%= form_tag(root_path, method: :get) do %>
         <div class="input-group mb-5">
           <div class="col-sm">
-              Data inicial
-              <%= date_field('bling_order_item', 'initial_date', value: Date.new(@first_date.to_date.year, @first_date.to_date.month, @first_date.to_date.day).strftime) %>
+            Data inicial
+            <%= date_field('bling_order_item', 'initial_date', value: Date.new(@first_date.to_date.year, @first_date.to_date.month, @first_date.to_date.day).strftime) %>
           </div>
           <div class="col-sm">
-              Data final
-              <%= date_field('bling_order_item', 'final_date', value: Date.new(@second_date.to_date.year, @second_date.to_date.month, @second_date.to_date.day).strftime) %>
+            Data final
+            <%= date_field('bling_order_item', 'final_date', value: Date.new(@second_date.to_date.year, @second_date.to_date.month, @second_date.to_date.day).strftime) %>
           </div>
           <div class="col-sm">
-              <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %>
+            <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %>
           </div>
         </div>
         <div class="col-sm">
-            <%= link_to('Filtrar hoje', root_path, class: 'btn btn-light mb-3') %>
+          <%= link_to('Filtrar hoje', root_path, class: 'btn btn-light mb-3') %>
         </div>
       <% end %>
     </div>
+  </section>
 
-    <div class="row">
+  <section class="section p-3">
+    <div class="row p-0">
       <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
         <h1>Pedidos Concluidos(Pagos)</h1>
         <%= render 'order_items', order_items: @bling_order_items, show_revenue_estimation: true, printed: false %>
@@ -45,19 +72,19 @@
       </div>
       <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section border-danger">
         <h1>Pedidos Impressos (zerar ao final do dia)</h1>
-        <%= render 'order_items', order_items: @printed_order_items, show_revenue_estimation: false, printed: true %>
+        <%= render 'order_items', order_items: @grouped_printed_order_items, show_revenue_estimation: false, printed: true %>
       </div>
   </div>
 
   <div class="row">
       <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
         <h1>Pedidos Pendentes</h1>
-        <%= render 'order_items', order_items: @pending_order_items, show_revenue_estimation: false, printed: false %>
+        <%= render 'order_items', order_items: @grouped_pending_order_items, show_revenue_estimation: false, printed: false %>
       </div>
 
       <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
         <h1>Pedidos Em andamento(Pagos)</h1>
-        <%= render 'order_items', order_items: @in_progress_order_items, show_revenue_estimation: false, printed: false %>
+        <%= render 'order_items', order_items: @grouped_in_progress_order_items, show_revenue_estimation: false, printed: false %>
       </div>
 
       <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
@@ -89,17 +116,36 @@
               <div class="card-body text-center">
                 <h5 class="card-title">Pedidos Atrasados</h5>
                 <p>Quantidade de Pedidos: <%= @expired_orders_count %></p>
-            </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </div>
 
 <script>
     setInterval(function() {
         window.location.reload();
     }, 60000);
+    $(document).ready(function (){
+        let isHidden = true;
+
+        $('#eye-slash, #eye').click(function (){
+            if(isHidden) {
+                $('#revenue-estimation').removeAttr('hidden');
+                $('#average-ticket').removeAttr('hidden');
+                $('.bi-eye').removeAttr('hidden');
+                $('.bi-eye-slash').attr('hidden', true);
+                isHidden = false;
+            } else {
+                $('#revenue-estimation').attr('hidden', true);
+                $('#average-ticket').attr('hidden', true);
+                $('.bi-eye').attr('hidden', true)
+                $('.bi-eye-slash').removeAttr('hidden');
+                isHidden = true;
+            }
+        });
+    })
 </script>
