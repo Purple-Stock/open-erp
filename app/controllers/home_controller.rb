@@ -55,12 +55,6 @@ class HomeController < ApplicationController
     @bling_order_items = BlingOrderItem.group_order_items(base_query)
   end
 
-  def current_done_order_items
-    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                                    BlingOrderItem::Status::CHECKED],
-                                                     alteration_date: @date_range)
-  end
-
   def get_in_progress_order_items
     @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
   end
