@@ -43,5 +43,19 @@ RSpec.describe 'orders control' do
         expect(response).to be_successful
       end
     end
+
+    context 'when there is at least 2 current done order items' do
+      before do
+        FactoryBot.create_list(:bling_order_item, 2, valor: 10.5, store_id: '204061683',
+                                                     situation_id: BlingOrderItem::Status::CHECKED,
+                                                     bling_order_id: '1',
+                               alteration_date: Date.today)
+      end
+
+      it 'is a successful response' do
+        get root_path
+        expect(response).to be_successful
+      end
+    end
   end
 end
