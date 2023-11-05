@@ -70,9 +70,10 @@ class HomeController < ApplicationController
     initial_date = Time.zone.today.beginning_of_day
     end_date = Time.zone.today.end_of_day
     date_range = initial_date..end_date
-    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
+    base_query = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
                                                                     BlingOrderItem::Status::CHECKED],
                                                      alteration_date: date_range)
+    @current_done_order_items = BlingOrderItem.group_order_items(base_query)
   end
 
   def get_in_progress_order_items
