@@ -35,6 +35,12 @@ RSpec.describe BlingOrderItem, type: :model do
     end
   end
 
+  describe '#Status::PAID' do
+    it 'has status all' do
+      expect(described_class::Status::PAID).to eq([15, 101_065, 24, 94_871, 95_745])
+    end
+  end
+
   describe 'self.date_range' do
     before do
       described_class.destroy_all
