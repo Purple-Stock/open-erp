@@ -8,7 +8,7 @@ class BlingOrderItemHistoriesController < ApplicationController
   def index;end
 
   def day_quantities
-    render json: @bling_order_item_day_quantities_presenter
+    render json: @paid_items_presentable
   end
 
   private
@@ -25,8 +25,6 @@ class BlingOrderItemHistoriesController < ApplicationController
   end
 
   def day_quantities_presenter
-    @bling_order_item_day_quantities_presenter = @paid_bling_order_items.count.map do |day_quantity|
-      { day: day_quantity.dig(0).day, quantity: day_quantity.dig(1) }
-    end
+    @paid_items_presentable = BlingOrderItemHistoriesPresenter.new(@paid_bling_order_items).presentable
   end
 end
