@@ -21,7 +21,6 @@ class BlingOrderItemHistoriesController < ApplicationController
 
   def paid_bling_order_items
     @paid_bling_order_items = BlingOrderItem.where(date: date_range, situation_id: [BlingOrderItem::Status::PAID])
-                                            .group(:date)
   end
 
   def day_quantities_presenter
