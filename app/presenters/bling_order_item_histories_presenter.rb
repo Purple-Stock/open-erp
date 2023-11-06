@@ -4,7 +4,7 @@
 class BlingOrderItemHistoriesPresenter
   attr_accessor :bling_order_item_collection
 
-  def initialize(bling_order_item_collection)
+  def initialize(bling_order_item_collection = [])
     @bling_order_item_collection = bling_order_item_collection
   end
 
