@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe BlingOrderItemHistoriesPresenter do
   describe '#initialize' do
-    it 'is truthy' do
-      expect(described_class.new).to be_truthy
+    it 'raises argument error' do
+      expect { described_class.new }.to raise_exception(ArgumentError)
     end
   end
 
