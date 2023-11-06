@@ -6,32 +6,24 @@
 </main>
 
 <script>
-  (async function() {
-      const data = [
-          { year: 2010, count: 10 },
-          { year: 2011, count: 20 },
-          { year: 2012, count: 15 },
-          { year: 2013, count: 25 },
-          { year: 2014, count: 22 },
-          { year: 2015, count: 30 },
-          { year: 2016, count: 28 },
-      ];
-
-      new Chart(
-          document.getElementById('chartjs-bar'),
-          {
-              type: 'bar',
-              data: {
-                  labels: data.map(row => row.year),
-                  datasets: [
-                      {
-                          label: 'Faturaento dos últimos 15 dias',
-                          data: data.map(row => row.count)
+  $(document).ready(function (){
+      $.ajax({url: 'bling_order_item_histories/day_quantities', success: function(result){
+              new Chart(
+                  document.getElementById('chartjs-bar'),
+                  {
+                      type: 'bar',
+                      data: {
+                          labels: result.map(row => row.day),
+                          datasets: [
+                              {
+                                  label: 'Faturaento dos últimos 15 dias',
+                                  data: result.map(row => row.quantity)
+                              }
+                          ]
                       }
-                  ]
-              }
-          }
-      );
-  })();
+                  }
+              )
+          }});
+  });
 
 </script>
