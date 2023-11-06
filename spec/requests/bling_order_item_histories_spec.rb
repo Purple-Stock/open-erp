@@ -13,4 +13,17 @@ RSpec.describe "BlingOrderItemHistories", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "GET /day_quantity" do
+    before do
+      FactoryBot.create_list(:bling_order_item, 2, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shopee'])
+      FactoryBot.create_list(:bling_order_item, 2, date: Date.today - 2.days, bling_order_id: '2')
+    end
+
+    it "returns http success" do
+      get day_quantities_bling_order_item_histories_path
+
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
