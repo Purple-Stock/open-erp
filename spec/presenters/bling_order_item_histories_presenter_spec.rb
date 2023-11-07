@@ -25,7 +25,7 @@ RSpec.describe BlingOrderItemHistoriesPresenter do
       end
 
       it 'is an array of hash' do
-        result = [{ day: 4, quantity: 2 }, { day: 6, quantity: 2 }]
+        result = [{ day: '04/11/2023', quantity: 2 }, { day: '06/11/2023', quantity: 2 }]
         bling_order_item_collection = BlingOrderItem.all
         expect(described_class.new(bling_order_item_collection).presentable).to eq(result)
       end
