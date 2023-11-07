@@ -36,7 +36,7 @@ RSpec.describe BlingOrderItem, type: :model do
   end
 
   describe '#Status::PAID' do
-    it 'has status all' do
+    it 'has status paid' do
       expect(described_class::Status::PAID).to eq([15, 101_065, 24, 94_871, 95_745])
     end
   end
