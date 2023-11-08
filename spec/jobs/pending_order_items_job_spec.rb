@@ -30,13 +30,15 @@ RSpec.describe PendingOrderItemsJob, type: :job do
     end
 
     context 'when there are pending orders' do
-      before { subject.perform(user.account.id) }
+      before do
+        FactoryBot.create(:bling_order_item, bling_order_id: '18964504312')
+      end
 
-      it 'counts by 0 bling order items' do
+      it 'counts by 99 bling order items' do
         VCR.use_cassette('all_pending_order_items', erb: true) do
           expect do
             subject.perform(user.account.id)
-          end.to change(BlingOrderItem, :count).by(0)
+          end.to change(BlingOrderItem, :count).by(100 - 1) # one already created.
         end
       end
     end
