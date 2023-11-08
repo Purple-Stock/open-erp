@@ -21,8 +21,11 @@ class PendingOrderItemsJob < BlingOrderItemCreatorBaseJob
 
   def create_orders(orders)
     orders_attributes = []
+    query_order_ids = BlingOrderItem.all.pluck(:bling_order_id).map(&:to_i)
 
     orders.each do |order|
+      next if query_order_ids.include?(order['id'])
+
       orders_attributes << {
         bling_order_id: order['id'],
         situation_id: order['situacao']['id'],
