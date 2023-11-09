@@ -41,6 +41,14 @@ RSpec.describe InProgressOrderItemsJob, type: :job do
           end.to change(BlingOrderItem, :count).by(86) # one already created.
         end
       end
+
+      it 'has status in progress' do
+        VCR.use_cassette('all_in_progress_order_items', erb: true) do
+          subject.perform(user.account.id)
+          expect(BlingOrderItem.find_by(bling_order_id: '18971174289').situation_id.to_i)
+            .to eq(BlingOrderItem::Status::IN_PROGRESS)
+        end
+      end
     end
   end
 end
