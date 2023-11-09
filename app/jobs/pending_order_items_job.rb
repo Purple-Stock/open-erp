@@ -20,11 +20,20 @@ class PendingOrderItemsJob < BlingOrderItemCreatorBaseJob
   end
 
   def create_orders(orders)
+    return if orders.blank?
+
+    order_ids = orders.map { |order| order['id'] }
+    query_bling_order_ids = BlingOrderItem.where(bling_order_id: order_ids)
+                                          .pluck(:bling_order_id)
+                                          .map(&:to_i)
+
+
     orders_attributes = []
-    query_order_ids = BlingOrderItem.all.pluck(:bling_order_id).map(&:to_i)
+    BlingOrderItem.where(bling_order_id: [query_bling_order_ids])
+                  .update_all(situation_id: STATUS)
 
     orders.each do |order|
-      next if query_order_ids.include?(order['id'])
+      next if query_bling_order_ids.include?(order['id'])
 
       orders_attributes << {
         bling_order_id: order['id'],
@@ -35,6 +44,6 @@ class PendingOrderItemsJob < BlingOrderItemCreatorBaseJob
       }
     end
 
-    BlingOrderItem.create!(orders_attributes)
+    BlingOrderItem.create(orders_attributes)
   end
 end
