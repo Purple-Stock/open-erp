@@ -49,7 +49,7 @@ RSpec.describe BlingOrderItem, type: :model do
     before do
       described_class.destroy_all
       [23, 24, 25].each do |day|
-        FactoryBot.create(:bling_order_item, date: "2023-10-#{day}")
+        FactoryBot.create(:bling_order_item, date: "2023-10-#{day}", bling_order_id: day)
       end
     end
 
