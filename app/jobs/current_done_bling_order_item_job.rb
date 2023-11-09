@@ -30,6 +30,8 @@ class CurrentDoneBlingOrderItemJob < BlingOrderItemCreatorBaseJob
 
 
     orders_attributes = []
+    BlingOrderItem.where(bling_order_id: [query_bling_order_ids])
+                  .update_all(alteration_date: @alteration_date, situation_id: BlingOrderItem::Status::CHECKED)
 
     orders.each do |order|
       next if query_bling_order_ids.include?(order['id'])
