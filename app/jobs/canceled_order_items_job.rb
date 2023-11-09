@@ -6,7 +6,7 @@
 # We keep the create block as it is since we can not prove bling
 # erp first create a e.g. checked status then
 # update its own data to the canceled one.
-class CancelledOrderItemsJob < BlingOrderItemCreatorBaseJob
+class CanceledOrderItemsJob < BlingOrderItemCreatorBaseJob
   queue_as :default
   STATUS = BlingOrderItem::Status::CANCELED.freeze
 

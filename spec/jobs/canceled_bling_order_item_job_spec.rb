@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe CancelledOrderItemsJob, type: :job do
+RSpec.describe CanceledOrderItemsJob, type: :job do
   let(:user) { FactoryBot.create(:user) }
 
   describe '#perform_now' do
@@ -12,7 +12,7 @@ RSpec.describe CancelledOrderItemsJob, type: :job do
 
     context 'when there is no cancelled orders' do
       it 'counts by 100 bling order items' do
-        VCR.use_cassette('all_cancelled_order_items', erb: true, record: :all) do
+        VCR.use_cassette('all_canceled_order_items', erb: true, record: :all) do
           expect do
             subject.perform(user.account.id)
           end.to change(BlingOrderItem, :count).by(100)
@@ -26,7 +26,7 @@ RSpec.describe CancelledOrderItemsJob, type: :job do
       end
 
       it 'counts by 99 bling order items' do
-        VCR.use_cassette('all_cancelled_order_items', erb: true) do
+        VCR.use_cassette('all_canceled_order_items', erb: true) do
           expect do
             subject.perform(user.account.id)
           end.to change(BlingOrderItem, :count).by(99) # one already created.
@@ -34,7 +34,7 @@ RSpec.describe CancelledOrderItemsJob, type: :job do
       end
 
       it 'has cancelled situation id' do
-        VCR.use_cassette('all_cancelled_order_items', erb: true) do
+        VCR.use_cassette('all_canceled_order_items', erb: true) do
           subject.perform(user.account.id)
           expect(BlingOrderItem.find_by(bling_order_id: '19091628770').situation_id)
             .to eq(BlingOrderItem::Status::CANCELED)
