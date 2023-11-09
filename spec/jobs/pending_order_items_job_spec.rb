@@ -41,6 +41,14 @@ RSpec.describe PendingOrderItemsJob, type: :job do
           end.to change(BlingOrderItem, :count).by(100 - 1) # one already created.
         end
       end
+
+      it 'has status pending' do
+        VCR.use_cassette('all_pending_order_items', erb: true) do
+          subject.perform(user.account.id)
+          expect(BlingOrderItem.find_by(bling_order_id: '18964504312').situation_id.to_i)
+            .to eq(BlingOrderItem::Status::PENDING)
+        end
+      end
     end
   end
 end
