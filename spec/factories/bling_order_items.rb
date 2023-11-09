@@ -19,6 +19,10 @@
 #  situation_id       :string
 #  store_id           :string
 #
+# Indexes
+#
+#  index_bling_order_items_on_bling_order_id  (bling_order_id) UNIQUE
+#
 FactoryBot.define do
   factory :bling_order_item do
     codigo { "MyString" }
