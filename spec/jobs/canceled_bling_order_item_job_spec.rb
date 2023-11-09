@@ -12,7 +12,7 @@ RSpec.describe CanceledOrderItemsJob, type: :job do
 
     context 'when there is no cancelled orders' do
       it 'counts by 100 bling order items' do
-        VCR.use_cassette('all_canceled_order_items', erb: true, record: :all) do
+        VCR.use_cassette('all_canceled_order_items', erb: true) do
           expect do
             subject.perform(user.account.id)
           end.to change(BlingOrderItem, :count).by(100)
