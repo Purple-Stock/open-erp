@@ -34,7 +34,8 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
         situation_id: order['situacao']['id'],
         store_id: order['loja']['id'],
         date: order['data'],
-        alteration_date:
+        alteration_date:,
+        marketplace_code_id: order['numeroLoja']
       }
     end
 
