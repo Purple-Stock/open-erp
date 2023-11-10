@@ -35,7 +35,7 @@ FactoryBot.define do
     descricao { "MyText" }
     descricaoDetalhada { "MyText" }
     situation_id { BlingOrderItem::Status::CHECKED }
-    bling_order_id { '1' }
+    bling_order_id { Faker::Number.number }
     date { Date.today }
     store_id { BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shein'] }
   end
