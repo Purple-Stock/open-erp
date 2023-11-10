@@ -21,7 +21,7 @@ RSpec.describe BlingOrderItemHistoriesPresenter do
       before do
         allow(Date).to receive(:today).and_return Date.new(2023, 11, 6)
         FactoryBot.create_list(:bling_order_item, 2, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shopee'])
-        FactoryBot.create_list(:bling_order_item, 2, date: Date.today - 2.days, bling_order_id: '2')
+        FactoryBot.create_list(:bling_order_item, 2, date: Date.today - 2.days)
       end
 
       it 'is an array of hash' do

@@ -9,8 +9,9 @@ class CurrentDoneBlingOrderItemJob < BlingOrderItemCreatorBaseJob
     @account_id = account_id
     begin
       DONE_STATUSES.each do |status|
+        @status = status
         orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                             situation: status, options: options)
+                                             situation: status, options:)
         orders = orders['data']
 
         create_orders(orders)
