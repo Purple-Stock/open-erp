@@ -9,9 +9,8 @@ task remove_bling_order_item_duplication: :environment do
     duplicated_ids << order_id_counter_array[0] if order_id_counter_array[1] > 1
   end
 
-  BlingOrderItem.where(bling_order_id: duplicated_ids).find_each do |orders|
-    duplicated_orders = orders.shift # remove the first from the annihilation.
-    duplicated_orders.destroy_all
+  BlingOrderItem.where(bling_order_id: duplicated_ids).find_each.each_with_index do |order, index|
+    order.destroy if index > 0 # preserve the first from the annihilation.
   end
 
   puts 'BlingOrderItem duplication removed!'
