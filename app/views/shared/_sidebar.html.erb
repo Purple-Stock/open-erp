@@ -82,6 +82,9 @@
             <li class="<%= active_nav_item('sales', 'new') %>">
               <%= link_to t("sales.create"), new_sale_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('checkout_orders', 'index') %>">
+              <%= link_to t("sales.checkout"), checkout_orders_path, class: 'nav-link' %>
+            </li>
           <% end %>
           <%= render 'shared/sidebar_dropdown', title: t("customers.two"), icon: 'fas fa-users' do %>
             <li class="<%= active_nav_item('customers', 'index') %>">
