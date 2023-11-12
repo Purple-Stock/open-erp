@@ -21,7 +21,6 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
                                           .pluck(:bling_order_id)
                                           .map(&:to_i)
 
-
     orders_attributes = []
     BlingOrderItem.where(bling_order_id: [query_bling_order_ids])
                   .update_all(situation_id: @status, alteration_date: @alteration_date)
@@ -35,7 +34,8 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
         store_id: order['loja']['id'],
         date: order['data'],
         alteration_date:,
-        marketplace_code_id: order['numeroLoja']
+        marketplace_code_id: order['numeroLoja'],
+        bling_id: order['numero']
       }
     end
 
