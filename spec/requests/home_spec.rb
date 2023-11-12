@@ -7,9 +7,9 @@ RSpec.describe 'orders control' do
     let(:user) { FactoryBot.create(:user) }
 
     before do
-      FactoryBot.create_list(:bling_order_item, 2, valor: 10.5, store_id: '204061683', situation_id: '94871',
-                                                   date: Time.zone.today)
-      FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
+      FactoryBot.create(:bling_order_item, valor: 10.5, store_id: '204061683', situation_id: '94871',
+                                           date: Time.zone.today, bling_order_id: Faker::Number.number)
+      FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.zone.now + 2.days)
       sign_in user
     end
 
@@ -18,11 +18,11 @@ RSpec.describe 'orders control' do
       expect(response).to be_successful
     end
 
-    context 'when there is at least 2 in progress order items' do
+    context 'when there is at least 1 in progress order items' do
       before do
-        FactoryBot.create_list(:bling_order_item, 2, valor: 10.5, store_id: '204061683',
+        FactoryBot.create(:bling_order_item, valor: 10.5, store_id: '204061683',
                                                      situation_id: BlingOrderItem::Status::IN_PROGRESS,
-                                                     bling_order_id: '1')
+                                                     bling_order_id: Faker::Number.number)
       end
 
       it 'is a successful response' do
@@ -31,11 +31,11 @@ RSpec.describe 'orders control' do
       end
     end
 
-    context 'when there is at least 2 checked order items' do
+    context 'when there is at least 1 checked order items' do
       before do
-        FactoryBot.create_list(:bling_order_item, 2, valor: 10.5, store_id: '204061683',
+        FactoryBot.create(:bling_order_item, valor: 10.5, store_id: '204061683',
                                                      situation_id: BlingOrderItem::Status::CHECKED,
-                                                     bling_order_id: '1')
+                                                     bling_order_id: Faker::Number.number)
       end
 
       it 'is a successful response' do
@@ -46,10 +46,10 @@ RSpec.describe 'orders control' do
 
     context 'when there is at least 2 current done order items' do
       before do
-        FactoryBot.create_list(:bling_order_item, 2, valor: 10.5, store_id: '204061683',
+        FactoryBot.create(:bling_order_item, valor: 10.5, store_id: '204061683',
                                                      situation_id: BlingOrderItem::Status::CHECKED,
-                                                     bling_order_id: '1',
-                               alteration_date: Date.today)
+                                                     bling_order_id: Faker::Number.number,
+                                                     alteration_date: Time.zone.today)
       end
 
       it 'is a successful response' do
