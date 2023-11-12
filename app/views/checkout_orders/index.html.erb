@@ -1,0 +1,98 @@
+<div class="container mt-5">
+  <h1>Checkout de Pedidos</h1>
+
+  <%= form_with url: process_file_checkout_orders_path, local: true, html: { multipart: true, data: { turbo: false } } do |form| %>
+
+    <div class="form-group">
+      <%= form.label :text_block, "Texto (Pacote do comerciante)" %>
+      <%= form.text_area :text_block, class: "form-control", style: 'height: 200px' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :document, "Documento (.txt apenas)" %>
+      <%= form.file_field :document, accept: '.txt', class: "form-control-file" %>
+    </div>
+
+    <%= form.submit "Enviar Pedido", class: "btn btn-primary" %>
+
+  <% end %>
+  <h2>Order Results</h2>
+    <% flash.each do |type, message| %>
+    <div class="alert alert-<%= type == 'alert' ? 'danger' : 'success' %>">
+      <%= message %>
+    </div>
+  <% end %>
+  <% if @combined_order_data.empty? %>
+    <p>No orders found.</p>
+  <% else %>
+    <%= form_with url: update_selected_orders_checkout_orders_path, method: :post, id: 'update_orders_form' do |form| %>
+
+      <%= select_tag :id_situacao, 
+                options_for_select(BlingOrderItem::STATUS_NAME_KEY_VALUE.map { |key, value| [value, key] }), 
+              prompt: 'Select Status',
+              class: 'form-control' %>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">
+              <input type="checkbox" id="select_all" onclick="selectAllOrders(this)" />
+              Select All
+            </th>
+            <th scope="col">Bling ID</th>
+            <th scope="col">Bling Order Item ID</th>
+            <th scope="col">Bling Status</th>
+            <th scope="col">Shein Status</th>
+            <th scope="col">Order Number</th>
+            <th scope="col">Package Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @combined_order_data.each_with_index do |combined_order, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td>
+                <% if combined_order[:bling_order_item] %>
+                  <%= check_box_tag "selected_orders[]", combined_order[:bling_order_item].bling_order_id, false, class: "order-checkbox" %>
+                <% else %>
+                  N/A
+                <% end %>
+              </td>
+              <td>
+                <% if combined_order[:bling_order_item] %>
+                  <%= combined_order[:bling_order_item].bling_order_id %>
+                <% else %>
+                  N/A
+                <% end %>
+              </td>
+              <td>
+                <% if combined_order[:bling_order_item] %>
+                  <%= combined_order[:bling_order_item].bling_id %>
+                <% else %>
+                  N/A
+                <% end %>
+              </td>
+              <td><%=  BlingOrderItem::STATUS_NAME_KEY_VALUE[combined_order[:bling_order_item].situation_id] %></td>
+              <td><%= combined_order[:shein_status] %></td>
+              <td><%= combined_order[:order_number] %></td>
+              <td><%= combined_order[:package_code] %></td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+      <%= form.submit "Update Selected Orders", class: "btn btn-primary mt-2" %>
+    <% end %>
+<% end %>
+
+</div>
+
+<script>
+function selectAllOrders(source) {
+  checkboxes = document.getElementsByClassName('order-checkbox');
+  for (var i = 0, n = checkboxes.length; i < n; i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+
+</script>
