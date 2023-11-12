@@ -136,3 +136,4 @@ gem "good_job", "~> 3.19", ">= 3.19.1"
 gem 'roo'
 gem 'roo-xls'
 gem 'activerecord-import'
+gem 'appsignal'
