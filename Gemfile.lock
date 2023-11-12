@@ -91,6 +91,8 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
+    appsignal (3.4.14)
+      rack
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.824.0)
@@ -268,6 +270,8 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.4-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -525,12 +529,14 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
   activerecord-import
   acts_as_tenant
   annotate
+  appsignal
   aws-sdk-s3
   better_errors
   binding_of_caller
