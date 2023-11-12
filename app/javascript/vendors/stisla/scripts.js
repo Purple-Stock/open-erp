@@ -1,6 +1,6 @@
 $(document).on("turbo:load", function() {
-  // ChartJS
-  if(window.Chart) {
+  // ChartJS the reason why .global is undefined.
+  if(false) {
     Chart.defaults.global.defaultFontFamily = "'Nunito', 'Segoe UI', 'Arial'";
     Chart.defaults.global.defaultFontSize = 12;
     Chart.defaults.global.defaultFontStyle = 500;

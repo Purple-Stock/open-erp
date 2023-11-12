@@ -1,0 +1,2 @@
+module BlingOrderItemHistoriesHelper
+end
