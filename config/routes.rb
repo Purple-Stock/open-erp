@@ -70,6 +70,14 @@ Rails.application.routes.draw do
   get 'orders_business_day', to: 'orders_control#show_orders_business_day', as: 'show_orders_business_day'
   get '/orders/post_mail_control', to: 'orders_control#post_mail_control', as: 'show_post_mail_control'
   post 'orders_control/import_post_mail' => 'orders_control#import_post_mail', as: 'import_post_mail'
+
+  resources :checkout_orders, only: [:index] do
+    collection do
+      post :process_file
+      post :update_selected_orders
+    end
+  end
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get 'bling/pedidos', to: 'bling/orders#show', as: 'show_bling_orders'

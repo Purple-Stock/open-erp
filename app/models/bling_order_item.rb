@@ -29,6 +29,15 @@ class BlingOrderItem < ApplicationRecord
     '204061683' => 'Mercado Livre'
   }.freeze
 
+  STATUS_NAME_KEY_VALUE = {
+    "15" => 'Em andamento',
+    "101065" => 'Checado',
+    "24" => 'Verificado',
+    "94871" => 'Pendente',
+    "95745" => 'Impresso',
+    "12" => 'Cancelado'
+  }.freeze
+
   class Status
     IN_PROGRESS = 15
     CHECKED = 101_065
