@@ -30,6 +30,7 @@ pt-BR:
     two: Vendas
     list: Lista de Vendas
     create: Criar Vendas
+    checkout: Checkout Pedidos
   customers:
     one: Cliente
     two: Clientes
