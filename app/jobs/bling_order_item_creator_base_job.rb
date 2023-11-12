@@ -46,6 +46,8 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
           descricaoDetalhada: item_data['descricaoDetalhada'],
           situation_id: fetched_order_data['data']['situacao']['id'],
           store_id: fetched_order_data['data']['loja']['id'],
+          marketplace_code_id: fetched_order_data['data']['numeroLoja'],
+          bling_id: fetched_order_data['data']['numero'],
           date: fetched_order_data['data']['data'],
           alteration_date: alteration_date
         )
