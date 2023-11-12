@@ -5,6 +5,7 @@ class InProgressOrderItemsJob < BlingOrderItemCreatorBaseJob
   attr_accessor :account_id
 
   def perform(account_id)
+    @status = STATUS
     @account_id = account_id
     begin
       orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,

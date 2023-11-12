@@ -1,0 +1,49 @@
+<main class="main-content pl-0">
+  <h1>Histórico de vendas dos últimos 15 dias</h1>
+  <div>
+    <canvas id="chartjs-bar"></canvas>
+  </div>
+</main>
+
+<script>
+  $(document).ready(function (){
+      let options = {
+          maintainAspectRatio: false,
+          aspectRatio: 1,
+          scales: {
+              y: {
+                  stacked: true,
+                  grid: {
+                      display: true,
+                      color: "rgba(255,99,132,0.2)"
+                  }
+              },
+              x: {
+                  grid: {
+                      display: false
+                  }
+              }
+          }
+      };
+
+      $.ajax({url: 'bling_order_item_histories/day_quantities', success: function(result){
+              new Chart(
+                  document.getElementById('chartjs-bar'),
+                  {
+                      type: 'bar',
+                      options: options,
+                      data: {
+                          labels: result.map(row => row.day),
+                          datasets: [
+                              {
+                                  label: 'Quantidade vendida nos últimos 15 dias',
+                                  data: result.map(row => row.quantity)
+                              }
+                          ]
+                      }
+                  }
+              )
+          }});
+  });
+
+</script>

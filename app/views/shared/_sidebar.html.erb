@@ -12,6 +12,9 @@
           <li class="<%= active_nav_item('home', 'index') %>">
             <%= link_to t("dashboards.one"), root_path, class: 'nav-link' %>
           </li>
+          <li class="<%= active_nav_item('bling_order_item_histories', 'index') %>">
+            <%= link_to 'Histórico de pedidos', bling_order_item_histories_path, class: 'nav-link' %>
+          </li>
           <li class="<%= active_nav_item('shein_orders', 'index') %>">
             <%= link_to t("dashboards.two"), shein_orders_path, class: 'nav-link' %>
           </li>

@@ -2,22 +2,27 @@
 #
 # Table name: bling_order_items
 #
-#  id                 :bigint           not null, primary key
-#  aliquotaIPI        :decimal(, )
-#  alteration_date    :datetime
-#  codigo             :string
-#  date               :datetime
-#  desconto           :decimal(, )
-#  descricao          :text
-#  descricaoDetalhada :text
-#  quantidade         :integer
-#  unidade            :string
-#  valor              :decimal(, )
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  bling_order_id     :string
-#  situation_id       :string
-#  store_id           :string
+#  id                  :bigint           not null, primary key
+#  aliquotaIPI         :decimal(, )
+#  alteration_date     :datetime
+#  codigo              :string
+#  date                :datetime
+#  desconto            :decimal(, )
+#  descricao           :text
+#  descricaoDetalhada  :text
+#  quantidade          :integer
+#  unidade             :string
+#  valor               :decimal(, )
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  bling_order_id      :string
+#  marketplace_code_id :string
+#  situation_id        :string
+#  store_id            :string
+#
+# Indexes
+#
+#  index_bling_order_items_on_bling_order_id  (bling_order_id) UNIQUE
 #
 require 'rails_helper'
 
@@ -35,11 +40,17 @@ RSpec.describe BlingOrderItem, type: :model do
     end
   end
 
+  describe '#Status::PAID' do
+    it 'has status paid' do
+      expect(described_class::Status::PAID).to eq([15, 101_065, 24, 94_871, 95_745])
+    end
+  end
+
   describe 'self.date_range' do
     before do
       described_class.destroy_all
       [23, 24, 25].each do |day|
-        FactoryBot.create(:bling_order_item, date: "2023-10-#{day}")
+        FactoryBot.create(:bling_order_item, date: "2023-10-#{day}", bling_order_id: day)
       end
     end
 
