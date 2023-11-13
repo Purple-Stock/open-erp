@@ -73,7 +73,7 @@
                   N/A
                 <% end %>
               </td>
-              <td><%=  BlingOrderItem::STATUS_NAME_KEY_VALUE[combined_order[:bling_order_item].situation_id] %></td>
+              <td><%=  BlingOrderItem::STATUS_NAME_KEY_VALUE[combined_order[:bling_order_item].situation_id] if combined_order[:bling_order_item].present?%></td>
               <td><%= combined_order[:shein_status] %></td>
               <td><%= combined_order[:order_number] %></td>
               <td><%= combined_order[:package_code] %></td>
@@ -84,15 +84,33 @@
       <%= form.submit "Update Selected Orders", class: "btn btn-primary mt-2" %>
     <% end %>
 <% end %>
+<h2>Codes Not Found</h2>
+<% if @shein_orders_not_found.present? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Package Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shein_orders_not_found.each do |code_not_found| %>
+        <tr>
+          <td><%= code_not_found %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No codes were not found.</p>
+<% end %>
 
 </div>
 
 <script>
-function selectAllOrders(source) {
-  checkboxes = document.getElementsByClassName('order-checkbox');
-  for (var i = 0, n = checkboxes.length; i < n; i++) {
-    checkboxes[i].checked = source.checked;
+  function selectAllOrders(source) {
+    checkboxes = document.getElementsByClassName('order-checkbox');
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+      checkboxes[i].checked = source.checked;
+    }
   }
-}
-
 </script>

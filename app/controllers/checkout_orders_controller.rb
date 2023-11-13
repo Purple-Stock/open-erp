@@ -45,23 +45,19 @@ class CheckoutOrdersController < ApplicationController
   
     # Now @combined_order_data contains all the combined data objects
     @combined_order_data = combined_order_data
+    @shein_orders_not_found = package_codes - @shein_orders.map { |order| order.data['Pacote do comerciante'] }
   
     render :index
   end
 
   def update_selected_orders
-    #byebug
     selected_orders = params[:selected_orders]
     id_situacao = params[:id_situacao]
-    #byebug
-    # Logic to update orders via Bling API
-    #selected_orders.each do |order_id|
-      Services::Bling::UpdateOrderStatus.call(
-        tenant: current_tenant.id,
-        order_ids: params[:selected_orders],
-        new_status: params[:id_situacao]
-      )
-    #end
+    Services::Bling::UpdateOrderStatus.call(
+      tenant: current_tenant.id,
+      order_ids: params[:selected_orders],
+      new_status: params[:id_situacao]
+    )
 
     # Redirect or render with a success/failure message
     redirect_to checkout_orders_path, notice: 'Orders updated successfully'
