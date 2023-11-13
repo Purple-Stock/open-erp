@@ -15,6 +15,7 @@
 #  valor               :decimal(, )
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  bling_id            :integer
 #  bling_order_id      :string
 #  marketplace_code_id :string
 #  situation_id        :string
