@@ -2,5 +2,8 @@
 pt-BR:
   dashboards:
     title: Dashboard
+    second_title: Sessão Shein
     one: Pedidos
     two: Pedidos Atrasados
+    three: Pedidos Shein/Bling
+    
