@@ -1,0 +1,35 @@
+<%# app/views/bling_order_items/index.html.erb %>
+
+<%# Use Stisla's layout components %>
+<div class="section-header">
+  <h1>SHEIN - Bling Order Items</h1>
+</div>
+
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-md">
+          <thead>
+            <tr>
+              <th>Bling ID</th>
+              <th>Bling Order ID</th>
+              <th>Número do Pedido</th>
+              <th>Pacote do Comerciante</th>
+              <th>Status Bling</th>
+              <th>Status Shein</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @bling_shein_orders.each do |order| %>
+              <tr>
+                <td><%= order.bling_id %></td>
+                <td><%= order.bling_order_id %></td>
+                <td><%= order.numero_do_pedido %></td>
+                <td><%= order.pacote_do_comerciante %></td>
+                <td><%= BlingOrderItem::STATUS_NAME_KEY_VALUE[order.situation_id] %></td>
+                <td><%= order.status_do_produto %></td>
+              </tr>
+    <% end %>
+  </tbody>
+</table>
