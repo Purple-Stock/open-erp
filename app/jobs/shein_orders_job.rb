@@ -8,14 +8,8 @@ class SheinOrdersJob < ApplicationJob
       
       (2..spreadsheet.last_row).each do |i|
         row = Hash[[headers, spreadsheet.row(i)].transpose]
-        
-        # Find an existing order by number or initialize a new one
-        # Assuming "Número do pedido" is a unique identifier for orders
-        shein_order = SheinOrder.where("data ->> 'Número do pedido' = ?", row["Número do pedido"].to_s).first_or_initialize
-        
-        # Update and save the order with all columns
-        shein_order.update(data: row)
-        shein_order.save!
+
+        InsertSheinOrderJob.perform_later(row)
       end
     rescue => e
       # Log the error message
