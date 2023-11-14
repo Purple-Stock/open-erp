@@ -3,11 +3,10 @@
 # Table name: shein_orders
 #
 #  id         :bigint           not null, primary key
-#  data       :json
+#  data       :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# app/models/shein_order.rb
 
 class SheinOrder < ApplicationRecord
   def self.import_from_file(file)
