@@ -121,6 +121,14 @@ Rails.application.configure do
       args: [1],
       set: { priority: 3 },
       description: "Create Order Items statuses are checked"
+    },
+
+    verified_order_items_task: {
+      cron: "@weekly",
+      class: "VerifiedBlingOrderItemsJob",
+      args: [1],
+      set: { priority: 4 },
+      description: "Create Order Items whose statuses are verified"
     }
     # etc.
   }
