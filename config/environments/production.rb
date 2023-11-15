@@ -97,6 +97,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.good_job.smaller_number_is_higher_priority = true
+  config.good_job.execution_mode = :async
 
   config.good_job.enable_cron = true
   config.good_job.cron = {
