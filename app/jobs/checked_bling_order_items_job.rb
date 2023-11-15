@@ -12,7 +12,7 @@
 # 1) You cleaned your database;
 # 2) There are orders status over counted. There are possibilities they became checked or verified on bling API
 # but somehow the CurrentDoneBlingOrderJob does not update that.
-class CheckedOrderItemsJob < BlingOrderItemCreatorBaseJob
+class CheckedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
   queue_as :default
   STATUS = BlingOrderItem::Status::CHECKED.freeze
 
