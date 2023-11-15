@@ -21,14 +21,14 @@ class VerifiedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
   def perform(account_id)
     @status = STATUS
     @account_id = account_id
-    initial_date = Date.today - 3.months
-    final_date = Date.today
+    initial_date = Time.zone.today - 3.months
+    final_date = Time.zone.today
     date_range = (initial_date..final_date)
     begin
       date_range.each do |alteration_date|
-        @alteration_date = alteration_date.strftime
+        @alteration_date = alteration_date
         final_alteration_date = (alteration_date + 1.day).strftime
-        options = { dataAlteracaoInicial: @alteration_date, dataAlteracaoFinal: final_alteration_date }
+        options = { dataAlteracaoInicial: @alteration_date.strftime, dataAlteracaoFinal: final_alteration_date }
         orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
                                              situation: STATUS, options: options)
         orders = orders['data']
