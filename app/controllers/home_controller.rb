@@ -43,9 +43,9 @@ class HomeController < ApplicationController
   private
 
   def date_range
-    @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil) || Time.zone.today.beginning_of_day
-    @second_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :final_date, nil) || Time.zone.today.end_of_day
-    @date_range = @first_date..@second_date
+    @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil).try(:to_date).try(:beginning_of_day) || Time.zone.today.beginning_of_day
+    @second_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :final_date, nil).try(:to_date).try(:end_of_day) || Time.zone.today.end_of_day
+    @date_range = @first_date.to_date.beginning_of_day..@second_date.end_of_day
   end
 
   def bling_order_items
@@ -72,7 +72,7 @@ class HomeController < ApplicationController
     date_range = initial_date..end_date
     base_query = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
                                                                     BlingOrderItem::Status::CHECKED],
-                                                     alteration_date: date_range)
+                                                     alteration_date: @date_range)
     @current_done_order_items = BlingOrderItem.group_order_items(base_query)
   end
 
