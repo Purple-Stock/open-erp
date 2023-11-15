@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe CheckedOrderItemsJob, type: :job do
+RSpec.describe CheckedBlingOrderItemsJob, type: :job do
   let(:user) { FactoryBot.create(:user) }
 
   describe '#perform_now' do
