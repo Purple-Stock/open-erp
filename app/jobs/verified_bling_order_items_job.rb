@@ -21,8 +21,8 @@ class VerifiedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
   def perform(account_id)
     @status = STATUS
     @account_id = account_id
-    initial_date = Time.zone.today - 3.months
-    final_date = Time.zone.today
+    initial_date = Date.today - 3.months
+    final_date = Date.today
     date_range = (initial_date..final_date)
     begin
       date_range.each do |alteration_date|
