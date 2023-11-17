@@ -112,6 +112,8 @@ gem 'httparty', '>= 0.21.0'
 
 gem 'nokogiri'
 
+gem 'newrelic_rpm'
+
 gem 'pagy', '~> 6.0.0'
 
 gem 'business', '~> 2.0'
