@@ -176,10 +176,10 @@ GEM
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
-    factory_bot (6.2.1)
+    factory_bot (6.4.0)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.2.0)
-      factory_bot (~> 6.2.0)
+    factory_bot_rails (6.4.0)
+      factory_bot (~> 6.4)
       railties (>= 5.0.0)
     faker (3.2.1)
       i18n (>= 1.8.11, < 2)
@@ -245,7 +245,7 @@ GEM
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.21.4)
+    loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -272,9 +272,9 @@ GEM
     newrelic_rpm (9.6.0)
       base64
     nio4r (2.5.9)
-    nokogiri (1.15.4-arm64-darwin)
+    nokogiri (1.15.5-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (6.0.4)
@@ -297,7 +297,7 @@ GEM
     puma (6.4.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
-    racc (1.7.1)
+    racc (1.7.3)
     rack (2.2.8)
     rack-cors (2.0.1)
       rack (>= 2.0.0)
@@ -335,7 +335,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
-    rake (13.0.6)
+    rake (13.1.0)
     ransack (4.0.0)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
@@ -487,7 +487,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
-    thor (1.2.2)
+    thor (1.3.0)
     thread_safe (0.3.6)
     tilt (2.3.0)
     timeout (0.4.0)
@@ -551,7 +551,7 @@ DEPENDENCIES
   csv-importer
   devise (>= 4.9.3)
   dotenv-rails
-  factory_bot_rails
+  factory_bot_rails (>= 6.3.0)
   faker
   geared_pagination
   good_job (~> 3.19, >= 3.19.1)
@@ -603,4 +603,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.20
+   2.4.6
