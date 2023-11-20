@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Services::Bling::Order, type: :services do
-  BlingDatum.destroy_all
   let!(:bling_datum) { FactoryBot.create(:bling_datum, account_id: 1) }
   let(:order_command) { 'find_orders' }
   let(:situation) { 15 }
@@ -15,6 +14,19 @@ RSpec.describe Services::Bling::Order, type: :services do
   end
 
   describe '#call' do
+    context 'when given number of page in options' do
+      before { allow(Rails).to receive(:env).and_return('no_test') }
+
+      let(:options) { { max_pages: 1 } }
+
+      it 'counts 100 data' do
+        VCR.use_cassette('bling_order_items_max_pages', erb: true, record: :all) do
+          result = described_class.call(order_command: order_command, tenant: 1, situation: situation, options: options)
+          expect(result['data'].count).to eq(100)
+        end
+      end
+    end
+
     context 'when filtering by initial and final dates' do
       let(:situation) { 9 }
       let(:options) { { dataInicial: '2022-12-31', dataFinal: '2022-12-31' } }
