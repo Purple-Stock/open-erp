@@ -10,6 +10,8 @@ module Services
         @tenant = tenant
         @situation = situation
         @options = options
+        @max_pages = options[:max_pages] || 10
+        options.delete(:max_pages)
       end
 
       def call
@@ -40,8 +42,7 @@ module Services
 
         all_orders = []
 
-        # Fetch data from the first two pages
-        (1..).each do |page|
+        (1..@max_pages).each do |page|
           # we do not need to request all massive data. If the first page works, so does the remaining pages.
           break if (page.eql?(2) && Rails.env.eql?('test'))
 
