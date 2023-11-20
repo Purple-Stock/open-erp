@@ -17,9 +17,8 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
     return if orders.blank?
 
     order_ids = orders.map { |order| order['id'] }
-    query_bling_order_ids = BlingOrderItem.where(bling_order_id: order_ids)
-                                          .pluck(:bling_order_id)
-                                          .map(&:to_i)
+    query_bling_order_ids = BlingOrderItem.select(:bling_order_id).where(bling_order_id: order_ids)
+                                          .map { |order| order.bling_order_id.to_i }
 
     orders_attributes = []
     BlingOrderItem.where(bling_order_id: [query_bling_order_ids])
