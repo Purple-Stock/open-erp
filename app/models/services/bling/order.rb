@@ -10,7 +10,7 @@ module Services
         @tenant = tenant
         @situation = situation
         @options = options
-        @max_pages = options[:max_pages] || 10
+        @max_pages = options[:max_pages]
         options.delete(:max_pages)
       end
 
