@@ -64,6 +64,14 @@ RSpec.describe PendingOrderItemsJob, type: :job do
             .to eq(BlingOrderItem::Status::PENDING)
         end
       end
+
+      it 'has account id' do
+        VCR.use_cassette('all_pending_order_items', erb: true) do
+          subject.perform(user.account.id)
+          expect(BlingOrderItem.find_by(account_id: user.account.id).account_id)
+            .to eq(user.account.id)
+        end
+      end
     end
   end
 end
