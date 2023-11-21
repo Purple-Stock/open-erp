@@ -5,6 +5,7 @@ class SheinOrdersController < ApplicationController
 
   def index
     @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
+                              .where(account_id: current_tenant.id)
                               .order(Arel.sql("data ->> 'Limite de tempo para coletar' ASC"))
   end
   
@@ -45,7 +46,8 @@ class SheinOrdersController < ApplicationController
   def import
     file = params[:file]
     if file.present?
-      SheinOrder.import_from_file(file)
+      byebug
+      SheinOrder.import_from_file(file, current_tenant.id)
       redirect_to shein_orders_path, notice: "Orders have been processed."
     else
       redirect_to upload_shein_orders_path, alert: "Please select a valid file."
