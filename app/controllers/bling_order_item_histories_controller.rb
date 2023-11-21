@@ -20,7 +20,8 @@ class BlingOrderItemHistoriesController < ApplicationController
   end
 
   def paid_bling_order_items
-    @paid_bling_order_items = BlingOrderItem.where(date: date_range, situation_id: [BlingOrderItem::Status::PAID])
+    @paid_bling_order_items = BlingOrderItem.where(date: date_range, situation_id: [BlingOrderItem::Status::PAID],
+                                                   account_id: current_user.account.id)
   end
 
   def day_quantities_presenter
