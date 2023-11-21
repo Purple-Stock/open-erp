@@ -45,6 +45,6 @@ FactoryBot.define do
     bling_order_id { Faker::Number.number }
     date { Date.today }
     store_id { BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shein'] }
-    account_id { 1 }
+    account_id { User.first.account.id }
   end
 end
