@@ -582,6 +582,7 @@ DEPENDENCIES
   rubocop-rails (>= 2.21.2)
   rubocop-rspec
   rubycritic
+  rubyzip
   sassc-rails
   selenium-webdriver
   serviceworker-rails
