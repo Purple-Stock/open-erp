@@ -15,6 +15,8 @@
 #  valor               :decimal(, )
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  account_id          :bigint
+#  bling_id            :integer
 #  bling_order_id      :string
 #  marketplace_code_id :string
 #  situation_id        :string
@@ -22,7 +24,12 @@
 #
 # Indexes
 #
+#  index_bling_order_items_on_account_id      (account_id)
 #  index_bling_order_items_on_bling_order_id  (bling_order_id) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (account_id => accounts.id)
 #
 FactoryBot.define do
   factory :bling_order_item do
@@ -38,5 +45,6 @@ FactoryBot.define do
     bling_order_id { Faker::Number.number }
     date { Date.today }
     store_id { BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shein'] }
+    account_id { 1 }
   end
 end
