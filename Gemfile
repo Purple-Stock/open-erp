@@ -139,3 +139,5 @@ gem 'roo'
 gem 'roo-xls'
 gem 'activerecord-import'
 gem 'appsignal'
+
+gem 'rubyzip'
