@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HomeController < ApplicationController
   before_action :refresh_token, :date_range, :bling_order_items, :current_done_order_items, :set_monthly_revenue_estimation,
                 :get_in_progress_order_items, :get_printed_order_items,
@@ -11,8 +13,9 @@ class HomeController < ApplicationController
     @shein_pending_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['Pendente'])
                                      .count
 
-    @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
-    @expired_orders = @shein_orders.select { |order| order_status(order) == "Atrasado" }
+    @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)",
+                                     ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
+    @expired_orders = @shein_orders.select { |order| order_status(order) == 'Atrasado' }
     @expired_orders_count = @expired_orders.count
 
     order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
@@ -49,43 +52,41 @@ class HomeController < ApplicationController
   end
 
   def bling_order_items
-    base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED)
+    base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED,
+                                      account_id: current_user.account.id)
                                .date_range(@first_date, @second_date)
 
     @bling_order_items = BlingOrderItem.group_order_items(base_query)
   end
 
   def get_in_progress_order_items
-    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
+    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS,
+                                                    account_id: current_user.account.id)
   end
 
   def finance_per_status
-    @pendings = SheinOrder.where("data ->> 'Status do pedido' = ?", "Pendente")
-    @to_be_colected = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser coletado pela SHEIN")
-    @to_be_sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "A ser enviado pela SHEIN")
-    @sent = SheinOrder.where("data ->> 'Status do pedido' = ?", "Enviado")
+    @pendings = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Pendente')
+    @to_be_colected = SheinOrder.where("data ->> 'Status do pedido' = ?", 'A ser coletado pela SHEIN')
+    @to_be_sent = SheinOrder.where("data ->> 'Status do pedido' = ?", 'A ser enviado pela SHEIN')
+    @sent = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Enviado')
   end
 
   def current_done_order_items
-    initial_date = Time.zone.today.beginning_of_day
-    end_date = Time.zone.today.end_of_day
-    date_range = initial_date..end_date
     base_query = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                                    BlingOrderItem::Status::CHECKED],
-                                                     alteration_date: @date_range)
+                                                     BlingOrderItem::Status::CHECKED],
+                                      alteration_date: @date_range,
+                                      account_id: current_user.account.id)
     @current_done_order_items = BlingOrderItem.group_order_items(base_query)
   end
 
-  def get_in_progress_order_items
-    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS)
-  end
-
   def get_printed_order_items
-    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED)
+    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED,
+                                                account_id: current_user.account.id)
   end
 
   def get_pending_order_items
-    @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
+    @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING,
+                                                account_id: current_user.account.id)
   end
 
   def set_monthly_revenue_estimation
@@ -111,7 +112,6 @@ class HomeController < ApplicationController
     end
     counter
   end
-
 
   def fetch_order_data(order_id)
     Services::Bling::FindOrder.call(id: order_id, order_command: 'find_order',
