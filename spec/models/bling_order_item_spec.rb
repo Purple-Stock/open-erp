@@ -27,17 +27,9 @@
 #  index_bling_order_items_on_account_id      (account_id)
 #  index_bling_order_items_on_bling_order_id  (bling_order_id) UNIQUE
 #
-# Foreign Keys
-#
-#  fk_rails_...  (account_id => accounts.id)
-#
 require 'rails_helper'
 
 RSpec.describe BlingOrderItem, type: :model do
-  describe '#associations' do
-    it { is_expected.to belong_to(:account) }
-  end
-
   describe '#store_name' do
     it 'has name' do
       subject.store_id = '204219105'
