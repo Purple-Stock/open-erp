@@ -46,7 +46,6 @@ class SheinOrdersController < ApplicationController
   def import
     file = params[:file]
     if file.present?
-      byebug
       SheinOrder.import_from_file(file, current_tenant.id)
       redirect_to shein_orders_path, notice: "Orders have been processed."
     else
