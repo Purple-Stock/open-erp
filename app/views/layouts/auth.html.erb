@@ -13,6 +13,8 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
   <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbo-track': 'reload' if platform.mobile_app? %>
 
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
   <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css"/>
@@ -42,7 +44,6 @@
 </div>
 
 <!-- scripts -->
-<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 <script type="text/javascript" src="https://a.kabachnik.info/assets/js/onscan.min.js"></script>
 
 </body>
