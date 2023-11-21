@@ -9,6 +9,8 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr'
   c.hook_into :webmock
   c.before_record do |interaction|
+    # https://github.com/vcr/vcr/discussions/887 ways to hide sensitive data.
+    interaction.request.headers['Authorization'][0] = "Bearer <%= ENV['ACCESS_TOKEN'] %>"
     interaction.response.body.gsub!(/\d{3}[.]\d{3}[.]\d{3}[-]\d{2}/, '999.999.999-99')
   end
 end
