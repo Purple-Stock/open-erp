@@ -25,8 +25,9 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
 
     context 'when there is data in collection' do
       before do
-        FactoryBot.create_list(:bling_order_item, 2, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shopee'])
-        FactoryBot.create_list(:bling_order_item, 2, date: Date.today - 2.days)
+        FactoryBot.create_list(:bling_order_item, 2, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shopee'],
+                               account_id: user.account.id)
+        FactoryBot.create_list(:bling_order_item, 2, date: Date.today - 2.days, account_id: user.account.id)
       end
 
       it 'returns http success' do
