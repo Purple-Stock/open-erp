@@ -109,12 +109,21 @@ Rails.application.configure do
                                     description: "Create Order Items with status in progress" # optional description that appears in Dashboard
     },
 
-    pending_order_items_task: { # each recurring job must have a unique key
-                                cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
-                                class: "PendingOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
-                                args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
-                                set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
-                                description: "Create Order Items with pending status" # optional description that appears in Dashboard
+    today_pending_order_items_task: {
+      cron: "*/2 * * * *",
+      class: "PendingOrderItemsJob",
+      args: [1, { dataInicial: Date.today.strftime, dataFinal: Date.today.strftime, max_pages: 5 }],
+      set: { priority: 1 },
+      description: "Create Order Items with pending status in the current day"
+    },
+
+    weekly_pending_order_items_task: {
+      cron: "@weekly",
+      class: "PendingOrderItemsJob",
+      args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime,
+                  max_pages: 40 }],
+      set: { priority: 3 },
+      description: "Create Order Items with pending status on the week"
     },
 
     printed_order_items_task: { # each recurring job must have a unique key
