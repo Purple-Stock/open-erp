@@ -4,6 +4,7 @@ module Api
   module V1
     module Checkout
       class OrdersController < ApplicationController
+        skip_before_action :authenticate_user!, only: [:find_order]
 
         def find_order
           @bling_shein_orders = BlingOrderItem
