@@ -22,7 +22,7 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
 
     orders_attributes = []
     BlingOrderItem.where(bling_order_id: [query_bling_order_ids])
-                  .update_all(situation_id: @status, alteration_date: @alteration_date)
+                  .update_all(situation_id: @status, alteration_date: @alteration_date, account_id:)
 
     orders.each do |order|
       next if query_bling_order_ids.include?(order['id'])
@@ -34,7 +34,8 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
         date: order['data'],
         alteration_date:,
         marketplace_code_id: order['numeroLoja'],
-        bling_id: order['numero']
+        bling_id: order['numero'],
+        account_id:
       }
     end
 
