@@ -93,6 +93,7 @@ Rails.application.routes.draw do
       get 'products/:custom_id', to: 'products#show', as: 'show'
       get 'sale_products/:id', to: 'products#show_product', as: 'show_product'
       get 'products', to: 'products#index', as: 'index'
+      get 'account/:id/checkout_orders/:package_id', to: 'checkout/orders#find_order'
       post 'purchase_products/add_products', to: 'purchase_products#add_products', as: 'add_products'
       post 'sale_products/remove_products', to: 'sale_products#remove_products', as: 'remove_products'
       post 'purchase_products/add_inventory_quantity', to: 'purchase_products#add_inventory_quantity',
