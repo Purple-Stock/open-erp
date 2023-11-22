@@ -12,11 +12,11 @@ RSpec.describe VerifiedBlingOrderItemsJob, type: :job do
     end
 
     context 'when there is no verified orders' do
-      it 'counts by 2946 bling order items' do
+      it 'counts by 3255 bling order items' do
         VCR.use_cassette('all_verified_order_items', erb: true) do
           expect do
             subject.perform(user.account.id)
-          end.to change(BlingOrderItem, :count).by(2946)
+          end.to change(BlingOrderItem, :count).by(3255)
         end
       end
     end
@@ -27,11 +27,11 @@ RSpec.describe VerifiedBlingOrderItemsJob, type: :job do
                                              situation_id: BlingOrderItem::Status::PENDING)
       end
 
-      it 'counts by 3358 bling order items' do
+      it 'counts by 3254 bling order items' do
         VCR.use_cassette('all_verified_order_items', erb: true) do
           expect do
             subject.perform(user.account.id)
-          end.to change(BlingOrderItem, :count).by(2945) # one already created.
+          end.to change(BlingOrderItem, :count).by(3254) # one already created.
         end
       end
 
