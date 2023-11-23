@@ -92,7 +92,7 @@ production:
   database: inventory-control_production
   username: inventory-control
   password: <%= ENV['INVENTORY-CONTROL_DATABASE_PASSWORD'] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5).to_i + 1 + 2 + ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 20).to_i + 1 + 2 + ENV.fetch("GOOD_JOB_MAX_THREADS", 20).to_i %>
 
 # check best practices for good job https://github.com/bensheldon/good_job#database-connections
 staging:
