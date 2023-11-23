@@ -49,11 +49,11 @@
   <% end %>
   <div class="col-md-12">
     <div class="card mb-12">
-      <div class="card-body text-center">
+      <div class="card-body text-center <%= 'bg-danger text-dark' if printed && !order_items.values.flatten.length.zero? %>">
         <h5 class="card-title">
           Contagem total
         </h5>
-        <p>
+        <p class="<%= 'text-success' if printed && order_items.values.flatten.length.zero? %>">
           <%= order_items.values.flatten.length %>
         </p>
       </div>
