@@ -8,8 +8,10 @@ RSpec.describe 'orders control' do
 
     before do
       FactoryBot.create(:bling_order_item, valor: 10.5, store_id: '204061683', situation_id: '94871',
-                                           date: Time.zone.today, bling_order_id: Faker::Number.number)
-      FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.zone.now + 2.days)
+                                           date: Time.zone.today, bling_order_id: Faker::Number.number,
+                        account_id: user.account.id)
+      FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.zone.now + 2.days,
+                        account_id: user.account.id)
       sign_in user
     end
 
@@ -35,7 +37,8 @@ RSpec.describe 'orders control' do
       before do
         FactoryBot.create(:bling_order_item, valor: 10.5, store_id: '204061683',
                                              situation_id: BlingOrderItem::Status::CANCELED,
-                                             bling_order_id: Faker::Number.number)
+                                             bling_order_id: Faker::Number.number,
+                                             account_id: user.account.id)
       end
 
       it 'is a successful response' do
