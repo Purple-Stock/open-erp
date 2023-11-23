@@ -126,6 +126,14 @@ Rails.application.configure do
       description: "Create Order Items with pending status on the week"
     },
 
+    general_pending_order_items_task: {
+      cron: "@monthly",
+      class: "PendingOrderItemsJob",
+      args: [1],
+      set: { priority: 3 },
+      description: "Create Order Items with pending status considering all period"
+    },
+
     printed_order_items_task: { # each recurring job must have a unique key
                                 cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
                                 class: "PrintedOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
