@@ -15,8 +15,8 @@ RSpec.describe CheckedBlingOrderItemsJob, type: :job do
     end
 
     context 'when there are checked orders' do
-      it 'counts by 3134 bling order items' do
-        expect(BlingOrderItem.count).to eq(3134)
+      it 'counts by 3353 bling order items' do
+        expect(BlingOrderItem.count).to eq(3353)
       end
 
       it 'has checked situation id' do
