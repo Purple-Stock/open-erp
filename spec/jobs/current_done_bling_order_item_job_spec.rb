@@ -8,22 +8,20 @@ RSpec.describe CurrentDoneBlingOrderItemJob, type: :job do
   describe '#perform_now' do
     before do
       allow(Date).to receive(:today).and_return Date.new(2023, 11, 9)
-      allow(Rails).to receive(:env).and_return('no_test')
-      BlingOrderItem.destroy_all
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
     end
 
     context 'when there is a pending bling order item in local database' do
       before do
-        FactoryBot.create(:bling_order_item, bling_order_id: 19_085_061_334,
+        FactoryBot.create(:bling_order_item, bling_order_id: 19191617591,
                                              situation_id: BlingOrderItem::Status::PENDING)
       end
 
-      it 'counts by 1058 bling order items' do
+      it 'counts by 100 bling order items' do
         VCR.use_cassette('verified_checked_order_items_situation', erb: true) do
           expect do
             subject.perform(user.account.id)
-          end.to change(BlingOrderItem, :count).by(1058)
+          end.to change(BlingOrderItem, :count).by(99)
         end
       end
 
@@ -42,11 +40,11 @@ RSpec.describe CurrentDoneBlingOrderItemJob, type: :job do
       end
     end
 
-    it 'counts by 1059 bling order items' do
+    it 'counts by 100 bling order items' do
       VCR.use_cassette('verified_checked_order_items_situation', erb: true) do
         expect do
           subject.perform(user.account.id)
-        end.to change(BlingOrderItem, :count).by(1059)
+        end.to change(BlingOrderItem, :count).by(100)
       end
     end
 

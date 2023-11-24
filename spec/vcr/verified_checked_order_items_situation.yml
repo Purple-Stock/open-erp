@@ -1,0 +1,220 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?dataAlteracaoInicial=2023-11-09&idsSituacoes%5B%5D=101065&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 24 Nov 2023 18:14:02 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '33878'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=ea64eddc06940483
+      Set-Cookie:
+      - PHPSESSID=ldublhn9jtrcjp4upo9btgbf90; path=/; secure; HttpOnly
+      - PHPSESSID=v9hhoiutr2cusdjps0lj3ngosc; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 82b3a115a835261c-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":19191617591,"numero":51471,"numeroLoja":"GSHNAQ599000J0V","data":"2023-11-24","dataSaida":"2023-11-24","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16441933288,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19188489880,"numero":51094,"numeroLoja":"GSHNAQ16C00MJPR","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440892734,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19188451940,"numero":51089,"numeroLoja":"GSHNAQ13C000FH8","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440876357,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19188211480,"numero":50998,"numeroLoja":"GSHNAQ26U0017C1","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440780659,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19188179870,"numero":50984,"numeroLoja":"GSHNAQ632000M3F","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16440770357,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19188105063,"numero":50939,"numeroLoja":"GSHNAQ49U002CYG","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440743881,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19187858895,"numero":50909,"numeroLoja":"GSHNAQ052000A2R","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440674193,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19187794040,"numero":50904,"numeroLoja":"GSHNAQ16200MYNS","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440658421,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19187793667,"numero":50902,"numeroLoja":"GSHNAQ642001TA9","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440658335,"nome":"Osl\u00e2ne
+        Jussara","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19187434973,"numero":50865,"numeroLoja":"GSHNAQ13100099R","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":59.9,"total":56.62,"contato":{"id":16440578914,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19187434740,"numero":50864,"numeroLoja":"GSHNAQ0710009GN","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":59.9,"total":56.62,"contato":{"id":16440578841,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19187092102,"numero":50837,"numeroLoja":"GSHNAQ09N001KJJ","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440504424,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19187090892,"numero":50832,"numeroLoja":"GSHNAQ05N0006XL","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":59.9,"total":56.62,"contato":{"id":16440504138,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185878111,"numero":50727,"numeroLoja":"GSHNAQ220001EEN","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440224641,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185876864,"numero":50723,"numeroLoja":"GSHNAQ55000N02C","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440224287,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185876605,"numero":50722,"numeroLoja":"GSHNAQ430001AWT","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16440224217,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185876104,"numero":50720,"numeroLoja":"GSHNAQ23000MUWM","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":59.6,"contato":{"id":16440224090,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185748814,"numero":50704,"numeroLoja":"GSHNA459F00NFTR","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16440191698,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185624795,"numero":50693,"numeroLoja":"GSHNA419F000C29","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":59.6,"contato":{"id":16440159139,"nome":"La\u00edssa
+        Rocha","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185623541,"numero":50688,"numeroLoja":"GSHNA432F001W9E","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440158757,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185623328,"numero":50687,"numeroLoja":"GSHNA416F002Q8V","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440158718,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185521164,"numero":50674,"numeroLoja":"GSHNA413F002376","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440132458,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185412945,"numero":50667,"numeroLoja":"GSHNA432B00N91N","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440101242,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185303105,"numero":50652,"numeroLoja":"GSHNA414B0013RC","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16440069504,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19185201917,"numero":50644,"numeroLoja":"GSHNA442B002NU9","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":59.9,"total":56.62,"contato":{"id":16440041900,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184851658,"numero":50599,"numeroLoja":"GSHNA447A00N2UR","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439962180,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184850048,"numero":50595,"numeroLoja":"GSHNA427A001LCC","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439961865,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184849003,"numero":50592,"numeroLoja":"GSHNA411A000PGJ","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439961648,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184506590,"numero":50572,"numeroLoja":"GSHNA423A00MGNP","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16415706003,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184505940,"numero":50570,"numeroLoja":"GSHNA305R000DWE","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439886114,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184365825,"numero":50557,"numeroLoja":"GSHNA421A001B0H","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":34.9,"total":34.9,"contato":{"id":16439855495,"nome":"Elo\u00e1
+        Lav\u00ednia","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184364706,"numero":50554,"numeroLoja":"GSHNA425A00MFNH","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":59.6,"contato":{"id":16439855243,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184364037,"numero":50552,"numeroLoja":"GSHNA415A00N3KW","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439855100,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19184111937,"numero":50536,"numeroLoja":"GSHNA4169002DUR","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16220152086,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19183976895,"numero":50526,"numeroLoja":"GSHNA461900NTJ2","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439775955,"nome":"Faker
+        Name Souza\u00e3o","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19183790268,"numero":50506,"numeroLoja":"GSHNA445900M25X","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":89.9,"contato":{"id":16384462710,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19183623171,"numero":50498,"numeroLoja":"GSHNA461S00170B","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16438571878,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19183621993,"numero":50494,"numeroLoja":"GSHNA415S00N18Q","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16414355470,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19183479260,"numero":50485,"numeroLoja":"GSHNA413S0024CS","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":59.6,"contato":{"id":16439680340,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19183246960,"numero":50471,"numeroLoja":"GSHNA428S00N88S","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439639634,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19183124472,"numero":50468,"numeroLoja":"231123CQTPQVEC","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":51.06,"contato":{"id":16439617330,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19183050474,"numero":50459,"numeroLoja":"231123CQCPFHB9","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"2023-12-07","totalProdutos":45.9,"total":44.7,"contato":{"id":16439603805,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19182967374,"numero":50458,"numeroLoja":"231123CPWXD3MS","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"2023-12-06","totalProdutos":45.9,"total":44.64,"contato":{"id":16439590897,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19182925976,"numero":50457,"numeroLoja":"231123CPNEKU65","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"2023-12-07","totalProdutos":45.9,"total":45.62,"contato":{"id":16439583270,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19182769088,"numero":50446,"numeroLoja":"231123CNCRTWF8","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"2023-12-05","totalProdutos":45.9,"total":45.9,"contato":{"id":16414816380,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19182738615,"numero":50445,"numeroLoja":"231123CN4HMYMR","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":43.1,"contato":{"id":16439545134,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19182526720,"numero":50431,"numeroLoja":"GSHNA4298000VTU","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439501670,"nome":"Fab\u00edola
+        Costa","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182453684,"numero":50418,"numeroLoja":"GSHNA4358001D2F","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439483515,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182453583,"numero":50417,"numeroLoja":"GSHNA434W000N0B","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439483466,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182243052,"numero":50389,"numeroLoja":"GSHNA409X00NJCC","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439430614,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182211534,"numero":50386,"numeroLoja":"231123C8BHCN63","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"2023-12-03","totalProdutos":45.9,"total":45.9,"contato":{"id":16415741754,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19182169840,"numero":50369,"numeroLoja":"GSHNA4585001YNX","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":59.9,"total":56.62,"contato":{"id":16439408228,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182163371,"numero":50363,"numeroLoja":"GSHNA4215000VSB","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439405527,"nome":"Faker
+        Name Souza\u00e3o de Brito","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182157776,"numero":50362,"numeroLoja":"GSHNA4425000908","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439403143,"nome":"Faker
+        Name Souza\u00e7alves","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182157703,"numero":50358,"numeroLoja":"GSHNA432500NGA9","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":34.9,"total":34.9,"contato":{"id":16439403118,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182157639,"numero":50355,"numeroLoja":"GSHNA414500M5D6","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439403085,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182123046,"numero":50347,"numeroLoja":"GSHNA457T000PMP","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16439386613,"nome":"Thayn\u00e1
+        Cruz costa dos santos","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182083550,"numero":50334,"numeroLoja":"GSHNA417T002W40","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16418836881,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19182083291,"numero":50331,"numeroLoja":"GSHNA428T00MEEB","data":"2023-11-23","dataSaida":"2023-11-23","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439367978,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181981694,"numero":50314,"numeroLoja":"231123BTB4E8NN","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-03","totalProdutos":45.9,"total":45.9,"contato":{"id":16439318924,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181940203,"numero":50310,"numeroLoja":"GSHNA4584000CSP","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439292819,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181940185,"numero":50309,"numeroLoja":"231123BSCTHWFV","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-06","totalProdutos":64.9,"total":74.95,"contato":{"id":16439292806,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181940036,"numero":50307,"numeroLoja":"GSHNA448Q00N311","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439292744,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181889110,"numero":50297,"numeroLoja":"GSHNA434400MW7H","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439267909,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181885036,"numero":50294,"numeroLoja":"231123BRB4VPTQ","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":45.71,"contato":{"id":16439265338,"nome":"Faker
+        Name Souza\u00e9 de sousa","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181865778,"numero":50293,"numeroLoja":"231123BQXCQFJQ","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-03","totalProdutos":45.9,"total":45.9,"contato":{"id":16326014784,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181862292,"numero":50292,"numeroLoja":"231123BQV1CRQP","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":45.9,"contato":{"id":16439248620,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181852600,"numero":50283,"numeroLoja":"GSHNA410400NRHC","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439242490,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181852442,"numero":50282,"numeroLoja":"GSHNA404400NSLT","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16439242386,"nome":"Faker
+        Name Souza\u00e9lix","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181806363,"numero":50273,"numeroLoja":"GSHNA4504000MRQ","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439220613,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181806096,"numero":50271,"numeroLoja":"GSHNA4244000QLV","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":89.9,"contato":{"id":16439220462,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181777356,"numero":50267,"numeroLoja":"231123BPD1EAHC","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-03","totalProdutos":45.9,"total":52.59,"contato":{"id":16389478471,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181737476,"numero":50263,"numeroLoja":"GSHNA4483000YEM","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":59.6,"contato":{"id":16439188609,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181737186,"numero":50261,"numeroLoja":"GSHNA437400ME78","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16439188443,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181729777,"numero":50257,"numeroLoja":"231123BNN2M7WH","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-03","totalProdutos":45.9,"total":45.9,"contato":{"id":16439185004,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181697327,"numero":50253,"numeroLoja":"GSHNA425000N8C2","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439170770,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181632458,"numero":50239,"numeroLoja":"GSHNA403300MWL5","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16439140191,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181579483,"numero":50226,"numeroLoja":"231123BKDSETTK","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":45.9,"contato":{"id":16439116771,"nome":"Faker
+        Name Souza\u00edtor Bento De Oliveira","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181550008,"numero":50224,"numeroLoja":"231123BK17Y148","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":45.9,"contato":{"id":16439104246,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181535129,"numero":50222,"numeroLoja":"231123BJSPQKHX","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":45.9,"contato":{"id":16439097691,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181515726,"numero":50215,"numeroLoja":"GSHNA433W000F7J","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":62.9,"total":59.6,"contato":{"id":16415377298,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181515594,"numero":50213,"numeroLoja":"GSHNA415W00NBMP","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16439088404,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181450563,"numero":50196,"numeroLoja":"GSHNA439W000E7E","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":69.9,"total":59.6,"contato":{"id":16439058459,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181422427,"numero":50192,"numeroLoja":"231123BH38C2EU","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":45.89,"contato":{"id":16414719525,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181392395,"numero":50189,"numeroLoja":"231123BGNGP6M8","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-06","totalProdutos":45.9,"total":44.86,"contato":{"id":16439032459,"nome":"Faker
+        Name Souza\u00eds Da Silva Dos Santos","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181379867,"numero":50188,"numeroLoja":"231123BGET41HP","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-05","totalProdutos":45.9,"total":45.9,"contato":{"id":16439027008,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181333332,"numero":50179,"numeroLoja":"231123BFREUGCM","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-06","totalProdutos":45.9,"total":45.9,"contato":{"id":16439006232,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181297590,"numero":50175,"numeroLoja":"231123BF7M2CQV","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-06","totalProdutos":45.9,"total":45.9,"contato":{"id":16438990372,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181290868,"numero":50172,"numeroLoja":"HC2311231672873987","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16397485722,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181257803,"numero":50171,"numeroLoja":"GSHNA438C001C8V","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16438973055,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181257135,"numero":50166,"numeroLoja":"GSHNA431C00NV4X","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16438972748,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181198357,"numero":50156,"numeroLoja":"GSHNA429C00MLX0","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":45,"total":45,"contato":{"id":16438948320,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181198217,"numero":50155,"numeroLoja":"GSHNA460C0023YG","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16438948256,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181198106,"numero":50154,"numeroLoja":"GSHNA445C00NSBR","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16438948195,"nome":"Andr\u00e9ia
+        Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181188717,"numero":50151,"numeroLoja":"231123BDJYV15T","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-04","totalProdutos":45.9,"total":45.9,"contato":{"id":16438943900,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181151857,"numero":50150,"numeroLoja":"231123BD0AUKC6","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-05","totalProdutos":45.9,"total":45.61,"contato":{"id":16438928303,"nome":"Cristiely","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181064706,"numero":50133,"numeroLoja":"231123BBRMHHYP","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"2023-12-06","totalProdutos":45.9,"total":44.27,"contato":{"id":16438894291,"nome":"Faker
+        Name Souza\u00e9 dos Santos","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982}},{"id":19181016216,"numero":50126,"numeroLoja":"GSHNA452U000EX4","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":59.9,"total":56.62,"contato":{"id":16438875851,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181015150,"numero":50117,"numeroLoja":"GSHNA426U00NJLX","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16438875392,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}},{"id":19181015030,"numero":50116,"numeroLoja":"GSHNA425U00011X","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":81.4,"total":81.4,"contato":{"id":16394989267,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":204219105}}]}'
+  recorded_at: Fri, 24 Nov 2023 18:14:02 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?dataAlteracaoInicial=2023-11-09&idsSituacoes%5B%5D=24&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 24 Nov 2023 18:14:04 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '11'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=5e680077146df840
+      Set-Cookie:
+      - PHPSESSID=10534btq1hi99dekeh62bc9ac2; path=/; secure; HttpOnly
+      - PHPSESSID=ou5dikovg7tbk566d1419nbs86; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 82b3a11e6f2f6485-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[]}'
+  recorded_at: Fri, 24 Nov 2023 18:14:04 GMT
+recorded_with: VCR 6.2.0
