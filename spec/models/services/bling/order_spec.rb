@@ -19,10 +19,10 @@ RSpec.describe Services::Bling::Order, type: :services do
 
       let(:options) { { max_pages: 1 } }
 
-      it 'counts 47 data' do
+      it 'counts 100 data' do
         VCR.use_cassette('bling_order_items_max_pages', erb: true) do
           result = described_class.call(order_command: order_command, tenant: 1, situation: situation, options: options)
-          expect(result['data'].count).to eq(47)
+          expect(result['data'].count).to eq(100)
         end
       end
     end
