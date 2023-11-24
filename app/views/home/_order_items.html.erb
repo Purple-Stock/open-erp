@@ -1,6 +1,5 @@
 <div class="row justify-content-center">
-  <% order_items.each do |store_name, items| %>
-    <% orders = items.group_by(&:bling_order_id).compact %>
+  <% order_items.each do |store_name, orders| %>
      <div class="col-md-12">
         <div class="card mb-12">
           <div class="card-body text-center <%= 'bg-danger text-dark' if printed && !order_items.values.flatten.length.zero? %>">
