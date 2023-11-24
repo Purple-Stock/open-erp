@@ -3,7 +3,7 @@
 class HomeController < ApplicationController
   before_action :refresh_token, :date_range, :bling_order_items, :current_done_order_items, :set_monthly_revenue_estimation,
                 :get_in_progress_order_items, :get_printed_order_items,
-                :get_pending_order_items, only: :index
+                :get_pending_order_items, :canceled_orders, only: :index
   include SheinOrdersHelper
 
   def index
@@ -89,6 +89,14 @@ class HomeController < ApplicationController
   def get_pending_order_items
     @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING,
                                                 account_id: current_user.account.id)
+  end
+
+  def canceled_orders
+    base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::CANCELED,
+                                      account_id: current_user.account.id)
+                               .date_range(@first_date, @second_date)
+
+    @canceled_orders = BlingOrderItem.group_order_items(base_query)
   end
 
   def set_monthly_revenue_estimation
