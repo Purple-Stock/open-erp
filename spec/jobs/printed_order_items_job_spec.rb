@@ -23,7 +23,7 @@ RSpec.describe PrintedOrderItemsJob, type: :job do
 
     context 'when there are printed orders' do
       before do
-        FactoryBot.create(:bling_order_item, bling_order_id: '19177332844')
+        FactoryBot.create(:bling_order_item, bling_order_id: '19191688711')
       end
 
       it 'counts by 99 bling order items' do
