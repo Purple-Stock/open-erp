@@ -13,7 +13,7 @@ RSpec.describe CurrentDoneBlingOrderItemJob, type: :job do
 
     context 'when there is a pending bling order item in local database' do
       before do
-        FactoryBot.create(:bling_order_item, bling_order_id: 19172572784,
+        FactoryBot.create(:bling_order_item, bling_order_id: 19191617591,
                                              situation_id: BlingOrderItem::Status::PENDING)
       end
 
