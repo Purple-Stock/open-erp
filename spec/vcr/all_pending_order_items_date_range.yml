@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?dataFinal=2023-11-1&dataInicial=2023-11-1&idsSituacoes%5B%5D=94871&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 24 Nov 2023 18:14:10 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '692'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=48da6369dd3e897d
+      Set-Cookie:
+      - PHPSESSID=jpr58cg7hj5e4153ts0fsuthj2; path=/; secure; HttpOnly
+      - PHPSESSID=tpvjbdgslpaqui47tkpdb6jqvf; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 82b3a1439b441d50-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":19044042815,"numero":36603,"numeroLoja":"HC2311014900827139","data":"2023-11-01","dataSaida":"2023-11-01","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16378156870,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":94871,"valor":0},"loja":{"id":204219105}},{"id":19042220721,"numero":36531,"numeroLoja":"HC2311013019078657","data":"2023-11-01","dataSaida":"2023-11-01","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16384405850,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":94871,"valor":0},"loja":{"id":204219105}}]}'
+  recorded_at: Fri, 24 Nov 2023 18:14:10 GMT
+recorded_with: VCR 6.2.0
