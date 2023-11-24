@@ -2,9 +2,8 @@
   <% order_items.each do |store_name, items| %>
     <% orders = items.group_by(&:bling_order_id).compact %>
      <div class="col-md-12">
-     <% if orders.count > 0 %>
         <div class="card mb-12">
-          <div class="card-body text-center <%= 'bg-danger text-dark' if printed %>">
+          <div class="card-body text-center <%= 'bg-danger text-dark' if printed && !order_items.values.flatten.length.zero? %>">
             <h5 class="card-title">
               <%= store_name %>
             </h5>
@@ -13,7 +12,7 @@
                 Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
               </p>
             <% end %>
-            <p>
+            <p class="<%= 'text-success' if printed && order_items.values.flatten.length.zero? %>">
               Pedidos: <%= orders&.count %>
             </p>
             <% if store_name.eql?('Mercado Livre') %>
@@ -23,18 +22,8 @@
             <% end %>
           </div>
         </div>
-     <% else %>
-        <div class="card card-body text-center">
-          <h5 class="card-title">
-            <%= store_name %>
-          </h5>
-          <p class="<%= 'text-success' if printed %>">
-            Pedidos: 0
-          </p>
-        </div>
-     <% end %>
       </div>
-    <% end %>
+  <% end %>
   <div class="col-md-12">
     <div class="card mb-12">
       <div class="card-body text-center <%= 'bg-danger text-dark' if printed && !order_items.values.flatten.length.zero? %>">
