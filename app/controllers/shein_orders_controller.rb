@@ -6,7 +6,7 @@ class SheinOrdersController < ApplicationController
   def index
     @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
                               .where(account_id: current_tenant.id)
-                              .order(Arel.sql("data ->> 'Limite de tempo para coletar' ASC"))
+                              .order(Arel.sql("data ->> 'Prazo final de coleta' ASC"))
   end
   
   def show
