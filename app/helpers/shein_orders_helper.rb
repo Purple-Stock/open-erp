@@ -2,7 +2,7 @@
 
 module SheinOrdersHelper
   def time_remaining(shein_order)
-    collection_deadline = parse_portuguese_date(shein_order.data['Limite de tempo para coletar'])
+    collection_deadline = parse_portuguese_date(shein_order.data['Prazo final de coleta'])
     
     if collection_deadline
       # Adjust the time zone difference to +3 hours (180 minutes)
@@ -28,7 +28,7 @@ module SheinOrdersHelper
   end
 
   def order_status(shein_order)
-    collection_deadline = parse_portuguese_date(shein_order.data['Limite de tempo para coletar'])
+    collection_deadline = parse_portuguese_date(shein_order.data['Prazo final de coleta'])
     
     if collection_deadline
       # Adjust the time zone difference to +3 hours (180 minutes)
