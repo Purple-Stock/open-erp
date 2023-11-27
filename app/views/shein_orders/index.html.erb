@@ -25,7 +25,7 @@
               <tr>
                 <th>Número do Pedido</th>
                 <th>Status do Pedido</th>
-                <th>Limite de Tempo para Coletar</th>
+                <th>Prazo final de coleta</th>
                 <th>Tempo Restante</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -36,7 +36,7 @@
                 <tr>
                   <td><%= shein_order.data['Número do pedido'] %></td>
                   <td><%= shein_order.data['Status do pedido'] %></td>
-                  <td><%= shein_order.data['Limite de tempo para coletar'] %></td>
+                  <td><%= shein_order.data['Prazo final de coleta'] %></td>
                   <td><%= time_remaining(shein_order) %></td>
                   <td><%= order_status(shein_order) %></td>
                   <td>
