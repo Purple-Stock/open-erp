@@ -7,12 +7,14 @@ class HomeController < ApplicationController
   include SheinOrdersHelper
 
   def index
-    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['Para ser coletado por SHEIN'])
+    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Para ser coletado por SHEIN')
                                     .where(account_id: current_user.account.id)
-                                    .count
+                                    .distinct
+                                    .count("data ->> 'Número do pedido'")
 
     @shein_pending_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['Pendente']).where(account_id: current_user.account.id)
-                                     .count
+                                     .distinct
+                                     .count("data ->> 'Número do pedido'")
 
     @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)",
                                      ['Para ser coletado por SHEIN', 'Pendente', 'Para ser enviado'])
