@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   include SheinOrdersHelper
 
   def index
-    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['A ser coletado pela SHEIN'])
+    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['Para ser coletado por SHEIN'])
                                     .where(account_id: current_user.account.id)
                                     .count
 
@@ -15,7 +15,7 @@ class HomeController < ApplicationController
                                      .count
 
     @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)",
-                                     ['A ser coletado pela SHEIN', 'Pendente', 'Para ser enviado'])
+                                     ['Para ser coletado por SHEIN', 'Pendente', 'Para ser enviado'])
                               .where(account_id: current_user.account.id)
     @expired_orders = @shein_orders.select { |order| order_status(order) == 'Atrasado' }
     @expired_orders_count = @expired_orders.count
@@ -68,8 +68,8 @@ class HomeController < ApplicationController
 
   def finance_per_status
     @pendings = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Pendente')
-    @to_be_colected = SheinOrder.where("data ->> 'Status do pedido' = ?", 'A ser coletado pela SHEIN')
-    @to_be_sent = SheinOrder.where("data ->> 'Status do pedido' = ?", 'A ser enviado pela SHEIN')
+    @to_be_colected = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Para ser coletado por SHEIN')
+    @to_be_sent = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Para ser enviado por SHEIN')
     @sent = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Enviado')
   end
 
