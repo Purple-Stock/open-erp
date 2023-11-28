@@ -11,7 +11,8 @@ class MonthlyRevenuePresenter
   end
 
   def presentable
-    [dataset_structure('shein'), dataset_structure('shopee')]
+    [dataset_structure('shein'), dataset_structure('shopee'),
+     dataset_structure('simple_7'), dataset_structure('mercado_livre')]
   end
 
   def dataset_structure(store_name)
@@ -20,7 +21,9 @@ class MonthlyRevenuePresenter
       values << 0.0
     end
 
-    store_dataset = { label: store_name.capitalize, data: values }
+    labeled_store_name = store_name.split('_').map(&:capitalize).join(' ')
+
+    store_dataset = { label: labeled_store_name, data: values }
 
     bling_order_item_collection.send(store_name.to_sym).group_by { |record| record.date.to_date.month }.map do |month, records|
       store_dataset[:data][month - 1] = records.sum(&:value).to_f
