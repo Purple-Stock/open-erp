@@ -13,6 +13,7 @@
 #  quantidade          :integer
 #  unidade             :string
 #  valor               :decimal(, )
+#  value               :decimal(, )
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  account_id          :bigint
@@ -41,5 +42,6 @@ FactoryBot.define do
     bling_order_id { Faker::Number.number }
     date { Date.today }
     store_id { BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shein'] }
+    value { 2.0 }
   end
 end
