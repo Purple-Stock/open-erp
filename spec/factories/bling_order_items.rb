@@ -41,7 +41,7 @@ FactoryBot.define do
     situation_id { BlingOrderItem::Status::CHECKED }
     bling_order_id { Faker::Number.number }
     date { Date.today }
-    store_id { BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shein'] }
+    store_id { '204219105' }
     value { 2.0 }
   end
 end
