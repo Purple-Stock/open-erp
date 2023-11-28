@@ -5,6 +5,13 @@
   </div>
 </main>
 
+<section>
+  <h1>Faturamento mensal</h1>
+  <div>
+    <canvas id='chartjs-bar-monthly-revenue'></canvas>
+  </div>
+</section>
+
 <script>
   $(document).ready(function (){
       let options = {
@@ -44,7 +51,21 @@
                       }
                   }
               )
-          }});
+      }})
+
+      $.ajax({url: 'bling_order_item_histories/monthly_revenue', success: function(result){
+              new Chart(
+                  document.getElementById('chartjs-bar-monthly-revenue'),
+                  {
+                      type: 'bar',
+                      options: options,
+                      data: {
+                          labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                          datasets: result
+                      }
+                  }
+              )
+      }});
   });
 
 </script>
