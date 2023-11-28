@@ -26,7 +26,7 @@ RSpec.describe MonthlyRevenuePresenter do
 
       it 'is an array of hash' do
         result = [{ label: 'Shein',
-                    data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0, 6.0, 0.0] }]
+                    data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.0, 8.0, 0.0] }]
         bling_order_item_collection = BlingOrderItem.all
         expect(described_class.new(bling_order_item_collection).presentable).to eq(result)
       end
