@@ -20,12 +20,28 @@ RSpec.describe MonthlyRevenuePresenter do
     context 'when there is data in the collection' do
       before do
         allow(Date).to receive(:today).and_return Date.new(2023, 11, 6)
-        FactoryBot.create_list(:bling_order_item, 4, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shein'])
-        FactoryBot.create_list(:bling_order_item, 3, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE['Shopee'])
+        FactoryBot.create_list(:bling_order_item, 4, store_id: '204219105')
+        FactoryBot.create_list(:bling_order_item, 3, store_id: '204219105', date: Date.new(2023, 10, 3))
       end
 
       it 'is an array of hash' do
-        result = [{ label: 'Shein', month: 11, value: 40.0 }, { label: 'Shopee', month: 11, value: 30.0 }]
+        result = [{ label: 'Shein',
+                    data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0, 6.0, 0.0] }]
+        bling_order_item_collection = BlingOrderItem.all
+        expect(described_class.new(bling_order_item_collection).presentable).to eq(result)
+      end
+    end
+
+    context 'when there is data in the collection with nil in value' do
+      before do
+        allow(Date).to receive(:today).and_return Date.new(2023, 11, 6)
+        FactoryBot.create_list(:bling_order_item, 4, store_id: '204219105', value: nil)
+        FactoryBot.create_list(:bling_order_item, 3, store_id: '204219105', value: nil, date: Date.new(2023, 10, 3))
+      end
+
+      it 'is an array of hash' do
+        result = [{ label: 'Shein',
+                    data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] }]
         bling_order_item_collection = BlingOrderItem.all
         expect(described_class.new(bling_order_item_collection).presentable).to eq(result)
       end
