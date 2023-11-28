@@ -37,4 +37,28 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
       end
     end
   end
+
+  describe 'GET /monthly_revenue' do
+    context 'when there is not data in collection' do
+      it 'returns http success' do
+        get monthly_revenue_bling_order_item_histories_path
+
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'when there is data in collection' do
+      before do
+        FactoryBot.create_list(:bling_order_item, 2, store_id: '204219105',
+                               account_id: user.account.id)
+        FactoryBot.create_list(:bling_order_item, 2, date: Date.today - 2.days, account_id: user.account.id)
+      end
+
+      it 'returns http success' do
+        get monthly_revenue_bling_order_item_histories_path
+
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
 end
