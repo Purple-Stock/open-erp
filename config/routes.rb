@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :bling_order_item_histories, only: :index do
     collection do
       get :day_quantities
+      get :monthly_revenue
     end
   end
 
