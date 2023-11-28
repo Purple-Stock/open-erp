@@ -46,5 +46,21 @@ RSpec.describe MonthlyRevenuePresenter do
         expect(described_class.new(bling_order_item_collection).presentable).to eq(result)
       end
     end
+
+    context 'when there is data in the collection for both Shein and Shopee' do
+      before do
+        allow(Date).to receive(:today).and_return Date.new(2023, 11, 6)
+        FactoryBot.create_list(:bling_order_item, 4, store_id: '204219105')
+        FactoryBot.create_list(:bling_order_item, 3, store_id: '203737982', date: Date.new(2023, 10, 3))
+      end
+
+      it 'is an array of hash' do
+        result = [{ label: 'Shein',
+                    data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0, 0.0] },
+                  label: 'Shopee',
+                  data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.0, 0.0, 0.0]]
+        expect(described_class.new(BlingOrderItem.all).presentable).to eq(result)
+      end
+    end
   end
 end
