@@ -4,7 +4,7 @@
 # In order to take better commercial decisions.
 class BlingOrderItemHistoriesController < ApplicationController
   before_action :date_range, :paid_bling_order_items, :day_quantities_presenter,
-                only: %i[day_quantities monthly_revenue]
+                only: %i[day_quantities]
 
   def index;end
 
@@ -13,7 +13,10 @@ class BlingOrderItemHistoriesController < ApplicationController
   end
 
   def monthly_revenue
-    @monthly_revenue = MonthlyRevenuePresenter.new(@paid_bling_order_items).presentable
+    @current_year = Date.current.beginning_of_year..Date.current.end_of_day
+    @bling_order_items = BlingOrderItem.where(date: @current_year, situation_id: [BlingOrderItem::Status::PAID],
+                                              account_id: current_user.account.id)
+    @monthly_revenue = MonthlyRevenuePresenter.new(@bling_order_items).presentable
     render json: @monthly_revenue
   end
 
