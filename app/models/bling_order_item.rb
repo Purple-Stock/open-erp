@@ -14,6 +14,7 @@
 #  quantidade          :integer
 #  unidade             :string
 #  valor               :decimal(, )
+#  value               :decimal(, )
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  account_id          :bigint
@@ -89,5 +90,9 @@ class BlingOrderItem < ApplicationRecord
 
   def store_name
     STORE_ID_NAME_KEY_VALUE["#{store_id}"]
+  end
+
+  def value
+    super || 0.0
   end
 end
