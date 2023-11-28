@@ -35,7 +35,8 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
         alteration_date:,
         marketplace_code_id: order['numeroLoja'],
         bling_id: order['numero'],
-        account_id:
+        account_id:,
+        value: order['total']
       }
     end
 
