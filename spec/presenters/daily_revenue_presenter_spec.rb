@@ -12,8 +12,10 @@ RSpec.describe DailyRevenuePresenter do
   describe '#presentable' do
     context 'when there is not collection' do
       let(:datasets) do
-        [{ x: '6/11/2023', shein: 0, shopee: 0, simple_7: 0, mercado_livre: 0 }]
+        [{ x: '06/11/2023', shein: 0.0, shopee: 0.0, simple_7: 0.0, mercado_livre: 0.0 }]
       end
+
+      before { allow(Date).to receive(:today).and_return Date.new(2023, 11, 6) }
 
       it 'is empty' do
         blank_collection = BlingOrderItem.all
