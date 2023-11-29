@@ -12,7 +12,7 @@ class LocalSheinOrdersJob < ApplicationJob
       (2..spreadsheet.last_row).each do |i|
         row = Hash[[headers, spreadsheet.row(i)].transpose]
 
-        orders << SheinOrder.new(data: row, current_tenant_id)
+        orders << SheinOrder.new(data: row, account_id: current_tenant_id)
       end
       SheinOrder.import(orders)
     rescue => e
