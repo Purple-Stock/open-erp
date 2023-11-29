@@ -70,3 +70,5 @@ coverage/*
 *.sln
 nbproject/*
 /nbproject/private/
+
+codigo_quantidade.csv
