@@ -30,11 +30,14 @@ module Services
         # Loop through each ID
         @ids.each do |id|
           # Call the service for each ID
-          response = Services::Bling::FindOrder.call(id: id, order_command: 'find_order', tenant: 1)
+          response = Services::Bling::FindOrder.call(id: id, order_command: 'find_order', tenant: @tenant)
           next unless response && response["data"] && response["data"]["itens"]
 
           # Process each item
           response["data"]["itens"].each do |item|
+            order = BlingOrderItem.find_by(bling_order_id: id)
+            
+            order.update(items: item) if order.present?
             codigo = item["codigo"]
             quantidade = item["quantidade"]
 
