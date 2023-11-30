@@ -14,14 +14,14 @@ class DailyRevenuePresenter
 
   def presentable
     zeros_datasets = [{ x: initial_date.to_date.strftime('%d/%m/%Y'), shein: 0.0, shopee: 0.0, simple_7: 0.0,
-                        mercado_livre: 0.0 }]
+                        mercado_livre: 0.0, total: 0.0 }]
     return zeros_datasets if bling_order_item_collection.blank?
 
     datasets = []
     date_range = initial_date..final_date
     date_range.each do |_date|
       datasets << { x: initial_date.to_date.strftime('%d/%m/%Y'), shein: 0.0, shopee: 0.0, simple_7: 0.0,
-                    mercado_livre: 0.0 }
+                    mercado_livre: 0.0, total: 0.0 }
     end
 
     record.group_by(&:date).map do |date, record|
@@ -30,13 +30,15 @@ class DailyRevenuePresenter
       shopee_value = store_value_sum(record, '203737982')
       simple_7_value = store_value_sum(record, '203467890')
       mercado_livre_value = store_value_sum(record, '204061683')
+      total_value = shein_value + shopee_value + simple_7_value + mercado_livre_value
       datasets_date_index = datasets.find_index({ x: initial_date.to_date.strftime('%d/%m/%Y'), shein: 0.0, shopee: 0.0, simple_7: 0.0,
-                                                  mercado_livre: 0.0 })
+                                                  mercado_livre: 0.0, total: 0.0 })
       datasets[datasets_date_index] = { x: axis_date,
                                         shein: shein_value,
                                         shopee: shopee_value,
                                         simple_7: simple_7_value,
-                                        mercado_livre: mercado_livre_value }
+                                        mercado_livre: mercado_livre_value,
+                                        total: total_value}
     end
 
     datasets.sort_by! { |dataset| dataset[:x] }
