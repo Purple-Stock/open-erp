@@ -19,7 +19,8 @@
           <%= date_field('bling_order', 'final_date', value: Date.today.strftime) %>
         </div>
         <div class="col-sm">
-          <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3', id: 'daily-revenue-search') %>
+          <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3', id: 'daily-revenue-search',
+                         data: { turbo_frame: 'daily-revenue-chart' }) %>
         </div>
       </div>
     <% end %>
@@ -35,6 +36,67 @@
 
 <script>
   $(document).ready(function (){
+      function plotDailyRevenueChartBar(searchParams) {
+          $.ajax({
+              url: 'bling_order_item_histories/daily_revenue', data: searchParams, success: function (result) {
+                  let data = result;
+                  let cfg = {
+                      type: 'bar',
+                      options: {
+                          maintainAspectRatio: false,
+                          aspectRatio: 1
+                      },
+                      data: {
+                          datasets: [{
+                              label: 'Shein',
+                              data: data,
+                              parsing: {
+                                  yAxisKey: 'shein'
+                              }
+                          }, {
+                              label: 'Shopee',
+                              data: data,
+                              parsing: {
+                                  yAxisKey: 'shopee'
+                              }
+                          }, {
+                              label: 'Simple 7',
+                              data: data,
+                              parsing: {
+                                  yAxisKey: 'simple_7'
+                              }
+                          },
+                              {
+                                  label: 'Mercado Livre',
+                                  data: data,
+                                  parsing: {
+                                      yAxisKey: 'mercado_livre'
+                                  }
+                              }, {
+                                  label: 'Total',
+                                  data: data,
+                                  parsing: {
+                                      yAxisKey: 'total'
+                                  }
+                              }]
+                      },
+                  };
+                  if (dailyRevenueChartBar) {
+                      dailyRevenueChartBar.data.datasets[0] = data;
+                      dailyRevenueChartBar.data.datasets[1] = data;
+                      dailyRevenueChartBar.data.datasets[2] = data;
+                      dailyRevenueChartBar.data.datasets[3] = data;
+                      dailyRevenueChartBar.data.datasets[4] = data;
+                      dailyRevenueChartBar;
+                  } else {
+                      dailyRevenueChartBar = new Chart(document.getElementById('chartjs-bar-monthly-revenue'), cfg);
+                  }
+              }
+          });
+      }
+
+      let dailyRevenueChartBar;
+      let dailyRevenueSearchButton = $('daily-revenue-search');
       let initialDate = $('#bling_order_initial_date').val();
       let finalDate = $('#bling_order_final_date').val();
       let searchParams = { bling_order: { initial_date: initialDate, final_date: finalDate } }
@@ -77,52 +139,7 @@
               )
       }})
 
-      $.ajax({url: 'bling_order_item_histories/daily_revenue', data: searchParams, success: function(result){
-              let data = result;
-              let cfg = {
-                  type: 'bar',
-                  options: { maintainAspectRatio: false,
-                      aspectRatio: 1 },
-                  data: {
-                      datasets: [{
-                          label: 'Shein',
-                          data: data,
-                          parsing: {
-                              yAxisKey: 'shein'
-                          }
-                      }, {
-                          label: 'Shopee',
-                          data: data,
-                          parsing: {
-                              yAxisKey: 'shopee'
-                          }
-                      }, {
-                          label: 'Simple 7',
-                          data: data,
-                          parsing: {
-                              yAxisKey: 'simple_7'
-                          }
-                      },
-                          {
-                              label: 'Mercado Livre',
-                              data: data,
-                              parsing: {
-                                  yAxisKey: 'mercado_livre'
-                              }
-                          },                          {
-                              label: 'Total',
-                              data: data,
-                              parsing: {
-                                  yAxisKey: 'total'
-                              }
-                          }]
-                  },
-              };
-
-              new Chart(
-                  document.getElementById('chartjs-bar-monthly-revenue'), cfg
-              )
-      }});
+      plotDailyRevenueChartBar(searchParams);
   });
 
 </script>
