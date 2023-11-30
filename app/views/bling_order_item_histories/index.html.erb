@@ -19,7 +19,7 @@
           <%= date_field('bling_order', 'final_date', value: Date.today.strftime) %>
         </div>
         <div class="col-sm">
-          <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %>
+          <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3', id: 'daily-revenue-search') %>
         </div>
       </div>
     <% end %>
@@ -35,6 +35,9 @@
 
 <script>
   $(document).ready(function (){
+      let initialDate = $('#bling_order_initial_date').val();
+      let finalDate = $('#bling_order_final_date').val();
+      let searchParams = { bling_order: { initial_date: initialDate, final_date: finalDate } }
       let options = {
           maintainAspectRatio: false,
           aspectRatio: 1,
@@ -74,7 +77,7 @@
               )
       }})
 
-      $.ajax({url: 'bling_order_item_histories/daily_revenue', success: function(result){
+      $.ajax({url: 'bling_order_item_histories/daily_revenue', data: searchParams, success: function(result){
               let data = result;
               let cfg = {
                   type: 'bar',
