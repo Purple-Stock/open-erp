@@ -50,7 +50,11 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
     context 'when there is data in collection' do
       let(:date) { Date.today }
       let(:datasets) do
-        [{ 'mercado_livre' => 0.0, 'shein' => 4.0, 'shopee' => 0.0, 'simple_7' => 0.0, 'x' => date.strftime('%d/%m/%Y') }]
+        [{ 'mercado_livre' => 0.0, 'shein' => 4.0,
+           'shopee' => 0.0,
+           'simple_7' => 0.0,
+           'x' => date.strftime('%d/%m/%Y'),
+           'total' => 4.0 }]
       end
 
       before do
