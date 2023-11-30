@@ -38,7 +38,7 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
     end
   end
 
-  describe 'GET /monthly_revenue' do
+  describe 'GET /daily_revenue' do
     context 'when there is not data in collection' do
       it 'returns http success' do
         get daily_revenue_bling_order_item_histories_path
@@ -48,7 +48,7 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
     end
 
     context 'when there is data in collection filtered by initial and final date' do
-      let(:params) { { initial_date: (Date.today - 1.day).strftime, final_date: Date.today.strftime } }
+      let(:params) { { bling_order: { initial_date: (Date.today - 1.day).strftime, final_date: Date.today.strftime } } }
       let(:date) { Date.today }
       let(:datasets) do
         [{ 'mercado_livre' => 0.0,
