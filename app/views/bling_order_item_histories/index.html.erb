@@ -8,7 +8,7 @@
 <section class="mt-5 section bordered-section">
   <div class="row p-4">
     <h1>Pesquisar por data</h1>
-    <%= form_tag(daily_revenue_bling_order_item_histories_path, method: :get) do %>
+    <%= form_tag(bling_order_item_histories_path, method: :get) do %>
       <div class="input-group mb-5">
         <div class="col-sm">
           Data inicial
@@ -30,68 +30,62 @@
 <section class="chart-container pl-0">
   <h1>Faturamento diário</h1>
   <div>
+    <%= hidden_field_tag('daily_revenue', @daily_revenue) %>
     <canvas id='chartjs-bar-monthly-revenue'></canvas>
   </div>
 </section>
 
 <script>
   $(document).ready(function (){
-      function plotDailyRevenueChartBar(searchParams) {
-          $.ajax({
-              url: 'bling_order_item_histories/daily_revenue', data: searchParams, success: function (result) {
-                  let data = result;
-                  let cfg = {
-                      type: 'bar',
-                      options: {
-                          maintainAspectRatio: false,
-                          aspectRatio: 1
-                      },
-                      data: {
-                          datasets: [{
-                              label: 'Shein',
-                              data: data,
-                              parsing: {
-                                  yAxisKey: 'shein'
-                              }
-                          }, {
-                              label: 'Shopee',
-                              data: data,
-                              parsing: {
-                                  yAxisKey: 'shopee'
-                              }
-                          }, {
-                              label: 'Simple 7',
-                              data: data,
-                              parsing: {
-                                  yAxisKey: 'simple_7'
-                              }
-                          },
-                              {
-                                  label: 'Mercado Livre',
-                                  data: data,
-                                  parsing: {
-                                      yAxisKey: 'mercado_livre'
-                                  }
-                              }, {
-                                  label: 'Total',
-                                  data: data,
-                                  parsing: {
-                                      yAxisKey: 'total'
-                                  }
-                              }]
-                      },
-                  };
-
-                  dailyRevenueChartBar = new Chart(document.getElementById('chartjs-bar-monthly-revenue'), cfg);
-              }
-          });
+      function plotDailyRevenueChartBar() {
+          dailyRevenueChartBar = new Chart(document.getElementById('chartjs-bar-monthly-revenue'), cfg);
       }
+      let dailyRevenue = $('#daily_revenue').val();
+      let data = JSON.parse(dailyRevenue);
+      let cfg = {
+          type: 'bar',
+          options: {
+              maintainAspectRatio: false,
+              aspectRatio: 1
+          },
+          data: {
+              datasets: [{
+                  label: 'Shein',
+                  data: data,
+                  parsing: {
+                      yAxisKey: 'shein'
+                  }
+              }, {
+                  label: 'Shopee',
+                  data: data,
+                  parsing: {
+                      yAxisKey: 'shopee'
+                  }
+              }, {
+                  label: 'Simple 7',
+                  data: data,
+                  parsing: {
+                      yAxisKey: 'simple_7'
+                  }
+              },
+                  {
+                      label: 'Mercado Livre',
+                      data: data,
+                      parsing: {
+                          yAxisKey: 'mercado_livre'
+                      }
+                  }, {
+                      label: 'Total',
+                      data: data,
+                      parsing: {
+                          yAxisKey: 'total'
+                      }
+                  }]
+          },
+      };
+
 
       let dailyRevenueChartBar;
-      let dailyRevenueSearchButton = $('daily-revenue-search');
-      let initialDate = $('#bling_order_initial_date').val();
-      let finalDate = $('#bling_order_final_date').val();
-      let searchParams = { bling_order: { initial_date: initialDate, final_date: finalDate } }
       let options = {
           maintainAspectRatio: false,
           aspectRatio: 1,
@@ -131,7 +125,7 @@
               )
       }})
 
-      plotDailyRevenueChartBar(searchParams);
+      plotDailyRevenueChartBar();
   });
 
 </script>
