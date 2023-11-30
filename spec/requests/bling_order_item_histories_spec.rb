@@ -47,10 +47,25 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
       end
     end
 
-    context 'when there is data in collection' do
+    context 'when there is data in collection filtered by initial and final date' do
+      let(:params) { { initial_date: (Date.today - 1.day).strftime, final_date: Date.today.strftime } }
       let(:date) { Date.today }
       let(:datasets) do
-        [{ 'mercado_livre' => 0.0, 'shein' => 4.0,
+        [{ 'mercado_livre' => 0.0,
+           'shein' => 4.0,
+           'shopee' => 0.0,
+           'simple_7' => 0.0,
+           'x' => date.strftime('%d/%m/%Y'),
+           'total' => 4.0 }]
+      end
+
+      let(:filtered_datasets) do
+        [{ 'mercado_livre' => 0.0, 'shein' => 0.0,
+           'shopee' => 0.0,
+           'simple_7' => 0.0,
+           'x' => (date - 1.day).strftime('%d/%m/%Y'),
+           'total' => 0.0 },
+         { 'mercado_livre' => 0.0, 'shein' => 4.0,
            'shopee' => 0.0,
            'simple_7' => 0.0,
            'x' => date.strftime('%d/%m/%Y'),
@@ -58,6 +73,7 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
       end
 
       before do
+        allow(Date).to receive(:today).and_return Date.new(2023, 11, 9)
         FactoryBot.create_list(:bling_order_item, 2, store_id: '204219105',
                                                      account_id: user.account.id)
       end
@@ -68,6 +84,14 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
         result = JSON.parse(response.body)
 
         expect(result).to match_array(datasets)
+      end
+
+      it 'matches array of filtered datasets' do
+        get daily_revenue_bling_order_item_histories_path(params)
+
+        result = JSON.parse(response.body)
+
+        expect(result).to match_array(filtered_datasets)
       end
     end
   end
