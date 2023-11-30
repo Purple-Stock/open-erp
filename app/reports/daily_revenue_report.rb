@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# DailyRevenuePresenter returns the hash the Chart js needs.
+# DailyRevenueReport returns the hash the Chart js needs.
 # From the Char.js doc, https://www.chartjs.org/docs/latest/general/data-structures.html#parsing
-class DailyRevenuePresenter
+class DailyRevenueReport
   attr_accessor :bling_order_item_collection, :filter, :initial_date, :final_date
 
   def initialize(bling_order_item_collection, date_filter = nil)

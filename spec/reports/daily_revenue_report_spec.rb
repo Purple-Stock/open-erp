@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DailyRevenuePresenter do
+RSpec.describe DailyRevenueReport do
   describe '#initialize' do
     it 'raises argument error' do
       expect { described_class.new }.to raise_exception(ArgumentError)
