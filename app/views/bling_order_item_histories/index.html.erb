@@ -81,16 +81,8 @@
                               }]
                       },
                   };
-                  if (dailyRevenueChartBar) {
-                      dailyRevenueChartBar.data.datasets[0] = data;
-                      dailyRevenueChartBar.data.datasets[1] = data;
-                      dailyRevenueChartBar.data.datasets[2] = data;
-                      dailyRevenueChartBar.data.datasets[3] = data;
-                      dailyRevenueChartBar.data.datasets[4] = data;
-                      dailyRevenueChartBar;
-                  } else {
-                      dailyRevenueChartBar = new Chart(document.getElementById('chartjs-bar-monthly-revenue'), cfg);
-                  }
+
+                  dailyRevenueChartBar = new Chart(document.getElementById('chartjs-bar-monthly-revenue'), cfg);
               }
           });
       }
