@@ -41,23 +41,29 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
   describe 'GET /monthly_revenue' do
     context 'when there is not data in collection' do
       it 'returns http success' do
-        get monthly_revenue_bling_order_item_histories_path
+        get daily_revenue_bling_order_item_histories_path
 
         expect(response).to have_http_status(:success)
       end
     end
 
     context 'when there is data in collection' do
-      before do
-        FactoryBot.create_list(:bling_order_item, 2, store_id: '204219105',
-                               account_id: user.account.id)
-        FactoryBot.create_list(:bling_order_item, 2, date: Date.today - 2.days, account_id: user.account.id)
+      let(:date) { Date.today }
+      let(:datasets) do
+        [{ 'mercado_livre' => 0.0, 'shein' => 4.0, 'shopee' => 0.0, 'simple_7' => 0.0, 'x' => date.strftime('%d/%m/%Y') }]
       end
 
-      it 'returns http success' do
-        get monthly_revenue_bling_order_item_histories_path
+      before do
+        FactoryBot.create_list(:bling_order_item, 2, store_id: '204219105',
+                                                     account_id: user.account.id)
+      end
 
-        expect(response).to have_http_status(:success)
+      it 'matches array of datasets' do
+        get daily_revenue_bling_order_item_histories_path
+
+        result = JSON.parse(response.body)
+
+        expect(result).to match_array(datasets)
       end
     end
   end
