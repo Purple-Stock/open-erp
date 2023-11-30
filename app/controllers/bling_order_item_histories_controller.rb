@@ -12,12 +12,14 @@ class BlingOrderItemHistoriesController < ApplicationController
     render json: @paid_items_presentable
   end
 
-  def monthly_revenue
-    @current_year = Date.current.beginning_of_year..Date.current.end_of_day
-    @bling_order_items = BlingOrderItem.where(date: @current_year, situation_id: [BlingOrderItem::Status::PAID],
+  def daily_revenue
+    initial_date = params['initial_date'] || Date.today.strftime
+    final_date = params['final_date'] || Date.today.strftime
+    @daily_date_range_filter = { initial_date:, final_date: }
+    @bling_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::PAID],
                                               account_id: current_user.account.id)
-    @monthly_revenue = MonthlyRevenuePresenter.new(@bling_order_items).presentable
-    render json: @monthly_revenue
+    @daily_revenue = DailyRevenuePresenter.new(@bling_order_items, @daily_date_range_filter).presentable
+    render json: @daily_revenue
   end
 
   private
