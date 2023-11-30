@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CheckedBlingOrderItemsJob, type: :job do
+  BlingOrderItem.destroy_all
   let(:user) { FactoryBot.create(:user) }
 
   describe '#perform' do
