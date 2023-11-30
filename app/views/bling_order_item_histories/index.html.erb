@@ -6,7 +6,7 @@
 </main>
 
 <section class="chart-container pl-0">
-  <h1>Faturamento mensal</h1>
+  <h1>Faturamento diário</h1>
   <div>
     <canvas id='chartjs-bar-monthly-revenue'></canvas>
   </div>
@@ -53,17 +53,44 @@
               )
       }})
 
-      $.ajax({url: 'bling_order_item_histories/monthly_revenue', success: function(result){
+      $.ajax({url: 'bling_order_item_histories/daily_revenue', success: function(result){
+              let data = result;
+              let cfg = {
+                  type: 'bar',
+                  options: { maintainAspectRatio: false,
+                      aspectRatio: 1 },
+                  data: {
+                      datasets: [{
+                          label: 'Shein',
+                          data: data,
+                          parsing: {
+                              yAxisKey: 'shein'
+                          }
+                      }, {
+                          label: 'Shopee',
+                          data: data,
+                          parsing: {
+                              yAxisKey: 'shopee'
+                          }
+                      }, {
+                          label: 'Simple 7',
+                          data: data,
+                          parsing: {
+                              yAxisKey: 'simple_7'
+                          }
+                      },
+                          {
+                              label: 'Mercado Livre',
+                              data: data,
+                              parsing: {
+                                  yAxisKey: 'mercado_livre'
+                              }
+                          }]
+                  },
+              };
+
               new Chart(
-                  document.getElementById('chartjs-bar-monthly-revenue'),
-                  {
-                      type: 'bar',
-                      options: options,
-                      data: {
-                          labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                          datasets: result
-                      }
-                  }
+                  document.getElementById('chartjs-bar-monthly-revenue'), cfg
               )
       }});
   });
