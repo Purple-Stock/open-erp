@@ -31,14 +31,14 @@
   <h1>Faturamento diário</h1>
   <div>
     <%= hidden_field_tag('daily_revenue', @daily_revenue) %>
-    <canvas id='chartjs-bar-monthly-revenue'></canvas>
+    <canvas id='chartjs-bar-daily-revenue'></canvas>
   </div>
 </section>
 
 <script>
   $(document).ready(function (){
       function plotDailyRevenueChartBar() {
-          dailyRevenueChartBar = new Chart(document.getElementById('chartjs-bar-monthly-revenue'), cfg);
+          dailyRevenueChartBar = new Chart(document.getElementById('chartjs-bar-daily-revenue'), cfg);
       }
       let dailyRevenue = $('#daily_revenue').val();
       let data = JSON.parse(dailyRevenue);
