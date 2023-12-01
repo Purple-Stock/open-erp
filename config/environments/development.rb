@@ -73,7 +73,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.good_job.smaller_number_is_higher_priority = true
 
-  config.good_job.enable_cron = true
+  config.good_job.enable_cron = false
   config.good_job.cron = {
     # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
     in_progress_order_items_task: { # each recurring job must have a unique key
@@ -136,6 +136,14 @@ Rails.application.configure do
       class: "CheckedBlingOrderItemsJob",
       args: [1],
       set: { priority: 3 },
+      description: "Create Order Items statuses are checked"
+    },
+
+    frequent_checked_order_items_task: {
+      cron: "*/2 * * * *",
+      class: "CheckedBlingOrderItemsJob",
+      args: [1, (Date.today - 5.days)],
+      set: { priority: 1 },
       description: "Create Order Items statuses are checked"
     },
 
