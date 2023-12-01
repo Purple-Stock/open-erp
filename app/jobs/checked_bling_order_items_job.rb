@@ -18,12 +18,12 @@ class CheckedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
 
   attr_accessor :account_id
 
-  def perform(account_id)
+  def perform(account_id, initial_alteration_date = nil)
     @status = STATUS
     @account_id = account_id
-    initial_date = Date.today - 3.months
-    final_date = Date.today
-    date_range = (initial_date..final_date)
+    @initial_date = initial_alteration_date || Date.today - 3.months
+    @final_date = Date.today
+    date_range = (@initial_date..@final_date)
     begin
       date_range.each do |alteration_date|
         @alteration_date = alteration_date
