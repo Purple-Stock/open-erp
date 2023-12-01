@@ -95,8 +95,7 @@ Rails.application.configure do
     weekly_pending_order_items_task: {
                      cron: "@weekly",
                      class: "PendingOrderItemsJob",
-                     args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime,
-                                 max_pages: 40 }],
+                     args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime }],
                      set: { priority: 3 },
                      description: "Create Order Items with pending status on the week"
     },
