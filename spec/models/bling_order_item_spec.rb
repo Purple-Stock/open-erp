@@ -51,30 +51,32 @@ RSpec.describe BlingOrderItem, type: :model do
   end
 
   describe 'scopes' do
-    store_ids = %w[204219105 203737982 203467890 204061683]
-    store_ids.each do |store_id|
-      FactoryBot.create(:bling_order_item, store_id: store_id)
+    before do
+      store_ids = %w[204219105 203737982 203467890 204061683]
+      store_ids.each do |store_id|
+        FactoryBot.create(:bling_order_item, store_id: store_id)
+      end
     end
 
-    describe '#shein' do
+    context '#shein' do
       it 'counts 1' do
         expect(BlingOrderItem.shein.count).to eq(1)
       end
     end
 
-    describe '#shopee' do
+    context '#shopee' do
       it 'counts 1' do
         expect(BlingOrderItem.shopee.count).to eq(1)
       end
     end
 
-    describe '#simple_7' do
+    context '#simple_7' do
       it 'counts 1' do
         expect(BlingOrderItem.simple_7.count).to eq(1)
       end
     end
 
-    describe '#mercado_livre' do
+    context '#mercado_livre' do
       it 'counts 1' do
         expect(BlingOrderItem.mercado_livre.count).to eq(1)
       end
