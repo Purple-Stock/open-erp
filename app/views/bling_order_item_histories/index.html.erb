@@ -12,11 +12,11 @@
       <div class="input-group mb-5">
         <div class="col-sm">
           Data inicial
-          <%= date_field('bling_order', 'initial_date', value: Date.today.strftime) %>
+          <%= date_field('bling_order', 'initial_date', value: @initial_date) %>
         </div>
         <div class="col-sm">
           Data final
-          <%= date_field('bling_order', 'final_date', value: Date.today.strftime) %>
+          <%= date_field('bling_order', 'final_date', value: @final_date) %>
         </div>
         <div class="col-sm">
           <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3', id: 'daily-revenue-search',
