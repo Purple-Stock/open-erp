@@ -14,9 +14,9 @@ class BlingOrderItemHistoriesController < ApplicationController
   end
 
   def daily_revenue
-    initial_date = params.fetch('bling_order', initial_date: Date.today.strftime).fetch('initial_date')
-    final_date = params.fetch('bling_order', final_date: Date.today.strftime).fetch('final_date')
-    @daily_date_range_filter = { initial_date:, final_date: }
+    @initial_date = params.fetch('bling_order', initial_date: Date.today.strftime).fetch('initial_date')
+    @final_date = params.fetch('bling_order', final_date: Date.today.strftime).fetch('final_date')
+    @daily_date_range_filter = { initial_date: @initial_date, final_date: @final_date }
     @bling_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::PAID],
                                               account_id: current_user.account.id)
     @daily_revenue = DailyRevenueReport.new(@bling_order_items, @daily_date_range_filter).presentable
