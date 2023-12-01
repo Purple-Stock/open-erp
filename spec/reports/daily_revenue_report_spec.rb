@@ -59,13 +59,13 @@ RSpec.describe DailyRevenueReport do
     context 'when filter by today and yesterday' do
       let(:filter) { { initial_date: '2023-11-5', final_date: '2023-11-6' } }
       let(:datasets) do
-        [{ x: '05/11/2023', shein: 0.0, shopee: 0.0, simple_7: 0.0, mercado_livre: 0.0, total: 0.0 },
-         { x: '06/11/2023', shein: 8.0, shopee: 6.0, simple_7: 0.0, mercado_livre: 0.0, total: 14.0 }]
+        [{ x: '05/11/2023 - 06/11/2023', shein: 12.0, shopee: 6.0, simple_7: 0.0, mercado_livre: 0.0, total: 18.0 }]
       end
 
       before do
         allow(Date).to receive(:today).and_return Date.new(2023, 11, 6)
         FactoryBot.create_list(:bling_order_item, 4, store_id: '204219105')
+        FactoryBot.create_list(:bling_order_item, 2, store_id: '204219105', date: Date.new(2023, 11, 5))
         FactoryBot.create_list(:bling_order_item, 3, store_id: '203737982')
       end
 
