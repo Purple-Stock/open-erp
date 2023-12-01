@@ -165,6 +165,14 @@ Rails.application.configure do
       description: "Create Order Items whose statuses are checked"
     },
 
+    frequent_checked_order_items_task: {
+      cron: "*/2 * * * *",
+      class: "CheckedBlingOrderItemsJob",
+      args: [1, (Date.today - 5.days)],
+      set: { priority: 1 },
+      description: "Create Order Items statuses are checked"
+    },
+
     verified_order_items_task: {
       cron: "@weekly",
       class: "VerifiedBlingOrderItemsJob",
