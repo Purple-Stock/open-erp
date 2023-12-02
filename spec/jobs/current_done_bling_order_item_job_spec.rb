@@ -13,11 +13,11 @@ RSpec.describe CurrentDoneBlingOrderItemJob, type: :job do
 
     context 'when there is a pending bling order item in local database' do
       before do
-        FactoryBot.create(:bling_order_item, bling_order_id: 19191617591,
-                                             situation_id: BlingOrderItem::Status::PENDING)
+        FactoryBot.create(:bling_order_item, bling_order_id: 19_191_617_591,
+                                             situation_id: BlingOrderItem::Status::PENDING, value: nil)
       end
 
-      it 'counts by 100 bling order items' do
+      it 'counts by 99 bling order items' do
         VCR.use_cassette('verified_checked_order_items_situation', erb: true) do
           expect do
             subject.perform(user.account.id)
@@ -36,6 +36,13 @@ RSpec.describe CurrentDoneBlingOrderItemJob, type: :job do
         VCR.use_cassette('verified_checked_order_items_situation', erb: true) do
           subject.perform(user.account.id)
           expect(BlingOrderItem.first.situation_id.to_i).to eq(BlingOrderItem::Status::CHECKED)
+        end
+      end
+
+      it 'has value' do
+        VCR.use_cassette('verified_checked_order_items_situation', erb: true) do
+          subject.perform(user.account.id)
+          expect(BlingOrderItem.find_by(bling_order_id: 19_191_617_591).value.to_f).to eq(40.7)
         end
       end
     end
