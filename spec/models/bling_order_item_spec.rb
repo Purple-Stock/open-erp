@@ -13,6 +13,7 @@
 #  quantidade          :integer
 #  unidade             :string
 #  valor               :decimal(, )
+#  value               :decimal(, )
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  account_id          :bigint
@@ -46,6 +47,39 @@ RSpec.describe BlingOrderItem, type: :model do
   describe '#Status::PAID' do
     it 'has status paid' do
       expect(described_class::Status::PAID).to eq([15, 101_065, 24, 94_871, 95_745])
+    end
+  end
+
+  describe 'scopes' do
+    before do
+      store_ids = %w[204219105 203737982 203467890 204061683]
+      store_ids.each do |store_id|
+        FactoryBot.create(:bling_order_item, store_id: store_id)
+      end
+    end
+
+    context '#shein' do
+      it 'counts 1' do
+        expect(BlingOrderItem.shein.count).to eq(1)
+      end
+    end
+
+    context '#shopee' do
+      it 'counts 1' do
+        expect(BlingOrderItem.shopee.count).to eq(1)
+      end
+    end
+
+    context '#simple_7' do
+      it 'counts 1' do
+        expect(BlingOrderItem.simple_7.count).to eq(1)
+      end
+    end
+
+    context '#mercado_livre' do
+      it 'counts 1' do
+        expect(BlingOrderItem.mercado_livre.count).to eq(1)
+      end
     end
   end
 

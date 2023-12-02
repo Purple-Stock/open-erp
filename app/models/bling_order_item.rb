@@ -14,6 +14,7 @@
 #  quantidade          :integer
 #  unidade             :string
 #  valor               :decimal(, )
+#  value               :decimal(, )
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  account_id          :bigint
@@ -69,6 +70,23 @@ class BlingOrderItem < ApplicationRecord
     where(date: initial_date..end_date)
   }
 
+  scope :shein, lambda {
+    where(store_id: '204219105')
+  }
+
+  scope :shopee, lambda {
+    where(store_id: '203737982')
+  }
+
+  scope :simple_7, lambda {
+    where(store_id: '203467890')
+  }
+
+  scope :mercado_livre, lambda {
+    where(store_id: '204061683')
+  }
+
+
   scope :date_range, lambda { |initial_date, final_date|
     initial_date = initial_date.try(:to_date).try(:beginning_of_day)
     final_date = final_date.try(:to_date).try(:end_of_day)
@@ -89,5 +107,9 @@ class BlingOrderItem < ApplicationRecord
 
   def store_name
     STORE_ID_NAME_KEY_VALUE["#{store_id}"]
+  end
+
+  def value
+    super || 0.0
   end
 end
