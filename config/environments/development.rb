@@ -73,7 +73,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.good_job.smaller_number_is_higher_priority = true
 
-  config.good_job.enable_cron = true
+  config.good_job.enable_cron = false
   config.good_job.cron = {
     # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
     in_progress_order_items_task: { # each recurring job must have a unique key
@@ -87,7 +87,7 @@ Rails.application.configure do
     today_pending_order_items_task: {
                      cron: "*/2 * * * *",
                      class: "PendingOrderItemsJob",
-                     args: [1, { dataInicial: Date.today.strftime, dataFinal: Date.today.strftime, max_pages: 5 }],
+                     args: [1, { dataInicial: Date.today.strftime, dataFinal: Date.today.strftime }],
                      set: { priority: 1 },
                      description: "Create Order Items with pending status in the current day"
     },
@@ -95,9 +95,8 @@ Rails.application.configure do
     weekly_pending_order_items_task: {
                      cron: "@weekly",
                      class: "PendingOrderItemsJob",
-                     args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime,
-                                 max_pages: 40 }],
-                     set: { priority: 3 },
+                     args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime }],
+                     set: { priority: 1 },
                      description: "Create Order Items with pending status on the week"
     },
 
@@ -105,7 +104,7 @@ Rails.application.configure do
       cron: "@monthly",
       class: "PendingOrderItemsJob",
       args: [1],
-      set: { priority: 3 },
+      set: { priority: 1 },
       description: "Create Order Items with pending status considering all period"
     },
 
@@ -137,6 +136,14 @@ Rails.application.configure do
       class: "CheckedBlingOrderItemsJob",
       args: [1],
       set: { priority: 3 },
+      description: "Create Order Items statuses are checked"
+    },
+
+    frequent_checked_order_items_task: {
+      cron: "*/2 * * * *",
+      class: "CheckedBlingOrderItemsJob",
+      args: [1, (Date.today - 5.days)],
+      set: { priority: 1 },
       description: "Create Order Items statuses are checked"
     },
 
