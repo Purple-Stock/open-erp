@@ -11,6 +11,20 @@ RSpec.describe CurrentDoneBlingOrderItemJob, type: :job do
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
     end
 
+    context 'when there is an already created checked order whose value is nil' do
+      before do
+        FactoryBot.create(:bling_order_item, bling_order_id: 19_191_617_591,
+                          situation_id: BlingOrderItem::Status::CHECKED, value: nil)
+      end
+
+      it 'has value equal to 40.7' do
+        VCR.use_cassette('verified_checked_order_items_situation', erb: true) do
+          subject.perform(user.account.id)
+          expect(BlingOrderItem.find_by(bling_order_id: 19_191_617_591).value.to_f).to eq(40.7)
+        end
+      end
+    end
+
     context 'when there is a pending bling order item in local database' do
       before do
         FactoryBot.create(:bling_order_item, bling_order_id: 19_191_617_591,
