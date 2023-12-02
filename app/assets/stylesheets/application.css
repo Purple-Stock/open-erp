@@ -29,6 +29,10 @@
   min-height: 649px;
 }
 
+.chart-container {
+  min-height: 649px;
+}
+
 .table .btn-icon.btn-sm {
   line-height: 15px;
 }
