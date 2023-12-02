@@ -20,7 +20,7 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
 
     order_ids = orders.map { |order| order['id'] }
 
-    query_bling_order_ids = BlingOrderItem.where(bling_order_id: order_ids).where.not(situation_id: situation_id)
+    query_bling_order_ids = BlingOrderItem.where(bling_order_id: order_ids)
                                           .map { |order| order.bling_order_id.to_i }
 
     create_orders_attributes = []
