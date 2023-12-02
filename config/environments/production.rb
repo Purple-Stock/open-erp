@@ -112,7 +112,7 @@ Rails.application.configure do
     today_pending_order_items_task: {
       cron: "*/2 * * * *",
       class: "PendingOrderItemsJob",
-      args: [1, { dataInicial: Date.today.strftime, dataFinal: Date.today.strftime, max_pages: 5 }],
+      args: [1, { dataInicial: Date.today.strftime, dataFinal: Date.today.strftime }],
       set: { priority: 1 },
       description: "Create Order Items with pending status in the current day"
     },
@@ -120,9 +120,8 @@ Rails.application.configure do
     weekly_pending_order_items_task: {
       cron: "@weekly",
       class: "PendingOrderItemsJob",
-      args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime,
-                  max_pages: 40 }],
-      set: { priority: 3 },
+      args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime }],
+      set: { priority: 1 },
       description: "Create Order Items with pending status on the week"
     },
 
@@ -130,7 +129,7 @@ Rails.application.configure do
       cron: "@monthly",
       class: "PendingOrderItemsJob",
       args: [1],
-      set: { priority: 3 },
+      set: { priority: 1 },
       description: "Create Order Items with pending status considering all period"
     },
 
@@ -164,6 +163,14 @@ Rails.application.configure do
       args: [1],
       set: { priority: 3 },
       description: "Create Order Items whose statuses are checked"
+    },
+
+    frequent_checked_order_items_task: {
+      cron: "*/2 * * * *",
+      class: "CheckedBlingOrderItemsJob",
+      args: [1, (Date.today - 5.days)],
+      set: { priority: 1 },
+      description: "Create Order Items statuses are checked"
     },
 
     verified_order_items_task: {
