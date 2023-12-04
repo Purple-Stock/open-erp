@@ -84,20 +84,12 @@ Rails.application.configure do
                      description: "Create Order Items with status in progress" # optional description that appears in Dashboard
     },
 
-    today_pending_order_items_task: {
-                     cron: "*/2 * * * *",
-                     class: "PendingOrderItemsJob",
-                     args: [1, { dataInicial: Date.today.strftime, dataFinal: Date.today.strftime }],
-                     set: { priority: 1 },
-                     description: "Create Order Items with pending status in the current day"
-    },
-
     weekly_pending_order_items_task: {
-                     cron: "@weekly",
+                     cron: "*/2 * * * *",
                      class: "PendingOrderItemsJob",
                      args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime }],
                      set: { priority: 1 },
-                     description: "Create Order Items with pending status on the week"
+                     description: "Create Order Items with pending status from current week"
     },
 
     general_pending_order_items_task: {
