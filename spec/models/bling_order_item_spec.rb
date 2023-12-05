@@ -165,17 +165,22 @@ RSpec.describe BlingOrderItem, type: :model do
     context 'when there are in progress orders' do
       let(:incorrect_situation) { 99 }
       let(:collection) { described_class.where(value: nil, situation_id: incorrect_situation) }
+      let(:order_ids) do
+        %w[19270144097 19270112818 19270079777 19269718202]
+      end
 
       before do
         FactoryBot.create(:bling_datum)
-        FactoryBot.create(:bling_order_item, value: nil, situation_id: incorrect_situation, bling_order_id: 19195344030)
-        FactoryBot.create(:bling_order_item, value: nil, situation_id: incorrect_situation, bling_order_id: 19195327923)
+
+        order_ids.each do |order_id|
+          FactoryBot.create(:bling_order_item, bling_order_id: order_id, value: nil, situation_id: incorrect_situation)
+        end
       end
 
       it 'updates value' do
-        VCR.use_cassette('find_checked_order', erb: true) do
+        VCR.use_cassette('find_checked_order', erb: true, record: :all) do
           described_class.update_yourself(collection)
-          expect(collection.first.reload.value.to_f).to eq(64.9)
+          expect(collection.first.reload.value.to_f).to eq(69.9)
         end
       end
     end
