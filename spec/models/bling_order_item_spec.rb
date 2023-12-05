@@ -178,7 +178,7 @@ RSpec.describe BlingOrderItem, type: :model do
       end
 
       it 'updates value' do
-        VCR.use_cassette('find_checked_order', erb: true, record: :all) do
+        VCR.use_cassette('find_checked_order', erb: true) do
           described_class.update_yourself(collection)
           expect(collection.first.reload.value.to_f).to eq(69.9)
         end
