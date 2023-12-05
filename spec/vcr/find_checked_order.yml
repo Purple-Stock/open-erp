@@ -1,0 +1,134 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19195344030
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 05 Dec 2023 15:26:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1538'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=c2d7a90ef956d40a
+      Set-Cookie:
+      - PHPSESSID=1td8ki4sl4lf70o9n45nv8l7g0; path=/; secure; HttpOnly
+      - PHPSESSID=j3i9rti4j9mgi6te14dns74p3b; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 830d4eb9eb5d6465-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19195344030,"numero":51769,"numeroLoja":"231125FXW3HV27","data":"2023-11-24","dataSaida":"2023-11-24","dataPrevista":"2023-12-11","totalProdutos":64.9,"total":64.9,"contato":{"id":16442937464,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":19196398961},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16356375402,"codigo":"FAKE","unidade":"Unidad","quantidade":1,"desconto":0,"valor":64.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Branco;Tamanho:G","descricaoDetalhada":"","produto":{"id":15979076305},"comissao":{"base":64.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16555698895,"dataVencimento":"2023-12-24","valor":64.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"FAKE","numero":"99","complemento":"
+        E","municipio":"FAKE","uf":"FAKE","cep":"99999","bairro":"FAKE","nomePais":""},"volumes":[{"id":15262142204,"servico":"Logistica
+        Shopee","codigoRastreamento":"FAKEFAKE"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"999","nomeUsuario":"999"}}}'
+  recorded_at: Tue, 05 Dec 2023 15:26:27 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19195327923
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 05 Dec 2023 15:26:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1557'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=4361bd94f2724959
+      Set-Cookie:
+      - PHPSESSID=24vb7fsmusf3s4529h55427796; path=/; secure; HttpOnly
+      - PHPSESSID=i1pqm655dljde55hhens3tcp5i; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 830d4ec049d464df-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19195327923,"numero":51768,"numeroLoja":"231125FXTDQ5SQ","data":"2023-11-24","dataSaida":"2023-11-24","dataPrevista":"2023-12-07","totalProdutos":64.9,"total":64.9,"contato":{"id":16442933357,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":101065,"valor":0},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":19196399989},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16356364798,"codigo":"CONJ-FEND-TOP-PRETO-G","unidade":"Unidad","quantidade":1,"desconto":0,"valor":64.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Preto;Tamanho:G","descricaoDetalhada":"","produto":{"id":15994593244},"comissao":{"base":64.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16555689845,"dataVencimento":"2023-12-24","valor":64.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"FAKE","numero":"999","complemento":"FAKE","municipio":"FAKE","uf":"ES","cep":"99999","bairro":"FAKE","nomePais":""},"volumes":[{"id":15262140189,"servico":"Logistica
+        Shopee","codigoRastreamento":"FAKE"}]},"vendedor":{"id":0},"intermediador":{"cnpj":"999","nomeUsuario":"999"}}}'
+  recorded_at: Tue, 05 Dec 2023 15:26:28 GMT
+recorded_with: VCR 6.2.0
