@@ -160,4 +160,29 @@ RSpec.describe BlingOrderItem, type: :model do
       end
     end
   end
+
+  describe '#update_yourself' do
+    context 'when there are in progress orders' do
+      let(:incorrect_situation) { 99 }
+      let(:collection) { described_class.where(value: nil, situation_id: incorrect_situation) }
+      let(:order_ids) do
+        %w[19270144097 19270112818 19270079777 19269718202]
+      end
+
+      before do
+        FactoryBot.create(:bling_datum)
+
+        order_ids.each do |order_id|
+          FactoryBot.create(:bling_order_item, bling_order_id: order_id, value: nil, situation_id: incorrect_situation)
+        end
+      end
+
+      it 'updates value' do
+        VCR.use_cassette('find_checked_order', erb: true) do
+          described_class.update_yourself(collection)
+          expect(collection.first.reload.value.to_f).to eq(69.9)
+        end
+      end
+    end
+  end
 end
