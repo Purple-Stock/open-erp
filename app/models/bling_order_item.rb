@@ -105,6 +105,15 @@ class BlingOrderItem < ApplicationRecord
     )
   end
 
+  def self.update_yourself(self_collection)
+    account_id = self_collection.first.account_id
+
+    self_collection.each do |record|
+      result = Services::Bling::FindOrder.call(id: record.bling_order_id, order_command: 'find_order', tenant: account_id)
+      record.update({ value: result['data']['total'], situation_id: result['data']['situacao']['id'] })
+    end
+  end
+
   def store_name
     STORE_ID_NAME_KEY_VALUE["#{store_id}"]
   end
