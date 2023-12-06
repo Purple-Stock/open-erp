@@ -2,6 +2,7 @@
 
 class PendingOrderItemsJob < BlingOrderItemCreatorBaseJob
   queue_as :default
+
   STATUS = BlingOrderItem::Status::PENDING.freeze
 
   attr_accessor :account_id
@@ -9,14 +10,11 @@ class PendingOrderItemsJob < BlingOrderItemCreatorBaseJob
   def perform(account_id, options = {})
     @status = STATUS
     @account_id = account_id
-    begin
-      orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                           situation: @status, options: options)
-      orders = orders['data']
 
-      create_orders(orders)
-    rescue StandardError => e
-      Rails.logger.error(e.message)
-    end
+    orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
+                                         situation: @status, options: options)
+    orders = orders['data']
+
+    create_orders(orders)
   end
 end

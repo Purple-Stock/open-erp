@@ -2,6 +2,8 @@
 
 class BlingOrderItemCreatorBaseJob < ApplicationJob
   queue_as :default
+  retry_on StandardError, wait: :exponentially_longer, attempts: 5
+
   attr_accessor :account_id, :alteration_date
 
   def list_status_situation
@@ -15,8 +17,6 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
 
   def create_orders(orders)
     return if orders.blank?
-
-    situation_id = orders.first['situacao']['id']
 
     order_ids = orders.map { |order| order['id'] }
 

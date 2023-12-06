@@ -13,7 +13,6 @@
 # 2) There are orders status over counted. There are possibilities they became checked or verified on bling API
 # but somehow the CurrentDoneBlingOrderJob does not update that.
 class VerifiedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
-  queue_as :default
   STATUS = BlingOrderItem::Status::VERIFIED.freeze
 
   attr_accessor :account_id
@@ -24,20 +23,15 @@ class VerifiedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
     initial_date = Date.today - 3.months
     final_date = Date.today
     date_range = (initial_date..final_date)
-    begin
-      date_range.each do |alteration_date|
-        @alteration_date = alteration_date
-        final_alteration_date = (alteration_date + 1.day).strftime
-        options = { dataAlteracaoInicial: @alteration_date.strftime, dataAlteracaoFinal: final_alteration_date }
-        orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                             situation: STATUS, options: options)
-        orders = orders['data']
+    date_range.each do |alteration_date|
+      @alteration_date = alteration_date
+      final_alteration_date = (alteration_date + 1.day).strftime
+      options = { dataAlteracaoInicial: @alteration_date.strftime, dataAlteracaoFinal: final_alteration_date }
+      orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
+                                           situation: STATUS, options: options)
+      orders = orders['data']
 
-        create_orders(orders)
-      end
-
-    rescue StandardError => e
-      Rails.logger.error(e.message)
+      create_orders(orders)
     end
   end
 end
