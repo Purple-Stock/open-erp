@@ -47,7 +47,7 @@ module Services
           break if (page.eql?(2) && Rails.env.eql?('test'))
 
           response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
-          raise StandardError if response['error'].present?
+          raise(StandardError, response['error']['type']) if response['error'].present?
 
           data = JSON.parse(response.body)
           break if data['data'].blank?
