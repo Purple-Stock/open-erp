@@ -10,6 +10,22 @@ RSpec.describe PendingOrderItemsJob, type: :job do
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
     end
 
+    context 'when error too many requests' do
+      it 'does not raise exception' do
+        VCR.use_cassette('all_pending_order_items_with_errors', erb: true) do
+          expect { subject.perform(user.account.id) }.not_to raise_error(StandardError)
+        end
+      end
+
+      it 'counts by 0' do
+        VCR.use_cassette('all_pending_order_items_with_errors', erb: true) do
+          expect do
+            subject.perform(user.account.id)
+          end.to change(BlingOrderItem, :count).by(0)
+        end
+      end
+    end
+
     context 'when max page option is given' do
       let!(:options) { { max_pages: 1 } }
 
