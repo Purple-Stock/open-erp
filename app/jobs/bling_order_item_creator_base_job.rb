@@ -2,6 +2,7 @@
 
 class BlingOrderItemCreatorBaseJob < ApplicationJob
   queue_as :default
+  retry_on StandardError, wait: :exponentially_longer, attempts: 5
 
   attr_accessor :account_id, :alteration_date
 
