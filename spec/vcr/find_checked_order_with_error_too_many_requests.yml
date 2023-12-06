@@ -133,6 +133,69 @@ http_interactions:
   recorded_at: Tue, 05 Dec 2023 19:05:01 GMT
 - request:
     method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19270079777
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Date:
+      - Tue, 05 Dec 2023 19:05:02 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '196'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=0bf78190aa2755fd
+      Set-Cookie:
+      - PHPSESSID=71avk5bb14jq0tj662jktcjo43; path=/; secure; HttpOnly
+      - PHPSESSID=b6nqnlimjugnncrs373v0r4lpa; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 830e8ee998f46499-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"error":{"type":"TOO_MANY_REQUESTS","message":"Limite de requisi\u00e7\u00f5es
+        atingido.","description":"O limite de requisi\u00e7\u00f5es por segundo foi
+        atingido, tente novamente mais tarde."}}'
+  recorded_at: Tue, 05 Dec 2023 19:05:02 GMT
+- request:
+    method: get
     uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19269718202
     body:
       encoding: US-ASCII

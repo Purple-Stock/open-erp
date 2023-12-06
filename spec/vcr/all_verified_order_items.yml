@@ -8079,9 +8079,7 @@ http_interactions:
       - 82b3a468a80364e5-GIG
     body:
       encoding: ASCII-8BIT
-      string: '{"error":{"type":"TOO_MANY_REQUESTS","message":"Limite de requisi\u00e7\u00f5es
-        atingido.","description":"O limite de requisi\u00e7\u00f5es por segundo foi
-        atingido, tente novamente mais tarde."}}'
+      string: '{"data":[]}'
   recorded_at: Fri, 24 Nov 2023 18:16:18 GMT
 - request:
     method: get

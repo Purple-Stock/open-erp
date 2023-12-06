@@ -47,10 +47,7 @@ module Services
           break if (page.eql?(2) && Rails.env.eql?('test'))
 
           response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
-          if response.code.eql?(429)
-            sleep 5
-            response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
-          end
+          raise(StandardError, response['error']['type']) if response['error'].present?
 
           data = JSON.parse(response.body)
           break if data['data'].blank?
@@ -59,8 +56,6 @@ module Services
         end
 
         { 'data' => all_orders }
-      rescue StandardError => e
-        { error: "Error: #{e.message}" }
       end
 
       def bling_token
