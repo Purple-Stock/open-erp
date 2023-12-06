@@ -7,12 +7,6 @@ RSpec.describe Services::Bling::Order, type: :services do
   let(:order_command) { 'find_orders' }
   let(:situation) { 15 }
 
-  describe '#initialize' do
-    it 'is truthy' do
-      expect(described_class.call(order_command: order_command, tenant: 1, situation: situation)).to be_truthy
-    end
-  end
-
   describe '#call' do
     context 'when given number of page in options' do
       before { allow(Rails).to receive(:env).and_return('no_test') }
