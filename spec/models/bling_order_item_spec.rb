@@ -177,10 +177,20 @@ RSpec.describe BlingOrderItem, type: :model do
         end
       end
 
-      it 'updates value' do
-        VCR.use_cassette('find_checked_order', erb: true) do
-          described_class.update_yourself(collection)
-          expect(collection.first.reload.value.to_f).to eq(69.9)
+      context 'when there is no error in response' do
+        it 'updates value' do
+          VCR.use_cassette('find_checked_order', erb: true) do
+            described_class.update_yourself(collection)
+            expect(collection.first.reload.value.to_f).to eq(69.9)
+          end
+        end
+      end
+
+      context 'when there are too many requests error in the response' do
+        it 'does not raise StandardError with message' do
+          VCR.use_cassette('find_checked_order_with_error_too_many_requests', erb: true) do
+            expect { described_class.update_yourself(collection) }.not_to raise_error(StandardError)
+          end
         end
       end
     end
