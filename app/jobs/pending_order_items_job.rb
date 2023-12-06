@@ -2,6 +2,8 @@
 
 class PendingOrderItemsJob < BlingOrderItemCreatorBaseJob
   queue_as :default
+  retry_on StandardError, wait: :exponentially_longer, attempts: 5
+
   STATUS = BlingOrderItem::Status::PENDING.freeze
 
   attr_accessor :account_id
