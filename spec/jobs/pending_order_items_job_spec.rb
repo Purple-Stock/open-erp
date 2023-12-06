@@ -11,17 +11,11 @@ RSpec.describe PendingOrderItemsJob, type: :job do
     end
 
     context 'when error too many requests' do
-      it 'does not raise exception' do
+      it 'raises exception too many requests' do
         VCR.use_cassette('all_pending_order_items_with_errors', erb: true) do
-          expect { subject.perform(user.account.id) }.not_to raise_error(StandardError)
-        end
-      end
-
-      it 'counts by 0' do
-        VCR.use_cassette('all_pending_order_items_with_errors', erb: true) do
-          expect do
-            subject.perform(user.account.id)
-          end.to change(BlingOrderItem, :count).by(0)
+          expect { subject.perform(user.account.id) }
+            .to raise_error(StandardError)
+            .with_message('TOO_MANY_REQUESTS')
         end
       end
     end
