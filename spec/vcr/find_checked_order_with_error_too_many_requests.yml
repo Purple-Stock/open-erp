@@ -1,0 +1,262 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19270144097
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 05 Dec 2023 19:05:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1526'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=1af7c512a3894e5d
+      Set-Cookie:
+      - PHPSESSID=gkmp57dpf59jcd2kudrv2sfjm0; path=/; secure; HttpOnly
+      - PHPSESSID=ns3mssk6albfel33mk59aiba9g; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 830e8edc8d251d3b-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19270144097,"numero":59011,"numeroLoja":"231206EAXY8MBA","data":"2023-12-05","dataSaida":"2023-12-05","dataPrevista":"2023-12-26","totalProdutos":69.9,"total":69.9,"contato":{"id":16464184421,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16394835410,"codigo":"CONJ-FEND-TOP-NUDE-P","unidade":"Unidad","quantidade":1,"desconto":0,"valor":69.9,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Nude;Tamanho:P","descricaoDetalhada":"","produto":{"id":15977501218},"comissao":{"base":69.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16592357117,"dataVencimento":"2024-01-04","valor":69.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"Av Bahia. Condom\u00ednio Gran Village turu III Casa
+        69","numero":" .","complemento":"FAKE","municipio":"FAKE","uf":"FK","cep":"999","bairro":"FAKE","nomePais":""},"volumes":[{"id":15271375025,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"9999","nomeUsuario":"999"}}}'
+  recorded_at: Tue, 05 Dec 2023 19:05:00 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19270112818
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 05 Dec 2023 19:05:01 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1429'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=cf0b79c40dc980db
+      Set-Cookie:
+      - PHPSESSID=ki434kkrdmpsom5gom6mi7d85m; path=/; secure; HttpOnly
+      - PHPSESSID=na1hcjj8pjfomn48sur18trh84; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 830e8ee3392a1d56-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19270112818,"numero":59010,"numeroLoja":"17556I17553","data":"2023-12-05","dataSaida":"2023-12-05","dataPrevista":"0000-00-00","totalProdutos":89.9,"total":109.9,"contato":{"id":16464176543,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":15,"valor":3},"loja":{"id":203467890},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16394819454,"codigo":"Vest-Longo-Bojo-Romano-Nude-PP","unidade":"UN","quantidade":1,"desconto":0,"valor":89.9,"aliquotaIPI":0,"descricao":"Vestido
+        Romano Longo com Bojo Cor:Nude;Tamanho:PP","descricaoDetalhada":"","produto":{"id":16112725062},"comissao":{"base":89.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16592341540,"dataVencimento":"2024-01-04","valor":109.9,"observacoes":"M\u00e9todo
+        de pagamento: PagHiper\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":20,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":1,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"Rua C\u00e2ndida Ramos","numero":"112","complemento":"","municipio":"FAKE","uf":"FK","cep":"9999","bairro":"FAKE","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""}}}'
+  recorded_at: Tue, 05 Dec 2023 19:05:01 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19270079777
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Date:
+      - Tue, 05 Dec 2023 19:05:02 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '196'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=0bf78190aa2755fd
+      Set-Cookie:
+      - PHPSESSID=71avk5bb14jq0tj662jktcjo43; path=/; secure; HttpOnly
+      - PHPSESSID=b6nqnlimjugnncrs373v0r4lpa; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 830e8ee998f46499-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"error":{"type":"TOO_MANY_REQUESTS","message":"Limite de requisi\u00e7\u00f5es
+        atingido.","description":"O limite de requisi\u00e7\u00f5es por segundo foi
+        atingido, tente novamente mais tarde."}}'
+  recorded_at: Tue, 05 Dec 2023 19:05:02 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19269718202
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 05 Dec 2023 19:05:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1485'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=08b790e7260c015e
+      Set-Cookie:
+      - PHPSESSID=8f8h90n67bfvlfdq3591d520gn; path=/; secure; HttpOnly
+      - PHPSESSID=fc73ee4ep2tidk2rn42revpvk2; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 830e8eefe85564c0-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19269718202,"numero":58953,"numeroLoja":"231205E84NM39E","data":"2023-12-05","dataSaida":"2023-12-05","dataPrevista":"2023-12-18","totalProdutos":49.9,"total":49.9,"contato":{"id":16435067684,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":""},"situacao":{"id":15,"valor":3},"loja":{"id":203737982},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16394606917,"codigo":"VEST-LONG-TOP-SAI-FEND-VERMELHO-PP","unidade":"1","quantidade":1,"desconto":0,"valor":49.9,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Vermelho;Tamanho:PP","descricaoDetalhada":"","produto":{"id":15973680261},"comissao":{"base":49.9,"aliquota":0,"valor":0}}],"parcelas":[{"id":16592132719,"dataVencimento":"2024-01-04","valor":49.9,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":1,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"FAkE","numero":"99","complemento":" FAKE","municipio":"FAKE","uf":"FK","cep":"999","bairro":"FAKE","nomePais":""},"volumes":[{"id":15271323207,"servico":"Logistica
+        Shopee","codigoRastreamento":""}]},"vendedor":{"id":0},"intermediador":{"cnpj":"9999","nomeUsuario":"999"}}}'
+  recorded_at: Tue, 05 Dec 2023 19:05:03 GMT
+recorded_with: VCR 6.2.0
