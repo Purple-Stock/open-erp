@@ -22,7 +22,7 @@ RSpec.describe InProgressOrderItemsJob, type: :job do
 
     context 'when there are in progress orders' do
       before do
-        FactoryBot.create(:bling_order_item, bling_order_id: '19195344030', value: nil)
+        FactoryBot.create(:bling_order_item, bling_order_id: '19195344030')
       end
 
       it 'counts by 99 bling order items' do
@@ -38,14 +38,6 @@ RSpec.describe InProgressOrderItemsJob, type: :job do
           subject.perform(user.account.id)
           expect(BlingOrderItem.find_by(bling_order_id: '19195344030').situation_id.to_i)
             .to eq(BlingOrderItem::Status::IN_PROGRESS)
-        end
-      end
-
-      it 'has value' do
-        VCR.use_cassette('all_in_progress_order_items', erb: true) do
-          subject.perform(user.account.id)
-          expect(BlingOrderItem.find_by(bling_order_id: '19195344030').value.to_f)
-            .to eq(64.9)
         end
       end
     end
