@@ -118,7 +118,7 @@ gem 'pagy', '~> 6.0.0'
 
 gem 'business', '~> 2.0'
 
-gem 'acts_as_tenant'
+gem 'acts_as_tenant', '>= 1.0.0'
 
 gem 'aws-sdk-s3', require: false
 gem 'cocoon'
