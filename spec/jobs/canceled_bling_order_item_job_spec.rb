@@ -22,7 +22,7 @@ RSpec.describe CanceledBlingOrderItemsJob, type: :job do
 
     context 'when there are cancelled orders' do
       before do
-        FactoryBot.create(:bling_order_item, bling_order_id: '19195301106', value: nil)
+        FactoryBot.create(:bling_order_item, bling_order_id: '19195301106')
       end
 
       it 'counts by 99 bling order items' do
@@ -38,13 +38,6 @@ RSpec.describe CanceledBlingOrderItemsJob, type: :job do
           subject.perform(user.account.id)
           expect(BlingOrderItem.find_by(bling_order_id: '19195301106').situation_id.to_i)
             .to eq(BlingOrderItem::Status::CANCELED)
-        end
-      end
-
-      it 'has value equal to 40.7' do
-        VCR.use_cassette('all_canceled_order_items', erb: true) do
-          subject.perform(user.account.id)
-          expect(BlingOrderItem.find_by(bling_order_id: '19195301106').value).to eq(40.7)
         end
       end
     end

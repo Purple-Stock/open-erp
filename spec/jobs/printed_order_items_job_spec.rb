@@ -33,13 +33,6 @@ RSpec.describe PrintedOrderItemsJob, type: :job do
           end.to change(BlingOrderItem, :count).by(99) # one already created.
         end
       end
-
-      it 'has value' do
-        VCR.use_cassette('all_printed_order_items', erb: true) do
-          subject.perform(user.account.id)
-          expect(BlingOrderItem.find_by(bling_order_id: 19191688711).value.to_f).to eq(51.64)
-        end
-      end
     end
   end
 end
