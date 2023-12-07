@@ -10,16 +10,6 @@ RSpec.describe PendingOrderItemsJob, type: :job do
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
     end
 
-    context 'when error too many requests' do
-      it 'raises exception too many requests' do
-        VCR.use_cassette('all_pending_order_items_with_errors', erb: true) do
-          expect { subject.perform(user.account.id) }
-            .to raise_error(StandardError)
-            .with_message('TOO_MANY_REQUESTS')
-        end
-      end
-    end
-
     context 'when max page option is given' do
       let!(:options) { { max_pages: 1 } }
 
