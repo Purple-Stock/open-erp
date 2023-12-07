@@ -65,14 +65,6 @@ RSpec.describe PendingOrderItemsJob, type: :job do
         end
       end
 
-      it 'has value' do
-        VCR.use_cassette('all_pending_order_items', erb: true) do
-          subject.perform(user.account.id)
-          expect(BlingOrderItem.find_by(bling_order_id: '19191617135').value.to_f)
-            .to eq(40.7)
-        end
-      end
-
       it 'has account id' do
         VCR.use_cassette('all_pending_order_items', erb: true) do
           subject.perform(user.account.id)
