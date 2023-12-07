@@ -115,12 +115,20 @@ Rails.application.configure do
                      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
                      description: "Create Order Items statuses are checked and verified" # optional description that appears in Dashboard
     },
-    canceled_order_items_task: { # each recurring job must have a unique key
-                                     cron: "*/20 * * * *", # cron-style scheduling format by fugit gem
+    general_canceled_order_items_task: { # each recurring job must have a unique key
+                                     cron: "@monthly", # cron-style scheduling format by fugit gem
                                      class: "CanceledBlingOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
                                      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
                                      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
                                      description: "Create Order Items statuses are canceled" # optional description that appears in Dashboard
+    },
+
+    weekly_canceled_order_items_task: { # each recurring job must have a unique key
+                                        cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
+                                        class: "WeeklyCanceledOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
+                                        args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime }], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+                                        set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+                                        description: "Create Order Items statuses are canceled" # optional description that appears in Dashboard
     },
 
     checked_order_items_task: {
