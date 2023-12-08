@@ -1,4 +1,24 @@
 <div class="row justify-content-center">
+  <div class="col-md-12">
+    <div class="card mb-12">
+      <div class="card-body text-center <%= 'bg-danger text-dark' if printed && !order_items.values.flatten.length.zero? %>">
+        <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
+          <h5 class="card-title">
+            Meta de Pedidos: 
+          </h5>
+          <p>
+            <%= @monthly_revenue_estimation.daily_quantity %>
+          </p>  
+        <% end %>
+        <h5 class="card-title">
+          Contagem total
+        </h5>
+        <p class="<%= 'text-success' if printed && order_items.values.flatten.length.zero? %>">
+          <%= order_items.values.flatten.length %>
+        </p>
+      </div>
+    </div>
+  </div>
   <% order_items.each do |store_name, orders| %>
      <div class="col-md-12">
         <div class="card mb-12">
@@ -6,11 +26,6 @@
             <h5 class="card-title">
               <%= store_name %>
             </h5>
-            <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
-              <p>
-                Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
-              </p>
-            <% end %>
             <p class="<%= 'text-success' if printed && order_items.values.flatten.length.zero? %>">
               Pedidos: <%= orders&.count %>
             </p>
@@ -23,16 +38,4 @@
         </div>
       </div>
   <% end %>
-  <div class="col-md-12">
-    <div class="card mb-12">
-      <div class="card-body text-center <%= 'bg-danger text-dark' if printed && !order_items.values.flatten.length.zero? %>">
-        <h5 class="card-title">
-          Contagem total
-        </h5>
-        <p class="<%= 'text-success' if printed && order_items.values.flatten.length.zero? %>">
-          <%= order_items.values.flatten.length %>
-        </p>
-      </div>
-    </div>
-  </div>
 </div>
