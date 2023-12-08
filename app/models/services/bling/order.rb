@@ -48,7 +48,7 @@ module Services
 
           response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
           if response['error'].present?
-            sleep 2
+            sleep 10
             response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
           end
 
