@@ -102,7 +102,7 @@ Rails.application.configure do
   config.good_job.cron = {
     # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
     in_progress_order_items_task: { # each recurring job must have a unique key
-                                    cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                                    cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
                                     class: "InProgressOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
                                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
                                     set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
@@ -126,7 +126,7 @@ Rails.application.configure do
     },
 
     printed_order_items_task: { # each recurring job must have a unique key
-                                cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                                cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
                                 class: "PrintedOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
                                 args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
                                 set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
@@ -134,7 +134,7 @@ Rails.application.configure do
     },
 
     current_done_order_items_task: { # each recurring job must have a unique key
-                                     cron: "*/1 * * * *", # cron-style scheduling format by fugit gem
+                                     cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
                                      class: "CurrentDoneBlingOrderItemJob", # name of the job class as a String; must reference an Active Job job class
                                      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
                                      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
@@ -150,9 +150,9 @@ Rails.application.configure do
     },
 
     weekly_canceled_order_items_task: { # each recurring job must have a unique key
-                                        cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
+                                        cron: "*/4 * * * *", # cron-style scheduling format by fugit gem
                                         class: "WeeklyCanceledOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
-                                        args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime }], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+                                        args: [1, { dataInicial: 3.weeks.ago.to_date.strftime, dataFinal: Date.today.strftime }], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
                                         set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
                                         description: "Create Order Items statuses are canceled" # optional description that appears in Dashboard
     },
