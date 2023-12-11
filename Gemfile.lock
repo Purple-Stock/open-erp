@@ -445,6 +445,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.15.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.15.0)
+    sentry-ruby (5.15.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     serviceworker-rails (0.6.0)
       railties (>= 3.1)
     sexp_processor (4.17.0)
@@ -585,6 +590,8 @@ DEPENDENCIES
   rubyzip
   sassc-rails
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   serviceworker-rails
   shoulda-matchers (~> 5.3, >= 5.3.0)
   simplecov (~> 0.21.2)
@@ -604,4 +611,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.6
+   2.4.20
