@@ -2,6 +2,10 @@
 
 class BlingOrderItemCreatorBaseJob < ApplicationJob
   queue_as :default
+  rescue_from(StandardError) do |exception|
+    Sentry.capture_message(exception)
+  end
+
   retry_on StandardError, wait: :exponentially_longer, attempts: 5
 
   attr_accessor :account_id, :alteration_date
