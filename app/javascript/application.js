@@ -34,6 +34,9 @@ require("./vendors/stisla/scripts");
 
 import flatpickr from "flatpickr";
 import { Portuguese } from "flatpickr/dist/l10n/pt";
+require('./chartjs/daily_revenue_chart');
+require('./chartjs/quantity_revenue_chart');
+require('./chartjs/canceled_revenue_chart');
 
 flatpickr.localize(Portuguese); // default locale is now Portuguese
 

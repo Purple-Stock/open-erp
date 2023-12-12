@@ -27,7 +27,7 @@
   </div>
 </section>
 
-<section class="chart-container pl-0">
+<section class="chart-container">
   <h1>Faturamento diário</h1>
   <div>
     <%= hidden_field_tag('daily_revenue', @daily_revenue) %>
@@ -35,97 +35,10 @@
   </div>
 </section>
 
-<script>
-  $(document).ready(function (){
-      function plotDailyRevenueChartBar() {
-          dailyRevenueChartBar = new Chart(document.getElementById('chartjs-bar-daily-revenue'), cfg);
-      }
-      let dailyRevenue = $('#daily_revenue').val();
-      let data = JSON.parse(dailyRevenue);
-      let cfg = {
-          type: 'bar',
-          options: {
-              maintainAspectRatio: false,
-              aspectRatio: 1
-          },
-          data: {
-              datasets: [{
-                  label: 'Shein',
-                  data: data,
-                  parsing: {
-                      yAxisKey: 'shein'
-                  }
-              }, {
-                  label: 'Shopee',
-                  data: data,
-                  parsing: {
-                      yAxisKey: 'shopee'
-                  }
-              }, {
-                  label: 'Simple 7',
-                  data: data,
-                  parsing: {
-                      yAxisKey: 'simple_7'
-                  }
-              },
-                  {
-                      label: 'Mercado Livre',
-                      data: data,
-                      parsing: {
-                          yAxisKey: 'mercado_livre'
-                      }
-                  }, {
-                      label: 'Total',
-                      data: data,
-                      parsing: {
-                          yAxisKey: 'total'
-                      }
-                  }]
-          },
-      };
-
-
-      let dailyRevenueChartBar;
-      let options = {
-          maintainAspectRatio: false,
-          aspectRatio: 1,
-          scales: {
-              y: {
-                  stacked: false,
-                  grid: {
-                      display: true,
-                      color: "rgba(255,99,132,0.2)"
-                  }
-              },
-              x: {
-                  stacked: false,
-                  grid: {
-                      display: false
-                  }
-              }
-          }
-      };
-
-      $.ajax({url: 'bling_order_item_histories/day_quantities', success: function(result){
-              new Chart(
-                  document.getElementById('chartjs-bar'),
-                  {
-                      type: 'bar',
-                      options: options,
-                      data: {
-                          labels: result.map(row => row.day),
-                          datasets: [
-                              {
-                                  label: 'Quantidade vendida nos últimos 15 dias',
-                                  data: result.map(row => row.quantity)
-                              }
-                          ]
-                      }
-                  }
-              )
-      }})
-
-      plotDailyRevenueChartBar();
-  });
-
-</script>
+<section class="chart-container">
+  <h1>Custo de Oportunidade dos Pedidos Cancelados</h1>
+  <div>
+    <%= hidden_field_tag('canceled_revenue', @canceled_revenue) %>
+    <canvas id='canceled-revenue-chart'></canvas>
+  </div>
+</section>
