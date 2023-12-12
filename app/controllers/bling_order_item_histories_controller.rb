@@ -5,7 +5,7 @@
 class BlingOrderItemHistoriesController < ApplicationController
   before_action :date_range, :paid_bling_order_items, :day_quantities_presenter,
                 only: %i[day_quantities]
-  before_action :daily_revenue, only: :index
+  before_action :daily_revenue, :canceled_revenue, only: :index
 
   def index;end
 
@@ -29,6 +29,13 @@ class BlingOrderItemHistoriesController < ApplicationController
     initial_date = (Date.today - 15.days).beginning_of_day
     final_date = Date.today.end_of_day
     @date_range = initial_date..final_date
+  end
+
+  def canceled_revenue
+    @canceled_bling_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::CANCELED],
+                                              account_id: current_user.account.id)
+    @canceled_revenue = DailyRevenueReport.new(@canceled_bling_order_items, @daily_date_range_filter).presentable
+    @canceled_revenue = @canceled_revenue.to_json
   end
 
   def paid_bling_order_items
