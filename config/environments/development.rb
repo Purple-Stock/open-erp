@@ -85,9 +85,9 @@ Rails.application.configure do
     },
 
     weekly_pending_order_items_task: {
-                     cron: "*/2 * * * *",
+                     cron: "*/4 * * * *",
                      class: "PendingOrderItemsJob",
-                     args: [1, { dataInicial: (Date.today - 7.days).strftime, dataFinal: Date.today.strftime }],
+                     args: [1, { dataInicial: (Date.today - 3.weeks).strftime, dataFinal: Date.today.strftime }],
                      set: { priority: 1 },
                      description: "Create Order Items with pending status from current week"
     },
