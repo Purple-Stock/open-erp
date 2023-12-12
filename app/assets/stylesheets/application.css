@@ -19,6 +19,7 @@
  *= require_tree .
  *= stub mobile
  *= require_self
+ *= require charts/chart-container
  */
 
 .turbolinks-progress-bar {
@@ -26,10 +27,6 @@
 }
 
 .main-content {
-  min-height: 649px;
-}
-
-.chart-container {
   min-height: 649px;
 }
 
