@@ -34,3 +34,11 @@
     <canvas id='chartjs-bar-daily-revenue'></canvas>
   </div>
 </section>
+
+<section class="chart-container">
+  <h1>Custo de Oportunidade dos Pedidos Cancelados</h1>
+  <div>
+    <%= hidden_field_tag('canceled_revenue', @canceled_revenue) %>
+    <canvas id='canceled-revenue-chart'></canvas>
+  </div>
+</section>
