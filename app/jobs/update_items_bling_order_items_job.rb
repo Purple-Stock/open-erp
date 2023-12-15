@@ -1,4 +1,4 @@
-class UpdateItemsBlingOrderItem < ApplicationJob
+class UpdateItemsBlingOrderItemsJob < ApplicationJob
   queue_as :default
 
   def perform(store_id, situation_id, current_tenant_id)
