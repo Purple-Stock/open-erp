@@ -48,7 +48,14 @@ class BlingOrderItem < ApplicationRecord
     "24" => 'Verificado',
     "94871" => 'Pendente',
     "95745" => 'Impresso',
-    "12" => 'Cancelado'
+    "12" => 'Cancelado',
+  }.freeze
+
+  STATUS_PENDING_NAME_KEY_VALUE = {
+    "15, 94871, 95745" => 'Pedidos Pagos Pendentes',
+    "94871" => 'Pendente',
+    "15" => 'Em andamento',
+    "95745" => 'Impresso',
   }.freeze
 
   class Status

@@ -20,8 +20,22 @@ class OrdersControlController < ApplicationController
                        .order(custom_id: :desc)
   end
   
+
   def show_pending_orders
-    @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING)
+    situation_id = params[:situation_id]
+    store_id = params[:store_id]
+  
+    if situation_id.present?
+      cleaned_situation_ids = situation_id.split(',').map(&:to_i)
+    else
+      cleaned_situation_ids = BlingOrderItem::Status::PENDING
+    end
+    
+    if store_id.present?
+      @pending_order_items = BlingOrderItem.where(situation_id: cleaned_situation_ids, store_id: store_id)
+    else
+      @pending_order_items = BlingOrderItem.where(situation_id: cleaned_situation_ids)
+    end
   end
 
   def show_orders_business_day
