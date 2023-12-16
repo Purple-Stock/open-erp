@@ -36,6 +36,10 @@ class OrdersControlController < ApplicationController
     else
       @pending_order_items = BlingOrderItem.where(situation_id: cleaned_situation_ids)
     end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.csv { send_data generate_csv(@pending_order_items), filename: "pending-orders-#{Date.today}.csv" }
+    end
   end
 
   def show_orders_business_day
@@ -51,6 +55,25 @@ class OrdersControlController < ApplicationController
 
   private
 
+  def generate_csv(pending_order_items)
+    # Filter out items where `items` is nil
+    filtered_items = pending_order_items.select { |item| item.items.present? }
+  
+    # Group the filtered items by 'codigo'
+    grouped_items = filtered_items.group_by { |item| item.items['codigo'] }
+  
+    CSV.generate(headers: true) do |csv|
+      csv << ['Codigo', 'Total Quantity'] # Customize your headers here
+  
+      grouped_items.each do |codigo, items|
+        # Sum only the quantities of items with a non-nil 'quantidade'
+        total_quantity = items.sum { |item| item.items['quantidade'].to_i }
+        csv << [codigo, total_quantity] # Add each group's code and total quantity
+      end
+    end
+  end
+  
+  
   def list_orders
     @orders = []
     (1..20).each do |i|
