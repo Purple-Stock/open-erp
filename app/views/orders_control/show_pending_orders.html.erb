@@ -4,6 +4,8 @@
   </div>
 </div>
 
+<%= link_to 'Exportar para CSV', show_pending_orders_path(format: :csv, situation_id: params[:situation_id], store_id: params[:store_id]), class: 'btn btn-info' %>
+
 <div class="container">
   <%= form_with(url: show_pending_orders_path, method: :get, local: true) do |form| %>
     <div class="form-group">
@@ -20,8 +22,8 @@
     </div>
     <%= form.submit 'Filtro', class: 'btn btn-primary' %>
   <% end %>
+
   <div class="row justify-content-center">
-    
     <% if @pending_order_items.present? %>
       <% @pending_order_items.group_by(&:store_id).each do |store_id, store_items| %>
         <% loja_name = store_items.first.store_name %>
@@ -33,6 +35,9 @@
               <h5 class="card-title">
                 <%= loja_name %>
               </h5>
+
+              <% total_store_quantity = store_items.sum { |item| item.items.present? && item.items['quantidade'].present? ? item.items['quantidade'].to_i : 0 } %>
+              <h6>Quantidade total para <%= loja_name %>: <%= total_store_quantity %> unidades</h6>
 
               <% codigo_quantity = Hash.new { |h, k| h[k] = [] } %>
               <% store_items.each do |item| %>
@@ -80,11 +85,9 @@
                   Mercado Envios Flex: <%= @mercado_envios_flex_counts %>
                 </p>
               <% end %>
-
             </div>
           </div>
         </div>
-
       <% end %>
     <% else %>
       <div class="col-md-4">
@@ -97,6 +100,5 @@
         </div>
       </div>
     <% end %>
-
   </div>
 </div>
