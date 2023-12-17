@@ -122,7 +122,7 @@ Esse projeto existe graças ao esforço e dedicação dessas pessoas:
 **Desenvolvimento**
 
 <a href="https://github.com/puppe1990/open-erp/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=puppe1990/open-erp" />
+  <img src="https://contrib.rocks/image?repo=Purple-Stock/open-erp" />
 </a>
 
 ## Licença
