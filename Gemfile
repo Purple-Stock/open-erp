@@ -29,7 +29,7 @@ gem "turbo-rails", ">= 1.5.0"
 gem "stimulus-rails", ">= 1.3.0"
 
 gem "sentry-ruby"
-gem "sentry-rails"
+gem "sentry-rails", ">= 5.15.1"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
