@@ -12,6 +12,14 @@ VCR.configure do |c|
     # https://github.com/vcr/vcr/discussions/887 ways to hide sensitive data.
     interaction.request.headers['Authorization'][0] = "Bearer <%= ENV['ACCESS_TOKEN'] %>"
     interaction.response.body.gsub!(/\d{3}[.]\d{3}[.]\d{3}[-]\d{2}/, '999.999.999-99')
+    # Some names with latin punctuation had escaped
+    interaction.response.body.gsub!(/\\u00ed/, '')
+    interaction.response.body.gsub!(/\\u00f3/, '')
+    interaction.response.body.gsub!(/\\u00fa/, '')
+    interaction.response.body.gsub!(/\\u00e3/, '')
+    interaction.response.body.gsub!(/\\u00e7/, '')
+    interaction.response.body.gsub!('******', 'Aa Bb')
+    interaction.response.body.gsub!('****', 'Aa Bb')
     interaction.response.body.gsub!(/"nome\":["^\"][a-z-A-Z]+[\s][a-z-A-Z | \s]+/, "\"nome\":\"Faker Name Souza")
   end
 end
