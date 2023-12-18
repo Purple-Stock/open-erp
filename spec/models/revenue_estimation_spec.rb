@@ -48,4 +48,34 @@ RSpec.describe RevenueEstimation, type: :model do
       end
     end
   end
+
+  describe '#calculate_quantity' do
+    context 'with valid inputs' do
+      it 'calculates quantity based on revenue and average_ticket' do
+        revenue_estimation = RevenueEstimation.new(revenue: 1000, average_ticket: 50)
+        revenue_estimation.send(:calculate_quantity)
+        expect(revenue_estimation.quantity).to eq(20)
+      end
+    end
+
+    context 'with invalid inputs' do
+      it 'handles when revenue or average_ticket is a string' do
+        revenue_estimation = RevenueEstimation.new(revenue: 'invalid', average_ticket: 'invalid')
+        revenue_estimation.send(:calculate_quantity)
+        expect(revenue_estimation.quantity).to be_nil
+      end
+
+      it 'handles zero average_ticket' do
+        revenue_estimation = RevenueEstimation.new(revenue: 1000, average_ticket: 0)
+        revenue_estimation.send(:calculate_quantity)
+        expect(revenue_estimation.quantity).to be_nil
+      end
+
+      it 'handles zero revenue' do
+        revenue_estimation = RevenueEstimation.new(revenue: 0, average_ticket: 50)
+        revenue_estimation.send(:calculate_quantity)
+        expect(revenue_estimation.quantity).to be_zero
+      end
+    end
+  end
 end
