@@ -7,11 +7,10 @@ RSpec.describe DailyCanceledOrderJob, type: :job do
   let(:date) { Date.new(2023, 11, 22) }
   let(:alteration_date) { Date.new(2023, 12, 14) }
   let(:situation_id) { BlingOrderItem::Status::PENDING }
-  let(:bling_order_id) { '19178587026' }
+  let(:bling_order_id) { '19341921284' }
 
   describe '#perform' do
     before do
-      allow(Rails).to receive(:env).and_return('no_test')
       allow(Date).to receive(:today).and_return Date.new(2023, 12, 14)
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.zone.now + 2.days)
       FactoryBot.create(:bling_order_item, bling_order_id:, date:, situation_id:)
