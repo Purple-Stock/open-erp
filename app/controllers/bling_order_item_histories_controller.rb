@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-# a
+
 # There is a necessity to know the revenue from the last 15 days
 # In order to take better commercial decisions.
 class BlingOrderItemHistoriesController < ApplicationController

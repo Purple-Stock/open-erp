@@ -12,9 +12,6 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-# RevenueEstimation exists to answer a question:
-# How much Order Items to sale in order to achieve the average ticket
-# for the given month?
 class RevenueEstimation < ApplicationRecord
   attr_accessor :month
 
@@ -34,7 +31,13 @@ class RevenueEstimation < ApplicationRecord
   private
 
   def calculate_quantity
-    self.quantity = (revenue / average_ticket).to_i
+    return unless valid_numeric_inputs?
+
+    self.quantity = (revenue.to_f / average_ticket.to_f).to_i
+  end
+
+  def valid_numeric_inputs?
+    revenue.is_a?(Numeric) && average_ticket.is_a?(Numeric) && average_ticket.to_f != 0
   end
 
   def set_date
