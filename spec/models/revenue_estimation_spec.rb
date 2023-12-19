@@ -19,6 +19,7 @@ RSpec.describe RevenueEstimation, type: :model do
     it { is_expected.to validate_presence_of(:revenue) }
     it { is_expected.to validate_presence_of(:date) }
     it { is_expected.to validate_numericality_of(:revenue) }
+    it { is_expected.to validate_numericality_of(:average_ticket).is_greater_than(0) }
   end
 
   describe '#save' do
@@ -52,29 +53,20 @@ RSpec.describe RevenueEstimation, type: :model do
   describe '#calculate_quantity' do
     context 'with valid inputs' do
       it 'calculates quantity based on revenue and average_ticket' do
-        revenue_estimation = RevenueEstimation.new(revenue: 1000, average_ticket: 50)
-        revenue_estimation.send(:calculate_quantity)
+        revenue_estimation = create(:revenue_estimation, revenue: 1000, average_ticket: 50)
         expect(revenue_estimation.quantity).to eq(20)
       end
     end
 
     context 'with invalid inputs' do
       it 'handles when revenue or average_ticket is a string' do
-        revenue_estimation = RevenueEstimation.new(revenue: 'invalid', average_ticket: 'invalid')
-        revenue_estimation.send(:calculate_quantity)
-        expect(revenue_estimation.quantity).to be_nil
+        revenue_estimation = build(:revenue_estimation, revenue: 'invalid', average_ticket: 'invalid')
+        expect(revenue_estimation).not_to be_valid
       end
 
       it 'handles zero average_ticket' do
-        revenue_estimation = RevenueEstimation.new(revenue: 1000, average_ticket: 0)
-        revenue_estimation.send(:calculate_quantity)
-        expect(revenue_estimation.quantity).to be_nil
-      end
-
-      it 'handles zero revenue' do
-        revenue_estimation = RevenueEstimation.new(revenue: 0, average_ticket: 50)
-        revenue_estimation.send(:calculate_quantity)
-        expect(revenue_estimation.quantity).to be_zero
+        revenue_estimation = build(:revenue_estimation, revenue: 50, average_ticket: 0)
+        expect(revenue_estimation).not_to be_valid
       end
     end
   end

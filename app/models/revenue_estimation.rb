@@ -17,6 +17,7 @@ class RevenueEstimation < ApplicationRecord
 
   validates :revenue, :average_ticket, :date, presence: :true
   validates :revenue, numericality: :true
+  validates :average_ticket, numericality: { greater_than: 0 }
 
   before_save :calculate_quantity
   before_validation :set_date
@@ -31,13 +32,7 @@ class RevenueEstimation < ApplicationRecord
   private
 
   def calculate_quantity
-    return unless valid_numeric_inputs?
-
     self.quantity = (revenue.to_f / average_ticket.to_f).to_i
-  end
-
-  def valid_numeric_inputs?
-    revenue.is_a?(Numeric) && average_ticket.is_a?(Numeric) && average_ticket.to_f != 0
   end
 
   def set_date
