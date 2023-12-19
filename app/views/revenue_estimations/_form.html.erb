@@ -30,7 +30,7 @@
   <div class="form-row">
     <div class="form-group col-6">
       <%= f.label :month, :class => 'control-label' %>
-      <%= f.select :month, options_for_select((1..12).map { |m| [I18n.t("date.month_names")[m], m] }, f.object.date&.month), {}, class: 'form-control' %>
+      <%= f.select :month, options_for_select((1..12).map { |m| [I18n.t("date.month_names")[m], m] }, Time.now.month), {}, class: 'form-control' %>
     </div>
 
     <div class="form-group col-6">
