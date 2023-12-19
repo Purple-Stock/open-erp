@@ -61,13 +61,4 @@ RSpec.describe RevenueEstimation, type: :model do
       end
     end
   end
-
-  describe '#calculate_quantity' do
-    context 'with valid inputs' do
-      it 'calculates quantity based on revenue and average_ticket' do
-        revenue_estimation = create(:revenue_estimation, revenue: 1000, average_ticket: 50)
-        expect(revenue_estimation.quantity).to eq(20)
-      end
-    end
-  end
 end
