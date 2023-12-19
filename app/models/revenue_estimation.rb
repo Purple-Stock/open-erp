@@ -35,7 +35,7 @@ class RevenueEstimation < ApplicationRecord
   private
 
   def calculate_quantity
-    self.quantity = (revenue.to_f / average_ticket.to_f).to_i
+    self.quantity = (revenue / average_ticket).to_i
   end
 
   def set_date
