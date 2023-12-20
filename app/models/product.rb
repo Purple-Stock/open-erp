@@ -43,6 +43,11 @@ class Product < ApplicationRecord
     validates :price, numericality: { greater_than: 0 }
   end
 
+  def self.synchronize_bling(tenant, filter = {})
+    response = Services::Bling::Product.call(product_command: 'find_products', tenant: tenant)
+    response
+  end
+
   def count_month_purchase_product(year, month)
     first_day_month = Time.zone.local(year, month.to_i, 1)
     last_day_month = first_day_month.end_of_month
