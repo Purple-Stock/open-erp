@@ -15,6 +15,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  account_id  :integer
+#  bling_id    :bigint
 #  category_id :bigint
 #  custom_id   :integer
 #  store_id    :integer
@@ -52,7 +53,8 @@ class Product < ApplicationRecord
         price: bling_product['preco'],
         sku: bling_product['codigo'],
         active: bling_product['situacao'].eql?('A'),
-        account_id: tenant
+        account_id: tenant,
+        bling_id: bling_product['id']
       }
     end
 
