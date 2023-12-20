@@ -44,8 +44,19 @@ class Product < ApplicationRecord
   end
 
   def self.synchronize_bling(tenant, filter = {})
+    attributes = []
     response = Services::Bling::Product.call(product_command: 'find_products', tenant: tenant)
-    response
+    response['data'].each do |bling_product|
+      attributes << {
+        name: bling_product['nome'],
+        price: bling_product['preco'],
+        sku: bling_product['codigo'],
+        active: bling_product['situacao'].eql?('A'),
+        account_id: tenant
+      }
+    end
+
+    Product.create(attributes)
   end
 
   def count_month_purchase_product(year, month)
