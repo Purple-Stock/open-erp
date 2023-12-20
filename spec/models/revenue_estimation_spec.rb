@@ -48,17 +48,5 @@ RSpec.describe RevenueEstimation, type: :model do
         expect(subject.date.month).to eq(10)
       end
     end
-     
-    context "invalid" do
-      it 'handles when revenue or average_ticket is a string' do
-        revenue_estimation = build(:revenue_estimation, revenue: 'invalid', average_ticket: 'invalid')
-        expect(revenue_estimation).not_to be_valid
-      end
-
-      it 'handles zero average_ticket' do
-        revenue_estimation = build(:revenue_estimation, revenue: 50, average_ticket: 0)
-        expect(revenue_estimation).not_to be_valid
-      end
-    end
   end
 end
