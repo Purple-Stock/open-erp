@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_174620) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_232520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -237,6 +237,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_174620) do
     t.string "extra_sku"
     t.integer "account_id"
     t.integer "store_id"
+    t.bigint "bling_id"
     t.index ["account_id"], name: "index_products_on_account_id"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
