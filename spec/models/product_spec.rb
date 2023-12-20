@@ -41,6 +41,10 @@ RSpec.describe Product, type: :model do
     it { is_expected.to have_many(:simplo_items) }
   end
 
+  describe 'columns matcher' do
+    it { is_expected.to have_db_column(:bling_id) }
+  end
+
   describe 'validations' do
     it { is_expected.to validate_presence_of(:name) }
   end
@@ -55,6 +59,30 @@ RSpec.describe Product, type: :model do
         expect do
           described_class.synchronize_bling(user.account.id)
         end.to change(described_class, :count).by(100)
+      end
+    end
+
+    context 'when attributes' do
+      before do
+        VCR.use_cassette('bling_products', erb: true) do
+          described_class.synchronize_bling(user.account.id)
+        end
+      end
+
+      it 'has name' do
+        expect(described_class.first.name).to eq('Faker Name Souza:Branco;Tamanho:G')
+      end
+
+      it 'has sku' do
+        expect(described_class.first.sku).to eq('VEST-Brilho-Reveillon-BRANCO-G')
+      end
+
+      it 'has bling_id' do
+        expect(described_class.first.bling_id).to eq(16_181_499_539)
+      end
+
+      it 'is active' do
+        expect(described_class.first.active).to eq(true)
       end
     end
   end
