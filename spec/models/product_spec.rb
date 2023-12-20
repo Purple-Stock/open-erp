@@ -45,6 +45,20 @@ RSpec.describe Product, type: :model do
     it { is_expected.to validate_presence_of(:name) }
   end
 
+  describe '#self.synchronize_bling' do
+    let(:user) { FactoryBot.create(:user) }
+
+    before { FactoryBot.create(:bling_datum, account_id: user.account.id) }
+
+    it 'creates products' do
+      VCR.use_cassette('bling_products', erb: true) do
+        expect do
+          described_class.synchronize_bling(user.account.id)
+        end.to change(described_class, :count).by(100)
+      end
+    end
+  end
+
   describe '#count_month_purchase_product' do
     it 'returns the sum of quantities for purchase products in the given month' do
       year = Time.zone.now.year
