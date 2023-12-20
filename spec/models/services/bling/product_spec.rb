@@ -33,5 +33,14 @@ RSpec.describe Services::Bling::Product, type: :services do
         end
       end
     end
+
+    context 'when there is no filter' do
+      it 'counts by 100' do
+        VCR.use_cassette('bling_products', erb: true) do
+          result = described_class.call(product_command:, tenant: 1)
+          expect(result['data'].length).to eq(100)
+        end
+      end
+    end
   end
 end
