@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/estoques/saldos?idsProdutos%5B%5D=16181499539&idsProdutos%5B%5D=98
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 21 Dec 2023 15:47:31 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '205'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=ece8f463a8cfa69d
+      Set-Cookie:
+      - PHPSESSID=natl10m8en20s9a2qjs17mj4h4; path=/; secure; HttpOnly
+      - PHPSESSID=sop0p82mn2baeljk5n32erg0m1; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 839143943ac564bb-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"produto":{"id":16181499539},"saldoFisicoTotal":30,"saldoVirtualTotal":30,"depositos":[{"id":9023657532,"saldoFisico":30,"saldoVirtual":30},{"id":14887161887,"saldoFisico":0,"saldoVirtual":0}]}]}'
+  recorded_at: Thu, 21 Dec 2023 15:47:31 GMT
+recorded_with: VCR 6.2.0
