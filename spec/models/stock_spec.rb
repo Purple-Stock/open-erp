@@ -15,7 +15,7 @@ require 'rails_helper'
 
 RSpec.describe Stock, type: :model do
   describe '#associations' do
-    it { is_expected.to belong_to(:product).with_foreign_key(:bling_product_id) }
+    it { is_expected.to belong_to(:product) }
   end
 
   describe '#has column names' do
@@ -83,6 +83,10 @@ RSpec.describe Stock, type: :model do
         VCR.use_cassette('bling_stocks', erb: true) do
           described_class.synchronize_bling(user.account.id, product_ids)
         end
+      end
+
+      it 'has bling_product_id' do
+        expect(described_class.first.bling_product_id).to eq(bling_product_id)
       end
 
       it 'has bling_id' do
