@@ -22,17 +22,26 @@ class Stock < ApplicationRecord
   def self.synchronize_bling(tenant, bling_product_ids)
     options = { idsProdutos: bling_product_ids }
     results = Services::Bling::Stock.call(stock_command: 'find_stocks', tenant:, options:)
+    stocks = Stock.where(account_id: tenant)
     results['data'].each do |bling|
-      attributes = {
-        total_balance: bling['saldoFisicoTotal'],
-        total_virtual_balance: bling['saldoVirtualTotal'],
-        bling_product_id: bling['produto']['id'],
-        account_id: tenant
-      }
-      product = Product.find_by(bling_id: bling['produto']['id'])
-      stock = Stock.new(attributes)
-      product.stock = stock
-      product.save
+      if stocks.exists?(bling_product_id: bling['produto']['id'])
+        attributes = {
+          total_balance: bling['saldoFisicoTotal'],
+          total_virtual_balance: bling['saldoVirtualTotal'],
+        }
+
+        stocks.find_by(bling_product_id: bling['produto']['id']).update(attributes)
+      else
+        attributes = {
+          total_balance: bling['saldoFisicoTotal'],
+          total_virtual_balance: bling['saldoVirtualTotal'],
+          bling_product_id: bling['produto']['id'],
+          account_id: tenant
+        }
+        product = Product.find_by(bling_id: bling['produto']['id'])
+        stock = Stock.new(attributes)
+        product.stock = stock
+      end
     end
   end
 end
