@@ -55,11 +55,29 @@ RSpec.describe Product, type: :model do
 
     before { FactoryBot.create(:bling_datum, account_id: user.account.id) }
 
-    it 'creates products' do
-      VCR.use_cassette('bling_products', erb: true) do
-        expect do
-          described_class.synchronize_bling(user.account.id)
-        end.to change(described_class, :count).by(100)
+    context 'when there is no product' do
+      it 'counts by 100' do
+        VCR.use_cassette('bling_products', erb: true) do
+          expect do
+            described_class.synchronize_bling(user.account.id)
+          end.to change(described_class, :count).by(100)
+        end
+      end
+    end
+
+    context 'when there is product' do
+      let(:bling_product_id) { 16_181_499_539 }
+
+      include_context 'when user account'
+
+      before { FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id) }
+
+      it 'counts by 99' do
+        VCR.use_cassette('bling_products', erb: true) do
+          expect do
+            described_class.synchronize_bling(user.account.id)
+          end.to change(described_class, :count).by(99)
+        end
       end
     end
 
