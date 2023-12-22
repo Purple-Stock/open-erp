@@ -45,6 +45,8 @@ class Product < ApplicationRecord
     validates :price, numericality: { greater_than: 0 }
   end
 
+  after_create :create_stock
+
   def self.synchronize_bling(tenant, filter = {})
     attributes = []
     response = Services::Bling::Product.call(product_command: 'find_products', tenant: tenant)
@@ -124,5 +126,11 @@ class Product < ApplicationRecord
       order_column_index = 1 if order_column_index == 4
       order("#{Product::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
     end
+  end
+
+  private
+
+  def create_stock
+    Stock.synchronize_bling(account_id, [bling_id])
   end
 end
