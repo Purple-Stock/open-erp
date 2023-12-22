@@ -31,15 +31,15 @@ RSpec.describe Stock, type: :model do
   end
 
   describe '#save' do
-    let(:product) { FactoryBot.create(:product) }
+    let(:bling_product_id) { 16_181_499_539 }
+    let(:product) { FactoryBot.create(:product, bling_id: bling_product_id) }
 
     before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
 
     it 'is true' do
-      stock = described_class.new
-      stock.bling_product_id = product.id
-      stock.total_balance = 30
-      stock.total_virtual_balance = 30
+      attributes = { bling_product_id: product.id, total_balance: 30, total_virtual_balance: 30 }
+      stock = described_class.new(attributes)
+      product.stock = stock
       expect(stock.save).to be_truthy
     end
   end
