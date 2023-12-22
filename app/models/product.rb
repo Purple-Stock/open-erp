@@ -47,9 +47,9 @@ class Product < ApplicationRecord
 
   after_create :create_stock
 
-  def self.synchronize_bling(tenant, filter = {})
+  def self.synchronize_bling(tenant, options = {})
     attributes = []
-    response = Services::Bling::Product.call(product_command: 'find_products', tenant: tenant)
+    response = Services::Bling::Product.call(product_command: 'find_products', tenant:, options:)
     products = Product.where(account_id: tenant)
     response['data'].each do |bling_product|
       if products.exists?(bling_id: bling_product['id'])
