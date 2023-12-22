@@ -86,7 +86,7 @@ RSpec.describe Product, type: :model do
 
       before do
         VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
-          FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id)
+          FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id, active: false)
         end
       end
 
@@ -95,6 +95,15 @@ RSpec.describe Product, type: :model do
           expect do
             described_class.synchronize_bling(user.account.id)
           end.to change(described_class, :count).by(99)
+        end
+      end
+
+      it 'has active turned true from bling data' do
+        options = { idsProdutos: [bling_product_id] }
+
+        VCR.use_cassette('bling_product_by_ids', erb: true) do
+          described_class.synchronize_bling(user.account.id, options)
+          expect(described_class.find_by(bling_id: bling_product_id)).to be_active
         end
       end
     end
