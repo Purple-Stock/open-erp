@@ -38,7 +38,7 @@ class Product < ApplicationRecord
   has_one_attached :image
   has_many :simplo_items
   has_one :store
-  has_one :stock, foreign_key: :bling_product_id
+  has_one :stock
 
   with_options presence: true do
     validates :name
