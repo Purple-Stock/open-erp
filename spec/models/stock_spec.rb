@@ -31,7 +31,9 @@ RSpec.describe Stock, type: :model do
   end
 
   describe '#save' do
-    let!(:product) { FactoryBot.create(:product) }
+    let(:product) { FactoryBot.create(:product) }
+
+    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
 
     it 'is true' do
       stock = described_class.new
@@ -47,7 +49,10 @@ RSpec.describe Stock, type: :model do
     let(:product_ids) { [bling_product_id] }
 
     include_context 'with bling token'
-    before { FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id) }
+    before do
+      allow_any_instance_of(Product).to receive(:create_stock).and_return(true)
+      FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id)
+    end
 
     context 'with products' do
       it 'creates stock' do

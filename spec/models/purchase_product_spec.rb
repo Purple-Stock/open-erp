@@ -28,6 +28,8 @@
 require 'rails_helper'
 
 RSpec.describe PurchaseProduct, type: :model do
+  before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+
   it { is_expected.to belong_to(:product) }
 
   context 'when create' do

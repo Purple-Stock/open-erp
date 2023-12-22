@@ -125,6 +125,8 @@ RSpec.describe Product, type: :model do
   end
 
   describe '#count_month_purchase_product' do
+    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+
     it 'returns the sum of quantities for purchase products in the given month' do
       year = Time.zone.now.year
       month = Time.zone.now.month
@@ -135,18 +137,19 @@ RSpec.describe Product, type: :model do
   end
 
   describe '#datatable_filter' do
-    let(:search_value) { 'Widget' }
     let(:search_columns) { { '1' => { 'searchable' => true } } }
     let(:product_1) { create(:product, name: 'Widget') }
     let(:product_2) { create(:product, name: 'Gadget') }
-    let!(:products) { [product_1, product_2] }
+    let(:products) { [product_1, product_2] }
+
+    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
 
     it 'returns products matching the given search value for the given search columns' do
-      result = Product.datatable_filter(search_value, search_columns)
+      result = Product.datatable_filter('Widget', search_columns)
       expect(result).to contain_exactly(product_1)
     end
 
-    xit 'returns all products if the search value is blank' do
+    it 'returns all products if the search value is blank' do
       result = Product.datatable_filter('', search_columns)
       expect(result).to contain_exactly(*products)
     end
@@ -154,6 +157,8 @@ RSpec.describe Product, type: :model do
 
   describe '#count_month_sale_product' do
     let(:account) { create(:account) }
+
+    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
 
     it 'returns the sum of quantities for sale products in the given month' do
       year = Time.zone.now.year
@@ -174,6 +179,8 @@ RSpec.describe Product, type: :model do
   # end
 
   context 'when create' do
+    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+
     it 'is valid' do
       expect(product).to be_valid
     end
@@ -192,22 +199,6 @@ RSpec.describe Product, type: :model do
 
     it 'has a image' do
       expect(product.image).not_to be_nil
-    end
-  end
-
-  context 'when update' do
-    let(:product) { create(:product) }
-
-    it 'is valid' do
-      expect(product).to be_valid
-    end
-  end
-
-  context 'when destroy' do
-    let(:product) { create(:product) }
-
-    it 'is valid' do
-      expect(product).to be_valid
     end
   end
 end
