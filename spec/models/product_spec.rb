@@ -50,6 +50,20 @@ RSpec.describe Product, type: :model do
     it { is_expected.to validate_presence_of(:name) }
   end
 
+  describe '#create' do
+    let(:bling_id) { 16_181_499_539 }
+
+    include_context 'when user account'
+
+    it 'creates stock' do
+      VCR.use_cassette('bling_stocks', erb: true) do
+        expect do
+          FactoryBot.create(:product, bling_id:, account_id: user.account.id)
+        end.to change(Stock, :count).by(1)
+      end
+    end
+  end
+
   describe '#self.synchronize_bling' do
     let(:user) { FactoryBot.create(:user) }
 
