@@ -34,6 +34,27 @@ RSpec.describe Services::Bling::Product, type: :services do
       end
     end
 
+    context 'when filtering by products' do
+      let(:bling_product_id) { 16_181_499_539 }
+      let(:options) { { idsProdutos: [bling_product_id] } }
+
+      before { allow(Rails).to receive(:env).and_return('no_test') }
+
+      it 'counts by 1' do
+        VCR.use_cassette('bling_product_by_ids', erb: true) do
+          result = described_class.call(product_command:, tenant: 1, options:)
+          expect(result['data'].length).to eq(1)
+        end
+      end
+
+      it 'has same bling_product_id' do
+        VCR.use_cassette('bling_product_by_ids', erb: true) do
+          result = described_class.call(product_command:, tenant: 1, options:)
+          expect(result['data'].first['id']).to eq(bling_product_id)
+        end
+      end
+    end
+
     context 'when there is no filter' do
       it 'counts by 100' do
         VCR.use_cassette('bling_products', erb: true) do
