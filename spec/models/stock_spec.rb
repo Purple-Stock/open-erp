@@ -47,6 +47,7 @@ RSpec.describe Stock, type: :model do
   describe '#self.synchronize_bling' do
     let(:bling_product_id) { 16_181_499_539 }
     let(:product_ids) { [bling_product_id] }
+    let(:product) { FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id) }
 
     include_context 'with bling token'
     before do
@@ -60,6 +61,19 @@ RSpec.describe Stock, type: :model do
           expect do
             described_class.synchronize_bling(user.account.id, product_ids)
           end.to change(described_class, :count).by(1)
+        end
+      end
+    end
+
+    context 'with stock to be updated' do
+      before do
+        described_class.new(bling_product_id: product.bling_id, total_balance: 50, total_virtual_balance: 50).save
+      end
+
+      it 'updates total_balance' do
+        VCR.use_cassette('bling_stocks', erb: true) do
+          described_class.synchronize_bling(user.account.id, product_ids)
+          expect(described_class.find_by(bling_product_id:).total_balance).to eq(30)
         end
       end
     end
