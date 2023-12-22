@@ -56,7 +56,7 @@ RSpec.describe Product, type: :model do
     include_context 'when user account'
 
     it 'creates stock' do
-      VCR.use_cassette('bling_stocks', erb: true) do
+      VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
         expect do
           FactoryBot.create(:product, bling_id:, account_id: user.account.id)
         end.to change(Stock, :count).by(1)
@@ -71,7 +71,7 @@ RSpec.describe Product, type: :model do
 
     context 'when there is no product' do
       it 'counts by 100' do
-        VCR.use_cassette('bling_products', erb: true) do
+        VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
           expect do
             described_class.synchronize_bling(user.account.id)
           end.to change(described_class, :count).by(100)
@@ -84,10 +84,14 @@ RSpec.describe Product, type: :model do
 
       include_context 'when user account'
 
-      before { FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id) }
+      before do
+        VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
+          FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id)
+        end
+      end
 
       it 'counts by 99' do
-        VCR.use_cassette('bling_products', erb: true) do
+        VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
           expect do
             described_class.synchronize_bling(user.account.id)
           end.to change(described_class, :count).by(99)
@@ -97,7 +101,7 @@ RSpec.describe Product, type: :model do
 
     context 'when attributes' do
       before do
-        VCR.use_cassette('bling_products', erb: true) do
+        VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
           described_class.synchronize_bling(user.account.id)
         end
       end
