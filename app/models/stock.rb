@@ -12,7 +12,7 @@
 #  product_id            :integer
 #
 class Stock < ApplicationRecord
-  belongs_to :product, foreign_key: :bling_product_id
+  belongs_to :product, class_name: 'Product', inverse_of: :stock
 
   validates :bling_product_id, :total_balance, :total_virtual_balance,
             numericality: { numericality: true, only_integer: true }
