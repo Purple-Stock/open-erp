@@ -1,0 +1,21 @@
+<%- model_class = Stock -%>
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t '.title', :default => t(model_class.model_name.human.titleize) %></h1>
+  </div>
+</div>
+
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
+      <dl class="dl-horizontal">
+        <dt><strong><%= model_class.human_attribute_name(t(:name)) %>:</strong></dt>
+        <dd><%= @stock.name %></dd>
+        <dd>Saldo total: <%= @stock.total_balance %></dd>
+        <dd>Saldo Virtual total: <%= @stock.total_virtual_balance %></dd>
+      </dl>
+
+      <%= link_to t('.back', :default => t("helpers.links.back")), stocks_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+</div>
