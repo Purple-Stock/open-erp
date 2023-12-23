@@ -1,7 +1,7 @@
 <%- model_class = Stock -%>
 <div class="section-header">
   <div class="page-header">
-    <h1><%= t('stock.two') %></h1>
+    <h1><%= t('stocks.two') %></h1>
   </div>
 </div>
 
@@ -23,9 +23,9 @@
             <thead>
             <tr>
               <th><%= model_class.human_attribute_name(:id) %></th>
-              <th><%= t('stock.total_balance') %></th>
-              <th><%= t('stock.total_virtual_balance') %></th>
-              <th><%= t('stock.product') %></th>
+              <th><%= t('stocks.total_balance') %></th>
+              <th><%= t('stocks.total_virtual_balance') %></th>
+              <th><%= t('stocks.product') %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
