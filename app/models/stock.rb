@@ -19,16 +19,16 @@ class Stock < ApplicationRecord
 
   delegate :active, :bling_id, :name, to: :product
 
-  def self.filter_by_total_balance_situation(balance_situation = :all)
-    return all if balance_situation == :all
+  def self.filter_by_total_balance_situation(balance_situation = nil)
+    return all if balance_situation.blank?
 
     balance_situation_parser = { 1 => '>', -1 => '<', 0 => '=' }
-    balance_situation = balance_situation_parser[balance_situation]
+    balance_situation = balance_situation_parser[balance_situation.to_i]
     where("total_balance #{balance_situation} ?", 0)
   end
 
-  def self.filter_by_status(status_number = :all)
-    return all if status_number == :all
+  def self.filter_by_status(status_number = nil)
+    return all if status_number.blank?
 
     joins(:product).where(product: { active: status_number })
   end
