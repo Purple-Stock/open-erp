@@ -44,6 +44,67 @@ RSpec.describe Stock, type: :model do
     end
   end
 
+  describe '#Self.filter_by_total_balance_situation' do
+    include_context 'when user account'
+    before do
+      Product.skip_callback(:create, :after, :create_stock)
+    end
+
+    after do
+      Product.set_callback(:create, :after, :create_stock)
+    end
+
+    let(:product) { FactoryBot.create(:product) }
+    let!(:stock_positive) { FactoryBot.create(:stock, product: product, total_balance: 100) }
+    let!(:stock_zero) { FactoryBot.create(:stock, product: product, total_balance: 0) }
+    let!(:stock_negative) { FactoryBot.create(:stock, product: product, total_balance: -10) }
+
+
+    context 'when filtering by positive balance' do
+      subject(:positive_filter) { described_class.filter_by_total_balance_situation(1) }
+
+      it 'has stock positive' do
+        expect(positive_filter).to include(stock_positive)
+      end
+
+      it 'does not have neither stock zero nor negative stock' do
+        expect(positive_filter).not_to include(stock_negative, stock_zero)
+      end
+    end
+
+    context 'when filtering by negative balance' do
+      subject(:negative_filter) { described_class.filter_by_total_balance_situation(-1) }
+
+      it 'has stock negative' do
+        expect(negative_filter).to include(stock_negative)
+      end
+
+      it 'does not have neither stock zero nor positive stocks' do
+        expect(negative_filter).not_to include(stock_positive, stock_zero)
+      end
+    end
+
+    context 'when filtering by zero balance' do
+      subject(:zero_filter) { described_class.filter_by_total_balance_situation(0) }
+
+      it 'has stock zero' do
+        expect(zero_filter).to include(stock_zero)
+      end
+
+      it 'does not have neither stock positive nor negative stock' do
+        expect(zero_filter).not_to include(stock_positive, stock_negative)
+      end
+    end
+
+    context 'when filtering by all' do
+      subject(:by_all_filter) { described_class.filter_by_total_balance_situation() }
+
+      it 'includes all balances' do
+        expect(by_all_filter).to include(stock_positive, stock_negative, stock_zero)
+      end
+    end
+  end
+
   describe '#self.synchronize_bling' do
     let(:bling_product_id) { 16_181_499_539 }
     let(:product_ids) { [bling_product_id] }
