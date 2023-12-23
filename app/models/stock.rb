@@ -17,7 +17,7 @@ class Stock < ApplicationRecord
   validates :bling_product_id, :total_balance, :total_virtual_balance,
             numericality: { numericality: true, only_integer: true }
 
-  delegate :active, :bling_id, to: :product
+  delegate :active, :bling_id, :name, to: :product
 
   def self.synchronize_bling(tenant, bling_product_ids)
     options = { idsProdutos: bling_product_ids }
