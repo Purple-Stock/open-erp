@@ -38,7 +38,7 @@ class Product < ApplicationRecord
   has_one_attached :image
   has_many :simplo_items
   has_one :store
-  has_one :stock
+  has_one :stock, dependent: :destroy
 
   with_options presence: true do
     validates :name
@@ -46,6 +46,8 @@ class Product < ApplicationRecord
   end
 
   after_create :create_stock
+
+  accepts_nested_attributes_for :stock
 
   def self.synchronize_bling(tenant, options = {})
     attributes = []
