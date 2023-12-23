@@ -46,15 +46,9 @@ RSpec.describe Stock, type: :model do
 
   describe '#Self.filter_by_total_balance_situation' do
     include_context 'when user account'
-    before do
-      Product.skip_callback(:create, :after, :create_stock)
-    end
+    include_context 'when skip create_stock callback'
+    include_context 'with product'
 
-    after do
-      Product.set_callback(:create, :after, :create_stock)
-    end
-
-    let(:product) { FactoryBot.create(:product) }
     let!(:stock_positive) { FactoryBot.create(:stock, product: product, total_balance: 100) }
     let!(:stock_zero) { FactoryBot.create(:stock, product: product, total_balance: 0) }
     let!(:stock_negative) { FactoryBot.create(:stock, product: product, total_balance: -10) }
