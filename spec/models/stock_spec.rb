@@ -44,6 +44,47 @@ RSpec.describe Stock, type: :model do
     end
   end
 
+  describe '#Self.filter_by_status' do
+    include_context 'when user account'
+    include_context 'when skip create_stock callback'
+    include_context 'with product'
+    let(:inactive_product) { FactoryBot.create(:product, active: false) }
+    let!(:stock) { FactoryBot.create(:stock, product: product) }
+    let!(:inactive_stock) { FactoryBot.create(:stock, product: inactive_product) }
+
+    context 'when active' do
+      subject(:filter_by_active_status) { described_class.filter_by_status(1) }
+
+      it 'includes stock' do
+        expect(filter_by_active_status).to include(stock)
+      end
+
+      it 'does not include inactive stock' do
+        expect(filter_by_active_status).not_to include(inactive_stock)
+      end
+    end
+
+    context 'when inactive' do
+      subject(:filter_by_inactive_status) { described_class.filter_by_status(0) }
+
+      it 'does not include stock' do
+        expect(filter_by_inactive_status).not_to include(stock)
+      end
+
+      it 'includes inactive stock' do
+        expect(filter_by_inactive_status).to include(inactive_stock)
+      end
+    end
+
+    context 'when all status' do
+      subject(:filter_by_inactive_status) { described_class.filter_by_status }
+
+      it 'includes both stock and inactive stock' do
+        expect(filter_by_inactive_status).to include(stock, inactive_stock)
+      end
+    end
+  end
+
   describe '#Self.filter_by_total_balance_situation' do
     include_context 'when user account'
     include_context 'when skip create_stock callback'
@@ -91,7 +132,7 @@ RSpec.describe Stock, type: :model do
     end
 
     context 'when filtering by all' do
-      subject(:by_all_filter) { described_class.filter_by_total_balance_situation() }
+      subject(:by_all_filter) { described_class.filter_by_total_balance_situation }
 
       it 'includes all balances' do
         expect(by_all_filter).to include(stock_positive, stock_negative, stock_zero)
