@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Stocks', type: :request do
   let(:user) { FactoryBot.create(:user) }
-  let(:product) { FactoryBot.create(:product) }
+  let(:product) { FactoryBot.create(:product, account_id: user.account.id) }
 
   before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
 
