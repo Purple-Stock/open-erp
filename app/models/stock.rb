@@ -19,6 +19,14 @@ class Stock < ApplicationRecord
 
   delegate :active, :bling_id, :name, to: :product
 
+  def self.filter_by_total_balance_situation(balance_situation = :all)
+    return all if balance_situation == :all
+
+    balance_situation_parser = { 1 => '>', -1 => '<', 0 => '=' }
+    balance_situation = balance_situation_parser[balance_situation]
+    where("total_balance #{balance_situation} ?", 0)
+  end
+
   def self.synchronize_bling(tenant, bling_product_ids)
     options = { idsProdutos: bling_product_ids }
     results = Services::Bling::Stock.call(stock_command: 'find_stocks', tenant:, options:)
