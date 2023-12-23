@@ -26,9 +26,10 @@ Rails.application.routes.draw do
       post :import
     end
   end
-  
+
   devise_for :users
 
+  resources :stocks, only: %i[index show edit]
   resources :revenue_estimations
   resources :accounts
   resources :purchase_products
