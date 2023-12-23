@@ -1,0 +1,44 @@
+<%- model_class = Stock -%>
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t('stock.two') %></h1>
+  </div>
+</div>
+
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
+      <%= turbo_frame_tag :stocks do %>
+        <div class="table-responsive">
+
+          <table id="stockTable" class="table table-striped">
+            <thead>
+            <tr>
+              <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= t('stock.total_balance') %></th>
+              <th><%= t('stock.total_virtual_balance') %></th>
+              <th><%= t('stock.product') %></th>
+              <th><%= t '.actions', :default => t("helpers.actions") %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @stocks.each do |stock| %>
+            <tr>
+              <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
+              <td><%= stock.total_balance %></td>
+              <td><%= stock.total_virtual_balance %></td>
+              <td><%= stock.product.name %></td>
+              <td>
+                <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+              </td>
+            </tr>
+            <% end %>
+            </tbody>
+          </table>
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
