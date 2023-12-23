@@ -27,6 +27,12 @@ class Stock < ApplicationRecord
     where("total_balance #{balance_situation} ?", 0)
   end
 
+  def self.filter_by_status(status_number = :all)
+    return all if status_number == :all
+
+    joins(:product).where(product: { active: status_number })
+  end
+
   def self.synchronize_bling(tenant, bling_product_ids)
     options = { idsProdutos: bling_product_ids }
     results = Services::Bling::Stock.call(stock_command: 'find_stocks', tenant:, options:)
