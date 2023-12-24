@@ -1,0 +1,62 @@
+<%- model_class = Production -%>
+<section class="section">
+  <div class="section-header d-mobile-none">
+    <h1><%= t '.title', :default => t(model_class.model_name.human.titleize) %></h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item"><%= link_to 'Dashboard', root_path %></div>
+      <div class="breadcrumb-item"><%= link_to 'Productions', productions_path %></div>
+      <div class="breadcrumb-item">Show Production</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="card">
+      <div class="card-header">
+        <h4>Detalhes Costureiro</h4>
+      </div>
+      <div class="card-body">
+        <% if @production.tailor.present? %>
+          <p>Nome: <%= @production.tailor.name %></p>
+        <% else %>
+          <p>No tailor associated with this production.</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Produtos da Produção</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <% @production.production_products.each do |prod_product| %>
+            <li class="list-group-item">
+              Produto: <%= prod_product.product.name %>, Quantity: <%= prod_product.quantity %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Dados Produção</h4>
+      </div>
+      <div class="card-body">
+        <dl class="row">
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:cut_date) %>:</dt>
+          <dd class="col-sm-9"><%= @production.cut_date %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:deliver_date)%>:</dt>
+          <dd class="col-sm-9"><%= @production.deliver_date %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:consider)%>:</dt>
+          <dd class="col-sm-9"><%= @production.consider ? 'Sim' : 'Não' %></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+<%= link_to t('.back', :default => t("helpers.links.back")), productions_path, :class => 'btn btn-secondary' %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")), edit_production_path(@production), :class => 'btn btn-warning' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")), production_path(@production), :method => 'delete',
+            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+            :class => 'btn btn-danger' %>
+
+<% content_for(:page_title, 'Show Production') %>

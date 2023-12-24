@@ -1,0 +1,27 @@
+<br><br>
+<div class="container">
+  <%- model_class = Tailor -%>
+  <h1><%= t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_tailor_path, :class => 'btn btn-primary mb-3' %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(t(:name)) %></th>
+        <th><%= t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tailors.each do |tailor| %>
+        <tr>
+          <td><%= tailor.name %></td>
+          <td>
+            <%= link_to icon('fas fa-pencil-alt'), edit_tailor_path(tailor), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+            <%= link_to icon('fas fa-eye'), tailor, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+            <%= link_to icon('fas fa-trash'), tailor, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>              
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

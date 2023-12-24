@@ -12,9 +12,6 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-# RevenueEstimation exists to answer a question:
-# How much Order Items to sale in order to achieve the average ticket
-# for the given month?
 class RevenueEstimation < ApplicationRecord
   attr_accessor :month
 

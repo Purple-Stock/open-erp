@@ -21,6 +21,10 @@ pt-BR:
   Products: Produtos
   Sale: Venda
   Sales: Vendas
+  Tailor: Costureiro
+  Tailors: Costureiros
+  Production: Produção
+  Productions: Produções
   Customers: Clientes
   Customer: Cliente
   category_id: Categoria
@@ -48,12 +52,18 @@ pt-BR:
     active: 'Ativo'
     inactive: 'Inativo'
   activerecord:
-    errors:
-      messages:
-        record_invalid: 'A validação falhou: %{errors}'
-        restrict_dependent_destroy:
-          has_one: Não é possível excluir o registro pois existe um %{record} dependente
-          has_many: Não é possível excluir o registro pois existem %{record} dependentes
+    attributes:
+      production_product:
+        product_id: "Produto"
+        quantity: "Quantidade"
+  actions:
+    remove_product: "Remover Produto"
+  errors:
+    messages:
+      record_invalid: 'A validação falhou: %{errors}'
+      restrict_dependent_destroy:
+        has_one: Não é possível excluir o registro pois existe um %{record} dependente
+        has_many: Não é possível excluir o registro pois existem %{record} dependentes
   date:
     abbr_day_names:
     - dom
@@ -209,8 +219,11 @@ pt-BR:
       submit: Salvar %{model}
       confirm: Você tem certeza?
     titles:
-      new: Criar %{model}
       edit: Editar %{model}
+      new: Criar %{model}
+    tailor:
+      edit:
+        title: "Editar Costureiro"
     actions: Ações
   number:
     currency:
@@ -282,6 +295,12 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''
+  
+  date:
+    formats:
+      default: "%d-%m-%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %B"
 
   January: Janeiro
   February: Fevereiro
@@ -295,3 +314,15 @@ pt-BR:
   October: Outubro
   November: Novembro
   December: Dezembro
+helpers:
+  submit:
+    create: "Criar"
+    update: "Atualizar"
+  productions:
+    form:
+      tailor_selection: "Seleção de Alfaiate"
+      cut_date: "Data de Corte"
+      deliver_date: "Data de Entrega"
+      add_product: "Adicionar Produto"
+      consider: "Considerar"
+      submit_button: "Enviar"

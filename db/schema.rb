@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_013257) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_18_002858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -78,6 +78,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013257) do
     t.string "store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.datetime "alteration_date"
+    t.string "marketplace_code_id"
+    t.integer "bling_id"
+    t.bigint "account_id"
+    t.decimal "value"
+    t.jsonb "items"
+    t.index ["account_id"], name: "index_bling_order_items_on_account_id"
+    t.index ["bling_order_id"], name: "index_bling_order_items_on_bling_order_id", unique: true
   end
 
   create_table "categories", force: :cascade do |t|
@@ -98,6 +107,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013257) do
     t.datetime "updated_at", null: false
     t.integer "account_id"
     t.index ["account_id"], name: "index_customers_on_account_id"
+  end
+
+  create_table "finance_data", force: :cascade do |t|
+    t.date "date"
+    t.decimal "income"
+    t.decimal "expense"
+    t.decimal "fixed_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -205,6 +223,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013257) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "production_products", force: :cascade do |t|
+    t.bigint "production_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_production_products_on_product_id"
+    t.index ["production_id"], name: "index_production_products_on_production_id"
+  end
+
+  create_table "productions", force: :cascade do |t|
+    t.datetime "cut_date"
+    t.datetime "deliver_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "account_id"
+    t.bigint "tailor_id"
+    t.boolean "consider", default: false
+    t.index ["account_id"], name: "index_productions_on_account_id"
+    t.index ["tailor_id"], name: "index_productions_on_tailor_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.float "price"
@@ -245,6 +285,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013257) do
     t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
   end
 
+  create_table "revenue_estimations", force: :cascade do |t|
+    t.decimal "average_ticket"
+    t.integer "quantity"
+    t.decimal "revenue"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sale_products", force: :cascade do |t|
     t.integer "quantity"
     t.float "value"
@@ -275,6 +324,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013257) do
     t.integer "account_id"
     t.index ["account_id"], name: "index_sales_on_account_id"
     t.index ["customer_id"], name: "index_sales_on_customer_id"
+  end
+
+  create_table "shein_orders", force: :cascade do |t|
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_shein_orders_on_account_id"
   end
 
   create_table "simplo_clients", force: :cascade do |t|
@@ -369,6 +426,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013257) do
     t.index ["account_id"], name: "index_suppliers_on_account_id"
   end
 
+  create_table "tailors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_tailors_on_account_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -391,6 +456,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_013257) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "group_products", "groups"
   add_foreign_key "group_products", "products"
+  add_foreign_key "production_products", "productions"
+  add_foreign_key "production_products", "products"
+  add_foreign_key "productions", "tailors"
   add_foreign_key "products", "categories"
   add_foreign_key "purchase_products", "products"
   add_foreign_key "purchase_products", "purchases"

@@ -29,6 +29,7 @@ default: &default
 development:
   <<: *default
   database: inventory-control_development
+  #url: postgres://yosyveae:DU1Tb-Xd3E8Rzr468Tp5stXPN5Qo5ryD@babar.db.elephantsql.com/yosyveae
   pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5).to_i + 1 + 2 + ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i %>
 
   # check best practices for good_job https://github.com/bensheldon/good_job#database-connections
