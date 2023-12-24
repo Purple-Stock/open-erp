@@ -76,7 +76,7 @@ Rails.application.configure do
   config.good_job.enable_cron = false
   config.good_job.cron = {
     product_sync_job: {
-      cron: "*/60 * * * *",
+      cron: "*/10 * * * *",
       class: "ProductSyncJob",
       args: [1],
       set: { priority: 1 },
