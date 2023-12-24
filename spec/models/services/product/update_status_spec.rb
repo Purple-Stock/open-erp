@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Services::Product::UpdateStatus, type: :services do
-  before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+  include_context 'when skip synchronize_stock callback'
 
   context 'when call the service' do
     let(:product) { create(:product) }

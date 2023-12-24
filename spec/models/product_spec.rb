@@ -69,6 +69,8 @@ RSpec.describe Product, type: :model do
 
     before { FactoryBot.create(:bling_datum, account_id: user.account.id) }
 
+    include_context 'when skip synchronize_stock callback'
+
     context 'when there is no product' do
       it 'counts by 100' do
         VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
@@ -134,7 +136,7 @@ RSpec.describe Product, type: :model do
   end
 
   describe '#count_month_purchase_product' do
-    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+    include_context 'when skip synchronize_stock callback'
 
     it 'returns the sum of quantities for purchase products in the given month' do
       year = Time.zone.now.year
@@ -151,7 +153,7 @@ RSpec.describe Product, type: :model do
     let(:product_2) { create(:product, name: 'Gadget') }
     let(:products) { [product_1, product_2] }
 
-    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+    include_context 'when skip synchronize_stock callback'
 
     it 'returns products matching the given search value for the given search columns' do
       result = Product.datatable_filter('Widget', search_columns)
@@ -167,7 +169,7 @@ RSpec.describe Product, type: :model do
   describe '#count_month_sale_product' do
     let(:account) { create(:account) }
 
-    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+    include_context 'when skip synchronize_stock callback'
 
     it 'returns the sum of quantities for sale products in the given month' do
       year = Time.zone.now.year
@@ -188,7 +190,7 @@ RSpec.describe Product, type: :model do
   # end
 
   context 'when create' do
-    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+    include_context 'when skip synchronize_stock callback'
 
     it 'is valid' do
       expect(product).to be_valid

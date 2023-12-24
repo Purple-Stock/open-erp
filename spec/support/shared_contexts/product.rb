@@ -2,13 +2,13 @@
 
 require 'spec_helper'
 
-shared_context 'when skip create_stock callback' do
+shared_context 'when skip synchronize_stock callback' do
   before do
-    Product.skip_callback(:create, :after, :create_stock)
+    Product.skip_callback(:save, :after, :synchronize_stock)
   end
 
   after do
-    Product.set_callback(:create, :after, :create_stock)
+    Product.set_callback(:save, :after, :synchronize_stock)
   end
 end
 

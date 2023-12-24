@@ -34,7 +34,7 @@ RSpec.describe Stock, type: :model do
     let(:bling_product_id) { 16_181_499_539 }
     let(:product) { FactoryBot.create(:product, bling_id: bling_product_id) }
 
-    before { allow_any_instance_of(Product).to receive(:create_stock).and_return(true) }
+    include_context 'when skip synchronize_stock callback'
 
     it 'is true' do
       attributes = { bling_product_id: product.id, total_balance: 30, total_virtual_balance: 30 }
@@ -46,7 +46,7 @@ RSpec.describe Stock, type: :model do
 
   describe '#Self.filter_by_status' do
     include_context 'when user account'
-    include_context 'when skip create_stock callback'
+    include_context 'when skip synchronize_stock callback'
     include_context 'with product'
     let(:inactive_product) { FactoryBot.create(:product, active: false) }
     let!(:stock) { FactoryBot.create(:stock, product: product) }
@@ -87,7 +87,7 @@ RSpec.describe Stock, type: :model do
 
   describe '#Self.filter_by_total_balance_situation' do
     include_context 'when user account'
-    include_context 'when skip create_stock callback'
+    include_context 'when skip synchronize_stock callback'
     include_context 'with product'
 
     let!(:stock_positive) { FactoryBot.create(:stock, product: product, total_balance: 100) }
@@ -146,8 +146,8 @@ RSpec.describe Stock, type: :model do
     let(:product) { FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id) }
 
     include_context 'with bling token'
+    include_context 'when skip synchronize_stock callback'
     before do
-      allow_any_instance_of(Product).to receive(:create_stock).and_return(true)
       FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id)
     end
 
