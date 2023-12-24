@@ -45,7 +45,7 @@ class Product < ApplicationRecord
     validates :price, numericality: { greater_than: 0 }
   end
 
-  after_create :create_stock
+  after_save :synchronize_stock
 
   accepts_nested_attributes_for :stock
 
@@ -132,7 +132,7 @@ class Product < ApplicationRecord
 
   private
 
-  def create_stock
+  def synchronize_stock
     Stock.synchronize_bling(account_id, [bling_id])
   end
 end
