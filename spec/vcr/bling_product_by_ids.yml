@@ -2,89 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: https://www.bling.com.br/Api/v3/produtos?idsProdutos%5B%5D=16181499539&limite=100&pagina=1
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - Bearer <%= ENV['ACCESS_TOKEN'] %>
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 22 Dec 2023 15:48:28 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '2264'
-      Connection:
-      - keep-alive
-      Server-Timing:
-      - intid;desc=aedc192fd359c297
-      Set-Cookie:
-      - PHPSESSID=hao23h4d847tvsect7liq28tac; path=/; secure; HttpOnly
-      - PHPSESSID=hgt3a0eilasl0f5jnau4s53f9g; path=/; secure; HttpOnly
-      Expires:
-      - Thu, 19 Nov 1981 08:52:00 GMT
-      Cache-Control:
-      - no-cache, public, must-revalidate, max-age=2592000
-      Pragma:
-      - no-cache
-      Vary:
-      - Accept-Encoding
-      Cf-Cache-Status:
-      - DYNAMIC
-      Strict-Transport-Security:
-      - max-age=31536000
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - SAMEORIGIN
-      Server:
-      - cloudflare
-      Cf-Ray:
-      - 8399825a2b3e6466-GIG
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":[{"id":16181499539,"nome":"Faker Name Souza:Branco;Tamanho:G","codigo":"VEST-Brilho-Reveillon-BRANCO-G","preco":189.9,"tipo":"P","situacao":"A","formato":"S","descricaoCurta":"<p>Bem-vinda
-        \u00e0 \"Coleo Premium\", onde o glamour se encontra com a celebrao, e nosso
-        deslumbrante vestido de paet\u00eas \u00e9 a personificao do luxo para as
-        festividades de final de ano. Este vestido radiante, feito de paet\u00ea brilhante,
-        \u00e9 uma escolha verdadeiramente deslumbrante para aquelas que desejam brilhar
-        com estilo inigual\u00e1vel.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>Disponvel nas cores
-        preto, branco e vermelho, cada tonalidade oferece uma expresso nica de sofisticao
-        e festividade. A parte traseira aberta adiciona um toque sedutor, enquanto
-        os paet\u00eas proporcionam um brilho exuberante que certamente far\u00e1
-        voc\u00ea se destacar em qualquer celebrao.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>Use
-        este vestido para eventos de gala, festas de final de ano ou ocasi\u00f5es
-        especiais que exigem um toque de glamour extra. Combine com saltos altos para
-        alongar a silhueta e adicione acessrios minimalistas para destacar ainda mais
-        o brilho deslumbrante do paet\u00ea.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>A versatilidade
-        deste vestido permite que voc\u00ea o adapte ao seu estilo pessoal. Para um
-        visual mais ousado, escolha o vermelho vibrante; para uma eleg\u00e2ncia atemporal,
-        o cl\u00e1ssico preto \u00e9 a escolha perfeita; enquanto o branco transmite
-        uma pureza e luminosidade inigual\u00e1veis.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>Este
-        vestido de paet\u00eas no \u00e9 apenas uma pea de roupa, \u00e9 uma declarao
-        de estilo e confiana. Celebre o final de ano com brilho, eleg\u00e2ncia e
-        a certeza de que voc\u00ea est\u00e1 usando uma pea exclusiva da \"Coleo Premium\".
-        Prepare-se para deslumbrar e criar memrias inesquecveis enquanto brilha com
-        o esplendor deste vestido deslumbrante.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>\u00a0<\/p>\r\n<p>Tamanhos:<\/p>\r\n<p>PP:
-        veste at\u00e9 34<\/p>\r\n<p>P: veste at\u00e9 36<\/p>\r\n<p>M: veste at\u00e9
-        38<\/p>\r\n<p>G: veste at\u00e9 40\/42<\/p>\r\n<p>\u00a0<\/p>"}]}'
-  recorded_at: Fri, 22 Dec 2023 15:48:28 GMT
-- request:
-    method: get
     uri: https://www.bling.com.br/Api/v3/produtos?idsProdutos%5B%5D=16181499539&limite=100&pagina=2
     body:
       encoding: US-ASCII
@@ -142,4 +59,146 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"data":[]}'
   recorded_at: Fri, 22 Dec 2023 15:48:29 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/produtos?idsProdutos%5B%5D=16181499539&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 26 Dec 2023 22:05:44 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2264'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=c6981d0dd907f638
+      Set-Cookie:
+      - PHPSESSID=pbe8flv38m5g0hceucpf7kl7vi; path=/; secure; HttpOnly
+      - PHPSESSID=pje2br52jqcncbgame3b1rheph; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 83bca07cdd1621d1-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":16181499539,"nome":"Faker Name Souza:Branco;Tamanho:G","codigo":"VEST-Brilho-Reveillon-BRANCO-G","preco":189.9,"tipo":"P","situacao":"A","formato":"S","descricaoCurta":"<p>Bem-vinda
+        \u00e0 \"Coleo Premium\", onde o glamour se encontra com a celebrao, e nosso
+        deslumbrante vestido de paet\u00eas \u00e9 a personificao do luxo para as
+        festividades de final de ano. Este vestido radiante, feito de paet\u00ea brilhante,
+        \u00e9 uma escolha verdadeiramente deslumbrante para aquelas que desejam brilhar
+        com estilo inigual\u00e1vel.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>Disponvel nas cores
+        preto, branco e vermelho, cada tonalidade oferece uma expresso nica de sofisticao
+        e festividade. A parte traseira aberta adiciona um toque sedutor, enquanto
+        os paet\u00eas proporcionam um brilho exuberante que certamente far\u00e1
+        voc\u00ea se destacar em qualquer celebrao.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>Use
+        este vestido para eventos de gala, festas de final de ano ou ocasi\u00f5es
+        especiais que exigem um toque de glamour extra. Combine com saltos altos para
+        alongar a silhueta e adicione acessrios minimalistas para destacar ainda mais
+        o brilho deslumbrante do paet\u00ea.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>A versatilidade
+        deste vestido permite que voc\u00ea o adapte ao seu estilo pessoal. Para um
+        visual mais ousado, escolha o vermelho vibrante; para uma eleg\u00e2ncia atemporal,
+        o cl\u00e1ssico preto \u00e9 a escolha perfeita; enquanto o branco transmite
+        uma pureza e luminosidade inigual\u00e1veis.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>Este
+        vestido de paet\u00eas no \u00e9 apenas uma pea de roupa, \u00e9 uma declarao
+        de estilo e confiana. Celebre o final de ano com brilho, eleg\u00e2ncia e
+        a certeza de que voc\u00ea est\u00e1 usando uma pea exclusiva da \"Coleo Premium\".
+        Prepare-se para deslumbrar e criar memrias inesquecveis enquanto brilha com
+        o esplendor deste vestido deslumbrante.<\/p>\r\n<p>\u00a0<\/p>\r\n<p>\u00a0<\/p>\r\n<p>Tamanhos:<\/p>\r\n<p>PP:
+        veste at\u00e9 34<\/p>\r\n<p>P: veste at\u00e9 36<\/p>\r\n<p>M: veste at\u00e9
+        38<\/p>\r\n<p>G: veste at\u00e9 40\/42<\/p>\r\n<p>\u00a0<\/p>"}]}'
+  recorded_at: Tue, 26 Dec 2023 22:05:44 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/estoques/saldos?idsProdutos%5B%5D=16181499539
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 26 Dec 2023 22:05:46 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '205'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=9b56d5bbe4e1c9fa
+      Set-Cookie:
+      - PHPSESSID=6mr73dbdbpn09ou16u5g2k25o3; path=/; secure; HttpOnly
+      - PHPSESSID=o6toqme8n03tukg73kf38qsfre; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 83bca0841b9d254d-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"produto":{"id":16181499539},"saldoFisicoTotal":30,"saldoVirtualTotal":30,"depositos":[{"id":9023657532,"saldoFisico":30,"saldoVirtual":30},{"id":14887161887,"saldoFisico":0,"saldoVirtual":0}]}]}'
+  recorded_at: Tue, 26 Dec 2023 22:05:46 GMT
 recorded_with: VCR 6.2.0

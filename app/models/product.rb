@@ -68,6 +68,7 @@ class Product < ApplicationRecord
     end
 
     Product.create(attributes)
+    Product.skip_callback(:save, :after, :synchronize_stock)
   end
 
   def self.update_product(bling_product)
