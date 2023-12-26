@@ -56,11 +56,11 @@ RSpec.describe Product, type: :model do
 
     include_context 'when user account'
 
-    it 'creates stock' do
+    it 'does not create stock' do
       VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
         expect do
           FactoryBot.create(:product, bling_id:, account_id: user.account.id)
-        end.to change(Stock, :count).by(1)
+        end.to change(Stock, :count).by(0)
       end
     end
   end
@@ -69,8 +69,6 @@ RSpec.describe Product, type: :model do
     let(:user) { FactoryBot.create(:user) }
 
     before { FactoryBot.create(:bling_datum, account_id: user.account.id) }
-
-    include_context 'when skip synchronize_stock callback'
 
     context 'when there is no product' do
       it 'counts by 100' do
