@@ -1,0 +1,28 @@
+pt-BR:
+  activerecord:
+    models:
+      production: "Produção"
+    attributes:
+      production:
+        tailor: "Costureiro"
+        cut_date: "Data de Corte"
+        deliver_date: "Data de Entrega"
+        consider: "Considerar"
+  productions:
+    index:
+      title: "Produções"
+      product_summary: "Resumo da Produção"
+      no_tailor: "Nenhum"
+      no_products: "Nenhum produto"
+    actions:
+      show: "Mostrar"
+      edit: "Editar"
+      destroy: "Excluir"
+    confirm: "Você tem certeza?"
+    new:
+      title: "Nova Produção"
+    edit:
+      title: "Editar Produção"
+  helpers:
+    links:
+      new: "Novo"

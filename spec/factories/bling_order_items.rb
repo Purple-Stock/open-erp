@@ -10,6 +10,7 @@
 #  desconto            :decimal(, )
 #  descricao           :text
 #  descricaoDetalhada  :text
+#  items               :jsonb
 #  quantidade          :integer
 #  unidade             :string
 #  valor               :decimal(, )

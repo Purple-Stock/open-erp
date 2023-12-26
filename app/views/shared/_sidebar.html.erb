@@ -52,6 +52,20 @@
               <%= link_to t("products.create"), new_product_path, class: 'nav-link' %>
             </li>
           <% end %>
+          <%= render 'shared/sidebar_dropdown', title: t("productions.one"), icon: 'fas fa-rocket' do %>
+            <li class="<%= active_nav_item('productions', 'index') %>">
+              <%= link_to t("productions.list"), productions_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('productions', 'new') %>">
+              <%= link_to t("productions.create"), new_production_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('tailors', 'index') %>">
+              <%= link_to t("tailors.list"), tailors_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('tailors', 'new') %>">
+              <%= link_to t("tailors.create"), new_tailor_path, class: 'nav-link' %>
+            </li>
+          <% end %>
           <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-store' do %>
             <li class="<%= active_nav_item('stores', 'index') %>">
               <%= link_to t("stores.list"), stores_path, class: 'nav-link' %>

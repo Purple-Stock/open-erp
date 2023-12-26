@@ -1,0 +1,7 @@
+<br>
+<br>
+<%- model_class = Tailor -%>
+<div class="container">
+  <h1><%= t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => t(model_class.model_name.human.titleize) %></h1>
+  <%= render 'form', tailor: @tailor %>
+</div>

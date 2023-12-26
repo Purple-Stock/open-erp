@@ -130,15 +130,6 @@ Rails.application.configure do
                                         set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
                                         description: "Create Order Items statuses are canceled" # optional description that appears in Dashboard
     },
-
-    daily_canceled_order_task: {
-                                        cron: "*/10 * * * *",
-                                        class: "DailyCanceledOrderJob",
-                                        args: [1, Date.today],
-                                        set: { priority: 1 },
-                                        description: "Create Order Items statuses are canceled at current day"
-    },
-
     checked_order_items_task: {
       cron: "@weekly",
       class: "CheckedBlingOrderItemsJob",

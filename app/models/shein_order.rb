@@ -6,7 +6,12 @@
 #  data       :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  account_id :integer
 #
+# Indexes
+#
+#  index_shein_orders_on_account_id  (account_id)
+
 require 'zip'
 
 class SheinOrder < ApplicationRecord

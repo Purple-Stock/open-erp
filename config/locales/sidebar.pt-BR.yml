@@ -10,6 +10,16 @@ pt-BR:
     two: Produtos
     list: Lista de Produtos
     create: Criar Produto
+  productions:
+    one: Produção
+    two: Produções
+    list: Lista de Produções
+    create: Criar Produção
+  tailors:
+    one: Costureiro
+    two: Costureiros
+    list: Lista de Costureiros
+    create: Criar Costureiro
   suppliers:
     one: Fornecedor
     two: Fornecedores

@@ -1,0 +1,44 @@
+<br><br>
+<%= form_with(model: @production, local: true, html: { class: 'needs-validation', novalidate: '' }) do |form| %>
+
+  <!-- Row 1: Tailor Selection -->
+  <div class="row mb-3">
+    <div class="col-3">
+      <%= form.label :tailor_id, Production.human_attribute_name(:tailor), class: 'form-label' %>
+      <%= form.collection_select :tailor_id, @tailors, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <!-- Row 2: Dates -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :cut_date, Production.human_attribute_name(:cut_date), class: 'form-label' %>
+      <%= form.date_field :cut_date, class: 'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :deliver_date, Production.human_attribute_name(:deliver_date), class: 'form-label' %>
+      <%= form.date_field :deliver_date, class: 'form-control' %>
+    </div>
+  </div>
+
+  <!-- Row 3: Production Products -->
+  <div class="mb-3">
+    <%= form.fields_for :production_products do |pp_form| %>
+      <%= render 'production_product_fields', f: pp_form %>
+    <% end %>
+    <%= link_to_add_association t('actions.add_product'), form, :production_products, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="row mb-3 form-check">
+    <%= form.check_box :consider, class: 'form-check-input' %>
+    <%= form.label :consider, Production.human_attribute_name(:consider), class: 'form-check-label' %>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="row">
+    <div class="col">
+      <%= form.submit t('helpers.submit.create'), class: 'btn btn-success' %>
+    </div>
+  </div>
+
+<% end %>

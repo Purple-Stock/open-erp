@@ -3,6 +3,8 @@
 #require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :productions
+  resources :tailors
   #mount Sidekiq::Web => '/sidekiq'
   mount GoodJob::Engine => 'good_job'
 
