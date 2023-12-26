@@ -1,21 +1,19 @@
-<%- model_class = Stock -%>
-<div class="section-header">
-  <div class="page-header">
-    <h1><%= t '.title', :default => t(model_class.model_name.human.titleize) %></h1>
-  </div>
-</div>
+<section class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="display-4"><%= t('stocks.one') %></h1>
+      <hr>
+      <dl class="row">
+        <dt class="col-sm-3"><%= t('stocks.name') %></dt>
+        <dd class="col-sm-9"><%= @stock.name %></dd>
 
-<div class="section-body">
-  <div class="card">
-    <div class="card-body">
-      <dl class="dl-horizontal">
-        <dt><strong><%= model_class.human_attribute_name(t(:name)) %>:</strong></dt>
-        <dd><%= @stock.name %></dd>
-        <dd>Saldo total: <%= @stock.total_balance %></dd>
-        <dd>Saldo Virtual total: <%= @stock.total_virtual_balance %></dd>
+        <dt class="col-sm-3"><%= t('stocks.total_balance') %></dt>
+        <dd class="col-sm-9"><%= @stock.total_balance %></dd>
+
+        <dt class="col-sm-3"><%= t('stocks.total_virtual_balance') %></dt>
+        <dd class="col-sm-9"><%= @stock.total_virtual_balance %></dd>
       </dl>
-
-      <%= link_to t('.back', :default => t("helpers.links.back")), stocks_path, :class => 'btn btn-default' %>
+      <%= link_to t('helpers.links.back'), stocks_path, class: 'btn btn-primary' %>
     </div>
   </div>
-</div>
+</section>
