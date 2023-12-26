@@ -5,11 +5,11 @@
   </div>
 </div>
 
-<div>
+<div class="form-group">
   <%= form_with(url: stocks_path, method: :get) do %>
     <%= select_tag "status", options_for_select([['Situação', ''], ['Ativo', 1], ['Inativo', 0]], @default_status_filter) %>
-    <%= select_tag "balance_situation", options_for_select([['Salto total', ''], ['Maior do que zero', 1], ['Igual a zero', 0], ['Menor do que zero', -1]], @default_situation_balance_filter) %>
-    <%= submit_tag "Filtro" %>
+    <%= select_tag "balance_situation", options_for_select([['Saldo total', ''], ['Maior do que zero', 1], ['Igual a zero', 0], ['Menor do que zero', -1]], @default_situation_balance_filter) %>
+    <%= submit_tag "Filtro", class: 'btn btn-primary' %>
   <% end %>
 </div>
 
