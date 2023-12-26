@@ -6,5 +6,6 @@ pt-BR:
     name: Nome
     total_balance: Saldo total
     total_virtual_balance: Saldo virtual total
+    sku: SKU
     product: Produto
     list: Lista

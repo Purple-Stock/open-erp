@@ -26,6 +26,7 @@
               <th><%= t('stocks.total_balance') %></th>
               <th><%= t('stocks.total_virtual_balance') %></th>
               <th><%= t('stocks.product') %></th>
+              <th><%= t('stocks.sku') %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
@@ -36,6 +37,7 @@
               <td><%= stock.total_balance %></td>
               <td><%= stock.total_virtual_balance %></td>
               <td><%= stock.product.name %></td>
+              <td><%= stock.product.sku %></td>
               <td>
                 <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
               </td>
