@@ -3,7 +3,7 @@
 desc 'Creating Products...'
 
 task create_products: :environment do
-  Product.skip_callback(:create, :after, :create_stock)
+  Product.skip_callback(:save, :after, :synchronize_stock)
   products = []
 
   100.times do
