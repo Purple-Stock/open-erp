@@ -224,6 +224,8 @@ pt-BR:
     tailor:
       edit:
         title: "Editar Costureiro"
+      new: Criar %{model}
+      edit: Editar %{model}
     actions: Ações
   number:
     currency:
@@ -295,13 +297,13 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''
-  
+    
   date:
     formats:
       default: "%d-%m-%Y"
       long: "%d de %B de %Y"
       short: "%d de %B"
-
+      
   January: Janeiro
   February: Fevereiro
   March: Março
@@ -326,3 +328,4 @@ helpers:
       add_product: "Adicionar Produto"
       consider: "Considerar"
       submit_button: "Enviar"
+
