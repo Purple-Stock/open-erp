@@ -135,8 +135,6 @@ RSpec.describe Product, type: :model do
   end
 
   describe '#count_month_purchase_product' do
-    include_context 'when skip synchronize_stock callback'
-
     it 'returns the sum of quantities for purchase products in the given month' do
       year = Time.zone.now.year
       month = Time.zone.now.month
@@ -152,8 +150,6 @@ RSpec.describe Product, type: :model do
     let(:product_2) { create(:product, name: 'Gadget') }
     let(:products) { [product_1, product_2] }
 
-    include_context 'when skip synchronize_stock callback'
-
     it 'returns products matching the given search value for the given search columns' do
       result = Product.datatable_filter('Widget', search_columns)
       expect(result).to contain_exactly(product_1)
@@ -167,8 +163,6 @@ RSpec.describe Product, type: :model do
 
   describe '#count_month_sale_product' do
     let(:account) { create(:account) }
-
-    include_context 'when skip synchronize_stock callback'
 
     it 'returns the sum of quantities for sale products in the given month' do
       year = Time.zone.now.year
@@ -189,8 +183,6 @@ RSpec.describe Product, type: :model do
   # end
 
   context 'when create' do
-    include_context 'when skip synchronize_stock callback'
-
     it 'is valid' do
       expect(product).to be_valid
     end

@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Services::Product::Duplicate, type: :services do
-  include_context 'when skip synchronize_stock callback'
-
   context 'when call the service' do
     let(:product) { create(:product) }
 

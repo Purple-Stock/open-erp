@@ -28,8 +28,6 @@
 require 'rails_helper'
 
 RSpec.describe PurchaseProduct, type: :model do
-  include_context 'when skip synchronize_stock callback'
-
   it { is_expected.to belong_to(:product) }
 
   context 'when create' do

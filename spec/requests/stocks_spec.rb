@@ -6,9 +6,6 @@ RSpec.describe 'Stocks', type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:product) { FactoryBot.create(:product, account_id: user.account.id) }
 
-  include_context 'when skip synchronize_stock callback'
-
-
   describe 'GET /index' do
     before do
       FactoryBot.create_list(:stock, 2, product:)
