@@ -45,11 +45,10 @@ class Product < ApplicationRecord
     validates :price, numericality: { greater_than_or_equal_to: 0 }
   end
 
-  after_save :synchronize_stock
-
   accepts_nested_attributes_for :stock
 
   def self.synchronize_bling(tenant, options = {})
+    Product.set_callback(:save, :after, :synchronize_stock)
     attributes = []
     response = Services::Bling::Product.call(product_command: 'find_products', tenant:, options:)
     products = Product.where(account_id: tenant)
