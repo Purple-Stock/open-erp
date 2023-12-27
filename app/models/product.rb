@@ -82,6 +82,10 @@ class Product < ApplicationRecord
     product.update(attributes)
   end
 
+  def bling?
+    bling_id.blank? ? I18n.translate('activerecord.attributes.product.bling.false') : I18n.translate('activerecord.attributes.product.bling.true')
+  end
+
   def count_month_purchase_product(year, month)
     first_day_month = Time.zone.local(year, month.to_i, 1)
     last_day_month = first_day_month.end_of_month
