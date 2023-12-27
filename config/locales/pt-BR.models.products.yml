@@ -20,6 +20,9 @@ pt-BR:
         highlight: Destaque
         category: Categoria
         active: Ativo
+        bling:
+          true: Sim
+          false: Não
 
   products:
     one: Produto
