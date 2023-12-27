@@ -33,6 +33,12 @@ class Stock < ApplicationRecord
     joins(:product).where(product: { active: status_number })
   end
 
+  def self.only_positive_price(query = false)
+    return all unless query
+
+    joins(:product).where('products.price > ?', 0)
+  end
+
   def self.synchronize_bling(tenant, bling_product_ids)
     options = { idsProdutos: bling_product_ids }
     results = Services::Bling::Stock.call(stock_command: 'find_stocks', tenant:, options:)
