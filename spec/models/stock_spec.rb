@@ -82,6 +82,34 @@ RSpec.describe Stock, type: :model do
     end
   end
 
+  describe '#Self.only_positive_price' do
+    include_context 'with product'
+    let(:stock) { FactoryBot.create(:stock, product: product) }
+    let(:zero_price_product) { FactoryBot.create(:product, price: 0) }
+    let(:zero_price_stock) { FactoryBot.create(:stock, product: zero_price_product) }
+
+
+    context 'when only positive price is true' do
+      subject(:only_positive_price) { described_class.only_positive_price(true) }
+
+      it 'includes stock' do
+        expect(only_positive_price).to include(stock)
+      end
+
+      it 'does not include zero price stock' do
+        expect(only_positive_price).not_to include(zero_price_stock)
+      end
+    end
+
+    context 'when only positive price is false' do
+      subject(:all_stock_price) { described_class.only_positive_price(false) }
+
+      it 'includes all stocks' do
+        expect(all_stock_price).to include(stock, zero_price_stock)
+      end
+    end
+  end
+
   describe '#Self.filter_by_total_balance_situation' do
     include_context 'when user account'
     include_context 'with product'
