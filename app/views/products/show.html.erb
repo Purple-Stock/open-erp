@@ -1,18 +1,13 @@
-<%- model_class = Product -%>
 <section class="main-content">
   <div class="row">
     <div class="col-md-12">
-      <h1 class="display-4"><%= t('products.one') %></h1>
+      <h1 class="display-4"><%= @product.name %></h1>
       <hr>
       <dl class="row">
         <dt class="col-sm-3"><%= t('activerecord.attributes.product.custom_id') %></dt>
         <dd class="col-sm-9"><%= @product.custom_id %></dd>
-        <dt class="col-sm-3"><%= t('products.name') %></dt>
-        <dd class="col-sm-9"><%= @product.name %></dd>
         <dt class="col-sm-3"><%= t('activerecord.attributes.product.sku') %>:</dt>
         <dd class="col-sm-9"><%= @product.sku %></dd>
-        <dt class="col-sm-3"><%= t('products.name') %>:</dt>
-        <dd class="col-sm-9"><%= @product.name %></dd>
         <dt class="col-sm-3"><%= t('products.price') %>:</dt>
         <dd class="col-sm-9"><%= @product.price %></dd>
         <dt class="col-sm-3"><%= t('products.entry') %>:</dt>
