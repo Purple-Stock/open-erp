@@ -32,12 +32,12 @@
         <dt class="col-sm-3"><%= t('products.active') %>:</dt>
         <dd class="col-sm-9"><%= @product.active %></dd>
       </dl>
-      <%= link_to t('helpers.links.back'), products_path, class: 'btn btn-primary' %>
+      <%= link_to t('helpers.links.back'), products_path, class: 'btn btn-primary btn-lg' %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_product_path(@product), :class => 'btn btn-dark' %>
+                  edit_product_path(@product), :class => 'btn btn-dark btn-lg' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                   product_path(@product),
-                  title: t('destroy'), class: 'btn btn-danger',
+                  title: t('destroy'), class: 'btn btn-danger btn-lg',
                   method: :delete,
                   data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
     </div>
