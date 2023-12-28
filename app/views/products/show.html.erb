@@ -5,11 +5,11 @@
       <h1 class="display-4"><%= t('products.one') %></h1>
       <hr>
       <dl class="row">
-        <dt class="col-sm-3"><%= model_class.human_attribute_name(:custom_id) %></dt>
+        <dt class="col-sm-3"><%= t('activerecord.attributes.product.custom_id') %></dt>
         <dd class="col-sm-9"><%= @product.custom_id %></dd>
         <dt class="col-sm-3"><%= t('products.name') %></dt>
         <dd class="col-sm-9"><%= @product.name %></dd>
-        <dt class="col-sm-3"><%= model_class.human_attribute_name(:sku) %>:</dt>
+        <dt class="col-sm-3"><%= t('activerecord.attributes.product.sku') %>:</dt>
         <dd class="col-sm-9"><%= @product.sku %></dd>
         <dt class="col-sm-3"><%= t('products.name') %>:</dt>
         <dd class="col-sm-9"><%= @product.name %></dd>
