@@ -1,51 +1,45 @@
 <%- model_class = Product -%>
-<div class="section-header">
-  <div class="page-header">
-    <h1><%= t 'products.two', :default => model_class.model_name.human.titleize %></h1>
-  </div>
-</div>
-
-<div class="section-body">
-  <div class="card">
-    <div class="card-body">
-
-      <dl class="dl-horizontal">
-        <dt><strong><%= model_class.human_attribute_name(:custom_id) %>:</strong></dt>
-        <dd><%= @product.custom_id %></dd>
-        <dt><strong><%= model_class.human_attribute_name(:sku) %>:</strong></dt>
-        <dd><%= @product.sku %></dd>
-        <dt><strong><%= t('products.name') %>:</strong></dt>
-        <dd><%= @product.name %></dd>
-        <dt><strong><%= t('products.price') %>:</strong></dt>
-        <dd><%= @product.price %></dd>
-        <dt><strong><%= t('products.entry') %>:</strong></dt>
-        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'purchase_product') %></dd>
-        <dt><strong><%= t('products.exit') %>:</strong></dt>
-        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'sale_product') %></dd>
-        <dt><strong><%= t('products.balance') %>:</strong></dt>
-        <dd><%= Services::Product::CountQuantity.call(product: @product, product_command: 'balance_product') %></dd>
-        <dt><strong><%= t('products.rq_code') %></strong></dt>
-        <dd><%= image_tag(Services::Product::GenerateQrCode.call(product: @product)) %></dd>
-        <dt><strong><%= t('products.image') %>:</strong></dt>
-        <dd><%= image_tag(@product.image.attached? ? @product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd>
-        <dt><strong><%= t('products.highlight') %>:</strong></dt>
-        <dd><%= @product.highlight %></dd>
-        <dt><strong><%= t('products.category') %>:</strong></dt>
-        <dd><%= @product.category.try(:name) %></dd>
-        <dt><strong><%= t('products.active') %>:</strong></dt>
-        <dd><%= @product.active %></dd>
-
+<section class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="display-4"><%= t('products.one') %></h1>
+      <hr>
+      <dl class="row">
+        <dt class="col-sm-3"><%= model_class.human_attribute_name(:custom_id) %></dt>
+        <dd class="col-sm-9"><%= @product.custom_id %></dd>
+        <dt class="col-sm-3"><%= t('products.name') %></dt>
+        <dd class="col-sm-9"><%= @product.name %></dd>
+        <dt class="col-sm-3"><%= model_class.human_attribute_name(:sku) %>:</dt>
+        <dd class="col-sm-9"><%= @product.sku %></dd>
+        <dt class="col-sm-3"><%= t('products.name') %>:</dt>
+        <dd class="col-sm-9"><%= @product.name %></dd>
+        <dt class="col-sm-3"><%= t('products.price') %>:</dt>
+        <dd class="col-sm-9"><%= @product.price %></dd>
+        <dt class="col-sm-3"><%= t('products.entry') %>:</dt>
+        <dd class="col-sm-9"><%= Services::Product::CountQuantity.call(product: @product, product_command: 'purchase_product') %></dd>
+        <dt class="col-sm-3"><%= t('products.exit') %>:</dt>
+        <dd class="col-sm-9"><%= Services::Product::CountQuantity.call(product: @product, product_command: 'sale_product') %></dd>
+        <dt class="col-sm-3"><%= t('products.balance') %>:</dt>
+        <dd class="col-sm-9"><%= Services::Product::CountQuantity.call(product: @product, product_command: 'balance_product') %></dd>
+        <dt class="col-sm-3"><%= t('products.rq_code') %></dt>
+        <dd class="col-sm-9"><%= image_tag(Services::Product::GenerateQrCode.call(product: @product)) %></dd>
+        <dt class="col-sm-3"><%= t('products.image') %>:</dt>
+        <dd class="col-sm-9"><%= image_tag(@product.image.attached? ? @product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd>
+        <dt class="col-sm-3"><%= t('products.highlight') %>:</dt>
+        <dd class="col-sm-9"><%= @product.highlight %></dd>
+        <dt class="col-sm-3"><%= t('products.category') %>:</dt>
+        <dd class="col-sm-9"><%= @product.category.try(:name) %></dd>
+        <dt class="col-sm-3"><%= t('products.active') %>:</dt>
+        <dd class="col-sm-9"><%= @product.active %></dd>
       </dl>
-
-      <%= link_to t('.back', :default => t("helpers.links.back")),
-                  products_path, :class => 'btn btn-default' %>
+      <%= link_to t('helpers.links.back'), products_path, class: 'btn btn-primary' %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_product_path(@product), :class => 'btn btn-default' %>
+                  edit_product_path(@product), :class => 'btn btn-dark' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                  product_path(@product), 
-                  title: t('destroy'), class: 'btn btn-danger', 
-                  method: :delete, 
+                  product_path(@product),
+                  title: t('destroy'), class: 'btn btn-danger',
+                  method: :delete,
                   data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
     </div>
   </div>
-</div>
+</section>
