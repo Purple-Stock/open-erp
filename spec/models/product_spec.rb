@@ -15,6 +15,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  account_id  :integer
+#  bling_id    :bigint
 #  category_id :bigint
 #  custom_id   :integer
 #  store_id    :integer
@@ -41,8 +42,96 @@ RSpec.describe Product, type: :model do
     it { is_expected.to have_many(:simplo_items) }
   end
 
+  describe 'columns matcher' do
+    it { is_expected.to have_db_column(:bling_id) }
+  end
+
   describe 'validations' do
     it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_numericality_of(:price).is_greater_than_or_equal_to(0) }
+  end
+
+  describe '#create' do
+    let(:bling_id) { 16_181_499_539 }
+
+    include_context 'when user account'
+
+    it 'does not create stock' do
+      VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
+        expect do
+          FactoryBot.create(:product, bling_id:, account_id: user.account.id)
+        end.to change(Stock, :count).by(0)
+      end
+    end
+  end
+
+  describe '#self.synchronize_bling' do
+    let(:user) { FactoryBot.create(:user) }
+
+    before { FactoryBot.create(:bling_datum, account_id: user.account.id) }
+
+    context 'when there is no product' do
+      it 'counts by 100' do
+        VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
+          expect do
+            described_class.synchronize_bling(user.account.id)
+          end.to change(described_class, :count).by(100)
+        end
+      end
+    end
+
+    context 'when there is product' do
+      let(:bling_product_id) { 16_181_499_539 }
+
+      include_context 'when user account'
+
+      before do
+        VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
+          FactoryBot.create(:product, bling_id: bling_product_id, account_id: user.account.id, active: false)
+        end
+      end
+
+      it 'counts by 99' do
+        VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
+          expect do
+            described_class.synchronize_bling(user.account.id)
+          end.to change(described_class, :count).by(99)
+        end
+      end
+
+      it 'has active turned true from bling data' do
+        options = { idsProdutos: [bling_product_id] }
+
+        VCR.use_cassette('bling_product_by_ids', erb: true) do
+          described_class.synchronize_bling(user.account.id, options)
+          expect(described_class.find_by(bling_id: bling_product_id)).to be_active
+        end
+      end
+    end
+
+    context 'when attributes' do
+      before do
+        VCR.use_cassette('bling_products_with_stock_by_product_ids', erb: true) do
+          described_class.synchronize_bling(user.account.id)
+        end
+      end
+
+      it 'has name' do
+        expect(described_class.first.name).to eq('Faker Name Souza:Branco;Tamanho:G')
+      end
+
+      it 'has sku' do
+        expect(described_class.first.sku).to eq('VEST-Brilho-Reveillon-BRANCO-G')
+      end
+
+      it 'has bling_id' do
+        expect(described_class.first.bling_id).to eq(16_181_499_539)
+      end
+
+      it 'is active' do
+        expect(described_class.first.active).to eq(true)
+      end
+    end
   end
 
   describe '#count_month_purchase_product' do
@@ -56,18 +145,17 @@ RSpec.describe Product, type: :model do
   end
 
   describe '#datatable_filter' do
-    let(:search_value) { 'Widget' }
     let(:search_columns) { { '1' => { 'searchable' => true } } }
     let(:product_1) { create(:product, name: 'Widget') }
     let(:product_2) { create(:product, name: 'Gadget') }
-    let!(:products) { [product_1, product_2] }
+    let(:products) { [product_1, product_2] }
 
     it 'returns products matching the given search value for the given search columns' do
-      result = Product.datatable_filter(search_value, search_columns)
+      result = Product.datatable_filter('Widget', search_columns)
       expect(result).to contain_exactly(product_1)
     end
 
-    xit 'returns all products if the search value is blank' do
+    it 'returns all products if the search value is blank' do
       result = Product.datatable_filter('', search_columns)
       expect(result).to contain_exactly(*products)
     end
@@ -113,22 +201,6 @@ RSpec.describe Product, type: :model do
 
     it 'has a image' do
       expect(product.image).not_to be_nil
-    end
-  end
-
-  context 'when update' do
-    let(:product) { create(:product) }
-
-    it 'is valid' do
-      expect(product).to be_valid
-    end
-  end
-
-  context 'when destroy' do
-    let(:product) { create(:product) }
-
-    it 'is valid' do
-      expect(product).to be_valid
     end
   end
 end

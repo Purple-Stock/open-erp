@@ -1,0 +1,11 @@
+---
+pt-BR:
+  stocks:
+    one: Estoque
+    two: Estoques
+    name: Nome
+    total_balance: Saldo total
+    total_virtual_balance: Saldo virtual total
+    sku: SKU
+    product: Produto
+    list: Lista
