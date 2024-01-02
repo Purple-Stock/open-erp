@@ -57,6 +57,10 @@ gem "sassc-rails"
 
 gem 'devise', '>= 4.9.3'
 
+gem 'factory_bot_rails', '>= 6.3.0'
+
+gem 'faker'
+
 gem "rubycritic", require: false
 
 gem 'net-smtp', require: false
@@ -68,8 +72,6 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
   gem 'rspec-rails', '>= 6.0.2'
-  gem 'faker'
-  gem 'factory_bot_rails', '>= 6.3.0'
   gem 'solargraph'
 end
 
