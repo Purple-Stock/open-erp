@@ -32,6 +32,36 @@
 require 'rails_helper'
 
 RSpec.describe BlingOrderItem, type: :model do
+  describe 'associations' do
+    it { is_expected.to have_many(:items).dependent(:destroy) }
+  end
+
+  describe 'nested attributes' do
+    it { is_expected.to accept_nested_attributes_for(:items) }
+  end
+
+  describe '#synchronize_items' do
+    subject(:synchronize_items) { order.synchronize_items }
+
+    include_context 'with bling token'
+
+    let(:order) { FactoryBot.create(:bling_order_item, bling_order_id: 19_178_587_026, account_id: user.account.id) }
+
+    before do
+      VCR.use_cassette('find_order', erb: true) do
+        synchronize_items
+      end
+    end
+
+    it 'counts 1 item' do
+      expect(order.items.length).to eq(1)
+    end
+
+    it 'has quantity 1' do
+      expect(order.items.first.quantity).to eq(1)
+    end
+  end
+
   describe '#store_name' do
     it 'has name' do
       subject.store_id = '204219105'
