@@ -33,7 +33,10 @@ class BlingOrderItem < ApplicationRecord
   # TODO, refactor me separating the tables
   # There are features hard to implement without this separation.
 
+  has_many :items, dependent: :destroy
   belongs_to :account, optional: true
+
+  accepts_nested_attributes_for :items
 
   STORE_ID_NAME_KEY_VALUE = {
     '204219105' => 'Shein',
@@ -93,7 +96,6 @@ class BlingOrderItem < ApplicationRecord
     where(store_id: '204061683')
   }
 
-
   scope :date_range, lambda { |initial_date, final_date|
     initial_date = initial_date.try(:to_date).try(:beginning_of_day)
     final_date = final_date.try(:to_date).try(:end_of_day)
@@ -126,5 +128,27 @@ class BlingOrderItem < ApplicationRecord
 
   def value
     super || 0.0
+  end
+
+  def synchronize_items
+    items_attributes = []
+    order = Services::Bling::FindOrder.new(id: bling_order_id, order_command: 'find_order', tenant: account.id).call
+    order['data']['itens'].each do |item|
+      items_attributes << {
+        sku: item['codigo'],
+        unity: item['unidade'],
+        quantity: item['quantidade'],
+        discount: item['desconto'],
+        value: item['valor'],
+        ipi_tax: item['aliquotaIPI'],
+        description: item['descricao'],
+        long_description: item['descricaoDetalhada'],
+        product_id: item['produto']['id'],
+        account_id: account.id
+      }
+    end
+
+    items.build(items_attributes)
+    save
   end
 end
