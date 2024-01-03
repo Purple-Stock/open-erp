@@ -30,7 +30,7 @@ class Stock < ApplicationRecord
   def self.filter_by_status(status_number = nil)
     return all if status_number.blank?
 
-    joins(:product).where(product: { active: status_number })
+    joins(:product).where(products: { active: status_number })
   end
 
   def self.only_positive_price(query = false)
