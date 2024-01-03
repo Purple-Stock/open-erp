@@ -96,6 +96,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.good_job.smaller_number_is_higher_priority = true
+  config.good_job.execution_mode = :async
+
   config.good_job.enable_cron = false
   config.good_job.cron = {
     product_sync_job: {
