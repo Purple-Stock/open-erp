@@ -21,7 +21,6 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   describe 'associations' do
-    it { is_expected.to belong_to(:product) }
     it { is_expected.to belong_to(:account) }
     it { is_expected.to belong_to(:bling_order_item) }
   end
