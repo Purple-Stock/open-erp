@@ -54,7 +54,7 @@ RSpec.describe BlingOrderItem, type: :model do
     end
 
     it 'counts 1 item' do
-      expect(order.items.length).to eq(1)
+      expect(order.items.count).to eq(1)
     end
 
     it 'has quantity 1' do
