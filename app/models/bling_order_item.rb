@@ -131,24 +131,6 @@ class BlingOrderItem < ApplicationRecord
   end
 
   def synchronize_items
-    items_attributes = []
-    order = Services::Bling::FindOrder.new(id: bling_order_id, order_command: 'find_order', tenant: account.id).call
-    order['data']['itens'].each do |item|
-      items_attributes << {
-        sku: item['codigo'],
-        unity: item['unidade'],
-        quantity: item['quantidade'],
-        discount: item['desconto'],
-        value: item['valor'],
-        ipi_tax: item['aliquotaIPI'],
-        description: item['descricao'],
-        long_description: item['descricaoDetalhada'],
-        product_id: item['produto']['id'],
-        account_id: account.id
-      }
-    end
-
-    items.build(items_attributes)
-    save
+    OrderItemsJob.perform_later(self)
   end
 end
