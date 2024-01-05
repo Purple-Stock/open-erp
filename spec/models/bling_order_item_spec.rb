@@ -60,6 +60,34 @@ RSpec.describe BlingOrderItem, type: :model do
     it 'has quantity 1' do
       expect(order.items.first.quantity).to eq(1)
     end
+
+    context 'when perform twice' do
+      it 'still counts 1' do
+        VCR.use_cassette('find_order', erb: true) do
+          order.synchronize_items
+        end
+
+        expect(order.items.count).to eq(1)
+      end
+    end
+
+    context 'when perform in order with different account' do
+      let(:second_user) { FactoryBot.create(:user) }
+      let(:second_order) do
+        FactoryBot.create(:bling_order_item, bling_order_id: 19_449_352_383, account_id: second_user.account.id)
+      end
+
+      before { FactoryBot.create(:bling_datum, account_id: second_user.account.id) }
+
+      it 'counts 1 item created' do
+
+        VCR.use_cassette('find_second_order', erb: true) do
+          second_order.synchronize_items
+        end
+
+        expect(second_order.items.count).to eq(1)
+      end
+    end
   end
 
   describe '#store_name' do
