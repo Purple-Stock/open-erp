@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_21_234141) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_03_204520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -209,6 +209,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_234141) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "months", default: 1
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "sku"
+    t.integer "unity"
+    t.integer "quantity"
+    t.decimal "discount"
+    t.decimal "value"
+    t.decimal "ipi_tax"
+    t.string "description"
+    t.string "long_description"
+    t.bigint "product_id"
+    t.integer "account_id"
+    t.bigint "bling_order_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "post_data", force: :cascade do |t|
