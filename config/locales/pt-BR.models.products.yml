@@ -23,6 +23,7 @@ pt-BR:
         bling:
           true: Sim
           false: Não
+        custom_id: ID do Cliente
 
   products:
     one: Produto
