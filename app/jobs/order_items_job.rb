@@ -3,6 +3,8 @@ class OrderItemsJob < ApplicationJob
   retry_on StandardError, attempts: 20, wait: :exponentially_longer
 
   def perform(record)
+    return unless record.items.empty?
+
     account_id = record.account_id
     items_attributes = []
     order = Services::Bling::FindOrder.call(id: record.bling_order_id, order_command: 'find_order', tenant: account_id)
