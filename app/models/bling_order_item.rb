@@ -38,6 +38,8 @@ class BlingOrderItem < ApplicationRecord
 
   accepts_nested_attributes_for :items
 
+  after_create :synchronize_items
+
   STORE_ID_NAME_KEY_VALUE = {
     '204219105' => 'Shein',
     '203737982' => 'Shopee',
