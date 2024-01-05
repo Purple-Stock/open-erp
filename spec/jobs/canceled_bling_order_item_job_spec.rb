@@ -7,6 +7,7 @@ RSpec.describe CanceledBlingOrderItemsJob, type: :job do
 
   describe '#perform_now' do
     before do
+      allow_any_instance_of(BlingOrderItem).to receive(:synchronize_items).and_return(true)
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.now + 2.day)
     end
 

@@ -9,7 +9,10 @@ RSpec.describe 'BlingOrderItemHistories', type: :request do
                      final_date: Date.today.strftime } }
   end
 
-  before { sign_in user }
+  before do
+    allow_any_instance_of(BlingOrderItem).to receive(:synchronize_items).and_return(true)
+    sign_in user
+  end
 
   describe 'GET /index' do
     before do
