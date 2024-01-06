@@ -137,4 +137,10 @@ class BlingOrderItem < ApplicationRecord
 
     OrderItemsJob.perform_later(self)
   end
+
+  def self.bulk_synchronize_items(collection)
+    GoodJob::Bulk.enqueue do
+      collection.each(&:synchronize_items)
+    end
+  end
 end
