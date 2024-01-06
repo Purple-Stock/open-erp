@@ -1,6 +1,5 @@
 class OrderItemsJob < ApplicationJob
-  queue_as :default
-  retry_on StandardError, attempts: 5, wait: :exponentially_longer
+  queue_as :items
 
   def perform(record)
     return unless record.items.empty?
