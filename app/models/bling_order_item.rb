@@ -133,6 +133,8 @@ class BlingOrderItem < ApplicationRecord
   end
 
   def synchronize_items
+    return unless items.empty?
+
     OrderItemsJob.perform_later(self)
   end
 end

@@ -2,8 +2,6 @@ class OrderItemsJob < ApplicationJob
   queue_as :items
 
   def perform(record)
-    return unless record.items.empty?
-
     account_id = record.account_id
     items_attributes = []
     order = Services::Bling::FindOrder.call(id: record.bling_order_id, order_command: 'find_order', tenant: account_id)
