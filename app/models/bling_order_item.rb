@@ -135,7 +135,7 @@ class BlingOrderItem < ApplicationRecord
   def synchronize_items
     return unless items.empty?
 
-    OrderItemsJob.perform_later(self)
+    OrderItemsJob.perform_later(bling_order_id)
   end
 
   def self.bulk_synchronize_items(collection)
