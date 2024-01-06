@@ -7,7 +7,7 @@ class OrderItemsJob < ApplicationJob
     account_id = record.account_id
     items_attributes = []
     order = Services::Bling::FindOrder.call(id: record.bling_order_id, order_command: 'find_order', tenant: account_id)
-    raise StandardError if order['error'].present?
+    raise(StandardError, order['error']) if order['error'].present?
 
     order['data']['itens'].each do |item|
       items_attributes << {
