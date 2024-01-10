@@ -18,6 +18,14 @@ RSpec.describe ::Forecasts::BasicStock do
       FactoryBot.create(:item, sku: sku, quantity: 2, bling_order_item: order, product_id: product.id, account: user.account)
     end
 
+    context 'when there is no order related to stock' do
+      before { order.destroy }
+
+      it 'calculates 0' do
+        expect(calculate).to eq(0)
+      end
+    end
+
     context 'when total_balance is zero' do
       it 'calculates 2' do
         expect(calculate).to eq(2)
