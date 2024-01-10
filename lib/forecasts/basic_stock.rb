@@ -9,6 +9,8 @@ module Forecasts
   class BasicStock
     attr_accessor :stock, :sku, :date, :account_id, :items, :options
 
+    NO_NEED_TO_INCREASE_STOCK = 0
+
     def initialize(stock, options = {})
       @stock = stock
       @sku = stock.sku
@@ -19,7 +21,10 @@ module Forecasts
     end
 
     def calculate
-      items.sum(:quantity)
+      stock_to_repair_quantity = items.sum(:quantity) - stock.total_balance
+      return NO_NEED_TO_INCREASE_STOCK if stock_to_repair_quantity.negative?
+
+      stock_to_repair_quantity
     end
   end
 end
