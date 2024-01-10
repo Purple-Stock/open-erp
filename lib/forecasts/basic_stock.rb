@@ -21,10 +21,14 @@ module Forecasts
     end
 
     def calculate
-      stock_to_repair_quantity = items.sum(:quantity) - stock.total_balance
+      stock_to_repair_quantity = count_sold - stock.total_balance
       return NO_NEED_TO_INCREASE_STOCK if stock_to_repair_quantity.negative?
 
       stock_to_repair_quantity
+    end
+
+    def count_sold
+      @count_sold ||= items.sum(:quantity)
     end
   end
 end
