@@ -23,5 +23,29 @@ RSpec.describe ::Forecasts::BasicStock do
         expect(calculate).to eq(2)
       end
     end
+
+    context 'when total_balance is negative -2' do
+      before { stock.update(total_balance: -2) }
+
+      it 'calculates 4' do
+        expect(calculate).to eq(4)
+      end
+    end
+
+    context 'when total_balance is equal items sold quantity (2)' do
+      before { stock.update(total_balance: 2) }
+
+      it 'calculates 0' do
+        expect(calculate).to eq(0)
+      end
+    end
+
+    context 'when total_balance is too much superior (1000) to order items sold' do
+      before { stock.update(total_balance: 1_000) }
+
+      it 'calculates 0' do
+        expect(calculate).to eq(0)
+      end
+    end
   end
 end
