@@ -12,6 +12,10 @@
 #  product_id            :integer
 #
 class Stock < ApplicationRecord
+  require 'forecasts/basic_stock'
+
+  attr_accessor :basic_forecast
+
   belongs_to :product, class_name: 'Product', inverse_of: :stock
 
   validates :bling_product_id, :total_balance, :total_virtual_balance,
@@ -37,6 +41,18 @@ class Stock < ApplicationRecord
     return all unless query
 
     joins(:product).where('products.price > ?', 0)
+  end
+
+  def basic_forecast
+    @basic_forecast ||= Forecasts::BasicStock.new(self)
+  end
+
+  def calculate_basic_forecast
+    basic_forecast.calculate
+  end
+
+  def count_sold
+    basic_forecast.count_sold
   end
 
   def self.synchronize_bling(tenant, bling_product_ids)
