@@ -26,8 +26,8 @@
               <th><%= t('stocks.sku') %></th>
               <th><%= t('stocks.total_balance') %></th>
               <th><%= t('stocks.total_virtual_balance') %></th>
-              <th><%= t('stocks.calculate_basic_forecast') %></th>
               <th><%= t('stocks.count_sold') %></th>
+              <th><%= t('stocks.calculate_basic_forecast') %></th>
               <th><%= t('stocks.product') %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
@@ -39,8 +39,8 @@
               <td><%= stock.product.sku %></td>
               <td><%= stock.total_balance %></td>
               <td><%= stock.total_virtual_balance %></td>
-              <td><%= stock.calculate_basic_forecast %></td>
               <td><%= stock.count_sold %></td>
+              <td><%= stock.calculate_basic_forecast %></td>
               <td><%= stock.product.name %></td>
               <td>
                 <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
