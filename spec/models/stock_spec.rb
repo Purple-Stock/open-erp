@@ -228,6 +228,10 @@ RSpec.describe Stock, type: :model do
       it 'has account_id' do
         expect(described_class.first.account_id).to eq(user.account.id)
       end
+
+      it 'has sku as product' do
+        expect(described_class.first.sku).to eq(product.sku)
+      end
     end
   end
 end

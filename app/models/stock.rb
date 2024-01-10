@@ -17,7 +17,7 @@ class Stock < ApplicationRecord
   validates :bling_product_id, :total_balance, :total_virtual_balance,
             numericality: { numericality: true, only_integer: true }
 
-  delegate :active, :bling_id, :name, to: :product
+  delegate :active, :bling_id, :name, :sku, to: :product
 
   def self.filter_by_total_balance_situation(balance_situation = nil)
     return all if balance_situation.blank?
