@@ -21,8 +21,26 @@ RSpec.describe ::Forecasts::BasicStock do
     context 'when there is no order related to stock' do
       before { order.destroy }
 
-      it 'calculates 0' do
-        expect(calculate).to eq(0)
+      context 'when the total balance is positive' do
+        it 'calculates 0' do
+          expect(calculate).to eq(0)
+        end
+      end
+
+      context 'when the total balance is negative' do
+        before { stock.update(total_balance: -2) }
+
+        it 'calculates 2' do
+          expect(calculate).to eq(2)
+        end
+      end
+
+      context 'when the total balance is zero' do
+        before { stock.update(total_balance: 0) }
+
+        it 'calculates 0' do
+          expect(calculate).to eq(0)
+        end
       end
     end
 
