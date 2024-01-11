@@ -101,11 +101,19 @@ Rails.application.configure do
   config.good_job.enable_cron = true
   config.good_job.cron = {
     product_sync_job: {
-      cron: "*/10 * * * *",
+      cron: "*/60 * * * *",
       class: "ProductSyncJob",
       args: [1],
       set: { priority: 1 },
       description: "Synchronize products"
+    },
+
+    stock_sync_job: {
+      cron: "*/10 * * * *",
+      class: "StockSyncJob",
+      args: [1],
+      set: { priority: 1 },
+      description: "Synchronize Stocks based in products already created"
     },
 
     in_progress_order_items_task: { # each recurring job must have a unique key

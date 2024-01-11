@@ -48,7 +48,6 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :stock
 
   def self.synchronize_bling(tenant, options = {})
-    Product.set_callback(:save, :after, :synchronize_stock)
     attributes = []
     response = Services::Bling::Product.call(product_command: 'find_products', tenant:, options:)
     products = Product.where(account_id: tenant)
@@ -68,7 +67,6 @@ class Product < ApplicationRecord
     end
 
     Product.create(attributes)
-    Product.skip_callback(:save, :after, :synchronize_stock)
   end
 
   def self.update_product(bling_product)

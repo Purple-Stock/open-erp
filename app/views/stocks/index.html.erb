@@ -1,7 +1,10 @@
 <%- model_class = Stock -%>
-<div class="section-header">
+<div class="section-header row-cols-2">
   <div class="page-header">
     <h1><%= t('stocks.two') %></h1>
+  </div>
+  <div class="d-flex justify-content-end">
+    <%= button_to "Gerar Previsão de Venda", stocks_path(format: "csv"), class: "btn btn-success", method: :get %>
   </div>
 </div>
 
@@ -23,10 +26,12 @@
             <thead>
             <tr>
               <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= t('stocks.sku') %></th>
               <th><%= t('stocks.total_balance') %></th>
               <th><%= t('stocks.total_virtual_balance') %></th>
+              <th><%= t('stocks.count_sold') %></th>
+              <th><%= t('stocks.calculate_basic_forecast') %></th>
               <th><%= t('stocks.product') %></th>
-              <th><%= t('stocks.sku') %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
@@ -34,10 +39,12 @@
             <% @stocks.each do |stock| %>
             <tr>
               <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
+              <td><%= stock.product.sku %></td>
               <td><%= stock.total_balance %></td>
               <td><%= stock.total_virtual_balance %></td>
+              <td><%= stock.count_sold %></td>
+              <td><%= stock.calculate_basic_forecast %></td>
               <td><%= stock.product.name %></td>
-              <td><%= stock.product.sku %></td>
               <td>
                 <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
               </td>
