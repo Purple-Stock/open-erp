@@ -4,6 +4,16 @@ class StocksController < ApplicationController
   include Pagy::Backend
   inherit_resources
 
+  def index
+    respond_to do |format|
+      format.html { super }
+      format.csv do
+        @stocks_export = Stock.where(account_id: current_tenant)
+        send_data @stocks_export.to_csv, file_name: 'stock_forecast.csv'
+      end
+    end
+  end
+
   protected
 
   def collection
