@@ -21,7 +21,7 @@ class StocksController < ApplicationController
     @default_status_filter = params['status']
     @default_situation_balance_filter = params['balance_situation']
 
-    stocks = Stock.where(account_id: current_tenant)
+    stocks = Stock.where(account_id: current_tenant).includes([:product])
                   .only_positive_price(true)
                   .filter_by_status(params['status'])
                   .filter_by_total_balance_situation(params['balance_situation'])
