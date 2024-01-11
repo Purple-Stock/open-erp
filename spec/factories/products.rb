@@ -35,6 +35,7 @@ FactoryBot.define do
   factory :product do
     name { Faker::Commerce.product_name }
     custom_id { rand(99_999).to_s }
+    bling_id { 16_181_499_539 }
     sku { 'TESTESKU' }
     extra_sku { 'TESTESKU89' }
     image { FactoryHelpers.upload_file('spec/support/images/sem_imagem.jpeg', 'image/jpeg', true) }
