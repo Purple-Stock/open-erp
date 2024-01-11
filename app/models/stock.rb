@@ -47,7 +47,7 @@ class Stock < ApplicationRecord
     CSV.generate(headers: true, col_sep: ';') do |csv|
       csv << ['id', 'SKU', 'Saldo Total', 'Saldo Virtual Total', 'Quantidade Vendida dos Últimos 30 dias',
               'Previsão para os Próximos 30 dias', 'Produto']
-      all.each do |stock|
+      all.sort_by(&:calculate_basic_forecast).reverse!.each do |stock|
         next if stock.total_balance.zero? && stock.count_sold.zero?
 
         row = [stock.id, stock.sku, stock.total_balance, stock.total_virtual_balance, stock.count_sold,
@@ -63,7 +63,7 @@ class Stock < ApplicationRecord
   end
 
   def calculate_basic_forecast
-    basic_forecast.calculate
+    @calculate_basic_forecast ||= basic_forecast.calculate
   end
 
   def count_sold
