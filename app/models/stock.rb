@@ -43,6 +43,21 @@ class Stock < ApplicationRecord
     joins(:product).where('products.price > ?', 0)
   end
 
+  def self.to_csv
+    CSV.generate(headers: true, col_sep: ';') do |csv|
+      csv << ['id', 'SKU', 'Saldo Total', 'Saldo Virtual Total', 'Quantidade Vendida dos Últimos 30 dias',
+              'Previsão para os Próximos 30 dias', 'Produto']
+      all.each do |stock|
+        next if stock.total_balance.zero? && stock.count_sold.zero?
+
+        row = [stock.id, stock.sku, stock.total_balance, stock.total_virtual_balance, stock.count_sold,
+               stock.calculate_basic_forecast,
+               stock.product.name]
+        csv << row
+      end
+    end
+  end
+
   def basic_forecast
     @basic_forecast ||= Forecasts::BasicStock.new(self)
   end
