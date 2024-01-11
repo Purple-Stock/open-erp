@@ -1,7 +1,10 @@
 <%- model_class = Stock -%>
-<div class="section-header">
+<div class="section-header row-cols-2">
   <div class="page-header">
     <h1><%= t('stocks.two') %></h1>
+  </div>
+  <div class="d-flex justify-content-end">
+    <%= button_to "Gerar Previsão de Venda", stocks_path(format: "csv"), class: "btn btn-success", method: :get %>
   </div>
 </div>
 
