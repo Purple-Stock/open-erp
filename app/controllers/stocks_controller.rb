@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class StocksController < ApplicationController
-  include Pagy::Backend
+  require 'pagy/extras/array'
+  include Pagy::ArrayExtra
   inherit_resources
 
   def index
@@ -24,6 +25,8 @@ class StocksController < ApplicationController
                   .only_positive_price(true)
                   .filter_by_status(params['status'])
                   .filter_by_total_balance_situation(params['balance_situation'])
-    @pagy, @stocks = pagy(stocks)
+                  .sort_by(&:calculate_basic_forecast)
+                  .reverse!
+    @pagy, @stocks = pagy_array(stocks)
   end
 end
