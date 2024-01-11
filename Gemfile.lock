@@ -271,7 +271,7 @@ GEM
       net-protocol
     newrelic_rpm (9.6.0)
       base64
-    nio4r (2.5.9)
+    nio4r (2.7.0)
     nokogiri (1.15.5-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
@@ -294,7 +294,7 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.3)
-    puma (6.4.0)
+    puma (6.4.2)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.7.3)
@@ -573,7 +573,7 @@ DEPENDENCIES
   pg (~> 1.1)
   platform_agent
   pry-byebug
-  puma (~> 6.0, >= 6.0.0)
+  puma (~> 6.4, >= 6.4.2)
   rack-cors
   rails (~> 7.0.8)
   rails-i18n (~> 7.0.8)
@@ -611,4 +611,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.20
+   2.4.6

@@ -17,7 +17,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 6.0", ">= 6.0.0"
+gem "puma", "~> 6.4", ">= 6.4.2"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", ">= 1.2.0"
