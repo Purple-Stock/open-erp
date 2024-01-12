@@ -243,6 +243,20 @@ RSpec.describe BlingOrderItem, type: :model do
             expect(collection.first.reload.value.to_f).to eq(69.9)
           end
         end
+
+        it 'updates status situation' do
+          VCR.use_cassette('find_checked_order', erb: true) do
+            described_class.update_yourself(collection)
+            expect(collection.first.reload.situation_id.to_i).to eq(BlingOrderItem::Status::IN_PROGRESS)
+          end
+        end
+
+        it 'updates alteration date' do
+          VCR.use_cassette('find_checked_order', erb: true) do
+            described_class.update_yourself(collection)
+            expect(collection.first.reload.alteration_date.strftime('%Y-%m-%d')).to eq(Time.zone.today.strftime)
+          end
+        end
       end
 
       context 'when there are too many requests error in the response' do
