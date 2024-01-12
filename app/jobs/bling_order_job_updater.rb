@@ -1,5 +1,5 @@
 class BlingOrderJobUpdater < ApplicationJob
-  queue_as :default
+  queue_as :bling_order_updater
   retry_on StandardError, attempts: 5, wait: :exponentially_longer
 
   def perform(record, account_id)
