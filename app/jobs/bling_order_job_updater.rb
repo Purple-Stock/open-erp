@@ -6,6 +6,11 @@ class BlingOrderJobUpdater < ApplicationJob
     result = Services::Bling::FindOrder.call(id: record.bling_order_id, order_command: 'find_order', tenant: account_id)
     raise StandardError if result['error'].present?
 
-    record.update({ value: result['data']['total'], situation_id: result['data']['situacao']['id'] })
+    record.situation_id = result['data']['situacao']['id']
+    record.value = result['data']['total']
+    record.alteration_date = Time.zone.today
+    return unless record.situation_id_changed?
+
+    record.save!
   end
 end
