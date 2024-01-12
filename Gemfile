@@ -139,7 +139,7 @@ gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
-gem "good_job", "~> 3.19", ">= 3.19.1"
+gem "good_job", "3.19.2"
 
 gem 'roo'
 gem 'roo-xls'
