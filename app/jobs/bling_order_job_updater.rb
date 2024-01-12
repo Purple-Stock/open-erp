@@ -1,6 +1,6 @@
 class BlingOrderJobUpdater < ApplicationJob
   queue_as :bling_order_updater
-  retry_on StandardError, attempts: 5, wait: :exponentially_longer
+  retry_on StandardError, attempts: 10, wait: :exponentially_longer
 
   def perform(record, account_id)
     result = Services::Bling::FindOrder.call(id: record.bling_order_id, order_command: 'find_order', tenant: account_id)
