@@ -119,13 +119,10 @@ class BlingOrderItem < ApplicationRecord
   def self.update_yourself(self_collection)
     account_id = self_collection.first.account_id
 
-    self_collection.find_in_batches(batch_size: 100) do |sub_collection|
-      GoodJob::Bulk.enqueue do
-        sub_collection.each do |record|
-          BlingOrderJobUpdater.perform_later(record, account_id)
-        end
+    GoodJob::Bulk.enqueue do
+      self_collection.each do |record|
+        BlingOrderJobUpdater.perform_later(record, account_id)
       end
-      sleep 10 if Rails.env.eql?('production') || Rails.env.eql?('staging')
     end
   end
 
