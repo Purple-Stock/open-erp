@@ -101,7 +101,7 @@ Rails.application.configure do
   config.good_job.enable_cron = true
   config.good_job.cron = {
     product_sync_job: {
-      cron: "*/60 * * * *",
+      cron: '@daily',
       class: "ProductSyncJob",
       args: [1],
       set: { priority: 1 },
@@ -202,7 +202,14 @@ Rails.application.configure do
       args: [1],
       set: { priority: 4 },
       description: "Create Order Items whose statuses are verified"
+    },
+
+    collected_order_items_task: {
+      cron: "*/5 * * * *",
+      class: "CollectedBlingOrderItemsJob",
+      args: [1],
+      set: { priority: 4 },
+      description: "Create Order Items whose statuses are collected"
     }
-    # etc.
   }
 end
