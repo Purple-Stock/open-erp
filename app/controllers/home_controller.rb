@@ -70,7 +70,7 @@ class HomeController < ApplicationController
 
   def collected_orders
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
-                                      account_id: current_user.account.id)
+                                      account_id: current_user.account.id, collected_alteration_date: @first_date..@second_date)
     @collected_orders = BlingOrderItem.group_order_items(base_query)
   end
 
