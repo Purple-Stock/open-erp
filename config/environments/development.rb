@@ -185,7 +185,14 @@ Rails.application.configure do
       args: [1],
       set: { priority: 4 },
       description: "Create Order Items whose statuses are verified"
+    },
+
+    collected_order_items_task: {
+      cron: "*/5 * * * *",
+      class: "CollectedBlingOrderItemsJob",
+      args: [1, (Date.today - 5.days)],
+      set: { priority: 4 },
+      description: "Create Order Items whose statuses are collected"
     }
-    # etc.
   }
 end
