@@ -75,6 +75,12 @@
         <h1>Pedidos Feitos(checados e verificados)</h1>
         <%= render 'order_items', order_items: @current_done_order_items, show_revenue_estimation: false, printed: false %>
       </div>
+
+      <div class="col-sm bordered-section">
+        <h1>Pedidos Coletados</h1>
+        <%= render 'order_items', order_items: @collected_orders, show_revenue_estimation: false, printed: false %>
+      </div>
+
       <div class="col-sm bordered-section border-danger">
         <h1>Pedidos Impressos (zerar ao final do dia)</h1>
         <%= render 'order_items', order_items: @grouped_printed_order_items, show_revenue_estimation: false, printed: true %>
