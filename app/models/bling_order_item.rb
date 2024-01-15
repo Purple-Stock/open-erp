@@ -2,27 +2,28 @@
 #
 # Table name: bling_order_items
 #
-#  id                  :bigint           not null, primary key
-#  aliquotaIPI         :decimal(, )
-#  alteration_date     :datetime
-#  codigo              :string
-#  date                :datetime
-#  desconto            :decimal(, )
-#  descricao           :text
-#  descricaoDetalhada  :text
-#  items               :jsonb
-#  quantidade          :integer
-#  unidade             :string
-#  valor               :decimal(, )
-#  value               :decimal(, )
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  account_id          :bigint
-#  bling_id            :integer
-#  bling_order_id      :string
-#  marketplace_code_id :string
-#  situation_id        :string
-#  store_id            :string
+#  id                        :bigint           not null, primary key
+#  aliquotaIPI               :decimal(, )
+#  alteration_date           :datetime
+#  codigo                    :string
+#  collected_alteration_date :date
+#  date                      :datetime
+#  desconto                  :decimal(, )
+#  descricao                 :text
+#  descricaoDetalhada        :text
+#  items                     :jsonb
+#  quantidade                :integer
+#  unidade                   :string
+#  valor                     :decimal(, )
+#  value                     :decimal(, )
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  account_id                :bigint
+#  bling_id                  :integer
+#  bling_order_id            :string
+#  marketplace_code_id       :string
+#  situation_id              :string
+#  store_id                  :string
 #
 # Indexes
 #
@@ -70,10 +71,11 @@ class BlingOrderItem < ApplicationRecord
     PENDING = 94_871
     PRINTED = 95_745
     CANCELED = 12
-    ALL = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, CANCELED].freeze
+    COLLECTED = 173_631
+    ALL = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, CANCELED, COLLECTED].freeze
     EXCLUDE_DONE = [IN_PROGRESS, PENDING, PRINTED, CANCELED].freeze
     WITHOUT_CANCELLED = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED].freeze
-    PAID = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED].freeze
+    PAID = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, COLLECTED].freeze
   end
 
   scope :date_range_in_a_day, lambda { |date|
