@@ -27,6 +27,16 @@ RSpec.describe CollectedBlingOrderItemsJob, type: :job do
         expect(BlingOrderItem.find_by(bling_order_id: '19508913684').situation_id.to_i)
           .to eq(BlingOrderItem::Status::COLLECTED)
       end
+
+      it 'has collected alteration date' do
+        expect(BlingOrderItem.find_by(bling_order_id: '19508913684').collected_alteration_date.to_date)
+          .to eq(Date.today)
+      end
+
+      it 'has alteration date' do
+        expect(BlingOrderItem.find_by(bling_order_id: '19508913684').alteration_date.to_date)
+          .to eq(Date.today)
+      end
     end
   end
 end
