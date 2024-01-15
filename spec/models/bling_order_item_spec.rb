@@ -2,27 +2,28 @@
 #
 # Table name: bling_order_items
 #
-#  id                  :bigint           not null, primary key
-#  aliquotaIPI         :decimal(, )
-#  alteration_date     :datetime
-#  codigo              :string
-#  date                :datetime
-#  desconto            :decimal(, )
-#  descricao           :text
-#  descricaoDetalhada  :text
-#  items               :jsonb
-#  quantidade          :integer
-#  unidade             :string
-#  valor               :decimal(, )
-#  value               :decimal(, )
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  account_id          :bigint
-#  bling_id            :integer
-#  bling_order_id      :string
-#  marketplace_code_id :string
-#  situation_id        :string
-#  store_id            :string
+#  id                        :bigint           not null, primary key
+#  aliquotaIPI               :decimal(, )
+#  alteration_date           :datetime
+#  codigo                    :string
+#  collected_alteration_date :date
+#  date                      :datetime
+#  desconto                  :decimal(, )
+#  descricao                 :text
+#  descricaoDetalhada        :text
+#  items                     :jsonb
+#  quantidade                :integer
+#  unidade                   :string
+#  valor                     :decimal(, )
+#  value                     :decimal(, )
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  account_id                :bigint
+#  bling_id                  :integer
+#  bling_order_id            :string
+#  marketplace_code_id       :string
+#  situation_id              :string
+#  store_id                  :string
 #
 # Indexes
 #
@@ -32,6 +33,10 @@
 require 'rails_helper'
 
 RSpec.describe BlingOrderItem, type: :model do
+  describe 'db columns' do
+    it { is_expected.to have_db_column(:collected_alteration_date) }
+  end
+
   describe 'associations' do
     it { is_expected.to have_many(:items).dependent(:destroy) }
   end
@@ -99,13 +104,13 @@ RSpec.describe BlingOrderItem, type: :model do
 
   describe '#Status::ALL' do
     it 'has status all' do
-      expect(described_class::Status::ALL).to eq([15, 101_065, 24, 94_871, 95_745, 12])
+      expect(described_class::Status::ALL).to eq([15, 101_065, 24, 94_871, 95_745, 12, 173_631])
     end
   end
 
   describe '#Status::PAID' do
     it 'has status paid' do
-      expect(described_class::Status::PAID).to eq([15, 101_065, 24, 94_871, 95_745])
+      expect(described_class::Status::PAID).to eq([15, 101_065, 24, 94_871, 95_745, 173_631])
     end
   end
 
