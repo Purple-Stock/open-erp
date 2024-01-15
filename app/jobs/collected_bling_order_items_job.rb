@@ -10,6 +10,8 @@
 class CollectedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
   STATUS = BlingOrderItem::Status::COLLECTED.freeze
 
+  queue_as :collected_order
+
   attr_accessor :account_id
 
   def perform(account_id, initial_alteration_date = nil)
