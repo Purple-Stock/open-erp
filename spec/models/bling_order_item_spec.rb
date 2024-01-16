@@ -225,6 +225,21 @@ RSpec.describe BlingOrderItem, type: :model do
     end
   end
 
+  describe 'collected!' do
+    include_context 'with bling token'
+    let(:collected_order_id) { 19_436_662_536 }
+    let(:collected_status) { '173631' }
+    let(:order) do
+      FactoryBot.create(:bling_order_item, bling_order_id: collected_order_id, account_id: user.account.id)
+    end
+
+    before { order.collected! }
+
+    it 'updates from checked to collected status' do
+      expect(order.reload.situation_id).to eq(collected_status)
+    end
+  end
+
   describe '#update_yourself' do
     context 'when there are in progress orders' do
       let(:incorrect_situation) { 99 }
