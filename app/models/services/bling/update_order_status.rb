@@ -15,7 +15,7 @@ module Services
         token = bling_token
         base_url = 'https://www.bling.com.br/Api/v3'
         results = []
-        
+
         order_ids.each do |order_id|
           url = "#{base_url}/pedidos/vendas/#{order_id}/situacoes/#{new_status}"
           response = HTTParty.patch(url, headers: authorization_headers(token))
@@ -28,8 +28,6 @@ module Services
         end
 
         { results: results }
-      rescue StandardError => e
-        { error: "Error: #{e.message}" }
       end
 
       private
