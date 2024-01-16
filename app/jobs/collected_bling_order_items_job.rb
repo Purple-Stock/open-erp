@@ -42,7 +42,7 @@ class CollectedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
 
     orders_attributes = []
     BlingOrderItem.where(bling_order_id: [query_bling_order_ids])
-                  .update_all(situation_id: @status, collected_alteration_date: @collected_alteration_date, account_id:)
+                  .update_all(situation_id: @status, account_id:)
 
     orders.each do |order|
       next if query_bling_order_ids.include?(order['id'])
