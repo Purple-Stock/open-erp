@@ -37,6 +37,8 @@ class BlingOrderItem < ApplicationRecord
   has_many :items, dependent: :destroy
   belongs_to :account, optional: true
 
+  before_update :set_collected_alteration_date, if: :collected?
+
   accepts_nested_attributes_for :items
 
   after_create :synchronize_items
@@ -150,5 +152,15 @@ class BlingOrderItem < ApplicationRecord
     GoodJob::Bulk.enqueue do
       collection.each(&:synchronize_items)
     end
+  end
+
+  private
+
+  def set_collected_alteration_date
+    self.collected_alteration_date = alteration_date
+  end
+
+  def collected?
+    situation_id.eql?(BlingOrderItem::Status::COLLECTED.to_s)
   end
 end
