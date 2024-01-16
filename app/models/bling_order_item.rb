@@ -132,6 +132,10 @@ class BlingOrderItem < ApplicationRecord
     STORE_ID_NAME_KEY_VALUE["#{store_id}"]
   end
 
+  def collected!
+    update(situation_id: 173_631)
+  end
+
   def value
     super || 0.0
   end
