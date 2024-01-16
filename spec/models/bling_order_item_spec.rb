@@ -238,6 +238,10 @@ RSpec.describe BlingOrderItem, type: :model do
     it 'updates from checked to collected status' do
       expect(order.reload.situation_id).to eq(collected_status)
     end
+
+    it 'sets collected alteration date the same as alteration date' do
+      expect(order.reload.collected_alteration_date).to eq(order.alteration_date.to_date)
+    end
   end
 
   describe '#update_yourself' do

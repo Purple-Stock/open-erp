@@ -45,5 +45,6 @@ FactoryBot.define do
     date { Date.today }
     store_id { '204219105' }
     value { 2.0 }
+    alteration_date { Date.new(2023, 12, 3) }
   end
 end
