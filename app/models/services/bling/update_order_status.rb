@@ -3,6 +3,8 @@
 module Services
   module Bling
     class UpdateOrderStatus < ApplicationService
+      BASE_URL = 'https://www.bling.com.br/Api/v3/pedidos/vendas/'
+
       attr_accessor :tenant, :order_ids, :new_status
 
       def initialize(tenant:, order_ids:, new_status:)
@@ -15,9 +17,9 @@ module Services
         token = bling_token
         base_url = 'https://www.bling.com.br/Api/v3'
         results = []
-        
+
         order_ids.each do |order_id|
-          url = "#{base_url}/pedidos/vendas/#{order_id}/situacoes/#{new_status}"
+          url = "#{BASE_URL}#{order_id}/situacoes/#{new_status}"
           response = HTTParty.patch(url, headers: authorization_headers(token))
 
           results << if response.success?
@@ -28,8 +30,6 @@ module Services
         end
 
         { results: results }
-      rescue StandardError => e
-        { error: "Error: #{e.message}" }
       end
 
       private

@@ -1,0 +1,127 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19436662536
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 16 Jan 2024 15:28:45 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1981'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=42c53aa2eb0679ac
+      Set-Cookie:
+      - PHPSESSID=8e4q04ss7eoikicbsbf4tdgbkg; path=/; secure; HttpOnly
+      - PHPSESSID=bn47ftugoql43vigh6bdi3to0k; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 846763da0da66d45-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19436662536,"numero":67546,"numeroLoja":"18496I18493","data":"2024-01-02","dataSaida":"2024-01-02","dataPrevista":"0000-00-00","totalProdutos":91.04,"total":105.39,"contato":{"id":16477667762,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":101065,"valor":0},"loja":{"id":203467890},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":19441142582},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16478726518,"codigo":"VEST-LONG-TOP-SAI-FEND-VERMELHO-M","unidade":"1","quantidade":1,"desconto":0,"valor":37.92,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Vermelho;Tamanho:M","descricaoDetalhada":"","produto":{"id":15973680265},"comissao":{"base":37.92,"aliquota":0,"valor":0}},{"id":16478726519,"codigo":"CONJ-FEND-TOP-PRETO-M","unidade":"Unidad","quantidade":1,"desconto":0,"valor":53.12,"aliquotaIPI":0,"descricao":"CONJUNTO
+        TOP MANGA LONGA + SAIA COM FENDA Cor:Preto;Tamanho:M","descricaoDetalhada":"","produto":{"id":15994593243},"comissao":{"base":53.12,"aliquota":0,"valor":0}}],"parcelas":[{"id":16676126869,"dataVencimento":"2024-02-01","valor":52.69,"observacoes":"M\u00e9todo
+        de pagamento: Paypal\\n","formaPagamento":{"id":1135275}},{"id":16676126870,"dataVencimento":"2024-03-02","valor":52.7,"observacoes":"M\u00e9todo
+        de pagamento: Paypal\\n","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":14.35,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":6,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"Rua dos Bobos","numero":"0","complemento":"","municipio":"Mari","uf":"X","cep":"123456","bairro":"Bloco","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""},"taxas":{"taxaComissao":0,"custoFrete":0,"valorBase":0}}}'
+  recorded_at: Tue, 16 Jan 2024 15:28:45 GMT
+- request:
+    method: patch
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19436662536/situacoes/173631
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Date:
+      - Tue, 16 Jan 2024 15:28:49 GMT
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=0f273480513c14b4
+      Set-Cookie:
+      - PHPSESSID=p4h95c6ud2a2bikb2173k2vd84; path=/; secure; HttpOnly
+      - PHPSESSID=sec7b075uvfbqi32hkkirf8ocs; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 846763eaec6b6473-GIG
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Tue, 16 Jan 2024 15:28:49 GMT
+recorded_with: VCR 6.2.0
