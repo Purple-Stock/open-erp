@@ -225,6 +225,17 @@ RSpec.describe BlingOrderItem, type: :model do
     end
   end
 
+  describe '#update' do
+    let(:old_date) { Date.new(2021, 1, 1) }
+    let(:order) { FactoryBot.create(:bling_order_item, collected_alteration_date: old_date) }
+    let(:new_date) { Date.new(2023, 1, 1) }
+
+    it 'keeps old collected_alteration_date' do
+      order.update(collected_alteration_date: new_date)
+      expect(order.reload.collected_alteration_date).to eq(old_date)
+    end
+  end
+
   describe 'collected!' do
     include_context 'with bling token'
     let(:collected_order_id) { 19_436_662_536 }

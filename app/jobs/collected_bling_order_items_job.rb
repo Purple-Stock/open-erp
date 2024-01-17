@@ -41,8 +41,9 @@ class CollectedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
                                           .map { |order| order.bling_order_id.to_i }
 
     orders_attributes = []
-    BlingOrderItem.where(bling_order_id: [query_bling_order_ids])
-                  .update_all(situation_id: @status, account_id:)
+    BlingOrderItem.where(bling_order_id: [query_bling_order_ids]).each do |record|
+      record.update(situation_id: @status, collected_alteration_date: @collected_alteration_date)
+    end
 
     orders.each do |order|
       next if query_bling_order_ids.include?(order['id'])

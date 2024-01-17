@@ -39,6 +39,7 @@ class BlingOrderItem < ApplicationRecord
 
   accepts_nested_attributes_for :items
 
+  before_update :keep_old_collected_alteration_date
   after_create :synchronize_items
 
   STORE_ID_NAME_KEY_VALUE = {
@@ -150,5 +151,13 @@ class BlingOrderItem < ApplicationRecord
     GoodJob::Bulk.enqueue do
       collection.each(&:synchronize_items)
     end
+  end
+
+  private
+
+  def keep_old_collected_alteration_date
+    return unless collected_alteration_date_was.present? && collected_alteration_date_changed?
+
+    self.collected_alteration_date = collected_alteration_date_was
   end
 end
