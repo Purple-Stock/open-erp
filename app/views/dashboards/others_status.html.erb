@@ -19,19 +19,19 @@
       </span>
     </h1>
     <div class="row justify-content-center">
-        <% if @monthly_revenue_estimation.present? %>
-          <div class="col-sm text-center">
-            <p>Meta de quantidade: <%= @monthly_revenue_estimation.quantity %></p>
-          </div>
-          <div class="col-sm text-center">
-            <p>Meta de receita: <span id="revenue-estimation" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></span></p>
-          </div>
-          <div class="col-sm text-center">
-            <p>Ticket Médio: <span id="average-ticket" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></span></p>
-          </div>
-        <% else %>
-          <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
-        <% end %>
+      <% if @monthly_revenue_estimation.present? %>
+        <div class="col-sm text-center">
+          <p>Meta de quantidade: <%= @monthly_revenue_estimation.quantity %></p>
+        </div>
+        <div class="col-sm text-center">
+          <p>Meta de receita: <span id="revenue-estimation" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></span></p>
+        </div>
+        <div class="col-sm text-center">
+          <p>Ticket Médio: <span id="average-ticket" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></span></p>
+        </div>
+      <% else %>
+        <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
+      <% end %>
     </div>
   </section>
 
@@ -62,51 +62,56 @@
   <section class="section p-3">
     <div class="row p-0">
       <div class="col-sm bordered-section">
-        <h1>Pedidos Feitos(checados e verificados)</h1>
-        <%= render 'order_items', order_items: @current_done_order_items, show_revenue_estimation: false, printed: false %>
+        <h1>Pedidos Concluidos(Pagos)</h1>
+        <%= render 'order_items', order_items: @bling_order_items, show_revenue_estimation: true, printed: false %>
       </div>
 
       <div class="col-sm bordered-section">
-        <h1>Pedidos Coletados</h1>
-        <%= render 'order_items', order_items: @collected_orders, show_revenue_estimation: false, printed: false %>
+        <h1>Pedidos Cancelados</h1>
+        <%= render 'order_items', order_items: @canceled_orders, show_revenue_estimation: false, printed: false %>
       </div>
+    </div>
 
-      <div class="col-sm bordered-section border-danger">
-        <h1>Pedidos Impressos (zerar ao final do dia)</h1>
-        <%= render 'order_items', order_items: @grouped_printed_order_items, show_revenue_estimation: false, printed: true %>
-      </div>
-  </div>
-
-  <div class="row">
+    <div class="row">
       <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Pedidos Pendentes</h1>
-        <%= render 'order_items', order_items: @grouped_pending_order_items, show_revenue_estimation: false, printed: false %>
+        <h1>Pedidos Em andamento(Pagos)</h1>
+        <%= render 'order_items', order_items: @grouped_in_progress_order_items, show_revenue_estimation: false, printed: false %>
+      </div>
+
+      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
+        <h1>Status Shein</h1>
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h5 class="card-title">Pendentes Shein</h5>
+                <p>Quantidade de Pedidos: <%= @shein_pending_count %></p>
+                <p>Em Andamento Bling: <%= @in_progress = @in_progress_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
+                <p>Diferença: <%= @shein_pending_count - @in_progress %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h5 class="card-title">Pedidos a serem coletados</h5>
+                <p>Quantidade de Pedidos: <%= @shein_orders_count %></p>
+                <p>Pendentes Bling: <%= @pending = @pending_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
+                <p>Impressos Bling: <%= @printed = @printed_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
+                <p>Diferença: <%= @shein_orders_count - @pending - @printed%></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h5 class="card-title">Pedidos Atrasados</h5>
+                <p>Quantidade de Pedidos: <%= @expired_orders_count %></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </div>
-
-<script>
-    setInterval(function() {
-        window.location.reload();
-    }, 60000);
-    $(document).ready(function (){
-        let isHidden = true;
-
-        $('#eye-slash, #eye').click(function (){
-            if(isHidden) {
-                $('#revenue-estimation').removeAttr('hidden');
-                $('#average-ticket').removeAttr('hidden');
-                $('.bi-eye').removeAttr('hidden');
-                $('.bi-eye-slash').attr('hidden', true);
-                isHidden = false;
-            } else {
-                $('#revenue-estimation').attr('hidden', true);
-                $('#average-ticket').attr('hidden', true);
-                $('.bi-eye').attr('hidden', true)
-                $('.bi-eye-slash').removeAttr('hidden');
-                isHidden = true;
-            }
-        });
-    })
-</script>
