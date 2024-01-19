@@ -42,6 +42,9 @@ class BlingOrderItem < ApplicationRecord
   before_update :keep_old_collected_alteration_date
   after_create :synchronize_items
 
+  ANOTHER_SHEIN_STORE_ID = '204114350'
+  SHEIN_STORE_ID = '204219105'
+
   STORE_ID_NAME_KEY_VALUE = {
     '204219105' => 'Shein',
     '203737982' => 'Shopee',
@@ -131,6 +134,14 @@ class BlingOrderItem < ApplicationRecord
 
   def store_name
     STORE_ID_NAME_KEY_VALUE["#{store_id}"]
+  end
+
+  def store_id
+    if super.eql?(ANOTHER_SHEIN_STORE_ID)
+      SHEIN_STORE_ID
+    else
+      super
+    end
   end
 
   def collected!
