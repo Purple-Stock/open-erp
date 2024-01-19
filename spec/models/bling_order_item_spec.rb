@@ -211,6 +211,20 @@ RSpec.describe BlingOrderItem, type: :model do
       end
     end
 
+    context 'when there are orders for both old and new Shein store ids' do
+      subject(:group_order_items) { described_class.group_order_items(described_class.all) }
+
+      let!(:shein_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_219_105) }
+      let!(:old_shein_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_114_350) }
+      let(:grouped_hash) do
+        { 'Shein' => [shein_order_item, old_shein_order_item], 'Shopee' => [], 'Simplo 7' => [], 'Mercado Livre' => [] }
+      end
+
+      it 'return the corresponding store with empty array' do
+        expect(group_order_items).to(match(grouped_hash))
+      end
+    end
+
     context 'when store has no BlingOrderItem' do
       let!(:shein_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_219_105) }
 
