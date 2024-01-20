@@ -29,14 +29,9 @@ class DashboardsController < ApplicationController
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
 
-    @last_update = format_last_update(Time.current)
-
     @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
     @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
     @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
-  rescue StandardError => e
-    Rails.logger.error(e.message)
-    redirect_to home_last_updates_path
   end
 
   private
