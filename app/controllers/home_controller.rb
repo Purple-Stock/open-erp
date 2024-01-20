@@ -7,29 +7,6 @@ class HomeController < ApplicationController
   include SheinOrdersHelper
 
   def index
-    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Para ser coletado por SHEIN')
-                                    .where(account_id: current_user.account.id)
-                                    .distinct
-                                    .count("data ->> 'Número do pedido'")
-
-    @shein_pending_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['Pendente']).where(account_id: current_user.account.id)
-                                     .distinct
-                                     .count("data ->> 'Número do pedido'")
-
-    @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)",
-                                     ['Para ser coletado por SHEIN', 'Pendente', 'Para ser enviado'])
-                              .where(account_id: current_user.account.id)
-    @expired_orders = @shein_orders.select { |order| order_status(order) == 'Atrasado' }
-    @expired_orders_count = @expired_orders.count
-
-    order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
-
-    @mercado_envios_flex_counts = count_mercado_envios_flex(order_ids)
-
-    @store_name = get_loja_name
-
-    @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
-
     @expires_at = format_last_update(@date_expires)
 
     @last_update = format_last_update(Time.current)
