@@ -1,7 +1,8 @@
 class DashboardsController < ApplicationController
-  before_action :date_range, :bling_order_items, :canceled_orders, :get_in_progress_order_items,
+  before_action :token_expires_at, :date_range, :bling_order_items, :canceled_orders, :get_in_progress_order_items,
                 :current_done_order_items, :set_monthly_revenue_estimation, :get_printed_order_items,
                 :get_pending_order_items, :collected_orders, only: :others_status
+
   include SheinOrdersHelper
 
   def others_status
@@ -28,8 +29,6 @@ class DashboardsController < ApplicationController
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
 
-    @expires_at = format_last_update(@date_expires)
-
     @last_update = format_last_update(Time.current)
 
     @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
@@ -41,6 +40,10 @@ class DashboardsController < ApplicationController
   end
 
   private
+
+  def token_expires_at
+    @token_expires_at = BlingDatum.find_by(account_id: current_tenant.id).try(:expires_at)
+  end
 
   def date_range
     @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil).try(:to_date).try(:beginning_of_day) || Time.zone.today.beginning_of_day
@@ -131,10 +134,6 @@ class DashboardsController < ApplicationController
 
   def format_last_update(time)
     time&.strftime('%d-%m-%Y %H:%M:%S')
-  end
-
-  def token_expires_at
-    BlingDatum.find_by(account_id: current_tenant.id).try(:expires_at)
   end
 
   def get_loja_name
