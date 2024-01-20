@@ -53,6 +53,10 @@ module ApplicationHelper
     date.strftime('%d/%m/%Y %H:%m')
   end
 
+  def page_last_update
+    Time.current.strftime('%d-%m-%Y %H:%M:%S')
+  end
+
   def pt_datetime_format(time)
     time&.strftime('%d-%m-%Y %H:%M:%S')
   end
