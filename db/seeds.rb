@@ -12,7 +12,7 @@ Rails.logger.debug 'Module User'
 
 FactoryBot.create(:user, password: '123456', email: 'fashion.store@email.com')
 
-FactoryBot.create(:bling_datum, account_id: 1, expires_at: (Time.zone.local(13) + 3.days),
+FactoryBot.create(:bling_datum, account_id: 1, expires_at: (Time.zone.now + 3.days),
                                 access_token: ENV['ACCESS_TOKEN'], refresh_token: ENV['REFRESH_TOKEN'])
 
 Rails.logger.debug 'Categories'
