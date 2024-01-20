@@ -1,7 +1,7 @@
 <div class="container-ultra-wide">
   <section class="mt-5 section bordered-section">
     <p>Última Atualização: <%= @last_update %></p>
-    <p>Token Expira: <%= @expires_at %></p>
+    <p>Token Expira: <%= pt_datetime_format(@token_expires_at) %></p>
     <h1 class="text-center">Metas
       <span class="bi bi-eye-slash" id="eye-slash">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
