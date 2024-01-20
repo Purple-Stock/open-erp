@@ -60,22 +60,14 @@
   </section>
 
   <section class="section p-3">
-    <div class="row p-0">
+    <div class="row">
       <div class="col-sm bordered-section">
         <h1>Pedidos Concluidos(Pagos)</h1>
-        <%= render 'order_items', order_items: @bling_order_items, show_revenue_estimation: true, printed: false %>
+        <%= render 'order_items', order_items: @bling_order_items, show_revenue_estimation: true, highlighted:false %>
       </div>
-
       <div class="col-sm bordered-section">
         <h1>Pedidos Cancelados</h1>
-        <%= render 'order_items', order_items: @canceled_orders, show_revenue_estimation: false, printed: false %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Pedidos Em andamento(Pagos)</h1>
-        <%= render 'order_items', order_items: @grouped_in_progress_order_items, show_revenue_estimation: false, printed: false %>
+        <%= render 'order_items', order_items: @canceled_orders, show_revenue_estimation: false, highlighted:false %>
       </div>
 
       <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
