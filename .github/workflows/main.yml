@@ -23,6 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.9.0'
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -32,6 +37,7 @@ jobs:
         env:
           RAILS_ENV: test
         run: |
+          npm install -g yarn@1.22.19
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           yarn install --check-files
