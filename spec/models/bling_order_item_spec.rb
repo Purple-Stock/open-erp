@@ -193,21 +193,20 @@ RSpec.describe BlingOrderItem, type: :model do
   end
 
   describe '#group_order_items' do
-    subject { described_class.group_order_items(described_class.all) }
+    subject(:group_order_items) { described_class.group_order_items(described_class.all) }
 
     context 'when there\'s BlinOrderItem for all stores' do
       let!(:shein_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_219_105) }
       let!(:shopee_order_item) { FactoryBot.create(:bling_order_item, store_id: 203_737_982) }
       let!(:simplo7_order_item) { FactoryBot.create(:bling_order_item, store_id: 203_467_890) }
       let!(:mercado_livre_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_061_683) }
+      let!(:nuvem_shop) { FactoryBot.create(:bling_order_item, store_id: 204_796_870) }
 
       it 'return a hash with all stores' do
-        expect(subject).to(match({
-                                   'Shein' => [shein_order_item],
-                                   'Shopee' => [shopee_order_item],
-                                   'Simplo 7' => [simplo7_order_item],
-                                   'Mercado Livre' => [mercado_livre_order_item]
-                                 }))
+        expect(group_order_items).to(match({ 'Shein' => [shein_order_item], 'Shopee' => [shopee_order_item],
+                                             'Simplo 7' => [simplo7_order_item],
+                                             'Mercado Livre' => [mercado_livre_order_item],
+                                             'Nuvem Shop' => [nuvem_shop] }))
       end
     end
 
