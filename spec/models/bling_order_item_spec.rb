@@ -216,7 +216,8 @@ RSpec.describe BlingOrderItem, type: :model do
       let!(:shein_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_219_105) }
       let!(:old_shein_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_114_350) }
       let(:grouped_hash) do
-        { 'Shein' => [shein_order_item, old_shein_order_item], 'Shopee' => [], 'Simplo 7' => [], 'Mercado Livre' => [] }
+        { 'Shein' => [shein_order_item, old_shein_order_item], 'Shopee' => [], 'Simplo 7' => [], 'Mercado Livre' => [],
+          'Nuvem Shop' => [] }
       end
 
       it 'return the corresponding store with empty array' do
@@ -228,12 +229,9 @@ RSpec.describe BlingOrderItem, type: :model do
       let!(:shein_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_219_105) }
 
       it 'return the corresponding store with empty array' do
-        expect(subject).to(match({
-                                   'Shein' => [shein_order_item],
-                                   'Shopee' => [],
-                                   'Simplo 7' => [],
-                                   'Mercado Livre' => []
-                                 }))
+        expect(group_order_items).to(match({ 'Shein' => [shein_order_item], 'Shopee' => [], 'Simplo 7' => [],
+                                             'Mercado Livre' => [],
+                                             'Nuvem Shop' => [] }))
       end
     end
   end
