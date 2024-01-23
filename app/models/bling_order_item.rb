@@ -49,7 +49,8 @@ class BlingOrderItem < ApplicationRecord
     '204219105' => 'Shein',
     '203737982' => 'Shopee',
     '203467890' => 'Simplo 7',
-    '204061683' => 'Mercado Livre'
+    '204061683' => 'Mercado Livre',
+    '204796870' => 'Nuvem Shop'
   }.freeze
 
   STATUS_NAME_KEY_VALUE = {
