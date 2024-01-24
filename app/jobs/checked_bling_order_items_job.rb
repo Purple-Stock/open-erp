@@ -28,13 +28,16 @@ class CheckedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
       batch_alteration_dates.each do |alteration_date|
         @alteration_date = alteration_date
         threads << Thread.new do
-          final_alteration_date = (alteration_date + 1.day).strftime
-          options = { dataAlteracaoInicial: alteration_date.strftime, dataAlteracaoFinal: final_alteration_date }
-          orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
-                                               situation: STATUS, options: options)
-          orders = orders['data']
+          # As per https://guides.rubyonrails.org/threading_and_code_execution.html
+          Rails.application.executor.wrap do
+            final_alteration_date = (alteration_date + 1.day).strftime
+            options = { dataAlteracaoInicial: alteration_date.strftime, dataAlteracaoFinal: final_alteration_date }
+            orders = Services::Bling::Order.call(order_command: 'find_orders', tenant: account_id,
+                                                 situation: STATUS, options: options)
+            orders = orders['data']
 
-          create_orders(orders, alteration_date)
+            create_orders(orders, alteration_date)
+          end
         end
       end
     end
