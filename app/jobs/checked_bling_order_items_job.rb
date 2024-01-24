@@ -26,6 +26,7 @@ class CheckedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
     date_range = (@initial_date..@final_date)
     date_range.each_slice(10) do |batch_alteration_dates|
       batch_alteration_dates.each do |alteration_date|
+        @alteration_date = alteration_date
         threads << Thread.new do
           final_alteration_date = (alteration_date + 1.day).strftime
           options = { dataAlteracaoInicial: alteration_date.strftime, dataAlteracaoFinal: final_alteration_date }
@@ -33,7 +34,7 @@ class CheckedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
                                                situation: STATUS, options: options)
           orders = orders['data']
 
-          create_orders(orders)
+          create_orders(orders, alteration_date)
         end
       end
     end
