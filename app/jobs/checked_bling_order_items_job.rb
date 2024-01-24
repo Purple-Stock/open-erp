@@ -24,8 +24,7 @@ class CheckedBlingOrderItemsJob < BlingOrderItemCreatorBaseJob
     @final_date = Date.today
     threads = []
     date_range = (@initial_date..@final_date)
-    slice_count_date_range = date_range.count / 4
-    date_range.each_slice(slice_count_date_range) do |batch_alteration_dates|
+    date_range.each_slice(10) do |batch_alteration_dates|
       batch_alteration_dates.each do |alteration_date|
         threads << Thread.new do
           final_alteration_date = (alteration_date + 1.day).strftime
