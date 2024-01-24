@@ -23,11 +23,6 @@ RSpec.describe CheckedBlingOrderItemsJob, type: :job do
       it 'counts by 3353 bling order items' do
         expect(BlingOrderItem.count).to eq(3353)
       end
-
-      it 'has checked situation id' do
-        expect(BlingOrderItem.find_by(bling_order_id: '18621253255').situation_id.to_i)
-          .to eq(BlingOrderItem::Status::CHECKED)
-      end
     end
 
     context 'when argument has alteration date' do
@@ -39,6 +34,11 @@ RSpec.describe CheckedBlingOrderItemsJob, type: :job do
 
       it 'counts by 208 bling order items' do
         expect(BlingOrderItem.count).to eq(208)
+      end
+
+      it 'has checked situation id' do
+        expect(BlingOrderItem.find_by(bling_order_id: '19120184025').situation_id.to_i)
+          .to eq(BlingOrderItem::Status::CHECKED)
       end
 
       it 'has alteration date' do
