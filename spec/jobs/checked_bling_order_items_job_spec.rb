@@ -40,6 +40,16 @@ RSpec.describe CheckedBlingOrderItemsJob, type: :job do
       it 'counts by 208 bling order items' do
         expect(BlingOrderItem.count).to eq(208)
       end
+
+      it 'has alteration date' do
+        expect(BlingOrderItem.find_by(bling_order_id: '19120184025').alteration_date.strftime('%Y-%m-%d'))
+          .to eq('2023-11-13')
+      end
+
+      it 'has a different alteration date' do
+        expect(BlingOrderItem.find_by(bling_order_id: '19105074834').alteration_date.strftime('%Y-%m-%d'))
+          .to eq('2023-11-14')
+      end
     end
   end
 end
