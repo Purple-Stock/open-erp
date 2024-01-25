@@ -6,8 +6,12 @@ class BlingOrderItemsController < ApplicationController
 
   def collection
     @default_status_filter = params['status']
+    @default_initial_date = params['initial_date'] || Date.today
+    @default_final_date = params['final_date'] || Date.today
 
-    bling_order_items = BlingOrderItem.where(account_id: current_tenant).by_status(@default_status_filter)
+    bling_order_items = BlingOrderItem.where(account_id: current_tenant)
+                                      .by_status(@default_status_filter)
+                                      .date_range(@default_initial_date, @default_final_date)
     @pagy, @bling_order_items = pagy(bling_order_items)
   end
 end
