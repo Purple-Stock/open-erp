@@ -38,7 +38,7 @@
             <% @bling_order_items.each do |bling_order_item| %>
               <tr>
                 <td><%= link_to bling_order_item.id, bling_order_item_path(bling_order_item), data: { toggle: 'tooltip', turbo: false } %></td>
-                <td><%= bling_order_item.bling_order_id %></td>
+                <td><%= link_to bling_order_item.bling_order_id, "https://www.bling.com.br/b/vendas.php#edit/#{bling_order_item.bling_order_id}", target: '_blank' %></td>
                 <td><%= bling_order_item.bling_id %></td>
                 <td><%= bling_order_item.situation_id %></td>
                 <td><%= bling_order_item.store_id %></td>
