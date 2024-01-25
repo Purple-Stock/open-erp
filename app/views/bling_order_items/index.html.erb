@@ -7,12 +7,22 @@
   </div>
 </div>
 
-<div class="form-group">
-  <%= form_with(url: bling_order_items_path, method: :get) do %>
-    <%= select_tag "status", options_for_select(BlingOrderItemStatus.to_a, @default_status_filter) %>
-    <%= submit_tag "Filtro", class: 'btn btn-primary' %>
+<section class="section pl-0">
+  <%= form_with(url: bling_order_items_path, method: :get, html: { class: 'form-inline' }) do %>
+    <div class="form-group">
+      <%= select_tag "status", options_for_select(BlingOrderItemStatus.to_a, @default_status_filter), class: 'custom-select'%>
+    </div>
+    <div class="form-group mx-sm-3">
+      <%= label_tag :initial_date, 'Data Inicial' %>
+      <%= date_field_tag('initial_date', Date.today, class: 'form-control') %>
+    </div>
+    <div class="form-group mx-sm-3">
+      <%= label_tag :final_date, 'Data Final' %>
+      <%= date_field_tag(:final_date, Date.today, class: 'form-control') %>
+    </div>
+    <%= submit_tag "Filtrar", class: 'btn btn-primary btn-lg' %>
   <% end %>
-</div>
+</section>
 
 <div class="section-body">
   <div class="card">
