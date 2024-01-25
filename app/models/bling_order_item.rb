@@ -114,6 +114,12 @@ class BlingOrderItem < ApplicationRecord
     where(date: date_range)
   }
 
+  scope :by_status, lambda { |status|
+    return all if status.eql?(BlingOrderItemStatus::ALL.to_s)
+
+    where(situation_id: status)
+  }
+
   def self.group_order_items(base_query)
     grouped_order_items = {}
     STORE_ID_NAME_KEY_VALUE.each_value { |store| grouped_order_items[store] = [] }
