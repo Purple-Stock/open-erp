@@ -99,6 +99,9 @@
             <li class="<%= active_nav_item('sales', 'index') %>">
               <%= link_to t("sales.list"), sales_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('sales', 'index') %>">
+              <%= link_to t("activerecord.models.bling_order_items.list"), bling_order_items_path, class: 'nav-link' %>
+            </li>
             <li class="<%= active_nav_item('sales', 'new') %>">
               <%= link_to t("sales.create"), new_sale_path, class: 'nav-link' %>
             </li>
