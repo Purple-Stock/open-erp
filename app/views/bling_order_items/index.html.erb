@@ -14,11 +14,11 @@
     </div>
     <div class="form-group mx-sm-3">
       <%= label_tag :initial_date, 'Data Inicial' %>
-      <%= date_field_tag('initial_date', Date.today, class: 'form-control') %>
+      <%= date_field_tag('initial_date', @default_initial_date, class: 'form-control') %>
     </div>
     <div class="form-group mx-sm-3">
       <%= label_tag :final_date, 'Data Final' %>
-      <%= date_field_tag(:final_date, Date.today, class: 'form-control') %>
+      <%= date_field_tag(:final_date, @default_final_date, class: 'form-control') %>
     </div>
     <%= submit_tag "Filtrar", class: 'btn btn-primary btn-lg' %>
   <% end %>
