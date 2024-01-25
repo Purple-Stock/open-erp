@@ -25,27 +25,12 @@
             <thead>
             <tr>
               <th><%= t('activerecord.attributes.bling_order_items.id') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.aliquotaIPI') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.alteration_date') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.codigo') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.collected_alteration_date') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.date') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.desconto') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.descricao') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.descricaoDetalhada') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.items') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.quantidade') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.unidade') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.valor') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.value') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.created_at') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.updated_at') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.account_id') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.bling_id') %></th>
               <th><%= t('activerecord.attributes.bling_order_items.bling_order_id') %></th>
-              <th><%= t('activerecord.attributes.bling_order_items.marketplace_code_id') %></th>
+              <th><%= t('activerecord.attributes.bling_order_items.bling_id') %></th>
               <th><%= t('activerecord.attributes.bling_order_items.situation_id') %></th>
               <th><%= t('activerecord.attributes.bling_order_items.store_id') %></th>
+              <th><%= t('activerecord.attributes.bling_order_items.marketplace_code_id') %></th>
+              <th><%= t('activerecord.attributes.bling_order_items.date') %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
@@ -53,27 +38,12 @@
             <% @bling_order_items.each do |bling_order_item| %>
               <tr>
                 <td><%= link_to bling_order_item.id, bling_order_item_path(bling_order_item), data: { toggle: 'tooltip', turbo: false } %></td>
-                 <td><%= bling_order_item.aliquotaIPI %></td>
-                 <td><%= bling_order_item.alteration_date %></td>
-                 <td><%= bling_order_item.codigo %></td>
-                 <td><%= bling_order_item.collected_alteration_date %></td>
-                 <td><%= bling_order_item.date %></td>
-                 <td><%= bling_order_item.desconto %></td>
-                 <td><%= bling_order_item.descricao %></td>
-                 <td><%= bling_order_item.descricaoDetalhada %></td>
-                 <td><%= bling_order_item.items %></td>
-                 <td><%= bling_order_item.quantidade %></td>
-                 <td><%= bling_order_item.unidade %></td>
-                 <td><%= bling_order_item.valor %></td>
-                 <td><%= bling_order_item.value %></td>
-                 <td><%= bling_order_item.created_at %></td>
-                 <td><%= bling_order_item.updated_at %></td>
-                 <td><%= bling_order_item.account_id %></td>
-                 <td><%= bling_order_item.bling_id %></td>
-                 <td><%= bling_order_item.bling_order_id %></td>
-                 <td><%= bling_order_item.marketplace_code_id %></td>
-                 <td><%= bling_order_item.situation_id %></td>
-                 <td><%= bling_order_item.store_id %></td>
+                <td><%= bling_order_item.bling_order_id %></td>
+                <td><%= bling_order_item.bling_id %></td>
+                <td><%= bling_order_item.situation_id %></td>
+                <td><%= bling_order_item.store_id %></td>
+                <td><%= bling_order_item.marketplace_code_id %></td>
+                <td><%= bling_order_item.date %></td>
                 <td>
                   <%= link_to icon('fas fa-eye'), bling_order_item, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                 </td>
