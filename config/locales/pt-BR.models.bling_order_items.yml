@@ -5,6 +5,7 @@ pt-BR:
       bling_order_items:
         one: Pedido da Bling
         other: Pedidos da Bling
+        list: Lista de Vendas da Bling
     attributes:
       bling_order_items:
         id: ID
