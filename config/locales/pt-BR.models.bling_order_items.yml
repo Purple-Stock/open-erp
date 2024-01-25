@@ -1,5 +1,15 @@
 ---
 pt-BR:
+  enumerations:
+    bling_order_item_status:
+      all: Todos os Status
+      in_progress: Em andamento
+      checked: Checado
+      verified: Verificado
+      pending: Pendente
+      printed: Impresso
+      canceled: Cancelado
+      collected: Coletado
   activerecord:
     models:
       bling_order_items:
