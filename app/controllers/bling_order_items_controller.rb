@@ -6,9 +6,8 @@ class BlingOrderItemsController < ApplicationController
 
   def collection
     @default_status_filter = params['status']
-    @default_situation_balance_filter = params['balance_situation']
 
-    bling_order_items = BlingOrderItem.where(account_id: current_tenant)
+    bling_order_items = BlingOrderItem.where(account_id: current_tenant).by_status(@default_status_filter)
     @pagy, @bling_order_items = pagy(bling_order_items)
   end
 end
