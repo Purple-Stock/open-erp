@@ -1,0 +1,31 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      bling_order_items:
+        one: Pedido da Bling
+        other: Pedidos da Bling
+    attributes:
+      bling_order_items:
+        id: ID
+        aliquotaIPI: Alíquota do IPI
+        alteration_date: Data de Alteração
+        codigo: Código SKU
+        collected_alteration_date: Data de Coleta
+        date: Data
+        desconto: Desconto
+        descricao: Descrição
+        descricaoDetalhada: Descrição Detalhada
+        items: Items
+        quantidade: Quantidade
+        unidade: Unidade
+        valor: Valor
+        value: Valor
+        created_at: Criado em
+        updated_at: Atualizado em
+        account_id: Id da Conta
+        bling_id: Número do Pedido na Bling
+        bling_order_id: Id do Pedido na Bling
+        marketplace_code_id: Código do Marketplace
+        situation_id: Status
+        store_id: Loja
