@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :shein_bling_order_items, only: :index
+
   resources :shein_dashboards
   resources :shein_orders do 
     collection do
