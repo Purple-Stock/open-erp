@@ -147,6 +147,21 @@ RSpec.describe BlingOrderItem, type: :model do
     end
   end
 
+  describe '#by_status' do
+    context 'when status all' do
+      before do
+        statuses = [15, 12]
+        statuses.each do |status|
+          FactoryBot.create(:bling_order_item, situation_id: status)
+        end
+      end
+
+      it 'counts by 2' do
+        expect(described_class.by_status(BlingOrderItemStatus::ALL).length).to eq(2)
+      end
+    end
+  end
+
   describe 'self.date_range' do
     before do
       described_class.destroy_all
