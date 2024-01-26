@@ -162,6 +162,21 @@ RSpec.describe BlingOrderItem, type: :model do
     end
   end
 
+  describe '#by_store' do
+    context 'when store all' do
+      before do
+        store_ids = [204_219_105, 203_737_982]
+        store_ids.each do |store_id|
+          FactoryBot.create(:bling_order_item, store_id:)
+        end
+      end
+
+      it 'counts by 2' do
+        expect(described_class.by_store(BlingOrderItemStore::ALL).length).to eq(2)
+      end
+    end
+  end
+
   describe 'self.date_range' do
     before do
       described_class.destroy_all
