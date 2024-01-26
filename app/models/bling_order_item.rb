@@ -42,6 +42,9 @@ class BlingOrderItem < ApplicationRecord
   before_update :keep_old_collected_alteration_date
   after_create :synchronize_items
 
+  has_enumeration_for :situation_id, with: BlingOrderItemStatus, skip_validation: true
+  has_enumeration_for :store_id, with: BlingOrderItemStore, skip_validation: true
+
   ANOTHER_SHEIN_STORE_ID = '204114350'
   SHEIN_STORE_ID = '204219105'
 
