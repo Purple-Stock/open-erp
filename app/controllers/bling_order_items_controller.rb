@@ -5,7 +5,7 @@ class BlingOrderItemsController < ApplicationController
   protected
 
   def collection
-    @default_status_filter = params['status']
+    @default_status_filter = params['status'] || BlingOrderItemStatus::ALL
     @default_initial_date = params['initial_date'] || Date.today
     @default_final_date = params['final_date'] || Date.today
     @default_store_filter = params['store_id'] || BlingOrderItemStore::ALL
