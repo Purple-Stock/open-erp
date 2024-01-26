@@ -116,7 +116,7 @@ class BlingOrderItem < ApplicationRecord
   }
 
   scope :by_status, lambda { |status|
-    return all if status.eql?(BlingOrderItemStatus::ALL.to_s)
+    return all if status.eql?(BlingOrderItemStatus::ALL)
 
     where(situation_id: status)
   }
