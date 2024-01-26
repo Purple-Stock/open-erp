@@ -12,6 +12,9 @@
     <div class="form-group">
       <%= select_tag "status", options_for_select(BlingOrderItemStatus.to_a, @default_status_filter), class: 'custom-select'%>
     </div>
+    <div class="form-group">
+      <%= select_tag "store_id", options_for_select(BlingOrderItemStore.to_a, @default_store_filter), class: 'custom-select'%>
+    </div>
     <div class="form-group mx-sm-3">
       <%= label_tag :initial_date, 'Data Inicial' %>
       <%= date_field_tag('initial_date', @default_initial_date, class: 'form-control') %>
