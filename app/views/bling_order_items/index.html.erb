@@ -52,7 +52,7 @@
                 <td><%= bling_order_item.situation_id_humanize %></td>
                 <td><%= bling_order_item.store_id_humanize %></td>
                 <td><%= bling_order_item.marketplace_code_id %></td>
-                <td><%= bling_order_item.date %></td>
+                <td><%= bling_order_item.date.strftime("#{t('date.formats.default')}") %></td>
                 <td>
                   <% link_to icon('fas fa-eye'), bling_order_item, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                 </td>
