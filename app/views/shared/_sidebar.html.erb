@@ -23,8 +23,8 @@
           <li class="<%= active_nav_item('checkout_orders', 'index') %>">
             <%= link_to t("sales.checkout"), checkout_orders_path, class: 'nav-link' %>
           </li>
-          <li class="<%= active_nav_item('bling_order_items', 'index') %>">
-            <%= link_to t("dashboards.three"), bling_order_items_path, class: 'nav-link' %>
+          <li class="<%= active_nav_item('shein_bling_order_items', 'index') %>">
+            <%= link_to t("dashboards.three"), shein_bling_order_items_path, class: 'nav-link' %>
           </li>
           <li class="<%= active_nav_item('shein_orders', 'index') %>">
             <%= link_to t("dashboards.two"), shein_orders_path, class: 'nav-link' %>
@@ -98,6 +98,9 @@
           <%= render 'shared/sidebar_dropdown', title: t("sales.two"), icon: 'fas fa-shopping-cart' do %>
             <li class="<%= active_nav_item('sales', 'index') %>">
               <%= link_to t("sales.list"), sales_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('sales', 'index') %>">
+              <%= link_to t("activerecord.models.bling_order_items.list"), bling_order_items_path, class: 'nav-link' %>
             </li>
             <li class="<%= active_nav_item('sales', 'new') %>">
               <%= link_to t("sales.create"), new_sale_path, class: 'nav-link' %>

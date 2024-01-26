@@ -57,6 +57,8 @@ gem "sassc-rails"
 
 gem 'devise', '>= 4.9.3'
 
+gem 'enumerate_it'
+
 gem 'factory_bot_rails', '>= 6.3.0'
 
 gem 'faker'

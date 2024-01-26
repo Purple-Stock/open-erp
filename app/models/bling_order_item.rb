@@ -42,6 +42,9 @@ class BlingOrderItem < ApplicationRecord
   before_update :keep_old_collected_alteration_date
   after_create :synchronize_items
 
+  has_enumeration_for :situation_id, with: BlingOrderItemStatus, skip_validation: true
+  has_enumeration_for :store_id, with: BlingOrderItemStore, skip_validation: true
+
   ANOTHER_SHEIN_STORE_ID = '204114350'
   SHEIN_STORE_ID = '204219105'
 
@@ -110,6 +113,18 @@ class BlingOrderItem < ApplicationRecord
     final_date = final_date.try(:to_date).try(:end_of_day)
     date_range = initial_date..final_date
     where(date: date_range)
+  }
+
+  scope :by_status, lambda { |status|
+    return all if status.eql?(BlingOrderItemStatus::ALL)
+
+    where(situation_id: status)
+  }
+
+  scope :by_store, lambda { |store_id|
+    return all if store_id.eql?(BlingOrderItemStore::ALL)
+
+    where(store_id:)
   }
 
   def self.group_order_items(base_query)
