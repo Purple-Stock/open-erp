@@ -15,11 +15,11 @@
     <div class="form-group">
       <%= select_tag "store_id", options_for_select(BlingOrderItemStore.to_a, @default_store_filter), class: 'custom-select'%>
     </div>
-    <div class="form-group mx-sm-3">
+    <div class="form-group">
       <%= label_tag :initial_date, 'Data Inicial' %>
       <%= date_field_tag('initial_date', @default_initial_date, class: 'form-control') %>
     </div>
-    <div class="form-group mx-sm-3">
+    <div class="form-group">
       <%= label_tag :final_date, 'Data Final' %>
       <%= date_field_tag(:final_date, @default_final_date, class: 'form-control') %>
     </div>
