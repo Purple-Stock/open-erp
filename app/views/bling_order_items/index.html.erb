@@ -8,7 +8,7 @@
 </div>
 
 <section class="section pl-0">
-  <%= form_with(url: bling_order_items_path, method: :get, html: { class: 'form-inline' }) do %>
+  <%= form_with(url: bling_order_items_path, method: :get, html: { class: 'form-inline-sm d-lg-inline-flex' }) do %>
     <div class="form-group">
       <%= select_tag "status", options_for_select(BlingOrderItemStatus.to_a, @default_status_filter), class: 'custom-select'%>
     </div>
