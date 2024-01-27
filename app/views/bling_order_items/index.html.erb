@@ -23,7 +23,9 @@
       <%= label_tag :final_date, 'Data Final' %>
       <%= date_field_tag(:final_date, @default_final_date, class: 'form-control') %>
     </div>
-    <%= submit_tag "Filtrar", class: 'btn btn-primary btn-lg' %>
+    <div class="form-group">
+      <%= submit_tag "Filtrar", class: 'btn btn-primary btn-lg container-fluid' %>
+    </div>
   <% end %>
 </section>
 
