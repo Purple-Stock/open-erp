@@ -10,24 +10,23 @@
 <section class="section pl-0">
   <%= form_with(url: bling_order_items_path, method: :get) do %>
     <div class="form-group row">
-      <div class="col-md mb-2">
+      <div class="col-md-6 col-xl-auto mb-2">
         <%= select_tag "status", options_for_select(BlingOrderItemStatus.to_a, @default_status_filter), class: 'custom-select'%>
       </div>
-      <div class="col-md">
+      <div class="col-md-6 col-xl-auto">
         <%= select_tag "store_id", options_for_select(BlingOrderItemStore.to_a, @default_store_filter), class: 'custom-select'%>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <div class="col-md mb-2">
+      <div class="col-md-6 col-xl-auto mb-2 d-xl-inline-flex">
         <%= label_tag :initial_date, 'Data Inicial', class: 'col-form-label' %>
         <%= date_field_tag('initial_date', @default_initial_date, class: 'form-control') %>
       </div>
-      <div class="col-md">
+      <div class="col-md-6 col-xl-auto mb-2 d-xl-inline-flex">
         <%= label_tag :final_date, 'Data Final', class: 'col-form-label' %>
         <%= date_field_tag(:final_date, @default_final_date, class: 'form-control') %>
       </div>
     </div>
+
     <div class="form-group">
       <%= submit_tag "Filtrar", class: 'btn btn-primary btn-lg container-fluid' %>
     </div>
