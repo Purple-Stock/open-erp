@@ -25,7 +25,7 @@
               <%= store_name %>
             </h5>
             <p class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
-              Pedidos: <%= orders&.count %>
+              Pedidos: <%= link_to orders&.count, bling_order_items_path({ initial_date: Time.zone.today - 30.days, status: status, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE.key(store_name) }) %>
             </p>
             <% if store_name.eql?('Mercado Livre') %>
               <p>
