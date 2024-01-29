@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+  <div class="col-md-12">
+    <div class="card mb-12">
+      <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
+        <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
+          <h5 class="card-title">
+            Meta de Pedidos: 
+          </h5>
+          <p>
+            <%= @monthly_revenue_estimation.daily_quantity %>
+          </p>  
+        <% end %>
+        <h5 class="card-title">Contagem Total</h5>
+        <p class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
+          <%= link_to order_items.values.flatten.length, bling_order_items_path({ initial_date: Time.zone.today - 30.days, status: status }), class: 'text-body-secondary'  %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <% order_items.each do |store_name, orders| %>
+     <div class="col-md-12">
+        <div class="card mb-12">
+          <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
+            <h5 class="card-title">
+              <%= store_name %>
+            </h5>
+            <p class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
+              Pedidos: <%= orders&.count %>
+            </p>
+            <% if store_name.eql?('Mercado Livre') %>
+              <p>
+                Mercado Envios Flex: <%= @mercado_envios_flex_counts %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
