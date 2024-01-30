@@ -1,4 +1,5 @@
 class BlingOrderItemsController < ApplicationController
+  before_action :default_initial_date, :disable_initial_date, :default_final_date
   include Pagy::Backend
   inherit_resources
 
@@ -6,8 +7,6 @@ class BlingOrderItemsController < ApplicationController
 
   def collection
     @default_status_filter = params['status'] || BlingOrderItemStatus::ALL
-    @default_initial_date = params['initial_date'] || Date.today
-    @default_final_date = params['final_date'] || Date.today
     @default_store_filter = params['store_id'] || BlingOrderItemStore::ALL
 
     bling_order_items = BlingOrderItem.where(account_id: current_tenant)
@@ -15,5 +14,21 @@ class BlingOrderItemsController < ApplicationController
                                       .date_range(@default_initial_date, @default_final_date)
                                       .by_store(@default_store_filter)
     @pagy, @bling_order_items = pagy(bling_order_items)
+  end
+
+  private
+
+  def default_initial_date
+    @default_initial_date = params['initial_date'] || Date.today
+  end
+
+  # Dashboard has links to each status. From its point of view, it does not
+  # meter the initial_date filter since dashboard wants to see all period.
+  def disable_initial_date
+    @default_initial_date = nil if params['disable_initial_date'].present?
+  end
+
+  def default_final_date
+    @default_final_date = params['final_date'] || Date.today
   end
 end

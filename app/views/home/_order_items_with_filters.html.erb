@@ -12,7 +12,7 @@
         <% end %>
         <h5 class="card-title">Contagem Total</h5>
         <p class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
-          <%= link_to order_items.values.flatten.length, bling_order_items_path({ initial_date: Time.zone.today - 30.days, status: status }), class: 'text-body-secondary',
+          <%= link_to order_items.values.flatten.length, bling_order_items_path({ disable_initial_date: true, status: status }), class: 'text-body-secondary',
                       target: '_blank', rel: 'noopener' %>
         </p>
       </div>
@@ -26,7 +26,7 @@
               <%= store_name %>
             </h5>
             <p class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
-              Pedidos: <%= link_to orders&.count, bling_order_items_path({ initial_date: Time.zone.today - 30.days, status: status, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE.key(store_name) }),
+              Pedidos: <%= link_to orders&.count, bling_order_items_path({ disable_initial_date: true, status: status, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE.key(store_name) }),
                                    target: '_blank', rel: 'noopener' %>
             </p>
             <% if store_name.eql?('Mercado Livre') %>

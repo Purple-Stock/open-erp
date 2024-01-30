@@ -25,8 +25,11 @@
         <%= label_tag :final_date, 'Data Final', class: 'mx-xl-1 col-form-label' %>
         <%= date_field_tag(:final_date, @default_final_date, class: 'col-lg-12 col-xl-7 form-control') %>
       </div>
-      <div class="col-12 col-lg-6 col-xl-auto my-4 my-xl-0">
+      <div class="col-12 col-lg-6 col-xl-auto my-2 my-xl-0">
         <%= submit_tag "Filtrar", class: 'btn btn-primary btn-lg btn-block' %>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-auto my-2 my-xl-0">
+        <%= link_to('Filtrar hoje', bling_order_items_path({ status: @default_status_filter, store_id: @default_store_filter }), class: 'btn btn-light btn-lg btn-block') %>
       </div>
     </div>
   <% end %>
