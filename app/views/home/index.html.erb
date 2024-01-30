@@ -35,25 +35,24 @@
     </div>
   </section>
 
-  <section class="mt-5 section bordered-section">
-    <div class="row p-4">
-      <h1>Pesquisar por data</h1>
-      <%= form_tag(root_path, method: :get) do %>
-        <div class="input-group mb-5">
-          <div class="col-sm">
-            Data inicial
-            <%= date_field('bling_order_item', 'initial_date', value: Date.new(@first_date.to_date.year, @first_date.to_date.month, @first_date.to_date.day).strftime) %>
+  <section class="section p-0 bordered-section">
+    <div class="px-4 pt-4 pb-1">
+      <%= form_with(url: root_path, method: :get) do %>
+        <div class="form-group row">
+          <div class="col-md-6 col-lg-6 col-xl-auto mb-2 d-xl-inline-flex">
+            <%= label_tag :initial_date, 'Data Inicial', class: 'mx-xl-1 col-form-label' %>
+            <%= date_field_tag('initial_date', @default_initial_date, class: 'col-lg-12 col-xl-7 form-control') %>
           </div>
-          <div class="col-sm">
-            Data final
-            <%= date_field('bling_order_item', 'final_date', value: Date.new(@second_date.to_date.year, @second_date.to_date.month, @second_date.to_date.day).strftime) %>
+          <div class="col-md-6 col-lg-6 col-xl-auto mb-2 d-xl-inline-flex">
+            <%= label_tag :final_date, 'Data Final', class: 'mx-xl-1 col-form-label' %>
+            <%= date_field_tag(:final_date, @default_final_date, class: 'col-lg-12 col-xl-7 form-control') %>
           </div>
-          <div class="col-sm">
-            <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %>
+          <div class="col-12 col-lg-6 col-xl-auto my-1 my-xl-0">
+            <%= submit_tag "Filtrar", class: 'btn btn-primary btn-lg btn-block' %>
           </div>
-        </div>
-        <div class="col-sm">
-          <%= link_to('Filtrar hoje', root_path, class: 'btn btn-light mb-3') %>
+          <div class="col-12 col-lg-6 col-xl-auto my-1 my-xl-0">
+            <%= link_to('Filtrar hoje', root_path, class: 'btn btn-light btn-lg btn-block') %>
+          </div>
         </div>
       <% end %>
     </div>
