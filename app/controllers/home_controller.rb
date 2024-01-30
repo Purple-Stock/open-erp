@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  before_action :refresh_token, :date_range, :bling_order_items, :current_done_order_items, :set_monthly_revenue_estimation,
+  before_action :refresh_token, :default_initial_date, :default_final_date, :date_range, :bling_order_items,
+                :current_done_order_items, :set_monthly_revenue_estimation,
                 :get_in_progress_order_items, :get_printed_order_items,
                 :get_pending_order_items, :canceled_orders, :collected_orders, only: :index
   include SheinOrdersHelper
@@ -26,6 +27,14 @@ class HomeController < ApplicationController
 
   private
 
+  def default_initial_date
+    @default_initial_date = params[:initial_date] || Date.today
+  end
+
+  def default_final_date
+    @default_final_date = params[:final_date] || Date.today
+  end
+
   def date_range
     @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil).try(:to_date).try(:beginning_of_day) || Time.zone.today.beginning_of_day
     @second_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :final_date, nil).try(:to_date).try(:end_of_day) || Time.zone.today.end_of_day
@@ -35,7 +44,7 @@ class HomeController < ApplicationController
   def bling_order_items
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED,
                                       account_id: current_user.account.id)
-                               .date_range(@first_date, @second_date)
+                               .date_range(@default_initial_date, @default_final_date)
 
     @bling_order_items = BlingOrderItem.group_order_items(base_query)
   end
@@ -47,7 +56,8 @@ class HomeController < ApplicationController
 
   def collected_orders
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
-                                      account_id: current_user.account.id, collected_alteration_date: @first_date..@second_date)
+                                      account_id: current_user.account.id,
+                                      collected_alteration_date: @default_initial_date..@default_final_date)
     @collected_orders = BlingOrderItem.group_order_items(base_query)
   end
 
@@ -60,8 +70,9 @@ class HomeController < ApplicationController
 
   def current_done_order_items
     base_query = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                     BlingOrderItem::Status::CHECKED, BlingOrderItem::Status::COLLECTED],
-                                      alteration_date: @date_range,
+                                                     BlingOrderItem::Status::CHECKED,
+                                                     BlingOrderItem::Status::COLLECTED],
+                                      alteration_date: @default_initial_date.to_date.beginning_of_day..@default_final_date.to_date.end_of_day,
                                       account_id: current_user.account.id)
     @current_done_order_items = BlingOrderItem.group_order_items(base_query)
   end
@@ -79,7 +90,7 @@ class HomeController < ApplicationController
   def canceled_orders
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::CANCELED,
                                       account_id: current_user.account.id)
-                               .date_range(@first_date, @second_date)
+                               .date_range(@default_initial_date, @default_final_date)
 
     @canceled_orders = BlingOrderItem.group_order_items(base_query)
   end
