@@ -16,6 +16,10 @@ class BlingOrderItemsController < ApplicationController
     @pagy, @bling_order_items = pagy(bling_order_items)
   end
 
+  def permitted_params
+    params.permit(bling_order_item: %i[situation_id])
+  end
+
   private
 
   def default_initial_date
