@@ -59,4 +59,10 @@ RSpec.describe BlingOrderItemDecorator, type: :decorator do
       end
     end
   end
+
+  describe '#value' do
+    it 'uses default locales' do
+      expect(bling_order_decorated.value).to eq(number_to_currency(bling_order.value))
+    end
+  end
 end
