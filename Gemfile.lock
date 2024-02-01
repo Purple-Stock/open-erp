@@ -79,6 +79,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (7.0.8)
       activesupport (= 7.0.8)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (7.0.8)
       activemodel (= 7.0.8)
       activesupport (= 7.0.8)
@@ -187,6 +191,13 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    draper (4.0.2)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
+      ruby2_keywords
     e2mmap (0.1.0)
     enumerate_it (1.7.0)
       activesupport (>= 3.0.0)
@@ -430,6 +441,7 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-ole (1.2.12.2)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     ruby_parser (3.20.3)
       sexp_processor (~> 4.16)
     rubycritic (4.8.0)
@@ -569,6 +581,7 @@ DEPENDENCIES
   csv-importer
   devise (>= 4.9.3)
   dotenv-rails
+  draper
   enumerate_it
   factory_bot_rails (>= 6.3.0)
   faker
