@@ -51,7 +51,7 @@
               <th><%= t('activerecord.attributes.bling_order_items.store_id') %></th>
               <th><%= t('activerecord.attributes.bling_order_items.marketplace_code_id') %></th>
               <th><%= t('activerecord.attributes.bling_order_items.date') %></th>
-              <th><% t '.actions', :default => t("helpers.actions") %></th>
+              <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
             <tbody>
@@ -65,7 +65,7 @@
                 <td><%= bling_order_item.marketplace_code_id %></td>
                 <td><%= bling_order_item.date.strftime("#{t('date.formats.default')}") %></td>
                 <td>
-                  <% link_to icon('fas fa-eye'), bling_order_item, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-eye'), bling_order_item, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                 </td>
               </tr>
             <% end %>
