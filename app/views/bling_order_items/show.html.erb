@@ -1,7 +1,7 @@
 <section class="main-content">
   <h1><%= @bling_order_item.items.first.description %></h1>
   <hr>
-  <table>
+  <table class="zebra-table">
     <tr>
       <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.situation_id') %></th>
       <td class="col-sm-4"><%= @bling_order_item.situation_id_humanize %></td>
