@@ -1,94 +1,92 @@
 <section class="main-content">
   <div class="row">
-    <div class="col-md-9">
-      <h1><%= @bling_order_item.items.first.description %></h1>
-      <hr>
-      <table>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.situation_id') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.situation_id_humanize %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.codigo') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.codigo %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.unidade') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.unidade %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.quantidade') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.quantidade %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.desconto') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.desconto %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.valor') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.valor %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.aliquotaIPI') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.aliquotaIPI %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.descricao') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.descricao %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.descricaoDetalhada') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.descricaoDetalhada %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.store_id') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.store_id_humanize %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.created_at') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.created_at %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.updated_at') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.updated_at %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.date') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.date %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.alteration_date') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.alteration_date %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.marketplace_code_id') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.marketplace_code_id %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.bling_id') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.bling_id %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.account_id') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.account_id %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.value') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.value %></td>
-        </tr>
-        <tr>
-          <th class="col-sm-5"><%= t('activerecord.attributes.bling_order_items.collected_alteration_date') %></th>
-          <td class="col-sm-5"><%= @bling_order_item.collected_alteration_date %></td>
-        </tr>
-      </table>
-      <%= link_to t('helpers.links.back'), bling_order_items_path, class: 'btn btn-primary btn-lg' %>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_bling_order_item_path(@bling_order_item), :class => 'btn btn-dark btn-lg' %>
-      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                  bling_order_item_path(@bling_order_item),
-                  title: t('destroy'), class: 'btn btn-danger btn-lg',
-                  method: :delete,
-                  data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
-    </div>
+    <h1><%= @bling_order_item.items.first.description %></h1>
+    <hr>
+    <table>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.situation_id') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.situation_id_humanize %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.codigo') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.codigo %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.unidade') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.unidade %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.quantidade') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.quantidade %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.desconto') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.desconto %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.valor') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.valor %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.aliquotaIPI') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.aliquotaIPI %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.descricao') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.descricao %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.descricaoDetalhada') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.descricaoDetalhada %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.store_id') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.store_id_humanize %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.created_at') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.created_at %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.updated_at') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.updated_at %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.date') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.date %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.alteration_date') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.alteration_date %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.marketplace_code_id') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.marketplace_code_id %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.bling_id') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.bling_id %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.account_id') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.account_id %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.value') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.value %></td>
+      </tr>
+      <tr>
+        <th class="col-sm-8"><%= t('activerecord.attributes.bling_order_items.collected_alteration_date') %></th>
+        <td class="col-sm-4"><%= @bling_order_item.collected_alteration_date %></td>
+      </tr>
+    </table>
+    <%= link_to t('helpers.links.back'), bling_order_items_path, class: 'btn btn-primary btn-lg' %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_bling_order_item_path(@bling_order_item), :class => 'btn btn-dark btn-lg' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                bling_order_item_path(@bling_order_item),
+                title: t('destroy'), class: 'btn btn-danger btn-lg',
+                method: :delete,
+                data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
   </div>
 </section>
