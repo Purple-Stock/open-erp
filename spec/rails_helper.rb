@@ -74,4 +74,5 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   # In order to check translation interpolations, in decorators specs
   config.include AbstractController::Translation, type: :decorator
+  config.include ActionView::Helpers::NumberHelper, type: :decorator
 end
