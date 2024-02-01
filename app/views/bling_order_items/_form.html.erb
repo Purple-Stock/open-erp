@@ -1,0 +1,13 @@
+<section class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="display-4"><%= t('bling_order_item.one') %></h1>
+      <hr>
+      <dl class="row">
+        <dt class="col-sm-3"><%= t('bling_order_item.situation_id') %></dt>
+        <dd class="col-sm-9"><%= @bling_order_item.situation_id %></dd>
+      </dl>
+      <%= link_to t('helpers.links.back'), bling_order_items_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</section>
