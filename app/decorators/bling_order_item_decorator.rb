@@ -3,6 +3,7 @@
 # Decorator Pattern applied, check https://github.com/drapergem/draper
 class BlingOrderItemDecorator < Draper::Decorator
   include AbstractController::Translation
+  include ActionView::Helpers::NumberHelper
   delegate_all
 
   def title
@@ -33,5 +34,9 @@ class BlingOrderItemDecorator < Draper::Decorator
     return if model.alteration_date.blank?
 
     localize(model.alteration_date, format: :short)
+  end
+
+  def value
+    number_to_currency model.value
   end
 end
