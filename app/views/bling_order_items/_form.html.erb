@@ -73,17 +73,22 @@
   </div>
 
   <div class="form-row">
-    <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_items.aliquotaIPI'), :class => 'control-label' %>
-      <%= f.text_field :aliquotaIPI, :class => 'form-control', disabled: true %>
-    </div>
-    <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
+    <div class="form-group col">
       <%= f.label t('activerecord.attributes.bling_order_items.descricao'), :class => 'control-label' %>
       <%= f.text_field :descricao, :class => 'form-control', disabled: true %>
     </div>
-    <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
+  </div>
+  <div class="form-row">
+    <div class="form-group col">
       <%= f.label t('activerecord.attributes.bling_order_items.descricaoDetalhada'), :class => 'control-label' %>
       <%= f.text_field :descricaoDetalhada, :class => 'form-control', disabled: true %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
+      <%= f.label t('activerecord.attributes.bling_order_items.aliquotaIPI'), :class => 'control-label' %>
+      <%= f.text_field :aliquotaIPI, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
       <%= f.label t('activerecord.attributes.bling_order_items.store_id'), :class => 'control-label' %>
