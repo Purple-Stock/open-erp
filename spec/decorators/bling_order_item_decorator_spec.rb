@@ -65,4 +65,22 @@ RSpec.describe BlingOrderItemDecorator, type: :decorator do
       expect(bling_order_decorated.value).to eq(number_to_currency(bling_order.value))
     end
   end
+
+  describe '#situations_for_select' do
+    let(:paired_array_humanized_situation_id) do
+      [
+        [t('enumerations.bling_order_item_status.in_progress'), '15'],
+        [t('enumerations.bling_order_item_status.checked'), '101065'],
+        [t('enumerations.bling_order_item_status.verified'), '24'],
+        [t('enumerations.bling_order_item_status.pending'), '94871'],
+        [t('enumerations.bling_order_item_status.printed'), '95745'],
+        [t('enumerations.bling_order_item_status.canceled'), '12'],
+        [t('enumerations.bling_order_item_status.collected'), '173631']
+      ]
+    end
+
+    it 'is an array of humanized situation and situation_id' do
+      expect(bling_order_decorated.situations_for_select).to eq(paired_array_humanized_situation_id)
+    end
+  end
 end
