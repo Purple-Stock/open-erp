@@ -39,4 +39,10 @@ class BlingOrderItemDecorator < Draper::Decorator
   def value
     number_to_currency model.value
   end
+
+  def situations_for_select
+    paired_array = BlingOrderItemStatus.to_a
+    paired_array.slice!(0)
+    paired_array
+  end
 end
