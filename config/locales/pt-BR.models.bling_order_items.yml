@@ -37,7 +37,7 @@ pt-BR:
         created_at: Criado em
         updated_at: Atualizado em
         account_id: Id da Conta
-        bling_id: Número do Pedido na Bling
+        bling_id: Número do Pedido
         bling_order_id: Id do Pedido na Bling
         marketplace_code_id: Código do Marketplace
         situation_id: Status
