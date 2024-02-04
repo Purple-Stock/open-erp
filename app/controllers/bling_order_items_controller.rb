@@ -2,6 +2,7 @@ class BlingOrderItemsController < ApplicationController
   before_action :default_initial_date, :disable_initial_date, :default_final_date
   include Pagy::Backend
   inherit_resources
+  decorates_assigned :bling_order_item
 
   protected
 
@@ -14,6 +15,10 @@ class BlingOrderItemsController < ApplicationController
                                       .date_range(@default_initial_date, @default_final_date)
                                       .by_store(@default_store_filter)
     @pagy, @bling_order_items = pagy(bling_order_items)
+  end
+
+  def permitted_params
+    params.permit(bling_order_item: %i[situation_id])
   end
 
   private

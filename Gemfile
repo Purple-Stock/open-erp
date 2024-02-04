@@ -57,6 +57,9 @@ gem "sassc-rails"
 
 gem 'devise', '>= 4.9.3'
 
+# for decorator pattern https://github.com/drapergem/draper
+gem 'draper'
+
 gem 'enumerate_it'
 
 gem 'factory_bot_rails', '>= 6.3.0'
