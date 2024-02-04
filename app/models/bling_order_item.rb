@@ -54,7 +54,7 @@ class BlingOrderItem < ApplicationRecord
     '203467890' => 'Simplo 7',
     '204061683' => 'Mercado Livre',
     '204796870' => 'Nuvem Shop',
-    '0' => 'Feira da Madrugada'
+    '0' => 'Sem Loja'
   }.freeze
 
   STATUS_NAME_KEY_VALUE = {
