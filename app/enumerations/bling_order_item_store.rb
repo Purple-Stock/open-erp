@@ -8,6 +8,7 @@ class BlingOrderItemStore < EnumerateIt::Base
     'Shopee' => '203737982',
     'Simplo 7' => '203467890',
     'Mercado Livre' => '204061683',
-    'Nuvem Shop' => '204796870'
+    'Nuvem Shop' => '204796870',
+    'Sem Loja' => '0'
   )
 end
