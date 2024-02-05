@@ -45,4 +45,8 @@ class BlingOrderItemDecorator < Draper::Decorator
     paired_array.slice!(0)
     paired_array
   end
+
+  def class_name
+    t('activerecord.models.bling_order_items.one')
+  end
 end
