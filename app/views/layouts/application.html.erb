@@ -30,7 +30,7 @@
     <div class="navbar-bg"></div>
     <%= render 'shared/navbar' %>
     <%= render 'shared/sidebar' %>
-    <div class="main-content">
+    <div class="main-content mt-5">
       <section class="section">
         <%= content_for?(:content) ? yield(:content) : yield %>
       </section>

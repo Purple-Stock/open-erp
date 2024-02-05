@@ -1,0 +1,92 @@
+<section class="main-content">
+  <h1><%= bling_order_item.title %></h1>
+  <hr>
+  <table class="zebra-table">
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:situation_id) %></th>
+      <td class="col-sm-4"><%= bling_order_item.situation_id %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:codigo) %></th>
+      <td class="col-sm-4"><%= bling_order_item.codigo %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:unidade) %></th>
+      <td class="col-sm-4"><%= bling_order_item.unidade %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:quantidade) %></th>
+      <td class="col-sm-4"><%= bling_order_item.quantidade %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:desconto) %></th>
+      <td class="col-sm-4"><%= bling_order_item.desconto %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:valor) %></th>
+      <td class="col-sm-4"><%= bling_order_item.valor %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:aliquotaIPI) %></th>
+      <td class="col-sm-4"><%= bling_order_item.aliquotaIPI %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:descricao) %></th>
+      <td class="col-sm-4"><%= bling_order_item.descricao %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:descricaoDetalhada) %></th>
+      <td class="col-sm-4"><%= bling_order_item.descricaoDetalhada %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:store_id) %></th>
+      <td class="col-sm-4"><%= bling_order_item.store_id %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:created_at) %></th>
+      <td class="col-sm-4"><%= bling_order_item.created_at %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:updated_at) %></th>
+      <td class="col-sm-4"><%= bling_order_item.updated_at %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:date) %></th>
+      <td class="col-sm-4"><%= bling_order_item.date %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:alteration_date) %></th>
+      <td class="col-sm-4"><%= bling_order_item.alteration_date %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:marketplace_code_id) %></th>
+      <td class="col-sm-4"><%= bling_order_item.marketplace_code_id %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:bling_id) %></th>
+      <td class="col-sm-4"><%= bling_order_item.bling_id %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:account_id) %></th>
+      <td class="col-sm-4"><%= bling_order_item.account_id %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:value) %></th>
+      <td class="col-sm-4"><%= bling_order_item.value %></td>
+    </tr>
+    <tr>
+      <th class="col-sm-8"><%= bling_order_item.human_attribute(:collected_alteration_date) %></th>
+      <td class="col-sm-4"><%= bling_order_item.collected_alteration_date %></td>
+    </tr>
+  </table>
+  <div class="mt-4">
+    <%= link_to t('helpers.links.back'), bling_order_items_path, class: 'btn btn-primary btn-lg col-xs-12 col-sm-3 col-md-auto my-1 mx-md-1' %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_bling_order_item_path(@bling_order_item), :class => 'btn btn-dark btn-lg col-xs-12 col-sm-3 col-md-auto my-1 mx-md-1' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                bling_order_item_path(@bling_order_item),
+                title: t('destroy'), class: 'btn btn-danger btn-lg col-xs-12 col-sm-3 col-md-auto my-1 mx-md-1',
+                method: :delete,
+                data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
+  </div>
+</section>
