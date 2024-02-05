@@ -27,7 +27,7 @@ pt-BR:
         other: Pedidos da Bling
         list: Lista de Vendas da Bling
     attributes:
-      bling_order_items:
+      bling_order_item:
         id: ID
         aliquotaIPI: Alíquota do IPI
         alteration_date: Data de Alteração
