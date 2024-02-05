@@ -4,6 +4,15 @@ class BlingOrderItemsController < ApplicationController
   inherit_resources
   decorates_assigned :bling_order_item
 
+  def update
+    update! do |success, failure|
+      success.html do
+        flash[:notice] = t('flash.success.update', model: bling_order_item.class_name)
+        redirect_to resource
+      end
+    end
+  end
+
   protected
 
   def collection
