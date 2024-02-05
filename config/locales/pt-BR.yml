@@ -1,5 +1,8 @@
 ---
 pt-BR:
+  flash:
+    success:
+      update: "%{model} atualizado!"
   language_name: "Português"
   select_idiom: "Selecione um idioma"
   name: Nome
