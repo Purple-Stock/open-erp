@@ -13,6 +13,14 @@ pt-BR:
       canceled: Cancelado
       collected: Coletado
   activerecord:
+    errors:
+      models:
+        bling_order_item:
+          attributes:
+            collected_alteration_date:
+              blank: deve ser preenchida
+            date:
+              blank: deve ser preenchida
     models:
       bling_order_items:
         one: Pedido da Bling
