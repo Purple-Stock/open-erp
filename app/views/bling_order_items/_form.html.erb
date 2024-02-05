@@ -2,21 +2,8 @@
 
   <%= render 'layouts/flash' %>
 
-  <% if @bling_order_item.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@bling_order_item.errors.count, "error") %> prohibited this bling_order_item from being
-          saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-          <% @bling_order_item.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
+  <%= render 'layouts/active_record_errors', model: resource %>
+
   <div class="form-row">
     <div class="form-group col-12">
       <%= f.label :situation_id, t(:'activerecord.attributes.bling_order_item.situation_id'), :class => 'control-label' %>
