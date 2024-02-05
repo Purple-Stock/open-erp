@@ -9,7 +9,7 @@ RSpec.describe BlingOrderItemDecorator, type: :decorator do
 
   describe '#title' do
     it 'decorates bling_order_id' do
-      title = "#{t('activerecord.attributes.bling_order_items.bling_order_id')} #{bling_order_id}"
+      title = "#{t('activerecord.attributes.bling_order_item.bling_order_id')} #{bling_order_id}"
       expect(bling_order_decorated.title).to eq(title)
     end
   end
