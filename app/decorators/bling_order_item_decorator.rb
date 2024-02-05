@@ -7,7 +7,11 @@ class BlingOrderItemDecorator < Draper::Decorator
   delegate_all
 
   def title
-    "#{model.class.human_attribute_name(:bling_order_id)} #{model.bling_order_id}"
+    "#{human_attribute(:bling_order_id)} #{model.bling_order_id}"
+  end
+
+  def human_attribute(attribute_key)
+    model.class.human_attribute_name(attribute_key)
   end
 
   def situation_id
