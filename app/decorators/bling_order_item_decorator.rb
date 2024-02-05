@@ -7,7 +7,11 @@ class BlingOrderItemDecorator < Draper::Decorator
   delegate_all
 
   def title
-    "#{t('activerecord.attributes.bling_order_items.bling_order_id')} #{model.bling_order_id}"
+    "#{human_attribute(:bling_order_id)} #{model.bling_order_id}"
+  end
+
+  def human_attribute(attribute_key)
+    model.class.human_attribute_name(attribute_key)
   end
 
   def situation_id
@@ -44,5 +48,9 @@ class BlingOrderItemDecorator < Draper::Decorator
     paired_array = BlingOrderItemStatus.to_a
     paired_array.slice!(0)
     paired_array
+  end
+
+  def class_name
+    t('activerecord.models.bling_order_items.one')
   end
 end

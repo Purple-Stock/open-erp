@@ -1,5 +1,10 @@
 ---
 pt-BR:
+  flash:
+    success:
+      update: "%{model} atualizado!"
+    failure:
+      update: "%{model} não pode ser atualizado!"
   language_name: "Português"
   select_idiom: "Selecione um idioma"
   name: Nome

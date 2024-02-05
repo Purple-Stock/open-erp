@@ -9,7 +9,7 @@ RSpec.describe BlingOrderItemDecorator, type: :decorator do
 
   describe '#title' do
     it 'decorates bling_order_id' do
-      title = "#{t('activerecord.attributes.bling_order_items.bling_order_id')} #{bling_order_id}"
+      title = "#{t('activerecord.attributes.bling_order_item.bling_order_id')} #{bling_order_id}"
       expect(bling_order_decorated.title).to eq(title)
     end
   end
@@ -81,6 +81,12 @@ RSpec.describe BlingOrderItemDecorator, type: :decorator do
 
     it 'is an array of humanized situation and situation_id' do
       expect(bling_order_decorated.situations_for_select).to eq(paired_array_humanized_situation_id)
+    end
+  end
+
+  describe '#class_name' do
+    it 'is class name internationalized' do
+      expect(bling_order_decorated.class_name).to eq(t('activerecord.models.bling_order_items.one'))
     end
   end
 end
