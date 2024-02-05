@@ -1,16 +1,6 @@
 <%= form_for @bling_order_item, data: { turbo: false }, :html => { :class => "form-horizontal bling_order_item", :multipart => true } do |f| %>
 
-  <% if notice %>
-    <div class="alert alert-success" role="alert">
-      <%= notice %>
-    </div>
-  <% end %>
-
-  <% if alert %>
-    <div class="alert alert-danger" role="alert">
-      <%= alert %>
-    </div>
-  <% end %>
+  <%= render 'layouts/flash' %>
 
   <% if @bling_order_item.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
