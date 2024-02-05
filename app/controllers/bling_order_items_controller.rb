@@ -10,6 +10,10 @@ class BlingOrderItemsController < ApplicationController
         flash[:notice] = t('flash.success.update', model: bling_order_item.class_name)
         redirect_to resource
       end
+      failure.html do
+        flash.now[:alert] = t('flash.failure.update', model: bling_order_item.class_name)
+        render resource, status: :unprocessable_entity
+      end
     end
   end
 
