@@ -6,111 +6,111 @@
 
   <div class="form-row">
     <div class="form-group col-12">
-      <%= f.label :situation_id, t(:'activerecord.attributes.bling_order_item.situation_id'), :class => 'control-label' %>
+      <%= f.label :situation_id, bling_order_item.human_attribute(:situation_id), :class => 'control-label' %>
       <%= select_tag("bling_order_item[situation_id]", options_for_select(bling_order_item.situations_for_select, selected: f.object.situation_id), class: 'custom-select') %>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.codigo'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:codigo), :class => 'control-label' %>
       <%= f.text_field :codigo, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.unidade'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:unidade), :class => 'control-label' %>
       <%= f.text_field :unidade, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.quantidade'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:quantidade), :class => 'control-label' %>
       <%= f.text_field :quantidade, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.desconto'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:desconto), :class => 'control-label' %>
       <%= f.text_field :desconto, :class => 'form-control', disabled: true %>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.valor'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:valor), :class => 'control-label' %>
       <%= f.text_field :valor, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.aliquotaIPI'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:aliquotaIPI), :class => 'control-label' %>
       <%= f.text_field :aliquotaIPI, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.desconto'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:desconto), :class => 'control-label' %>
       <%= f.text_field :desconto, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.valor'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:valor), :class => 'control-label' %>
       <%= f.text_field :valor, :class => 'form-control', disabled: true %>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col">
-      <%= f.label t('activerecord.attributes.bling_order_item.descricao'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:descricao), :class => 'control-label' %>
       <%= f.text_field :descricao, :class => 'form-control', disabled: true %>
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col">
-      <%= f.label t('activerecord.attributes.bling_order_item.descricaoDetalhada'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:descricaoDetalhada), :class => 'control-label' %>
       <%= f.text_field :descricaoDetalhada, :class => 'form-control', disabled: true %>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.aliquotaIPI'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:aliquotaIPI), :class => 'control-label' %>
       <%= f.text_field :aliquotaIPI, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.store_id'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:store_id), :class => 'control-label' %>
       <%= f.text_field :store_id, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.created_at'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:created_at), :class => 'control-label' %>
       <%= f.text_field :created_at, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.updated_at'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:updated_at), :class => 'control-label' %>
       <%= f.text_field :updated_at, :class => 'form-control', disabled: true %>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.date'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:date), :class => 'control-label' %>
       <%= f.text_field :date, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.alteration_date'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:alteration_date), :class => 'control-label' %>
       <%= f.text_field :alteration_date, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.marketplace_code_id'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:marketplace_code_id), :class => 'control-label' %>
       <%= f.text_field :marketplace_code_id, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-3">
-      <%= f.label t('activerecord.attributes.bling_order_item.bling_id'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:bling_id), :class => 'control-label' %>
       <%= f.text_field :bling_id, :class => 'form-control', disabled: true %>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-      <%= f.label t('activerecord.attributes.bling_order_item.account_id'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:account_id), :class => 'control-label' %>
       <%= f.text_field :account_id, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-      <%= f.label t('activerecord.attributes.bling_order_item.value'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:value), :class => 'control-label' %>
       <%= f.text_field :value, :class => 'form-control', disabled: true %>
     </div>
     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-      <%= f.label t('activerecord.attributes.bling_order_item.collected_alteration_date'), :class => 'control-label' %>
+      <%= f.label bling_order_item.human_attribute(:collected_alteration_date), :class => 'control-label' %>
       <%= f.text_field :collected_alteration_date, :class => 'form-control', disabled: true %>
     </div>
   </div>
