@@ -12,6 +12,8 @@ pt-BR:
       printed: Impresso
       canceled: Cancelado
       collected: Coletado
+      delete_in_progress: Processando Deletar Pedido
+      deleted_at_bling: Deletado da Bling
   activerecord:
     errors:
       models:
