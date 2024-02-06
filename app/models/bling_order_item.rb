@@ -165,6 +165,10 @@ class BlingOrderItem < ApplicationRecord
     update(situation_id: 173_631)
   end
 
+  def deleted_at_bling!
+    update(situation_id: 0)
+  end
+
   def value
     super || 0.0
   end
