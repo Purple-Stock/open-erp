@@ -167,7 +167,7 @@ class BlingOrderItem < ApplicationRecord
   end
 
   def deleted_at_bling!
-    update(situation_id: BlingOrderItemStatus::DELETE_IN_PROGRESS)
+    update(situation_id: BlingOrderItemStatus::DELETE_IN_PROGRESS, original_situation_id: situation_id_previously_was)
     BlingOrderItemDestroyerJob.perform_later(bling_order_id)
   end
 
@@ -187,14 +187,6 @@ class BlingOrderItem < ApplicationRecord
     end
   end
 
-  private
-
-  def deleted_status_at_bling
-    unless found_at_bling?.dig('error', 'type')
-      errors.add(:situation_id, 'Não pode trocar o status para deletado devido o pedido ser encontrado na Bling')
-    end
-  end
-
   def not_found_at_bling?
     result = Services::Bling::FindOrder.call(id: bling_order_id, order_command: 'find_order', tenant: account_id)
     if result['error'].present? && result['error']['type'] != 'RESOURCE_NOT_FOUND'
@@ -203,6 +195,8 @@ class BlingOrderItem < ApplicationRecord
 
     result.dig('error', 'type') == 'RESOURCE_NOT_FOUND'
   end
+
+  private
 
   def keep_old_collected_alteration_date
     return unless collected_alteration_date_was.present? && collected_alteration_date_changed?
