@@ -39,6 +39,8 @@ class BlingOrderItem < ApplicationRecord
 
   accepts_nested_attributes_for :items
 
+  validate :deleted_status_at_bling, on: :update
+
   before_update :keep_old_collected_alteration_date
   after_create :synchronize_items
 
@@ -186,6 +188,17 @@ class BlingOrderItem < ApplicationRecord
   end
 
   private
+
+  def deleted_status_at_bling
+    unless find_at_bling.dig('error', 'type')
+      errors.add(:situation_id, 'Não pode trocar o status para deletado devido o pedido ser encontrado na Bling')
+    end
+  end
+
+  def find_at_bling
+    result = Services::Bling::FindOrder.call(id: bling_order_id, order_command: 'find_order', tenant: account_id)
+    result
+  end
 
   def keep_old_collected_alteration_date
     return unless collected_alteration_date_was.present? && collected_alteration_date_changed?
