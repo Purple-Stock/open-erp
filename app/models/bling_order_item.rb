@@ -166,7 +166,7 @@ class BlingOrderItem < ApplicationRecord
   end
 
   def deleted_at_bling!
-    update(situation_id: 0)
+    update(situation_id: BlingOrderItemStatus::DELETED_AT_BLING)
   end
 
   def value
