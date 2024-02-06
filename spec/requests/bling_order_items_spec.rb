@@ -78,4 +78,36 @@ RSpec.describe 'Stocks', type: :request do
       end
     end
   end
+
+  describe 'DELETE /destroy' do
+    let(:bling_order_item) { FactoryBot.create(:bling_order_item) }
+
+    context 'when not found at bling' do
+      before do
+        delete bling_order_item_path(bling_order_item)
+      end
+
+      it 'is found' do
+        expect(response).to have_http_status(:found)
+      end
+
+      it 'changes status to deleted at bling' do
+        expect(bling_order_item.reload.situation_id).to eq('0')
+      end
+    end
+
+    context 'when it is found at bling' do
+      before do
+        delete bling_order_item_path(bling_order_item)
+      end
+
+      it 'is found' do
+        expect(response).to have_http_status(:found)
+      end
+
+      it 'does not change status to deleted at bling' do
+        expect(bling_order_item.reload.situation_id).not_to eq('0')
+      end
+    end
+  end
 end
