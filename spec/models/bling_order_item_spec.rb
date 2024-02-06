@@ -22,6 +22,7 @@
 #  bling_id                  :integer
 #  bling_order_id            :string
 #  marketplace_code_id       :string
+#  original_situation_id     :string
 #  situation_id              :string
 #  store_id                  :string
 #
