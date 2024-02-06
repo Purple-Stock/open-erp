@@ -17,6 +17,11 @@ class BlingOrderItemsController < ApplicationController
     end
   end
 
+  def destroy
+    resource.deleted_at_bling!
+    redirect_to resource
+  end
+
   protected
 
   def collection
