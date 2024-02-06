@@ -19,7 +19,7 @@ class BlingOrderItemsController < ApplicationController
 
   def destroy
     resource.deleted_at_bling!
-    redirect_to resource
+    redirect_to resource, notice: 'A verificar Pedido de compra junto à Bling'
   end
 
   protected
