@@ -309,8 +309,8 @@ RSpec.describe BlingOrderItem, type: :model do
         end
       end
 
-      it 'does not change status to deleted_at_bling' do
-        expect(bling_order_item.reload.situation_id).not_to eq(BlingOrderItemStatus::DELETED_AT_BLING)
+      it 'changes status to DELETE_IN_PROGRESS' do
+        expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::DELETE_IN_PROGRESS)
       end
     end
 
@@ -324,8 +324,8 @@ RSpec.describe BlingOrderItem, type: :model do
         end
       end
 
-      it 'changes situation_id to deleted_at_bling' do
-        expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::DELETED_AT_BLING)
+      it 'changes situation_id to DELETE_IN_PROGRESS' do
+        expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::DELETE_IN_PROGRESS)
       end
     end
   end
