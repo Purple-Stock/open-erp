@@ -39,8 +39,6 @@ class BlingOrderItem < ApplicationRecord
 
   accepts_nested_attributes_for :items
 
-  validate :deleted_status_at_bling, on: :update
-
   before_update :keep_old_collected_alteration_date
   after_create :synchronize_items
 
@@ -168,7 +166,8 @@ class BlingOrderItem < ApplicationRecord
   end
 
   def deleted_at_bling!
-    update(situation_id: BlingOrderItemStatus::DELETED_AT_BLING)
+    update(situation_id: BlingOrderItemStatus::DELETE_IN_PROGRESS)
+    BlingOrderItemDestroyerJob.perform_later(bling_order_id)
   end
 
   def value
@@ -190,14 +189,18 @@ class BlingOrderItem < ApplicationRecord
   private
 
   def deleted_status_at_bling
-    unless find_at_bling.dig('error', 'type')
+    unless found_at_bling?.dig('error', 'type')
       errors.add(:situation_id, 'Não pode trocar o status para deletado devido o pedido ser encontrado na Bling')
     end
   end
 
-  def find_at_bling
+  def not_found_at_bling?
     result = Services::Bling::FindOrder.call(id: bling_order_id, order_command: 'find_order', tenant: account_id)
-    result
+    if result['error'].present? && result['error']['type'] != 'RESOURCE_NOT_FOUND'
+      raise StandardError, result['error']['type']
+    end
+
+    result.dig('error', 'type') == 'RESOURCE_NOT_FOUND'
   end
 
   def keep_old_collected_alteration_date
