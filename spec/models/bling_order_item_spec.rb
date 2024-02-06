@@ -299,12 +299,15 @@ RSpec.describe BlingOrderItem, type: :model do
     include_context 'with bling token'
     let(:bling_order_item) { FactoryBot.create(:bling_order_item, account_id: user.account.id) }
 
-    before { bling_order_item.deleted_at_bling! }
-
     context 'when order is found at bling' do
-      let(:found_bling_order_id) { '19270144097' }
+      let(:found_bling_order_id) { '19178587026' }
 
-      before { bling_order_item.bling_order_id = found_bling_order_id }
+      before do
+        VCR.use_cassette('found_at_bling', erb: true) do
+          bling_order_item.update(bling_order_id: found_bling_order_id)
+          bling_order_item.deleted_at_bling!
+        end
+      end
 
       it 'does not change status to deleted_at_bling' do
         expect(bling_order_item.reload.situation_id).not_to eq(BlingOrderItemStatus::DELETED_AT_BLING)
@@ -314,7 +317,12 @@ RSpec.describe BlingOrderItem, type: :model do
     context 'when resource is not found at bling' do
       let(:not_found_order_id) { '99' }
 
-      before { bling_order_item.bling_order_id = not_found_order_id }
+      before do
+        VCR.use_cassette('not_found_at_bling', erb: true) do
+          bling_order_item.update(bling_order_id: not_found_order_id)
+          bling_order_item.deleted_at_bling!
+        end
+      end
 
       it 'changes situation_id to deleted_at_bling' do
         expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::DELETED_AT_BLING)
