@@ -300,6 +300,16 @@ RSpec.describe BlingOrderItem, type: :model do
     include_context 'with bling token'
     let(:bling_order_item) { FactoryBot.create(:bling_order_item, account_id: user.account.id) }
 
+    context 'when order is processing deletion' do
+      before do
+        bling_order_item.update(situation_id: BlingOrderItemStatus::DELETE_IN_PROGRESS)
+      end
+
+      it 'is blank' do
+        expect(bling_order_item.deleted_at_bling!).to be_blank
+      end
+    end
+
     context 'when order is found at bling' do
       let(:found_bling_order_id) { '19178587026' }
 
