@@ -19,9 +19,9 @@ class BlingOrderItemsController < ApplicationController
 
   def destroy
     if resource.deleted_at_bling!
-      redirect_to resource, notice: 'A verificar Pedido de compra junto à Bling'
+      redirect_to resource, notice: t('flash.success.destroy.bling_order_item')
     else
-      redirect_to resource, alert: 'Pedido já em processo de deletar!'
+      redirect_to resource, alert: t('flash.failure.destroy.bling_order_item')
     end
   end
 
