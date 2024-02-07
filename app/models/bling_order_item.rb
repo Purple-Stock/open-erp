@@ -167,7 +167,9 @@ class BlingOrderItem < ApplicationRecord
   end
 
   def deleted_at_bling!
-    update(situation_id: BlingOrderItemStatus::DELETE_IN_PROGRESS, original_situation_id: situation_id_previously_was)
+    return if processing_deletion?
+
+    update(situation_id: BlingOrderItemStatus::DELETE_IN_PROGRESS, original_situation_id: situation_id_was)
     BlingOrderItemDestroyerJob.perform_later(bling_order_id)
   end
 
@@ -197,6 +199,11 @@ class BlingOrderItem < ApplicationRecord
   end
 
   private
+
+  def processing_deletion?
+    situation_id.eql?(BlingOrderItemStatus::DELETED_AT_BLING)\
+      || situation_id.eql?(BlingOrderItemStatus::DELETE_IN_PROGRESS)
+  end
 
   def keep_old_collected_alteration_date
     return unless collected_alteration_date_was.present? && collected_alteration_date_changed?
