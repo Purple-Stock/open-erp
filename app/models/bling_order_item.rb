@@ -46,6 +46,8 @@ class BlingOrderItem < ApplicationRecord
   has_enumeration_for :situation_id, with: BlingOrderItemStatus, skip_validation: true
   has_enumeration_for :store_id, with: BlingOrderItemStore, skip_validation: true
 
+  after_update_commit -> { broadcast_update_to self, partial: 'bling_order_items/bling_order_item_content', target: "bling_order_item_#{id}" if saved_change_to_situation_id? }
+
   ANOTHER_SHEIN_STORE_ID = '204114350'
   SHEIN_STORE_ID = '204219105'
 
