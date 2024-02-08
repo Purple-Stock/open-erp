@@ -57,8 +57,15 @@ jobs:
         run: |
           bin/rails db:migrate
 
+      - name: Setup Redis
+        uses: shogo82148/actions-setup-redis@v1
+        with:
+          redis-version: '6.x'
+
       - name: Run tests
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/inventory-control_test
+          REDIS_HOST: localhost
+          REDIS_PORT: ${{ steps.setup-redis.outputs.redis-port }}
         run: bundle exec rspec
