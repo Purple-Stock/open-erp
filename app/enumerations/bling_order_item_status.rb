@@ -10,6 +10,8 @@ class BlingOrderItemStatus < EnumerateIt::Base
     pending: '94871',
     printed: '95745',
     canceled: '12',
-    collected: '173631'
+    collected: '173631',
+    deleted_at_bling: '0',
+    delete_in_progress: '-1'
   )
 end

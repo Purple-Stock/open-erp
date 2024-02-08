@@ -78,4 +78,46 @@ RSpec.describe 'Stocks', type: :request do
       end
     end
   end
+
+  describe 'DELETE /destroy' do
+    let(:bling_order_item) { FactoryBot.create(:bling_order_item) }
+
+    context 'when not found at bling' do
+      let(:not_found_bling_order_id) { '9829778376' }
+
+      before do
+        bling_order_item.update(bling_order_id: not_found_bling_order_id)
+        VCR.use_cassette('not_found_at_bling', erb: true) do
+          delete bling_order_item_path(bling_order_item)
+        end
+      end
+
+      it 'is found' do
+        expect(response).to have_http_status(:found)
+      end
+
+      it 'changes status to deleted at bling' do
+        expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::DELETE_IN_PROGRESS)
+      end
+    end
+
+    context 'when it is found at bling' do
+      let(:found_bling_order_id) { '9447042612' }
+
+      before do
+        bling_order_item.update(bling_order_id: found_bling_order_id)
+        VCR.use_cassette('found_at_bling', erb: true) do
+          delete bling_order_item_path(bling_order_item)
+        end
+      end
+
+      it 'is found' do
+        expect(response).to have_http_status(:found)
+      end
+
+      it 'keeps status as original' do
+        expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::DELETE_IN_PROGRESS)
+      end
+    end
+  end
 end

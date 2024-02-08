@@ -75,7 +75,9 @@ RSpec.describe BlingOrderItemDecorator, type: :decorator do
         [t('enumerations.bling_order_item_status.pending'), '94871'],
         [t('enumerations.bling_order_item_status.printed'), '95745'],
         [t('enumerations.bling_order_item_status.canceled'), '12'],
-        [t('enumerations.bling_order_item_status.collected'), '173631']
+        [t('enumerations.bling_order_item_status.collected'), '173631'],
+        [t('enumerations.bling_order_item_status.deleted_at_bling'), '0'],
+        [t('enumerations.bling_order_item_status.delete_in_progress'), '-1'],
       ]
     end
 

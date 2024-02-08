@@ -22,6 +22,7 @@
 #  bling_id                  :integer
 #  bling_order_id            :string
 #  marketplace_code_id       :string
+#  original_situation_id     :string
 #  situation_id              :string
 #  store_id                  :string
 #
@@ -46,5 +47,6 @@ FactoryBot.define do
     store_id { '204219105' }
     value { 2.0 }
     alteration_date { Date.new(2023, 12, 3) }
+    original_situation_id { BlingOrderItemStatus::CHECKED }
   end
 end
