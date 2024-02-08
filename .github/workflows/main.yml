@@ -6,6 +6,15 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
       postgres:
         image: postgres:13
         env:
@@ -61,4 +70,6 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/inventory-control_test
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
         run: bundle exec rspec

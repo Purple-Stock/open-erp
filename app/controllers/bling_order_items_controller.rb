@@ -17,6 +17,14 @@ class BlingOrderItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if resource.deleted_at_bling!
+      redirect_to resource, notice: t('flash.success.destroy.bling_order_item')
+    else
+      redirect_to resource, alert: t('flash.failure.destroy.bling_order_item')
+    end
+  end
+
   protected
 
   def collection

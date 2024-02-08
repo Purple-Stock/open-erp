@@ -22,6 +22,7 @@
 #  bling_id                  :integer
 #  bling_order_id            :string
 #  marketplace_code_id       :string
+#  original_situation_id     :string
 #  situation_id              :string
 #  store_id                  :string
 #
@@ -292,6 +293,51 @@ RSpec.describe BlingOrderItem, type: :model do
 
     it 'updates from checked to collected status' do
       expect(order.reload.situation_id).to eq(collected_status)
+    end
+  end
+
+  describe 'deleted_at_bling!' do
+    include_context 'with bling token'
+    let(:bling_order_item) { FactoryBot.create(:bling_order_item, account_id: user.account.id) }
+
+    context 'when order is processing deletion' do
+      before do
+        bling_order_item.update(situation_id: BlingOrderItemStatus::DELETE_IN_PROGRESS)
+      end
+
+      it 'is blank' do
+        expect(bling_order_item.deleted_at_bling!).to be_blank
+      end
+    end
+
+    context 'when order is found at bling' do
+      let(:found_bling_order_id) { '19178587026' }
+
+      before do
+        VCR.use_cassette('found_at_bling', erb: true) do
+          bling_order_item.update(bling_order_id: found_bling_order_id)
+          bling_order_item.deleted_at_bling!
+        end
+      end
+
+      it 'changes status to DELETE_IN_PROGRESS' do
+        expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::CHECKED)
+      end
+    end
+
+    context 'when resource is not found at bling' do
+      let(:not_found_order_id) { '99' }
+
+      before do
+        VCR.use_cassette('not_found_at_bling', erb: true) do
+          bling_order_item.update(bling_order_id: not_found_order_id)
+          bling_order_item.deleted_at_bling!
+        end
+      end
+
+      it 'changes situation_id to DELETE_IN_PROGRESS' do
+        expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::DELETED_AT_BLING)
+      end
     end
   end
 

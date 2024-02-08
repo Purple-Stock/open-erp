@@ -22,6 +22,7 @@
 #  bling_id                  :integer
 #  bling_order_id            :string
 #  marketplace_code_id       :string
+#  original_situation_id     :string
 #  situation_id              :string
 #  store_id                  :string
 #
@@ -44,6 +45,8 @@ class BlingOrderItem < ApplicationRecord
 
   has_enumeration_for :situation_id, with: BlingOrderItemStatus, skip_validation: true
   has_enumeration_for :store_id, with: BlingOrderItemStore, skip_validation: true
+
+  after_update_commit -> { broadcast_update_to self, partial: 'bling_order_items/bling_order_item_content', target: "bling_order_item_#{id}" if saved_change_to_situation_id? }
 
   ANOTHER_SHEIN_STORE_ID = '204114350'
   SHEIN_STORE_ID = '204219105'
@@ -165,6 +168,13 @@ class BlingOrderItem < ApplicationRecord
     update(situation_id: 173_631)
   end
 
+  def deleted_at_bling!
+    return if processing_deletion?
+
+    update(situation_id: BlingOrderItemStatus::DELETE_IN_PROGRESS, original_situation_id: situation_id_was)
+    BlingOrderItemDestroyerJob.perform_later(bling_order_id)
+  end
+
   def value
     super || 0.0
   end
@@ -181,7 +191,21 @@ class BlingOrderItem < ApplicationRecord
     end
   end
 
+  def not_found_at_bling?
+    result = Services::Bling::FindOrder.call(id: bling_order_id, order_command: 'find_order', tenant: account_id)
+    if result['error'].present? && result['error']['type'] != 'RESOURCE_NOT_FOUND'
+      raise StandardError, result['error']['type']
+    end
+
+    result.dig('error', 'type') == 'RESOURCE_NOT_FOUND'
+  end
+
   private
+
+  def processing_deletion?
+    situation_id.eql?(BlingOrderItemStatus::DELETED_AT_BLING)\
+      || situation_id.eql?(BlingOrderItemStatus::DELETE_IN_PROGRESS)
+  end
 
   def keep_old_collected_alteration_date
     return unless collected_alteration_date_was.present? && collected_alteration_date_changed?

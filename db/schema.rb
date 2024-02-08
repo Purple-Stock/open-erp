@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_17_192519) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_06_203431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_192519) do
     t.decimal "value"
     t.jsonb "items"
     t.date "collected_alteration_date"
+    t.string "original_situation_id"
     t.index ["account_id"], name: "index_bling_order_items_on_account_id"
     t.index ["bling_order_id"], name: "index_bling_order_items_on_bling_order_id", unique: true
   end
