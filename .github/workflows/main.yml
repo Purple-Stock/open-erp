@@ -6,6 +6,15 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
       postgres:
         image: postgres:13
         env:
@@ -56,11 +65,6 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/inventory-control_test
         run: |
           bin/rails db:migrate
-
-      - name: Setup Redis
-        uses: shogo82148/actions-setup-redis@v1
-        with:
-          redis-version: '6.x'
 
       - name: Run tests
         env:
