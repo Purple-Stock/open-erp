@@ -67,5 +67,5 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/inventory-control_test
           REDIS_HOST: localhost
-          REDIS_PORT: ${{ steps.setup-redis.outputs.redis-port }}
+          REDIS_PORT: 6379
         run: bundle exec rspec
