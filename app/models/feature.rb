@@ -12,4 +12,6 @@
 class Feature < ApplicationRecord
   has_many :account_features
   has_many :accounts, through: :account_features
+
+  has_enumeration_for :feature_key, create_helpers: true
 end
