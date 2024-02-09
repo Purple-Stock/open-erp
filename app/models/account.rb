@@ -19,5 +19,16 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Account < ApplicationRecord
+  has_many :account_features
+  has_many :features, through: :account_features
+
   belongs_to :user
+
+  before_create :set_account_features
+
+  private
+
+  def set_account_features
+    features << Feature.where(feature_key: 0)
+  end
 end
