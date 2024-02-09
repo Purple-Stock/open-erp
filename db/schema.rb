@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_06_203431) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_09_142949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "account_features", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.integer "feature_id", null: false
+    t.boolean "is_enabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "company_name"
@@ -109,6 +117,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_06_203431) do
     t.datetime "updated_at", null: false
     t.integer "account_id"
     t.index ["account_id"], name: "index_customers_on_account_id"
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "is_enabled", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "feature_key", default: 0, null: false
   end
 
   create_table "finance_data", force: :cascade do |t|
