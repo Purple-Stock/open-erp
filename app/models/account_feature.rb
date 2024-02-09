@@ -12,4 +12,14 @@
 class AccountFeature < ApplicationRecord
   belongs_to :account
   belongs_to :feature
+
+  before_create :enable_stock
+
+  private
+
+  def enable_stock
+    return if feature.bling_integration?
+
+    self.is_enabled = true
+  end
 end
