@@ -29,6 +29,6 @@ class Account < ApplicationRecord
   private
 
   def set_account_features
-    features << Feature.where(feature_key: 0)
+    features << Feature.where(feature_key: [FeatureKey::STOCK, FeatureKey::BLING_INTEGRATION])
   end
 end
