@@ -13,21 +13,19 @@ require 'rails_helper'
 
 RSpec.describe AccountFeature, type: :model do
   describe '#is_enabled?' do
-    let!(:feature) { FactoryBot.create(:feature, feature_key: FeatureKey::STOCK, name: 'Stockist') }
-    let!(:user) { FactoryBot.create(:user) }
-
-    context 'when feature key is STOCK' do
-      it 'is truthy' do
-        expect(user.account.account_features.first.is_enabled?).to eq(true)
-      end
+    before do
+      FactoryBot.create(:feature, feature_key: FeatureKey::STOCK, name: 'Stock')
+      FactoryBot.create(:feature, feature_key: FeatureKey::BLING_INTEGRATION, name: 'Bling Integration')
     end
 
-    context 'when feature key is BLING_INTEGRATION' do
-      before { feature.update(feature_key: FeatureKey::BLING_INTEGRATION) }
+    let!(:user) { FactoryBot.create(:user) }
 
-      it 'is false' do
-        expect(user.account.account_features.first.is_enabled?).to eq(false)
-      end
+    it 'is truthy for stock feature' do
+      expect(user.account.account_features.first.is_enabled?).to eq(true)
+    end
+
+    it 'is false for bling integration feature' do
+      expect(user.account.account_features.second.is_enabled?).to eq(false)
     end
   end
 end
