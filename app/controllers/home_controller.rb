@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   include SheinOrdersHelper
 
   def index
+    authorize BlingOrderItem
     @expires_at = format_last_update(@date_expires)
 
     @last_update = format_last_update(Time.current)
