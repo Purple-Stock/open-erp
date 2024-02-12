@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   include SheinOrdersHelper
 
   def index
+    authorize BlingOrderItem
     @expires_at = format_last_update(@date_expires)
 
     @last_update = format_last_update(Time.current)
@@ -15,9 +16,6 @@ class HomeController < ApplicationController
     @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
     @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
     @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
-  rescue StandardError => e
-    Rails.logger.error(e.message)
-    redirect_to home_last_updates_path
   end
 
   def last_updates

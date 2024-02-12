@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
   include ForgeryProtection
   include SetPlatform
   before_action :authenticate_user!
@@ -9,6 +10,8 @@ class ApplicationController < ActionController::Base
   before_action :set_current_account
   before_action :configure_permitted_parameters, if: :devise_controller?
   layout :layout_by_resource
+
+  rescue_from Pundit::NotAuthorizedError, with: :current_account_not_authorized
 
   def set_current_account
     return if current_user.blank?
@@ -26,6 +29,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def current_account_not_authorized
+    redirect_to products_path
+  end
 
   def layout_by_resource
     if devise_controller?
