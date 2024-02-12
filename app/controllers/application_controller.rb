@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_account_not_authorized
-    redirect_to stocks_path
+    redirect_to products_path
   end
 
   def layout_by_resource

@@ -93,9 +93,9 @@ RSpec.describe 'home' do
         sign_in user
       end
 
-      it 'redirects to stocks_path' do
+      it 'redirects to products_path' do
         get root_path
-        expect(response).to redirect_to stocks_path
+        expect(response).to redirect_to products_path
       end
     end
   end
