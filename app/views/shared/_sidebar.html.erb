@@ -58,11 +58,14 @@
           </li>
         <% end %>
 
-        <%= render 'shared/sidebar_dropdown', title: t("stocks.two"), icon: 'fas fa-boxes' do %>
-          <li class="<%= active_nav_item('stocks', 'index') %>">
-            <%= link_to t("stocks.list"), stocks_path, class: 'nav-link' %>
-          </li>
+        <% if account_policy_enabled? %>
+          <%= render 'shared/sidebar_dropdown', title: t("stocks.two"), icon: 'fas fa-boxes' do %>
+            <li class="<%= active_nav_item('stocks', 'index') %>">
+              <%= link_to t("stocks.list"), stocks_path, class: 'nav-link' %>
+            </li>
+          <% end %>
         <% end %>
+
 
         <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-store' do %>
           <li class="<%= active_nav_item('stores', 'index') %>">
