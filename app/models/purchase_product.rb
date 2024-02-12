@@ -53,8 +53,8 @@ class PurchaseProduct < ApplicationRecord
       order("products.#{PurchaseProduct::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
     end
 
-    def inventory_quantity(custom_id, quantity, store)
-      product = Product.find_by(custom_id:)
+    def inventory_quantity(product_id, quantity, store)
+      product = Product.find(product_id)
       purchase_product = product.purchase_products.from_store(store).sum('Quantity')
       sale_products = product.sale_products.from_sale_store(store).sum('Quantity')
       balance = purchase_product - sale_products

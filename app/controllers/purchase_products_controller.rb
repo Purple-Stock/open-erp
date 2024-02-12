@@ -105,7 +105,7 @@ class PurchaseProductsController < ApplicationController
 
   def save_inventory
     product = Product.find(params['product_id'])
-    PurchaseProduct.inventory_quantity(product.custom_id, params['quantity'].to_i, params['inventory']['destiny'])
+    PurchaseProduct.inventory_quantity(product.id, params['quantity'].to_i, params['inventory']['destiny'])
     respond_to do |format|
       format.html { redirect_to stock_transfer_path, notice: 'Inventário Concluído.' }
     end
