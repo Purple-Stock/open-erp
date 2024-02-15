@@ -1,4 +1,4 @@
-<%= form_for @customer, :html => { :class => "form-horizontal customer" } do |f| %>
+<%= form_for @customer, html: { class: "form-horizontal customer", 'data-turbo': 'false' } do |f| %>
 
   <% if flash[:notice] %>
     <div class="alert alert-success">
@@ -8,10 +8,6 @@
 
   <% if @customer.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being
-          saved:</h3>
-      </div>
       <div class="panel-body">
         <ul>
           <% @customer.errors.full_messages.each do |msg| %>
@@ -46,7 +42,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.submit t('customers.submit'), :class => 'btn btn-primary' %>
+    <%= f.submit t('helpers.submit.submit', model: @customer.model_name.human.titleize), :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")), customers_path, :class => 'btn btn-default' %>
   </div>
 
