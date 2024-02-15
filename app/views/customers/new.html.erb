@@ -1,16 +1,14 @@
 <%- model_class = Customer -%>
 <div class="section-header">
   <div class="page-header">
-    <h1><%= t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => t(model_class.model_name.human.titleize) %></h1>
+    <h1><%= t('helpers.titles.new', model: model_class.model_name.human.titleize) %></h1>
   </div>
 </div>
 
 <div class="section-body">
   <div class="card">
     <div class="card-body">
-
       <%= render :partial => 'form' %>
-
     </div>
   </div>
 </div>
