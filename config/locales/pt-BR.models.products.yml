@@ -2,7 +2,7 @@
 pt-BR:
   activerecord:
     models:
-      products:
+      product:
         one: "Produto"
         other: "Produtos"
     attributes:
