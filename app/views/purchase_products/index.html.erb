@@ -7,8 +7,8 @@
 
 <div class="section-body">
 
-  <%= link_to t('.new', :default => t("helpers.links.new")), new_purchase_product_path, :class => 'btn btn-primary mb-3' %>
-  <%= link_to t('.new', :default => t("helpers.links.new-purchase")), new_purchase_path, :class => 'btn btn-primary mb-3' %>
+  <% link_to t('.new', :default => t("helpers.links.new")), new_purchase_product_path, :class => 'btn btn-primary mb-3' %>
+  <% link_to t('.new', :default => t("helpers.links.new-purchase")), new_purchase_path, :class => 'btn btn-primary mb-3' %>
   <%= link_to t('.inventory', :default => t("helpers.links.inventory")), inventory_view_path, :class => 'btn btn-primary mb-3' %>
 
   <div class="card">
