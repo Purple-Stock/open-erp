@@ -8,7 +8,7 @@
     <div class="form-group">
       <%= form.label t(:product_id), :class => 'control-label col-md-2' %>
       <div class="col-md-10">
-        <%= form.select :product_id, Product.where(active: true).order(:custom_id).collect {|p| [ "#{p.custom_id} - #{p.name} ", p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
+        <%= form.select :product_id, Product.where(account_id: current_user.account.id).order(:custom_id).collect {|p| [ "#{p.name} - #{number_to_currency p.price}", p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
       </div>
     </div>
     <div class="form-group">
