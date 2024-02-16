@@ -107,7 +107,7 @@ class PurchaseProductsController < ApplicationController
     product = Product.find(params['product_id'])
     PurchaseProduct.inventory_quantity(product.id, params['quantity'].to_i, params['inventory']['destiny'])
     respond_to do |format|
-      format.html { redirect_to stock_transfer_path, notice: 'Inventário Concluído.' }
+      format.html { redirect_to product_path(product), notice: 'Inventário Concluído.' }
     end
   rescue ArgumentError
     Rails.logger.debug 'erro'
