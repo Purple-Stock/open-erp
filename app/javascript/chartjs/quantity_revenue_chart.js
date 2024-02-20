@@ -1,4 +1,5 @@
 $(document).ready(function (){
+    let charDomElement = document.getElementById('chartjs-bar')
     let options = {
         maintainAspectRatio: false,
         aspectRatio: 1,
@@ -20,6 +21,7 @@ $(document).ready(function (){
     };
 
     $.ajax({url: 'bling_order_item_histories/day_quantities', success: function(result){
+        if(result.length > 0 && charDomElement !== null) {
             new Chart(
                 document.getElementById('chartjs-bar'),
                 {
@@ -36,5 +38,6 @@ $(document).ready(function (){
                     }
                 }
             )
-        }})
+        }
+    }})
 })
