@@ -17,12 +17,14 @@
         <%= form.text_field :quantity, class: 'form-control form-control-sm', autocomplete: "email", placeholder: "Quantidade a ser transferida"  %>
       </div>
     </div>
-    <div class="form-group">
-       <%= form.label 'Loja Destino', :class => 'control-label col-md-1' %>
-      <div class="col-md-11">
-        <%= select("inventory", "destiny", Sale.store_sales.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
+    <% if account_policy_enabled? %>
+      <div class="form-group">
+        <%= form.label 'Loja Destino', :class => 'control-label col-md-1' %>
+        <div class="col-md-11">
+          <%= select("inventory", "destiny", Sale.store_sales.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <div class="col-md-10">
       <%= submit_tag("Salvar Inventário", :class => "btn btn-info") %>
     </div>
