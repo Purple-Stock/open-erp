@@ -2,6 +2,9 @@ $(document).ready(function (){
     function plotChartBar() {
         let chartCanvasDomElement = $('#canceled-revenue-chart');
         let revenue = $('#canceled_revenue').val();
+        if (typeof revenue === 'undefined'){
+            return;
+        }
         let data = JSON.parse(revenue);
         let cfg = {
             type: 'bar',
