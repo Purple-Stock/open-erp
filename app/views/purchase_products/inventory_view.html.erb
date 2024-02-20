@@ -14,7 +14,7 @@
     <div class="form-group">
       <%= form.label 'Quantidade', :class => 'control-label col-md-1' %>
       <div class="col-md-11">
-        <%= form.text_field :quantity, class: 'form-control form-control-sm', autocomplete: "email", placeholder: "Quantidade a ser transferida"  %>
+        <%= form.number_field :quantity, in: 1..100000, step: 1, class: 'form-control', autocomplete: "email", placeholder: "Adicionar ao estoque"  %>
       </div>
     </div>
     <% if account_policy_enabled? %>
