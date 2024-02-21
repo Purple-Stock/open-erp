@@ -17,7 +17,7 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= model_class.human_attribute_name(:image) %></th>
               <th><%= model_class.human_attribute_name(t(:name)) %></th>
               <th><%= t('activerecord.attributes.product.sku') %></th>
               <th><%= model_class.human_attribute_name(t(:custom_id)) %></th>
@@ -35,7 +35,7 @@
             <tbody>
             <% @products.each do |product| %>
               <%= tag.tr id: dom_id(product) do %>
-                <td><%= link_to product.id, product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
+                <td><%= link_to (product.image.attached? ? image_tag(product.image.variant(:thumb)) : image_tag('products/product-5-50.png', size: '50')) , product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= product.name %></td>
                 <td><%= product.sku %></td>
                 <td><%= product.custom_id %></td>
