@@ -11,7 +11,7 @@ amazon:
   access_key_id: <%= ENV['AMAZON_S2_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['AMAZON_SECRET_ACCESS_KEY_S2'] %>
   region: <%= ENV['AMAZON_BUCKET_REGION'] %>
-  bucket: <%= ENV['AMAZON_BUCKET_NAME' %>
+  bucket: <%= ENV['AMAZON_BUCKET_NAME'] %>
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
