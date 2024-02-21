@@ -31,6 +31,7 @@ pt-BR:
     name: Nome
     sku: SKU
     price: Preço
+    price_with_currency: Preço R$
     entry: Entrada
     exit: Saída
     balance: Saldo
