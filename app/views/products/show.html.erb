@@ -4,9 +4,8 @@
       <h1 class="display-4"><%= @product.name %></h1>
       <hr>
       <table>
-        <!--  What to do with image? <dd class="col-sm-9"><%= image_tag(@product.image.attached? ? @product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd> -->
         <tr class="row">
-          <td><%= image_tag(Services::Product::GenerateQrCode.call(product: @product)) %></td>
+          <td><%= @product.image.attached? ? image_tag(@product.image, size: '300') : image_tag('products/product-5-50.png', size: '300') %></td>
           <td class="mt-md-5">
             <table>
               <tr>
