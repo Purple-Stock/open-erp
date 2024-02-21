@@ -17,8 +17,8 @@
                 <td class="col"><%= @product.sku %></td>
               </tr>
               <tr>
-                <th class="col"><%= t('products.price') %></th>
-                <td class="col"><%= @product.price %></td>
+                <th class="col"><%= t('products.price_with_currency') %></th>
+                <td class="col-12"><%= number_to_currency @product.price, unit: '' %></td>
               </tr>
               <tr>
                 <th class="col"><%= t('products.entry') %></th>
