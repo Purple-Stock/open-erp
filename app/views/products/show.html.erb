@@ -5,7 +5,7 @@
       <hr>
       <table>
         <tr class="row">
-          <td><%= @product.image.attached? ? image_tag(@product.image, size: '300') : image_tag('products/product-5-50.png', size: '300') %></td>
+          <td><%= @product.image.attached? ? image_tag(@product.image.variant(:thumb)) : image_tag('products/product-5-50.png', size: '300') %></td>
           <td class="mt-md-5">
             <table>
               <tr>
