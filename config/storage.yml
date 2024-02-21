@@ -8,8 +8,8 @@ local:
 
 amazon:
   service: S3
-  access_key_id: INSERT_YOUR_ACCESS_KEY
-  secret_access_key: INSERT_YOUR_SECRET_ACCESS_KEY
+  access_key_id: <%= ENV['AMAZON_S2_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AMAZON_SECRET_ACCESS_KEY_S2'] %>
   region: sa-east-1
   bucket: purple-stock
 
