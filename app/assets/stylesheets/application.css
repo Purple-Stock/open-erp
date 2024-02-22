@@ -21,6 +21,7 @@
  *= require_self
  *= require charts/chart-container
  *= require components/zebra-table
+ *= require components/thumb-image
  */
 
 .turbolinks-progress-bar {
