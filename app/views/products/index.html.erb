@@ -35,7 +35,7 @@
             <tbody>
             <% @products.each do |product| %>
               <%= tag.tr id: dom_id(product) do %>
-                <td><%= link_to (product.image.attached? ? image_tag(rails_blob_path(product.image.variant(:thumb))) : image_tag('products/product-5-50.png', size: '50')) , product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
+                <td><%= link_to (product.image.attached? ? image_tag(rails_blob_path(product.image.variant(:thumb)), class: "thumb-image #{'thumb-image-mobile' if (platform.mobile? || platform.mobile_app?) }") : image_tag('products/product-5-50.png', size: '50', class: "thumb-image #{'thumb-image-mobile' if (platform.mobile? || platform.mobile_app?) }" )), product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= product.name %></td>
                 <td><%= product.sku %></td>
                 <td><%= product.custom_id %></td>
