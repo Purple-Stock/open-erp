@@ -26,11 +26,11 @@ class HomeController < ApplicationController
   private
 
   def default_initial_date
-    @default_initial_date = params[:initial_date] || Date.today
+    @default_initial_date = params[:initial_date] || Time.zone.today
   end
 
   def default_final_date
-    @default_final_date = params[:final_date] || Date.today
+    @default_final_date = params[:final_date] || Time.zone.today
   end
 
   def date_range
