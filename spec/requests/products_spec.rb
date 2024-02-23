@@ -20,6 +20,23 @@ RSpec.describe 'Product' do
     end
   end
 
+  describe 'destroy_from_index_product_path' do
+    include_context 'with user signed in'
+
+    let!(:product) { FactoryBot.create(:product, account_id: user.account.id) }
+
+    it 'destroy product' do
+      expect do
+        delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
+      end.to change(Product, :count).by(-1)
+    end
+
+    it 'renders products index' do
+      delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
+      expect(response.status).to eq(200)
+    end
+  end
+
   describe 'GET /products_defer' do
     let!(:account) { create(:account) }
     let(:url) { '/products_defer' }
