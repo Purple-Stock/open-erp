@@ -8,15 +8,28 @@ RSpec.describe 'Product' do
 
     let!(:product) { FactoryBot.create(:product, account_id: user.account.id) }
 
-    it 'destroy product' do
-      expect do
+    context 'when product has neither sales nor purchase associated to it' do
+      it 'destroy product' do
+        expect do
+          delete product_path(product)
+        end.to change(Product, :count).by(-1)
+      end
+
+      it 'redirects to product list' do
         delete product_path(product)
-      end.to change(Product, :count).by(-1)
+        expect(response).to redirect_to(products_path)
+      end
     end
 
-    it 'redirects to product list' do
-      delete product_path(product)
-      expect(response).to redirect_to(products_path)
+    context 'when product has at least a single association' do
+      before do
+        FactoryBot.create(:purchase_product, product:, account_id: user.account.id)
+      end
+
+      it 'is unprocessable_entity' do
+        delete product_path(product)
+        expect(response.status).to eq(422)
+      end
     end
   end
 
