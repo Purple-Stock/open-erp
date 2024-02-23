@@ -88,15 +88,19 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    begin
-      @product.destroy
+    if @product.destroy
       respond_to do |format|
         format.html { redirect_to products_url, notice: 'Produto deletado.' }
         format.json { head :no_content }
       end
-    rescue ActiveRecord::InvalidForeignKey
-      # Handle invalid foreign key by raising a custom error message
-      raise "Can't delete product because it has associated records"
+    else
+      respond_to do |format|
+        format.html do
+          flash.now[:alert] = @product.errors.full_messages
+          render :show, status: :unprocessable_entity
+        end
+        format.json { head :unprocessable_entity }
+      end
     end
   end
 
