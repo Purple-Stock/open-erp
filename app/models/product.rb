@@ -47,6 +47,8 @@ class Product < ApplicationRecord
     validates :price, numericality: { greater_than_or_equal_to: 0 }
   end
 
+  before_destroy :can_destroy?
+
   accepts_nested_attributes_for :stock
 
   def self.synchronize_bling(tenant, options = {})
@@ -138,5 +140,24 @@ class Product < ApplicationRecord
 
   def synchronize_stock
     Stock.synchronize_bling(account_id, [bling_id])
+  end
+
+  def can_destroy?
+    # Check this issue. There is no recommendation for validate on: :destroy https://github.com/rails/rails/issues/32376
+    validate_sale_products_destroy
+    validate_purchase_products_destroy
+    throw(:abort)
+  end
+
+  def validate_sale_products_destroy
+    return if sale_products.blank?
+
+    errors.add(:sale_products, message: 'Existe saída de estoque associada a este produto')
+  end
+
+  def validate_purchase_products_destroy
+    return if purchase_products.blank?
+
+    errors.add(:purchase_products, message: 'Existe entrada de estoque associada a este produto')
   end
 end
