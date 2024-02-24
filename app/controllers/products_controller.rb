@@ -109,8 +109,6 @@ class ProductsController < ApplicationController
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@product)) }
       end
-    else
-      render products_path
     end
   end
 
