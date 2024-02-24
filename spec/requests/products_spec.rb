@@ -3,6 +3,66 @@
 require 'rails_helper'
 
 RSpec.describe 'Product' do
+  describe 'DELETE /product/:id' do
+    include_context 'with user signed in'
+
+    let!(:product) { FactoryBot.create(:product, account_id: user.account.id) }
+
+    context 'when product has neither sales nor purchase associated to it' do
+      it 'destroy product' do
+        expect do
+          delete product_path(product)
+        end.to change(Product, :count).by(-1)
+      end
+
+      it 'redirects to product list' do
+        delete product_path(product)
+        expect(response).to redirect_to(products_path)
+      end
+    end
+
+    context 'when product has at least a single association' do
+      before do
+        FactoryBot.create(:purchase_product, product:, account_id: user.account.id)
+      end
+
+      it 'is unprocessable_entity' do
+        delete product_path(product)
+        expect(response.status).to eq(422)
+      end
+    end
+  end
+
+  xdescribe 'destroy_from_index_product_path' do
+    include_context 'with user signed in'
+
+    let!(:product) { FactoryBot.create(:product, account_id: user.account.id) }
+
+    context 'when product has neither sales nor purchase associated to it' do
+      it 'destroys product' do
+        expect do
+          delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
+        end.to change(Product, :count).by(-1)
+      end
+
+      it 'renders products index' do
+        delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context 'when product has at least a single association' do
+      before do
+        FactoryBot.create(:purchase_product, product:, account_id: user.account.id)
+      end
+
+      it 'is unprocessable_entity' do
+        delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
+        expect(response.status).to eq(422)
+      end
+    end
+  end
+
   describe 'GET /products_defer' do
     let!(:account) { create(:account) }
     let(:url) { '/products_defer' }

@@ -55,7 +55,11 @@ Rails.application.routes.draw do
   get 'stock_transfer', to: 'purchase_products#stock_transfer', as: 'stock_transfer'
   post 'save_stock_transfer', to: 'purchase_products#save_stock_transfer', as: 'save_stock_transfer'
   resources :sale_products
-  resources :products
+  resources :products do
+    member do
+      delete :destroy_from_index
+    end
+  end
   resources :bling_data
   get 'products_defer', to: 'products#index_defer'
   get 'products_tags_defer', to: 'products#tags_index_defer'
