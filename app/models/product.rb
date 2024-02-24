@@ -146,7 +146,7 @@ class Product < ApplicationRecord
     # Check this issue. There is no recommendation for validate on: :destroy https://github.com/rails/rails/issues/32376
     validate_sale_products_destroy
     validate_purchase_products_destroy
-    throw(:abort)
+    throw(:abort) if errors.any?
   end
 
   def validate_sale_products_destroy
