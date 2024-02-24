@@ -31,7 +31,9 @@ RSpec.describe PurchaseProduct, type: :model do
   it { is_expected.to belong_to(:product) }
 
   context 'when create' do
-    let(:purchase_product) { create(:purchase_product) }
+    include_context 'when user account'
+    include_context 'with product'
+    let(:purchase_product) { create(:purchase_product, product:, account: user.account) }
 
     it 'is valid' do
       expect(purchase_product).to be_valid
