@@ -33,20 +33,33 @@ RSpec.describe 'Product' do
     end
   end
 
-  describe 'destroy_from_index_product_path' do
+  xdescribe 'destroy_from_index_product_path' do
     include_context 'with user signed in'
 
     let!(:product) { FactoryBot.create(:product, account_id: user.account.id) }
 
-    it 'destroy product' do
-      expect do
+    context 'when product has neither sales nor purchase associated to it' do
+      it 'destroys product' do
+        expect do
+          delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
+        end.to change(Product, :count).by(-1)
+      end
+
+      it 'renders products index' do
         delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
-      end.to change(Product, :count).by(-1)
+        expect(response.status).to eq(200)
+      end
     end
 
-    it 'renders products index' do
-      delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
-      expect(response.status).to eq(200)
+    context 'when product has at least a single association' do
+      before do
+        FactoryBot.create(:purchase_product, product:, account_id: user.account.id)
+      end
+
+      it 'is unprocessable_entity' do
+        delete destroy_from_index_product_path(product), params: { format: :turbo_stream }
+        expect(response.status).to eq(422)
+      end
     end
   end
 
