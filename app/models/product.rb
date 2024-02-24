@@ -152,12 +152,14 @@ class Product < ApplicationRecord
   def validate_sale_products_destroy
     return if sale_products.blank?
 
-    errors.add(:sale_products, message: 'Existe saída de estoque associada a este produto')
+    # ActiveModel::Errors#generate_message
+    errors.add(:sale_products, message: errors.generate_message(:sale_products))
   end
 
   def validate_purchase_products_destroy
     return if purchase_products.blank?
 
-    errors.add(:purchase_products, message: 'Existe entrada de estoque associada a este produto')
+    # ActiveModel::Errors#generate_message => we can access it manually
+    errors.add(:purchase_products, message: errors.generate_message(:purchase_products))
   end
 end
