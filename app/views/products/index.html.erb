@@ -17,7 +17,7 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= model_class.human_attribute_name(:image) %></th>
               <th><%= model_class.human_attribute_name(t(:name)) %></th>
               <th><%= t('activerecord.attributes.product.sku') %></th>
               <th><%= model_class.human_attribute_name(t(:custom_id)) %></th>
@@ -35,7 +35,7 @@
             <tbody>
             <% @products.each do |product| %>
               <%= tag.tr id: dom_id(product) do %>
-                <td><%= link_to product.id, product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
+                <td><%= link_to (product.image.attached? ? image_tag(rails_blob_path(product.image.variant(:thumb)), class: "thumb-image #{'thumb-image-mobile' if (platform.mobile? || platform.mobile_app?) }") : image_tag('products/product-5-50.png', size: '50', class: "thumb-image #{'thumb-image-mobile' if (platform.mobile? || platform.mobile_app?) }" )), product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= product.name %></td>
                 <td><%= product.sku %></td>
                 <td><%= product.custom_id %></td>
@@ -51,7 +51,7 @@
                   <%= link_to icon('fas fa-eye'), product, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-clone'), meeting_duplicate_path(product), title: t('duplicate'), class: 'btn btn-warning', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-sync'), update_product_active_path(product), title: t('update_active'), class: 'btn btn-success', data: { toggle: 'tooltip', turbo: false } %>
-                  <%= link_to icon('fas fa-trash'), product, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
+                  <% link_to icon('fas fa-trash'), destroy_from_index_product_path(product), title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
                 </td>
               <% end %>
             <% end %>

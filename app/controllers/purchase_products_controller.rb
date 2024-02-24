@@ -104,10 +104,12 @@ class PurchaseProductsController < ApplicationController
   def inventory_view; end
 
   def save_inventory
+    no_store = 0
+    destiny = params.dig('inventory', 'destiny') || no_store
     product = Product.find(params['product_id'])
-    PurchaseProduct.inventory_quantity(product.custom_id, params['quantity'].to_i, params['inventory']['destiny'])
+    PurchaseProduct.inventory_quantity(product.id, params['quantity'].to_i, destiny)
     respond_to do |format|
-      format.html { redirect_to stock_transfer_path, notice: 'Inventário Concluído.' }
+      format.html { redirect_to product_path(product), notice: 'Inventário Concluído.' }
     end
   rescue ArgumentError
     Rails.logger.debug 'erro'

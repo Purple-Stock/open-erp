@@ -4,6 +4,9 @@ $(document).ready(function (){
         dailyRevenueChartBar = new Chart(chartJsBarDailyRevenueDomElement, cfg);
     }
     let dailyRevenue = $('#daily_revenue').val();
+    if(typeof dailyRevenue === 'undefined'){
+        return;
+    }
     let data = JSON.parse(dailyRevenue);
     let cfg = {
         type: 'bar',

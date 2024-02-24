@@ -135,11 +135,14 @@ RSpec.describe Product, type: :model do
   end
 
   describe '#count_month_purchase_product' do
+    include_context 'when user account'
+    include_context 'with product'
+
     it 'returns the sum of quantities for purchase products in the given month' do
       year = Time.zone.now.year
       month = Time.zone.now.month
-      create(:purchase_product, product:, quantity: 5, created_at: Time.zone.local(year, month, 15))
-      create(:purchase_product, product:, quantity: 3, created_at: Time.zone.local(year, month, 20))
+      FactoryBot.create(:purchase_product, product:, account: user.account, quantity: 5, created_at: Time.zone.local(year, month, 15))
+      FactoryBot.create(:purchase_product, product:, account: user.account, quantity: 3, created_at: Time.zone.local(year, month, 20))
       expect(product.count_month_purchase_product(year, month)).to eq(8)
     end
   end

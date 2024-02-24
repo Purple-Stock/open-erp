@@ -3,14 +3,14 @@
 class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!, only: %i[index_defer tags_index_defer]
-  before_action :set_product, only: %i[show edit update destroy]
+  before_action :set_product, only: %i[show edit update destroy destroy_from_index]
   include Pagy::Backend
   include ActionView::RecordIdentifier
   # GET /products
   # GET /products.json
   def index
     products = Product.includes(:purchase_products, :sale_products, :category)
-                      .where(account_id: current_tenant)
+                      .where(account_id: current_tenant).order('created_at DESC')
     @pagy, @products = pagy(products)
   end
 
@@ -88,16 +88,27 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    begin
-      @product.destroy
+    if @product.destroy
       respond_to do |format|
         format.html { redirect_to products_url, notice: 'Produto deletado.' }
         format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html do
+          flash.now[:alert] = @product.errors.full_messages
+          render :show, status: :unprocessable_entity
+        end
+        format.json { head :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy_from_index
+    if @product.destroy
+      respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@product)) }
       end
-    rescue ActiveRecord::InvalidForeignKey
-      # Handle invalid foreign key by raising a custom error message
-      raise "Can't delete product because it has associated records"
     end
   end
 

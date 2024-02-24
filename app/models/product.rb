@@ -35,7 +35,9 @@ class Product < ApplicationRecord
   has_many :purchase_products
   has_many :sale_products
   has_many :group_products
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [50, 50]
+  end
   has_many :simplo_items
   has_one :store
   has_one :stock, dependent: :destroy
@@ -44,6 +46,8 @@ class Product < ApplicationRecord
     validates :name
     validates :price, numericality: { greater_than_or_equal_to: 0 }
   end
+
+  before_destroy :can_destroy?
 
   accepts_nested_attributes_for :stock
 
@@ -136,5 +140,26 @@ class Product < ApplicationRecord
 
   def synchronize_stock
     Stock.synchronize_bling(account_id, [bling_id])
+  end
+
+  def can_destroy?
+    # Check this issue. There is no recommendation for validate on: :destroy https://github.com/rails/rails/issues/32376
+    validate_sale_products_destroy
+    validate_purchase_products_destroy
+    throw(:abort) if errors.any?
+  end
+
+  def validate_sale_products_destroy
+    return if sale_products.blank?
+
+    # ActiveModel::Errors#generate_message
+    errors.add(:sale_products, message: errors.generate_message(:sale_products))
+  end
+
+  def validate_purchase_products_destroy
+    return if purchase_products.blank?
+
+    # ActiveModel::Errors#generate_message => we can access it manually
+    errors.add(:purchase_products, message: errors.generate_message(:purchase_products))
   end
 end

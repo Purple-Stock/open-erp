@@ -29,5 +29,6 @@ module AwesomeRails
 
     config.management_api = config_for(:management_api)
     config.active_job.queue_adapter = :good_job
+    config.active_storage.variant_processor = :mini_magick
   end
 end

@@ -6,6 +6,7 @@ class DashboardsController < ApplicationController
   include SheinOrdersHelper
 
   def others_status
+    authorize BlingOrderItem
     @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Para ser coletado por SHEIN')
                                     .where(account_id: current_user.account.id)
                                     .distinct

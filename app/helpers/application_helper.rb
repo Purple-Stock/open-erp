@@ -7,6 +7,10 @@ module ApplicationHelper
     content_for(:page_title) || Rails.application.class.to_s.split('::').first
   end
 
+  def account_policy_enabled?
+    @account_policy ||= AccountPolicy.new(current_user.account).enabled
+  end
+
   def crud_actions
     %w[index show new edit create update]
   end
