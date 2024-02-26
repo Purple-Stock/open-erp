@@ -107,9 +107,15 @@ class PurchaseProductsController < ApplicationController
     no_store = 0
     destiny = params.dig('inventory', 'destiny') || no_store
     product = Product.find(params['product_id'])
-    PurchaseProduct.inventory_quantity(product.id, params['quantity'].to_i, destiny)
-    respond_to do |format|
-      format.html { redirect_to product_path(product), notice: 'Inventário Concluído.' }
+    @purchase_product = PurchaseProduct.inventory_quantity(product.id, params['quantity'].to_i, destiny)
+    if @purchase_product.valid?
+      respond_to do |format|
+        format.html { redirect_to product_path(product), notice: 'Inventário Concluído.' }
+      end
+    else
+      respond_to do |format|
+        format.html { render new_purchase_product_path, status: :unprocessable_entity }
+      end
     end
   rescue ArgumentError
     Rails.logger.debug 'erro'
