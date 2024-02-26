@@ -1,4 +1,5 @@
-<br><br>
+<%= render 'layouts/flash' %>
+
 <div class="page-header">
   <h1><%=t '.title', :default => 'Inventário de estoque'%></h1>
 </div>
@@ -19,7 +20,7 @@
     </div>
     <% if account_policy_enabled? %>
       <div class="form-group">
-        <%= form.label 'Loja Destino', :class => 'control-label col-md-1' %>
+        <%= form.label 'Loja Destino', :class => 'control-label col-md-11' %>
         <div class="col-md-11">
           <%= select("inventory", "destiny", Sale.store_sales.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
         </div>
