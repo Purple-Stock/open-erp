@@ -30,6 +30,7 @@ class PurchaseProduct < ApplicationRecord
   belongs_to :product
   acts_as_tenant :account
 
+  validates :quantity, numericality: { greater_than: 0 }
   delegate :name, to: :product
 
   enum store_entrance: { Sem_Loja: 0, LojaPrincipal: 1, LojaSecundaria: 2 }
