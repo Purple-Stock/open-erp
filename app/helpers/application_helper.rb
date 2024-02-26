@@ -62,7 +62,7 @@ module ApplicationHelper
   end
 
   def pt_datetime_format(time)
-    time&.strftime('%d-%m-%Y %H:%M:%S')
+    time.to_datetime.strftime('%d-%m-%Y %H:%M:%S')
   end
 
   # date format "%d/%m/%Y %H:%m"
