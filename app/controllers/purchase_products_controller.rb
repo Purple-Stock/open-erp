@@ -114,7 +114,10 @@ class PurchaseProductsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render new_purchase_product_path, status: :unprocessable_entity }
+        format.html do
+          flash.now[:alert] = @purchase_product.errors.full_messages
+          render 'inventory_view', status: :unprocessable_entity
+        end
       end
     end
   rescue ArgumentError
