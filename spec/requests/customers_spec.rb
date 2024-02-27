@@ -66,4 +66,27 @@ RSpec.describe 'Customers', type: :request do
       end
     end
   end
+
+  describe 'PUT /customers/:id' do
+    let!(:customer) { FactoryBot.create(:customer, account: user.account) }
+
+    include_context 'with user signed in'
+    context 'when feature bling' do
+      include_context 'with bling feature' do
+        it 'has successfully response' do
+          put customer_path(customer), params: { customer: valid_params }
+
+          expect(response).to redirect_to(customer_path(customer))
+        end
+      end
+    end
+
+    context 'without feature bling as a stock manager only' do
+      it 'redirects to products list' do
+        put customer_path(customer), params: { customer: valid_params }
+
+        expect(response).to redirect_to(products_path)
+      end
+    end
+  end
 end
