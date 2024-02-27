@@ -44,7 +44,7 @@ class Product < ApplicationRecord
 
   with_options presence: true do
     validates :name
-    validates :price, numericality: { greater_than_or_equal_to: 0 }
+    validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
   end
 
   before_destroy :can_destroy?
