@@ -32,7 +32,7 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
-    authorize BlingOrderItem
+    authorize Customer
     @customer = Customer.new(customer_params)
 
     respond_to do |format|
@@ -65,7 +65,7 @@ class CustomersController < ApplicationController
   # DELETE /customers/1
   # DELETE /customers/1.json
   def destroy
-    authorize BlingOrderItem
+    authorize Customer
     @customer.destroy
     respond_to do |format|
       format.html { redirect_to customers_url, notice: t('activerecord.models.customer.deleted') }
@@ -74,7 +74,7 @@ class CustomersController < ApplicationController
   end
 
   def import
-    authorize BlingOrderItem
+    authorize Customer
     return redirect_to request.referer, alert: 'Selecione um arquivo csv' unless params[:file].present?
 
     import = ImportCustomerCSV.new(file: params[:file])
