@@ -2,47 +2,24 @@
 
 require 'rails_helper'
 
-RSpec.describe "Customers", type: :request do
+RSpec.describe 'Customers', type: :request do
+  describe 'GET /customers' do
+    include_context 'with user signed in'
+    context 'when feature bling' do
+      include_context 'with bling feature'
 
-	# before :each do
-	# 	@file = fixture_file_upload('customers.csv', 'text/csv')
-	# end
+      it 'has successfully response' do
+        get customers_path
+        expect(response).to have_http_status(:success)
+      end
+    end
 
-  # describe "POST /import" do
-  #   it "returns http found" do
-  #     post import_customers_path
-  #     expect(response).to have_http_status(:found)
-  #   end  
+    context 'without bling feature' do
+      it 'redirects to products list' do
+        get customers_path
 
-	# 	let!(:account) { create(:account) }
-	# 	let(:csv_file) { fixture_file_upload(file_fixture('customers.csv')) }
-
-	# 	#subject(:http_request) { post import_customers_path, params: { file: csv_file } }
-
-	# 	#expect(response).to have_http_status(:found)
-	# 	it "can upload a cvs file" do
-	# 		login_user(account.user)
-	# 		# file = Hash.new
-	# 		# file['file'] = @file
-	# 		# post import_customers_path, params: { uploads: { file: file } }
-	# 		post import_customers_path, params: { file: csv_file }
-	# 		expect(response.status).to eq(302) #redirect
-	# 	end
-  # end  
-
-	# describe 'Services::StudentsUploader' do 
-	# 	it 'creates students' do 
-	# 		Tempfile.open(['students.csv', '.csv']) do |temp|
-	# 			 CSV.open(temp, 'wb', col_sep: ';', headers: true) do |csv|
-	# 				 csv << ['email', 'name']
-	# 				 csv << ['student@example.com', 'Student Name']
-	# 			 end
-	
-	# 			 result = described_class.call(temp)
-	
-	# 			 expect(result[:count]).to eq(1)
-	# 			 expect(Student.count).to eq(1)
-	# 		 end
-	# 	end
-	# end
+        expect(response).to redirect_to(products_path)
+      end
+    end
+  end
 end
