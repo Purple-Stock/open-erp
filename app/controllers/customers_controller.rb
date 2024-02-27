@@ -45,7 +45,7 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
-    authorize BlingOrderItem
+    authorize Customer
 
     respond_to do |format|
       if @customer.update(customer_params)
