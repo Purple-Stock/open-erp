@@ -18,6 +18,7 @@ class CustomersController < ApplicationController
 
   # GET /customers/new
   def new
+    authorize BlingOrderItem
     @customer = Customer.new
   end
 
@@ -27,6 +28,7 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
+    authorize BlingOrderItem
     @customer = Customer.new(customer_params)
 
     respond_to do |format|
@@ -43,6 +45,8 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
+    authorize BlingOrderItem
+
     respond_to do |format|
       if @customer.update(customer_params)
         format.html { redirect_to @customer, notice: t('activerecord.models.customer.updated') }
@@ -57,6 +61,7 @@ class CustomersController < ApplicationController
   # DELETE /customers/1
   # DELETE /customers/1.json
   def destroy
+    authorize BlingOrderItem
     @customer.destroy
     respond_to do |format|
       format.html { redirect_to customers_url, notice: t('activerecord.models.customer.deleted') }
@@ -64,15 +69,17 @@ class CustomersController < ApplicationController
     end
   end
 
-  def import    
+  def import
+    authorize BlingOrderItem
     return redirect_to request.referer, alert: 'Selecione um arquivo csv' unless params[:file].present?
+
     import = ImportCustomerCSV.new(file: params[:file])
     import.run!
     if import.report.success?
       redirect_to customers_path, notice: 'Clientes importados / atualizados com sucesso!'
     else
       redirect_to request.referer, alert: "Não foi possível importar o arquivo: #{import.report.message}"
-    end      
+    end
   end
 
   private
