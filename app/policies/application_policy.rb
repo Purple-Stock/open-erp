@@ -13,7 +13,7 @@ class ApplicationPolicy
   end
 
   def show?
-    false
+    bling_feature_flag?
   end
 
   def create?
@@ -33,7 +33,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    bling_feature_flag?
   end
 
   private
