@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    products = Product.includes(:purchase_products, :sale_products, :category)
+    products = Product.includes(:category)
                       .where(account_id: current_tenant).order('created_at DESC')
     @pagy, @products = pagy(products)
   end
