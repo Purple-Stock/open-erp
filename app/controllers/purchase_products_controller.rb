@@ -55,7 +55,7 @@ class PurchaseProductsController < ApplicationController
         format.json { render :show, status: :created, location: @purchase_product }
       else
         format.html do
-          flash.now[:alert] = @purchase_product.errors.full_messages
+          flash.now[:alert] = ErrorDecorator.new(@purchase_product.errors).full_messages
           render :new, status: :unprocessable_entity
         end
         format.json { render json: @purchase_product.errors, status: :unprocessable_entity }
@@ -118,7 +118,7 @@ class PurchaseProductsController < ApplicationController
     else
       respond_to do |format|
         format.html do
-          flash.now[:alert] = @purchase_product.errors.full_messages
+          flash.now[:alert] = ErrorDecorator.new(@purchase_product.errors).full_messages
           render 'inventory_view', status: :unprocessable_entity
         end
       end
