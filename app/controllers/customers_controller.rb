@@ -7,14 +7,16 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    authorize CustomerPolicy
+    authorize Customer
     customers = Customer.where(account_id: current_tenant)
     @pagy, @customers = pagy(customers)
   end
 
   # GET /customers/1
   # GET /customers/1.json
-  def show; end
+  def show
+    authorize Customer
+  end
 
   # GET /customers/new
   def new
@@ -23,7 +25,9 @@ class CustomersController < ApplicationController
   end
 
   # GET /customers/1/edit
-  def edit; end
+  def edit
+    authorize Customer
+  end
 
   # POST /customers
   # POST /customers.json
