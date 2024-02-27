@@ -22,4 +22,25 @@ RSpec.describe 'Customers', type: :request do
       end
     end
   end
+
+  describe 'GET /customers/new' do
+    include_context 'with user signed in'
+    context 'when feature bling' do
+      include_context 'with bling feature' do
+        it 'has successfully response' do
+          get new_customer_path
+
+          expect(response).to have_http_status(:success)
+        end
+      end
+    end
+
+    context 'without feature bling as a stock manager only' do
+      it 'redirects to products list' do
+        get new_customer_path
+
+        expect(response).to redirect_to(products_path)
+      end
+    end
+  end
 end
