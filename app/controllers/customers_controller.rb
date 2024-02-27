@@ -7,7 +7,7 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    authorize BlingOrderItem
+    authorize CustomerPolicy
     customers = Customer.where(account_id: current_tenant)
     @pagy, @customers = pagy(customers)
   end
@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
 
   # GET /customers/new
   def new
-    authorize BlingOrderItem
+    authorize Customer
     @customer = Customer.new
   end
 
