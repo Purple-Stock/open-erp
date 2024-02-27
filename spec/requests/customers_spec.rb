@@ -46,6 +46,52 @@ RSpec.describe 'Customers', type: :request do
     end
   end
 
+  describe 'GET /customers/show/:id' do
+    let!(:customer) { FactoryBot.create(:customer, account: user.account) }
+
+    include_context 'with user signed in'
+    context 'when feature bling' do
+      include_context 'with bling feature' do
+        it 'has successfully response' do
+          get customer_path(customer)
+
+          expect(response).to have_http_status(:success)
+        end
+      end
+    end
+
+    context 'without feature bling as a stock manager only' do
+      it 'redirects to products list' do
+        get customer_path(customer)
+
+        expect(response).to redirect_to(products_path)
+      end
+    end
+  end
+
+  describe 'GET /customers/edit/:id' do
+    let!(:customer) { FactoryBot.create(:customer, account: user.account) }
+
+    include_context 'with user signed in'
+    context 'when feature bling' do
+      include_context 'with bling feature' do
+        it 'has successfully response' do
+          get edit_customer_path(customer)
+
+          expect(response).to have_http_status(:success)
+        end
+      end
+    end
+
+    context 'without feature bling as a stock manager only' do
+      it 'redirects to products list' do
+        get edit_customer_path(customer)
+
+        expect(response).to redirect_to(products_path)
+      end
+    end
+  end
+
   describe 'POST /customers/' do
     include_context 'with user signed in'
     context 'when feature bling' do
@@ -84,6 +130,29 @@ RSpec.describe 'Customers', type: :request do
     context 'without feature bling as a stock manager only' do
       it 'redirects to products list' do
         put customer_path(customer), params: { customer: valid_params }
+
+        expect(response).to redirect_to(products_path)
+      end
+    end
+  end
+
+  describe 'DELETE /customers/:id' do
+    let!(:customer) { FactoryBot.create(:customer, account: user.account) }
+
+    include_context 'with user signed in'
+    context 'when feature bling' do
+      include_context 'with bling feature' do
+        it 'has successfully response' do
+          delete customer_path(customer)
+
+          expect(response).to redirect_to(customers_path)
+        end
+      end
+    end
+
+    context 'without feature bling as a stock manager only' do
+      it 'redirects to products list' do
+        delete customer_path(customer)
 
         expect(response).to redirect_to(products_path)
       end
