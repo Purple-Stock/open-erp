@@ -25,7 +25,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    bling_feature_flag?
   end
 
   def edit?
