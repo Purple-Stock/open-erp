@@ -113,6 +113,14 @@ class BlingOrderItem < ApplicationRecord
     where(store_id: '204061683')
   }
 
+  scope :feira_madrugada, lambda {
+    where(store_id: '204824954')
+  }
+
+  scope :nuvem_shop, lambda {
+    where(store_id: '204796870')
+  }
+
   scope :date_range, lambda { |initial_date, final_date|
     initial_date = initial_date.try(:to_date).try(:beginning_of_day)
     final_date = final_date.try(:to_date).try(:end_of_day)
