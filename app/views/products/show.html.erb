@@ -8,6 +8,7 @@
       <table>
         <tr class="row">
           <td><%= @product.image.attached? ? image_tag(rails_blob_path(@product.image), size: 300) : image_tag('products/product-5-50.png', size: '300') %></td>
+          <td><%= image_tag Services::Product::GenerateQrCode.new(product: @product).call if platform.desktop? %></td>
           <td class="mt-md-5">
             <table>
               <tr>
@@ -16,7 +17,7 @@
               </tr>
               <tr>
                 <th class="col"><%= t('activerecord.attributes.product.sku') %></th>
-                <td class="col"><%= @product.sku %></td>
+                <td class="col"><%= @product.decorate.sku %></td>
               </tr>
               <tr>
                 <th class="col"><%= t('products.price_with_currency') %></th>
