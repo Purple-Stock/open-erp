@@ -17,7 +17,7 @@
               </tr>
               <tr>
                 <th class="col"><%= t('activerecord.attributes.product.sku') %></th>
-                <td class="col"><%= @product.sku %></td>
+                <td class="col"><%= @product.decorate.sku %></td>
               </tr>
               <tr>
                 <th class="col"><%= t('products.price_with_currency') %></th>
