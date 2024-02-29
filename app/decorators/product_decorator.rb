@@ -6,12 +6,14 @@ class ProductDecorator < Draper::Decorator
   include ActionView::Helpers::NumberHelper
   delegate_all
 
+  LIMIT_TO_TRUNCATE_SKU = 17
+
   def human_attribute(attribute_key)
     model.class.human_attribute_name(attribute_key)
   end
 
   def sku
-    return model.sku if model.sku.blank? || model.sku.length < 17
+    return model.sku if model.sku.blank? || model.sku.length < LIMIT_TO_TRUNCATE_SKU
 
     "#{model.sku.split('')[0..15].join('')}..."
   end
