@@ -57,6 +57,7 @@ class BlingOrderItem < ApplicationRecord
     '203467890' => 'Simplo 7',
     '204061683' => 'Mercado Livre',
     '204796870' => 'Nuvem Shop',
+    '204824954' => 'Feira da Madrugada',
     '0' => 'Sem Loja'
   }.freeze
 
