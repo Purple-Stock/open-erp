@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    products = Product.includes(:purchase_products, :sale_products, :category)
+    products = Product.includes(:category)
                       .where(account_id: current_tenant).order('created_at DESC')
     @pagy, @products = pagy(products)
   end
@@ -65,7 +65,10 @@ class ProductsController < ApplicationController
         format.html { redirect_to @product, notice: 'Produto criado.' }
         format.json { render :show, status: :created, location: @product }
       else
-        format.html { render :new }
+        format.html do
+          flash.now[:alert] = ErrorDecorator.new(@product.errors).full_messages
+          render :new, status: :unprocessable_entity
+        end
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
