@@ -60,7 +60,7 @@ Rails.application.routes.draw do
       delete :destroy_from_index
     end
   end
-  resources :bling_data
+  resources :bling_data, only: [:index, :show]
   get 'products_defer', to: 'products#index_defer'
   get 'products_tags_defer', to: 'products#tags_index_defer'
   get '/products/:id/duplicate', to: 'products#duplicate', as: 'meeting_duplicate'
