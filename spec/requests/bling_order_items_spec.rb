@@ -10,11 +10,19 @@ RSpec.describe 'Stocks', type: :request do
       FactoryBot.create_list(:bling_order_item, 2, account_id: user.account.id)
     end
 
-    context 'when there is no filter' do
-      before { get bling_order_items_path }
+    context 'when authorized' do
+      include_context 'with bling feature'
 
       it 'is success' do
+        get bling_order_items_path
         expect(response).to be_successful
+      end
+    end
+
+    context 'when unauthorized' do
+      it 'redirects to products path' do
+        get bling_order_items_path
+        expect(response).to redirect_to(products_path)
       end
     end
   end
