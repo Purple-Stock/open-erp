@@ -2,9 +2,26 @@ class BlingOrderItemsController < ApplicationController
   before_action :default_initial_date, :disable_initial_date, :default_final_date
   include Pagy::Backend
   inherit_resources
+  actions :all, except: %i[new create]
   decorates_assigned :bling_order_item
 
+  def index
+    authorize Customer
+    index!
+  end
+
+  def show
+    authorize Customer
+    show!
+  end
+
+  def edit
+    authorize Customer
+    edit!
+  end
+
   def update
+    authorize Customer
     update! do |success, failure|
       success.html do
         flash[:notice] = t('flash.success.update', model: bling_order_item.class_name)
@@ -18,6 +35,7 @@ class BlingOrderItemsController < ApplicationController
   end
 
   def destroy
+    authorize Customer
     if resource.deleted_at_bling!
       redirect_to resource, notice: t('flash.success.destroy.bling_order_item')
     else
