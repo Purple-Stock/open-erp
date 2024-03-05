@@ -2,6 +2,7 @@ class BlingOrderItemsController < ApplicationController
   before_action :default_initial_date, :disable_initial_date, :default_final_date
   include Pagy::Backend
   inherit_resources
+  actions :all, except: %i[new create]
   decorates_assigned :bling_order_item
 
   def index
