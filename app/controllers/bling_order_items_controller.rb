@@ -4,6 +4,11 @@ class BlingOrderItemsController < ApplicationController
   inherit_resources
   decorates_assigned :bling_order_item
 
+  def index
+    authorize Customer
+    index!
+  end
+
   def update
     update! do |success, failure|
       success.html do
