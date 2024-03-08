@@ -3,7 +3,7 @@
 class HomeController < ApplicationController
   before_action :refresh_token, :default_initial_date, :default_final_date, :date_range, :bling_order_items,
                 :current_done_order_items, :set_monthly_revenue_estimation,
-                :get_in_progress_order_items, :get_printed_order_items,
+                :get_in_progress_order_items, :get_printed_order_items, :get_error_order_items,
                 :get_pending_order_items, :canceled_orders, :collected_orders, only: :index
   include SheinOrdersHelper
 
@@ -15,6 +15,7 @@ class HomeController < ApplicationController
 
     @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
     @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
+    @grouped_error_order_items = BlingOrderItem.group_order_items(@error_order_items)
     @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
   end
 
@@ -82,6 +83,11 @@ class HomeController < ApplicationController
 
   def get_pending_order_items
     @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING,
+                                                account_id: current_user.account.id)
+  end
+
+  def get_error_order_items
+    @error_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::ERROR,
                                                 account_id: current_user.account.id)
   end
 
