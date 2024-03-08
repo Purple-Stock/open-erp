@@ -68,6 +68,7 @@ class BlingOrderItem < ApplicationRecord
     "94871" => 'Pendente',
     "95745" => 'Impresso',
     "12" => 'Cancelado',
+    "215138" => 'Erro'
   }.freeze
 
   STATUS_PENDING_NAME_KEY_VALUE = {
@@ -85,6 +86,7 @@ class BlingOrderItem < ApplicationRecord
     PRINTED = 95_745
     CANCELED = 12
     COLLECTED = 173_631
+    ERROR = 215138
     ALL = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, CANCELED, COLLECTED].freeze
     EXCLUDE_DONE = [IN_PROGRESS, PENDING, PRINTED, CANCELED].freeze
     WITHOUT_CANCELLED = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED].freeze
