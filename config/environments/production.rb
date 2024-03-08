@@ -180,6 +180,15 @@ Rails.application.configure do
       description: "Create Order Items statuses are canceled at current day"
     },
 
+    daily_error_order_task: {
+      cron: "*/10 * * * *",
+      class: "DailyErrorOrderJob",
+      args: [1, Date.today],
+      set: { priority: 1 },
+      description: "Create Order Items statuses are with error at current day"
+    },
+
+
     checked_order_items_task: {
       cron: "@weekly",
       class: "CheckedBlingOrderItemsJob",

@@ -9,6 +9,7 @@ class BlingOrderItemStore < EnumerateIt::Base
     'Simplo 7' => '203467890',
     'Mercado Livre' => '204061683',
     'Nuvem Shop' => '204796870',
+    'Feira Da Madrugada' => '204824954',
     'Sem Loja' => '0'
   )
 end

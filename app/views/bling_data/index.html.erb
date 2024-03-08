@@ -25,12 +25,9 @@
         <td><%= bling_datum.account_id %></td>
         <td>
           <%= link_to 'Show', bling_datum %>
-          <%= link_to 'Edit', edit_bling_datum_path(bling_datum) %>
           <%= link_to 'Destroy', bling_datum, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to 'New Bling Datum', new_bling_datum_path %>
