@@ -18,4 +18,13 @@ class ReportsController < ApplicationController
   def all_reports; end
 
   def payment; end
+
+  def top_selling_products
+    @items = BlingOrderItem.includes(:items)
+                      .where(created_at: (15.days.ago..Time.now))
+                      .where(account_id: current_tenant.id)
+                      .joins(:items)
+                      .group('bling_order_items.id', 'items.sku', 'items.id')
+                      .select('items.sku, sum(items.quantity) as total_quantity')
+  end
 end
