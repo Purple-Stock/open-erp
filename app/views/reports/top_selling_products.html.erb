@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>SKU</th>
+      <th>Total Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.sku %></td>
+        <td><%= item.total_quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

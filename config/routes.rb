@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get 'reports/daily_sale', to: 'reports#daily_sale'
   get 'reports/all_reports', to: 'reports#all_reports', as: 'all_reports'
   get 'reports/payment', to: 'reports#payment', as: 'payment'
+  get 'reports/top_selling_products', to: 'reports#top_selling_products', as: 'top_selling_products'
   resources :purchases
   resources :suppliers
   resources :sales
