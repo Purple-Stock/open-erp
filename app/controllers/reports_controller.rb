@@ -21,10 +21,20 @@ class ReportsController < ApplicationController
 
   def top_selling_products
     @items = BlingOrderItem.includes(:items)
-                      .where(created_at: (15.days.ago..Time.now))
-                      .where(account_id: current_tenant.id)
-                      .joins(:items)
-                      .group('bling_order_items.id', 'items.sku', 'items.id')
-                      .select('items.sku, sum(items.quantity) as total_quantity')
+                           .where(date: date_range)
+                           .where(situation_id: [BlingOrderItem::Status::PAID])
+                           .where(account_id: current_tenant.id)
+                           .joins(:items)
+                           .group('bling_order_items.id', 'items.sku', 'items.id')
+                           .select('items.sku, sum(items.quantity) as total_quantity')
+                           .order('total_quantity DESC')
+  end
+
+  private
+
+  def date_range
+    initial_date = (Date.today - 15.days).beginning_of_day
+    final_date = Date.today.end_of_day
+    @date_range = initial_date..final_date
   end
 end
