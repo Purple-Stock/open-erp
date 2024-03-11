@@ -33,9 +33,9 @@ class ReportsController < ApplicationController
   private
 
   def date_range
-    if params[:bling_order].present? && params[:bling_order][:initial_date].present? && params[:bling_order][:final_date].present?
-      initial_date = params[:bling_order][:initial_date].to_date.beginning_of_day
-      final_date = params[:bling_order][:final_date].to_date.end_of_day
+    if params[:selling_products].present? && params[:selling_products][:initial_date].present? && params[:selling_products][:final_date].present?
+      initial_date = params[:selling_products][:initial_date].to_date.beginning_of_day
+      final_date = params[:selling_products][:final_date].to_date.end_of_day
     else
       initial_date = (Date.today - 7.days).beginning_of_day
       final_date = Date.today.end_of_day
