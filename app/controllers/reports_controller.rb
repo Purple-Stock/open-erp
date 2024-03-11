@@ -33,8 +33,13 @@ class ReportsController < ApplicationController
   private
 
   def date_range
-    initial_date = (Date.today - 15.days).beginning_of_day
-    final_date = Date.today.end_of_day
+    if params[:bling_order].present? && params[:bling_order][:initial_date].present? && params[:bling_order][:final_date].present?
+      initial_date = params[:bling_order][:initial_date].to_date.beginning_of_day
+      final_date = params[:bling_order][:final_date].to_date.end_of_day
+    else
+      initial_date = (Date.today - 7.days).beginning_of_day
+      final_date = Date.today.end_of_day
+    end
     @date_range = initial_date..final_date
   end
 end

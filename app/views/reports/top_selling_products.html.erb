@@ -1,3 +1,25 @@
+<section class="mt-5 section bordered-section">
+  <div class="row p-4">
+    <h1>Pesquisar por data</h1>
+    <%= form_tag(top_selling_products_path, method: :get) do %>
+      <div class="input-group mb-5">
+        <div class="col-sm">
+          Data inicial
+          <%= date_field_tag('initial_date', params[:initial_date] || (Date.today - 15.days)) %>
+        </div>
+        <div class="col-sm">
+          Data final
+          <%= date_field_tag('final_date', params[:final_date] || Date.today) %>
+        </div>
+        <div class="col-sm">
+          <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+
 <table class="table">
   <thead>
     <tr>
