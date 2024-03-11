@@ -20,6 +20,9 @@ class ReportsController < ApplicationController
   def payment; end
 
   def top_selling_products
+    @initial_date = params[:selling_products][:initial_date] if params[:selling_products] && params[:selling_products][:initial_date].present?
+    @final_date = params[:selling_products][:final_date] if params[:selling_products] && params[:selling_products][:final_date].present?
+
     @items = BlingOrderItem.includes(:items)
                            .where(date: date_range)
                            .where(situation_id: [BlingOrderItem::Status::PAID])

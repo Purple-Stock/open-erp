@@ -5,11 +5,11 @@
       <div class="input-group mb-5">
         <div class="col-sm">
           Data inicial
-          <%= date_field_tag('selling_products[initial_date]', @initial_date || (Date.today - 15.days)) %>
+          <%= date_field_tag('selling_products[initial_date]', @initial_date || (Date.today - 7.days)) %>
         </div>
         <div class="col-sm">
           Data final
-          <%= date_field_tag('selling_products[final_date]', params[:selling_products][:final_date] || Date.today) %>
+          <%= date_field_tag('selling_products[final_date]', @final_date || Date.today) %>
         </div>
         <div class="col-sm">
           <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %>
