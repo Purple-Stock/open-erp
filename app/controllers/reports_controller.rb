@@ -20,17 +20,20 @@ class ReportsController < ApplicationController
   def payment; end
 
   def top_selling_products
-    @initial_date = params[:selling_products][:initial_date] if params[:selling_products] && params[:selling_products][:initial_date].present?
-    @final_date = params[:selling_products][:final_date] if params[:selling_products] && params[:selling_products][:final_date].present?
+    if params[:selling_products] && params[:selling_products][:initial_date].present?
+      @initial_date = params[:selling_products][:initial_date]
+    end
+    if params[:selling_products] && params[:selling_products][:final_date].present?
+      @final_date = params[:selling_products][:final_date]
+    end
 
-    @items = BlingOrderItem.includes(:items)
-                           .where(date: date_range)
-                           .where(situation_id: [BlingOrderItem::Status::PAID])
-                           .where(account_id: current_tenant.id)
-                           .joins(:items)
-                           .group('bling_order_items.id', 'items.sku', 'items.id')
-                           .select('items.sku, sum(items.quantity) as total_quantity')
-                           .order('total_quantity DESC')
+    @items = Item.joins(bling_order_item: :items)
+                 .where(bling_order_items: { date: date_range })
+                 .where(bling_order_items: { situation_id: [BlingOrderItem::Status::PAID] })
+                 .where(account_id: current_tenant.id)
+                 .group('items.sku')
+                 .select('items.sku, SUM(items.quantity) AS total_quantity')
+                 .order('total_quantity DESC')
   end
 
   private
