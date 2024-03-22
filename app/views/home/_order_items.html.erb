@@ -13,9 +13,9 @@
         <h5 class="card-title">
           Contagem total
         </h5>
-        <p class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
+        <h5 class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
           <%= order_items.values.flatten.length %>
-        </p>
+        </h5>
       </div>
     </div>
   </div>
@@ -26,9 +26,9 @@
             <h5 class="card-title">
               <%= store_name %>
             </h5>
-            <p class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
-              Pedidos: <%= orders&.count %>
-            </p>
+            <h5 class="<%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
+              <%= orders&.count %>
+            </h5>
             <% if store_name.eql?('Mercado Livre') %>
               <p>
                 Mercado Envios Flex: <%= @mercado_envios_flex_counts %>
