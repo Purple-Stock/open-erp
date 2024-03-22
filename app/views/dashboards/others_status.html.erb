@@ -1,5 +1,5 @@
 <div class="container-ultra-wide">
-  <section class="mt-5 section bordered-section">
+  <section class="card mt-5 section">
     <% if @token_expires_at && @token_expires_at > Time.zone.now %>
       <p>Última Atualização: <%= page_last_update %></p>
       <p>Token Expira: <%= pt_datetime_format(@token_expires_at) %></p>
@@ -40,9 +40,9 @@
     </div>
   </section>
 
-  <section class="mt-5 section bordered-section">
+  <section class="card mt-5 section">
     <div class="row p-4">
-      <h1>Pesquisar por data</h1>
+      <div class="card-header"><h3>Pesquisar por data</h3></div>
       <%= form_tag(root_path, method: :get) do %>
         <div class="input-group mb-5">
           <div class="col-sm">
@@ -66,17 +66,17 @@
 
   <section class="section p-3">
     <div class="row">
-      <div class="col-sm bordered-section">
-        <h1>Pedidos Concluidos(Pagos)</h1>
+      <div class="card col-sm">
+        <div class="card-header"><h3>Pedidos Concluidos(Pagos)</h3></div>
         <%= render 'order_items', order_items: @bling_order_items, show_revenue_estimation: true, highlighted:false %>
       </div>
-      <div class="col-sm bordered-section">
-        <h1>Pedidos Cancelados</h1>
+      <div class="card col-sm">
+        <div class="card-header"><h3>Pedidos Cancelados</h3></div>
         <%= render 'order_items', order_items: @canceled_orders, show_revenue_estimation: false, highlighted:false %>
       </div>
 
-      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Status Shein</h1>
+      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
+        <div class="card-header"><h3>Status Shein</h3></div>
         <div class="row justify-content-center">
           <div class="col-md-12">
             <div class="card mb-4">

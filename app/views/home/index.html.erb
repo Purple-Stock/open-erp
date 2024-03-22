@@ -1,5 +1,5 @@
 <div class="container-ultra-wide">
-  <section class="mt-5 section bordered-section">
+  <section class="card mt-5 section">
     <% if @expires_at && @expires_at > Time.zone.now %>
       <p>Última Atualização: <%= @last_update %></p>
       <p>Token Expira: <%= pt_datetime_format(@expires_at) %></p>
@@ -22,7 +22,7 @@
         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
       </svg>
       </span>
-    </h1>
+    </h3>
     <div class="row justify-content-center">
         <% if @monthly_revenue_estimation.present? %>
           <div class="col-sm text-center">
@@ -40,7 +40,7 @@
     </div>
   </section>
 
-  <section class="section p-0 bordered-section">
+  <section class="card section p-0">
     <div class="px-4 pt-4 pb-1">
       <%= form_with(url: root_path, method: :get) do %>
         <div class="form-group row">
@@ -65,37 +65,37 @@
 
   <section class="section p-3">
     <div class="row p-0">
-      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Pedidos Em andamento(Pagos)</h1>
+      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
+        <div class="card-header"><h3>Pedidos Em andamento(Pagos)</h3></div>
         <%= render 'order_items_with_filters', order_items: @grouped_in_progress_order_items,
                    show_revenue_estimation: false, highlighted: true, status: BlingOrderItemStatus::IN_PROGRESS %>
       </div>
 
-      <div class="col-sm bordered-section border-danger">
-        <h1>Pedidos Impressos</h1>
+      <div class="card col-sm border-danger">
+        <div class="card-header"><h3>Pedidos Impressos</h3></div>
         <%= render 'order_items_with_filters', order_items: @grouped_printed_order_items,
                    show_revenue_estimation: false, highlighted: false, status: BlingOrderItemStatus::PRINTED %>
       </div>    
 
-      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Pedidos Pendentes</h1>
+      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
+        <div class="card-header"><h3>Pedidos Pendentes</h3></div>
         <%= render 'order_items_with_filters', order_items: @grouped_pending_order_items, show_revenue_estimation: false,
                    highlighted: false, status: BlingOrderItemStatus::PENDING %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Pedidos com erro</h1>
+      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
+        <div class="card-header"><h3>Pedidos com erro</h3></div>
         <%= render 'order_items_with_filters', order_items: @grouped_error_order_items, show_revenue_estimation: false,
                    highlighted: false, status: BlingOrderItemStatus::ERROR %>
       </div>
-      <div class="col-sm bordered-section">
-        <h1>Pedidos Feitos(checados e verificados)</h1>
+      <div class="card col-sm">
+        <div class="card-header"><h3>Pedidos Feitos(checados e verificados)</h3></div>
         <%= render 'order_items', order_items: @current_done_order_items, show_revenue_estimation: false, highlighted:false %>
       </div>
-      <div class="col-sm bordered-section">
-        <h1>Pedidos Coletados</h1>
+      <div class="card col-sm">
+        <div class="card-header"><h3>Pedidos Coletados</h3></div>
         <%= render 'order_items', order_items: @collected_orders, show_revenue_estimation: false, highlighted:false %>
       </div>
     </div>
