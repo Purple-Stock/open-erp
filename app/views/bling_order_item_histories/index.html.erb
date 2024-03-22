@@ -1,11 +1,10 @@
-<main class="section m-2">
-  <h1>Histórico de vendas dos últimos 15 dias</h1>
-  <div>
-    <canvas id="chartjs-bar"></canvas>
+<section class="card mt-5 section">
+  <div class="card">
+    <h1>Histórico de vendas dos últimos 15 dias</h1>
+    <div>
+      <canvas id="chartjs-bar"></canvas>
+    </div>
   </div>
-</main>
-
-<section class="mt-5 section bordered-section">
   <div class="row p-4">
     <h1>Pesquisar por data</h1>
     <%= form_tag(bling_order_item_histories_path, method: :get) do %>
@@ -74,7 +73,7 @@
   </div>
 </div>
 
-<section class="chart-container">
+<section class="card chart-container">
   <h1>Faturamento diário</h1>
   <div>
     <%= hidden_field_tag('daily_revenue', @daily_revenue) %>
@@ -82,7 +81,7 @@
   </div>
 </section>
 
-<section class="chart-container">
+<section class="card chart-container">
   <h1>Custo de Oportunidade dos Pedidos Cancelados</h1>
   <div>
     <%= hidden_field_tag('canceled_revenue', @canceled_revenue) %>
