@@ -19,6 +19,10 @@ class BlingOrderItemHistoriesController < ApplicationController
     @daily_date_range_filter = { initial_date: @initial_date, final_date: @final_date }
     @bling_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::PAID],
                                               account_id: current_user.account.id)
+    @date_order_items = @bling_order_items.where(date: @initial_date.to_datetime.beginning_of_day..@final_date.to_datetime.end_of_day)                                          
+    @quantity_paid = @date_order_items.count
+    @revenue_paid = @date_order_items.sum(:value)
+    @average_ticket = @revenue_paid / @quantity_paid
     @daily_revenue = DailyRevenueReport.new(@bling_order_items, @daily_date_range_filter).presentable
     @daily_revenue = @daily_revenue.to_json
   end
