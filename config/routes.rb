@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :bling_order_item_owners, only: :index do
+    collection do
+      get :day_quantities
+    end
+  end
+
   resources :shein_bling_order_items, only: :index
 
   resources :shein_dashboards
