@@ -4,11 +4,8 @@
       <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
         <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
           <h5 class="card-title">
-            Meta de Pedidos: 
+            Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
           </h5>
-          <p>
-            <%= @monthly_revenue_estimation.daily_quantity %>
-          </p>  
         <% end %>
         <h5 class="card-title <%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
           Contagem total: <%= order_items.values.flatten.length %>
