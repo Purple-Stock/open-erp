@@ -32,6 +32,8 @@ class BlingOrderItemOwnersController < ApplicationController
     @daily_date_range_filter = { initial_date: @initial_date, final_date: @final_date }
     @bling_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::PAID],
                                               account_id: current_user.account.id)
+    monthly_revenue  
+    anual_revenue
     @date_order_items = @bling_order_items.where(date: @initial_date.to_datetime.beginning_of_day..@final_date.to_datetime.end_of_day)
     @quantity_paid = @date_order_items.count
     @revenue_paid = @date_order_items.sum(:value)
@@ -41,6 +43,24 @@ class BlingOrderItemOwnersController < ApplicationController
   end
 
   private
+
+  def monthly_revenue
+    @initial_monthly_date = Time.zone.now.beginning_of_month
+    @final_monthly_date = Time.zone.now
+    @monthly_order_items = @bling_order_items.where(date: @initial_monthly_date..@final_monthly_date)
+    @monthly_quantity_paid = @monthly_order_items.count
+    @monthly_revenue_paid = @monthly_order_items.sum(:value)
+    @monthly_average_ticket = @monthly_revenue_paid / @monthly_quantity_paid
+  end
+
+  def anual_revenue
+    @initial_anual_date = Time.zone.now.beginning_of_year
+    @final_anual_date = Time.zone.now
+    @anual_order_items = @bling_order_items.where(date: @initial_anual_date..@final_anual_date)
+    @anual_quantity_paid = @anual_order_items.count
+    @anual_revenue_paid = @anual_order_items.sum(:value)
+    @anual_average_ticket = @anual_revenue_paid / @anual_quantity_paid
+  end
 
   def date_range
     initial_date = (Date.today - 15.days).beginning_of_day

@@ -6,7 +6,103 @@
       </div>
       <div class="card-wrap">
         <div class="card-header">
-          <h4>Faturamento</h4>
+          <h4>Faturamento Anual</h4>
+        </div>
+        <div class="card-body">
+          <%= number_to_currency(@anual_revenue_paid, unit: "BRL", separator: ",", delimiter: ".") %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="card card-statistic-2">
+      <div class="card-icon shadow-primary bg-primary">
+        <i class="fas fa-shopping-bag"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h4>Vendas Anuais</h4>
+        </div>
+        <div class="card-body">
+          <%= @anual_quantity_paid %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="card card-statistic-2">
+      <div class="card-icon shadow-primary bg-primary">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h4>Ticket Médio Anual</h4>
+        </div>
+        <div class="card-body">
+          <%= number_to_currency(@anual_average_ticket.round(2), unit: "BRL", separator: ",", delimiter: ".") %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="card card-statistic-2">
+      <div class="card-icon shadow-primary bg-primary">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h4>Faturamento Mensal</h4>
+        </div>
+        <div class="card-body">
+          <%= number_to_currency(@monthly_revenue_paid, unit: "BRL", separator: ",", delimiter: ".") %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="card card-statistic-2">
+      <div class="card-icon shadow-primary bg-primary">
+        <i class="fas fa-shopping-bag"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h4>Vendas Mensais</h4>
+        </div>
+        <div class="card-body">
+          <%= @monthly_quantity_paid %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="card card-statistic-2">
+      <div class="card-icon shadow-primary bg-primary">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h4>Ticket Médio Mensal</h4>
+        </div>
+        <div class="card-body">
+          <%= number_to_currency(@monthly_average_ticket.round(2), unit: "BRL", separator: ",", delimiter: ".") %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="card card-statistic-2">
+      <div class="card-icon shadow-primary bg-primary">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <div class="card-wrap">
+        <div class="card-header">
+          <h4>Faturamento Diário</h4>
         </div>
         <div class="card-body">
           <%= number_to_currency(@revenue_paid, unit: "BRL", separator: ",", delimiter: ".") %>
@@ -21,7 +117,7 @@
       </div>
       <div class="card-wrap">
         <div class="card-header">
-          <h4>Vendas</h4>
+          <h4>Vendas Diárias</h4>
         </div>
         <div class="card-body">
           <%= @quantity_paid %>
@@ -36,7 +132,7 @@
       </div>
       <div class="card-wrap">
         <div class="card-header">
-          <h4>Ticket Médio</h4>
+          <h4>Ticket Médio Diário</h4>
         </div>
         <div class="card-body">
           <%= number_to_currency(@average_ticket.round(2), unit: "BRL", separator: ",", delimiter: ".") %>
@@ -46,13 +142,17 @@
   </div>
 </div>
 
-<section class="card chart-container">
+<%
+=begin%>
+ <section class="card chart-container">
   <div class="text-small text-muted">Faturamento diário
   <div>
     <%= hidden_field_tag('daily_revenue', @daily_revenue) %>
     <canvas id='chartjs-bar-daily-revenue'></canvas>
   </div>
-</section>
+</section> 
+<%
+=end%>
 
 <div class="card mt-4">
   <div class="card-header">
