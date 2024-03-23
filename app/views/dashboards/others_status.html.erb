@@ -1,6 +1,6 @@
 <div class="container-ultra-wide">
   <section class="card mt-5 section">
-    <% if @token_expires_at && @token_expires_at > Time.zone.now %>
+    <% if @token_expires_at > Time.current.strftime('%Y-%m-%d %H:%M') %>
       <p>Última Atualização: <%= page_last_update %></p>
       <p>Token Expira: <%= pt_datetime_format(@token_expires_at) %></p>
     <% else %>  
