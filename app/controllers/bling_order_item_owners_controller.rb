@@ -27,8 +27,8 @@ class BlingOrderItemOwnersController < ApplicationController
     @colected_orders = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
                                             account_id: current_user.account.id, collected_alteration_date: Time.current.beginning_of_day..Time.current.end_of_day).count
 
-    @initial_date = params.fetch('bling_order', initial_date: Date.today.strftime).fetch('initial_date')
-    @final_date = params.fetch('bling_order', final_date: Date.today.strftime).fetch('final_date')
+    @initial_date = params.fetch('bling_order', initial_date: Time.current.strftime('%Y-%m-%d %H:%M')).fetch('initial_date')
+    @final_date = params.fetch('bling_order', final_date: Time.current.strftime('%Y-%m-%d %H:%M')).fetch('final_date')
     @daily_date_range_filter = { initial_date: @initial_date, final_date: @final_date }
     @bling_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::PAID],
                                               account_id: current_user.account.id)
