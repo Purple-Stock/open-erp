@@ -11,7 +11,7 @@ A página oficial do projeto está em [página institucional](https://purplestoc
 
 Este Projeto também é integrado com o aplicativo de QR CODE https://github.com/Purple-Stock/open-erp-qr-code-reader e o sistema gerador de etiquetas PIMACO de produtos com QR CODE https://github.com/Purple-Stock/open-erp-pimaco-print-tags.
 
-![Screenshot from 2022-11-04 19-30-07](https://user-images.githubusercontent.com/8432835/200084193-5c591172-c698-4e95-a849-f49f781a2b25.png)
+![image](https://github.com/Purple-Stock/open-erp/assets/8432835/52cf1594-35e7-4e46-bdea-a2041b057d54)
 
 ## Desenvolvimento
 
@@ -113,7 +113,7 @@ Você pode testar o Open Erp com um clique no Heroku:
 
 ## Contribuindo
 
-Este projeto existe graças a todas as pessoas que contribuem. Fique a vontade para contribuir! Essas aqui são boas [issues](https://github.com/Purple-Stock/open-erp/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) para começar! Se tiver dúvidas ou interesse em utilizar em algum negócio entre em contato em matheus.puppe@gmail.com
+Este projeto existe graças a todas as pessoas que contribuem. Fique a vontade para contribuir! Essas aqui são boas [issues](https://github.com/Purple-Stock/open-erp/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) para começar! Se tiver dúvidas ou interesse em utilizar em algum negócio entre em contato em matheus.puppe@purplestock.com.br
 
 ## Contribuidores
 

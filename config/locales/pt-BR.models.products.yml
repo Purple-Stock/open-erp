@@ -2,7 +2,7 @@
 pt-BR:
   activerecord:
     models:
-      products:
+      product:
         one: "Produto"
         other: "Produtos"
     attributes:
@@ -24,6 +24,16 @@ pt-BR:
           true: Sim
           false: Não
         custom_id: ID do Cliente
+        purchase_products: Entrada de estoque
+        sale_products: Saída de estoque
+    errors:
+      models:
+        product:
+          attributes:
+            purchase_products:
+              invalid: Existe entrada de estoque associada a este produto
+            sale_products:
+              invalid: Existe saída de estoque associada a este produto
 
   products:
     one: Produto
@@ -31,6 +41,7 @@ pt-BR:
     name: Nome
     sku: SKU
     price: Preço
+    price_with_currency: Preço R$
     entry: Entrada
     exit: Saída
     balance: Saldo

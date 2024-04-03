@@ -19,12 +19,18 @@ class DailyRevenueReport
     shopee_value_sum = record.shopee.sum(&:value).to_f
     simple_7_value_sum = record.simple_7.sum(&:value).to_f
     mercado_livre_value_sum = record.mercado_livre.sum(&:value).to_f
-    total = shein_value_sum + shopee_value_sum + simple_7_value_sum + mercado_livre_value_sum
+    feira_madrugada_sum = record.feira_madrugada.sum(&:value).to_f
+    nuvem_shop_sum = record.nuvem_shop.sum(&:value).to_f
+
+    total = shein_value_sum + shopee_value_sum + simple_7_value_sum + mercado_livre_value_sum + feira_madrugada_sum + nuvem_shop_sum
+
     [{ x: axi_x,
-      shein: shein_value_sum,
-      shopee: shopee_value_sum,
-      simple_7: simple_7_value_sum,
-      mercado_livre: mercado_livre_value_sum,
-       total: total}]
+       shein: shein_value_sum,
+       shopee: shopee_value_sum,
+       simple_7: simple_7_value_sum,
+       mercado_livre: mercado_livre_value_sum,
+       feira_madrugada: feira_madrugada_sum,
+       nuvem_shop: nuvem_shop_sum,
+       total: }]
   end
 end

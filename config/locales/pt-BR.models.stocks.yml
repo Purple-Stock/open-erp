@@ -9,3 +9,5 @@ pt-BR:
     sku: SKU
     product: Produto
     list: Lista
+    count_sold: Quantidade vendida dos últimos 30 dias
+    calculate_basic_forecast: Previsão para os próximos 30 dias

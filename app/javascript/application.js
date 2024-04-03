@@ -79,3 +79,4 @@ document.addEventListener("turbo:load", () => {
     altFormat: "d/m/Y H:i",
   });
 });
+import "@hotwired/turbo-rails"

@@ -13,7 +13,7 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
                                     tenant: account_id)
   end
 
-  def create_orders(orders)
+  def create_orders(orders, alteration_date = nil)
     return if orders.blank?
 
     order_ids = orders.map { |order| order['id'] }
@@ -33,7 +33,7 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
         situation_id: order['situacao']['id'],
         store_id: order['loja']['id'],
         date: order['data'],
-        alteration_date:,
+        alteration_date: alteration_date || @alteration_date,
         marketplace_code_id: order['numeroLoja'],
         bling_id: order['numero'],
         account_id:,

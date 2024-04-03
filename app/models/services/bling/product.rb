@@ -47,8 +47,14 @@ module Services
           break if (page.eql?(2) && Rails.env.eql?('test'))
 
           response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
+          sleep 5 if Rails.env.eql?('production') || Rails.env.eql?('staging')
           if response['error'].present?
-            sleep 10
+            sleep 10 if Rails.env.eql?('production') || Rails.env.eql?('staging')
+            response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
+          end
+
+          if response['error'].present?
+            sleep 10 if Rails.env.eql?('production') || Rails.env.eql?('staging')
             response = HTTParty.get(base_url, query: params.merge(pagina: page), headers:)
           end
 

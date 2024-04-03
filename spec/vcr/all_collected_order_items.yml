@@ -1,0 +1,181 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?dataAlteracaoFinal=2024-01-14&dataAlteracaoInicial=2024-01-13&idsSituacoes%5B%5D=173631&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 15 Jan 2024 14:58:46 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '11'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=8722174f356a55b2
+      Set-Cookie:
+      - PHPSESSID=8b0h27kr8sjs5h9posnkqs4nds; path=/; secure; HttpOnly
+      - PHPSESSID=v5dijv88jjq1e53tagjm3qjeqf; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 845efa8d28d11d57-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[]}'
+  recorded_at: Mon, 15 Jan 2024 14:58:46 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?dataAlteracaoFinal=2024-01-15&dataAlteracaoInicial=2024-01-14&idsSituacoes%5B%5D=173631&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 15 Jan 2024 14:58:47 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '11'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=b74d51ab47e97b10
+      Set-Cookie:
+      - PHPSESSID=kfbt3hrpmg9id4d2ih64rk8vpm; path=/; secure; HttpOnly
+      - PHPSESSID=vsquehb3gb6l24m19g8dqhp0v7; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 845efa93aa1b6502-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[]}'
+  recorded_at: Mon, 15 Jan 2024 14:58:47 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas?dataAlteracaoFinal=2024-01-16&dataAlteracaoInicial=2024-01-15&idsSituacoes%5B%5D=173631&limite=100&pagina=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 15 Jan 2024 14:58:48 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '345'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=bd7e30ca139ab2af
+      Set-Cookie:
+      - PHPSESSID=a61q2l8sqj964l8rluuo5qk2hg; path=/; secure; HttpOnly
+      - PHPSESSID=seec0navj6mh4rl44q2rptejhv; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 845efa9a2cd5644e-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":19508913684,"numero":68445,"numeroLoja":"GSHNBH59C000JLX","data":"2024-01-12","dataSaida":"2024-01-12","dataPrevista":"0000-00-00","totalProdutos":37.9,"total":37.9,"contato":{"id":16527510154,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":173631,"valor":0},"loja":{"id":204219105}}]}'
+  recorded_at: Mon, 15 Jan 2024 14:58:48 GMT
+recorded_with: VCR 6.2.0

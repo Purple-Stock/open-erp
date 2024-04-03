@@ -23,7 +23,7 @@ class Customer < ApplicationRecord
   acts_as_tenant :account
 
   validates :name, presence: true
-  validates :cpf, presence: true, uniqueness: true, length: { is: 11 }, allow_blank: true
+  validates :cpf, presence: true, uniqueness: true, length: { is: 14 }, allow_blank: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :phone, presence: true
   validates :cellphone, presence: true
