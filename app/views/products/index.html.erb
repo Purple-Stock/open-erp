@@ -27,8 +27,6 @@
               <th><%= t('activerecord.attributes.product.balance') %></th>
               <th><%= t('activerecord.attributes.product.category') %></th>
               <th><%= model_class.human_attribute_name(t(:active)) %></th>
-              <th>Produto Bling?</th>
-
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
@@ -45,7 +43,6 @@
                 <td><%= Services::Product::CountQuantity.call(product: product, product_command: 'balance_product') %></td>
                 <td><%= product.category.try(:name) %></td>
                 <td><%= raw display_status(product.active) %></td>
-                <td><%= product.bling? %></td>
                 <td>
                   <%= link_to icon('fas fa-pencil-alt'), edit_product_path(product), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-eye'), product, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>

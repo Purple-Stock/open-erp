@@ -19,6 +19,9 @@
             <li class="<%= active_nav_item('bling_order_item_histories', 'index') %>">
               <%= link_to 'Histórico de pedidos', bling_order_item_histories_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('bling_order_item_histories', 'index') %>">
+              <%= link_to 'Pedidos Diários', bling_order_item_owners_path, class: 'nav-link' %>
+            </li>
           <% end %>
           <%= render 'shared/sidebar_dropdown', title: t("dashboards.second_title"), icon: 'fas fa-shopping-bag' do %>
             <li class="<%= active_nav_item('checkout_orders', 'index') %>">
@@ -111,15 +114,15 @@
             <%= link_to t("sales.create"), new_sale_path, class: 'nav-link' %>
           </li>
         <% end %>
-        <%= render 'shared/sidebar_dropdown', title: t("customers.two"), icon: 'fas fa-users' do %>
-          <li class="<%= active_nav_item('customers', 'index') %>">
-            <%= link_to t("customers.list"), customers_path, class: 'nav-link' %>
-          </li>
-          <li class="<%= active_nav_item('customers', 'new') %>">
-            <%= link_to t("customers.create"), new_customer_path, class: 'nav-link' %>
-          </li>
-        <% end %>
       <% if account_policy_enabled? %>
+          <%= render 'shared/sidebar_dropdown', title: t("customers.two"), icon: 'fas fa-users' do %>
+            <li class="<%= active_nav_item('customers', 'index') %>">
+              <%= link_to t("customers.list"), customers_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('customers', 'new') %>">
+              <%= link_to t("customers.create"), new_customer_path, class: 'nav-link' %>
+            </li>
+          <% end %>
         <li class="menu-header">Gerencial</li>
         <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-chart-line' do %>
           <li class="<%= active_nav_menu_item([show_pending_orders_path]) %>">
@@ -127,6 +130,9 @@
           </li>
           <li class="<%= active_nav_menu_item([shein_dashboards_path]) %>">
             <%= link_to t("audits.finance"), shein_dashboards_path, class: 'nav-link' %>
+          </li>
+          <li class="<%= active_nav_menu_item([top_selling_products_path]) %>">
+            <%= link_to t("audits.top_selling_products"), top_selling_products_path, class: 'nav-link' %>
           </li>
           <li class="<%= active_nav_menu_item([show_orders_products_stock_path]) %>">
             <%= link_to t("audits.products"), show_orders_products_stock_path, class: 'nav-link' %>

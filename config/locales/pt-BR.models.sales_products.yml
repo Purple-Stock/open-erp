@@ -1,5 +1,13 @@
 ---
 pt-BR:
+  activerecord:
+    models:
+      sale_product:
+        one: Saída de Estoque
+        other: Saídas de Estoque
+    attributes:
+      sale_product:
+        quantity: Quantidade
   sales_products:
     new: Nova Saída de Estoque
     edit: Editar Saída de Estoque

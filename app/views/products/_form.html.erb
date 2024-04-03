@@ -1,28 +1,6 @@
+<%= render 'layouts/flash' %>
+
 <%= form_for @product, html: { class: "form-horizontal product", multipart: true, 'data-turbo': 'false' } do |f| %>
-
-  <% if notice %>
-    <div class="alert alert-success" role="alert">
-      <%= notice %>
-    </div>
-  <% end %>
-
-  <% if alert %>
-    <div class="alert alert-danger" role="alert">
-      <%= alert %>
-    </div>
-  <% end %>
-
-  <% if @product.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-body">
-        <ul>
-          <% @product.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
   <div class="form-row">
     <div class="form-group col-6">
       <%= f.label :custom_id, t(:custom_id), :class => 'control-label' %>

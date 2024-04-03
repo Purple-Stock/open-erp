@@ -1,15 +1,15 @@
 <%- model_class = PurchaseProduct -%>
 <div class="section-header">
   <div class="page-header">
-    <h1><%= t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
+    <h1><%= t('activerecord.models.purchase_product.other') %></h1>
   </div>
 </div>
 
 <div class="section-body">
 
-  <% link_to t('.new', :default => t("helpers.links.new")), new_purchase_product_path, :class => 'btn btn-primary mb-3' %>
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_purchase_product_path, :class => 'btn btn-primary mb-3' %>
   <% link_to t('.new', :default => t("helpers.links.new-purchase")), new_purchase_path, :class => 'btn btn-primary mb-3' %>
-  <%= link_to t('.inventory', :default => t("helpers.links.inventory")), inventory_view_path, :class => 'btn btn-primary mb-3' %>
+  <% link_to t('.inventory', :default => t("helpers.links.inventory")), inventory_view_path, :class => 'btn btn-primary mb-3' %>
 
   <div class="card">
     <div class="card-body">
@@ -18,10 +18,9 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th><%= model_class.human_attribute_name(:id) %></th>
+              <th><%= model_class.human_attribute_name(:product_id) %></th>
               <th><%= model_class.human_attribute_name(t(:custom_id)) %></th>
               <th><%= model_class.human_attribute_name(t(:quantity)) %></th>
-              <th><%= model_class.human_attribute_name(t(:value)) %></th>
               <th><%= model_class.human_attribute_name(t(:name)) %></th>
               <th><%= model_class.human_attribute_name(t(:created_at)) %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
@@ -33,7 +32,6 @@
                 <td><%= link_to purchase_product.id, product_path(purchase_product.product), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= purchase_product.try(:custom_id) %></td>
                 <td><%= purchase_product.quantity %></td>
-                <td><%= purchase_product.value %></td>
                 <td><%= purchase_product.try(:name) %></td>
                 <td><%= df(purchase_product.created_at) %></td>
                 <td>

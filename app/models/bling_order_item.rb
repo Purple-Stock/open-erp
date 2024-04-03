@@ -68,6 +68,7 @@ class BlingOrderItem < ApplicationRecord
     "94871" => 'Pendente',
     "95745" => 'Impresso',
     "12" => 'Cancelado',
+    "215138" => 'Erro'
   }.freeze
 
   STATUS_PENDING_NAME_KEY_VALUE = {
@@ -85,10 +86,11 @@ class BlingOrderItem < ApplicationRecord
     PRINTED = 95_745
     CANCELED = 12
     COLLECTED = 173_631
-    ALL = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, CANCELED, COLLECTED].freeze
+    ERROR = 215138
+    ALL = [IN_PROGRESS, CHECKED, ERROR, VERIFIED, PENDING, PRINTED, CANCELED, COLLECTED].freeze
     EXCLUDE_DONE = [IN_PROGRESS, PENDING, PRINTED, CANCELED].freeze
-    WITHOUT_CANCELLED = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED].freeze
-    PAID = [IN_PROGRESS, CHECKED, VERIFIED, PENDING, PRINTED, COLLECTED].freeze
+    WITHOUT_CANCELLED = [IN_PROGRESS, CHECKED, ERROR, VERIFIED, PENDING, PRINTED].freeze
+    PAID = [IN_PROGRESS, CHECKED, VERIFIED, ERROR, PENDING, PRINTED, COLLECTED].freeze
   end
 
   scope :date_range_in_a_day, lambda { |date|
@@ -111,6 +113,14 @@ class BlingOrderItem < ApplicationRecord
 
   scope :mercado_livre, lambda {
     where(store_id: '204061683')
+  }
+
+  scope :feira_madrugada, lambda {
+    where(store_id: '204824954')
+  }
+
+  scope :nuvem_shop, lambda {
+    where(store_id: '204796870')
   }
 
   scope :date_range, lambda { |initial_date, final_date|

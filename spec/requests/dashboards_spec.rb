@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Dashboards', type: :request do
-
   describe 'GET /others_status' do
     include_context 'with user signed in'
     let(:feature_bling) { FactoryBot.create(:feature, feature_key: FeatureKey::BLING_INTEGRATION, is_enabled: true) }

@@ -9,23 +9,23 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    bling_feature_flag?
   end
 
   def show?
-    false
+    bling_feature_flag?
   end
 
   def create?
-    false
+    bling_feature_flag?
   end
 
   def new?
-    create?
+    bling_feature_flag?
   end
 
   def update?
-    false
+    bling_feature_flag?
   end
 
   def edit?
@@ -33,7 +33,15 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    bling_feature_flag?
+  end
+
+  private
+
+  def bling_feature_flag?
+    @account = user.account
+    @enabled ||= @account.account_features.includes([:feature])
+                         .select { |account_feature| account_feature.feature.bling_integration? }&.first&.is_enabled?
   end
 
   class Scope
