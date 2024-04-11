@@ -30,12 +30,12 @@ module Services
       end
 
       def count_sale_product
-        @product.sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
+        @product.sale_products.sum('Quantity')
       end
 
       def balance
-        purchase_sale_balance = @product.purchase_products.from_store('LojaPrincipal').sum('Quantity')
-        purchase_sale_balance -= @product.sale_products.from_sale_store('LojaPrincipal').sum('Quantity')
+        purchase_sale_balance = @product.purchase_products.sum('Quantity')
+        purchase_sale_balance -= @product.sale_products.sum('Quantity')
         purchase_sale_balance.to_s
       end
     end

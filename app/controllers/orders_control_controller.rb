@@ -30,17 +30,21 @@ class OrdersControlController < ApplicationController
     else
       cleaned_situation_ids = BlingOrderItem::Status::PENDING
     end
-    
+  
+    pending_items = Item.includes(:bling_order_item).where(bling_order_items: { situation_id: cleaned_situation_ids })
+  
     if store_id.present?
-      @pending_order_items = BlingOrderItem.where(situation_id: cleaned_situation_ids, store_id: store_id)
+      @pending_order_items = pending_items.where(bling_order_items: { store_id: store_id })
     else
-      @pending_order_items = BlingOrderItem.where(situation_id: cleaned_situation_ids)
+      @pending_order_items = pending_items
     end
+  
     respond_to do |format|
       format.html # show.html.erb
       format.csv { send_data generate_csv(@pending_order_items), filename: "pending-orders-#{Date.today}.csv" }
     end
   end
+  
 
   def show_orders_business_day
     @simplo_orders = SimploOrder.where(order_status: %w[2 30 31]).order(order_id: :asc)
@@ -56,23 +60,26 @@ class OrdersControlController < ApplicationController
   private
 
   def generate_csv(pending_order_items)
-    # Filter out items where `items` is nil
-    filtered_items = pending_order_items.select { |item| item.items.present? }
-  
-    # Group the filtered items by 'codigo'
-    grouped_items = filtered_items.group_by { |item| item.items['codigo'] }
-  
     CSV.generate(headers: true) do |csv|
-      csv << ['Codigo', 'Total Quantity'] # Customize your headers here
+      # Define your headers without 'Description'
+      csv << ['SKU', 'Quantity', 'Total Value']
   
-      grouped_items.each do |codigo, items|
-        # Sum only the quantities of items with a non-nil 'quantidade'
-        total_quantity = items.sum { |item| item.items['quantidade'].to_i }
-        csv << [codigo, total_quantity] # Add each group's code and total quantity
+      # Group by SKU and sum quantities, calculate total value without including description
+      grouped_items = pending_order_items.group_by(&:sku).map do |sku, items|
+        total_quantity = items.sum(&:quantity)
+        total_value = items.sum { |item| item.value.to_f * item.quantity }
+        [sku, total_quantity, total_value]
+      end
+  
+      # Sorting grouped items by total_quantity in descending order
+      sorted_grouped_items = grouped_items.sort_by { |item| -item[1] }
+  
+      # Adding rows for each group of items
+      sorted_grouped_items.each do |item|
+        csv << item
       end
     end
   end
-  
   
   def list_orders
     @orders = []

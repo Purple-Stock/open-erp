@@ -3,11 +3,13 @@ class BlingDataController < ApplicationController
 
   # GET /bling_data
   def index
+    authorize Customer
     @bling_data = BlingDatum.all
   end
 
   # GET /bling_data/1
   def show
+    authorize Customer
   end
 
   # GET /bling_data/new

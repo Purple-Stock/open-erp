@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -63,7 +63,6 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "awesome_rails_production"
-  config.active_job.queue_adapter = :async
   # config.action_controller.asset_host = ENV['CLOUDFRONT_URL']
   config.cache_store = :redis_cache_store, { url: ENV['REDISCLOUD_URL'] }
 
@@ -96,14 +95,25 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.good_job.enable_cron = false
+  config.good_job.smaller_number_is_higher_priority = true
+  config.good_job.execution_mode = :async
+
+  config.good_job.enable_cron = ENV['ENABLE_CRON'] || false
   config.good_job.cron = {
     product_sync_job: {
-      cron: "*/10 * * * *",
+      cron: '@daily',
       class: "ProductSyncJob",
       args: [1],
       set: { priority: 1 },
       description: "Synchronize products"
+    },
+
+    stock_sync_job: {
+      cron: "*/10 * * * *",
+      class: "StockSyncJob",
+      args: [1],
+      set: { priority: 1 },
+      description: "Synchronize Stocks based in products already created"
     },
 
     in_progress_order_items_task: { # each recurring job must have a unique key
@@ -119,7 +129,7 @@ Rails.application.configure do
       class: "PendingOrderItemsJob",
       args: [1, { dataInicial: (Date.today - 3.weeks).strftime, dataFinal: Date.today.strftime }],
       set: { priority: 1 },
-      description: "Create Order Items with pending status from current week"
+      description: "Create Order Items with pending status considering 3 week ago"
     },
 
     general_pending_order_items_task: {
@@ -145,6 +155,7 @@ Rails.application.configure do
                                      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
                                      description: "Create Order Items statuses are checked and verified" # optional description that appears in Dashboard
     },
+
     general_canceled_order_items_task: { # each recurring job must have a unique key
                                          cron: "@monthly", # cron-style scheduling format by fugit gem
                                          class: "CanceledBlingOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
@@ -169,12 +180,20 @@ Rails.application.configure do
       description: "Create Order Items statuses are canceled at current day"
     },
 
+    daily_error_order_task: {
+      cron: "*/10 * * * *",
+      class: "DailyErrorOrderJob",
+      args: [1, Date.today],
+      set: { priority: 1 },
+      description: "Create Order Items statuses are with error at current day"
+    },
+
     checked_order_items_task: {
       cron: "@weekly",
       class: "CheckedBlingOrderItemsJob",
       args: [1],
       set: { priority: 3 },
-      description: "Create Order Items statuses are checked"
+      description: "Create Order Items whose statuses are checked"
     },
 
     frequent_checked_order_items_task: {
@@ -191,7 +210,14 @@ Rails.application.configure do
       args: [1],
       set: { priority: 4 },
       description: "Create Order Items whose statuses are verified"
+    },
+
+    collected_order_items_task: {
+      cron: "*/5 * * * *",
+      class: "CollectedBlingOrderItemsJob",
+      args: [1, (Date.today - 5.days)],
+      set: { priority: 4 },
+      description: "Create Order Items whose statuses are collected"
     }
-    # etc.
   }
 end

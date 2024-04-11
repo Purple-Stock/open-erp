@@ -10,11 +10,22 @@ RSpec.describe 'Stocks', type: :request do
     before do
       FactoryBot.create_list(:stock, 2, product:)
       sign_in user
-      get stocks_path
     end
 
-    it 'is success' do
-      expect(response).to be_successful
+    context 'when there is no filter' do
+      before { get stocks_path }
+
+      it 'is success' do
+        expect(response).to be_successful
+      end
+    end
+
+    context 'when filtering by status' do
+      before { get stocks_path, params: { status: '1' } }
+
+      it 'is success' do
+        expect(response).to be_successful
+      end
     end
   end
 

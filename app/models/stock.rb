@@ -12,12 +12,16 @@
 #  product_id            :integer
 #
 class Stock < ApplicationRecord
+  require 'forecasts/basic_stock'
+
+  attr_accessor :basic_forecast
+
   belongs_to :product, class_name: 'Product', inverse_of: :stock
 
   validates :bling_product_id, :total_balance, :total_virtual_balance,
             numericality: { numericality: true, only_integer: true }
 
-  delegate :active, :bling_id, :name, to: :product
+  delegate :active, :bling_id, :name, :sku, to: :product
 
   def self.filter_by_total_balance_situation(balance_situation = nil)
     return all if balance_situation.blank?
@@ -30,13 +34,40 @@ class Stock < ApplicationRecord
   def self.filter_by_status(status_number = nil)
     return all if status_number.blank?
 
-    joins(:product).where(product: { active: status_number })
+    joins(:product).where(products: { active: status_number })
   end
 
   def self.only_positive_price(query = false)
     return all unless query
 
     joins(:product).where('products.price > ?', 0)
+  end
+
+  def self.to_csv
+    CSV.generate(headers: true, col_sep: ';') do |csv|
+      csv << ['id', 'SKU', 'Saldo Total', 'Saldo Virtual Total', 'Quantidade Vendida dos Últimos 30 dias',
+              'Previsão para os Próximos 30 dias', 'Produto']
+      all.sort_by(&:calculate_basic_forecast).reverse!.each do |stock|
+        next if stock.total_balance.zero? && stock.count_sold.zero?
+
+        row = [stock.id, stock.sku, stock.total_balance, stock.total_virtual_balance, stock.count_sold,
+               stock.calculate_basic_forecast,
+               stock.product.name]
+        csv << row
+      end
+    end
+  end
+
+  def basic_forecast
+    @basic_forecast ||= Forecasts::BasicStock.new(self)
+  end
+
+  def calculate_basic_forecast
+    @calculate_basic_forecast ||= basic_forecast.calculate
+  end
+
+  def count_sold
+    basic_forecast.count_sold
   end
 
   def self.synchronize_bling(tenant, bling_product_ids)

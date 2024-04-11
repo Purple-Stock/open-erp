@@ -8,6 +8,7 @@ RSpec.describe CheckedBlingOrderItemsJob, type: :job do
 
   describe '#perform' do
     before do
+      allow_any_instance_of(BlingOrderItem).to receive(:synchronize_items).and_return(true)
       allow(Date).to receive(:today).and_return Date.new(2023, 11, 15)
       FactoryBot.create(:bling_datum, account_id: user.account.id, expires_at: Time.zone.now + 2.days)
     end
@@ -22,11 +23,6 @@ RSpec.describe CheckedBlingOrderItemsJob, type: :job do
       it 'counts by 3353 bling order items' do
         expect(BlingOrderItem.count).to eq(3353)
       end
-
-      it 'has checked situation id' do
-        expect(BlingOrderItem.find_by(bling_order_id: '18621253255').situation_id.to_i)
-          .to eq(BlingOrderItem::Status::CHECKED)
-      end
     end
 
     context 'when argument has alteration date' do
@@ -38,6 +34,21 @@ RSpec.describe CheckedBlingOrderItemsJob, type: :job do
 
       it 'counts by 208 bling order items' do
         expect(BlingOrderItem.count).to eq(208)
+      end
+
+      it 'has checked situation id' do
+        expect(BlingOrderItem.find_by(bling_order_id: '19120184025').situation_id.to_i)
+          .to eq(BlingOrderItem::Status::CHECKED)
+      end
+
+      it 'has alteration date' do
+        expect(BlingOrderItem.find_by(bling_order_id: '19120184025').alteration_date.strftime('%Y-%m-%d'))
+          .to eq('2023-11-13')
+      end
+
+      it 'has a different alteration date' do
+        expect(BlingOrderItem.find_by(bling_order_id: '19105074834').alteration_date.strftime('%Y-%m-%d'))
+          .to eq('2023-11-14')
       end
     end
   end

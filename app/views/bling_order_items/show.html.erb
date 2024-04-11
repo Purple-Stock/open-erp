@@ -1,0 +1,4 @@
+<%= turbo_stream_from @bling_order_item.decorate %>
+<div id="<%= dom_id @bling_order_item %>">
+  <%= render 'bling_order_item_content', bling_order_item: @bling_order_item %>
+</div>
