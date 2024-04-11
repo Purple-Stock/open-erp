@@ -205,7 +205,7 @@ Rails.application.configure do
     },
 
     hour_checked_order_items_task: {
-      cron: '*0 * * * *',
+      cron: '0 * * * *',
       class: 'CheckedBlingOrderItemsJob',
       args: [1, ((Date.today - 5.days) - 5.days)],
       set: { priority: 1 },
@@ -229,7 +229,7 @@ Rails.application.configure do
     },
 
     hour_collected_order_items_task: {
-      cron: '*0 * * * *',
+      cron: '0 * * * *',
       class: 'CollectedBlingOrderItemsJob',
       args: [1, ((Date.today - 5.days) - 5.days)],
       set: { priority: 4 },
