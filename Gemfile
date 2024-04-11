@@ -23,7 +23,7 @@ gem "puma", "~> 6.0", ">= 6.0.0"
 gem 'pundit'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", ">= 1.2.0"
+gem "jsbundling-rails", ">= 1.2.2"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", ">= 1.5.0"
