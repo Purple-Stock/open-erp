@@ -205,6 +205,14 @@ Rails.application.configure do
       description: "Create Order Items statuses are checked"
     },
 
+    hour_checked_order_items_task: {
+      cron: "*0 * * * *",
+      class: "CheckedBlingOrderItemsJob",
+      args: [1, ((Date.today - 5.days) - 5.days)],
+      set: { priority: 1 },
+      description: "Create Order Items statuses are checked every hour"
+    },
+
     verified_order_items_task: {
       cron: "@weekly",
       class: "VerifiedBlingOrderItemsJob",
@@ -219,6 +227,14 @@ Rails.application.configure do
       args: [1, (Date.today - 5.days)],
       set: { priority: 4 },
       description: "Create Order Items whose statuses are collected"
+    },
+
+    hour_collected_order_items_task: {
+      cron: "*0 * * * *",
+      class: "CollectedBlingOrderItemsJob",
+      args: [1, ((Date.today - 5.days) - 5.days)],
+      set: { priority: 4 },
+      description: "Create Order Items whose statuses are collected every hour"
     }
   }
 end
