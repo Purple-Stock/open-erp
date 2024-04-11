@@ -17,7 +17,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 6.0", ">= 6.0.0"
+gem "puma", "~> 6.4", ">= 6.4.2"
 
 # For police pattern
 gem 'pundit'
@@ -29,10 +29,10 @@ gem "jsbundling-rails", ">= 1.2.2"
 gem "turbo-rails", ">= 1.5.0"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails", ">= 1.3.0"
+gem "stimulus-rails", ">= 1.3.1"
 
 gem "sentry-ruby"
-gem "sentry-rails"
+gem "sentry-rails", ">= 5.15.1"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"

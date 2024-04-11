@@ -2,7 +2,7 @@
 
 class HomeController < ApplicationController
   before_action :refresh_token, :default_initial_date, :default_final_date, :date_range, :bling_order_items,
-                :current_done_order_items, :set_monthly_revenue_estimation,
+                :current_done_order_items, :set_monthly_revenue_estimation, :token_expires_at,
                 :get_in_progress_order_items, :get_printed_order_items, :get_error_order_items,
                 :get_pending_order_items, :canceled_orders, :collected_orders, only: :index
   include SheinOrdersHelper
@@ -25,6 +25,10 @@ class HomeController < ApplicationController
   end
 
   private
+
+  def token_expires_at
+    @token_expires_at = BlingDatum.find_by(account_id: current_tenant.id).try(:expires_at)
+  end
 
   def default_initial_date
     @default_initial_date = params[:initial_date] || Time.zone.today
@@ -130,10 +134,6 @@ class HomeController < ApplicationController
 
   def format_last_update(time)
     time&.strftime('%d-%m-%Y %H:%M:%S')
-  end
-
-  def token_expires_at
-    BlingDatum.find_by(account_id: current_tenant.id).try(:expires_at)
   end
 
   def refresh_token
