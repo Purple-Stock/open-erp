@@ -476,10 +476,10 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.15.0)
+    sentry-rails (5.15.2)
       railties (>= 5.0)
-      sentry-ruby (~> 5.15.0)
-    sentry-ruby (5.15.0)
+      sentry-ruby (~> 5.15.2)
+    sentry-ruby (5.15.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
     serviceworker-rails (0.6.0)
       railties (>= 3.1)
@@ -627,7 +627,7 @@ DEPENDENCIES
   rubyzip
   sassc-rails
   selenium-webdriver
-  sentry-rails
+  sentry-rails (>= 5.15.1)
   sentry-ruby
   serviceworker-rails
   shoulda-matchers (~> 5.3, >= 5.3.0)
