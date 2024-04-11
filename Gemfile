@@ -29,7 +29,7 @@ gem "jsbundling-rails", ">= 1.2.2"
 gem "turbo-rails", ">= 1.5.0"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails", ">= 1.3.0"
+gem "stimulus-rails", ">= 1.3.1"
 
 gem "sentry-ruby"
 gem "sentry-rails"
