@@ -28,7 +28,8 @@ default: &default
 
 development:
   <<: *default
-  database: inventory-control_development
+  #database: inventory-control_development
+  url: postgres://yosyveae:O0xOs_OA-sSzpdLx-89NWXpS4jk2VjrS@purple-stock-1.cl4ukakuskr0.us-east-2.rds.amazonaws.com/postgres
   pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5).to_i + 1 + 2 + ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i %>
 
   # check best practices for good_job https://github.com/bensheldon/good_job#database-connections
