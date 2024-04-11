@@ -32,7 +32,10 @@ class SaleProductsController < ApplicationController
         format.html { redirect_to @sale_product, notice: t('sales_products.created') }
         format.json { render :show, status: :created, location: @sale_product }
       else
-        format.html { render :new }
+        format.html do
+          flash.now[:alert] = @sale_product.errors.full_messages
+          render :new, status: :unprocessable_entity
+        end
         format.json { render json: @sale_product.errors, status: :unprocessable_entity }
       end
     end

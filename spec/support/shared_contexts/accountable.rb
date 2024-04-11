@@ -13,3 +13,7 @@ shared_context 'with bling token' do
 
   before { FactoryBot.create(:bling_datum, account_id: user.account.id) }
 end
+
+shared_context 'with bling datum' do
+  let(:bling_datum) { FactoryBot.create(:bling_datum, account_id: user.account.id) }
+end

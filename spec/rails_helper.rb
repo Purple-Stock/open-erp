@@ -72,4 +72,7 @@ RSpec.configure do |config|
   # This fixes the error: "Devise could not find the `Warden::Proxy` instance on your request environment" when running rspec controller tests
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
+  # In order to check translation interpolations, in decorators specs
+  config.include AbstractController::Translation, type: :decorator
+  config.include ActionView::Helpers::NumberHelper, type: :decorator
 end

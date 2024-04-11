@@ -29,7 +29,7 @@
           </thead>
           <tbody>
           <% @sale_products.each do |sale_product| %>
-            <%= tag.tr id: dom_id(customer) do %>
+            <%= tag.tr id: dom_id(current_user) do %>
               <td><%= link_to sale_product.id, sale_product_path(sale_product) %></td>
               <td><%= image_tag(sale_product.product.image.attached? ? sale_product.product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></td>
               <td><%= sale_product.quantity %></td>

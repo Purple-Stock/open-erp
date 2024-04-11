@@ -12,7 +12,8 @@ RSpec.describe DailyRevenueReport do
   describe '#presentable' do
     context 'when there is not collection' do
       let(:datasets) do
-        [{ x: '06/11/2023', shein: 0.0, shopee: 0.0, simple_7: 0.0, mercado_livre: 0.0, total: 0.0 }]
+        [{ x: '06/11/2023', shein: 0.0, shopee: 0.0, simple_7: 0.0, mercado_livre: 0.0, feira_madrugada: 0.0,
+           nuvem_shop: 0.0, total: 0.0 }]
       end
 
       before { allow(Date).to receive(:today).and_return Date.new(2023, 11, 6) }
@@ -25,7 +26,8 @@ RSpec.describe DailyRevenueReport do
 
     context 'when there is data in the collection with nil in value' do
       let(:datasets) do
-        [{ x: '06/11/2023', shein: 0.0, shopee: 0.0, simple_7: 0.0, mercado_livre: 0.0, total: 0.0 }]
+        [{ x: '06/11/2023', shein: 0.0, shopee: 0.0, simple_7: 0.0, mercado_livre: 0.0, feira_madrugada: 0.0,
+           nuvem_shop: 0.0, total: 0.0 }]
       end
 
       before do
@@ -42,7 +44,8 @@ RSpec.describe DailyRevenueReport do
 
     context 'when there is data in the collection for both Shein and Shopee' do
       let(:datasets) do
-        [{ x: '06/11/2023', shein: 8.0, shopee: 6.0, simple_7: 0.0, mercado_livre: 0.0, total: 14.0 }]
+        [{ x: '06/11/2023', shein: 8.0, shopee: 6.0, simple_7: 0.0, mercado_livre: 0.0, feira_madrugada: 0.0,
+           nuvem_shop: 0.0, total: 14.0 }]
       end
 
       before do
@@ -59,7 +62,8 @@ RSpec.describe DailyRevenueReport do
     context 'when filter by today and yesterday' do
       let(:filter) { { initial_date: '2023-11-5', final_date: '2023-11-6' } }
       let(:datasets) do
-        [{ x: '05/11/2023 - 06/11/2023', shein: 12.0, shopee: 6.0, simple_7: 0.0, mercado_livre: 0.0, total: 18.0 }]
+        [{ x: '05/11/2023 - 06/11/2023', shein: 12.0, shopee: 6.0, simple_7: 0.0, mercado_livre: 0.0,
+           feira_madrugada: 0.0, nuvem_shop: 0.0, total: 18.0 }]
       end
 
       before do

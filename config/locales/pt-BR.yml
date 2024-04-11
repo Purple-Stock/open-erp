@@ -1,5 +1,10 @@
 ---
 pt-BR:
+  flash:
+    success:
+      update: "%{model} atualizado!"
+    failure:
+      update: "%{model} não pode ser atualizado!"
   language_name: "Português"
   select_idiom: "Selecione um idioma"
   name: Nome
@@ -280,7 +285,7 @@ pt-BR:
     formats:
       default: "%a, %d de %B de %Y, %H:%M:%S %z"
       long: "%d de %B de %Y, %H:%M"
-      short: "%d de %B, %H:%M"
+      short: "%d/%m/%Y"
     pm: ''
 
   January: Janeiro

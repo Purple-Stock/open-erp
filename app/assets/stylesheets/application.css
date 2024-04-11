@@ -20,6 +20,9 @@
  *= stub mobile
  *= require_self
  *= require charts/chart-container
+ *= require components/zebra-table
+ *= require components/thumb-image
+ *= require components/thumb-image-mobile
  */
 
 .turbolinks-progress-bar {
