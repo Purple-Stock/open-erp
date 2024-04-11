@@ -15,6 +15,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  account_id  :integer
+#  bling_id    :bigint
 #  category_id :bigint
 #  custom_id   :integer
 #  store_id    :integer

@@ -7,30 +7,37 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
+    authorize Customer
     customers = Customer.where(account_id: current_tenant)
     @pagy, @customers = pagy(customers)
   end
 
   # GET /customers/1
   # GET /customers/1.json
-  def show; end
+  def show
+    authorize Customer
+  end
 
   # GET /customers/new
   def new
+    authorize Customer
     @customer = Customer.new
   end
 
   # GET /customers/1/edit
-  def edit; end
+  def edit
+    authorize Customer
+  end
 
   # POST /customers
   # POST /customers.json
   def create
+    authorize Customer
     @customer = Customer.new(customer_params)
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to @customer, notice: t('customers.created') }
+        format.html { redirect_to @customer, notice: t('activerecord.models.customer.created') }
         format.json { render :show, status: :created, location: @customer }
       else
         format.html { render :new }
@@ -42,9 +49,11 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
+    authorize Customer
+
     respond_to do |format|
       if @customer.update(customer_params)
-        format.html { redirect_to @customer, notice: t('customers.updated') }
+        format.html { redirect_to @customer, notice: t('activerecord.models.customer.updated') }
         format.json { render :show, status: :ok, location: @customer }
       else
         format.html { render :edit }
@@ -56,22 +65,25 @@ class CustomersController < ApplicationController
   # DELETE /customers/1
   # DELETE /customers/1.json
   def destroy
+    authorize Customer
     @customer.destroy
     respond_to do |format|
-      format.html { redirect_to customers_url, notice: t('customers.deleted') }
+      format.html { redirect_to customers_url, notice: t('activerecord.models.customer.deleted') }
       format.json { head :no_content }
     end
   end
 
-  def import    
+  def import
+    authorize Customer
     return redirect_to request.referer, alert: 'Selecione um arquivo csv' unless params[:file].present?
+
     import = ImportCustomerCSV.new(file: params[:file])
     import.run!
     if import.report.success?
       redirect_to customers_path, notice: 'Clientes importados / atualizados com sucesso!'
     else
       redirect_to request.referer, alert: "Não foi possível importar o arquivo: #{import.report.message}"
-    end      
+    end
   end
 
   private

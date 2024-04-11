@@ -26,7 +26,7 @@ FactoryBot.define do
     email { Faker::Internet.email }
     phone { Faker::Number.number(digits: 10) }
     cellphone { Faker::Number.number(digits: 11) }
-    cpf { Faker::Number.number(digits: 11) }
+    cpf { Faker::Number.number(digits: 14) }
 
     account_id { create(:account).id }
   end

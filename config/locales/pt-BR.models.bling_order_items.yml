@@ -1,0 +1,62 @@
+---
+pt-BR:
+  flash:
+    success:
+      destroy:
+        bling_order_item: A verificar Pedido de compra junto à Bling
+    failure:
+      destroy:
+        bling_order_item: Pedido já em processo de deletar!
+  enumerations:
+    bling_order_item_store:
+      all: Todas as Lojas
+    bling_order_item_status:
+      all: Todos os Status
+      in_progress: Em andamento
+      checked: Checado
+      verified: Verificado
+      pending: Pendente
+      printed: Impresso
+      canceled: Cancelado
+      collected: Coletado
+      error: Erro
+      delete_in_progress: Processando Deletar Pedido
+      deleted_at_bling: Deletado da Bling
+  activerecord:
+    errors:
+      models:
+        bling_order_item:
+          attributes:
+            collected_alteration_date:
+              blank: deve ser preenchida
+            date:
+              blank: deve ser preenchida
+    models:
+      bling_order_items:
+        one: Pedido da Bling
+        other: Pedidos da Bling
+        list: Lista de Vendas da Bling
+    attributes:
+      bling_order_item:
+        id: ID
+        aliquotaIPI: Alíquota do IPI
+        alteration_date: Data de Alteração
+        codigo: Código SKU
+        collected_alteration_date: Data de Coleta
+        date: Data
+        desconto: Desconto
+        descricao: Descrição
+        descricaoDetalhada: Descrição Detalhada
+        items: Items
+        quantidade: Quantidade
+        unidade: Unidade
+        valor: Valor
+        value: Valor
+        created_at: Criado em
+        updated_at: Atualizado em
+        account_id: Id da Conta
+        bling_id: Número do Pedido
+        bling_order_id: Id do Pedido na Bling
+        marketplace_code_id: Código do Marketplace
+        situation_id: Status
+        store_id: Loja

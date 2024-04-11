@@ -1,0 +1,47 @@
+<section class="mt-5 section bordered-section">
+  <div class="container">
+    <h1 class="text-center mb-4">Pesquisar por data</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-3">
+        <%= form_tag(top_selling_products_path, method: :get) do %>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Data inicial</span>
+            </div>
+            <%= date_field_tag('selling_products[initial_date]', @initial_date || (Date.today - 7.days), class: 'form-control') %>
+          </div>
+      </div>
+      <div class="col-md-4 mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Data final</span>
+            </div>
+            <%= date_field_tag('selling_products[final_date]', @final_date || Date.today, class: 'form-control') %>
+          </div>
+      </div>
+      <div class="col-md-2">
+          <%= button_tag('Pesquisar...', class: 'btn btn-primary btn-block', style: 'margin-top: 38px;') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container mt-5">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>SKU</th>
+        <th>Total Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.sku %></td>
+          <td><%= item.total_quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

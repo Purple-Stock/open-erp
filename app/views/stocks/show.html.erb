@@ -1,0 +1,19 @@
+<section class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="display-4"><%= t('stocks.one') %></h1>
+      <hr>
+      <dl class="row">
+        <dt class="col-sm-3"><%= t('stocks.name') %></dt>
+        <dd class="col-sm-9"><%= @stock.name %></dd>
+
+        <dt class="col-sm-3"><%= t('stocks.total_balance') %></dt>
+        <dd class="col-sm-9"><%= @stock.total_balance %></dd>
+
+        <dt class="col-sm-3"><%= t('stocks.total_virtual_balance') %></dt>
+        <dd class="col-sm-9"><%= @stock.total_virtual_balance %></dd>
+      </dl>
+      <%= link_to t('helpers.links.back'), stocks_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</section>

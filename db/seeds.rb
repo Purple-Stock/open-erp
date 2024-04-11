@@ -10,25 +10,23 @@
 
 Rails.logger.debug 'Module User'
 
-FactoryBot.create(:user, password: '123456', email: 'fashion.store@email.com')
+user = FactoryBot.create(:user, password: '123456', email: 'fashion.store@email.com')
+FactoryBot.create(:user, password: '123456', email: 'stock@email.com')
 
-FactoryBot.create(:bling_datum, account_id: 1, expires_at: (Time.zone.local(13) + 3.days),
+FactoryBot.create(:bling_datum, account_id: 1, expires_at: (Time.zone.now + 3.days),
                                 access_token: ENV['ACCESS_TOKEN'], refresh_token: ENV['REFRESH_TOKEN'])
+
+Rails.logger.debug 'Flag first account with bling feature'
+
+feature = FactoryBot.create(:feature, feature_key: FeatureKey::BLING_INTEGRATION, is_enabled: true)
+
+user.account.features << feature
+
+user.account.account_features.first.update(is_enabled: true)
 
 Rails.logger.debug 'Categories'
 50.times { FactoryBot.create(:category, name: Faker::Lorem.word) }
 50.times { Category.create(name: Faker::Lorem.word, account_id: 1) }
-50.times do
-  Product.create(
-    name: Faker::Commerce.product_name,
-    sku: Faker::Number.number(digits: 10),
-    extra_sku: Faker::Number.number(digits: 10),
-    price: Faker::Commerce.price,
-    active: true,
-    account_id: 1,
-    category_id: 1
-  )
-end
 50.times do
   Customer.create(name: Faker::Name.name, email: Faker::Internet.email, phone: Faker::PhoneNumber.phone_number,
                   cpf: Faker::Number.number(digits: 11), account_id: 1)

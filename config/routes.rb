@@ -3,14 +3,25 @@
 #require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'dashboards/others_status'
   #mount Sidekiq::Web => '/sidekiq'
   mount GoodJob::Engine => 'good_job'
+
+  resources :bling_order_items
 
   resources :bling_order_item_histories, only: :index do
     collection do
       get :day_quantities
     end
   end
+
+  resources :bling_order_item_owners, only: :index do
+    collection do
+      get :day_quantities
+    end
+  end
+
+  resources :shein_bling_order_items, only: :index
 
   resources :shein_dashboards
   resources :shein_orders do 
@@ -26,9 +37,10 @@ Rails.application.routes.draw do
       post :import
     end
   end
-  
+
   devise_for :users
 
+  resources :stocks, only: %i[index show edit]
   resources :revenue_estimations
   resources :accounts
   resources :purchase_products
@@ -40,6 +52,7 @@ Rails.application.routes.draw do
   get 'reports/daily_sale', to: 'reports#daily_sale'
   get 'reports/all_reports', to: 'reports#all_reports', as: 'all_reports'
   get 'reports/payment', to: 'reports#payment', as: 'payment'
+  get 'reports/top_selling_products', to: 'reports#top_selling_products', as: 'top_selling_products'
   resources :purchases
   resources :suppliers
   resources :sales
@@ -49,8 +62,12 @@ Rails.application.routes.draw do
   get 'stock_transfer', to: 'purchase_products#stock_transfer', as: 'stock_transfer'
   post 'save_stock_transfer', to: 'purchase_products#save_stock_transfer', as: 'save_stock_transfer'
   resources :sale_products
-  resources :products
-  resources :bling_data
+  resources :products do
+    member do
+      delete :destroy_from_index
+    end
+  end
+  resources :bling_data, only: [:index, :show]
   get 'products_defer', to: 'products#index_defer'
   get 'products_tags_defer', to: 'products#tags_index_defer'
   get '/products/:id/duplicate', to: 'products#duplicate', as: 'meeting_duplicate'

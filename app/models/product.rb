@@ -15,6 +15,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  account_id  :integer
+#  bling_id    :bigint
 #  category_id :bigint
 #  custom_id   :integer
 #  store_id    :integer
@@ -34,13 +35,57 @@ class Product < ApplicationRecord
   has_many :purchase_products
   has_many :sale_products
   has_many :group_products
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [50, 50]
+  end
   has_many :simplo_items
   has_one :store
+  has_one :stock, dependent: :destroy
 
   with_options presence: true do
     validates :name
-    validates :price, numericality: { greater_than: 0 }
+    validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
+  end
+
+  before_destroy :can_destroy?
+
+  accepts_nested_attributes_for :stock
+
+  def self.synchronize_bling(tenant, options = {})
+    attributes = []
+    response = Services::Bling::Product.call(product_command: 'find_products', tenant:, options:)
+    products = Product.where(account_id: tenant)
+    response['data'].each do |bling_product|
+      if products.exists?(bling_id: bling_product['id'])
+        update_product(bling_product)
+      else
+        attributes << {
+          name: bling_product['nome'],
+          price: bling_product['preco'],
+          sku: bling_product['codigo'],
+          active: bling_product['situacao'].eql?('A'),
+          account_id: tenant,
+          bling_id: bling_product['id']
+        }
+      end
+    end
+
+    Product.create(attributes)
+  end
+
+  def self.update_product(bling_product)
+    attributes = {
+      name: bling_product['nome'],
+      price: bling_product['preco'],
+      sku: bling_product['codigo'],
+      active: bling_product['situacao'].eql?('A'),
+    }
+    product = where(bling_id: bling_product['id'])
+    product.update(attributes)
+  end
+
+  def bling?
+    bling_id.blank? ? I18n.translate('activerecord.attributes.product.bling.false') : I18n.translate('activerecord.attributes.product.bling.true')
   end
 
   def count_month_purchase_product(year, month)
@@ -89,5 +134,32 @@ class Product < ApplicationRecord
       order_column_index = 1 if order_column_index == 4
       order("#{Product::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
     end
+  end
+
+  private
+
+  def synchronize_stock
+    Stock.synchronize_bling(account_id, [bling_id])
+  end
+
+  def can_destroy?
+    # Check this issue. There is no recommendation for validate on: :destroy https://github.com/rails/rails/issues/32376
+    validate_sale_products_destroy
+    validate_purchase_products_destroy
+    throw(:abort) if errors.any?
+  end
+
+  def validate_sale_products_destroy
+    return if sale_products.blank?
+
+    # ActiveModel::Errors#generate_message
+    errors.add(:sale_products, message: errors.generate_message(:sale_products))
+  end
+
+  def validate_purchase_products_destroy
+    return if purchase_products.blank?
+
+    # ActiveModel::Errors#generate_message => we can access it manually
+    errors.add(:purchase_products, message: errors.generate_message(:purchase_products))
   end
 end

@@ -6,4 +6,11 @@ class ApplicationJob < ActiveJob::Base
 
   # Most jobs are safe to ignore if the underlying records are no longer available
   # discard_on ActiveJob::DeserializationError
+  queue_as :default
+
+  rescue_from(StandardError) do |exception|
+    Sentry.capture_message(exception)
+  end
+
+  retry_on StandardError, wait: :exponentially_longer, attempts: 5
 end

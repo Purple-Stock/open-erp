@@ -30,12 +30,12 @@
   <div class="form-row">
     <div class="form-group col-6">
       <%= f.label :month, :class => 'control-label' %>
-      <%= f.number_field :month, :class => 'form-control', value: f.object.date&.month %>
+      <%= f.select :month, options_for_select((1..12).map { |m| [I18n.t("date.month_names")[m], m] }, Time.now.month), {}, class: 'form-control' %>
     </div>
 
     <div class="form-group col-6">
       <%= f.label :revenue, :class => 'control-label' %>
-      <%= f.text_field :revenue, :class => 'form-control' %>
+      <%= f.text_field :revenue, value: number_to_currency(f.object.revenue, precision: 2), class: 'form-control' %>
     </div>
 
     <div class="form-group col-6">
@@ -45,7 +45,7 @@
 
     <div class="form-group col-6">
       <%= f.label :average_ticket, :class => 'control-label' %>
-      <%= f.text_field :average_ticket, :class => 'form-control' %>
+      <%= f.text_field :average_ticket, value: number_to_currency(f.object.average_ticket, precision: 2), class: 'form-control' %>
     </div>
 
     <div class="form-group">

@@ -1,13 +1,17 @@
 ---
 pt-BR:
-  customers:
-    one: Cliente
-    two: Clientes
-    name: Nome
-    created: Cliente Criado
-    updated: Cliente Atualizado
-    deleted: Cliente Deletado
-    new: Novo Cliente
-    submit: Salvar
-    edit:
-      title: Editar Cliente
+  activerecord:
+    models:
+      customer:
+        one: Cliente
+        other: Clientes
+        created: Cliente Criado
+        updated: Cliente Editado
+        deleted: Cliente Deletado
+    attributes:
+      customer:
+        name: Nome
+        email: Email
+        phone: Telefone Fixo
+        cellphone: Celular
+        cpf: CPF

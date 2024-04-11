@@ -7,6 +7,10 @@ module ApplicationHelper
     content_for(:page_title) || Rails.application.class.to_s.split('::').first
   end
 
+  def account_policy_enabled?
+    @account_policy ||= AccountPolicy.new(current_user.account).enabled
+  end
+
   def crud_actions
     %w[index show new edit create update]
   end
@@ -51,6 +55,14 @@ module ApplicationHelper
   # date format "%d/%m/%Y %H:%m"
   def df(date)
     date.strftime('%d/%m/%Y %H:%m')
+  end
+
+  def page_last_update
+    Time.current.strftime('%d-%m-%Y %H:%M:%S')
+  end
+
+  def pt_datetime_format(time)
+    time.to_datetime.strftime('%d-%m-%Y %H:%M:%S')
   end
 
   # date format "%d/%m/%Y %H:%m"

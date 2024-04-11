@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -100,7 +100,22 @@ Rails.application.configure do
 
   config.good_job.enable_cron = true
   config.good_job.cron = {
-    # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
+    product_sync_job: {
+      cron: '@daily',
+      class: "ProductSyncJob",
+      args: [1],
+      set: { priority: 1 },
+      description: "Synchronize products"
+    },
+
+    stock_sync_job: {
+      cron: "*/10 * * * *",
+      class: "StockSyncJob",
+      args: [1],
+      set: { priority: 1 },
+      description: "Synchronize Stocks based in products already created"
+    },
+
     in_progress_order_items_task: { # each recurring job must have a unique key
                                     cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
                                     class: "InProgressOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
@@ -157,6 +172,23 @@ Rails.application.configure do
                                         description: "Create Order Items statuses are canceled" # optional description that appears in Dashboard
     },
 
+    daily_canceled_order_task: {
+      cron: "*/10 * * * *",
+      class: "DailyCanceledOrderJob",
+      args: [1, Date.today],
+      set: { priority: 1 },
+      description: "Create Order Items statuses are canceled at current day"
+    },
+
+    daily_error_order_task: {
+      cron: "*/10 * * * *",
+      class: "DailyErrorOrderJob",
+      args: [1, Date.today],
+      set: { priority: 1 },
+      description: "Create Order Items statuses are with error at current day"
+    },
+
+
     checked_order_items_task: {
       cron: "@weekly",
       class: "CheckedBlingOrderItemsJob",
@@ -173,13 +205,36 @@ Rails.application.configure do
       description: "Create Order Items statuses are checked"
     },
 
+    hour_checked_order_items_task: {
+      cron: "*0 * * * *",
+      class: "CheckedBlingOrderItemsJob",
+      args: [1, ((Date.today - 5.days) - 5.days)],
+      set: { priority: 1 },
+      description: "Create Order Items statuses are checked every hour"
+    },
+
     verified_order_items_task: {
       cron: "@weekly",
       class: "VerifiedBlingOrderItemsJob",
       args: [1],
       set: { priority: 4 },
       description: "Create Order Items whose statuses are verified"
+    },
+
+    collected_order_items_task: {
+      cron: "*/5 * * * *",
+      class: "CollectedBlingOrderItemsJob",
+      args: [1, (Date.today - 5.days)],
+      set: { priority: 4 },
+      description: "Create Order Items whose statuses are collected"
+    },
+
+    hour_collected_order_items_task: {
+      cron: "*0 * * * *",
+      class: "CollectedBlingOrderItemsJob",
+      args: [1, ((Date.today - 5.days) - 5.days)],
+      set: { priority: 4 },
+      description: "Create Order Items whose statuses are collected every hour"
     }
-    # etc.
   }
 end
