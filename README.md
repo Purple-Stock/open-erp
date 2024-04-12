@@ -109,7 +109,7 @@ bundle exec rubocop
 
 Você pode testar o Open Erp com um clique no Heroku:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/puppe1990/open-erp)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Purple-Stock/open-erp)
 
 ## Contribuindo
 
