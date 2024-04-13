@@ -30,9 +30,9 @@ class DashboardsController < ApplicationController
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
 
-    @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
-    @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
-    @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
+    @grouped_printed_order_items = BlingOrderItem.selected_group_order_items(@printed_order_items)
+    @grouped_pending_order_items = BlingOrderItem.selected_group_order_items(@pending_order_items)
+    @grouped_in_progress_order_items = BlingOrderItem.selected_group_order_items(@in_progress_order_items)
   end
 
   private
@@ -52,7 +52,7 @@ class DashboardsController < ApplicationController
                                       account_id: current_user.account.id)
                                .date_range(@first_date, @second_date)
 
-    @bling_order_items = BlingOrderItem.group_order_items(base_query)
+    @bling_order_items = BlingOrderItem.selected_group_order_items(base_query)
   end
 
   def get_in_progress_order_items
@@ -63,7 +63,7 @@ class DashboardsController < ApplicationController
   def collected_orders
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
                                       account_id: current_user.account.id, collected_alteration_date: @first_date..@second_date)
-    @collected_orders = BlingOrderItem.group_order_items(base_query)
+    @collected_orders = BlingOrderItem.selected_group_order_items(base_query)
   end
 
   def finance_per_status
@@ -78,7 +78,7 @@ class DashboardsController < ApplicationController
                                                      BlingOrderItem::Status::CHECKED, BlingOrderItem::Status::COLLECTED],
                                       alteration_date: @date_range,
                                       account_id: current_user.account.id)
-    @current_done_order_items = BlingOrderItem.group_order_items(base_query)
+    @current_done_order_items = BlingOrderItem.selected_group_order_items(base_query)
   end
 
   def get_printed_order_items
@@ -96,7 +96,7 @@ class DashboardsController < ApplicationController
                                       account_id: current_user.account.id)
                                .date_range(@first_date, @second_date)
 
-    @canceled_orders = BlingOrderItem.group_order_items(base_query)
+    @canceled_orders = BlingOrderItem.selected_group_order_items(base_query)
   end
 
   def set_monthly_revenue_estimation
