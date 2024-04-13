@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :bling_order_item_owners, only: :index do
     collection do
       get :day_quantities
+      get :verification
     end
   end
 

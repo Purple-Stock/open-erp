@@ -61,6 +61,13 @@ class BlingOrderItem < ApplicationRecord
     '0' => 'Sem Loja'
   }.freeze
 
+  STORE_NAME_KEY_VALUE = {
+    '204219105' => 'Shein',
+    '203737982' => 'Shopee',
+    '204061683' => 'Mercado Livre',
+    '204796870' => 'Nuvem Shop',
+  }.freeze
+
   STATUS_NAME_KEY_VALUE = {
     "15" => 'Em andamento',
     "101065" => 'Checado',
@@ -150,6 +157,17 @@ class BlingOrderItem < ApplicationRecord
       base_query
       .group_by(&:store_id)
       .transform_keys { |store_id| STORE_ID_NAME_KEY_VALUE.fetch(store_id) }
+    )
+  end
+
+  def self.selected_group_order_items(base_query)
+    grouped_order_items = {}
+    STORE_NAME_KEY_VALUE.each_value { |store| grouped_order_items[store] = [] }
+
+    grouped_order_items.merge!(
+      base_query
+      .group_by(&:store_id)
+      .transform_keys { |store_id| STORE_NAME_KEY_VALUE.fetch(store_id) }
     )
   end
 
