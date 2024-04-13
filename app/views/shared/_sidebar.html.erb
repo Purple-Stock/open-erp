@@ -19,6 +19,9 @@
             <li class="<%= active_nav_item('bling_order_item_histories', 'index') %>">
               <%= link_to 'Histórico de pedidos', bling_order_item_histories_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('bling_order_item_histories', 'verification') %>">
+              <%= link_to 'Pedidos Status', verification_bling_order_item_owners_path, class: 'nav-link' %>
+            </li>
             <li class="<%= active_nav_item('bling_order_item_histories', 'index') %>">
               <%= link_to 'Pedidos Diários', bling_order_item_owners_path, class: 'nav-link' %>
             </li>

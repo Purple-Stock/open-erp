@@ -13,10 +13,10 @@ class HomeController < ApplicationController
 
     @last_update = format_last_update(Time.current)
 
-    @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
-    @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
-    @grouped_error_order_items = BlingOrderItem.group_order_items(@error_order_items)
-    @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
+    @grouped_printed_order_items = BlingOrderItem.selected_group_order_items(@printed_order_items)
+    @grouped_pending_order_items = BlingOrderItem.selected_group_order_items(@pending_order_items)
+    @grouped_error_order_items = BlingOrderItem.selected_group_order_items(@error_order_items)
+    @grouped_in_progress_order_items = BlingOrderItem.selected_group_order_items(@in_progress_order_items)
   end
 
   def last_updates
@@ -49,7 +49,7 @@ class HomeController < ApplicationController
                                       account_id: current_user.account.id)
                                .date_range(@default_initial_date, @default_final_date)
 
-    @bling_order_items = BlingOrderItem.group_order_items(base_query)
+    @bling_order_items = BlingOrderItem.selected_group_order_items(base_query)
   end
 
   def get_in_progress_order_items
@@ -61,7 +61,7 @@ class HomeController < ApplicationController
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
                                       account_id: current_user.account.id,
                                       collected_alteration_date: @default_initial_date..@default_final_date)
-    @collected_orders = BlingOrderItem.group_order_items(base_query)
+    @collected_orders = BlingOrderItem.selected_group_order_items(base_query)
   end
 
   def finance_per_status
@@ -77,7 +77,7 @@ class HomeController < ApplicationController
                                                      BlingOrderItem::Status::COLLECTED],
                                       alteration_date: @default_initial_date.to_date.beginning_of_day..@default_final_date.to_date.end_of_day,
                                       account_id: current_user.account.id)
-    @current_done_order_items = BlingOrderItem.group_order_items(base_query)
+    @current_done_order_items = BlingOrderItem.selected_group_order_items(base_query)
   end
 
   def get_printed_order_items
@@ -100,7 +100,7 @@ class HomeController < ApplicationController
                                       account_id: current_user.account.id)
                                .date_range(@default_initial_date, @default_final_date)
 
-    @canceled_orders = BlingOrderItem.group_order_items(base_query)
+    @canceled_orders = BlingOrderItem.selected_group_order_items(base_query)
   end
 
   def set_monthly_revenue_estimation

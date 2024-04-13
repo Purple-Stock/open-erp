@@ -9,6 +9,30 @@ class BlingOrderItemOwnersController < ApplicationController
 
   def index; end
 
+  def verification
+    @printed_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED,
+                                                account_id: current_user.account.id)
+
+    @grouped_printed_order_items = BlingOrderItem.selected_group_order_items(@printed_order_items)
+
+    @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS,
+                                                    account_id: current_user.account.id)
+
+    @grouped_in_progress_order_items = BlingOrderItem.selected_group_order_items(@in_progress_order_items)
+
+    @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING,
+                                                account_id: current_user.account.id)
+
+    @grouped_pending_order_items = BlingOrderItem.selected_group_order_items(@pending_order_items)
+
+    @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
+                                                                    BlingOrderItem::Status::CHECKED, BlingOrderItem::Status::COLLECTED],
+                                                     alteration_date: Time.current.beginning_of_day..Time.current.end_of_day,
+                                                     account_id: current_user.account.id).count
+    @colected_orders = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
+                                            account_id: current_user.account.id, collected_alteration_date: Time.current.beginning_of_day..Time.current.end_of_day).count
+  end
+
   def day_quantities
     render json: @paid_items_presentable
   end
@@ -27,12 +51,13 @@ class BlingOrderItemOwnersController < ApplicationController
     @colected_orders = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
                                             account_id: current_user.account.id, collected_alteration_date: Time.current.beginning_of_day..Time.current.end_of_day).count
 
-    @initial_date = params.fetch('bling_order', initial_date: Time.current.strftime('%Y-%m-%d %H:%M')).fetch('initial_date')
+    @initial_date = params.fetch('bling_order',
+                                 initial_date: Time.current.strftime('%Y-%m-%d %H:%M')).fetch('initial_date')
     @final_date = params.fetch('bling_order', final_date: Time.current.strftime('%Y-%m-%d %H:%M')).fetch('final_date')
     @daily_date_range_filter = { initial_date: @initial_date, final_date: @final_date }
     @bling_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::PAID],
                                               account_id: current_user.account.id)
-    monthly_revenue  
+    monthly_revenue
     anual_revenue
     @date_order_items = @bling_order_items.where(date: @initial_date.to_datetime.beginning_of_day..@final_date.to_datetime.end_of_day)
     @quantity_paid = @date_order_items.count
