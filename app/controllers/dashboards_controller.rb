@@ -75,7 +75,7 @@ class DashboardsController < ApplicationController
 
   def current_done_order_items
     base_query = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                     BlingOrderItem::Status::CHECKED, BlingOrderItem::Status::COLLECTED],
+                                                     BlingOrderItem::Status::CHECKED],
                                       alteration_date: @date_range,
                                       account_id: current_user.account.id)
     @current_done_order_items = BlingOrderItem.group_order_items(base_query)

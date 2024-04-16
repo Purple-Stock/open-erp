@@ -26,7 +26,7 @@ class BlingOrderItemOwnersController < ApplicationController
     @grouped_pending_order_items = BlingOrderItem.selected_group_order_items(@pending_order_items)
 
     @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                                    BlingOrderItem::Status::CHECKED, BlingOrderItem::Status::COLLECTED],
+                                                                    BlingOrderItem::Status::CHECKED],
                                                      alteration_date: Time.current.beginning_of_day..Time.current.end_of_day,
                                                      account_id: current_user.account.id).count
     @colected_orders = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
@@ -45,7 +45,7 @@ class BlingOrderItemOwnersController < ApplicationController
     @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING,
                                                 account_id: current_user.account.id).count
     @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                                    BlingOrderItem::Status::CHECKED, BlingOrderItem::Status::COLLECTED],
+                                                                    BlingOrderItem::Status::CHECKED],
                                                      alteration_date: Time.current.beginning_of_day..Time.current.end_of_day,
                                                      account_id: current_user.account.id).count
     @colected_orders = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
