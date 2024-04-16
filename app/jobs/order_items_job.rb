@@ -39,8 +39,8 @@ class OrderItemsJob < ApplicationJob
       account_id:
     }
 
-    record.items.build(items_attributes) if record.items.nil?
-    record.build_localization(label_attributes.first) if record.localization.nil?
+    record.items.build(items_attributes)
+    record.build_localization(label_attributes.first)
     record.save!
   end
 end
