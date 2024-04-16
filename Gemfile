@@ -58,7 +58,7 @@ gem "sassc-rails"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
-gem 'devise', '>= 4.9.3'
+gem 'devise', '>= 4.9.4'
 
 # for decorator pattern https://github.com/drapergem/draper
 gem 'draper'
