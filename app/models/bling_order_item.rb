@@ -28,14 +28,17 @@
 #
 # Indexes
 #
+#  bling_order_id_index_on_bling_order_items  (bling_order_id)
 #  index_bling_order_items_on_account_id      (account_id)
 #  index_bling_order_items_on_bling_order_id  (bling_order_id) UNIQUE
+#  situation_id_index_on_bling_order_items    (situation_id,store_id)
 #
 class BlingOrderItem < ApplicationRecord
   # TODO, refactor me separating the tables
   # There are features hard to implement without this separation.
 
   has_many :items, dependent: :destroy
+  has_one :localization, dependent: :destroy
   belongs_to :account, optional: true
 
   accepts_nested_attributes_for :items

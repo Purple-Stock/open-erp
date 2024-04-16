@@ -118,23 +118,4 @@
     setInterval(function() {
         window.location.reload();
     }, 60000);
-    $(document).ready(function (){
-        let isHidden = true;
-
-        $('#eye-slash, #eye').click(function (){
-            if(isHidden) {
-                $('#revenue-estimation').removeAttr('hidden');
-                $('#average-ticket').removeAttr('hidden');
-                $('.bi-eye').removeAttr('hidden');
-                $('.bi-eye-slash').attr('hidden', true);
-                isHidden = false;
-            } else {
-                $('#revenue-estimation').attr('hidden', true);
-                $('#average-ticket').attr('hidden', true);
-                $('.bi-eye').attr('hidden', true)
-                $('.bi-eye-slash').removeAttr('hidden');
-                isHidden = true;
-            }
-        });
-    })
 </script>
