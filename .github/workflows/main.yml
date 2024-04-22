@@ -36,6 +36,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.9.0'
+          cache: 'yarn'
+      - run: yarn install --check-files
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -43,15 +45,6 @@ jobs:
           ruby-version: 3.2.2
           # runs 'bundle install' and cache installed gems automatically
           bundler-cache: true
-
-      - name: Install dependencies
-        env:
-          RAILS_ENV: test
-        run: |
-          npm install -g yarn@1.22.19
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-          yarn install --check-files
 
       - name: Setup test database
         env:
