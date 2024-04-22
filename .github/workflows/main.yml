@@ -37,7 +37,9 @@ jobs:
         with:
           node-version: '20.9.0'
           cache: 'yarn'
-      - run: yarn install --check-files
+      - run: | 
+          npm install -g yarn@1.22.19
+          yarn install --check-files
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
