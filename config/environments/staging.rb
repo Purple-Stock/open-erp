@@ -234,6 +234,14 @@ Rails.application.configure do
       args: [1, ((Date.today - 5.days) - 5.days)],
       set: { priority: 4 },
       description: 'Create Order Items whose statuses are collected every hour'
+    },
+
+    change_in_progress_to_printed: {
+      cron: '*/10 * * * *',
+      class: 'ChangeOrderStatusJob',
+      args: ['15', '95745', 1],
+      set: { priority: 2 },
+      description: 'Update new orders to printed status'
     }
   }
 end
