@@ -1,4 +1,4 @@
-class ChangeOrderStatusJob
+class ChangeOrderStatusJob < ApplicationJob
   attr_accessor :account_id
 
   def perform(old_status, new_status, account_id)
@@ -13,7 +13,7 @@ class ChangeOrderStatusJob
 
     Services::Bling::UpdateOrderStatus.call(
       tenant: account_id,
-      order_ids: [orders_ids],
+      order_ids: orders_ids,
       new_status:
     )
   end
