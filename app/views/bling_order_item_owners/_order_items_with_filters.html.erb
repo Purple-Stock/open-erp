@@ -1,0 +1,24 @@
+<div class="row justify-content-center">
+  <div class="col-md-12">
+    <div class="card mb-12">
+      <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
+        <h5 class="card-title <%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">Contagem Total: <%= link_to order_items.values.flatten.length, bling_order_items_path({ disable_initial_date: true, status: status }), class: 'text-body-secondary', target: '_blank', rel: 'noopener' %></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <% order_items.each do |store_name, orders| %>
+    <div class="col-md-12 col-lg-6">
+      <div class="card mb-3">
+        <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
+          <h5 class="card-title <%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %> d-inline-block">
+            <%= store_name %>: <%= link_to orders&.count, bling_order_items_path({ disable_initial_date: true, status: status, store_id: BlingOrderItem::STORE_ID_NAME_KEY_VALUE.key(store_name) }),
+                                 target: '_blank', rel: 'noopener' %>
+          </h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 class BlingOrderItemCreatorBaseJob < ApplicationJob
-  queue_as :default
-  rescue_from(StandardError) do |exception|
-    Sentry.capture_message(exception)
-  end
-
-  retry_on StandardError, wait: :exponentially_longer, attempts: 5
 
   attr_accessor :account_id, :alteration_date
 
@@ -19,7 +13,7 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
                                     tenant: account_id)
   end
 
-  def create_orders(orders)
+  def create_orders(orders, alteration_date = nil)
     return if orders.blank?
 
     order_ids = orders.map { |order| order['id'] }
@@ -39,7 +33,7 @@ class BlingOrderItemCreatorBaseJob < ApplicationJob
         situation_id: order['situacao']['id'],
         store_id: order['loja']['id'],
         date: order['data'],
-        alteration_date:,
+        alteration_date: alteration_date || @alteration_date,
         marketplace_code_id: order['numeroLoja'],
         bling_id: order['numero'],
         account_id:,

@@ -1,0 +1,203 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/9447042612
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Tue, 06 Feb 2024 15:19:58 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '280'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=0220c8b4c69f7917
+      Set-Cookie:
+      - PHPSESSID=j8fhru4rkj1lrig79n3fv4qbqc; path=/; secure; HttpOnly
+      - PHPSESSID=o9gj805oqfllinj6akcbpr58tb; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 85145fd86f552683-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+            "error": {
+                "type": "RESOURCE_NOT_FOUND",
+                "message": "No encontrado.",
+                "description": "O recurso requisitado no foi encontrado. Verifique se o endpoint solicitado est\u00e1 correto ou se o ID informado realmente existe no sistema."
+            }
+        }
+  recorded_at: Tue, 06 Feb 2024 15:19:58 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19178587026
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 06 Feb 2024 15:20:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1510'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=93a1049d148d4d14
+      Set-Cookie:
+      - PHPSESSID=bgle777npcpi8lt5h8ac2kmcfd; path=/; secure; HttpOnly
+      - PHPSESSID=d6694psfoq1sojlahsgb8tt8ip; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 85145fe7997d25b4-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19178587026,"numero":49911,"numeroLoja":"GSHNA331F00N1B7","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16438305363,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":12,"valor":2},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":19184511286},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16347285097,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:P","descricaoDetalhada":"","produto":{"id":15973680258},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16547387358,"dataVencimento":"2023-12-22","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"Avenida Sete de Setembro- de 401 a 899 - lado mpar","numero":"Center
+        sho","complemento":"","municipio":"Ararangu\u00e1","uf":"SC","cep":"88901004","bairro":"Cidade
+        Alta","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""},"taxas":{"taxaComissao":0,"custoFrete":0,"valorBase":0}}}'
+  recorded_at: Tue, 06 Feb 2024 15:20:01 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19178587026
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 06 Feb 2024 15:20:04 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1510'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=25c4a5c703b4477f
+      Set-Cookie:
+      - PHPSESSID=86m5ve5qs0p2ud65b33gelccin; path=/; secure; HttpOnly
+      - PHPSESSID=jihiu1b1j7akj2jj8la9es3big; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 85145ffd5c24649c-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19178587026,"numero":49911,"numeroLoja":"GSHNA331F00N1B7","data":"2023-11-22","dataSaida":"2023-11-22","dataPrevista":"0000-00-00","totalProdutos":40.7,"total":40.7,"contato":{"id":16438305363,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":12,"valor":2},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":19184511286},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16347285097,"codigo":"VEST-LONG-TOP-SAI-FEND-BRANCO-P","unidade":"1","quantidade":1,"desconto":0,"valor":40.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Branco;Tamanho:P","descricaoDetalhada":"","produto":{"id":15973680258},"comissao":{"base":40.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16547387358,"dataVencimento":"2023-12-22","valor":40.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"Avenida Sete de Setembro- de 401 a 899 - lado mpar","numero":"Center
+        sho","complemento":"","municipio":"Ararangu\u00e1","uf":"SC","cep":"88901004","bairro":"Cidade
+        Alta","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"","nomeUsuario":""},"taxas":{"taxaComissao":0,"custoFrete":0,"valorBase":0}}}'
+  recorded_at: Tue, 06 Feb 2024 15:20:04 GMT
+recorded_with: VCR 6.2.0

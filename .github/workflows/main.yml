@@ -1,11 +1,20 @@
 name: CI
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
       postgres:
         image: postgres:13
         env:
@@ -23,18 +32,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.9.0'
+          cache: 'yarn'
+      - run: | 
+          npm install -g yarn@1.22.19
+          yarn install --check-files
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2.2
-
-      - name: Install dependencies
-        env:
-          RAILS_ENV: test
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-          yarn install --check-files
+          # runs 'bundle install' and cache installed gems automatically
+          bundler-cache: true
 
       - name: Setup test database
         env:
@@ -55,4 +67,6 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/inventory-control_test
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
         run: bundle exec rspec

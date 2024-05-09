@@ -1,20 +1,6 @@
-<%= form_for @sale_product, :html => { :class => "form-horizontal sale_product" } do |f| %>
+<%= render 'layouts/flash' %>
 
-  <% if @sale_product.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@sale_product.errors.count, "error") %> prohibited this sale_product from
-          being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-          <% @sale_product.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
+<%= form_for @sale_product, :html => { :class => "form-horizontal sale_product" } do |f| %>
   <div class="form-row">
     <div class="form-group col-4">
       <%= f.label t('sales_products.quantity'), :class => 'control-label' %>

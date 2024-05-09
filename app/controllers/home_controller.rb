@@ -1,45 +1,22 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  before_action :refresh_token, :date_range, :bling_order_items, :current_done_order_items, :set_monthly_revenue_estimation,
-                :get_in_progress_order_items, :get_printed_order_items,
-                :get_pending_order_items, :canceled_orders, only: :index
+  before_action :refresh_token, :default_initial_date, :default_final_date, :date_range, :bling_order_items,
+                :current_done_order_items, :set_monthly_revenue_estimation, :token_expires_at,
+                :get_in_progress_order_items, :get_printed_order_items, :get_error_order_items,
+                :get_pending_order_items, :canceled_orders, :collected_orders, only: :index
   include SheinOrdersHelper
 
   def index
-    @shein_orders_count = SheinOrder.where("data ->> 'Status do pedido' = ?", 'Para ser coletado por SHEIN')
-                                    .where(account_id: current_user.account.id)
-                                    .distinct
-                                    .count("data ->> 'Número do pedido'")
-
-    @shein_pending_count = SheinOrder.where("data ->> 'Status do pedido' IN (?)", ['Pendente']).where(account_id: current_user.account.id)
-                                     .distinct
-                                     .count("data ->> 'Número do pedido'")
-
-    @shein_orders = SheinOrder.where("data ->> 'Status do pedido' IN (?)",
-                                     ['Para ser coletado por SHEIN', 'Pendente', 'Para ser enviado'])
-                              .where(account_id: current_user.account.id)
-    @expired_orders = @shein_orders.select { |order| order_status(order) == 'Atrasado' }
-    @expired_orders_count = @expired_orders.count
-
-    order_ids = @orders&.select { |order| order['loja']['id'] == 204_061_683 }&.map { |order| order['id'] }
-
-    @mercado_envios_flex_counts = count_mercado_envios_flex(order_ids)
-
-    @store_name = get_loja_name
-
-    @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
-
+    authorize BlingOrderItem
     @expires_at = format_last_update(@date_expires)
 
     @last_update = format_last_update(Time.current)
 
     @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
     @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
+    @grouped_error_order_items = BlingOrderItem.group_order_items(@error_order_items)
     @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
-  rescue StandardError => e
-    Rails.logger.error(e.message)
-    redirect_to home_last_updates_path
   end
 
   def last_updates
@@ -48,6 +25,18 @@ class HomeController < ApplicationController
   end
 
   private
+
+  def token_expires_at
+    @token_expires_at = BlingDatum.find_by(account_id: current_tenant.id).try(:expires_at)
+  end
+
+  def default_initial_date
+    @default_initial_date = params[:initial_date] || Time.zone.today
+  end
+
+  def default_final_date
+    @default_final_date = params[:final_date] || Time.zone.today
+  end
 
   def date_range
     @first_date = params.try(:fetch, :bling_order_item, nil).try(:fetch, :initial_date, nil).try(:to_date).try(:beginning_of_day) || Time.zone.today.beginning_of_day
@@ -58,7 +47,7 @@ class HomeController < ApplicationController
   def bling_order_items
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::WITHOUT_CANCELLED,
                                       account_id: current_user.account.id)
-                               .date_range(@first_date, @second_date)
+                               .date_range(@default_initial_date, @default_final_date)
 
     @bling_order_items = BlingOrderItem.group_order_items(base_query)
   end
@@ -66,6 +55,13 @@ class HomeController < ApplicationController
   def get_in_progress_order_items
     @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS,
                                                     account_id: current_user.account.id)
+  end
+
+  def collected_orders
+    base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
+                                      account_id: current_user.account.id,
+                                      collected_alteration_date: @default_initial_date..@default_final_date)
+    @collected_orders = BlingOrderItem.group_order_items(base_query)
   end
 
   def finance_per_status
@@ -77,8 +73,9 @@ class HomeController < ApplicationController
 
   def current_done_order_items
     base_query = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
-                                                     BlingOrderItem::Status::CHECKED],
-                                      alteration_date: @date_range,
+                                                     BlingOrderItem::Status::CHECKED
+                                                    ],
+                                      alteration_date: @default_initial_date.to_date.beginning_of_day..@default_final_date.to_date.end_of_day,
                                       account_id: current_user.account.id)
     @current_done_order_items = BlingOrderItem.group_order_items(base_query)
   end
@@ -93,10 +90,15 @@ class HomeController < ApplicationController
                                                 account_id: current_user.account.id)
   end
 
+  def get_error_order_items
+    @error_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::ERROR,
+                                                account_id: current_user.account.id)
+  end
+
   def canceled_orders
     base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::CANCELED,
                                       account_id: current_user.account.id)
-                               .date_range(@first_date, @second_date)
+                               .date_range(@default_initial_date, @default_final_date)
 
     @canceled_orders = BlingOrderItem.group_order_items(base_query)
   end
@@ -134,13 +136,9 @@ class HomeController < ApplicationController
     time&.strftime('%d-%m-%Y %H:%M:%S')
   end
 
-  def token_expires_at
-    BlingDatum.find_by(account_id: current_tenant.id).try(:expires_at)
-  end
-
   def refresh_token
     @date_expires = token_expires_at
-    return if @date_expires.blank? || (@date_expires > DateTime.now && !Rails.env.eql?('production'))
+    return if @date_expires.blank? || (@date_expires > Time.current || Rails.env.eql?('production'))
 
     refresh_token = BlingDatum.find_by(account_id: current_tenant.id).refresh_token
     client_id = ENV['CLIENT_ID']

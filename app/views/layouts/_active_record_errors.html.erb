@@ -1,0 +1,11 @@
+<% if resource.errors.any? %>
+  <div id="error_expl" class="panel panel-danger">
+    <div class="panel-body">
+      <ul>
+        <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

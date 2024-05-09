@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_18_002858) do
+
+ActiveRecord::Schema[7.0].define(version: 2024_02_09_142949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "account_features", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.integer "feature_id", null: false
+    t.boolean "is_enabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "company_name"
@@ -85,6 +94,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_002858) do
     t.bigint "account_id"
     t.decimal "value"
     t.jsonb "items"
+    t.date "collected_alteration_date"
+    t.string "original_situation_id"
     t.index ["account_id"], name: "index_bling_order_items_on_account_id"
     t.index ["bling_order_id"], name: "index_bling_order_items_on_bling_order_id", unique: true
   end
@@ -107,6 +118,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_002858) do
     t.datetime "updated_at", null: false
     t.integer "account_id"
     t.index ["account_id"], name: "index_customers_on_account_id"
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "is_enabled", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "feature_key", default: 0, null: false
   end
 
   create_table "finance_data", force: :cascade do |t|
@@ -182,14 +201,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_002858) do
     t.integer "executions_count"
     t.text "job_class"
     t.integer "error_event", limit: 2
+    t.text "labels", array: true
     t.index ["active_job_id", "created_at"], name: "index_good_jobs_on_active_job_id_and_created_at"
-    t.index ["active_job_id"], name: "index_good_jobs_on_active_job_id"
     t.index ["batch_callback_id"], name: "index_good_jobs_on_batch_callback_id", where: "(batch_callback_id IS NOT NULL)"
     t.index ["batch_id"], name: "index_good_jobs_on_batch_id", where: "(batch_id IS NOT NULL)"
     t.index ["concurrency_key"], name: "index_good_jobs_on_concurrency_key_when_unfinished", where: "(finished_at IS NULL)"
-    t.index ["cron_key", "created_at"], name: "index_good_jobs_on_cron_key_and_created_at"
-    t.index ["cron_key", "cron_at"], name: "index_good_jobs_on_cron_key_and_cron_at", unique: true
+    t.index ["cron_key", "created_at"], name: "index_good_jobs_on_cron_key_and_created_at_cond", where: "(cron_key IS NOT NULL)"
+    t.index ["cron_key", "cron_at"], name: "index_good_jobs_on_cron_key_and_cron_at_cond", unique: true, where: "(cron_key IS NOT NULL)"
     t.index ["finished_at"], name: "index_good_jobs_jobs_on_finished_at", where: "((retried_good_job_id IS NULL) AND (finished_at IS NOT NULL))"
+    t.index ["labels"], name: "index_good_jobs_on_labels", where: "(labels IS NOT NULL)", using: :gin
     t.index ["priority", "created_at"], name: "index_good_jobs_jobs_on_priority_created_at_when_unfinished", order: { priority: "DESC NULLS LAST" }, where: "(finished_at IS NULL)"
     t.index ["queue_name", "scheduled_at"], name: "index_good_jobs_on_queue_name_and_scheduled_at", where: "(finished_at IS NULL)"
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
@@ -209,6 +229,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_002858) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "months", default: 1
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "sku"
+    t.integer "unity"
+    t.integer "quantity"
+    t.decimal "discount"
+    t.decimal "value"
+    t.decimal "ipi_tax"
+    t.string "description"
+    t.string "long_description"
+    t.bigint "product_id"
+    t.integer "account_id"
+    t.bigint "bling_order_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "post_data", force: :cascade do |t|
@@ -259,6 +295,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_002858) do
     t.string "extra_sku"
     t.integer "account_id"
     t.integer "store_id"
+    t.bigint "bling_id"
     t.index ["account_id"], name: "index_products_on_account_id"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
@@ -396,6 +433,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_002858) do
     t.string "sku"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer "product_id"
+    t.bigint "bling_product_id"
+    t.integer "total_balance"
+    t.integer "total_virtual_balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "account_id"
   end
 
   create_table "stores", force: :cascade do |t|

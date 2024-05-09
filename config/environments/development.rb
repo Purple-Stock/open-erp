@@ -3,6 +3,15 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
+  config.after_initialize do
+    Bullet.enable        = true
+    Bullet.alert         = true
+    Bullet.bullet_logger = true
+    Bullet.console       = true
+    Bullet.rails_logger  = true
+    Bullet.add_footer    = true
+  end
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -73,86 +82,139 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.good_job.smaller_number_is_higher_priority = true
 
-  config.good_job.enable_cron = false
+  config.good_job.enable_cron = ENV['ENABLE_CRON'] || false
   config.good_job.cron = {
-    # Every 15 minutes, enqueue `ExampleJob.set(priority: -10).perform_later(42, "life", name: "Alice")`
+    product_sync_job: {
+      cron: '*/60 * * * *',
+      class: 'ProductSyncJob',
+      args: [1],
+      set: { priority: 1 },
+      description: 'Synchronize products'
+    },
+
+    stock_sync_job: {
+      cron: '*/10 * * * *',
+      class: 'StockSyncJob',
+      args: [1],
+      set: { priority: 1 },
+      description: 'Synchronize Stocks based in products already created'
+    },
+
     in_progress_order_items_task: { # each recurring job must have a unique key
-                     cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
-                     class: "InProgressOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
-                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
-                     set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
-                     description: "Create Order Items with status in progress" # optional description that appears in Dashboard
+      cron: '*/2 * * * *', # cron-style scheduling format by fugit gem
+      class: 'InProgressOrderItemsJob', # name of the job class as a String; must reference an Active Job job class
+      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+      description: 'Create Order Items with status in progress' # optional description that appears in Dashboard
     },
 
     weekly_pending_order_items_task: {
-                     cron: "*/4 * * * *",
-                     class: "PendingOrderItemsJob",
-                     args: [1, { dataInicial: (Date.today - 3.weeks).strftime, dataFinal: Date.today.strftime }],
-                     set: { priority: 1 },
-                     description: "Create Order Items with pending status from current week"
+      cron: '*/4 * * * *',
+      class: 'PendingOrderItemsJob',
+      args: [1, { dataInicial: (Date.today - 3.weeks).strftime, dataFinal: Date.today.strftime }],
+      set: { priority: 1 },
+      description: 'Create Order Items with pending status from current week'
     },
 
     general_pending_order_items_task: {
-      cron: "@monthly",
-      class: "PendingOrderItemsJob",
+      cron: '@monthly',
+      class: 'PendingOrderItemsJob',
       args: [1],
       set: { priority: 1 },
-      description: "Create Order Items with pending status considering all period"
+      description: 'Create Order Items with pending status considering all period'
     },
 
     printed_order_items_task: { # each recurring job must have a unique key
-                     cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
-                     class: "PrintedOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
-                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
-                     set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
-                     description: "Create Order Items with printed status" # optional description that appears in Dashboard
+      cron: '*/2 * * * *', # cron-style scheduling format by fugit gem
+      class: 'PrintedOrderItemsJob', # name of the job class as a String; must reference an Active Job job class
+      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+      description: 'Create Order Items with printed status' # optional description that appears in Dashboard
     },
 
     current_done_order_items_task: { # each recurring job must have a unique key
-                     cron: "*/2 * * * *", # cron-style scheduling format by fugit gem
-                     class: "CurrentDoneBlingOrderItemJob", # name of the job class as a String; must reference an Active Job job class
-                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
-                     set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
-                     description: "Create Order Items statuses are checked and verified" # optional description that appears in Dashboard
+      cron: '*/2 * * * *', # cron-style scheduling format by fugit gem
+      class: 'CurrentDoneBlingOrderItemJob', # name of the job class as a String; must reference an Active Job job class
+      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+      description: 'Create Order Items statuses are checked and verified' # optional description that appears in Dashboard
     },
     general_canceled_order_items_task: { # each recurring job must have a unique key
-                                     cron: "@monthly", # cron-style scheduling format by fugit gem
-                                     class: "CanceledBlingOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
-                                     args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
-                                     set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
-                                     description: "Create Order Items statuses are canceled" # optional description that appears in Dashboard
+      cron: '@monthly', # cron-style scheduling format by fugit gem
+      class: 'CanceledBlingOrderItemsJob', # name of the job class as a String; must reference an Active Job job class
+      args: [1], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+      description: 'Create Order Items statuses are canceled' # optional description that appears in Dashboard
     },
 
     weekly_canceled_order_items_task: { # each recurring job must have a unique key
-                                        cron: "*/4 * * * *", # cron-style scheduling format by fugit gem
-                                        class: "WeeklyCanceledOrderItemsJob", # name of the job class as a String; must reference an Active Job job class
-                                        args: [1, { dataInicial: 3.weeks.ago.to_date.strftime, dataFinal: Date.today.strftime }], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
-                                        set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
-                                        description: "Create Order Items statuses are canceled" # optional description that appears in Dashboard
+      cron: '*/4 * * * *', # cron-style scheduling format by fugit gem
+      class: 'WeeklyCanceledOrderItemsJob', # name of the job class as a String; must reference an Active Job job class
+      args: [1, { dataInicial: 3.weeks.ago.to_date.strftime, dataFinal: Date.today.strftime }], # positional arguments to pass to the job; can also be a proc e.g. `-> { [Time.now] }`
+      set: { priority: 1 }, # additional Active Job properties; can also be a lambda/proc e.g. `-> { { priority: [1,2].sample } }`
+      description: 'Create Order Items statuses are canceled' # optional description that appears in Dashboard
+    },
+    daily_canceled_order_task: {
+      cron: '*/10 * * * *',
+      class: 'DailyCanceledOrderJob',
+      args: [1, Date.today],
+      set: { priority: 1 },
+      description: 'Create Order Items statuses are canceled at current day'
     },
     checked_order_items_task: {
-      cron: "@weekly",
-      class: "CheckedBlingOrderItemsJob",
+      cron: '@weekly',
+      class: 'CheckedBlingOrderItemsJob',
       args: [1],
       set: { priority: 3 },
-      description: "Create Order Items statuses are checked"
+      description: 'Create Order Items statuses are checked'
     },
 
     frequent_checked_order_items_task: {
-      cron: "*/2 * * * *",
-      class: "CheckedBlingOrderItemsJob",
+      cron: '*/2 * * * *',
+      class: 'CheckedBlingOrderItemsJob',
       args: [1, (Date.today - 5.days)],
       set: { priority: 1 },
-      description: "Create Order Items statuses are checked"
+      description: 'Create Order Items statuses are checked'
+    },
+
+    hour_checked_order_items_task: {
+      cron: '0 * * * *',
+      class: 'CheckedBlingOrderItemsJob',
+      args: [1, ((Date.today - 5.days) - 5.days)],
+      set: { priority: 1 },
+      description: 'Create Order Items statuses are checked every hour'
     },
 
     verified_order_items_task: {
-      cron: "@weekly",
-      class: "VerifiedBlingOrderItemsJob",
+      cron: '@weekly',
+      class: 'VerifiedBlingOrderItemsJob',
       args: [1],
       set: { priority: 4 },
-      description: "Create Order Items whose statuses are verified"
+      description: 'Create Order Items whose statuses are verified'
+    },
+
+    collected_order_items_task: {
+      cron: '*/5 * * * *',
+      class: 'CollectedBlingOrderItemsJob',
+      args: [1, (Date.today - 5.days)],
+      set: { priority: 4 },
+      description: 'Create Order Items whose statuses are collected'
+    },
+
+    hour_collected_order_items_task: {
+      cron: '0 * * * *',
+      class: 'CollectedBlingOrderItemsJob',
+      args: [1, ((Date.today - 5.days) - 5.days)],
+      set: { priority: 4 },
+      description: 'Create Order Items whose statuses are collected every hour'
+    },
+
+    change_in_progress_to_printed: {
+      cron: '*/10 * * * *',
+      class: 'ChangeOrderStatusJob',
+      args: ['15', '95745', 1],
+      set: { priority: 2 },
+      description: 'Update new orders to printed status'
     }
-    # etc.
   }
 end

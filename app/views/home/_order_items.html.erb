@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-md-12">
     <div class="card mb-12">
-      <div class="card-body text-center <%= 'bg-danger text-dark' if printed && !order_items.values.flatten.length.zero? %>">
+      <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
         <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
           <h5 class="card-title">
             Meta de Pedidos: 
@@ -10,25 +10,19 @@
             <%= @monthly_revenue_estimation.daily_quantity %>
           </p>  
         <% end %>
-        <h5 class="card-title">
-          Contagem total
+        <h5 class="card-title <%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
+          Contagem total: <%= order_items.values.flatten.length %>
         </h5>
-        <p class="<%= 'text-success' if printed && order_items.values.flatten.length.zero? %>">
-          <%= order_items.values.flatten.length %>
-        </p>
       </div>
     </div>
   </div>
   <% order_items.each do |store_name, orders| %>
      <div class="col-md-12">
         <div class="card mb-12">
-          <div class="card-body text-center <%= 'bg-danger text-dark' if printed && !order_items.values.flatten.length.zero? %>">
-            <h5 class="card-title">
-              <%= store_name %>
+          <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
+            <h5 class="card-title <%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
+              <%= store_name %>: <%= orders&.count %>
             </h5>
-            <p class="<%= 'text-success' if printed && order_items.values.flatten.length.zero? %>">
-              Pedidos: <%= orders&.count %>
-            </p>
             <% if store_name.eql?('Mercado Livre') %>
               <p>
                 Mercado Envios Flex: <%= @mercado_envios_flex_counts %>

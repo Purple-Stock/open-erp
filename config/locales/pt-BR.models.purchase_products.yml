@@ -1,5 +1,17 @@
 ---
 pt-BR:
+  activerecord:
+    models:
+      purchase_product:
+        one: Entrada de Estoque
+        other: Entradas de Estoque
+    attributes:
+      purchase_product:
+        quantity: Quantidade
+        product: Produto
+        product_id: Produto
+        purchase: Entrada de Estoque
+        purchase_id: Entrada de Estoque
   purchase_products:
     new: Nova Entrada de Estoque
     one: Entrada de Estoque

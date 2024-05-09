@@ -1,0 +1,207 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/9829778376
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Tue, 06 Feb 2024 15:20:06 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '280'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=04adc33ae18e5c59
+      Set-Cookie:
+      - PHPSESSID=m8jk1ptdndmm7q0686rt42cs52; path=/; secure; HttpOnly
+      - PHPSESSID=v49876n663p5n2r7dudj9rb89k; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8514600b5a8a7a53-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+            "error": {
+                "type": "RESOURCE_NOT_FOUND",
+                "message": "No encontrado.",
+                "description": "O recurso requisitado no foi encontrado. Verifique se o endpoint solicitado est\u00e1 correto ou se o ID informado realmente existe no sistema."
+            }
+        }
+  recorded_at: Tue, 06 Feb 2024 15:20:06 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/99
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Tue, 06 Feb 2024 15:20:10 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '280'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=d9aeb276bef96aec
+      Set-Cookie:
+      - PHPSESSID=g5tsalemhm00850mcamfdnetj1; path=/; secure; HttpOnly
+      - PHPSESSID=kpulbq1btu10ma4fj4a61r8305; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 851460219db764f1-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+            "error": {
+                "type": "RESOURCE_NOT_FOUND",
+                "message": "No encontrado.",
+                "description": "O recurso requisitado no foi encontrado. Verifique se o endpoint solicitado est\u00e1 correto ou se o ID informado realmente existe no sistema."
+            }
+        }
+  recorded_at: Tue, 06 Feb 2024 15:20:10 GMT
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/99
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Tue, 06 Feb 2024 15:20:22 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '280'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=616950bdcc74cd92
+      Set-Cookie:
+      - PHPSESSID=1io28lr73l423gp31fdjr3o73n; path=/; secure; HttpOnly
+      - PHPSESSID=h95nd88c41s9sh7cjd303pm0ea; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 85146071c86b1d3f-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+            "error": {
+                "type": "RESOURCE_NOT_FOUND",
+                "message": "No encontrado.",
+                "description": "O recurso requisitado no foi encontrado. Verifique se o endpoint solicitado est\u00e1 correto ou se o ID informado realmente existe no sistema."
+            }
+        }
+  recorded_at: Tue, 06 Feb 2024 15:20:25 GMT
+recorded_with: VCR 6.2.0

@@ -12,9 +12,7 @@
 #
 #  index_shein_orders_on_account_id  (account_id)
 #  data       :json
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
+
 require 'rails_helper'
 
 RSpec.describe SheinOrder, type: :model do

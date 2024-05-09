@@ -1,7 +1,12 @@
 <div class="container-ultra-wide">
-  <section class="mt-5 section bordered-section">
-    <p>Última Atualização: <%= @last_update %></p>
-    <p>Token Expira: <%= @expires_at %></p>
+  <section class="card mt-5 section">
+    <% if @token_expires_at.present? && @token_expires_at > Time.current %>
+      <h6>Última Atualização: <%= @last_update %></h6>
+      <h6>Token Expira: <%= pt_datetime_format(@token_expires_at) %></h6>
+    <% else %>
+      <h6>Última Atualização: <%= @last_update %></h6>
+      <h6 style="background-color: red;">CLIQUE AQUI: <a target="_blank"  href="https://www.bling.com.br/OAuth2/views/authorization.php?response_type=code&client_id=<%= ENV['CLIENT_ID']%>&state=323eb862289daff1f11ee6c23edb4f6e&scopes=98308+98309+98310+98313+98314+98565+98619+101584+507943+575904+5990556+6631498+106168710+182224097+199272829+200802821+220621674+318257547+318257550+318257553+318257556+318257559+318257561+318257565+318257568+318257570+318257573+318257576+318257583+333936575+363921589+363921590+363921591+363921592+363921598+363921599+363953167+363953556+363953706+791588404+875116881+875116885+1649295804+1780272711+1869535257+5862218180+6239411327+6239420709+13645012976+13645012997+13645012998">Atualizar Token</a></h6>
+    <% end %>
     <h1 class="text-center">Metas
       <span class="bi bi-eye-slash" id="eye-slash">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
@@ -17,43 +22,42 @@
         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
       </svg>
       </span>
-    </h1>
+    </h3>
     <div class="row justify-content-center">
         <% if @monthly_revenue_estimation.present? %>
           <div class="col-sm text-center">
-            <p>Meta de quantidade: <%= @monthly_revenue_estimation.quantity %></p>
+            <h6>Meta de quantidade: <%= @monthly_revenue_estimation.quantity %></h6>
           </div>
           <div class="col-sm text-center">
-            <p>Meta de receita: <span id="revenue-estimation" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></span></p>
+            <h6>Meta de receita: <span id="revenue-estimation" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></span></h6>
           </div>
           <div class="col-sm text-center">
-            <p>Ticket Médio: <span id="average-ticket" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></span></p>
+            <h6>Ticket Médio: <span id="average-ticket" hidden><%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></span></h6>
           </div>
         <% else %>
-          <p><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></p>
+          <h6><%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path %></h6>
         <% end %>
     </div>
   </section>
 
-  <section class="mt-5 section bordered-section">
-    <div class="row p-4">
-      <h1>Pesquisar por data</h1>
-      <%= form_tag(root_path, method: :get) do %>
-        <div class="input-group mb-5">
-          <div class="col-sm">
-            Data inicial
-            <%= date_field('bling_order_item', 'initial_date', value: Date.new(@first_date.to_date.year, @first_date.to_date.month, @first_date.to_date.day).strftime) %>
+  <section class="card section p-0">
+    <div class="px-4 pt-4 pb-1">
+      <%= form_with(url: root_path, method: :get) do %>
+        <div class="form-group row">
+          <div class="col-md-6 col-lg-6 col-xl-auto mb-2 d-xl-inline-flex">
+            <%= label_tag :initial_date, 'Data Inicial', class: 'mx-xl-1 col-form-label' %>
+            <%= date_field_tag('initial_date', @default_initial_date, class: 'col-lg-12 col-xl-7 form-control') %>
           </div>
-          <div class="col-sm">
-            Data final
-            <%= date_field('bling_order_item', 'final_date', value: Date.new(@second_date.to_date.year, @second_date.to_date.month, @second_date.to_date.day).strftime) %>
+          <div class="col-md-6 col-lg-6 col-xl-auto mb-2 d-xl-inline-flex">
+            <%= label_tag :final_date, 'Data Final', class: 'mx-xl-1 col-form-label' %>
+            <%= date_field_tag(:final_date, @default_final_date, class: 'col-lg-12 col-xl-7 form-control') %>
           </div>
-          <div class="col-sm">
-            <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3') %>
+          <div class="col-12 col-lg-6 col-xl-auto my-1 my-xl-0">
+            <%= submit_tag "Filtrar", class: 'btn btn-primary btn-lg btn-block' %>
           </div>
-        </div>
-        <div class="col-sm">
-          <%= link_to('Filtrar hoje', root_path, class: 'btn btn-light mb-3') %>
+          <div class="col-12 col-lg-6 col-xl-auto my-1 my-xl-0">
+            <%= link_to('Filtrar hoje', root_path, class: 'btn btn-light btn-lg btn-block') %>
+          </div>
         </div>
       <% end %>
     </div>
@@ -61,69 +65,49 @@
 
   <section class="section p-3">
     <div class="row p-0">
-      <div class="col-sm bordered-section">
-        <h1>Pedidos Concluidos(Pagos)</h1>
-        <%= render 'order_items', order_items: @bling_order_items, show_revenue_estimation: true, printed: false %>
+      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
+        <div class="card-header"><h3>Pedidos Em andamento(Pagos)</h3></div>
+        <div class="card-body">
+          <%= render 'order_items_with_filters', order_items: @grouped_in_progress_order_items,
+                    show_revenue_estimation: false, highlighted: true, status: BlingOrderItemStatus::IN_PROGRESS %>
+        </div>
       </div>
 
-      <div class="col-sm bordered-section">
-        <h1>Pedidos Cancelados</h1>
-        <%= render 'order_items', order_items: @canceled_orders, show_revenue_estimation: false, printed: false %>
-      </div>
+      <div class="card col-sm border-danger">
+        <div class="card-header"><h3>Pedidos Impressos</h3></div>
+        <div class="card-body">
+          <%= render 'order_items_with_filters', order_items: @grouped_printed_order_items,
+                    show_revenue_estimation: false, highlighted: false, status: BlingOrderItemStatus::PRINTED %>
+        </div>    
+      </div>    
 
-      <div class="col-sm bordered-section">
-        <h1>Pedidos Feitos(checados e verificados)</h1>
-        <%= render 'order_items', order_items: @current_done_order_items, show_revenue_estimation: false, printed: false %>
+      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
+        <div class="card-header"><h3>Pedidos Pendentes</h3></div>
+        <div class="card-body">
+          <%= render 'order_items_with_filters', order_items: @grouped_pending_order_items, show_revenue_estimation: false,
+                    highlighted: false, status: BlingOrderItemStatus::PENDING %>
+        </div>
       </div>
-      <div class="col-sm bordered-section border-danger">
-        <h1>Pedidos Impressos (zerar ao final do dia)</h1>
-        <%= render 'order_items', order_items: @grouped_printed_order_items, show_revenue_estimation: false, printed: true %>
-      </div>
-  </div>
+    </div>
 
-  <div class="row">
-      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Pedidos Pendentes</h1>
-        <%= render 'order_items', order_items: @grouped_pending_order_items, show_revenue_estimation: false, printed: false %>
+    <div class="row">
+      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
+        <div class="card-header"><h3>Pedidos com erro</h3></div>
+        <div class="card-body">
+          <%= render 'order_items_with_filters', order_items: @grouped_error_order_items, show_revenue_estimation: false,
+                    highlighted: false, status: BlingOrderItemStatus::ERROR %>
+        </div>
       </div>
-
-      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Pedidos Em andamento(Pagos)</h1>
-        <%= render 'order_items', order_items: @grouped_in_progress_order_items, show_revenue_estimation: false, printed: false %>
+      <div class="card col-sm">
+        <div class="card-header"><h3>Pedidos Feitos(checados e verificados)</h3></div>
+        <div class="card-body">
+          <%= render 'order_items', order_items: @current_done_order_items, show_revenue_estimation: false, highlighted:false %>
+        </div>
       </div>
-
-      <div class="col-sm-12 col-md-3 col-xl-4 col-3-grid bordered-section">
-        <h1>Status Shein</h1>
-        <div class="row justify-content-center">
-          <div class="col-md-12">
-            <div class="card mb-4">
-              <div class="card-body text-center">
-                <h5 class="card-title">Pendentes Shein</h5>
-                <p>Quantidade de Pedidos: <%= @shein_pending_count %></p>
-                <p>Em Andamento Bling: <%= @in_progress = @in_progress_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
-                <p>Diferença: <%= @shein_pending_count - @in_progress %></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="card mb-4">
-              <div class="card-body text-center">
-                <h5 class="card-title">Pedidos a serem coletados</h5>
-                <p>Quantidade de Pedidos: <%= @shein_orders_count %></p>
-                <p>Pendentes Bling: <%= @pending = @pending_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
-                <p>Impressos Bling: <%= @printed = @printed_order_items.where(store_id: '204219105').group_by(&:bling_order_id).count %></p>
-                <p>Diferença: <%= @shein_orders_count - @pending - @printed%></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="card mb-4">
-              <div class="card-body text-center">
-                <h5 class="card-title">Pedidos Atrasados</h5>
-                <p>Quantidade de Pedidos: <%= @expired_orders_count %></p>
-              </div>
-            </div>
-          </div>
+      <div class="card col-sm">
+        <div class="card-header"><h3>Pedidos Coletados</h3></div>
+        <div class="card-body">
+          <%= render 'order_items', order_items: @collected_orders, show_revenue_estimation: false, highlighted:false %>
         </div>
       </div>
     </div>
@@ -134,23 +118,4 @@
     setInterval(function() {
         window.location.reload();
     }, 60000);
-    $(document).ready(function (){
-        let isHidden = true;
-
-        $('#eye-slash, #eye').click(function (){
-            if(isHidden) {
-                $('#revenue-estimation').removeAttr('hidden');
-                $('#average-ticket').removeAttr('hidden');
-                $('.bi-eye').removeAttr('hidden');
-                $('.bi-eye-slash').attr('hidden', true);
-                isHidden = false;
-            } else {
-                $('#revenue-estimation').attr('hidden', true);
-                $('#average-ticket').attr('hidden', true);
-                $('.bi-eye').attr('hidden', true)
-                $('.bi-eye-slash').removeAttr('hidden');
-                isHidden = true;
-            }
-        });
-    })
 </script>

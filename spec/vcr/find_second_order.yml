@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bling.com.br/Api/v3/pedidos/vendas/19449352383
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer <%= ENV['ACCESS_TOKEN'] %>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bling.com.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 04 Jan 2024 17:49:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1471'
+      Connection:
+      - keep-alive
+      Server-Timing:
+      - intid;desc=68bdca5f6fae5efd
+      Set-Cookie:
+      - PHPSESSID=8g11k25ajltchdm1a34rr46j3h; path=/; secure; HttpOnly
+      - PHPSESSID=fv7h7bmid3jr49asj9lkqt3laj; path=/; secure; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-cache, public, must-revalidate, max-age=2592000
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 840551700fbf1d5c-GIG
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":19449352383,"numero":67665,"numeroLoja":"GSHNBS60M00MP6A","data":"2024-01-04","dataSaida":"2024-01-04","dataPrevista":"0000-00-00","totalProdutos":49.7,"total":49.7,"contato":{"id":16511967561,"nome":"Faker
+        Name Souza","tipoPessoa":"F","numeroDocumento":"999.999.999-99"},"situacao":{"id":15,"valor":3},"loja":{"id":204219105},"numeroPedidoCompra":"","outrasDespesas":0,"observacoes":"","observacoesInternas":"","desconto":{"valor":0,"unidade":"REAL"},"categoria":{"id":0},"notaFiscal":{"id":0},"tributacao":{"totalICMS":0,"totalIPI":0},"itens":[{"id":16483879338,"codigo":"VEST-LONG-TOP-SAI-FEND-PRETO-P","unidade":"1","quantidade":1,"desconto":0,"valor":49.7,"aliquotaIPI":0,"descricao":"Vestido
+        LONGO top + saia fenda Cor:Preto;Tamanho:P","descricaoDetalhada":"","produto":{"id":15957707537},"comissao":{"base":49.7,"aliquota":0,"valor":0}}],"parcelas":[{"id":16681040259,"dataVencimento":"2024-02-03","valor":49.7,"observacoes":"","formaPagamento":{"id":1135275}}],"transporte":{"fretePorConta":0,"frete":0,"quantidadeVolumes":0,"pesoBruto":0,"prazoEntrega":0,"contato":{"id":0,"nome":""},"etiqueta":{"nome":"Faker
+        Name Souza","endereco":"Rua Pituba","numero":"119","complemento":"","municipio":"Duque
+        de Caxias","uf":"RJ","cep":"25080655","bairro":"Jardim Panam\u00e1","nomePais":""},"volumes":[]},"vendedor":{"id":0},"intermediador":{"cnpj":"45.814.425\/0001-72","nomeUsuario":"purchase.mod@live.com"},"taxas":{"taxaComissao":0,"custoFrete":0,"valorBase":0}}}'
+  recorded_at: Thu, 04 Jan 2024 17:49:27 GMT
+recorded_with: VCR 6.2.0

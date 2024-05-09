@@ -17,19 +17,22 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 6.0", ">= 6.0.0"
+gem "puma", "~> 6.4", ">= 6.4.2"
+
+# For police pattern
+gem 'pundit'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", ">= 1.2.0"
+gem "jsbundling-rails", ">= 1.2.2"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", ">= 1.5.0"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails", ">= 1.3.0"
+gem "stimulus-rails", ">= 1.3.1"
 
 gem "sentry-ruby"
-gem "sentry-rails"
+gem "sentry-rails", ">= 5.15.1"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -53,9 +56,18 @@ gem "bootsnap", require: false
 gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
-gem 'devise', '>= 4.9.3'
+gem 'devise', '>= 4.9.4'
+
+# for decorator pattern https://github.com/drapergem/draper
+gem 'draper'
+
+gem 'enumerate_it'
+
+gem 'factory_bot_rails', '>= 6.3.0'
+
+gem 'faker'
 
 gem "rubycritic", require: false
 
@@ -65,11 +77,10 @@ gem 'csv-importer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
   gem 'rspec-rails', '>= 6.0.2'
-  gem 'faker'
-  gem 'factory_bot_rails', '>= 6.3.0'
   gem 'solargraph'
 end
 
@@ -136,7 +147,7 @@ gem 'rubocop-rspec', require: false
 gem 'rubocop-performance', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
-gem "good_job", "~> 3.19", ">= 3.19.1"
+gem "good_job", github: 'bensheldon/good_job', branch: 'main'
 
 gem 'roo'
 gem 'roo-xls'
