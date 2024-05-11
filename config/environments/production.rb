@@ -187,7 +187,6 @@ Rails.application.configure do
       set: { priority: 1 },
       description: 'Create Order Items statuses are with error at current day'
     },
-
     checked_order_items_task: {
       cron: '@weekly',
       class: 'CheckedBlingOrderItemsJob',

@@ -11,7 +11,7 @@
 # Indexes
 #
 #  index_shein_orders_on_account_id  (account_id)
-#
+
 require 'zip'
 
 class SheinOrder < ApplicationRecord

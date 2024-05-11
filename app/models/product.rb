@@ -35,9 +35,14 @@ class Product < ApplicationRecord
   has_many :purchase_products
   has_many :sale_products
   has_many :group_products
+  has_many :production_products
+  has_many :productions, through: :production_products
+  has_one_attached :image
+  
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [50, 50]
   end
+  
   has_many :simplo_items
   has_one :store
   has_one :stock, dependent: :destroy
