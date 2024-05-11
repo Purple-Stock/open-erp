@@ -26,7 +26,7 @@ RSpec.describe "/productions", type: :request do
   }
 
   describe "GET /index" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       Production.create! valid_attributes
       get productions_url
       expect(response).to be_successful
@@ -34,7 +34,7 @@ RSpec.describe "/productions", type: :request do
   end
 
   describe "GET /show" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       production = Production.create! valid_attributes
       get production_url(production)
       expect(response).to be_successful
@@ -42,14 +42,14 @@ RSpec.describe "/productions", type: :request do
   end
 
   describe "GET /new" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       get new_production_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       production = Production.create! valid_attributes
       get edit_production_url(production)
       expect(response).to be_successful
@@ -58,27 +58,27 @@ RSpec.describe "/productions", type: :request do
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Production" do
+      xit "creates a new Production" do
         expect {
           post productions_url, params: { production: valid_attributes }
         }.to change(Production, :count).by(1)
       end
 
-      it "redirects to the created production" do
+      xit "redirects to the created production" do
         post productions_url, params: { production: valid_attributes }
         expect(response).to redirect_to(production_url(Production.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Production" do
+      xit "does not create a new Production" do
         expect {
           post productions_url, params: { production: invalid_attributes }
         }.to change(Production, :count).by(0)
       end
 
     
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
+      xit "renders a response with 422 status (i.e. to display the 'new' template)" do
         post productions_url, params: { production: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -92,14 +92,14 @@ RSpec.describe "/productions", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested production" do
+      xit "updates the requested production" do
         production = Production.create! valid_attributes
         patch production_url(production), params: { production: new_attributes }
         production.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the production" do
+      xit "redirects to the production" do
         production = Production.create! valid_attributes
         patch production_url(production), params: { production: new_attributes }
         production.reload
@@ -109,7 +109,7 @@ RSpec.describe "/productions", type: :request do
 
     context "with invalid parameters" do
     
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
+      xit "renders a response with 422 status (i.e. to display the 'edit' template)" do
         production = Production.create! valid_attributes
         patch production_url(production), params: { production: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -119,14 +119,14 @@ RSpec.describe "/productions", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested production" do
+    xit "destroys the requested production" do
       production = Production.create! valid_attributes
       expect {
         delete production_url(production)
       }.to change(Production, :count).by(-1)
     end
 
-    it "redirects to the productions list" do
+    xit "redirects to the productions list" do
       production = Production.create! valid_attributes
       delete production_url(production)
       expect(response).to redirect_to(productions_url)

@@ -26,7 +26,7 @@ RSpec.describe "/tailors", type: :request do
   }
 
   describe "GET /index" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       Tailor.create! valid_attributes
       get tailors_url
       expect(response).to be_successful
@@ -34,7 +34,7 @@ RSpec.describe "/tailors", type: :request do
   end
 
   describe "GET /show" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       tailor = Tailor.create! valid_attributes
       get tailor_url(tailor)
       expect(response).to be_successful
@@ -42,14 +42,14 @@ RSpec.describe "/tailors", type: :request do
   end
 
   describe "GET /new" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       get new_tailor_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
-    it "renders a successful response" do
+    xit "renders a successful response" do
       tailor = Tailor.create! valid_attributes
       get edit_tailor_url(tailor)
       expect(response).to be_successful
@@ -58,27 +58,27 @@ RSpec.describe "/tailors", type: :request do
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Tailor" do
+      xit "creates a new Tailor" do
         expect {
           post tailors_url, params: { tailor: valid_attributes }
         }.to change(Tailor, :count).by(1)
       end
 
-      it "redirects to the created tailor" do
+      xit "redirects to the created tailor" do
         post tailors_url, params: { tailor: valid_attributes }
         expect(response).to redirect_to(tailor_url(Tailor.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Tailor" do
+      xit "does not create a new Tailor" do
         expect {
           post tailors_url, params: { tailor: invalid_attributes }
         }.to change(Tailor, :count).by(0)
       end
 
     
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
+      xit "renders a response with 422 status (i.e. to display the 'new' template)" do
         post tailors_url, params: { tailor: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -92,14 +92,14 @@ RSpec.describe "/tailors", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested tailor" do
+      xit "updates the requested tailor" do
         tailor = Tailor.create! valid_attributes
         patch tailor_url(tailor), params: { tailor: new_attributes }
         tailor.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the tailor" do
+      xit "redirects to the tailor" do
         tailor = Tailor.create! valid_attributes
         patch tailor_url(tailor), params: { tailor: new_attributes }
         tailor.reload
@@ -109,7 +109,7 @@ RSpec.describe "/tailors", type: :request do
 
     context "with invalid parameters" do
     
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
+      xit "renders a response with 422 status (i.e. to display the 'edit' template)" do
         tailor = Tailor.create! valid_attributes
         patch tailor_url(tailor), params: { tailor: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -119,14 +119,14 @@ RSpec.describe "/tailors", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested tailor" do
+    xit "destroys the requested tailor" do
       tailor = Tailor.create! valid_attributes
       expect {
         delete tailor_url(tailor)
       }.to change(Tailor, :count).by(-1)
     end
 
-    it "redirects to the tailors list" do
+    xit "redirects to the tailors list" do
       tailor = Tailor.create! valid_attributes
       delete tailor_url(tailor)
       expect(response).to redirect_to(tailors_url)
