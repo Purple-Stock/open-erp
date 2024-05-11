@@ -1,0 +1,22 @@
+<%= form_with(model: production, local: true) do |form| %>
+
+  <!-- Fields for production -->
+
+  <div class="form-group">
+    <%= form.label :tailor_id, 'Select Tailor' %>
+    <%= form.collection_select :tailor_id, Tailor.all, :id, :name, include_blank: true %>
+  </div>
+
+  <h3>Products</h3>
+  <div id="products">
+    <%= form.fields_for :products do |product_form| %>
+      <%= render 'product_fields', f: product_form %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'Add Product', form, :products %>
+    </div>
+  </div>
+
+  <%= form.submit %>
+<% end %>

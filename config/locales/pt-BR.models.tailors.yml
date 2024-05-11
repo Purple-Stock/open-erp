@@ -1,0 +1,10 @@
+---
+pt-BR:
+  activerecord:
+    attributes:
+      tailors:
+        tailor: Costureiro
+  tailors:
+    name: Nome
+
+

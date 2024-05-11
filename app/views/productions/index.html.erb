@@ -1,0 +1,51 @@
+<%- model_class = Production -%>
+
+<div class="container">
+  <div class="section-header">
+    <h1><%= t 'productions.index.title', default: model_class.model_name.human.pluralize.titleize %></h1>
+  </div>
+
+  <div class="section-body">
+    <%= link_to t('helpers.links.new'), new_production_path, class: 'btn btn-primary mb-3' %>
+
+    <div class="card">
+      <div class="card-body">
+        <%= turbo_frame_tag :productions do %>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><%= model_class.human_attribute_name(:tailor) %></th>
+                  <th><%= t 'productions.index.product_summary' %></th>
+                  <th><%= model_class.human_attribute_name(:cut_date) %></th>
+                  <th><%= model_class.human_attribute_name(:deliver_date) %></th>
+                  <th><%= model_class.human_attribute_name(:consider) %></th>
+                  <th><%= t 'helpers.actions' %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @productions.each do |production| %>
+                  <tr>
+                    <td><%= production.tailor&.name || t('productions.index.no_tailor') %></td>
+                    <td>
+                      <% production_products_summary = production.production_products.map { |pp| "#{pp.product.name}: #{pp.quantity}" }.join(', ') %>
+                      <%= production_products_summary.presence || t('productions.index.no_products') %>
+                    </td>
+                    <td><%= I18n.l(production.cut_date, format: :long) if production.cut_date %></td>
+                    <td><%= I18n.l(production.deliver_date, format: :long) if production.deliver_date %></td>
+                    <td><%= production.consider ? 'Sim' : 'Não' %></td>
+                    <td>
+                      <%= link_to icon('fas fa-pencil-alt'), edit_production_path(production), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
+                      <%= link_to icon('fas fa-eye'), production, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                      <%= link_to icon('fas fa-trash'), production, title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>              
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
