@@ -81,7 +81,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
   gem 'rspec-rails', '>= 6.0.2'
-  gem 'solargraph'
+  gem 'solargraph', '>= 0.50.0'
 end
 
 group :development do
@@ -101,13 +101,13 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", ">= 4.11.0"
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 5.3', '>= 5.3.0'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'simplecov', '~> 0.21.2'
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', '>= 3.20.0'
 end
 
 group :production do
@@ -142,9 +142,9 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.8'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
-gem 'rubocop-rails', '>= 2.21.2', require: false
-gem 'rubocop-rspec', require: false
-gem 'rubocop-performance', require: false
+gem 'rubocop-rails', '>= 2.22.0', require: false
+gem 'rubocop-rspec', '>= 2.24.1', require: false
+gem 'rubocop-performance', '>= 1.20.0', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
 gem "good_job", github: 'bensheldon/good_job', branch: 'main'
