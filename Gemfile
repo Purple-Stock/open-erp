@@ -4,12 +4,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 # dotenv-rails must be on the top
-gem 'dotenv-rails', groups: %i[development test]
+gem 'dotenv-rails', '>= 3.0.0', groups: %i[development test]
 
 gem 'inherited_resources', '1.14.0'
 
 # Bundle Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.8"
+gem "rails", "~> 7.0.8", ">= 7.0.8.4"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -23,16 +23,16 @@ gem "puma", "~> 6.4", ">= 6.4.2"
 gem 'pundit'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", ">= 1.2.2"
+gem "jsbundling-rails", ">= 1.3.0"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", ">= 1.5.0"
+gem "turbo-rails", ">= 2.0.0"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails", ">= 1.3.1"
 
 gem "sentry-ruby"
-gem "sentry-rails", ">= 5.15.1"
+gem "sentry-rails", ">= 5.16.1"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -65,7 +65,7 @@ gem 'draper'
 
 gem 'enumerate_it'
 
-gem 'factory_bot_rails', '>= 6.3.0'
+gem 'factory_bot_rails', '>= 6.4.2'
 
 gem 'faker'
 
@@ -80,7 +80,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
-  gem 'rspec-rails', '>= 6.0.2'
+  gem 'rspec-rails', '>= 6.0.4'
   gem 'solargraph'
 end
 
@@ -101,13 +101,13 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", ">= 4.11.0"
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 5.3', '>= 5.3.0'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'simplecov', '~> 0.21.2'
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', '>= 3.20.0'
 end
 
 group :production do
@@ -132,19 +132,19 @@ gem 'pagy', '~> 6.0.0'
 
 gem 'business', '~> 2.0'
 
-gem 'acts_as_tenant'
+gem 'acts_as_tenant', '>= 1.0.0'
 
 gem 'aws-sdk-s3', require: false
 gem 'cocoon'
 # gem 'jquery-rails'
 gem 'jsonapi-serializer'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails-i18n', '~> 7.0.8'
+gem 'rails-i18n', '~> 7.0.9'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
-gem 'rubocop-rails', '>= 2.21.2', require: false
-gem 'rubocop-rspec', require: false
-gem 'rubocop-performance', require: false
+gem 'rubocop-rails', '>= 2.22.0', require: false
+gem 'rubocop-rspec', '>= 2.24.1', require: false
+gem 'rubocop-performance', '>= 1.20.0', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
 gem "good_job", github: 'bensheldon/good_job', branch: 'main'
