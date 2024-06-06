@@ -5,6 +5,38 @@
       <canvas id="chartjs-bar"></canvas>
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="card card-statistic-2">
+        <div class="card-icon shadow-primary bg-primary">
+          <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Pedidos Últimos 15 dias</h4>
+          </div>
+          <div class="card-body">
+            <%= @sum_last_days %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="card card-statistic-2">
+        <div class="card-icon shadow-primary bg-primary">
+          <i class="fas fa-shopping-bag"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Média Pedidos Últimos 15 dias</h4>
+          </div>
+          <div class="card-body">
+            <%= @average_last_days %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row p-4">
     <h1>Pesquisar por data</h1>
     <%= form_tag(bling_order_item_histories_path, method: :get) do %>
