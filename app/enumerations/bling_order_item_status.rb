@@ -12,6 +12,7 @@ class BlingOrderItemStatus < EnumerateIt::Base
     canceled: '12',
     collected: '173631',
     error: '215138',
+    fulfilled: '9',
     deleted_at_bling: '0',
     delete_in_progress: '-1'
   )

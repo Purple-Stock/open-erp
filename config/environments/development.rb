@@ -161,6 +161,23 @@ Rails.application.configure do
       set: { priority: 1 },
       description: 'Create Order Items statuses are canceled at current day'
     },
+
+    daily_error_order_task: {
+      cron: '*/10 * * * *',
+      class: 'DailyErrorOrderJob',
+      args: [1, Date.today],
+      set: { priority: 1 },
+      description: 'Create Order Items statuses are with error at current day'
+    },
+
+    daily_fulfilled_order_task: {
+      cron: '*/10 * * * *',
+      class: 'DailyFulfilledOrderJob',
+      args: [1, Date.today],
+      set: { priority: 1 },
+      description: 'Create Order Items statuses are with fulfilled at current day'
+    },
+    
     checked_order_items_task: {
       cron: '@weekly',
       class: 'CheckedBlingOrderItemsJob',
@@ -209,12 +226,12 @@ Rails.application.configure do
       description: 'Create Order Items whose statuses are collected every hour'
     },
 
-    change_in_progress_to_printed: {
+    change_in_progress_to_fulfilled: {
       cron: '*/10 * * * *',
       class: 'ChangeOrderStatusJob',
-      args: ['15', '95745', 1],
+      args: ['15', '9', 1],
       set: { priority: 2 },
-      description: 'Update new orders to printed status'
+      description: 'Update new orders to fulfilled status'
     }
   }
 end

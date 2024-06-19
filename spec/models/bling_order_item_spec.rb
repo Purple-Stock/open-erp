@@ -105,13 +105,13 @@ RSpec.describe BlingOrderItem, type: :model do
 
   describe '#Status::ALL' do
     it 'has status all' do
-      expect(described_class::Status::ALL).to match_array([15, 215138, 101_065, 24, 94_871, 95_745, 12, 173_631])
+      expect(described_class::Status::ALL).to match_array([15, 9, 215138, 101_065, 24, 94_871, 95_745, 12, 173_631])
     end
   end
 
   describe '#Status::PAID' do
     it 'has status paid' do
-      expect(described_class::Status::PAID).to match_array([15, 215138, 101_065, 24, 94_871, 95_745, 173_631])
+      expect(described_class::Status::PAID).to match_array([15, 9, 215138, 101_065, 24, 94_871, 95_745, 173_631])
     end
   end
 
