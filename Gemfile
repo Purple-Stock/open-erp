@@ -152,6 +152,6 @@ gem "good_job", github: 'bensheldon/good_job', branch: 'main'
 gem 'roo'
 gem 'roo-xls'
 gem 'activerecord-import'
-gem 'appsignal'
+gem 'appsignal', '>= 3.7.6'
 
 gem 'rubyzip'
