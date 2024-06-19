@@ -15,6 +15,11 @@ class BlingOrderItemOwnersController < ApplicationController
 
     @grouped_printed_order_items = BlingOrderItem.selected_group_order_items(@printed_order_items)
 
+    @fulfilled_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::FULFILLED,
+                                                          account_id: current_user.account.id)
+    
+    @grouped_fulfilled_order_items = BlingOrderItem.selected_group_order_items(@fulfilled_order_items)
+
     @in_progress_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS,
                                                     account_id: current_user.account.id)
 

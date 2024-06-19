@@ -72,7 +72,6 @@
                     show_revenue_estimation: false, highlighted: true, status: BlingOrderItemStatus::IN_PROGRESS %>
         </div>
       </div>
-
       <div class="card col-sm border-danger">
         <div class="card-header"><h3>Pedidos Impressos</h3></div>
         <div class="card-body">
@@ -91,13 +90,13 @@
     </div>
 
     <div class="row">
-      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
-        <div class="card-header"><h3>Pedidos com erro</h3></div>
+      <div class="card col-sm border-danger">
+        <div class="card-header"><h3>Pedidos Atendidos</h3></div>
         <div class="card-body">
-          <%= render 'order_items_with_filters', order_items: @grouped_error_order_items, show_revenue_estimation: false,
-                    highlighted: false, status: BlingOrderItemStatus::ERROR %>
-        </div>
-      </div>
+          <%= render 'order_items_with_filters', order_items: @grouped_fulfilled_order_items,
+                    show_revenue_estimation: false, highlighted: false, status: BlingOrderItemStatus::FULFILLED %>
+        </div>    
+      </div>    
       <div class="card col-sm">
         <div class="card-header"><h3>Pedidos Feitos(checados e verificados)</h3></div>
         <div class="card-body">
@@ -108,6 +107,15 @@
         <div class="card-header"><h3>Pedidos Coletados</h3></div>
         <div class="card-body">
           <%= render 'order_items', order_items: @collected_orders, show_revenue_estimation: false, highlighted:false %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
+        <div class="card-header"><h3>Pedidos com erro</h3></div>
+        <div class="card-body">
+          <%= render 'order_items_with_filters', order_items: @grouped_error_order_items, show_revenue_estimation: false,
+                    highlighted: false, status: BlingOrderItemStatus::ERROR %>
         </div>
       </div>
     </div>

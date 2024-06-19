@@ -73,6 +73,7 @@ class BlingOrderItem < ApplicationRecord
 
   STATUS_NAME_KEY_VALUE = {
     "15" => 'Em andamento',
+    "9" => 'Atendido',
     "101065" => 'Checado',
     "24" => 'Verificado',
     "94871" => 'Pendente',
@@ -82,9 +83,10 @@ class BlingOrderItem < ApplicationRecord
   }.freeze
 
   STATUS_PENDING_NAME_KEY_VALUE = {
-    "15, 94871, 95745" => 'Pedidos Pagos Pendentes',
+    "15, 9, 94871, 95745" => 'Pedidos Pagos Pendentes',
     "94871" => 'Pendente',
     "15" => 'Em andamento',
+    "9" => 'Atendido',
     "95745" => 'Impresso',
   }.freeze
 
@@ -96,11 +98,12 @@ class BlingOrderItem < ApplicationRecord
     PRINTED = 95_745
     CANCELED = 12
     COLLECTED = 173_631
+    FULFILLED = 9
     ERROR = 215138
-    ALL = [IN_PROGRESS, CHECKED, ERROR, VERIFIED, PENDING, PRINTED, CANCELED, COLLECTED].freeze
+    ALL = [IN_PROGRESS, CHECKED, ERROR, VERIFIED, PENDING, PRINTED, CANCELED, COLLECTED, FULFILLED].freeze
     EXCLUDE_DONE = [IN_PROGRESS, PENDING, PRINTED, CANCELED].freeze
-    WITHOUT_CANCELLED = [IN_PROGRESS, CHECKED, ERROR, VERIFIED, PENDING, PRINTED].freeze
-    PAID = [IN_PROGRESS, CHECKED, VERIFIED, ERROR, PENDING, PRINTED, COLLECTED].freeze
+    WITHOUT_CANCELLED = [IN_PROGRESS, CHECKED, ERROR, VERIFIED, PENDING, PRINTED, FULFILLED].freeze
+    PAID = [IN_PROGRESS, CHECKED, VERIFIED, ERROR, PENDING, PRINTED, COLLECTED, FULFILLED].freeze
   end
 
   scope :date_range_in_a_day, lambda { |date|
