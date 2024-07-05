@@ -15,10 +15,10 @@ GIT
 
 GIT
   remote: https://github.com/bensheldon/good_job.git
-  revision: 28fb6aae3df4c796c48cccbed314920959c74c64
+  revision: 58a6605b899abb3f6a8c1232704f7950510cc201
   branch: main
   specs:
-    good_job (3.29.4)
+    good_job (3.29.5)
       activejob (>= 6.0.0)
       activerecord (>= 6.0.0)
       concurrent-ruby (>= 1.0.2)
@@ -433,13 +433,13 @@ GEM
       chunky_png (~> 1.0)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
-    rspec-expectations (3.13.0)
+    rspec-expectations (3.13.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-mocks (3.13.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (6.1.2)
+    rspec-rails (6.1.3)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
@@ -513,10 +513,10 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.17.3)
+    sentry-rails (5.18.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.17.3)
-    sentry-ruby (5.17.3)
+      sentry-ruby (~> 5.18.0)
+    sentry-ruby (5.18.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
     serviceworker-rails (0.6.0)
@@ -659,7 +659,7 @@ DEPENDENCIES
   roo
   roo-xls
   rqrcode_png!
-  rspec-rails (>= 6.0.4)
+  rspec-rails (>= 6.1.3)
   rubocop-performance (>= 1.20.0)
   rubocop-rails (>= 2.25.1)
   rubocop-rspec (>= 2.24.1)
@@ -667,7 +667,7 @@ DEPENDENCIES
   rubyzip
   sassc-rails
   selenium-webdriver (>= 4.11.0)
-  sentry-rails (>= 5.16.1)
+  sentry-rails (>= 5.18.0)
   sentry-ruby
   serviceworker-rails
   shoulda-matchers (~> 5.3, >= 5.3.0)
