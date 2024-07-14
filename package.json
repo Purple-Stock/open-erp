@@ -13,7 +13,7 @@
     "@rails/activestorage": "^7.1.0",
     "@rails/ujs": "^6.1.6",
     "axios": "^1.6.4",
-    "bootstrap": "^4.6.2",
+    "bootstrap": "^5.0.0",
     "chartjs": "^0.3.24",
     "cleave.js": "^1.4.7",
     "flatpickr": "^4.6.13",
