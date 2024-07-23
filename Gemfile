@@ -32,7 +32,7 @@ gem "turbo-rails", ">= 2.0.0"
 gem "stimulus-rails", ">= 1.3.1"
 
 gem "sentry-ruby"
-gem "sentry-rails", ">= 5.16.1"
+gem "sentry-rails", ">= 5.18.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -80,7 +80,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
-  gem 'rspec-rails', '>= 6.0.4'
+  gem 'rspec-rails', '>= 6.1.3'
   gem 'solargraph'
 end
 
