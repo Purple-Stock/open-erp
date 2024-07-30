@@ -284,7 +284,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
-    jsbundling-rails (1.3.0)
+    jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     json (2.7.2)
     jsonapi-serializer (2.2.0)
@@ -328,9 +328,9 @@ GEM
       net-protocol
     newrelic_rpm (9.10.1)
     nio4r (2.7.3)
-    nokogiri (1.16.6-arm64-darwin)
+    nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.6-x86_64-linux)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (6.0.4)
@@ -355,7 +355,7 @@ GEM
     pundit (2.3.2)
       activesupport (>= 3.0.0)
     raabro (1.4.0)
-    racc (1.8.0)
+    racc (1.8.1)
     rack (2.2.9)
     rack-cors (2.0.2)
       rack (>= 2.0.0)
@@ -605,7 +605,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.36)
-    zeitwerk (2.6.16)
+    zeitwerk (2.6.17)
 
 PLATFORMS
   arm64-darwin-22
@@ -639,7 +639,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   inherited_resources (= 1.14.0)
   jbuilder
-  jsbundling-rails (>= 1.3.0)
+  jsbundling-rails (>= 1.3.1)
   jsonapi-serializer
   listen (~> 3.2)
   net-smtp
