@@ -42,7 +42,6 @@ FactoryBot.define do
     price { rand(100..400) }
     active { true }
 
-    account_id { create(:account).id }
-    category_id { create(:category, account_id:).id }
+    association :account
   end
 end
