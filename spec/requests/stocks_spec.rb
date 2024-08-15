@@ -8,7 +8,7 @@ RSpec.describe 'Stocks', type: :request do
 
   describe 'GET /index' do
     before do
-      FactoryBot.create_list(:stock, 2, product:)
+      FactoryBot.create_list(:stock, 10, product:, account_id: user.account.id)
       sign_in user
     end
 
