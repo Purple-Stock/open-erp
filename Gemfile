@@ -11,7 +11,7 @@ gem 'inherited_resources', '1.14.0'
 # Bundle Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails", ">= 3.5.1"
+gem "sprockets-rails", ">= 3.5.2"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
