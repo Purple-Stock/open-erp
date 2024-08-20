@@ -13,10 +13,11 @@
 #
 FactoryBot.define do
   factory :stock do
-    product_id { 1 }
     bling_product_id { 1 }
     total_balance { [10, 30, 40, 0, -1, 100, -4].sample }
     total_virtual_balance { [10, 30, 40, 0, -1, 100, -4].sample }
     account_id { 1 }
+ 
+    association :product
   end
 end

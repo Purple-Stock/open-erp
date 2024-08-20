@@ -25,8 +25,8 @@ class StocksController < ApplicationController
                   .only_positive_price(true)
                   .filter_by_status(params['status'])
                   .filter_by_total_balance_situation(params['balance_situation'])
-                  .sort_by(&:calculate_basic_forecast)
-                  .reverse!
+                  #.sort_by(&:calculate_basic_forecast)
+                  #.reverse!
     @pagy, @stocks = pagy_array(stocks)
   end
 end

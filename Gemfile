@@ -11,7 +11,7 @@ gem 'inherited_resources', '1.14.0'
 # Bundle Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails", ">= 3.5.1"
+gem "sprockets-rails", ">= 3.5.2"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
@@ -23,10 +23,10 @@ gem "puma", "~> 6.4", ">= 6.4.2"
 gem 'pundit'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", ">= 1.3.0"
+gem "jsbundling-rails", ">= 1.3.1"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", ">= 2.0.0"
+gem "turbo-rails", ">= 2.0.6"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails", ">= 1.3.1"
