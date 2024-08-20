@@ -29,7 +29,7 @@ gem "jsbundling-rails", ">= 1.3.1"
 gem "turbo-rails", ">= 2.0.6"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails", ">= 1.3.1"
+gem "stimulus-rails", ">= 1.3.4"
 
 gem "sentry-ruby"
 gem "sentry-rails", ">= 5.18.0"
@@ -80,7 +80,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
-  gem 'rspec-rails', '>= 6.1.3'
+  gem 'rspec-rails', '>= 6.1.4'
   gem 'solargraph'
 end
 
