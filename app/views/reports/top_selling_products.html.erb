@@ -1,65 +1,118 @@
-<section class="mt-5 section bordered-section">
-  <div class="container">
-    <h1 class="text-center mb-4">Pesquisar por data</h1>
-    <div class="row justify-content-center">
-      <div class="col-md-4 mb-3">
-        <%= form_tag(top_selling_products_path, method: :get) do %>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Data inicial</span>
+<div class="section-body">
+  <h2 class="section-title">Produtos Mais Vendidos</h2>
+  <p class="section-lead">Analise os produtos mais vendidos em um período específico.</p>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Filtrar por Data</h4>
+        </div>
+        <div class="card-body">
+          <%= form_tag(top_selling_products_path, method: :get, id: 'search-form', class: 'form-inline') do %>
+            <div class="form-group mr-2">
+              <%= label_tag 'selling_products[initial_date]', 'Data Inicial', class: 'mr-2' %>
+              <%= date_field_tag 'selling_products[initial_date]', @initial_date || (Date.today - 7.days), class: 'form-control', id: 'initial_date' %>
             </div>
-            <%= date_field_tag('selling_products[initial_date]', @initial_date || (Date.today - 7.days), class: 'form-control') %>
-          </div>
-      </div>
-      <div class="col-md-4 mb-3">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Data final</span>
+            <div class="form-group mr-2">
+              <%= label_tag 'selling_products[final_date]', 'Data Final', class: 'mr-2' %>
+              <%= date_field_tag 'selling_products[final_date]', @final_date || Date.today, class: 'form-control', id: 'final_date' %>
             </div>
-            <%= date_field_tag('selling_products[final_date]', @final_date || Date.today, class: 'form-control') %>
-          </div>
-      </div>
-      <div class="col-md-2">
-          <%= button_tag('Pesquisar...', class: 'btn btn-primary btn-block', style: 'margin-top: 38px;') %>
-        <% end %>
+            <%= button_tag 'Pesquisar', class: 'btn btn-primary mr-2' %>
+            <%= button_tag 'Últimos 15 Dias', id: 'last15DaysBtn', type: 'button', class: 'btn btn-secondary mr-2' %>
+            <%= button_tag 'Últimos 30 Dias', id: 'last30DaysBtn', type: 'button', class: 'btn btn-secondary' %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-<div class="container mt-5">
-  <div class="mb-3">
-    Download: 
-    <%= link_to 'CSV', top_selling_products_path(format: :csv, selling_products: { initial_date: @initial_date, final_date: @final_date }), class: 'btn btn-sm btn-secondary' %></div>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>SKU</th>
-        <th>Total Quantity</th>
-        <th>Total Value</th>
-        <th>Cumulative Percentage</th>
-        <th>ABC Classification</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% cumulative_value = 0 %>
-      <% @items.each do |item| %>
-        <% cumulative_value += item.total_value %>
-        <% percentage = (cumulative_value.to_f / @total_value * 100).round(2) %>
-        <% classification = case percentage
-                            when 0..80 then 'Curva A'
-                            when 80..95 then 'Curva B'
-                            else 'Curva C'
-                            end %>
-        <tr>
-          <td><%= item.sku %></td>
-          <td><%= item.total_quantity %></td>
-          <td><%= number_to_currency(item.total_value, unit: "R$", separator: ",", delimiter: ".") %></td>
-          <td><%= number_to_percentage(percentage, precision: 2) %></td>
-          <td><%= classification %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Resultados</h4>
+          <div class="card-header-action">
+            <%= link_to 'Baixar CSV', top_selling_products_path(format: :csv, selling_products: { initial_date: @initial_date, final_date: @final_date }), class: 'btn btn-icon icon-left btn-primary' %>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped" id="top-selling-products-table">
+              <thead>
+                <tr>
+                  <th>SKU</th>
+                  <th>Quantidade Total</th>
+                  <th>Valor Total</th>
+                  <th>Porcentagem Cumulativa</th>
+                  <th>Classificação ABC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cumulative_value = 0 %>
+                <% @items.each do |item| %>
+                  <% cumulative_value += item.total_value %>
+                  <% percentage = (cumulative_value.to_f / @total_value * 100).round(2) %>
+                  <% classification = case percentage
+                                      when 0..80 then 'Curva A'
+                                      when 80..95 then 'Curva B'
+                                      else 'Curva C'
+                                      end %>
+                  <tr>
+                    <td><%= item.sku %></td>
+                    <td><%= item.total_quantity %></td>
+                    <td><%= number_to_currency(item.total_value, unit: "R$", separator: ",", delimiter: ".") %></td>
+                    <td><%= number_to_percentage(percentage, precision: 2) %></td>
+                    <td><%= classification %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<%= content_for :javascript do %>
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const last15DaysBtn = document.getElementById('last15DaysBtn');
+      const last30DaysBtn = document.getElementById('last30DaysBtn');
+      const initialDateInput = document.getElementById('initial_date');
+      const finalDateInput = document.getElementById('final_date');
+      const searchForm = document.getElementById('search-form');
+
+      function setDateRangeAndSubmit(days) {
+        const today = new Date();
+        const pastDate = new Date(today);
+        pastDate.setDate(today.getDate() - days);
+
+        finalDateInput.value = today.toISOString().split('T')[0];
+        initialDateInput.value = pastDate.toISOString().split('T')[0];
+
+        searchForm.submit();
+      }
+
+      last15DaysBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        setDateRangeAndSubmit(15);
+      });
+
+      last30DaysBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        setDateRangeAndSubmit(30);
+      });
+
+      // Initialize DataTables
+      $(document).ready(function() {
+        $('#top-selling-products-table').DataTable({
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+          }
+        });
+      });
+    });
+  </script>
+<% end %>
