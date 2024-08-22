@@ -32,8 +32,15 @@ class ReportsController < ApplicationController
                  .where(bling_order_items: { situation_id: [BlingOrderItem::Status::PAID] })
                  .where(account_id: current_tenant.id)
                  .group('items.sku')
-                 .select('items.sku, SUM(items.quantity) AS total_quantity')
-                 .order('total_quantity DESC')
+                 .select('items.sku, SUM(items.value) AS total_value, COUNT(*) AS total_quantity')
+                 .order('total_value DESC')
+
+    @total_value = @items.sum(&:total_value)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_csv, filename: "top_selling_products_#{Date.today}.csv" }
+    end
   end
 
   private
@@ -47,5 +54,30 @@ class ReportsController < ApplicationController
       final_date = Date.today.end_of_day
     end
     @date_range = initial_date..final_date
+  end
+
+  def generate_csv
+    CSV.generate(headers: true) do |csv|
+      csv << ['SKU', 'Total Quantity', 'Total Value', 'Cumulative Percentage', 'ABC Classification']
+
+      cumulative_value = 0
+      @items.each do |item|
+        cumulative_value += item.total_value
+        percentage = (cumulative_value.to_f / @total_value * 100).round(2)
+        classification = case percentage
+                         when 0..80 then 'Curva A'
+                         when 80..95 then 'Curva B'
+                         else 'Curva C'
+                         end
+
+        csv << [
+          item.sku,
+          item.total_quantity,
+          item.total_value,
+          percentage,
+          classification
+        ]
+      end
+    end
   end
 end

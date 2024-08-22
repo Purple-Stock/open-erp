@@ -28,18 +28,36 @@
 </section>
 
 <div class="container mt-5">
+  <div class="mb-3">
+    Download: 
+    <%= link_to 'CSV', top_selling_products_path(format: :csv, selling_products: { initial_date: @initial_date, final_date: @final_date }), class: 'btn btn-sm btn-secondary' %></div>
+
   <table class="table">
     <thead>
       <tr>
         <th>SKU</th>
         <th>Total Quantity</th>
+        <th>Total Value</th>
+        <th>Cumulative Percentage</th>
+        <th>ABC Classification</th>
       </tr>
     </thead>
     <tbody>
+      <% cumulative_value = 0 %>
       <% @items.each do |item| %>
+        <% cumulative_value += item.total_value %>
+        <% percentage = (cumulative_value.to_f / @total_value * 100).round(2) %>
+        <% classification = case percentage
+                            when 0..80 then 'Curva A'
+                            when 80..95 then 'Curva B'
+                            else 'Curva C'
+                            end %>
         <tr>
           <td><%= item.sku %></td>
           <td><%= item.total_quantity %></td>
+          <td><%= number_to_currency(item.total_value, unit: "R$", separator: ",", delimiter: ".") %></td>
+          <td><%= number_to_percentage(percentage, precision: 2) %></td>
+          <td><%= classification %></td>
         </tr>
       <% end %>
     </tbody>
