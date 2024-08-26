@@ -250,6 +250,14 @@ Rails.application.configure do
       args: ['15', '9', 1],
       set: { priority: 2 },
       description: 'Update new orders to fulfilled status'
+    },
+
+    change_printed_to_pending: {
+      cron: '0 17 * * *',
+      class: 'UpdateBlingOrderStatusJob',
+      args: ['95745', '94871', 1],
+      set: { priority: 2 },
+      description: 'Change all printed orders to pending status daily at 17:00'
     }
   }
 end
