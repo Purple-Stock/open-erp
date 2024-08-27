@@ -44,6 +44,7 @@
                   <th>SKU</th>
                   <th>Quantidade Total</th>
                   <th>Valor Total</th>
+                  <th>Porcentagem Proporcional</th>
                   <th>Porcentagem Cumulativa</th>
                   <th>Classificação ABC</th>
                 </tr>
@@ -51,9 +52,10 @@
               <tbody>
                 <% cumulative_value = 0 %>
                 <% @items.each do |item| %>
+                  <% proportional_percentage = (item.total_value.to_f / @total_value * 100).round(2) %>
                   <% cumulative_value += item.total_value %>
-                  <% percentage = (cumulative_value.to_f / @total_value * 100).round(2) %>
-                  <% classification = case percentage
+                  <% cumulative_percentage = (cumulative_value.to_f / @total_value * 100).round(2) %>
+                  <% classification = case cumulative_percentage
                                       when 0..80 then 'Curva A'
                                       when 80..95 then 'Curva B'
                                       else 'Curva C'
@@ -62,7 +64,8 @@
                     <td><%= item.sku %></td>
                     <td><%= item.total_quantity %></td>
                     <td><%= number_to_currency(item.total_value, unit: "R$", separator: ",", delimiter: ".") %></td>
-                    <td><%= number_to_percentage(percentage, precision: 2) %></td>
+                    <td><%= number_to_percentage(proportional_percentage, precision: 2) %></td>
+                    <td><%= number_to_percentage(cumulative_percentage, precision: 2) %></td>
                     <td><%= classification %></td>
                   </tr>
                 <% end %>
@@ -73,6 +76,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <%= content_for :javascript do %>
