@@ -58,13 +58,14 @@ class ReportsController < ApplicationController
 
   def generate_csv
     CSV.generate(headers: true) do |csv|
-      csv << ['SKU', 'Total Quantity', 'Total Value', 'Cumulative Percentage', 'ABC Classification']
+      csv << ['SKU', 'Total Quantity', 'Total Value', 'Proportional Percentage', 'Cumulative Percentage', 'ABC Classification']
 
       cumulative_value = 0
       @items.each do |item|
+        proportional_percentage = (item.total_value.to_f / @total_value * 100).round(2)
         cumulative_value += item.total_value
-        percentage = (cumulative_value.to_f / @total_value * 100).round(2)
-        classification = case percentage
+        cumulative_percentage = (cumulative_value.to_f / @total_value * 100).round(2)
+        classification = case cumulative_percentage
                          when 0..80 then 'Curva A'
                          when 80..95 then 'Curva B'
                          else 'Curva C'
@@ -74,7 +75,8 @@ class ReportsController < ApplicationController
           item.sku,
           item.total_quantity,
           item.total_value,
-          percentage,
+          proportional_percentage,
+          cumulative_percentage,
           classification
         ]
       end
