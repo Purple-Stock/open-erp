@@ -1,9 +1,10 @@
+# app/controllers/productions_controller.rb
+
 class ProductionsController < ApplicationController
   before_action :set_production, only: [:show, :edit, :update, :destroy]
-  before_action :set_tailor_options, only: [:new, :edit, :create, :update]
 
   def index
-    @productions = Production.all
+    @productions = Production.includes(:tailor, production_products: :product).all
   end
 
   def show
@@ -12,9 +13,7 @@ class ProductionsController < ApplicationController
   def new
     @production = Production.new
     @production.production_products.build
-  end
-
-  def edit
+    @tailors = Tailor.all
   end
 
   def create
@@ -22,43 +21,39 @@ class ProductionsController < ApplicationController
     if @production.save
       redirect_to @production, notice: 'Production was successfully created.'
     else
+      @tailors = Tailor.all
       render :new
     end
+  end
+
+  def edit
+    @tailors = Tailor.all
   end
 
   def update
     if @production.update(production_params)
       redirect_to @production, notice: 'Production was successfully updated.'
     else
+      @tailors = Tailor.all
       render :edit
     end
   end
 
   def destroy
-    begin      
-      ProductionProduct.where(production_id: @production.id).destroy_all
-      @production.destroy
-      respond_to do |format|
-        format.html { redirect_to productions_path, notice: 'Produção deletado.' }
-        format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@production)) }
-      end
-    rescue ActiveRecord::InvalidForeignKey
-      # Handle invalid foreign key by raising a custom error message
-      raise "Can't delete production because it has associated records"
-    end
+    @production.destroy
+    redirect_to productions_url, notice: 'Production was successfully destroyed.'
   end
 
   private
 
-    def set_production
-      @production = Production.find(params[:id])
-    end
+  def set_production
+    @production = Production.find(params[:id])
+  end
 
-    def production_params
-      params.require(:production).permit(:cut_date, :deliver_date, :quantity, :tailor_id, :consider, production_products_attributes: [:id, :product_id, :quantity, :_destroy])
-    end
-
-    def set_tailor_options
-      @tailors = Tailor.all
-    end
+  def production_params
+    params.require(:production).permit(
+      :tailor_id, :cut_date, :delivery_date, :consider,
+      production_products_attributes: [:id, :product_id, :quantity, :_destroy]
+    )
+  end
 end

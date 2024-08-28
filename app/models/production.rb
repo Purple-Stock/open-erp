@@ -18,6 +18,7 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (account_id => accounts.id)
 #  fk_rails_...  (tailor_id => tailors.id)
 #
 class Production < ApplicationRecord

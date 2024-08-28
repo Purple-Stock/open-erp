@@ -1,11 +1,22 @@
-<br><br>
-<%= form_with(model: @production, local: true, html: { class: 'needs-validation', novalidate: '' }) do |form| %>
+<h1><%= t('productions.new.title') %></h1>
+
+<%= form_with(model: [@account, @production], local: true, html: { class: 'needs-validation', novalidate: '' }) do |form| %>
+  <% if @production.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(@production.errors.count, "error") %> prohibited this production from being saved:</h2>
+      <ul>
+        <% @production.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <!-- Row 1: Tailor Selection -->
   <div class="row mb-3">
     <div class="col-3">
       <%= form.label :tailor_id, Production.human_attribute_name(:tailor), class: 'form-label' %>
-      <%= form.collection_select :tailor_id, @tailors, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+      <%= form.collection_select :tailor_id, @tailors, :id, :name, { include_blank: true }, { class: 'form-control', required: true } %>
     </div>
   </div>
 
@@ -13,20 +24,28 @@
   <div class="row mb-3">
     <div class="col-md-6">
       <%= form.label :cut_date, Production.human_attribute_name(:cut_date), class: 'form-label' %>
-      <%= form.date_field :cut_date, class: 'form-control' %>
+      <%= form.date_field :cut_date, class: 'form-control', required: true %>
     </div>
     <div class="col-md-6">
-      <%= form.label :deliver_date, Production.human_attribute_name(:deliver_date), class: 'form-label' %>
-      <%= form.date_field :deliver_date, class: 'form-control' %>
+      <%= form.label :delivery_date, Production.human_attribute_name(:delivery_date), class: 'form-label' %>
+      <%= form.date_field :delivery_date, class: 'form-control' %>
     </div>
   </div>
 
   <!-- Row 3: Production Products -->
   <div class="mb-3">
-    <%= form.fields_for :production_products do |pp_form| %>
-      <%= render 'production_product_fields', f: pp_form %>
-    <% end %>
-    <%= link_to_add_association t('actions.add_product'), form, :production_products, class: 'btn btn-primary' %>
+    <h3><%= t('productions.products') %></h3>
+    <div id="production-products">
+      <%= form.fields_for :production_products do |pp_form| %>
+        <%= render 'production_product_fields', f: pp_form %>
+      <% end %>
+    </div>
+    <%= link_to_add_association t('actions.add_product'), form, :production_products, 
+        class: 'btn btn-primary',
+        data: {
+          association_insertion_node: '#production-products',
+          association_insertion_method: 'append'
+        } %>
   </div>
 
   <div class="row mb-3 form-check">
@@ -40,5 +59,4 @@
       <%= form.submit t('helpers.submit.create'), class: 'btn btn-success' %>
     </div>
   </div>
-
 <% end %>

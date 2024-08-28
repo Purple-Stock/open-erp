@@ -1,22 +1,97 @@
-<%= form_with(model: production, local: true) do |form| %>
+<%# app/views/productions/_form.html.erb %>
 
-  <!-- Fields for production -->
+<%= form_with(model: [@account, production], local: true) do |form| %>
+  <% if production.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(production.errors.count, "error") %> prohibited this production from being saved:</h2>
+      <ul>
+        <% production.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :number %>
+    <%= form.number_field :number, class: 'form-control' %>
+  </div>
 
   <div class="form-group">
     <%= form.label :tailor_id, 'Select Tailor' %>
-    <%= form.collection_select :tailor_id, Tailor.all, :id, :name, include_blank: true %>
+    <%= form.collection_select :tailor_id, Tailor.all, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :cut_date %>
+    <%= form.date_field :cut_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :delivery_date %>
+    <%= form.date_field :delivery_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :pieces_delivered %>
+    <%= form.number_field :pieces_delivered, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :pieces_missing %>
+    <%= form.number_field :pieces_missing, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :expected_delivery_date %>
+    <%= form.date_field :expected_delivery_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :confirmed %>
+    <%= form.check_box :confirmed, class: 'form-check-input' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :paid %>
+    <%= form.check_box :paid, class: 'form-check-input' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :consider %>
+    <%= form.check_box :consider, class: 'form-check-input' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :observation %>
+    <%= form.text_area :observation, class: 'form-control' %>
   </div>
 
   <h3>Products</h3>
   <div id="products">
-    <%= form.fields_for :products do |product_form| %>
-      <%= render 'product_fields', f: product_form %>
+    <%= form.fields_for :production_products do |production_product_form| %>
+      <%= render 'production_product_fields', f: production_product_form %>
     <% end %>
 
     <div class="links">
-      <%= link_to_add_association 'Add Product', form, :products %>
+      <%= link_to_add_association 'Add Product', form, :production_products, partial: 'production_product_fields' %>
     </div>
   </div>
 
-  <%= form.submit %>
+  <%= form.submit class: 'btn btn-primary' %>
 <% end %>
+
+<%# app/views/productions/_production_product_fields.html.erb %>
+<div class="nested-fields">
+  <div class="form-group">
+    <%= f.label :product_id, 'Select Product' %>
+    <%= f.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, class: 'form-control' %>
+  </div>
+
+  <%= link_to_remove_association "Remove Product", f %>
+</div>
