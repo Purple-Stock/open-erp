@@ -2016,10 +2016,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-sweetalert2@^11.7.32:
-  version "11.7.32"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.7.32.tgz#366fde9eaa1fc8d7a8993400d7582715647a31cf"
-  integrity sha512-44tNNe2oLe7T94mT6dus4hc9G7qg6jZU/K5qZzpNS6e5HGPrSF6Kie6oZ7B5puIJydB34V2h/8f5EhIFivYo4A==
+sweetalert2@^11.12.3:
+  version "11.12.4"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.12.4.tgz#2f7cc2663dab7845f33d5abd6ce3f642a09b91dd"
+  integrity sha512-ZSpyaLbAmn4b7xjnV9x9BFD1UOrCAhIzm1D8dZ443kGxtVKqbTIA5SgXs4xeEtmFfEXUyC3RBgpSlu1AXmCiHA==
 
 tapable@^2.1.1, tapable@^2.2.0:
   version "2.2.1"
