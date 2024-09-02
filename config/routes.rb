@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
-#require 'sidekiq/web'
-
 Rails.application.routes.draw do
-  resources :productions
+  # mount Sidekiq::Web => '/sidekiq'
+  mount GoodJob::Engine => 'good_job'
+
+  resources :productions do
+    member do
+      get :verify
+      patch :verify, to: 'productions#update'
+    end
+  end
+
   resources :tailors
   get 'dashboards/others_status'
-  #mount Sidekiq::Web => '/sidekiq'
-  mount GoodJob::Engine => 'good_job'
 
   resources :bling_order_items
 
@@ -27,7 +32,7 @@ Rails.application.routes.draw do
   resources :shein_bling_order_items, only: :index
 
   resources :shein_dashboards
-  resources :shein_orders do 
+  resources :shein_orders do
     collection do
       get :upload
       post :import
@@ -70,11 +75,16 @@ Rails.application.routes.draw do
       delete :destroy_from_index
     end
   end
-  resources :bling_data, only: [:index, :show]
+  resources :bling_data, only: %i[index show]
   get 'products_defer', to: 'products#index_defer'
   get 'products_tags_defer', to: 'products#tags_index_defer'
   get '/products/:id/duplicate', to: 'products#duplicate', as: 'meeting_duplicate'
   get '/products/:id/update_active', to: 'products#update_active', as: 'update_product_active'
+  resources :items, only: [] do
+    member do
+      patch :update_status
+    end
+  end
 
   resources :customers do
     collection do
@@ -121,4 +131,12 @@ Rails.application.routes.draw do
     end
   end
   root to: 'home#index'
+  
+  resources :accounts do
+    resources :productions do
+      member do
+        get :verify
+      end
+    end
+  end
 end
