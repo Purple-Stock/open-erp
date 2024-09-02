@@ -65,6 +65,11 @@ module ApplicationHelper
     time.to_datetime.strftime('%d-%m-%Y %H:%M:%S')
   end
 
+  def pt_only_date_format(time)
+    return 'N/A' if time.nil?
+    time.to_datetime.strftime('%d-%m-%Y')
+  end
+
   # date format "%d/%m/%Y %H:%m"
   def display_status(status)
     if status

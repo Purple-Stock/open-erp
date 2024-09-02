@@ -5,6 +5,7 @@ pt-BR:
       production_product: "Produto da Produção"
     attributes:
       production:
+        service_order_number: "Número da Ordem de Serviço"
         tailor: "Costureiro"
         cut_date: "Data de Corte"
         delivery_date: "Data de Entrega"

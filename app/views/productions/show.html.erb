@@ -28,12 +28,20 @@
       </div>
       <div class="card-body">
         <dl class="row">
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:service_order_number) %>:</dt>
+          <dd class="col-sm-9"><%= @production.service_order_number %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:cut_date) %>:</dt>
-          <dd class="col-sm-9"><%= @production.cut_date %></dd>
+          <dd class="col-sm-9"><%= pt_only_date_format(@production.cut_date) %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:expected_delivery_date) %>:</dt>
-          <dd class="col-sm-9"><%= @production.expected_delivery_date %></dd>
+          <dd class="col-sm-9"><%= pt_only_date_format(@production.expected_delivery_date) %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:consider)%>:</dt>
           <dd class="col-sm-9"><%= @production.consider ? 'Sim' : 'Não' %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:confirmed) %>:</dt>
+          <dd class="col-sm-9"><%= @production.confirmed ? 'Sim' : 'Não' %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:paid) %>:</dt>
+          <dd class="col-sm-9"><%= @production.paid ? 'Sim' : 'Não' %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:observation) %>:</dt>
+          <dd class="col-sm-9"><%= @production.observation %></dd>
         </dl>
       </div>
     </div>

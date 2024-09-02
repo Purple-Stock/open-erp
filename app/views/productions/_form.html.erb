@@ -1,6 +1,6 @@
 <%# app/views/productions/_form.html.erb %>
 
-<%= form_with(model: [@account, production], local: true) do |form| %>
+<%= form_with(model: production, local: true) do |form| %>
   <% if production.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(production.errors.count, "error") %> prohibited this production from being saved:</h2>
@@ -11,6 +11,11 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="form-group">
+    <%= form.label :service_order_number %>
+    <%= form.text_field :service_order_number, class: 'form-control' %>
+  </div>
 
   <div class="form-group">
     <%= form.label :number %>
@@ -79,6 +84,7 @@
   </div>
 
   <%= form.submit class: 'btn btn-primary' %>
+  <%= link_to 'Verify', verify_account_production_path(@account, production), class: 'btn btn-secondary', method: :get if production.persisted? %>
 <% end %>
 
 <%# app/views/productions/_production_product_fields.html.erb %>
