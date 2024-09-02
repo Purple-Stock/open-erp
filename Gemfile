@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.4'
 
 # dotenv-rails must be on the top
 gem 'dotenv-rails', '>= 3.0.0', groups: %i[development test]
