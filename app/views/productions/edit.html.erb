@@ -20,15 +20,19 @@
       <div class="card-body">
         <%= form_with(model: @production, local: true) do |form| %>
           <div class="row mb-3">
-            <div class="col-md-4">
+            <div class="col-md-3">
+              <%= form.label :service_order_number, model_class.human_attribute_name(:service_order_number), class: 'form-label' %>
+              <%= form.text_field :service_order_number, class: 'form-control' %>
+            </div>
+            <div class="col-md-3">
               <%= form.label :tailor_id, model_class.human_attribute_name(:tailor), class: 'form-label' %>
               <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: 'Select a tailor' }, { class: 'form-control' } %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= form.label :cut_date, model_class.human_attribute_name(:cut_date), class: 'form-label' %>
               <%= form.date_field :cut_date, class: 'form-control', readonly: true %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= form.label :expected_delivery_date, model_class.human_attribute_name(:expected_delivery_date), class: 'form-label' %>
               <%= form.date_field :expected_delivery_date, class: 'form-control' %>
             </div>
