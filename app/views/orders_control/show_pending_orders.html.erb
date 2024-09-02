@@ -20,8 +20,8 @@
   <% end %>
 
   <div class="row justify-content-center">
-    <% if @pending_order_items.present? %>
-      <% @pending_order_items.group_by { |item| item.bling_order_item.store_name }.each do |loja_name, items| %>
+    <% if @all_items.present? %>
+      <% @all_items.group_by { |item| item.bling_order_item.store_name }.each do |loja_name, items| %>
         <div class="col-md-12">
           <div class="card mb-4">
             <div class="card-body">
@@ -37,6 +37,11 @@
                       <div class="card card-body">
                         Pedido: <%= item.bling_order_item.bling_order_id %>, Quantidade: <%= item.quantity %> unidades<br>
                         <a href='https://www.bling.com.br/vendas.php#edit/<%= item.bling_order_item.bling_order_id %>'>Ver Pedido no Bling</a>
+                        <p>Status: <%= item.pending? ? 'Pendente' : 'Não Pendente' %></p>
+                        <% if item.bling_order_item.situation_id == BlingOrderItem::Status::PENDING %>
+                          <%= link_to 'Marcar como Pendente', update_status_item_path(item, status: 'pendente'), method: :patch, class: 'btn btn-success' %>
+                          <%= link_to 'Marcar como Não Pendente', update_status_item_path(item, status: 'nao_pendente'), method: :patch, class: 'btn btn-danger' %>
+                        <% end %>
                       </div>
                     </div>
                   <% end %>

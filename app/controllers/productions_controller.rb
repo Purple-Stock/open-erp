@@ -1,13 +1,17 @@
 # app/controllers/productions_controller.rb
 
 class ProductionsController < ApplicationController
-  before_action :set_production, only: [:show, :edit, :update, :destroy]
+  before_action :set_production, only: [:show, :edit, :update, :destroy, :verify]
+  before_action :set_tailors, only: [:new, :edit, :create, :update]
 
   def index
     @productions = Production.includes(:tailor, production_products: :product).all
   end
 
-  def show
+  def show; end
+
+  def verify
+    @production = @account.productions.find(params[:id])
   end
 
   def new
@@ -19,20 +23,23 @@ class ProductionsController < ApplicationController
   def create
     @production = Production.new(production_params)
     if @production.save
-      redirect_to @production, notice: 'Production was successfully created.'
+      redirect_to @production, notice: t('.production_created')
     else
       @tailors = Tailor.all
-      render :new
+      flash.now[:alert] = t('.creation_failed')
+      logger.error("Failed to create production: #{@production.errors.full_messages}")
     end
   end
 
   def edit
-    @tailors = Tailor.all
+    @production = Production.find(params[:id])
+    @tailors = Tailor.all  # Ensure @tailors is set for the edit view
   end
 
   def update
-    if @production.update(production_params)
-      redirect_to @production, notice: 'Production was successfully updated.'
+    @production = Production.find(params[:id])
+    if @production.update!(production_params)
+      redirect_to @production, notice: t('.production_updated')
     else
       @tailors = Tailor.all
       render :edit
@@ -40,8 +47,11 @@ class ProductionsController < ApplicationController
   end
 
   def destroy
-    @production.destroy
-    redirect_to productions_url, notice: 'Production was successfully destroyed.'
+    if @production.destroy
+      redirect_to productions_url, notice: t('.production_destroyed')
+    else
+      redirect_to productions_url, alert: t('.destruction_failed')
+    end
   end
 
   private
@@ -50,10 +60,15 @@ class ProductionsController < ApplicationController
     @production = Production.find(params[:id])
   end
 
+  def set_tailors
+    @tailors = Tailor.all
+  end
+
   def production_params
     params.require(:production).permit(
-      :tailor_id, :cut_date, :delivery_date, :consider,
-      production_products_attributes: [:id, :product_id, :quantity, :_destroy]
+      :tailor_id, :cut_date, :expected_delivery_date, 
+      :confirmed, :paid, :consider, :observation,
+      production_products_attributes: [:id, :product_id, :quantity, :pieces_delivered, :pieces_missing, :_destroy]
     )
   end
 end

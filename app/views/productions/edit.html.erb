@@ -1,44 +1,92 @@
 <br><br>
-<%= form_with(model: @production, local: true, html: { class: 'needs-validation', novalidate: '' }) do |form| %>
+<h1>Verify Production</h1>
 
-  <!-- Row 1: Tailor Selection -->
-  <div class="row mb-3">
-    <div class="col-3">
-      <%= form.label :tailor_id, t('productions.form.tailor_selection'), class: 'form-label' %>
-      <%= form.collection_select :tailor_id, @tailors, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+<%- model_class = Production -%>
+<section class="section">
+  <div class="section-header d-mobile-none">
+    <h1><%= t '.title', :default => t("Edit #{model_class.model_name.human.titleize}") %></h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item"><%= link_to 'Dashboard', root_path %></div>
+      <div class="breadcrumb-item"><%= link_to 'Productions', productions_path %></div>
+      <div class="breadcrumb-item">Edit Production</div>
     </div>
   </div>
 
-  <!-- Row 2: Dates -->
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <%= form.label :cut_date, t('productions.form.cut_date'), class: 'form-label' %>
-      <%= form.date_field :cut_date, class: 'form-control' %>
+  <div class="section-body">
+    <div class="card">
+      <div class="card-header">
+        <h4>Edit Production</h4>
+      </div>
+      <div class="card-body">
+        <%= form_with(model: @production, local: true) do |form| %>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <%= form.label :tailor_id, model_class.human_attribute_name(:tailor), class: 'form-label' %>
+              <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: 'Select a tailor' }, { class: 'form-control' } %>
+            </div>
+            <div class="col-md-4">
+              <%= form.label :cut_date, model_class.human_attribute_name(:cut_date), class: 'form-label' %>
+              <%= form.date_field :cut_date, class: 'form-control', readonly: true %>
+            </div>
+            <div class="col-md-4">
+              <%= form.label :expected_delivery_date, model_class.human_attribute_name(:expected_delivery_date), class: 'form-label' %>
+              <%= form.date_field :expected_delivery_date, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <%= form.label :consider, model_class.human_attribute_name(:consider), class: 'form-check-label' %>
+              <%= form.check_box :consider, class: 'form-check-input' %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <%= form.label :confirmed, model_class.human_attribute_name(:confirmed), class: 'form-check-label' %>
+              <%= form.check_box :confirmed, class: 'form-check-input' %>
+            </div>
+            <div class="col-md-4">
+              <%= form.label :paid, model_class.human_attribute_name(:paid), class: 'form-check-label' %>
+              <%= form.check_box :paid, class: 'form-check-input' %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <%= form.label :observation, model_class.human_attribute_name(:observation), class: 'form-label' %>
+              <%= form.text_area :observation, class: 'form-control' %>
+            </div>
+          </div>
+
+          <h3>Products</h3>
+          <div id="production-products">
+            <%= form.fields_for :production_products do |pp_form| %>
+              <div class="row mb-2">
+                <div class="col-md-3">
+                  <%= pp_form.label :product_id, Product.model_name.human, class: 'form-label' %>
+                  <%= pp_form.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, { class: 'form-control', required: true } %>
+                </div>
+                <div class="col-md-2">
+                  <%= pp_form.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
+                  <%= pp_form.number_field :quantity, class: 'form-control', readonly: true %>
+                </div>
+                <div class="col-md-2">
+                  <%= pp_form.label :pieces_delivered, ProductionProduct.human_attribute_name(:pieces_delivered), class: 'form-label' %>
+                  <%= pp_form.number_field :pieces_delivered, class: 'form-control' %>
+                </div>
+                <div class="col-md-2">
+                  <%= pp_form.label :pieces_missing, ProductionProduct.human_attribute_name(:pieces_missing), class: 'form-label' %>
+                  <%= pp_form.number_field :pieces_missing, class: 'form-control', readonly: true %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <%= form.submit t('helpers.submit.update'), class: 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")), production_path(@production), class: 'btn btn-secondary' %>
+        <% end %>
+      </div>
     </div>
-    <div class="col-md-6">
-      <%= form.label :deliver_date, t('productions.form.deliver_date'), class: 'form-label' %>
-      <%= form.date_field :deliver_date, class: 'form-control' %>
-    </div>
   </div>
-
-  <!-- Row 3: Production Products -->
-  <div class="mb-3">
-    <%= form.fields_for :production_products do |pp_form| %>
-      <%= render 'production_product_fields', f: pp_form %>
-    <% end %>
-    <%= link_to_add_association t('productions.form.add_product'), form, :production_products, class: 'btn btn-primary' %>
-  </div>
-
-  <div class="row mb-3 form-check">
-    <%= form.check_box :consider, class: 'form-check-input' %>
-    <%= form.label :consider, t('productions.form.consider'), class: 'form-check-label' %>
-  </div>
-
-  <!-- Submit Button -->
-  <div class="row">
-    <div class="col">
-      <%= form.submit @production.new_record? ? t('helpers.submit.create') : t('helpers.submit.update'), class: 'btn btn-success' %>
-    </div>
-  </div>
-
-<% end %>
+</section>
