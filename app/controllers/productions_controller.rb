@@ -1,3 +1,5 @@
+# app/controllers/productions_controller.rb
+
 class ProductionsController < ApplicationController
   before_action :set_production, only: [:show, :edit, :update, :destroy, :verify]
   before_action :set_tailors, only: [:new, :edit, :create, :update]
@@ -26,7 +28,6 @@ class ProductionsController < ApplicationController
       @tailors = Tailor.all
       flash.now[:alert] = t('.creation_failed')
       logger.error("Failed to create production: #{@production.errors.full_messages}")
-      render :new
     end
   end
 
@@ -40,6 +41,7 @@ class ProductionsController < ApplicationController
     if @production.update!(production_params)
       redirect_to @production, notice: t('.production_updated')
     else
+      @tailors = Tailor.all
       render :edit
     end
   end
