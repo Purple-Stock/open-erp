@@ -63,21 +63,17 @@
           <div id="production-products">
             <%= form.fields_for :production_products do |pp_form| %>
               <div class="row mb-2">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <%= pp_form.label :product_id, Product.model_name.human, class: 'form-label' %>
                   <%= pp_form.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, { class: 'form-control', required: true } %>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                   <%= pp_form.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
                   <%= pp_form.number_field :quantity, class: 'form-control', readonly: true %>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                   <%= pp_form.label :pieces_delivered, ProductionProduct.human_attribute_name(:pieces_delivered), class: 'form-label' %>
                   <%= pp_form.number_field :pieces_delivered, class: 'form-control' %>
-                </div>
-                <div class="col-md-2">
-                  <%= pp_form.label :pieces_missing, ProductionProduct.human_attribute_name(:pieces_missing), class: 'form-label' %>
-                  <%= pp_form.number_field :pieces_missing, class: 'form-control', readonly: true %>
                 </div>
               </div>
             <% end %>

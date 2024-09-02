@@ -44,6 +44,7 @@ class TailorsController < ApplicationController
     end
 
     def tailor_params
-      params.require(:tailor).permit(:name, :production_id)
+      params['tailor']['account_id'] = current_tenant.id
+      params.require(:tailor).permit(:name, :production_id, :account_id)
     end
 end

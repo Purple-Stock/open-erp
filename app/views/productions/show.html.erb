@@ -24,20 +24,6 @@
     </div>
     <div class="card">
       <div class="card-header">
-        <h4>Produtos da Produção</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <% @production.production_products.each do |prod_product| %>
-            <li class="list-group-item">
-              Produto: <%= prod_product.product&.name || 'No product assigned' %>, Quantity: <%= prod_product.quantity %>, Pieces Delivered: <%= prod_product.pieces_delivered %>, Pieces Missing: <%= prod_product.pieces_missing %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
         <h4>Dados Produção</h4>
       </div>
       <div class="card-body">
@@ -78,7 +64,8 @@
             </tbody>
             <tfoot>
               <tr>
-                <th colspan="2">Totais</th>
+                <th>Totais</th>
+                <td><%= @production.production_products.sum(&:quantity) %></td>
                 <td><%= @production.total_pieces_delivered %></td>
                 <td><%= @production.total_pieces_missing %></td>
               </tr>
