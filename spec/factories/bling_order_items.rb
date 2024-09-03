@@ -5,7 +5,6 @@
 #  id                        :bigint           not null, primary key
 #  aliquotaIPI               :decimal(, )
 #  alteration_date           :datetime
-#  city                      :string(10485760)
 #  codigo                    :string
 #  collected_alteration_date :date
 #  date                      :datetime
@@ -14,7 +13,6 @@
 #  descricaoDetalhada        :text
 #  items                     :jsonb
 #  quantidade                :integer
-#  state                     :string(10485760)
 #  unidade                   :string
 #  valor                     :decimal(, )
 #  value                     :decimal(, )
@@ -30,10 +28,8 @@
 #
 # Indexes
 #
-#  bling_order_id_index_on_bling_order_items  (bling_order_id)
 #  index_bling_order_items_on_account_id      (account_id)
 #  index_bling_order_items_on_bling_order_id  (bling_order_id) UNIQUE
-#  situation_id_index_on_bling_order_items    (situation_id,store_id)
 #
 FactoryBot.define do
   factory :bling_order_item do
