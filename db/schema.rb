@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_03_193444) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -91,16 +91,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
     t.string "marketplace_code_id"
     t.integer "bling_id"
     t.bigint "account_id"
-    t.jsonb "items"
     t.decimal "value"
+    t.jsonb "items"
     t.date "collected_alteration_date"
     t.string "original_situation_id"
-    t.string "city", limit: 10485760
-    t.string "state", limit: 10485760
     t.index ["account_id"], name: "index_bling_order_items_on_account_id"
-    t.index ["bling_order_id"], name: "bling_order_id_index_on_bling_order_items"
     t.index ["bling_order_id"], name: "index_bling_order_items_on_bling_order_id", unique: true
-    t.index ["situation_id", "store_id"], name: "situation_id_index_on_bling_order_items"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -257,7 +253,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
     t.bigint "bling_order_item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "pending", default: false
   end
 
   create_table "localizations", force: :cascade do |t|
@@ -283,7 +278,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
     t.string "post_code"
     t.string "post_type"
     t.float "value"
-    t.datetime "send_date"
+    t.datetime "send_date", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -295,29 +290,26 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "pieces_delivered"
-    t.integer "pieces_missing"
+    t.date "delivery_date"
     t.index ["product_id"], name: "index_production_products_on_product_id"
     t.index ["production_id"], name: "index_production_products_on_production_id"
   end
 
   create_table "productions", force: :cascade do |t|
     t.datetime "cut_date"
-    t.datetime "deliver_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
     t.bigint "tailor_id"
     t.boolean "consider", default: false
-    t.date "delivery_date"
-    t.integer "pieces_delivered"
     t.integer "pieces_missing"
     t.date "expected_delivery_date"
     t.boolean "confirmed"
     t.boolean "paid"
     t.text "observation"
+    t.string "service_order_number"
     t.index ["account_id"], name: "index_productions_on_account_id"
     t.index ["cut_date"], name: "index_productions_on_cut_date"
-    t.index ["delivery_date"], name: "index_productions_on_delivery_date"
     t.index ["expected_delivery_date"], name: "index_productions_on_expected_delivery_date"
     t.index ["tailor_id"], name: "index_productions_on_tailor_id"
   end
@@ -415,7 +407,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
   create_table "simplo_clients", force: :cascade do |t|
     t.string "name"
     t.integer "age"
-    t.datetime "order_date"
+    t.datetime "order_date", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -429,7 +421,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
     t.float "valor_total"
     t.float "peso"
     t.float "desconto"
-    t.datetime "data_pedido"
+    t.datetime "data_pedido", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "order_id"
@@ -526,8 +518,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_200830) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "first_name"
