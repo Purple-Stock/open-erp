@@ -6,13 +6,11 @@
 #  confirmed              :boolean
 #  consider               :boolean          default(FALSE)
 #  cut_date               :datetime
-#  deliver_date           :datetime
-#  delivery_date          :date
 #  expected_delivery_date :date
 #  observation            :text
 #  paid                   :boolean
-#  pieces_delivered       :integer
 #  pieces_missing         :integer
+#  service_order_number   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  account_id             :integer
@@ -22,7 +20,6 @@
 #
 #  index_productions_on_account_id              (account_id)
 #  index_productions_on_cut_date                (cut_date)
-#  index_productions_on_delivery_date           (delivery_date)
 #  index_productions_on_expected_delivery_date  (expected_delivery_date)
 #  index_productions_on_tailor_id               (tailor_id)
 #

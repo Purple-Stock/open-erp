@@ -21,6 +21,7 @@ pt-BR:
         quantity: "Quantidade"
         pieces_delivered: "Peças Entregues"
         pieces_missing: "Peças Faltando"
+        delivery_date: "Data de Entrega"
   productions:
     index:
       title: "Produções"

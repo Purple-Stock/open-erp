@@ -79,7 +79,8 @@ class ProductionsController < ApplicationController
     params.require(:production).permit(
       :cut_date, :tailor_id, :service_order_number, :expected_delivery_date,
       :confirmed, :paid, :consider, :observation,
-      production_products_attributes: [:id, :product_id, :quantity, :pieces_delivered, :pieces_missing, :_destroy]
+      production_products_attributes: [:id, :product_id, :quantity, :pieces_delivered, :delivery_date,
+      :_destroy]
     )
   end
 end

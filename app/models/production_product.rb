@@ -3,8 +3,8 @@
 # Table name: production_products
 #
 #  id               :bigint           not null, primary key
+#  delivery_date    :date
 #  pieces_delivered :integer
-#  pieces_missing   :integer
 #  quantity         :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -27,7 +27,6 @@ class ProductionProduct < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :pieces_delivered, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-  validates :pieces_missing, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   before_save :set_default_pieces_delivered
 

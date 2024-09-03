@@ -58,6 +58,7 @@
                 <th>Quantidade</th>
                 <th>Peças Entregues</th>
                 <th>Peças Faltantes</th>
+                <th>Data de Entrega</th>
               </tr>
             </thead>
             <tbody>
@@ -67,6 +68,7 @@
                   <td><%= pp.quantity %></td>
                   <td><%= pp.pieces_delivered || 0 %></td>
                   <td><%= pp.quantity - (pp.pieces_delivered || 0) %></td>
+                  <td><%= pt_only_date_format(pp.delivery_date) || 'Não informado' %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -76,6 +78,7 @@
                 <td><%= @production.production_products.sum(&:quantity) %></td>
                 <td><%= @production.total_pieces_delivered %></td>
                 <td><%= @production.total_pieces_missing %></td>
+                <td></td>
               </tr>
             </tfoot>
           </table>
@@ -88,7 +91,6 @@
 <div class="actions">
   <%= link_to t('.back', :default => t("helpers.links.back")), productions_path, :class => 'btn btn-secondary' %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_production_path(@production), :class => 'btn btn-warning' %>
-  <%= link_to t('productions.missing_pieces.title'), missing_pieces_productions_path, class: 'btn btn-info' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")), production_path(@production), :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
