@@ -80,7 +80,9 @@ module ApplicationHelper
   end
 
   def localize(object, options = {})
-    super(object, options) if object
+    return nil if object.nil?
+    format = options[:format] || :default
+    I18n.localize(object, format: format)
   end
 
   alias l localize

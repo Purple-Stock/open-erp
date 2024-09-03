@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   mount GoodJob::Engine => 'good_job'
 
   resources :productions do
+    collection do
+      get 'missing_pieces'
+    end
     member do
-      get :verify
-      patch :verify, to: 'productions#update'
+      patch :verify
     end
   end
 

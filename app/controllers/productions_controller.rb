@@ -54,6 +54,13 @@ class ProductionsController < ApplicationController
     end
   end
 
+  def missing_pieces
+    @productions_with_missing_pieces = Production.includes(:tailor, production_products: :product)
+                                                 .where(id: ProductionProduct.select(:production_id)
+                                                                             .where('quantity > COALESCE(pieces_delivered, 0)'))
+                                                 .distinct
+  end
+
   private
 
   def set_production

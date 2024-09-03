@@ -7,6 +7,7 @@
 #  consider               :boolean          default(FALSE)
 #  cut_date               :datetime
 #  deliver_date           :datetime
+#  delivery_date          :date
 #  expected_delivery_date :date
 #  observation            :text
 #  paid                   :boolean
@@ -21,6 +22,7 @@
 #
 #  index_productions_on_account_id              (account_id)
 #  index_productions_on_cut_date                (cut_date)
+#  index_productions_on_delivery_date           (delivery_date)
 #  index_productions_on_expected_delivery_date  (expected_delivery_date)
 #  index_productions_on_tailor_id               (tailor_id)
 #
@@ -41,6 +43,7 @@ class Production < ApplicationRecord
   validates :cut_date, presence: true
   validates :tailor, presence: true
   validates :account, presence: true
+  validates :service_order_number, presence: true, uniqueness: { scope: :account_id }
 
   # Add a method to calculate total pieces delivered
   def total_pieces_delivered

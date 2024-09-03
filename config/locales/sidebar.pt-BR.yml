@@ -13,6 +13,7 @@ pt-BR:
   productions:
     one: Produção
     two: Produções
+    missing_pieces: "Peças Faltantes"
     list: Lista de Produções
     create: Criar Produção
   tailors:

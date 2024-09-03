@@ -53,6 +53,11 @@ pt-BR:
     destroy:
       production_destroyed: "Produção excluída com sucesso."
       destruction_failed: "Falha ao excluir a produção."
+    missing_pieces:
+      title: "Produções com Peças Faltantes"
+      production_number: "Produção #%{number}"
+      missing_pieces: "Peças Faltantes"
+      service_order: "Ordem de Serviço #%{number}"
   helpers:
     submit:
       create: "Criar %{model}"

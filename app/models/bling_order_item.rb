@@ -5,6 +5,7 @@
 #  id                        :bigint           not null, primary key
 #  aliquotaIPI               :decimal(, )
 #  alteration_date           :datetime
+#  city                      :string(10485760)
 #  codigo                    :string
 #  collected_alteration_date :date
 #  date                      :datetime
@@ -13,6 +14,7 @@
 #  descricaoDetalhada        :text
 #  items                     :jsonb
 #  quantidade                :integer
+#  state                     :string(10485760)
 #  unidade                   :string
 #  valor                     :decimal(, )
 #  value                     :decimal(, )

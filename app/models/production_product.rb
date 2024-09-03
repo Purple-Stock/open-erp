@@ -2,14 +2,14 @@
 #
 # Table name: production_products
 #
-#  id                     :bigint           not null, primary key
-#  pieces_delivered       :integer
-#  pieces_missing         :integer
-#  quantity               :integer
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  product_id             :bigint           not null
-#  production_id          :bigint           not null
+#  id               :bigint           not null, primary key
+#  pieces_delivered :integer
+#  pieces_missing   :integer
+#  quantity         :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  product_id       :bigint           not null
+#  production_id    :bigint           not null
 #
 # Indexes
 #
