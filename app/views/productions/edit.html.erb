@@ -37,7 +37,6 @@
               <%= form.date_field :expected_delivery_date, class: 'form-control' %>
             </div>
           </div>
-
           <div class="row mb-3">
             <div class="col-md-4">
               <%= form.label :consider, model_class.human_attribute_name(:consider), class: 'form-check-label' %>
@@ -63,21 +62,25 @@
             </div>
           </div>
 
-          <h3>Products</h3>
+          <h3><%= t('productions.edit.products') %></h3>
           <div id="production-products">
             <%= form.fields_for :production_products do |pp_form| %>
               <div class="row mb-2">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <%= pp_form.label :product_id, Product.model_name.human, class: 'form-label' %>
                   <%= pp_form.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, { class: 'form-control', required: true } %>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <%= pp_form.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
                   <%= pp_form.number_field :quantity, class: 'form-control', readonly: true %>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <%= pp_form.label :pieces_delivered, ProductionProduct.human_attribute_name(:pieces_delivered), class: 'form-label' %>
                   <%= pp_form.number_field :pieces_delivered, class: 'form-control' %>
+                </div>
+                <div class="col-md-3">
+                  <%= pp_form.label :delivery_date, ProductionProduct.human_attribute_name(:delivery_date), class: 'form-label' %>
+                  <%= pp_form.date_field :delivery_date, class: 'form-control' %>
                 </div>
               </div>
             <% end %>
