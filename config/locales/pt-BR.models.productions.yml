@@ -27,6 +27,14 @@ pt-BR:
       product_summary: "Resumo da Produção"
       no_tailor: "Nenhum"
       no_products: "Nenhum produto"
+    missing_pieces:
+      title: "Produções com Peças Faltantes"
+      filter_by_tailor: "Filtrar por Costureiro"
+      all_tailors: "Todos os Costureiros"
+      apply_filter: "Aplicar Filtro"
+      production_number: "Produção #%{number}"
+      missing_pieces: "Peças Faltantes"
+      service_order: "Ordem de Serviço #%{number}"
     show:
       title: "Detalhes da Produção"
       tailor_details: "Detalhes do Costureiro"
@@ -53,11 +61,6 @@ pt-BR:
     destroy:
       production_destroyed: "Produção excluída com sucesso."
       destruction_failed: "Falha ao excluir a produção."
-    missing_pieces:
-      title: "Produções com Peças Faltantes"
-      production_number: "Produção #%{number}"
-      missing_pieces: "Peças Faltantes"
-      service_order: "Ordem de Serviço #%{number}"
   helpers:
     submit:
       create: "Criar %{model}"

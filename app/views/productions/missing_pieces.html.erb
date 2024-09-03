@@ -1,6 +1,17 @@
 <br><br>
 <div class="container">
-  <h1 class="mb-4">Peças Faltantes</h1>
+  <h1 class="mb-4"><%= t('productions.missing_pieces.title') %></h1>
+
+  <%= form_tag missing_pieces_productions_path, method: :get, class: 'mb-4' do %>
+    <div class="form-group">
+      <%= label_tag :tailor_id, t('.filter_by_tailor') %>
+      <%= select_tag :tailor_id, 
+                     options_from_collection_for_select(Tailor.all, :id, :name, params[:tailor_id]), 
+                     include_blank: t('.all_tailors'), 
+                     class: 'form-control' %>
+    </div>
+    <%= submit_tag t('productions.missing_pieces.apply_filter'), class: 'btn btn-primary' %>
+  <% end %>
 
   <div class="row">
     <% @productions_with_missing_pieces.each do |production| %>
