@@ -88,6 +88,7 @@
 <div class="actions">
   <%= link_to t('.back', :default => t("helpers.links.back")), productions_path, :class => 'btn btn-secondary' %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_production_path(@production), :class => 'btn btn-warning' %>
+  <%= link_to t('productions.missing_pieces.title'), missing_pieces_productions_path, class: 'btn btn-info' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")), production_path(@production), :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
