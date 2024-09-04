@@ -24,24 +24,24 @@ class OrdersControlController < ApplicationController
   def show_pending_orders
     situation_id = params[:situation_id]
     store_id = params[:store_id]
-  
+
     if situation_id.present?
       cleaned_situation_ids = situation_id.split(',').map(&:to_i)
     else
       cleaned_situation_ids = BlingOrderItem::Status::PENDING
     end
-  
+
     pending_items = Item.includes(:bling_order_item).where(bling_order_items: { situation_id: cleaned_situation_ids })
-  
+
     if store_id.present?
-      @pending_order_items = pending_items.where(bling_order_items: { store_id: store_id })
+      @all_items = pending_items.where(bling_order_items: { store_id: store_id })
     else
-      @pending_order_items = pending_items
+      @all_items = pending_items
     end
-  
+
     respond_to do |format|
       format.html # show.html.erb
-      format.csv { send_data generate_csv(@pending_order_items), filename: "pending-orders-#{Date.today}.csv" }
+      format.csv { send_data generate_csv(@all_items), filename: "pending-orders-#{Date.today}.csv" }
     end
   end
   
