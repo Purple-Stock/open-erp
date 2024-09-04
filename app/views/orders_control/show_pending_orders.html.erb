@@ -20,19 +20,18 @@
   <% end %>
 
   <div class="row justify-content-center">
-    <% if @all_items.present? %>
-      <% @all_items.group_by { |item| item.bling_order_item.store_name }.each do |loja_name, items| %>
+    <% if @sorted_stores.present? %>
+      <% @sorted_stores.each do |loja_name, items| %>
         <div class="col-md-12">
           <div class="card mb-4">
             <div class="card-header bg-primary text-white">
-              <h5 class="mb-0"><%= loja_name %></h5>
+              <h5 class="mb-0"><%= loja_name %> - Total: <%= items.sum(&:quantity) %> unidades</h5>
             </div>
             <div class="card-body">
-              <% items.group_by(&:sku).each do |codigo, sku_items| %>
-                <% sorted_sku_items = sku_items.sort_by { |item| -item.quantity.to_i } %>
+              <% items.group_by(&:sku).sort_by { |_, sku_items| -sku_items.sum(&:quantity) }.each do |codigo, sku_items| %>
                 <div class="mb-3">
                   <button class="btn btn-info btn-block text-left" type="button" data-toggle="collapse" data-target=".collapse<%= codigo %>">
-                    <strong>Código <%= codigo %></strong> - <%= sorted_sku_items.sum { |item| item.quantity.to_i } %> unidades
+                    <strong>Código <%= codigo %></strong> - <%= sku_items.sum(&:quantity) %> unidades
                   </button>
                   <div class="collapse collapse<%= codigo %> mt-2">
                     <div class="table-responsive">
@@ -46,7 +45,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <% sorted_sku_items.each do |item| %>
+                          <% sku_items.sort_by(&:quantity).reverse.each do |item| %>
                             <tr>
                               <td>
                                 <%= item.bling_order_item.bling_order_id %>

@@ -39,6 +39,11 @@ class OrdersControlController < ApplicationController
       @all_items = pending_items
     end
 
+    # Group items by store and sort by total quantity
+    @sorted_stores = @all_items.group_by { |item| item.bling_order_item.store_name }
+                               .sort_by { |_, items| -items.sum(&:quantity) }
+                               .to_h
+
     respond_to do |format|
       format.html # show.html.erb
       format.csv { send_data generate_csv(@all_items), filename: "pending-orders-#{Date.today}.csv" }
