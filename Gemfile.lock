@@ -334,8 +334,8 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (6.0.4)
-    parallel (1.25.1)
-    parser (3.3.4.0)
+    parallel (1.26.3)
+    parser (3.3.4.2)
       ast (~> 2.4.1)
       racc
     path_expander (1.1.2)
@@ -416,7 +416,7 @@ GEM
       railties (>= 5.2)
     reverse_markdown (2.1.1)
       nokogiri
-    rexml (3.3.2)
+    rexml (3.3.6)
       strscan
     rodf (1.2.0)
       builder (>= 3.0)
@@ -448,7 +448,7 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
-    rubocop (1.65.0)
+    rubocop (1.65.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -459,15 +459,15 @@ GEM
       rubocop-ast (>= 1.31.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.31.3)
+    rubocop-ast (1.32.1)
       parser (>= 3.3.1.0)
     rubocop-performance (1.21.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails (2.25.1)
+    rubocop-rails (2.26.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 1.33.0, < 2.0)
+      rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rspec (3.0.3)
       rubocop (~> 1.61)
@@ -602,6 +602,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -654,9 +655,10 @@ DEPENDENCIES
   rqrcode_png!
   rspec-rails (>= 6.1.4)
   rubocop-performance (>= 1.21.1)
-  rubocop-rails (>= 2.25.1)
   rubocop-rspec (>= 2.31.0)
   rubycritic (>= 4.8.1)
+  rubocop-rails (>= 2.26.0)
+  rubycritic
   rubyzip
   sassc-rails
   selenium-webdriver (>= 4.22.0)
@@ -678,7 +680,7 @@ DEPENDENCIES
   webmock (>= 3.20.0)
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.3.4p94
 
 BUNDLED WITH
    2.4.10

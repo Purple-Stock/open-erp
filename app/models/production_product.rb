@@ -2,12 +2,14 @@
 #
 # Table name: production_products
 #
-#  id            :bigint           not null, primary key
-#  quantity      :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  product_id    :bigint           not null
-#  production_id :bigint           not null
+#  id               :bigint           not null, primary key
+#  delivery_date    :date
+#  pieces_delivered :integer
+#  quantity         :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  product_id       :bigint           not null
+#  production_id    :bigint           not null
 #
 # Indexes
 #
@@ -24,4 +26,13 @@ class ProductionProduct < ApplicationRecord
   belongs_to :production
 
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :pieces_delivered, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+
+  before_save :set_default_pieces_delivered
+
+  private
+
+  def set_default_pieces_delivered
+    self.pieces_delivered ||= 0
+  end
 end

@@ -35,16 +35,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.9.0'
+          node-version: '22.2.0'
           cache: 'yarn'
       - run: | 
-          npm install -g yarn@1.22.19
+          npm install -g yarn@1.22.22
           yarn install --check-files
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.3.4
           # runs 'bundle install' and cache installed gems automatically
           bundler-cache: true
 

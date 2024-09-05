@@ -2,22 +2,30 @@
 #
 # Table name: productions
 #
-#  id           :bigint           not null, primary key
-#  consider     :boolean          default(FALSE)
-#  cut_date     :datetime
-#  deliver_date :datetime
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  account_id   :integer
-#  tailor_id    :bigint
+#  id                     :bigint           not null, primary key
+#  confirmed              :boolean
+#  consider               :boolean          default(FALSE)
+#  cut_date               :datetime
+#  expected_delivery_date :date
+#  observation            :text
+#  paid                   :boolean
+#  pieces_missing         :integer
+#  service_order_number   :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  account_id             :integer
+#  tailor_id              :bigint
 #
 # Indexes
 #
-#  index_productions_on_account_id  (account_id)
-#  index_productions_on_tailor_id   (tailor_id)
+#  index_productions_on_account_id              (account_id)
+#  index_productions_on_cut_date                (cut_date)
+#  index_productions_on_expected_delivery_date  (expected_delivery_date)
+#  index_productions_on_tailor_id               (tailor_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (account_id => accounts.id)
 #  fk_rails_...  (tailor_id => tailors.id)
 #
 FactoryBot.define do

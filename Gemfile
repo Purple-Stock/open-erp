@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.4'
 
 # dotenv-rails must be on the top
 gem 'dotenv-rails', '>= 3.0.0', groups: %i[development test]
@@ -142,9 +142,9 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.9'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
-gem 'rubocop-rails', '>= 2.25.1', require: false
 gem 'rubocop-rspec', '>= 2.31.0', require: false
 gem 'rubocop-performance', '>= 1.21.1', require: false
+gem 'rubocop-rails', '>= 2.26.0', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
 gem "good_job", github: 'bensheldon/good_job', branch: 'main'
