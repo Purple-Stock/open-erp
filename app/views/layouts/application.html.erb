@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -29,11 +29,11 @@
 
 <body>
 <div id="app">
-  <div class="main-wrapper main-wrapper-1">
+  <div class="main-wrapper">
     <div class="navbar-bg"></div>
     <%= render 'shared/navbar' %>
     <%= render 'shared/sidebar' %>
-    <div class="main-content mt-5">
+    <div class="main-content">
       <section class="section">
         <%= content_for?(:content) ? yield(:content) : yield %>
       </section>
@@ -44,8 +44,22 @@
 
 <%= render 'shared/toastr' %>
 
-<!-- scripts -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
 <%= yield(:javascript) if content_for?(:javascript) %>
+
+<%= yield :page_scripts %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sidebarToggle = document.querySelector('[data-toggle="sidebar"]');
+    const body = document.body;
+
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        body.classList.toggle('sidebar-mini');
+      });
+    }
+  });
+</script>
 </body>
 </html>

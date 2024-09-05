@@ -2,27 +2,77 @@ pt-BR:
   activerecord:
     models:
       production: "Produção"
+      production_product: "Produto da Produção"
     attributes:
       production:
+        service_order_number: "Número da Ordem de Serviço"
         tailor: "Costureiro"
         cut_date: "Data de Corte"
-        deliver_date: "Data de Entrega"
+        delivery_date: "Data de Entrega"
+        expected_delivery_date: "Data Prevista de Entrega"
         consider: "Considerar"
+        confirmed: "Confirmado"
+        paid: "Pago"
+        observation: "Observação"
+        pieces_delivered: "Peças Entregues"
+        pieces_missing: "Peças Faltando"
+      production_product:
+        product: "Produto"
+        quantity: "Quantidade"
+        pieces_delivered: "Peças Entregues"
+        pieces_missing: "Peças Faltando"
+        delivery_date: "Data de Entrega"
   productions:
     index:
       title: "Produções"
       product_summary: "Resumo da Produção"
       no_tailor: "Nenhum"
       no_products: "Nenhum produto"
+    missing_pieces:
+      title: "Produções com Peças Faltantes"
+      filter_by_tailor: "Filtrar por Costureiro"
+      all_tailors: "Todos os Costureiros"
+      apply_filter: "Aplicar Filtro"
+      production_number: "Produção #%{number}"
+      missing_pieces: "Peças Faltantes"
+      service_order: "Ordem de Serviço #%{number}"
+    show:
+      title: "Detalhes da Produção"
+      tailor_details: "Detalhes do Costureiro"
+      production_data: "Dados da Produção"
+      product_details: "Detalhes dos Produtos"
+      totals: "Totais"
+    new:
+      title: "Nova Produção"
+      new_production: "Criar Nova Produção"
+      products: "Produtos"
+      add_product: "Adicionar Produto"
+    edit:
+      title: "Editar Produção"
     actions:
       show: "Mostrar"
       edit: "Editar"
       destroy: "Excluir"
     confirm: "Você tem certeza?"
-    new:
-      title: "Nova Produção"
-    edit:
-      title: "Editar Produção"
+    create:
+      production_created: "Produção criada com sucesso."
+      creation_failed: "Falha ao criar a produção."
+    update:
+      production_updated: "Produção atualizada com sucesso."
+    destroy:
+      production_destroyed: "Produção excluída com sucesso."
+      destruction_failed: "Falha ao excluir a produção."
   helpers:
+    submit:
+      create: "Criar %{model}"
+      update: "Atualizar %{model}"
     links:
-      new: "Novo"
+      new: "Nova Produção"
+      back: "Voltar"
+      edit: "Editar"
+      cancel: "Cancelar"
+    titles:
+      new: "Nova %{model}"
+      edit: "Editar %{model}"
+  actions:
+    remove: "Remover"

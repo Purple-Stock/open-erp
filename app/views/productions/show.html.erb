@@ -24,39 +24,78 @@
     </div>
     <div class="card">
       <div class="card-header">
-        <h4>Produtos da Produção</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <% @production.production_products.each do |prod_product| %>
-            <li class="list-group-item">
-              Produto: <%= prod_product.product.name %>, Quantity: <%= prod_product.quantity %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
         <h4>Dados Produção</h4>
       </div>
       <div class="card-body">
         <dl class="row">
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:service_order_number) %>:</dt>
+          <dd class="col-sm-9"><%= @production.service_order_number %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:cut_date) %>:</dt>
-          <dd class="col-sm-9"><%= @production.cut_date %></dd>
-          <dt class="col-sm-3"><%= model_class.human_attribute_name(:deliver_date)%>:</dt>
-          <dd class="col-sm-9"><%= @production.deliver_date %></dd>
+          <dd class="col-sm-9"><%= pt_only_date_format(@production.cut_date) %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:expected_delivery_date) %>:</dt>
+          <dd class="col-sm-9"><%= pt_only_date_format(@production.expected_delivery_date) %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:consider)%>:</dt>
           <dd class="col-sm-9"><%= @production.consider ? 'Sim' : 'Não' %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:confirmed) %>:</dt>
+          <dd class="col-sm-9"><%= @production.confirmed ? 'Sim' : 'Não' %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:paid) %>:</dt>
+          <dd class="col-sm-9"><%= @production.paid ? 'Sim' : 'Não' %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:observation) %>:</dt>
+          <dd class="col-sm-9"><%= @production.observation %></dd>
         </dl>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Detalhes dos Produtos</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Peças Entregues</th>
+                <th>Peças Faltantes</th>
+                <th>Data de Entrega</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @production.production_products.each do |pp| %>
+                <tr>
+                  <td><%= pp.product&.name || 'Nenhum produto atribuído' %></td>
+                  <td><%= pp.quantity %></td>
+                  <td><%= pp.pieces_delivered || 0 %></td>
+                  <td><%= pp.quantity - (pp.pieces_delivered || 0) %></td>
+                  <td><%= pt_only_date_format(pp.delivery_date) || 'Não informado' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Totais</th>
+                <td><%= @production.production_products.sum(&:quantity) %></td>
+                <td><%= @production.total_pieces_delivered %></td>
+                <td><%= @production.total_pieces_missing %></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<%= link_to t('.back', :default => t("helpers.links.back")), productions_path, :class => 'btn btn-secondary' %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")), edit_production_path(@production), :class => 'btn btn-warning' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")), production_path(@production), :method => 'delete',
-            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-            :class => 'btn btn-danger' %>
+
+<div class="actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")), productions_path, :class => 'btn btn-secondary' %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_production_path(@production), :class => 'btn btn-warning' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")), production_path(@production), :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
 <% content_for(:page_title, 'Show Production') %>
+
+

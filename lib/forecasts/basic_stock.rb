@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Forecasts
   # This class is simple as it is.
   # Born to answer this question:
@@ -7,28 +5,39 @@ module Forecasts
   # How many products I need to add to my actual stock? Assuming I expect the same demand
   # for the next 30 days"
   class BasicStock
-    attr_accessor :stock, :sku, :date, :account_id, :items, :options
+    attr_reader :stock, :sku, :start_date, :end_date, :account_id, :options
 
     NO_NEED_TO_INCREASE_STOCK = 0
 
     def initialize(stock, options = {})
       @stock = stock
       @sku = stock.sku
-      @date = Date.today - 1.month
+      @end_date = options[:end_date] || Date.today
+      @start_date = options[:start_date] || @end_date - 1.month
       @account_id = stock.account_id
       @options = options
-      @items = Item.joins(:bling_order_item).where(bling_order_item: { date: [date..] }, account_id:, sku:)
     end
+
+    def self.bulk_calculate(stocks, items_sold)
+      stocks.map do |stock|
+        sold_quantity = items_sold[stock.sku] || 0
+        forecast = [sold_quantity - stock.total_balance, 0].max
+        [stock, forecast]
+      end
+    end
+    
 
     def calculate
       stock_to_repair_quantity = count_sold - stock.total_balance
-      return NO_NEED_TO_INCREASE_STOCK if stock_to_repair_quantity.negative?
-
-      stock_to_repair_quantity
+      [stock_to_repair_quantity, NO_NEED_TO_INCREASE_STOCK].max
     end
 
     def count_sold
-      @count_sold ||= items.sum(:quantity)
+      @count_sold ||= Item.joins(:bling_order_item)
+                          .where(bling_order_item: { date: start_date..end_date }, 
+                                 account_id: account_id, 
+                                 sku: sku)
+                          .sum(:quantity)
     end
   end
 end

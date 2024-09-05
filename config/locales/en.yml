@@ -45,3 +45,66 @@ en:
     formats:
       default: "%Y/%m/%d %H:%M"
       time: "%H:%M:%S"
+  
+  productions:
+    verify:
+      title: "Verify Production"
+      production_details: "Production Details"
+      tailor: "Tailor"
+      cut_date: "Cut Date"
+      delivery_date: "Delivery Date"
+      expected_delivery_date: "Expected Delivery Date"
+      products: "Products"
+      product_name: "Product Name"
+      quantity: "Quantity"
+      pieces_delivered: "Pieces Delivered"
+      pieces_missing: "Pieces Missing"
+      additional_info: "Additional Information"
+      observation: "Observation"
+      confirmed: "Confirmed"
+      paid: "Paid"
+      consider: "Consider"
+      finalize_production: "Finalize Production"
+      back: "Back to Edit"
+    update:
+      production_updated: "Production was successfully updated."
+  activerecord:
+    models:
+      production: "Production"
+      production_product: "Production Product"
+    attributes:
+      production:
+        number: "Number"
+        tailor: "Tailor"
+        cut_date: "Cut Date"
+        delivery_date: "Delivery Date"
+        expected_delivery_date: "Expected Delivery Date"
+        consider: "Consider"
+        confirmed: "Confirmed"
+        paid: "Paid"
+        observation: "Observation"
+        pieces_delivered: "Pieces Delivered"
+        pieces_missing: "Pieces Missing"
+      production_product:
+        product: "Product"
+        quantity: "Quantity"
+        pieces_delivered: "Pieces Delivered"
+        pieces_missing: "Pieces Missing"
+        expected_delivery_date: "Expected Delivery Date"
+    errors:
+      models:
+        production:
+          attributes:
+            tailor:
+              blank: "must be selected"
+  helpers:
+    submit:
+      update: "Update"
+    links:
+      back: "Back"
+      edit: "Edit"
+      destroy: "Destroy"
+      cancel: "Cancel"
+      confirm: "Are you sure?"
+  actions:
+    remove: "Remove"

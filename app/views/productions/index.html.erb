@@ -7,19 +7,21 @@
 
   <div class="section-body">
     <%= link_to t('helpers.links.new'), new_production_path, class: 'btn btn-primary mb-3' %>
+    <%= link_to t('productions.missing_pieces.title'), missing_pieces_productions_path, class: 'btn btn btn-info mb-3 ml-2' %>
 
     <div class="card">
       <div class="card-body">
         <%= turbo_frame_tag :productions do %>
           <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
+            <table class="table table-striped table-hover">
+              <thead class="thead-dark">
                 <tr>
                   <th><%= model_class.human_attribute_name(:tailor) %></th>
                   <th><%= t 'productions.index.product_summary' %></th>
                   <th><%= model_class.human_attribute_name(:cut_date) %></th>
-                  <th><%= model_class.human_attribute_name(:deliver_date) %></th>
+                  <th><%= model_class.human_attribute_name(:expected_delivery_date) %></th>
                   <th><%= model_class.human_attribute_name(:consider) %></th>
+                  <th><%= model_class.human_attribute_name(:confirmed) %></th>
                   <th><%= t 'helpers.actions' %></th>
                 </tr>
               </thead>
@@ -28,12 +30,16 @@
                   <tr>
                     <td><%= production.tailor&.name || t('productions.index.no_tailor') %></td>
                     <td>
-                      <% production_products_summary = production.production_products.map { |pp| "#{pp.product.name}: #{pp.quantity}" }.join(', ') %>
-                      <%= production_products_summary.presence || t('productions.index.no_products') %>
+                      <ul class="list-unstyled">
+                        <% production.production_products.each do |pp| %>
+                          <li><%= "#{pp.product.name}: #{pp.quantity}" %></li>
+                        <% end %>
+                      </ul>
                     </td>
                     <td><%= I18n.l(production.cut_date, format: :long) if production.cut_date %></td>
-                    <td><%= I18n.l(production.deliver_date, format: :long) if production.deliver_date %></td>
+                    <td><%= I18n.l(production.expected_delivery_date, format: :long) if production.expected_delivery_date %></td>
                     <td><%= production.consider ? 'Sim' : 'Não' %></td>
+                    <td><%= production.confirmed ? 'Verified' : 'Not Verified' %></td>
                     <td>
                       <%= link_to icon('fas fa-pencil-alt'), edit_production_path(production), title: t('edit'), class: 'btn btn-primary', data: { toggle: 'tooltip', turbo: false } %>
                       <%= link_to icon('fas fa-eye'), production, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>

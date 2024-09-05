@@ -1,44 +1,74 @@
 <br><br>
-<%= form_with(model: @production, local: true, html: { class: 'needs-validation', novalidate: '' }) do |form| %>
+<%- model_class = Production -%>
+<h1><%= t('.title', :default => t("helpers.titles.new", :model => model_class.model_name.human.titleize)) %></h1>
 
-  <!-- Row 1: Tailor Selection -->
-  <div class="row mb-3">
-    <div class="col-3">
-      <%= form.label :tailor_id, Production.human_attribute_name(:tailor), class: 'form-label' %>
-      <%= form.collection_select :tailor_id, @tailors, :id, :name, { include_blank: true }, { class: 'form-control' } %>
+<section class="section">
+  <div class="section-body">
+    <div class="card">
+      <div class="card-header">
+        <h4><%= t('.new_production') %></h4>
+      </div>
+      <div class="card-body">
+        <%= form_with(model: @production, local: true) do |form| %>
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <%= form.label :service_order_number, model_class.human_attribute_name(:service_order_number), class: 'form-label' %>
+              <%= form.text_field :service_order_number, class: 'form-control' %>
+            </div>
+            <div class="col-md-3">
+              <%= form.label :tailor_id, model_class.human_attribute_name(:tailor), class: 'form-label' %>
+              <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: 'Select a tailor' }, { class: 'form-control select2' } %>
+            </div>
+            <div class="col-md-3">
+              <%= form.label :cut_date, model_class.human_attribute_name(:cut_date), class: 'form-label' %>
+              <%= form.date_field :cut_date, class: 'form-control' %>
+            </div>
+            <div class="col-md-3">
+              <%= form.label :expected_delivery_date, model_class.human_attribute_name(:expected_delivery_date), class: 'form-label' %>
+              <%= form.date_field :expected_delivery_date, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <%= form.label :consider, model_class.human_attribute_name(:consider), class: 'form-check-label' %>
+              <%= form.check_box :consider, class: 'form-check-input' %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <%= form.label :observation, model_class.human_attribute_name(:observation), class: 'form-label' %>
+              <%= form.text_area :observation, class: 'form-control' %>
+            </div>
+          </div>
+
+          <h3><%= t('.products') %></h3>
+          <div id="production-products">
+            <%= form.fields_for :production_products do |pp_form| %>
+              <%= render 'production_product_fields', f: pp_form %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association t('.add_product'), form, :production_products, class: 'btn btn-primary' %>
+            </div>
+          </div>
+
+          <%= form.submit t('helpers.submit.create'), class: 'btn btn-primary mt-3' %>
+          <%= link_to t('helpers.links.cancel'), productions_path, class: 'btn btn-secondary mt-3' %>
+        <% end %>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- Row 2: Dates -->
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <%= form.label :cut_date, Production.human_attribute_name(:cut_date), class: 'form-label' %>
-      <%= form.date_field :cut_date, class: 'form-control' %>
-    </div>
-    <div class="col-md-6">
-      <%= form.label :deliver_date, Production.human_attribute_name(:deliver_date), class: 'form-label' %>
-      <%= form.date_field :deliver_date, class: 'form-control' %>
-    </div>
-  </div>
+<% content_for :page_scripts do %>
+  <script>
+    $(document).ready(function() {
+      $('.select2').select2();
 
-  <!-- Row 3: Production Products -->
-  <div class="mb-3">
-    <%= form.fields_for :production_products do |pp_form| %>
-      <%= render 'production_product_fields', f: pp_form %>
-    <% end %>
-    <%= link_to_add_association t('actions.add_product'), form, :production_products, class: 'btn btn-primary' %>
-  </div>
-
-  <div class="row mb-3 form-check">
-    <%= form.check_box :consider, class: 'form-check-input' %>
-    <%= form.label :consider, Production.human_attribute_name(:consider), class: 'form-check-label' %>
-  </div>
-
-  <!-- Submit Button -->
-  <div class="row">
-    <div class="col">
-      <%= form.submit t('helpers.submit.create'), class: 'btn btn-success' %>
-    </div>
-  </div>
-
+      $('#production-products').on('cocoon:after-insert', function(e, insertedItem) {
+        $(insertedItem).find('.select2').select2();
+      });
+    });
+  </script>
 <% end %>
