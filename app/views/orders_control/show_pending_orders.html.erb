@@ -68,16 +68,15 @@
                                   <td>
                                     <% if item.resolved %>
                                       Resolvido
-                                      <%= button_to 'Marcar como Não Resolvido', update_status_item_path(item, status: 'unresolved'), method: :patch, class: 'btn btn-sm btn-warning' %>
                                     <% else %>
                                       Não Resolvido
-                                      <%= button_to 'Marcar como Resolvido', update_status_item_path(item, status: 'resolved'), method: :patch, class: 'btn btn-sm btn-success' %>
                                     <% end %>
                                   </td>
                                   <td>
-                                    <% if item.bling_order_item.situation_id == BlingOrderItem::Status::PENDING %>
-                                      <%= button_to 'Marcar Pendente', update_status_item_path(item, status: 'pendente'), method: :patch, class: 'btn btn-sm btn-success' %>
-                                      <%= button_to 'Marcar Não Pendente', update_status_item_path(item, status: 'nao_pendente'), method: :patch, class: 'btn btn-sm btn-danger' %>
+                                    <% if item.resolved %>
+                                      <%= button_to 'Marcar como Não Resolvido', update_status_item_path(item, status: 'unresolved'), method: :patch, class: 'btn btn-sm btn-warning' %>
+                                    <% else %>
+                                      <%= button_to 'Marcar como Resolvido', update_status_item_path(item, status: 'resolved'), method: :patch, class: 'btn btn-sm btn-success' %>
                                     <% end %>
                                   </td>
                                 </tr>
