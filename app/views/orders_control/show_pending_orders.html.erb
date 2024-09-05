@@ -16,7 +16,11 @@
       <%= form.label :store_id, 'Filtro por Loja' %>
       <%= form.select :store_id, BlingOrderItem::STORE_ID_NAME_KEY_VALUE.invert, { include_blank: 'Todas', selected: params[:store_id] }, { class: 'form-control' } %>
     </div>
-    <%= form.submit 'Filtro', class: 'btn btn-primary' %>
+    <div class="form-group">
+      <%= form.label :resolution_status, 'Status de Resolução' %>
+      <%= form.select :resolution_status, options_for_select([['Todos', ''], ['Não Resolvido', 'unresolved'], ['Resolvido', 'resolved']], params[:resolution_status]), {}, { class: 'form-control' } %>
+    </div>
+    <%= form.submit 'Filtrar', class: 'btn btn-primary' %>
   <% end %>
 
   <div class="row justify-content-center">
@@ -54,11 +58,19 @@
                                 </a>
                               </td>
                               <td><%= item.quantity %> unidades</td>
-                              <td><%= item.pending? ? 'Pendente' : 'Não Pendente' %></td>
+                              <td>
+                                <% if item.resolved %>
+                                  Resolvido
+                                  <%= button_to 'Marcar como Não Resolvido', update_status_item_path(item, status: 'unresolved'), method: :patch, class: 'btn btn-sm btn-warning' %>
+                                <% else %>
+                                  Não Resolvido
+                                  <%= button_to 'Marcar como Resolvido', update_status_item_path(item, status: 'resolved'), method: :patch, class: 'btn btn-sm btn-success' %>
+                                <% end %>
+                              </td>
                               <td>
                                 <% if item.bling_order_item.situation_id == BlingOrderItem::Status::PENDING %>
-                                  <%= link_to 'Marcar Pendente', update_status_item_path(item, status: 'pendente'), method: :patch, class: 'btn btn-sm btn-success' %>
-                                  <%= link_to 'Marcar Não Pendente', update_status_item_path(item, status: 'nao_pendente'), method: :patch, class: 'btn btn-sm btn-danger' %>
+                                  <%= button_to 'Marcar Pendente', update_status_item_path(item, status: 'pendente'), method: :patch, class: 'btn btn-sm btn-success' %>
+                                  <%= button_to 'Marcar Não Pendente', update_status_item_path(item, status: 'nao_pendente'), method: :patch, class: 'btn btn-sm btn-danger' %>
                                 <% end %>
                               </td>
                             </tr>
