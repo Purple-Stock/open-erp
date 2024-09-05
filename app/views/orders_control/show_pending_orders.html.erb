@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<%= link_to 'Exportar para CSV', show_pending_orders_path(format: :csv, situation_id: params[:situation_id], store_id: params[:store_id]), class: 'btn btn-info' %>
+<%= link_to 'Exportar para CSV', show_pending_orders_path(format: :csv, situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: @resolution_status), class: 'btn btn-info mb-3' %>
 
 <div class="container">
   <%= form_with(url: show_pending_orders_path, method: :get, local: true) do |form| %>
@@ -16,83 +16,92 @@
       <%= form.label :store_id, 'Filtro por Loja' %>
       <%= form.select :store_id, BlingOrderItem::STORE_ID_NAME_KEY_VALUE.invert, { include_blank: 'Todas', selected: params[:store_id] }, { class: 'form-control' } %>
     </div>
-    <div class="form-group">
-      <%= form.label :resolution_status, 'Status de Resolução' %>
-      <%= form.select :resolution_status, options_for_select([['Todos', ''], ['Não Resolvido', 'unresolved'], ['Resolvido', 'resolved']], params[:resolution_status]), {}, { class: 'form-control' } %>
-    </div>
     <%= form.submit 'Filtrar', class: 'btn btn-primary' %>
   <% end %>
 
-  <div class="row justify-content-center">
-    <% if @sorted_stores.present? %>
-      <% @sorted_stores.each do |loja_name, items| %>
-        <div class="col-md-12">
-          <div class="card mb-4">
-            <div class="card-header bg-primary text-white">
-              <h5 class="mb-0"><%= loja_name %> - Total: <%= items.sum(&:quantity) %> unidades</h5>
-            </div>
-            <div class="card-body">
-              <% items.group_by(&:sku).sort_by { |_, sku_items| -sku_items.sum(&:quantity) }.each do |codigo, sku_items| %>
-                <div class="mb-3">
-                  <button class="btn btn-info btn-block text-left" type="button" data-toggle="collapse" data-target=".collapse<%= codigo %>">
-                    <strong>Código <%= codigo %></strong> - <%= sku_items.sum(&:quantity) %> unidades
-                  </button>
-                  <div class="collapse collapse<%= codigo %> mt-2">
-                    <div class="table-responsive">
-                      <table class="table table-bordered table-striped">
-                        <thead class="thead-light">
-                          <tr>
-                            <th>Pedido</th>
-                            <th>Quantidade</th>
-                            <th>Status</th>
-                            <th>Ações</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <% sku_items.sort_by(&:quantity).reverse.each do |item| %>
-                            <tr>
-                              <td>
-                                <%= item.bling_order_item.bling_order_id %>
-                                <a href='https://www.bling.com.br/vendas.php#edit/<%= item.bling_order_item.bling_order_id %>' target="_blank" class="btn btn-sm btn-outline-secondary ml-2">
-                                  Ver no Bling
-                                </a>
-                              </td>
-                              <td><%= item.quantity %> unidades</td>
-                              <td>
-                                <% if item.resolved %>
-                                  Resolvido
-                                  <%= button_to 'Marcar como Não Resolvido', update_status_item_path(item, status: 'unresolved'), method: :patch, class: 'btn btn-sm btn-warning' %>
-                                <% else %>
-                                  Não Resolvido
-                                  <%= button_to 'Marcar como Resolvido', update_status_item_path(item, status: 'resolved'), method: :patch, class: 'btn btn-sm btn-success' %>
-                                <% end %>
-                              </td>
-                              <td>
-                                <% if item.bling_order_item.situation_id == BlingOrderItem::Status::PENDING %>
-                                  <%= button_to 'Marcar Pendente', update_status_item_path(item, status: 'pendente'), method: :patch, class: 'btn btn-sm btn-success' %>
-                                  <%= button_to 'Marcar Não Pendente', update_status_item_path(item, status: 'nao_pendente'), method: :patch, class: 'btn btn-sm btn-danger' %>
-                                <% end %>
-                              </td>
-                            </tr>
-                          <% end %>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+  <ul class="nav nav-tabs mt-4" id="resolutionTabs" role="tablist">
+    <li class="nav-item">
+      <%= link_to 'Não Resolvidos', show_pending_orders_path(situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: 'unresolved'), class: "nav-link #{@resolution_status == 'unresolved' ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Resolvidos', show_pending_orders_path(situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: 'resolved'), class: "nav-link #{@resolution_status == 'resolved' ? 'active' : ''}" %>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="items" role="tabpanel">
+      <div class="row justify-content-center">
+        <% if @sorted_stores.present? %>
+          <% @sorted_stores.each do |loja_name, items| %>
+            <div class="col-md-12">
+              <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="mb-0"><%= loja_name %> - Total: <%= items.sum(&:quantity) %> unidades</h5>
                 </div>
-              <% end %>
+                <div class="card-body">
+                  <% items.group_by(&:sku).sort_by { |_, sku_items| -sku_items.sum(&:quantity) }.each do |codigo, sku_items| %>
+                    <div class="mb-3">
+                      <button class="btn btn-info btn-block text-left" type="button" data-toggle="collapse" data-target=".collapse<%= codigo %>">
+                        <strong>Código <%= codigo %></strong> - <%= sku_items.sum(&:quantity) %> unidades
+                      </button>
+                      <div class="collapse collapse<%= codigo %> mt-2">
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-striped">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Pedido</th>
+                                <th>Quantidade</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% sku_items.sort_by(&:quantity).reverse.each do |item| %>
+                                <tr>
+                                  <td>
+                                    <%= item.bling_order_item.bling_order_id %>
+                                    <a href='https://www.bling.com.br/vendas.php#edit/<%= item.bling_order_item.bling_order_id %>' target="_blank" class="btn btn-sm btn-outline-secondary ml-2">
+                                      Ver no Bling
+                                    </a>
+                                  </td>
+                                  <td><%= item.quantity %> unidades</td>
+                                  <td>
+                                    <% if item.resolved %>
+                                      Resolvido
+                                      <%= button_to 'Marcar como Não Resolvido', update_status_item_path(item, status: 'unresolved'), method: :patch, class: 'btn btn-sm btn-warning' %>
+                                    <% else %>
+                                      Não Resolvido
+                                      <%= button_to 'Marcar como Resolvido', update_status_item_path(item, status: 'resolved'), method: :patch, class: 'btn btn-sm btn-success' %>
+                                    <% end %>
+                                  </td>
+                                  <td>
+                                    <% if item.bling_order_item.situation_id == BlingOrderItem::Status::PENDING %>
+                                      <%= button_to 'Marcar Pendente', update_status_item_path(item, status: 'pendente'), method: :patch, class: 'btn btn-sm btn-success' %>
+                                      <%= button_to 'Marcar Não Pendente', update_status_item_path(item, status: 'nao_pendente'), method: :patch, class: 'btn btn-sm btn-danger' %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+                              <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="col-md-12">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <p>Os pedidos aparecerão aqui</p>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    <% else %>
-      <div class="col-md-12">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <p>Os pedidos aparecerão aqui</p>
-          </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

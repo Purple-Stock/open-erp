@@ -23,7 +23,7 @@ class OrdersControlController < ApplicationController
   def show_pending_orders
     situation_id = params[:situation_id]
     store_id = params[:store_id]
-    resolution_status = params[:resolution_status]
+    @resolution_status = params[:resolution_status] || 'unresolved'
 
     if situation_id.present?
       cleaned_situation_ids = situation_id.split(',').map(&:to_i)
@@ -35,14 +35,14 @@ class OrdersControlController < ApplicationController
 
     items = items.where(bling_order_items: { store_id: store_id }) if store_id.present?
     
-    case resolution_status
-    when 'unresolved'
-      items = items.unresolved
-    when 'resolved'
-      items = items.resolved
-    end
-
-    @all_items = items
+    @all_items = case @resolution_status
+                 when 'unresolved'
+                   items.unresolved
+                 when 'resolved'
+                   items.resolved
+                 else
+                   items
+                 end
 
     # Group items by store and sort by total quantity
     @sorted_stores = @all_items.group_by { |item| item.bling_order_item.store_name }
