@@ -35,17 +35,22 @@
           <thead class="thead-light">
             <tr>
               <th>SKU</th>
-              <th>Quantidade Total</th>
-              <th>Saldo Total</th>
+              <th>Quantidade Pendente Total</th>
+              <th>Estoque</th>
+              <th>Estoque - Quantidade Pendente Total</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             <% @sorted_items.each do |sku, items| %>
+              <% pending_quantity = items.sum(&:quantity) %>
+              <% stock = @stock_balances[sku] || 0 %>
+              <% difference = stock - pending_quantity %>
               <tr>
                 <td><%= sku %></td>
-                <td><%= items.sum(&:quantity) %></td>
-                <td><%= @stock_balances[sku] || 'N/A' %></td>
+                <td><%= pending_quantity %></td>
+                <td><%= stock %></td>
+                <td><%= difference %></td>
                 <td>
                   <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#collapse<%= sku.gsub(/\W/, '') %>">
                     Ver Detalhes
