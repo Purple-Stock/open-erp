@@ -44,7 +44,7 @@
             <% @sorted_items.each do |sku, items| %>
               <tr>
                 <td><%= sku %></td>
-                <td><%= items.sum(&:quantity) %> unidades</td>
+                <td><%= items.sum(&:quantity) %></td>
                 <td><%= @stock_balances[sku] || 'N/A' %></td>
                 <td>
                   <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#collapse<%= sku.gsub(/\W/, '') %>">
