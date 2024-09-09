@@ -155,6 +155,9 @@
           <li class="<%= active_nav_menu_item([show_pending_orders_path]) %>">
             <%= link_to t("audits.pendings"), show_pending_orders_path, class: 'nav-link' %>
           </li>
+            <li class="<%= active_nav_menu_item([show_pending_product_planning_path]) %>">
+            <%= link_to t("audits.pending_product_planning"), show_pending_product_planning_path, class: 'nav-link' %>
+          </li>
           <li class="<%= active_nav_menu_item([shein_dashboards_path]) %>">
             <%= link_to t("audits.finance"), shein_dashboards_path, class: 'nav-link' %>
           </li>
@@ -173,21 +176,8 @@
           <li class="<%= active_nav_menu_item([revenue_estimations_path]) %>">
             <%= link_to t("activerecord.models.revenue_estimations.other"), revenue_estimations_path, class: 'nav-link' %>
           </li>
-          <!--          <li class="<%#= active_nav_menu_item([show_orders_business_day_path]) %>">-->
-          <%#= link_to 'Tempo dos pedidos', show_orders_business_day_path, class: 'nav-link' %>
-          <!--          </li>-->
-          <!--          <li class="<%#= active_nav_menu_item([show_orders_control_path]) %>">-->
-          <%#= link_to 'Controle de Pedidos Online', show_orders_control_path, class: 'nav-link' %>
-          <!--          </li>-->
         <% end %>
       <% end %>
-        <!--        <li class="menu-header">Planos</li>-->
-        <%#= render 'shared/sidebar_dropdown', title: 'Métodos de pagamento', icon: 'fas fa-file-alt' do %>
-        <!--          <li class="<%#= active_nav_item('reports', crud_actions) %>">-->
-        <%#= link_to 'Pagar', payment_path, class: 'nav-link' %>
-        <!--          </li>-->
-        <%# end %>
-        <!--        </li>-->
       </ul>
     </aside>
   </div>
