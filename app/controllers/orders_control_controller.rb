@@ -88,6 +88,15 @@ class OrdersControlController < ApplicationController
     skus = @sorted_items.keys
     @stock_balances = Stock.joins(:product).where(products: { sku: skus }).pluck('products.sku', :total_balance).to_h
 
+    # Fetch total pieces missing for all SKUs
+    @total_pieces_missing = ProductionProduct.joins(:product)
+                                           .where(products: { sku: skus })
+                                           .group('products.sku')
+                                           .sum('quantity - COALESCE(pieces_delivered, 0)')
+
+    # Add this line to determine which tab is active
+    @active_tab = params[:tab] || 'full'
+
     respond_to do |format|
       format.html
       format.csv { send_data generate_csv(@all_items), filename: "pending-products-#{Date.today}.csv" }
