@@ -41,10 +41,10 @@
                 <div class="card-body">
                   <% items.group_by(&:sku).sort_by { |_, sku_items| -sku_items.sum(&:quantity) }.each do |codigo, sku_items| %>
                     <div class="mb-3">
-                      <button class="btn btn-info btn-block text-left" type="button" data-toggle="collapse" data-target=".collapse<%= codigo %>">
+                      <div class="btn btn-info btn-block text-left">
                         <strong>Código <%= codigo %></strong> - <%= sku_items.sum(&:quantity) %> unidades
-                      </button>
-                      <div class="collapse collapse<%= codigo %> mt-2">
+                      </div>
+                      <div class="mt-2">
                         <div class="table-responsive">
                           <table class="table table-bordered table-striped">
                             <thead class="thead-light">
