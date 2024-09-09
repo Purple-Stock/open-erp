@@ -1,0 +1,111 @@
+<div class="section-header">
+  <div class="page-header">
+    <h1><%= t('orders_products.three') %></h1>
+  </div>
+</div>
+
+<%= link_to 'Exportar para CSV', show_pending_product_planning_path(format: :csv, situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: @resolution_status), class: 'btn btn-info mb-3' %>
+
+<div class="container">
+  <%= form_with(url: show_pending_product_planning_path, method: :get, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :situation_id, 'Filtro por Status' %>
+      <%= form.select :situation_id, BlingOrderItem::STATUS_PENDING_NAME_KEY_VALUE.invert, { include_blank: 'Select Status', selected: params[:situation_id] }, { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= form.label :store_id, 'Filtro por Loja' %>
+      <%= form.select :store_id, BlingOrderItem::STORE_ID_NAME_KEY_VALUE.invert, { include_blank: 'Todas', selected: params[:store_id] }, { class: 'form-control' } %>
+    </div>
+    <%= form.submit 'Filtrar', class: 'btn btn-primary' %>
+  <% end %>
+
+  <ul class="nav nav-tabs mt-4" id="resolutionTabs" role="tablist">
+    <li class="nav-item">
+      <%= link_to 'Não Resolvidos', show_pending_product_planning_path(situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: 'unresolved'), class: "nav-link #{@resolution_status == 'unresolved' ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Resolvidos', show_pending_product_planning_path(situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: 'resolved'), class: "nav-link #{@resolution_status == 'resolved' ? 'active' : ''}" %>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="items" role="tabpanel">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="thead-light">
+            <tr>
+              <th>SKU</th>
+              <th>Quantidade Pendente Total</th>
+              <th>Estoque</th>
+              <th>Estoque - Quantidade Pendente Total</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sorted_items.each do |sku, items| %>
+              <% pending_quantity = items.sum(&:quantity) %>
+              <% stock = @stock_balances[sku] || 0 %>
+              <% difference = stock - pending_quantity %>
+              <tr>
+                <td><%= sku %></td>
+                <td><%= pending_quantity %></td>
+                <td><%= stock %></td>
+                <td><%= difference %></td>
+                <td>
+                  <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#collapse<%= sku.gsub(/\W/, '') %>">
+                    Ver Detalhes
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4" class="p-0">
+                  <div id="collapse<%= sku.gsub(/\W/, '') %>" class="collapse">
+                    <table class="table table-sm mb-0">
+                      <thead>
+                        <tr>
+                          <th>Pedido</th>
+                          <th>Quantidade</th>
+                          <th>Loja</th>
+                          <th>Status</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% items.each do |item| %>
+                          <tr>
+                            <td>
+                              <%= item.bling_order_item.bling_order_id %>
+                              <a href='https://www.bling.com.br/vendas.php#edit/<%= item.bling_order_item.bling_order_id %>' target="_blank" class="btn btn-sm btn-outline-secondary ml-2">
+                                Ver no Bling
+                              </a>
+                            </td>
+                            <td><%= item.quantity %></td>
+                            <td><%= item.bling_order_item.store_name %></td>
+                            <td>
+                              <% if item.resolved %>
+                                Resolvido
+                              <% else %>
+                                Não Resolvido
+                              <% end %>
+                            </td>
+                            <td>
+                              <% if item.resolved %>
+                                <%= button_to 'Marcar como Não Resolvido', update_status_item_path(item, status: 'unresolved'), method: :patch, class: 'btn btn-sm btn-warning' %>
+                              <% else %>
+                                <%= button_to 'Marcar como Resolvido', update_status_item_path(item, status: 'resolved'), method: :patch, class: 'btn btn-sm btn-success' %>
+                              <% end %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
