@@ -1,0 +1,42 @@
+<%= form_with(model: warehouse, local: true) do |form| %>
+  <% if warehouse.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(warehouse.errors.count, "error") %> prohibited this warehouse from being saved:</h2>
+
+      <ul>
+        <% warehouse.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :bling_id %>
+    <%= form.text_field :bling_id, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_field :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.select :status, Warehouse.statuses.keys.map { |status| [t("warehouses.statuses.#{status}"), status] }, {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :is_default %>
+    <%= form.check_box :is_default, class: 'form-check-input' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :ignore_balance %>
+    <%= form.check_box :ignore_balance, class: 'form-check-input' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit t('common.submit'), class: 'btn btn-primary' %>
+  </div>
+<% end %>

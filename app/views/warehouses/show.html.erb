@@ -1,0 +1,29 @@
+<h1><%= t('warehouses.details') %></h1>
+
+<p>
+  <strong><%= t('warehouses.bling_id') %>:</strong>
+  <%= @warehouse.bling_id %>
+</p>
+
+<p>
+  <strong><%= t('warehouses.description') %>:</strong>
+  <%= @warehouse.description %>
+</p>
+
+<p>
+  <strong><%= t('warehouses.status') %>:</strong>
+  <%= @warehouse.status %>
+</p>
+
+<p>
+  <strong><%= t('warehouses.is_default') %>:</strong>
+  <%= @warehouse.is_default %>
+</p>
+
+<p>
+  <strong><%= t('warehouses.ignore_balance') %>:</strong>
+  <%= @warehouse.ignore_balance %>
+</p>
+
+<%= link_to t('common.edit'), edit_warehouse_path(@warehouse), class: 'btn btn-primary' %> |
+<%= link_to t('common.back'), warehouses_path, class: 'btn btn-secondary' %>

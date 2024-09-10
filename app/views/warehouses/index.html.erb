@@ -1,0 +1,33 @@
+<h1><%= t('warehouses.list') %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= t('warehouses.bling_id') %></th>
+      <th><%= t('warehouses.description') %></th>
+      <th><%= t('warehouses.status') %></th>
+      <th><%= t('warehouses.is_default') %></th>
+      <th><%= t('warehouses.ignore_balance') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @warehouses.each do |warehouse| %>
+      <tr>
+        <td><%= warehouse.bling_id %></td>
+        <td><%= warehouse.description %></td>
+        <td><%= warehouse.status %></td>
+        <td><%= warehouse.is_default %></td>
+        <td><%= warehouse.ignore_balance %></td>
+        <td><%= link_to t('common.show'), warehouse %></td>
+        <td><%= link_to t('common.edit'), edit_warehouse_path(warehouse) %></td>
+        <td><%= link_to t('common.destroy'), warehouse, method: :delete, data: { confirm: t('common.are_you_sure') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('warehouses.new'), new_warehouse_path, class: 'btn btn-primary' %>
