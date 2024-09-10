@@ -1,32 +1,41 @@
-FROM ruby:3.1.2
+FROM ruby:3.3.4
+
+ENV DATABASE_URL=
+ENV REDIS_URL=
+
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - &&\
+    apt-get install -y nodejs
+RUN npm install --global yarn@1.22
 
 LABEL maintainer="gilcierweb@gmail.com"
 
-ENV BUNDLER_VERSION=2.3.18
-
-RUN gem install bundler -v 2.3.18
-
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock ./
-
 RUN bundle config build.nokogiri --use-system-libraries
-
-RUN bundle check || bundle install
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
 
 COPY package.json yarn.lock ./
-
-RUN apt-get update
-
-RUN apt-get -y upgrade
-
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - &&\
-    apt-get install -y nodejs
-
-RUN npm install --global yarn
-
 RUN yarn install --check-files
 
-COPY . ./ 
+COPY . ./
 
-ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]
+RUN yarn run build
+
+# Executa a criação/atualização do Banco de Dados
+ENV DEPLOY_DATABASE=false
+
+# Executa os testes
+ENV PERFORM_TESTS=false
+
+# Inicia a aplicação
+ENV START_APP=true
+
+# Para Configuration Management
+# Será o valor atribuído à variável RAILS_ENV
+# Por padrão, assume o valor `development`
+ENV CONFIG=development
+
+ENTRYPOINT ["./entrypoints/app-entrypoint.sh"]
