@@ -50,6 +50,14 @@
               <%= link_to 'Pedidos Diários', bling_order_item_owners_path, class: 'nav-link' %>
             </li>
           <% end %>
+                <%= render 'shared/sidebar_dropdown', title: t("warehouses.two"), icon: 'fas fa-warehouse' do %>
+        <li class="<%= active_nav_item('warehouses', 'index') %>">
+          <%= link_to t("warehouses.list"), warehouses_path, class: 'nav-link' %>
+        </li>
+        <li class="<%= active_nav_item('warehouses', 'new') %>">
+          <%= link_to t("warehouses.create"), new_warehouse_path, class: 'nav-link' %>
+        </li>
+      <% end %>
           <%= render 'shared/sidebar_dropdown', title: t("dashboards.second_title"), icon: 'fas fa-shopping-bag' do %>
             <li class="<%= active_nav_item('checkout_orders', 'index') %>">
               <%= link_to t("sales.checkout"), checkout_orders_path, class: 'nav-link' %>

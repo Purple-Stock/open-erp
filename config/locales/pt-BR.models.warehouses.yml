@@ -1,0 +1,38 @@
+pt-BR:
+  warehouses:
+    two: "Depósitos"
+    list: "Lista de Depósitos"
+    new: "Novo Depósito"
+    edit: "Editar Depósito"
+    details: "Detalhes do Depósito"
+    create: "Criar Depósito"
+    bling_id: "ID Bling"
+    description: "Descrição"
+    status: "Status"
+    is_default: "É Padrão"
+    ignore_balance: "Ignorar Saldo"
+    statuses:
+      inactive: "Inativo"
+      active: "Ativo"
+
+  activerecord:
+    models:
+      warehouse:
+        one: "Depósito"
+        other: "Depósitos"
+    attributes:
+      warehouse:
+        bling_id: "ID Bling"
+        description: "Descrição"
+        status: "Status"
+        is_default: "É Padrão"
+        ignore_balance: "Ignorar Saldo"
+        account_id: "ID da Conta"
+
+  common:
+    show: "Visualizar"
+    edit: "Editar"
+    destroy: "Excluir"
+    back: "Voltar"
+    submit: "Enviar"
+    are_you_sure: "Tem certeza?"

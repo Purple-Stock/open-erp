@@ -1,0 +1,6 @@
+<h1><%= t('warehouses.edit') %></h1>
+
+<%= render 'form', warehouse: @warehouse %>
+
+<%= link_to t('common.show'), @warehouse, class: 'btn btn-info' %> |
+<%= link_to t('common.back'), warehouses_path, class: 'btn btn-secondary' %>
