@@ -37,11 +37,23 @@ module Services
           'Authorization' => "Bearer #{token}"
         }
         all_stocks = []
+        
+        Rails.logger.info "Sending request to Bling API: #{base_url} with params: #{params}"
         response = HTTParty.get(base_url, query: params, headers:)
+        Rails.logger.info "Bling API response code: #{response.code}"
+        Rails.logger.info "Bling API response body: #{response.body}"
 
-        raise(StandardError, response['error']['type']) if response['error'].present?
+        if response.code != 200
+          error_message = "Bling API Error: HTTP #{response.code} - #{response.body}"
+          raise StandardError, error_message
+        end
 
         data = JSON.parse(response.body)
+
+        if data['error'].present?
+          error_message = "Bling API Error: #{data['error']['type']} - #{data['error']['message']}"
+          raise StandardError, error_message
+        end
 
         all_stocks.concat(data['data'])
 
