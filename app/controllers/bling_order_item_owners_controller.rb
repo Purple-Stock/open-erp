@@ -49,6 +49,8 @@ class BlingOrderItemOwnersController < ApplicationController
                                                     account_id: current_user.account.id).count
     @pending_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING,
                                                 account_id: current_user.account.id).count
+    @fulfilled_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::FULFILLED,
+                                                  account_id: current_user.account.id).count
     @current_done_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED,
                                                                     BlingOrderItem::Status::CHECKED],
                                                      alteration_date: Time.current.beginning_of_day..Time.current.end_of_day,

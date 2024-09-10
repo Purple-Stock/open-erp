@@ -70,29 +70,45 @@ class Stock < ApplicationRecord
     basic_forecast.count_sold
   end
 
+  has_many :balances, dependent: :destroy
+
   def self.synchronize_bling(tenant, bling_product_ids)
-    options = { idsProdutos: bling_product_ids }
-    results = Services::Bling::Stock.call(stock_command: 'find_stocks', tenant:, options:)
+    options = { idsProdutos: Array(bling_product_ids) }
+    begin
+      Rails.logger.info "Starting Bling stock synchronization for tenant: #{tenant}, product IDs: #{bling_product_ids}"
+      results = Services::Bling::Stock.call(stock_command: 'find_stocks', tenant:, options:)
+    rescue StandardError => e
+      Rails.logger.error "Error synchronizing Bling stocks: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
+      return { error: e.message }
+    end
+
+    Rails.logger.info "Bling API response: #{results.inspect}"
+
     stocks = Stock.where(account_id: tenant)
     results['data'].each do |bling|
-      if stocks.exists?(bling_product_id: bling['produto']['id'])
-        attributes = {
-          total_balance: bling['saldoFisicoTotal'],
-          total_virtual_balance: bling['saldoVirtualTotal'],
-        }
+      attributes = {
+        total_balance: bling['saldoFisicoTotal'],
+        total_virtual_balance: bling['saldoVirtualTotal'],
+        bling_product_id: bling['produto']['id'],
+        account_id: tenant
+      }
 
-        stocks.find_by(bling_product_id: bling['produto']['id']).update(attributes)
-      else
-        attributes = {
-          total_balance: bling['saldoFisicoTotal'],
-          total_virtual_balance: bling['saldoVirtualTotal'],
-          bling_product_id: bling['produto']['id'],
-          account_id: tenant
-        }
+      stock = stocks.find_or_initialize_by(bling_product_id: bling['produto']['id'])
+      if stock.new_record?
         product = Product.find_by(bling_id: bling['produto']['id'])
-        stock = Stock.new(attributes)
-        product.stock = stock
+        stock.product = product
+      end
+      stock.update(attributes)
+
+      bling['depositos'].each do |deposito|
+        stock.balances.find_or_initialize_by(deposit_id: deposito['id']).update(
+          physical_balance: deposito['saldoFisico'],
+          virtual_balance: deposito['saldoVirtual']
+        )
       end
     end
+    Rails.logger.info "Bling stock synchronization completed successfully"
+    { success: true }
   end
 end
