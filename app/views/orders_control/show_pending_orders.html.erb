@@ -32,57 +32,59 @@
     <div class="tab-pane fade show active" id="items" role="tabpanel">
       <div class="row justify-content-center">
         <% if @sorted_stores.present? %>
-          <% @sorted_stores.each do |loja_name, items| %>
+          <% @sorted_stores.each_with_index do |(loja_name, items), index| %>
             <div class="col-md-12">
               <div class="card mb-4">
                 <div class="card-header bg-primary text-white">
                   <h5 class="mb-0"><%= loja_name %> - Total: <%= items.sum(&:quantity) %> unidades</h5>
                 </div>
                 <div class="card-body">
-                  <% items.group_by(&:sku).sort_by { |_, sku_items| -sku_items.sum(&:quantity) }.each do |codigo, sku_items| %>
+                  <% items.group_by(&:sku).sort_by { |_, sku_items| -sku_items.sum(&:quantity) }.each_with_index do |(codigo, sku_items), sku_index| %>
                     <div class="mb-3">
-                      <div class="btn btn-info btn-block text-left">
+                      <button class="btn btn-info btn-block text-left collapse-toggle" type="button" data-target="#collapse<%= index %>_<%= sku_index %>">
                         <strong>Código <%= codigo %></strong> - <%= sku_items.sum(&:quantity) %> unidades
-                      </div>
-                      <div class="mt-2">
-                        <div class="table-responsive">
-                          <table class="table table-bordered table-striped">
-                            <thead class="thead-light">
-                              <tr>
-                                <th>Pedido</th>
-                                <th>Quantidade</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <% sku_items.sort_by(&:quantity).reverse.each do |item| %>
+                      </button>
+                      <div class="collapse-row" id="collapse<%= index %>_<%= sku_index %>" style="display: none;">
+                        <div class="mt-2">
+                          <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                              <thead class="thead-light">
                                 <tr>
-                                  <td>
-                                    <%= item.bling_order_item.bling_order_id %>
-                                    <a href='https://www.bling.com.br/vendas.php#edit/<%= item.bling_order_item.bling_order_id %>' target="_blank" class="btn btn-sm btn-outline-secondary ml-2">
-                                      Ver no Bling
-                                    </a>
-                                  </td>
-                                  <td><%= item.quantity %> unidades</td>
-                                  <td>
-                                    <% if item.resolved %>
-                                      Resolvido
-                                    <% else %>
-                                      Não Resolvido
-                                    <% end %>
-                                  </td>
-                                  <td>
-                                    <% if item.resolved %>
-                                      <%= button_to 'Marcar como Não Resolvido', update_status_item_path(item, status: 'unresolved'), method: :patch, class: 'btn btn-sm btn-warning' %>
-                                    <% else %>
-                                      <%= button_to 'Marcar como Resolvido', update_status_item_path(item, status: 'resolved'), method: :patch, class: 'btn btn-sm btn-success' %>
-                                    <% end %>
-                                  </td>
+                                  <th>Pedido</th>
+                                  <th>Quantidade</th>
+                                  <th>Status</th>
+                                  <th>Ações</th>
                                 </tr>
-                              <% end %>
-                            </tbody>
-                          </table>
+                              </thead>
+                              <tbody>
+                                <% sku_items.sort_by(&:quantity).reverse.each do |item| %>
+                                  <tr>
+                                    <td>
+                                      <%= item.bling_order_item.bling_order_id %>
+                                      <a href='https://www.bling.com.br/vendas.php#edit/<%= item.bling_order_item.bling_order_id %>' target="_blank" class="btn btn-sm btn-outline-secondary ml-2">
+                                        Ver no Bling
+                                      </a>
+                                    </td>
+                                    <td><%= item.quantity %> unidades</td>
+                                    <td>
+                                      <% if item.resolved %>
+                                        Resolvido
+                                      <% else %>
+                                        Não Resolvido
+                                      <% end %>
+                                    </td>
+                                    <td>
+                                      <% if item.resolved %>
+                                        <%= button_to 'Marcar como Não Resolvido', update_status_item_path(item, status: 'unresolved'), method: :patch, class: 'btn btn-sm btn-warning' %>
+                                      <% else %>
+                                        <%= button_to 'Marcar como Resolvido', update_status_item_path(item, status: 'resolved'), method: :patch, class: 'btn btn-sm btn-success' %>
+                                      <% end %>
+                                    </td>
+                                  </tr>
+                                <% end %>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -104,3 +106,30 @@
     </div>
   </div>
 </div>
+
+<%= javascript_tag do %>
+  document.addEventListener('turbo:load', function() {
+    setupCollapseButtons();
+  });
+
+  document.addEventListener('turbo:render', function() {
+    setupCollapseButtons();
+  });
+
+  function setupCollapseButtons() {
+    const collapseButtons = document.querySelectorAll('.collapse-toggle');
+    collapseButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const target = document.querySelector(this.dataset.target);
+        const sign = this.querySelector('.toggle-sign');
+        if (target.style.display === 'none' || target.style.display === '') {
+          target.style.display = 'block';
+          sign.textContent = '-';
+        } else {
+          target.style.display = 'none';
+          sign.textContent = '+';
+        }
+      });
+    });
+  }
+<% end %>
