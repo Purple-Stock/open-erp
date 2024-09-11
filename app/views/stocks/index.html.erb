@@ -21,34 +21,70 @@
     <div class="card-body">
       <%= turbo_frame_tag :stocks do %>
         <div class="table-responsive">
-
           <table id="stockTable" class="table table-striped">
             <thead>
             <tr>
+              <th></th>
               <th><%= model_class.human_attribute_name(:id) %></th>
               <th><%= t('stocks.sku') %></th>
               <th><%= t('stocks.total_balance') %></th>
               <th><%= t('stocks.total_virtual_balance') %></th>
-              <th><%= t('stocks.count_sold') %></th>
-              <th><%= t('stocks.calculate_basic_forecast') %></th>
+              <th>Quantidade vendida dos últimos 30 dias</th>
+              <th>Previsão para os próximos 30 dias</th>
               <th><%= t('stocks.product') %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
             <tbody>
-            <% @stocks.each do |stock| %>
-            <tr>
-              <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
-              <td><%= stock.product.sku %></td>
-              <td><%= stock.total_balance %></td>
-              <td><%= stock.total_virtual_balance %></td>
-              <td><%= stock.count_sold %></td>
-              <td><%= stock.calculate_basic_forecast %></td>
-              <td><%= stock.product.name %></td>
-              <td>
-                <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
-              </td>
-            </tr>
+            <% @stocks_with_data.each_with_index do |(stock, data), index| %>
+              <tr>
+                <td>
+                  <% if stock.balances.any? %>
+                    <button class="btn btn-sm btn-outline-primary collapse-toggle" type="button" data-target="#collapse<%= index %>">
+                      +
+                    </button>
+                  <% end %>
+                </td>
+                <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
+                <td><%= stock.product.sku %></td>
+                <td><%= stock.total_balance %></td>
+                <td><%= stock.total_virtual_balance %></td>
+                <td><%= data[:total_sold] %></td>
+                <td><%= data[:total_forecast] %></td>
+                <td><%= stock.product.name %></td>
+                <td>
+                  <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
+                </td>
+              </tr>
+              <% if stock.balances.any? %>
+                <tr class="collapse-row" id="collapse<%= index %>" style="display: none;">
+                  <td colspan="9" class="p-0">
+                    <table class="table table-sm table-bordered mb-0">
+                      <thead>
+                        <tr>
+                          <th>Warehouse</th>
+                          <th>Physical Balance</th>
+                          <th>Virtual Balance</th>
+                          <th>Quantidade vendida dos últimos 30 dias</th>
+                          <th>Previsão para os próximos 30 dias</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% stock.balances.each do |balance| %>
+                          <% warehouse_data = data[:warehouses][balance.deposit_id] %>
+                          <tr>
+                            <td><%= @warehouses[balance.deposit_id.to_s] || "Unknown (ID: #{balance.deposit_id})" %></td>
+                            <td><%= balance.physical_balance %></td>
+                            <td><%= balance.virtual_balance %></td>
+                            <td><%= warehouse_data[:sold] %></td>
+                            <td><%= warehouse_data[:forecast] %></td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
             </tbody>
           </table>
@@ -58,4 +94,30 @@
     </div>
   </div>
 </div>
+
+<%= javascript_tag do %>
+  document.addEventListener('turbo:load', function() {
+    setupCollapseButtons();
+  });
+
+  document.addEventListener('turbo:render', function() {
+    setupCollapseButtons();
+  });
+
+  function setupCollapseButtons() {
+    const collapseButtons = document.querySelectorAll('.collapse-toggle');
+    collapseButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const target = document.querySelector(this.dataset.target);
+        if (target.style.display === 'none' || target.style.display === '') {
+          target.style.display = 'table-row';
+          this.textContent = '-';
+        } else {
+          target.style.display = 'none';
+          this.textContent = '+';
+        }
+      });
+    });
+  }
+<% end %>
 
