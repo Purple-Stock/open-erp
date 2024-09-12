@@ -63,6 +63,21 @@ class ProductionsController < ApplicationController
     if params[:tailor_id].present?
       @productions_with_missing_pieces = @productions_with_missing_pieces.where(tailor_id: params[:tailor_id])
     end
+
+    @tailors_summary = @productions_with_missing_pieces.each_with_object({}) do |production, summary|
+      tailor_id = production.tailor_id
+      summary[tailor_id] ||= { productions_count: 0, total_missing_pieces: 0, products: {} }
+      summary[tailor_id][:productions_count] += 1
+
+      production.production_products.each do |pp|
+        missing_pieces = pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
+        if missing_pieces > 0
+          summary[tailor_id][:total_missing_pieces] += missing_pieces
+          summary[tailor_id][:products][pp.product_id] ||= 0
+          summary[tailor_id][:products][pp.product_id] += missing_pieces
+        end
+      end
+    end
   end
 
   private
