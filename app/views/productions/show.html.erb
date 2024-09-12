@@ -57,6 +57,9 @@
                 <th>Produto</th>
                 <th>Quantidade</th>
                 <th>Peças Entregues</th>
+                <th>Sujo</th>
+                <th>Erro</th>
+                <th>Descarte</th>
                 <th>Peças Faltantes</th>
                 <th>Data de Entrega</th>
               </tr>
@@ -67,7 +70,12 @@
                   <td><%= pp.product&.name || 'Nenhum produto atribuído' %></td>
                   <td><%= pp.quantity %></td>
                   <td><%= pp.pieces_delivered || 0 %></td>
-                  <td><%= pp.quantity - (pp.pieces_delivered || 0) %></td>
+                  <td><%= pp.dirty || 0 %></td>
+                  <td><%= pp.error || 0 %></td>
+                  <td><%= pp.discard || 0 %></td>
+                  <td>
+                    <%= pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0)) %>
+                  </td>
                   <td><%= pt_only_date_format(pp.delivery_date) || 'Não informado' %></td>
                 </tr>
               <% end %>
@@ -76,8 +84,15 @@
               <tr>
                 <th>Totais</th>
                 <td><%= @production.production_products.sum(&:quantity) %></td>
-                <td><%= @production.total_pieces_delivered %></td>
-                <td><%= @production.total_pieces_missing %></td>
+                <td><%= @production.production_products.sum(&:pieces_delivered) %></td>
+                <td><%= @production.production_products.sum(&:dirty) %></td>
+                <td><%= @production.production_products.sum(&:error) %></td>
+                <td><%= @production.production_products.sum(&:discard) %></td>
+                <td>
+                  <%= @production.production_products.sum { |pp| 
+                    pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
+                  } %>
+                </td>
                 <td></td>
               </tr>
             </tfoot>

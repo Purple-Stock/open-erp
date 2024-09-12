@@ -65,22 +65,38 @@
           <h3><%= t('productions.edit.products') %></h3>
           <div id="production-products">
             <%= form.fields_for :production_products do |pp_form| %>
-              <div class="row mb-2">
-                <div class="col-md-3">
-                  <%= pp_form.label :product_id, Product.model_name.human, class: 'form-label' %>
-                  <%= pp_form.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, { class: 'form-control', required: true } %>
-                </div>
-                <div class="col-md-2">
-                  <%= pp_form.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
-                  <%= pp_form.number_field :quantity, class: 'form-control', readonly: true %>
-                </div>
-                <div class="col-md-2">
-                  <%= pp_form.label :pieces_delivered, ProductionProduct.human_attribute_name(:pieces_delivered), class: 'form-label' %>
-                  <%= pp_form.number_field :pieces_delivered, class: 'form-control' %>
-                </div>
-                <div class="col-md-3">
-                  <%= pp_form.label :delivery_date, ProductionProduct.human_attribute_name(:delivery_date), class: 'form-label' %>
-                  <%= pp_form.date_field :delivery_date, class: 'form-control' %>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row align-items-end">
+                    <div class="col-md-2">
+                      <%= pp_form.label :product_id, Product.model_name.human, class: 'form-label' %>
+                      <%= pp_form.collection_select :product_id, Product.all, :id, :name, { include_blank: true }, { class: 'form-control', required: true } %>
+                    </div>
+                    <div class="col-md-1">
+                      <%= pp_form.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
+                      <%= pp_form.number_field :quantity, class: 'form-control', readonly: true %>
+                    </div>
+                    <div class="col-md-1">
+                      <%= pp_form.label :pieces_delivered, ProductionProduct.human_attribute_name(:pieces_delivered), class: 'form-label' %>
+                      <%= pp_form.number_field :pieces_delivered, class: 'form-control' %>
+                    </div>
+                    <div class="col-md-2">
+                      <%= pp_form.label :delivery_date, ProductionProduct.human_attribute_name(:delivery_date), class: 'form-label' %>
+                      <%= pp_form.date_field :delivery_date, class: 'form-control' %>
+                    </div>
+                    <div class="col-md-2">
+                      <%= pp_form.label :dirty, ProductionProduct.human_attribute_name(:dirty), class: 'form-label' %>
+                      <%= pp_form.number_field :dirty, class: 'form-control', min: 0 %>
+                    </div>
+                    <div class="col-md-2">
+                      <%= pp_form.label :error, ProductionProduct.human_attribute_name(:error), class: 'form-label' %>
+                      <%= pp_form.number_field :error, class: 'form-control', min: 0 %>
+                    </div>
+                    <div class="col-md-2">
+                      <%= pp_form.label :discard, ProductionProduct.human_attribute_name(:discard), class: 'form-label' %>
+                      <%= pp_form.number_field :discard, class: 'form-control', min: 0 %>
+                    </div>
+                  </div>
                 </div>
               </div>
             <% end %>
