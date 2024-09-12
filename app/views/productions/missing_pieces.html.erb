@@ -49,9 +49,9 @@
                 <h5 class="card-title"><%= Tailor.find(tailor_id).name %></h5>
               </div>
               <div class="card-body">
-                <p><strong>Total Productions:</strong> <%= summary[:productions_count] %></p>
-                <p><strong>Total Missing Pieces:</strong> <%= summary[:total_missing_pieces] %></p>
-                <h6 class="mt-3">Products with Missing Pieces:</h6>
+                <p><strong><%= t('.total_productions') %>:</strong> <%= summary[:productions_count] %></p>
+                <p><strong><%= t('.total_missing_pieces') %>:</strong> <%= summary[:total_missing_pieces] %></p>
+                <h6 class="mt-3"><%= t('.products_with_missing_pieces') %>:</h6>
                 <ul>
                   <% summary[:products].each do |product_id, count| %>
                     <li><%= Product.find(product_id).name %>: <%= count %></li>
