@@ -80,7 +80,7 @@ class ProductionsController < ApplicationController
       :cut_date, :tailor_id, :service_order_number, :expected_delivery_date,
       :confirmed, :paid, :consider, :observation,
       production_products_attributes: [:id, :product_id, :quantity, :pieces_delivered, :delivery_date,
-      :_destroy]
+                                     :dirty, :error, :discard, :_destroy]
     )
   end
 end

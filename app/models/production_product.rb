@@ -4,6 +4,9 @@
 #
 #  id               :bigint           not null, primary key
 #  delivery_date    :date
+#  dirty            :integer          default(0)
+#  discard          :integer          default(0)
+#  error            :integer          default(0)
 #  pieces_delivered :integer
 #  quantity         :integer
 #  created_at       :datetime         not null

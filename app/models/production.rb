@@ -44,11 +44,29 @@ class Production < ApplicationRecord
 
   # Add a method to calculate total pieces delivered
   def total_pieces_delivered
-    production_products.sum(:pieces_delivered)
+    production_products.sum(&:pieces_delivered)
   end
 
   # Add a method to calculate total pieces missing
   def total_pieces_missing
     production_products.sum { |pp| pp.quantity - (pp.pieces_delivered || 0) }
+  end
+
+  def total_dirty_pieces
+    production_products.sum(&:dirty)
+  end
+
+  def total_error_pieces
+    production_products.sum(&:error)
+  end
+
+  def total_discarded_pieces
+    production_products.sum(&:discard)
+  end
+
+  def total_missing_pieces
+    production_products.sum do |pp|
+      pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
+    end
   end
 end
