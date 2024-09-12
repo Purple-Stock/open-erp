@@ -29,9 +29,18 @@
             <h6 class="mt-3"><%= t('.missing_pieces') %>:</h6>
             <ul>
               <% production.production_products.each do |pp| %>
-                <% pieces_missing = pp.quantity - (pp.pieces_delivered || 0) %>
+                <% pieces_missing = pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0)) %>
                 <% if pieces_missing > 0 %>
-                  <li><%= "#{pp.product.name}: #{pieces_missing}" %></li>
+                  <li>
+                    <%= "#{pp.product.name}: #{pieces_missing}" %>
+                    <small>
+                      (Total: <%= pp.quantity %>,
+                      Entregues: <%= pp.pieces_delivered || 0 %>,
+                      Sujo: <%= pp.dirty || 0 %>,
+                      Erro: <%= pp.error || 0 %>,
+                      Descarte: <%= pp.discard || 0 %>)
+                    </small>
+                  </li>
                 <% end %>
               <% end %>
             </ul>
