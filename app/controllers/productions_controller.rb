@@ -57,7 +57,7 @@ class ProductionsController < ApplicationController
   def missing_pieces
     @productions_with_missing_pieces = Production.includes(:tailor, production_products: :product)
                                                  .where(id: ProductionProduct.select(:production_id)
-                                                                             .where('quantity > COALESCE(pieces_delivered, 0)'))
+                                                                             .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0)'))
                                                  .distinct
 
     if params[:tailor_id].present?
