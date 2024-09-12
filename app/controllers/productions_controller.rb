@@ -99,7 +99,7 @@ class ProductionsController < ApplicationController
   end
 
   def calculate_tailors_summary(productions)
-    productions.each_with_object({}) do |production, summary|
+    summary = productions.each_with_object({}) do |production, summary|
       tailor_id = production.tailor_id
       summary[tailor_id] ||= { productions_count: 0, total_missing_pieces: 0, products: {} }
       summary[tailor_id][:productions_count] += 1
@@ -113,5 +113,12 @@ class ProductionsController < ApplicationController
         end
       end
     end
+
+    # Sort products by missing pieces count (descending order)
+    summary.each do |tailor_id, tailor_summary|
+      tailor_summary[:products] = tailor_summary[:products].sort_by { |_, count| -count }.to_h
+    end
+
+    summary
   end
 end
