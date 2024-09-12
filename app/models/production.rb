@@ -35,7 +35,7 @@ class Production < ApplicationRecord
   has_many :production_products, dependent: :destroy
   has_many :products, through: :production_products
 
-  accepts_nested_attributes_for :production_products, allow_destroy: true
+  accepts_nested_attributes_for :production_products, allow_destroy: true, reject_if: :all_blank
 
   validates :cut_date, presence: true
   validates :tailor, presence: true

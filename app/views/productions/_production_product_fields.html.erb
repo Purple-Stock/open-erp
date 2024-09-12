@@ -1,15 +1,35 @@
-<div class="nested-fields">
-  <div class="row">
-    <div class="col-md-5">
-      <%= f.label :product_id, ProductionProduct.human_attribute_name(:product), class: 'form-label' %>
-      <%= f.collection_select :product_id, Product.all, :id, :sku, { include_blank: true }, { class: 'form-control select2', required: true } %>
+<div class="nested-fields card mb-3">
+  <div class="card-body">
+    <div class="row align-items-end">
+      <div class="col-md-4">
+        <%= f.label :product_id, Product.model_name.human, class: 'form-label' %>
+        <%= f.collection_select :product_id, Product.all, :id, :sku, { include_blank: true }, { class: 'form-control select2', required: true } %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
+        <%= f.number_field :quantity, class: 'form-control' %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :pieces_delivered, ProductionProduct.human_attribute_name(:pieces_delivered), class: 'form-label' %>
+        <%= f.number_field :pieces_delivered, class: 'form-control' %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :dirty, ProductionProduct.human_attribute_name(:dirty), class: 'form-label' %>
+        <%= f.number_field :dirty, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :error, ProductionProduct.human_attribute_name(:error), class: 'form-label' %>
+        <%= f.number_field :error, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :discard, ProductionProduct.human_attribute_name(:discard), class: 'form-label' %>
+        <%= f.number_field :discard, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-2">
+        <%= f.label :delivery_date, ProductionProduct.human_attribute_name(:delivery_date), class: 'form-label' %>
+        <%= f.date_field :delivery_date, class: 'form-control' %>
+      </div>
     </div>
-    <div class="col-md-5">
-      <%= f.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
-      <%= f.number_field :quantity, class: 'form-control', min: 1, required: true %>
-    </div>
-    <div class="col-md-2 d-flex align-items-end">
-      <%= link_to_remove_association t('actions.remove'), f, class: 'btn btn-danger' %>
-    </div>
+    <%= link_to_remove_association 'Remove Product', f, class: 'btn btn-danger mt-2' %>
   </div>
 </div>
