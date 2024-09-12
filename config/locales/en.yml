@@ -91,6 +91,9 @@ en:
         pieces_delivered: "Pieces Delivered"
         pieces_missing: "Pieces Missing"
         expected_delivery_date: "Expected Delivery Date"
+        dirty: "Dirty"
+        error: "Error"
+        discard: "Discard"
     errors:
       models:
         production:

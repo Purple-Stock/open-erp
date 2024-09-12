@@ -59,8 +59,9 @@ pt-BR:
   activerecord:
     attributes:
       production_product:
-        product_id: "Produto"
-        quantity: "Quantidade"
+        dirty: "Sujo"
+        error: "Erro"
+        discard: "Descarte"
   actions:
     remove_product: "Remover Produto"
   errors:
