@@ -39,6 +39,11 @@ pt-BR:
       production_number: "Produção #%{number}"
       missing_pieces: "Peças Faltantes"
       service_order: "Ordem de Serviço #%{number}"
+      filter_by_status: "Filter by Status"
+      all_statuses: "All Statuses"
+      on_time: "On Time"
+      late: "Late"
+      no_date: "No Expected Date"
     show:
       title: "Detalhes da Produção"
       tailor_details: "Detalhes do Costureiro"

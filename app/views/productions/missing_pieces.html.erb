@@ -10,6 +10,17 @@
                      include_blank: t('.all_tailors'), 
                      class: 'form-control' %>
     </div>
+    <div class="form-group">
+      <%= label_tag :status, t('.filter_by_status') %>
+      <%= select_tag :status,
+                     options_for_select([
+                       [t('.all_statuses'), ''],
+                       [t('.on_time'), 'on_time'],
+                       [t('.late'), 'late'],
+                       [t('.no_date'), 'no_date']
+                     ], params[:status]),
+                     class: 'form-control' %>
+    </div>
     <%= submit_tag t('productions.missing_pieces.apply_filter'), class: 'btn btn-primary' %>
   <% end %>
 
