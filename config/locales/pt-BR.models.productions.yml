@@ -22,6 +22,9 @@ pt-BR:
         pieces_delivered: "Peças Entregues"
         pieces_missing: "Peças Faltando"
         delivery_date: "Data de Entrega"
+        dirty: "Sujo"
+        error: "Erro"
+        discard: "Descarte"
   productions:
     index:
       title: "Produções"
@@ -49,6 +52,7 @@ pt-BR:
       add_product: "Adicionar Produto"
     edit:
       title: "Editar Produção"
+      products: "Produtos"
     actions:
       show: "Mostrar"
       edit: "Editar"

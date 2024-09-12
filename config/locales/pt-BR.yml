@@ -208,25 +208,20 @@ pt-BR:
         one: 'Não foi possível gravar %{model}: 1 erro'
         other: 'Não foi possível gravar %{model}: %{count} erros'
   helpers:
-    select:
-      prompt: Por favor selecione
     submit:
-      create: Criar %{model}
-      submit: Salvar %{model}
-      update: Atualizar %{model}
+      create: "Criar %{model}"
+      update: "Atualizar %{model}"
     links:
-      new: Novo
-      inventory: Novo Inventário
-      edit: Editar
-      destroy: Deletar
-      cancel: Cancelar
-      back: Voltar
-      show: Ver
-      submit: Salvar %{model}
-      confirm: Você tem certeza?
+      new: "Novo"
+      back: "Voltar"
+      edit: "Editar"
+      cancel: "Cancelar"
+      show: "Ver"
+      destroy: "Deletar"
+      confirm: "Você tem certeza?"
     titles:
-      edit: Editar %{model}
-      new: Criar %{model}
+      new: "Novo %{model}"
+      edit: "Editar %{model}"
     tailor:
       edit:
         title: "Editar Costureiro"
