@@ -19,22 +19,22 @@ class OrdersControlController < ApplicationController
                        .where(account_id: current_tenant.id)
                        .order(custom_id: :desc)
   end
-  
+
   def show_pending_orders
     situation_id = params[:situation_id]
     store_id = params[:store_id]
     @resolution_status = params[:resolution_status] || 'unresolved'
 
-    if situation_id.present?
-      cleaned_situation_ids = situation_id.split(',').map(&:to_i)
-    else
-      cleaned_situation_ids = BlingOrderItem::Status::PENDING
-    end
+    cleaned_situation_ids = if situation_id.present?
+                              situation_id.split(',').map(&:to_i)
+                            else
+                              BlingOrderItem::Status::PENDING
+                            end
 
     items = Item.includes(:bling_order_item).where(bling_order_items: { situation_id: cleaned_situation_ids })
 
-    items = items.where(bling_order_items: { store_id: store_id }) if store_id.present?
-    
+    items = items.where(bling_order_items: { store_id: }) if store_id.present?
+
     @all_items = case @resolution_status
                  when 'unresolved'
                    items.unresolved
@@ -60,16 +60,16 @@ class OrdersControlController < ApplicationController
     store_id = params[:store_id]
     @resolution_status = params[:resolution_status] || 'unresolved'
 
-    if situation_id.present?
-      cleaned_situation_ids = situation_id.split(',').map(&:to_i)
-    else
-      cleaned_situation_ids = BlingOrderItem::Status::PENDING
-    end
+    cleaned_situation_ids = if situation_id.present?
+                              situation_id.split(',').map(&:to_i)
+                            else
+                              BlingOrderItem::Status::PENDING
+                            end
 
     items = Item.includes(:bling_order_item).where(bling_order_items: { situation_id: cleaned_situation_ids })
 
-    items = items.where(bling_order_items: { store_id: store_id }) if store_id.present?
-    
+    items = items.where(bling_order_items: { store_id: }) if store_id.present?
+
     @all_items = case @resolution_status
                  when 'unresolved'
                    items.unresolved
@@ -90,19 +90,19 @@ class OrdersControlController < ApplicationController
 
     # Fetch total pieces missing for all SKUs
     @total_pieces_missing = ProductionProduct.joins(:product)
-                                           .where(products: { sku: skus })
-                                           .group('products.sku')
-                                           .sum('quantity - COALESCE(pieces_delivered, 0)')
+                                             .where(products: { sku: skus })
+                                             .group('products.sku')
+                                             .sum('quantity - COALESCE(pieces_delivered, 0)')
 
-    # Add this line to determine which tab is active
-    @active_tab = params[:tab] || 'full'
+    # Set the default tab to 'pending_missing'
+    @active_tab = params[:tab] || 'pending_missing'
 
     respond_to do |format|
       format.html
       format.csv { send_data generate_csv(@all_items), filename: "pending-products-#{Date.today}.csv" }
     end
   end
-  
+
   def show_orders_business_day
     @simplo_orders = SimploOrder.where(order_status: %w[2 30 31]).order(order_id: :asc)
     @calendar = SimploOrder.calendar
@@ -120,24 +120,24 @@ class OrdersControlController < ApplicationController
     CSV.generate(headers: true) do |csv|
       # Define your headers without 'Description'
       csv << ['SKU', 'Quantity', 'Total Value']
-  
+
       # Group by SKU and sum quantities, calculate total value without including description
       grouped_items = pending_order_items.group_by(&:sku).map do |sku, items|
         total_quantity = items.sum(&:quantity)
         total_value = items.sum { |item| item.value.to_f * item.quantity }
         [sku, total_quantity, total_value]
       end
-  
+
       # Sorting grouped items by total_quantity in descending order
       sorted_grouped_items = grouped_items.sort_by { |item| -item[1] }
-  
+
       # Adding rows for each group of items
       sorted_grouped_items.each do |item|
         csv << item
       end
     end
   end
-  
+
   def list_orders
     @orders = []
     (1..20).each do |i|
