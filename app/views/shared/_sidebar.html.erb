@@ -40,6 +40,9 @@
             <li class="<%= active_nav_menu_item([top_selling_products_path]) %>">
               <%= link_to t("audits.top_selling_products"), top_selling_products_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('stocks', 'index') %>">
+              <%= link_to t("stocks.shopping_suggestion"), stocks_path, class: 'nav-link' %>
+            </li>
             <!--
             <li class="<%#= active_nav_menu_item([show_orders_products_stock_path]) %>">
               <%#= link_to t("audits.products"), show_orders_products_stock_path, class: 'nav-link' %>
@@ -101,11 +104,6 @@
           </li>
         <% end %>
         <% if account_policy_enabled? %>
-          <%= render 'shared/sidebar_dropdown', title: t("stocks.two"), icon: 'fas fa-boxes' do %>
-            <li class="<%= active_nav_item('stocks', 'index') %>">
-              <%= link_to t("stocks.list"), stocks_path, class: 'nav-link' %>
-            </li>
-          <% end %>
           <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-store' do %>
             <li class="<%= active_nav_item('stores', 'index') %>">
               <%= link_to t("stores.list"), stores_path, class: 'nav-link' %>
