@@ -16,6 +16,7 @@ pt-BR:
     side_missing_pieces: "Peças Faltantes"
     list: Lista de Produções
     create: Criar Produção
+    products_in_production_report: "Relatório de Produtos em Produção"
   tailors:
     one: Costureiro
     two: Costureiros

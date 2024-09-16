@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :productions do
     collection do
       get 'missing_pieces'
+      get :products_in_production_report
     end
     member do
       patch :verify
