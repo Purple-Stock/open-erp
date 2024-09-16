@@ -24,6 +24,10 @@
     <%= submit_tag t('productions.missing_pieces.apply_filter'), class: 'btn btn-primary' %>
   <% end %>
 
+  <!-- Add this line below the form -->
+  <%= link_to t('.download_csv'), missing_pieces_productions_path(format: :csv, tailor_id: params[:tailor_id], status: params[:status]), class: 'btn btn-secondary mb-3 mr-2' %>
+  <%= link_to t('.products_in_production_report'), products_in_production_report_productions_path, class: 'btn btn-info mb-3' %>
+
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <a class="nav-link active" id="productions-tab" data-toggle="tab" href="#productions" role="tab" aria-controls="productions" aria-selected="true">Productions</a>

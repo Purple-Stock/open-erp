@@ -49,6 +49,7 @@ pt-BR:
       products_with_missing_pieces: "Produtos com Peças Faltantes"
       productions: "Produções"
       tailors_summary: "Resumo dos Costureiros"
+      products_in_production_report: "Relatório de Produtos em Produção"
     show:
       title: "Detalhes da Produção"
       tailor_details: "Detalhes do Costureiro"
@@ -76,6 +77,12 @@ pt-BR:
     destroy:
       production_destroyed: "Produção excluída com sucesso."
       destruction_failed: "Falha ao excluir a produção."
+    products_in_production_report:
+      title: "Relatório de Produtos em Produção"
+      download_csv: "Baixar CSV"
+      product_name: "Nome do Produto"
+      total_quantity: "Quantidade Total"
+      total_missing: "Total de Peças Faltantes"
   helpers:
     submit:
       create: "Criar %{model}"

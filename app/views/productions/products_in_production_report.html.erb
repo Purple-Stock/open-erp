@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="mb-4"><%= t('.title') %></h1>
+
+  <%= link_to t('.download_csv'), products_in_production_report_productions_path(format: :csv), class: 'btn btn-secondary mb-3' %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= t('.product_name') %></th>
+        <th><%= t('.total_quantity') %> ▼</th>
+        <th><%= t('.total_missing') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products_summary.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.total_quantity %></td>
+          <td><%= product.total_missing %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

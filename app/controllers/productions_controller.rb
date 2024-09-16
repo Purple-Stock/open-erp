@@ -77,6 +77,24 @@ class ProductionsController < ApplicationController
     end
 
     @tailors_summary = calculate_tailors_summary(@productions_with_missing_pieces)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_tailors_summary_csv, filename: "tailors_summary_#{Date.today}.csv" }
+    end
+  end
+
+  def products_in_production_report
+    @products_summary = ProductionProduct.joins(:production, :product)
+      .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0)')
+      .group('products.id, products.name')
+      .select('products.id, products.name, SUM(quantity) as total_quantity, SUM(quantity - COALESCE(pieces_delivered, 0) - COALESCE(dirty, 0) - COALESCE(error, 0) - COALESCE(discard, 0)) as total_missing')
+      .order('total_quantity DESC')  # Change this line to order by total_quantity in descending order
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_products_in_production_csv, filename: "products_in_production_#{Date.today}.csv" }
+    end
   end
 
   private
@@ -120,5 +138,41 @@ class ProductionsController < ApplicationController
     end
 
     summary
+  end
+
+  def generate_tailors_summary_csv
+    require 'csv'
+
+    CSV.generate(headers: true) do |csv|
+      csv << ['Tailor Name', 'Total Productions', 'Total Missing Pieces', 'Products with Missing Pieces']
+
+      @tailors_summary.each do |tailor_id, summary|
+        tailor = Tailor.find(tailor_id)
+        products_summary = summary[:products].map { |product_id, count| "#{Product.find(product_id).name}: #{count}" }.join(', ')
+        
+        csv << [
+          tailor.name,
+          summary[:productions_count],
+          summary[:total_missing_pieces],
+          products_summary
+        ]
+      end
+    end
+  end
+
+  def generate_products_in_production_csv
+    require 'csv'
+
+    CSV.generate(headers: true) do |csv|
+      csv << ['Product Name', 'Total Quantity', 'Total Missing Pieces']
+
+      @products_summary.each do |product|
+        csv << [
+          product.name,
+          product.total_quantity,
+          product.total_missing
+        ]
+      end
+    end
   end
 end
