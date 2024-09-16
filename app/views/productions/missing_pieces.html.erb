@@ -64,4 +64,16 @@
       </div>
     </div>
   </div>
+
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.5.1.slim.min.js' %>
+  <%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' %>
+
+  <script>
+    $(document).ready(function() {
+      $('#myTab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
+    });
+  </script>
 </div>
