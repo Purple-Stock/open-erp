@@ -59,15 +59,15 @@ class OrdersControlController < ApplicationController
     situation_id = params[:situation_id]
     store_id = params[:store_id]
     @resolution_status = params[:resolution_status] || 'unresolved'
-
+  
     if situation_id.present?
       cleaned_situation_ids = situation_id.split(',').map(&:to_i)
     else
       cleaned_situation_ids = BlingOrderItem::Status::PENDING
     end
-
+  
     items = Item.includes(:bling_order_item).where(bling_order_items: { situation_id: cleaned_situation_ids })
-
+  
     items = items.where(bling_order_items: { store_id: store_id }) if store_id.present?
     
     @all_items = case @resolution_status
@@ -78,30 +78,30 @@ class OrdersControlController < ApplicationController
                  else
                    items
                  end
-
+  
     # Group items by SKU and sort by total quantity
     @sorted_items = @all_items.group_by(&:sku)
                               .sort_by { |_, sku_items| -sku_items.sum(&:quantity) }
                               .to_h
-
+  
     # Fetch stock balances for all SKUs
     skus = @sorted_items.keys
     @stock_balances = Stock.joins(:product).where(products: { sku: skus }).pluck('products.sku', :total_balance).to_h
-
+  
     # Fetch total pieces missing for all SKUs
     @total_pieces_missing = ProductionProduct.joins(:product)
                                            .where(products: { sku: skus })
                                            .group('products.sku')
                                            .sum('quantity - COALESCE(pieces_delivered, 0)')
-
-    # Add this line to determine which tab is active
-    @active_tab = params[:tab] || 'full'
-
+  
+    # Set the default tab to 'pending_missing'
+    @active_tab = params[:tab] || 'pending_missing'
+  
     respond_to do |format|
       format.html
       format.csv { send_data generate_csv(@all_items), filename: "pending-products-#{Date.today}.csv" }
     end
-  end
+  end  
   
   def show_orders_business_day
     @simplo_orders = SimploOrder.where(order_status: %w[2 30 31]).order(order_id: :asc)
