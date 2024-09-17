@@ -1,11 +1,12 @@
 <div class="col-md-4 mb-4">
-  <div class="card">
-    <div class="card-header">
-      <h5 class="card-title">
-        <%= t('activerecord.attributes.production.service_order_number') %>: <%= production.service_order_number.presence || 'N/A' %>
-      </h5>
-    </div>
+  <div class="card mb-3">
     <div class="card-body">
+      <h5 class="card-title">
+        <%= t('.service_order_number') %>: <%= production.service_order_number %>
+      </h5>
+      <p class="card-text">
+        <strong><%= t('.cut_date') %>:</strong> <%= production.cut_date.strftime('%d/%m/%Y') %>
+      </p>
       <p><strong><%= Production.human_attribute_name(:tailor) %>:</strong> <%= production.tailor.name %></p>
       <p><strong><%= Production.human_attribute_name(:cut_date) %>:</strong> <%= pt_only_date_format(production.cut_date) if production.cut_date %></p>
       <p><strong><%= Production.human_attribute_name(:expected_delivery_date) %>:</strong> <%= l(production.expected_delivery_date) if production.expected_delivery_date %></p>
