@@ -59,6 +59,7 @@ class ProductionsController < ApplicationController
                                                  .where(id: ProductionProduct.select(:production_id)
                                                                              .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0)'))
                                                  .distinct
+                                                 .order(cut_date: :desc, service_order_number: :desc)  # Order by cut_date and service_order_number
 
     if params[:tailor_id].present?
       @productions_with_missing_pieces = @productions_with_missing_pieces.where(tailor_id: params[:tailor_id])
