@@ -28,6 +28,9 @@
               <%= form.label :tailor_id, model_class.human_attribute_name(:tailor), class: 'form-label' %>
               <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: 'Select a tailor' }, { class: 'form-control' } %>
             </div>
+          </div>
+
+          <div class="row mb-3">
             <div class="col-md-3">
               <%= form.label :cut_date, model_class.human_attribute_name(:cut_date), class: 'form-label' %>
               <%= form.date_field :cut_date, class: 'form-control', readonly: true %>
@@ -36,22 +39,9 @@
               <%= form.label :expected_delivery_date, model_class.human_attribute_name(:expected_delivery_date), class: 'form-label' %>
               <%= form.date_field :expected_delivery_date, class: 'form-control' %>
             </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <%= form.label :consider, model_class.human_attribute_name(:consider), class: 'form-check-label' %>
-              <%= form.check_box :consider, class: 'form-check-input' %>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <%= form.label :confirmed, model_class.human_attribute_name(:confirmed), class: 'form-check-label' %>
-              <%= form.check_box :confirmed, class: 'form-check-input' %>
-            </div>
-            <div class="col-md-4">
-              <%= form.label :paid, model_class.human_attribute_name(:paid), class: 'form-check-label' %>
-              <%= form.check_box :paid, class: 'form-check-input' %>
+            <div class="col-md-3">
+              <%= form.label :payment_date, model_class.human_attribute_name(:payment_date), class: 'form-label' %>
+              <%= form.date_field :payment_date, class: 'form-control' %>
             </div>
           </div>
 
@@ -70,6 +60,17 @@
             <div class="col-12">
               <%= form.label :observation, model_class.human_attribute_name(:observation), class: 'form-label' %>
               <%= form.text_area :observation, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <!-- <div class="col-md-4">
+              <%#= form.label :confirmed, model_class.human_attribute_name(:confirmed), class: 'form-check-label' %>
+              <%#= form.check_box :confirmed, class: 'form-check-input' %>
+            </div> -->
+            <div class="col-md-4">
+              <%= form.label :paid, model_class.human_attribute_name(:paid), class: 'form-check-label' %>
+              <%= form.check_box :paid, class: 'form-check-input' %>
             </div>
           </div>
 

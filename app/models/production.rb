@@ -17,6 +17,7 @@
 #  updated_at             :datetime         not null
 #  account_id             :integer
 #  tailor_id              :bigint
+#  payment_date           :date
 #
 # Indexes
 #
