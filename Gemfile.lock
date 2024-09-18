@@ -339,10 +339,15 @@ GEM
       ast (~> 2.4.1)
       racc
     path_expander (1.1.1)
+    pdf-core (0.10.0)
     pg (1.5.6)
     platform_agent (1.0.1)
       activesupport (>= 5.2.0)
       useragent (~> 0.16.3)
+    prawn (2.5.0)
+      matrix (~> 0.4)
+      pdf-core (~> 0.10.0)
+      ttfunk (~> 1.8)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -567,6 +572,8 @@ GEM
     thread_safe (0.3.6)
     tilt (2.3.0)
     timeout (0.4.1)
+    ttfunk (1.8.0)
+      bigdecimal (~> 3.1)
     tty-which (0.4.2)
     turbo-rails (2.0.6)
       actionpack (>= 6.0.0)
@@ -649,6 +656,7 @@ DEPENDENCIES
   pagy (~> 6.0.0)
   pg (~> 1.1)
   platform_agent
+  prawn
   pry-byebug
   puma (~> 6.4, >= 6.4.2)
   pundit

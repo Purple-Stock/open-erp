@@ -155,3 +155,5 @@ gem 'activerecord-import'
 gem 'appsignal', '>= 3.7.6'
 
 gem 'rubyzip'
+
+gem 'prawn'
