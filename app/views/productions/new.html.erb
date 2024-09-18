@@ -37,6 +37,17 @@
           </div>
 
           <div class="row mb-3">
+            <div class="col-md-6">
+              <%= form.label :notions_cost, t('productions.form.notions_cost'), class: 'form-label' %>
+              <%= form.number_field :notions_cost, step: 0.01, class: 'form-control' %>
+            </div>
+            <div class="col-md-6">
+              <%= form.label :fabric_cost, t('productions.form.fabric_cost'), class: 'form-label' %>
+              <%= form.number_field :fabric_cost, step: 0.01, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
             <div class="col-12">
               <%= form.label :observation, model_class.human_attribute_name(:observation), class: 'form-label' %>
               <%= form.text_area :observation, class: 'form-control' %>
