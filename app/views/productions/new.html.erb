@@ -19,6 +19,9 @@
               <%= form.label :tailor_id, model_class.human_attribute_name(:tailor), class: 'form-label' %>
               <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: 'Select a tailor' }, { class: 'form-control select2' } %>
             </div>
+          </div>
+
+          <div class="row mb-3">
             <div class="col-md-3">
               <%= form.label :cut_date, model_class.human_attribute_name(:cut_date), class: 'form-label' %>
               <%= form.date_field :cut_date, class: 'form-control' %>
@@ -27,14 +30,18 @@
               <%= form.label :expected_delivery_date, model_class.human_attribute_name(:expected_delivery_date), class: 'form-label' %>
               <%= form.date_field :expected_delivery_date, class: 'form-control' %>
             </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <%= form.label :consider, model_class.human_attribute_name(:consider), class: 'form-check-label' %>
-              <%= form.check_box :consider, class: 'form-check-input' %>
+            <div class="col-md-3">
+              <%= form.label :payment_date, model_class.human_attribute_name(:payment_date), class: 'form-label' %>
+              <%= form.date_field :payment_date, class: 'form-control' %>
             </div>
           </div>
+
+          <!-- <div class="row mb-3">
+            <div class="col-md-4">
+              <%#= form.label :consider, model_class.human_attribute_name(:consider), class: 'form-check-label' %>
+              <%#= form.check_box :consider, class: 'form-check-input' %>
+            </div>
+          </div> -->
 
           <div class="row mb-3">
             <div class="col-md-6">
@@ -80,6 +87,38 @@
       $('#production-products').on('cocoon:after-insert', function(e, insertedItem) {
         $(insertedItem).find('.select2').select2();
       });
+
+      // Add event listener for cut_date change
+      $('#production_cut_date').on('change', function() {
+        updateDates();
+      });
+
+      function updateDates() {
+        var cutDate = new Date($('#production_cut_date').val());
+        if (isNaN(cutDate.getTime())) return; // Invalid date
+
+        // Calculate expected delivery date (5 business days from cut date)
+        var expectedDeliveryDate = new Date(cutDate);
+        var businessDays = 5;
+        while (businessDays > 0) {
+          expectedDeliveryDate.setDate(expectedDeliveryDate.getDate() + 1);
+          if (expectedDeliveryDate.getDay() !== 0 && expectedDeliveryDate.getDay() !== 6) {
+            businessDays--;
+          }
+        }
+
+        // Calculate payment date (20 calendar days from cut date)
+        var paymentDate = new Date(cutDate);
+        paymentDate.setDate(paymentDate.getDate() + 20);
+
+        // Set the calculated dates
+        $('#production_expected_delivery_date').val(formatDate(expectedDeliveryDate));
+        $('#production_payment_date').val(formatDate(paymentDate));
+      }
+
+      function formatDate(date) {
+        return date.toISOString().split('T')[0];
+      }
     });
   </script>
 <% end %>

@@ -19,6 +19,7 @@ pt-BR:
         notions_cost: "Custo de Aviamentos"
         fabric_cost: "Custo de Tecido"
         price_per_piece: "Preço por Peça"
+        payment_date: "Data de Pagamento"
       production_product:
         product: "Produto"
         quantity: "Quantidade"
