@@ -16,6 +16,9 @@ pt-BR:
         observation: "Observação"
         pieces_delivered: "Peças Entregues"
         pieces_missing: "Peças Faltando"
+        notions_cost: "Custo de Aviamentos"
+        fabric_cost: "Custo de Tecido"
+        price_per_piece: "Preço por Peça"
       production_product:
         product: "Produto"
         quantity: "Quantidade"
@@ -25,6 +28,8 @@ pt-BR:
         dirty: "Sujo"
         error: "Erro"
         discard: "Descarte"
+        unit_price: "Preço Unitário"
+        total_price: "Preço Total"
   productions:
     index:
       title: "Produções"
@@ -56,6 +61,7 @@ pt-BR:
       production_data: "Dados da Produção"
       product_details: "Detalhes dos Produtos"
       totals: "Totais"
+      price_per_piece: "Preço por Peça"
     new:
       title: "Nova Produção"
       new_production: "Criar Nova Produção"
@@ -83,6 +89,9 @@ pt-BR:
       product_name: "Nome do Produto"
       total_quantity: "Quantidade Total"
       total_missing: "Total de Peças Faltantes"
+    form:
+      notions_cost: "Custo de Aviamentos"
+      fabric_cost: "Custo de Tecido"
   helpers:
     submit:
       create: "Criar %{model}"

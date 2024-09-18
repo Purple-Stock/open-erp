@@ -113,7 +113,7 @@ class ProductionsController < ApplicationController
       :cut_date, :tailor_id, :service_order_number, :expected_delivery_date,
       :confirmed, :paid, :consider, :observation, :notions_cost, :fabric_cost,
       production_products_attributes: [:id, :product_id, :quantity, :pieces_delivered, :delivery_date,
-                                     :dirty, :error, :discard, :_destroy]
+                                       :dirty, :error, :discard, :unit_price, :_destroy]
     )
   end
 
