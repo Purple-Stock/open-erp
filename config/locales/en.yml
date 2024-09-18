@@ -85,6 +85,8 @@ en:
         observation: "Observation"
         pieces_delivered: "Pieces Delivered"
         pieces_missing: "Pieces Missing"
+        notions_cost: "Notions Cost"
+        fabric_cost: "Fabric Cost"
       production_product:
         product: "Product"
         quantity: "Quantity"

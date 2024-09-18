@@ -101,3 +101,18 @@
 
   <%= link_to_remove_association "Remove Product", f %>
 </div>
+
+<div class="form-group">
+  <%= form.label :notions_cost, "Valor dos Aviamentos" %>
+  <%= form.number_field :notions_cost, step: 0.01, class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <%= form.label :fabric_cost, "Valor do Tecido" %>
+  <%= form.number_field :fabric_cost, step: 0.01, class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <%= form.label :total_material_cost, "Custo Total de Materiais" %>
+  <%= form.number_field :total_material_cost, step: 0.01, class: 'form-control', readonly: true %>
+</div>

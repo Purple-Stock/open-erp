@@ -62,6 +62,10 @@ pt-BR:
         dirty: "Sujo"
         error: "Erro"
         discard: "Descarte"
+      production:
+        notions_cost: "Custo de Aviamentos"
+        fabric_cost: "Custo de Tecido"
+        # Remove the total_material_cost line
   actions:
     remove_product: "Remover Produto"
   errors:
@@ -329,4 +333,7 @@ helpers:
       add_product: "Adicionar Produto"
       consider: "Considerar"
       submit_button: "Enviar"
+      notions_cost: "Custo de Aviamentos"
+      fabric_cost: "Custo de Tecido"
+      # Remove the total_material_cost line
 

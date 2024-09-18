@@ -42,6 +42,10 @@
           <dd class="col-sm-9"><%= @production.paid ? 'Sim' : 'Não' %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:observation) %>:</dt>
           <dd class="col-sm-9"><%= @production.observation %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:notions_cost) %>:</dt>
+          <dd class="col-sm-9"><%= number_to_currency(@production.notions_cost) %></dd>
+          <dt class="col-sm-3"><%= model_class.human_attribute_name(:fabric_cost) %>:</dt>
+          <dd class="col-sm-9"><%= number_to_currency(@production.fabric_cost) %></dd>
         </dl>
       </div>
     </div>
