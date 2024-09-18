@@ -9,6 +9,8 @@
 #  error            :integer          default(0)
 #  pieces_delivered :integer
 #  quantity         :integer
+#  total_price      :decimal(10, 2)
+#  unit_price       :decimal(10, 2)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  product_id       :bigint           not null
@@ -30,12 +32,18 @@ class ProductionProduct < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :pieces_delivered, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :unit_price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   before_save :set_default_pieces_delivered
+  before_save :calculate_total_price
 
   private
 
   def set_default_pieces_delivered
     self.pieces_delivered ||= 0
+  end
+
+  def calculate_total_price
+    self.total_price = quantity * unit_price if quantity.present? && unit_price.present?
   end
 end

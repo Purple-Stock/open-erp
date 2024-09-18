@@ -7,6 +7,8 @@
 #  consider               :boolean          default(FALSE)
 #  cut_date               :datetime
 #  expected_delivery_date :date
+#  fabric_cost            :decimal(10, 2)
+#  notions_cost           :decimal(10, 2)
 #  observation            :text
 #  paid                   :boolean
 #  pieces_missing         :integer
@@ -84,5 +86,9 @@ class Production < ApplicationRecord
     total_quantity = production_products.sum(&:quantity)
     
     total_quantity.zero? ? 0 : (total_cost / total_quantity)
+  end
+
+  def total_price
+    production_products.sum { |pp| pp.total_price || 0 }
   end
 end

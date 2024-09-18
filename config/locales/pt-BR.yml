@@ -336,4 +336,7 @@ helpers:
       notions_cost: "Custo de Aviamentos"
       fabric_cost: "Custo de Tecido"
       # Remove the total_material_cost line
+  productions:
+    show:
+      price_per_piece: "Preço por Peça"
 

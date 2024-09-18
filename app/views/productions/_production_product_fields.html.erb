@@ -1,17 +1,25 @@
 <div class="nested-fields card mb-3">
   <div class="card-body">
     <div class="row align-items-end">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <%= f.label :product_id, Product.model_name.human, class: 'form-label' %>
         <%= f.collection_select :product_id, Product.all, :id, :sku, { include_blank: true }, { class: 'form-control select2', required: true } %>
       </div>
       <div class="col-md-1">
         <%= f.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
-        <%= f.number_field :quantity, class: 'form-control' %>
+        <%= f.number_field :quantity, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :unit_price, ProductionProduct.human_attribute_name(:unit_price), class: 'form-label' %>
+        <%= f.number_field :unit_price, step: 0.01, class: 'form-control price-input', min: 0 %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :total_price, ProductionProduct.human_attribute_name(:total_price), class: 'form-label' %>
+        <%= f.number_field :total_price, step: 0.01, class: 'form-control total-price', readonly: true %>
       </div>
       <div class="col-md-1">
         <%= f.label :pieces_delivered, ProductionProduct.human_attribute_name(:pieces_delivered), class: 'form-label' %>
-        <%= f.number_field :pieces_delivered, class: 'form-control' %>
+        <%= f.number_field :pieces_delivered, class: 'form-control', min: 0 %>
       </div>
       <div class="col-md-1">
         <%= f.label :dirty, ProductionProduct.human_attribute_name(:dirty), class: 'form-label' %>
@@ -29,7 +37,40 @@
         <%= f.label :delivery_date, ProductionProduct.human_attribute_name(:delivery_date), class: 'form-label' %>
         <%= f.date_field :delivery_date, class: 'form-control' %>
       </div>
+      <div class="col-md-1 d-flex align-items-end">
+        <%= link_to_remove_association 'Remove', f, class: 'btn btn-danger btn-sm' %>
+      </div>
     </div>
-    <%= link_to_remove_association 'Remove Product', f, class: 'btn btn-danger mt-2' %>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  function setupTotalPriceCalculation(nestedFields) {
+    const quantityInput = nestedFields.querySelector('input[name$="[quantity]"]');
+    const unitPriceInput = nestedFields.querySelector('input[name$="[unit_price]"]');
+    const totalPriceInput = nestedFields.querySelector('input[name$="[total_price]"]');
+
+    function calculateTotalPrice() {
+      const quantity = parseFloat(quantityInput.value) || 0;
+      const unitPrice = parseFloat(unitPriceInput.value) || 0;
+      const totalPrice = (quantity * unitPrice).toFixed(2);
+      totalPriceInput.value = totalPrice;
+    }
+
+    quantityInput.addEventListener('input', calculateTotalPrice);
+    unitPriceInput.addEventListener('input', calculateTotalPrice);
+
+    // Initial calculation
+    calculateTotalPrice();
+  }
+
+  // Setup for existing nested fields
+  document.querySelectorAll('.nested-fields').forEach(setupTotalPriceCalculation);
+
+  // Setup for dynamically added nested fields
+  document.addEventListener('cocoon:after-insert', function(e) {
+    setupTotalPriceCalculation(e.detail[0]);
+  });
+});
+</script>

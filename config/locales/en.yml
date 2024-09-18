@@ -68,6 +68,8 @@ en:
       back: "Back to Edit"
     update:
       production_updated: "Production was successfully updated."
+    show:
+      price_per_piece: "Price per Piece"
   activerecord:
     models:
       production: "Production"

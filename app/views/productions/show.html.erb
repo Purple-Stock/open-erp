@@ -62,6 +62,8 @@
               <tr>
                 <th>Produto</th>
                 <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Preço Total</th>
                 <th>Peças Entregues</th>
                 <th>Sujo</th>
                 <th>Erro</th>
@@ -75,6 +77,8 @@
                 <tr>
                   <td><%= pp.product&.name || 'Nenhum produto atribuído' %></td>
                   <td><%= pp.quantity %></td>
+                  <td><%= number_to_currency(pp.unit_price) %></td>
+                  <td><%= number_to_currency(pp.total_price) %></td>
                   <td><%= pp.pieces_delivered || 0 %></td>
                   <td><%= pp.dirty || 0 %></td>
                   <td><%= pp.error || 0 %></td>
@@ -88,18 +92,9 @@
             </tbody>
             <tfoot>
               <tr>
-                <th>Totais</th>
-                <td><%= @production.production_products.sum(&:quantity) %></td>
-                <td><%= @production.production_products.sum(&:pieces_delivered) %></td>
-                <td><%= @production.production_products.sum(&:dirty) %></td>
-                <td><%= @production.production_products.sum(&:error) %></td>
-                <td><%= @production.production_products.sum(&:discard) %></td>
-                <td>
-                  <%= @production.production_products.sum { |pp| 
-                    pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
-                  } %>
-                </td>
-                <td></td>
+                <th colspan="3">Total da Produção</th>
+                <td><%= number_to_currency(@production.total_price) %></td>
+                <td colspan="6"></td>
               </tr>
             </tfoot>
           </table>
