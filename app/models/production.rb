@@ -69,4 +69,20 @@ class Production < ApplicationRecord
       pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
     end
   end
+
+  # Remove the before_save callback and the calculate_total_material_cost method
+  # before_save :calculate_total_material_cost
+
+  # private
+
+  # def calculate_total_material_cost
+  #   self.total_material_cost = (notions_cost || 0) + (fabric_cost || 0)
+  # end
+
+  def price_per_piece
+    total_cost = (notions_cost || 0) + (fabric_cost || 0)
+    total_quantity = production_products.sum(&:quantity)
+    
+    total_quantity.zero? ? 0 : (total_cost / total_quantity)
+  end
 end
