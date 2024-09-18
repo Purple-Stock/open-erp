@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
     member do
       patch :verify
+      get :service_order_pdf
     end
   end
 
