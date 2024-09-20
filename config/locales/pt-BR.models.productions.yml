@@ -37,6 +37,12 @@ pt-BR:
       product_summary: "Resumo da Produção"
       no_tailor: "Nenhum"
       no_products: "Nenhum produto"
+      filter_by_tailor: "Filtrar por Costureiro"
+      all_tailors: "Todos os Costureiros"
+      filter_by_service_order: "Filtrar por Ordem de Serviço"
+      enter_service_order: "Digite o Número da Ordem de Serviço"
+      filter: "Filtrar"
+      clear_filters: "Limpar Filtros"
     missing_pieces:
       title: "Produções com Peças Faltantes"
       filter_by_tailor: "Filtrar por Costureiro"

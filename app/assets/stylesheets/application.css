@@ -72,3 +72,11 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 /** HIDE-SPINNERS-END **/
+
+.sorted-asc::after {
+  content: " ▲";
+}
+
+.sorted-desc::after {
+  content: " ▼";
+}
