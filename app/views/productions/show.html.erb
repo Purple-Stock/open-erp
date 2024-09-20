@@ -49,7 +49,11 @@
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:fabric_cost) %>:</dt>
           <dd class="col-sm-9"><%= number_to_currency(@production.fabric_cost) %></dd>
           <dt class="col-sm-3"><%= t('productions.show.price_per_piece') %>:</dt>
-          <dd class="col-sm-9"><%= number_to_currency(@production.price_per_piece) %></dd>
+          <dd class="col-sm-9">
+            <% total_cost = @production.notions_cost + @production.fabric_cost + @production.total_price %>
+            <% total_quantity = @production.production_products.sum(:quantity) %>
+            <%= number_to_currency(total_cost / total_quantity) if total_quantity > 0 %>
+          </dd>
         </dl>
       </div>
     </div>
@@ -94,9 +98,20 @@
             </tbody>
             <tfoot>
               <tr>
-                <th colspan="3">Total da Produção</th>
+                <th>Total da Produção</th>
+                <td><%= @production.production_products.sum(:quantity) %></td>
+                <td></td>
                 <td><%= number_to_currency(@production.total_price) %></td>
-                <td colspan="6"></td>
+                <td><%= @production.production_products.sum(:pieces_delivered) %></td>
+                <td><%= @production.production_products.sum(:dirty) %></td>
+                <td><%= @production.production_products.sum(:error) %></td>
+                <td><%= @production.production_products.sum(:discard) %></td>
+                <td>
+                  <%= @production.production_products.sum { |pp| 
+                    pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
+                  } %>
+                </td>
+                <td></td>
               </tr>
             </tfoot>
           </table>
