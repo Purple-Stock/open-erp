@@ -16,13 +16,13 @@
             <table class="table table-striped table-hover">
               <thead class="thead-dark">
                 <tr>
-                  <th><%= model_class.human_attribute_name(:service_order_number) %></th>
-                  <th><%= model_class.human_attribute_name(:tailor) %></th>
+                  <th data-column="service_order_number"><%= model_class.human_attribute_name(:service_order_number) %></th>
+                  <th data-column="tailor"><%= model_class.human_attribute_name(:tailor) %></th>
                   <th><%= t 'productions.index.product_summary' %></th>
-                  <th><%= model_class.human_attribute_name(:cut_date) %></th>
-                  <th><%= model_class.human_attribute_name(:expected_delivery_date) %></th>
-                  <th><%= model_class.human_attribute_name(:consider) %></th>
-                  <th><%= model_class.human_attribute_name(:confirmed) %></th>
+                  <th data-column="cut_date"><%= model_class.human_attribute_name(:cut_date) %></th>
+                  <th data-column="expected_delivery_date"><%= model_class.human_attribute_name(:expected_delivery_date) %></th>
+                  <th data-column="consider"><%= model_class.human_attribute_name(:consider) %></th>
+                  <th data-column="confirmed"><%= model_class.human_attribute_name(:confirmed) %></th>
                   <th><%= t 'helpers.actions' %></th>
                 </tr>
               </thead>
@@ -57,3 +57,75 @@
     </div>
   </div>
 </div>
+
+<script>
+function initSortableTable() {
+  const table = document.querySelector('.table-responsive table');
+  if (!table) return;
+
+  const headers = table.querySelectorAll('th[data-column]');
+  const tbody = table.querySelector('tbody');
+  let sortColumn = null;
+  let sortAscending = true;
+
+  headers.forEach(header => {
+    header.addEventListener('click', () => {
+      const column = header.dataset.column;
+      
+      if (sortColumn === column) {
+        sortAscending = !sortAscending;
+      } else {
+        sortColumn = column;
+        sortAscending = true;
+      }
+
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const sortedRows = sortRows(rows, column);
+
+      tbody.innerHTML = '';
+      sortedRows.forEach(row => tbody.appendChild(row));
+
+      updateSortIndicators(headers, header);
+    });
+  });
+
+  function sortRows(rows, column) {
+    return rows.sort((a, b) => {
+      const aValue = getCellValue(a, column);
+      const bValue = getCellValue(b, column);
+
+      if (column === 'cut_date' || column === 'expected_delivery_date') {
+        return compareDates(aValue, bValue);
+      }
+
+      return compareValues(aValue, bValue);
+    });
+  }
+
+  function getCellValue(row, column) {
+    const index = Array.from(headers).findIndex(el => el.dataset.column === column);
+    return row.cells[index].textContent.trim();
+  }
+
+  function compareDates(a, b) {
+    const dateA = a ? new Date(a) : new Date(0);
+    const dateB = b ? new Date(b) : new Date(0);
+    return sortAscending ? dateA - dateB : dateB - dateA;
+  }
+
+  function compareValues(a, b) {
+    if (a < b) return sortAscending ? -1 : 1;
+    if (a > b) return sortAscending ? 1 : -1;
+    return 0;
+  }
+
+  function updateSortIndicators(headers, currentHeader) {
+    headers.forEach(header => {
+      header.classList.remove('sorted-asc', 'sorted-desc');
+    });
+    currentHeader.classList.add(sortAscending ? 'sorted-asc' : 'sorted-desc');
+  }
+}
+
+document.addEventListener('turbo:load', initSortableTable);
+</script>
