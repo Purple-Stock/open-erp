@@ -65,8 +65,11 @@ function initSortableTable() {
 
   const headers = table.querySelectorAll('th[data-column]');
   const tbody = table.querySelector('tbody');
-  let sortColumn = null;
-  let sortAscending = true;
+  let sortColumn = 'service_order_number'; // Set initial sort column
+  let sortAscending = false; // Start with descending order
+
+  // Initial sort
+  sortTable();
 
   headers.forEach(header => {
     header.addEventListener('click', () => {
@@ -76,18 +79,22 @@ function initSortableTable() {
         sortAscending = !sortAscending;
       } else {
         sortColumn = column;
-        sortAscending = true;
+        sortAscending = false; // Always start with descending order when changing columns
       }
 
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      const sortedRows = sortRows(rows, column);
-
-      tbody.innerHTML = '';
-      sortedRows.forEach(row => tbody.appendChild(row));
-
-      updateSortIndicators(headers, header);
+      sortTable();
     });
   });
+
+  function sortTable() {
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const sortedRows = sortRows(rows, sortColumn);
+
+    tbody.innerHTML = '';
+    sortedRows.forEach(row => tbody.appendChild(row));
+
+    updateSortIndicators(headers, Array.from(headers).find(h => h.dataset.column === sortColumn));
+  }
 
   function sortRows(rows, column) {
     return rows.sort((a, b) => {
@@ -96,6 +103,8 @@ function initSortableTable() {
 
       if (column === 'cut_date' || column === 'expected_delivery_date') {
         return compareDates(aValue, bValue);
+      } else if (column === 'service_order_number') {
+        return compareServiceOrderNumbers(aValue, bValue);
       }
 
       return compareValues(aValue, bValue);
@@ -111,6 +120,12 @@ function initSortableTable() {
     const dateA = a ? new Date(a) : new Date(0);
     const dateB = b ? new Date(b) : new Date(0);
     return sortAscending ? dateA - dateB : dateB - dateA;
+  }
+
+  function compareServiceOrderNumbers(a, b) {
+    const numA = parseInt(a.replace(/\D/g, ''), 10);
+    const numB = parseInt(b.replace(/\D/g, ''), 10);
+    return sortAscending ? numA - numB : numB - numA;
   }
 
   function compareValues(a, b) {
