@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       patch :verify
       get :service_order_pdf
+      get :payment_order_pdf  # Add this line
     end
   end
 
