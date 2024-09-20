@@ -8,6 +8,9 @@
       <div class="breadcrumb-item">Show Production</div>
     </div>
   </div>
+  <div class="actions">
+    <%= link_to 'Download Service Order PDF', service_order_pdf_production_path(@production), class: 'btn btn-primary', target: '_blank' %>
+  </div>
 
   <div class="section-body">
     <div class="card">
@@ -36,8 +39,6 @@
           <dd class="col-sm-9"><%= pt_only_date_format(@production.expected_delivery_date) %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:payment_date) %>:</dt>
           <dd class="col-sm-9"><%= pt_only_date_format(@production.payment_date) if @production.payment_date %></dd>
-          <dt class="col-sm-3"><%= model_class.human_attribute_name(:consider)%>:</dt>
-          <dd class="col-sm-9"><%= @production.consider ? 'Sim' : 'Não' %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:confirmed) %>:</dt>
           <dd class="col-sm-9"><%= @production.confirmed ? 'Sim' : 'Não' %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:paid) %>:</dt>
