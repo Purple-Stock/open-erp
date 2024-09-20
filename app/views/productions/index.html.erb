@@ -9,6 +9,23 @@
     <%= link_to t('helpers.links.new'), new_production_path, class: 'btn btn-primary mb-3' %>
     <%= link_to t('productions.missing_pieces.title'), missing_pieces_productions_path, class: 'btn btn btn-info mb-3 ml-2' %>
 
+    <div class="card mb-3">
+      <div class="card-body">
+        <%= form_tag productions_path, method: :get, class: 'form-inline' do %>
+          <div class="form-group mr-2">
+            <%= label_tag :tailor_id, t('productions.index.filter_by_tailor'), class: 'mr-2' %>
+            <%= select_tag :tailor_id, options_from_collection_for_select(Tailor.all, :id, :name, params[:tailor_id]), prompt: t('productions.index.all_tailors'), class: 'form-control' %>
+          </div>
+          <div class="form-group mr-2">
+            <%= label_tag :service_order_number, t('productions.index.filter_by_service_order'), class: 'mr-2' %>
+            <%= text_field_tag :service_order_number, params[:service_order_number], class: 'form-control', placeholder: t('productions.index.enter_service_order') %>
+          </div>
+          <%= submit_tag t('productions.index.filter'), class: 'btn btn-primary' %>
+          <%= link_to t('productions.index.clear_filters'), productions_path, class: 'btn btn-secondary ml-2' %>
+        <% end %>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-body">
         <%= turbo_frame_tag :productions do %>

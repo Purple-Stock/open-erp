@@ -9,6 +9,16 @@ class ProductionsController < ApplicationController
 
   def index
     @productions = Production.includes(:tailor, production_products: :product).all
+
+    if params[:tailor_id].present?
+      @productions = @productions.where(tailor_id: params[:tailor_id])
+    end
+
+    if params[:service_order_number].present?
+      @productions = @productions.where("service_order_number LIKE ?", "%#{params[:service_order_number]}%")
+    end
+
+    @productions = @productions.order(service_order_number: :desc)
   end
 
   def show; end
