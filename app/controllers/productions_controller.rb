@@ -113,7 +113,7 @@ class ProductionsController < ApplicationController
 
   def service_order_pdf
     @production = Production.find(params[:id])
-    pdf = generate_service_order_pdf(@production)
+    pdf = Services::Pdf::ServiceOrderPdfGenerator.new(@production).generate
     send_data pdf.render, filename: "service_order_#{@production.service_order_number}.pdf", type: 'application/pdf', disposition: 'inline'
   end
 
@@ -193,67 +193,6 @@ class ProductionsController < ApplicationController
           product.total_missing
         ]
       end
-    end
-  end
-
-  def generate_service_order_pdf(production)
-    Prawn::Document.new do |pdf|
-      pdf.font_families.update("DejaVu" => {
-        normal: "#{Rails.root}/app/assets/fonts/DejaVuSans.ttf",
-        bold: "#{Rails.root}/app/assets/fonts/DejaVuSans-Bold.ttf"
-      })
-      pdf.font "DejaVu"
-  
-      # Header
-      pdf.text "Ordem de serviço N° #{production.service_order_number}", size: 16, style: :bold
-      pdf.move_down 20
-  
-      # Client and Order Details
-      pdf.text "Cliente: #{production.tailor.name}", style: :bold
-      pdf.text "Endereço: Endereço do cliente" # Replace with actual address when available
-      pdf.text "Número da OS: #{production.service_order_number}"
-      pdf.text "Data de entrada: #{production.cut_date&.strftime("%d/%m/%Y")}"
-      pdf.text "Data prevista: #{production.expected_delivery_date&.strftime("%d/%m/%Y")}"
-      pdf.text "Data de conclusão: "
-      pdf.move_down 20
-  
-      # Products
-      pdf.text "Peças", size: 14, style: :bold
-      pdf.move_down 10
-  
-      production.production_products.each do |pp|
-        pdf.text "Produto: #{pp.product.name}"
-        pdf.text "Código: #{pp.product.sku}"
-        pdf.text "Quantidade: #{pp.quantity}"
-        pdf.text "Preço un.: #{number_to_currency(pp.unit_price)}"
-        pdf.text "Valor total: #{number_to_currency(pp.total_price)}"
-        pdf.move_down 10
-      end
-  
-      pdf.move_down 20
-  
-      # Totals
-      pdf.text "Total serviços: #{number_to_currency(0)}", align: :right
-      pdf.text "Total peças: #{number_to_currency(production.total_price)}", align: :right
-      pdf.text "Total da ordem de serviço: #{number_to_currency(production.total_price)}", style: :bold, align: :right
-  
-      pdf.move_down 30
-  
-      # Observations
-      if production.observation.present?
-        pdf.text "Observações do Serviço", style: :bold
-        pdf.text production.observation
-        pdf.move_down 20
-      end
-  
-      # Signature
-      pdf.text "Concordo com os termos descritos acima."
-      pdf.move_down 10
-      pdf.text "Data _____/_____/_____"
-      pdf.move_down 20
-      pdf.stroke_horizontal_rule
-      pdf.move_down 5
-      pdf.text "Assinatura do responsável"
     end
   end
 end

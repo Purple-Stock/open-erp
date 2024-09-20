@@ -11,7 +11,7 @@ pt-BR:
         delivery_date: "Data de Entrega"
         expected_delivery_date: "Data Prevista de Entrega"
         consider: "Considerar"
-        confirmed: "Confirmado"
+        confirmed: "Recebimento Confirmado"
         paid: "Pago"
         observation: "Observação"
         pieces_delivered: "Peças Entregues"
