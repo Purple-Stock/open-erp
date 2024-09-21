@@ -8,10 +8,12 @@
       <div class="breadcrumb-item">Show Production</div>
     </div>
   </div>
+
   <div class="actions">
     <%= link_to 'Download Service Order PDF', service_order_pdf_production_path(@production), class: 'btn btn-primary', target: '_blank' %>
+    <%= link_to 'Download Payment Order PDF', payment_order_pdf_production_path(@production), class: 'btn btn-success', target: '_blank' %>
   </div>
-
+  
   <div class="section-body">
     <div class="card">
       <div class="card-header">
