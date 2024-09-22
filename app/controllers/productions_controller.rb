@@ -117,6 +117,12 @@ class ProductionsController < ApplicationController
     send_data pdf.render, filename: "service_order_#{@production.service_order_number}.pdf", type: 'application/pdf', disposition: 'inline'
   end
 
+  def payment_order_pdf
+    @production = Production.find(params[:id])
+    pdf = Services::Pdf::PaymentOrderPdfGenerator.new(@production).generate
+    send_data pdf.render, filename: "payment_order_#{@production.service_order_number}.pdf", type: 'application/pdf', disposition: 'inline'
+  end
+
   private
 
   def set_production
