@@ -148,4 +148,10 @@ Rails.application.routes.draw do
 
   resources :warehouses
 
+  resources :bling_order_items do
+    collection do
+      get :export_csv
+    end
+  end
+
 end

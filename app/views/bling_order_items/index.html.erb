@@ -3,7 +3,7 @@
     <h1><%= t('activerecord.models.bling_order_items.other') %></h1>
   </div>
   <div class="d-flex justify-content-end">
-    <% button_to "Faça algo útil", '#', class: "btn btn-success", method: :get %>
+    <%= link_to "Exportar CSV", bling_order_items_path(format: :csv, status: @default_status_filter, store_id: @default_store_filter, initial_date: @default_initial_date, final_date: @default_final_date, disable_initial_date: params[:disable_initial_date]), class: "btn btn-success" %>
   </div>
 </div>
 
