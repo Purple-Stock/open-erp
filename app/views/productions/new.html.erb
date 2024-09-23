@@ -55,6 +55,13 @@
           </div>
 
           <div class="row mb-3">
+            <div class="col-md-6">
+              <%= form.label :returned, 'Returned', class: 'form-label' %>
+              <%= form.number_field :returned, step: 1, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="row mb-3">
             <div class="col-12">
               <%= form.label :observation, model_class.human_attribute_name(:observation), class: 'form-label' %>
               <%= form.text_area :observation, class: 'form-control' %>

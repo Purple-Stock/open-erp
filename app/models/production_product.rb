@@ -15,6 +15,7 @@
 #  updated_at       :datetime         not null
 #  product_id       :bigint           not null
 #  production_id    :bigint           not null
+#  returned         :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -33,9 +34,11 @@ class ProductionProduct < ApplicationRecord
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :pieces_delivered, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :unit_price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :returned, inclusion: { in: [true, false] }
 
   before_save :set_default_pieces_delivered
   before_save :calculate_total_price
+  before_save :set_default_unit_price
 
   private
 
@@ -45,5 +48,9 @@ class ProductionProduct < ApplicationRecord
 
   def calculate_total_price
     self.total_price = quantity * unit_price if quantity.present? && unit_price.present?
+  end
+
+  def set_default_unit_price
+    self.unit_price ||= 0
   end
 end
