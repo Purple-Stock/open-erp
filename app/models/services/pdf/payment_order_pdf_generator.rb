@@ -37,9 +37,9 @@ module Services
 
       def generate_tailor_details(pdf)
         pdf.text "Costureiro: #{@production.tailor.name}", style: :bold
-        pdf.text "Número da OS: #{@production.service_order_number}"
         pdf.text "Data de entrada: #{@production.cut_date&.strftime("%d/%m/%Y")}"
         pdf.text "Data de conclusão: #{@production.production_products.maximum(:delivery_date)&.strftime("%d/%m/%Y")}"
+        pdf.text "Data de pagamento: #{@production.payment_date.strftime("%d/%m/%Y")}"
         pdf.move_down 20
       end
       
