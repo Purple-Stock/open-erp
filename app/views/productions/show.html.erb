@@ -78,8 +78,10 @@
                 <th>Sujo</th>
                 <th>Erro</th>
                 <th>Descarte</th>
+                <th>Returned Quantity</th>
                 <th>Peças Faltantes</th>
                 <th>Data de Entrega</th>
+                <th>Returned</th>
               </tr>
             </thead>
             <tbody>
@@ -88,16 +90,28 @@
                   <td><%= pp.product&.name || 'Nenhum produto atribuído' %></td>
                   <td><%= pp.quantity %></td>
                   <td><%= number_to_currency(pp.unit_price) %></td>
-                  <td><%= number_to_currency(pp.unit_price * (pp.dirty + pp.error + pp.discard)) %></td>
+                  <td>
+                    <% if pp.unit_price %>
+                      <%= number_to_currency(pp.unit_price * ((pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))) %>
+                    <% else %>
+                      N/A
+                    <% end %>
+                    <% if pp.returned %>
+                      <br>
+                      <%= number_to_currency(pp.total_price) %>
+                    <% end %>
+                  </td>
                   <td><%= number_to_currency(pp.total_price) %></td>
                   <td><%= pp.pieces_delivered || 0 %></td>
                   <td><%= pp.dirty || 0 %></td>
                   <td><%= pp.error || 0 %></td>
                   <td><%= pp.discard || 0 %></td>
+                  <td><%= pp.returned ? pp.quantity : 0 %></td>
                   <td>
                     <%= pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0)) %>
                   </td>
                   <td><%= pt_only_date_format(pp.delivery_date) || 'Não informado' %></td>
+                  <td><%= pp.returned ? 'Yes' : 'No' %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -106,12 +120,17 @@
                 <th>Total da Produção</th>
                 <td><%= @production.production_products.sum(:quantity) %></td>
                 <td></td>
-                <td><%= number_to_currency(@production.production_products.sum { |pp| pp.unit_price * (pp.dirty + pp.error + pp.discard) }) %></td>
+                <td>
+                  <%= number_to_currency(@production.production_products.sum { |pp| pp.unit_price * (pp.dirty + pp.error + pp.discard) }) %>
+                  <br>
+                  <%= number_to_currency(@production.production_products.where(returned: true).sum(:total_price)) %>
+                </td>
                 <td><%= number_to_currency(@production.total_price) %></td>
                 <td><%= @production.production_products.sum(:pieces_delivered) %></td>
                 <td><%= @production.production_products.sum(:dirty) %></td>
                 <td><%= @production.production_products.sum(:error) %></td>
                 <td><%= @production.production_products.sum(:discard) %></td>
+                <td><%= @production.production_products.where(returned: true).sum(:quantity) %></td>
                 <td>
                   <%= @production.production_products.sum { |pp| 
                     pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
@@ -133,7 +152,6 @@
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")), production_path(@production), :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
-  <%= link_to 'Download Service Order PDF', service_order_pdf_production_path(@production), class: 'btn btn-primary', target: '_blank' %>
 </div>
 
 <% content_for(:page_title, 'Show Production') %>

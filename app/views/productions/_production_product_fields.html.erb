@@ -40,6 +40,10 @@
       <div class="col-md-1 d-flex align-items-end">
         <%= link_to_remove_association 'Remove', f, class: 'btn btn-danger btn-sm' %>
       </div>
+      <div class="col-md-1">
+        <%= f.label :returned, 'Returned', class: 'form-label' %>
+        <%= f.check_box :returned, class: 'form-check-input' %>
+      </div>
     </div>
   </div>
 </div>
