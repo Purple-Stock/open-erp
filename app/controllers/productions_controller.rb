@@ -70,7 +70,8 @@ class ProductionsController < ApplicationController
   def missing_pieces
     @productions_with_missing_pieces = Production.includes(:tailor, production_products: :product)
                                                  .where(id: ProductionProduct.select(:production_id)
-                                                                             .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0)'))
+                                                                             .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0)')
+                                                                             .where(returned: false))  # Add this line
                                                  .distinct
                                                  .order(cut_date: :desc, service_order_number: :desc)  # Order by cut_date and service_order_number
 
@@ -148,6 +149,7 @@ class ProductionsController < ApplicationController
       summary[tailor_id][:productions_count] += 1
 
       production.production_products.each do |pp|
+        next if pp.returned  # Skip if the product is returned
         missing_pieces = pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
         if missing_pieces > 0
           summary[tailor_id][:total_missing_pieces] += missing_pieces
