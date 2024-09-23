@@ -48,12 +48,12 @@
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:observation) %>:</dt>
           <dd class="col-sm-9"><%= @production.observation %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:notions_cost) %>:</dt>
-          <dd class="col-sm-9"><%= number_to_currency(@production.notions_cost) %></dd>
+          <dd class="col-sm-9"><%= number_to_currency(@production.notions_cost || 0) %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:fabric_cost) %>:</dt>
-          <dd class="col-sm-9"><%= number_to_currency(@production.fabric_cost) %></dd>
+          <dd class="col-sm-9"><%= number_to_currency(@production.fabric_cost || 0) %></dd>
           <dt class="col-sm-3"><%= t('productions.show.price_per_piece') %>:</dt>
           <dd class="col-sm-9">
-            <% total_cost = @production.notions_cost + @production.fabric_cost + @production.total_price %>
+            <% total_cost = (@production.notions_cost || 0) + (@production.fabric_cost || 0) + (@production.total_price || 0) %>
             <% total_quantity = @production.production_products.sum(:quantity) %>
             <%= number_to_currency(total_cost / total_quantity) if total_quantity > 0 %>
           </dd>
@@ -72,6 +72,7 @@
                 <th>Produto</th>
                 <th>Quantidade</th>
                 <th>Preço Unitário</th>
+                <th>Desconto</th>
                 <th>Preço Total</th>
                 <th>Peças Entregues</th>
                 <th>Sujo</th>
@@ -87,6 +88,7 @@
                   <td><%= pp.product&.name || 'Nenhum produto atribuído' %></td>
                   <td><%= pp.quantity %></td>
                   <td><%= number_to_currency(pp.unit_price) %></td>
+                  <td><%= number_to_currency(pp.unit_price * (pp.dirty + pp.error + pp.discard)) %></td>
                   <td><%= number_to_currency(pp.total_price) %></td>
                   <td><%= pp.pieces_delivered || 0 %></td>
                   <td><%= pp.dirty || 0 %></td>
@@ -104,6 +106,7 @@
                 <th>Total da Produção</th>
                 <td><%= @production.production_products.sum(:quantity) %></td>
                 <td></td>
+                <td><%= number_to_currency(@production.production_products.sum { |pp| pp.unit_price * (pp.dirty + pp.error + pp.discard) }) %></td>
                 <td><%= number_to_currency(@production.total_price) %></td>
                 <td><%= @production.production_products.sum(:pieces_delivered) %></td>
                 <td><%= @production.production_products.sum(:dirty) %></td>
