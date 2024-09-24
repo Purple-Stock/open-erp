@@ -18,6 +18,11 @@ class ProductionsController < ApplicationController
       @productions = @productions.where("service_order_number LIKE ?", "%#{params[:service_order_number]}%")
     end
 
+    # Add this block for the confirmed filter
+    if params[:confirmed].present?
+      @productions = @productions.where(confirmed: params[:confirmed] == 'true')
+    end
+
     @productions = @productions.order(service_order_number: :desc)
   end
 
