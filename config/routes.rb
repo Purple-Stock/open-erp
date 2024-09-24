@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :productions do
     collection do
       get 'missing_pieces'
-      get :products_in_production_report
+      get 'products_in_production_report'
+      get 'unpaid_confirmed'  # Add this line
     end
     member do
       patch :verify
