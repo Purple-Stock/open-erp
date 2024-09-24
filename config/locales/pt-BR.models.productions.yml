@@ -43,6 +43,10 @@ pt-BR:
       enter_service_order: "Digite o Número da Ordem de Serviço"
       filter: "Filtrar"
       clear_filters: "Limpar Filtros"
+      filter_by_confirmation: "Filtrar por Confirmação"
+      all_statuses: "Todos os Status"
+      confirmed: "Confirmado"
+      not_confirmed: "Não Confirmado"
     missing_pieces:
       title: "Produções com Peças Faltantes"
       filter_by_tailor: "Filtrar por Costureiro"
