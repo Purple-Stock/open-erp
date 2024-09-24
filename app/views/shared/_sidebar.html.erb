@@ -34,6 +34,9 @@
             <li class="<%= active_nav_item('productions', 'missing_pieces') %>">
               <%= link_to t("productions.side_missing_pieces"), missing_pieces_productions_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('productions', 'unpaid_confirmed') %>">
+            <%= link_to t("productions.unpaid_confirmed.title"), unpaid_confirmed_productions_path, class: 'nav-link' %>
+          </li>
             <li class="<%= active_nav_item('productions', 'products_in_production_report') %>">
               <%= link_to t("productions.products_in_production_report"), products_in_production_report_productions_path, class: 'nav-link' %>
             </li>

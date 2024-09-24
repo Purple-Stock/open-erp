@@ -129,6 +129,28 @@ class ProductionsController < ApplicationController
     send_data pdf.render, filename: "payment_order_#{@production.service_order_number}.pdf", type: 'application/pdf', disposition: 'inline'
   end
 
+  def unpaid_confirmed
+    @unpaid_confirmed_productions = Production.includes(:tailor, production_products: :product)
+                                              .where(confirmed: true, paid: false)
+                                              .order(cut_date: :desc, service_order_number: :desc)
+
+    @paid_productions = Production.includes(:tailor, production_products: :product)
+                                  .where(confirmed: true, paid: true)
+                                  .order(payment_date: :desc, service_order_number: :desc)
+
+    if params[:tailor_id].present?
+      @unpaid_confirmed_productions = @unpaid_confirmed_productions.where(tailor_id: params[:tailor_id])
+      @paid_productions = @paid_productions.where(tailor_id: params[:tailor_id])
+    end
+
+    @tailors_summary = calculate_tailors_summary_unpaid(@unpaid_confirmed_productions)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_unpaid_confirmed_csv, filename: "unpaid_confirmed_productions_#{Date.today}.csv" }
+    end
+  end
+
   private
 
   def set_production
@@ -172,6 +194,27 @@ class ProductionsController < ApplicationController
     summary
   end
 
+  def calculate_tailors_summary_unpaid(productions)
+    summary = productions.each_with_object({}) do |production, summary|
+      tailor_id = production.tailor_id
+      summary[tailor_id] ||= { productions_count: 0, total_value: 0, products: {} }
+      summary[tailor_id][:productions_count] += 1
+
+      production.production_products.each do |pp|
+        summary[tailor_id][:total_value] += pp.total_price if pp.total_price
+        summary[tailor_id][:products][pp.product_id] ||= { count: 0, value: 0 }
+        summary[tailor_id][:products][pp.product_id][:count] += pp.quantity
+        summary[tailor_id][:products][pp.product_id][:value] += pp.total_price if pp.total_price
+      end
+    end
+
+    summary.each do |tailor_id, tailor_summary|
+      tailor_summary[:products] = tailor_summary[:products].sort_by { |_, data| -data[:value] }.to_h
+    end
+
+    summary
+  end
+
   def generate_tailors_summary_csv
     require 'csv'
 
@@ -203,6 +246,26 @@ class ProductionsController < ApplicationController
           product.name,
           product.total_quantity,
           product.total_missing
+        ]
+      end
+    end
+  end
+
+  def generate_unpaid_confirmed_csv
+    require 'csv'
+
+    CSV.generate(headers: true) do |csv|
+      csv << ['Tailor Name', 'Total Productions', 'Total Value', 'Products']
+
+      @tailors_summary.each do |tailor_id, summary|
+        tailor = Tailor.find(tailor_id)
+        products_summary = summary[:products].map { |product_id, data| "#{Product.find(product_id).name}: #{data[:count]} (#{number_to_currency(data[:value])})" }.join(', ')
+        
+        csv << [
+          tailor.name,
+          summary[:productions_count],
+          number_to_currency(summary[:total_value]),
+          products_summary
         ]
       end
     end
