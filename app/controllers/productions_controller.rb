@@ -132,11 +132,11 @@ class ProductionsController < ApplicationController
   def unpaid_confirmed
     @unpaid_confirmed_productions = Production.includes(:tailor, production_products: :product)
                                               .where(confirmed: true, paid: false)
-                                              .order(cut_date: :desc, service_order_number: :desc)
+                                              .order(Arel.sql("COALESCE(payment_date, expected_delivery_date) ASC NULLS LAST"))
 
     @paid_productions = Production.includes(:tailor, production_products: :product)
                                   .where(confirmed: true, paid: true)
-                                  .order(payment_date: :desc, service_order_number: :desc)
+                                  .order(payment_date: :asc)
 
     if params[:tailor_id].present?
       @unpaid_confirmed_productions = @unpaid_confirmed_productions.where(tailor_id: params[:tailor_id])

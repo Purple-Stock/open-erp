@@ -3,7 +3,16 @@
     <div class="col-12 mb-4">
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="card-title mb-0"><%= t('.service_order_number') %>: <%= production.service_order_number %></h5>
+          <h5 class="card-title mb-0">
+            <%= t('.service_order_number') %>: <%= production.service_order_number %>
+            <small class="text-muted ml-2">
+              <% if production.payment_date %>
+                <%= t('.payment_date') %>: <%= l(production.payment_date, format: :long) %>
+              <% elsif production.expected_delivery_date %>
+                <%= t('.expected_delivery_date') %>: <%= l(production.expected_delivery_date, format: :long) %>
+              <% end %>
+            </small>
+          </h5>
           <div>
             <%= link_to t('helpers.links.edit'), edit_production_path(production), class: 'btn btn-primary btn-sm mr-2' %>
             <%= link_to t('helpers.links.show'), production_path(production), class: 'btn btn-info btn-sm' %>
