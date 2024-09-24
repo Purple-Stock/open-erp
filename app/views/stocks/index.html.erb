@@ -47,8 +47,8 @@
                 </td>
                 <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= stock.product.sku %></td>
-                <td><%= stock.total_balance %></td>
-                <td><%= stock.total_virtual_balance %></td>
+                <td><%= data[:total_balance] %></td>
+                <td><%= data[:total_virtual_balance] %></td>
                 <td><%= data[:total_sold] %></td>
                 <td><%= data[:total_forecast] %></td>
                 <td><%= stock.product.name %></td>

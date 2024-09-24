@@ -38,21 +38,31 @@ class StocksController < ApplicationController
                      .group(:sku)
                      .sum(:quantity)
   
+    default_warehouse_id = '9023657532'
+
     stocks_with_forecasts = stocks.map do |stock|
       total_sold = items_sold[stock.product.sku] || 0
-      total_physical_balance = stock.balances.sum(&:physical_balance)
+      
+      default_balance = stock.balances.find { |b| b.deposit_id.to_s == default_warehouse_id }
+      total_physical_balance = default_balance&.physical_balance || 0
       total_forecast = [total_sold - total_physical_balance, 0].max
 
       warehouse_forecasts = stock.balances.map do |balance|
-        warehouse_forecast = if balance.physical_balance > 0
+        warehouse_forecast = if balance.deposit_id.to_s == default_warehouse_id
                                [total_sold - balance.physical_balance, 0].max
                              else
-                               total_sold
+                               0
                              end
-        [balance.deposit_id, { sold: total_sold, forecast: warehouse_forecast }]
+        [balance.deposit_id, { sold: balance.deposit_id.to_s == default_warehouse_id ? total_sold : 0, forecast: warehouse_forecast }]
       end.to_h
       
-      [stock, { warehouses: warehouse_forecasts, total_sold: total_sold, total_forecast: total_forecast }]
+      [stock, { 
+        warehouses: warehouse_forecasts, 
+        total_sold: total_sold, 
+        total_forecast: total_forecast,
+        total_balance: total_physical_balance,
+        total_virtual_balance: default_balance&.virtual_balance || 0
+      }]
     end
   
     sorted_stocks = stocks_with_forecasts.sort_by { |_, data| -data[:total_sold] }
