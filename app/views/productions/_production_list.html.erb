@@ -15,7 +15,9 @@
           </h5>
           <div>
             <%= link_to t('helpers.links.edit'), edit_production_path(production), class: 'btn btn-primary btn-sm mr-2' %>
-            <%= link_to t('helpers.links.show'), production_path(production), class: 'btn btn-info btn-sm' %>
+            <%= link_to t('helpers.links.show'), production_path(production), class: 'btn btn-info btn-sm mr-2' %>
+            <%= link_to t('.service_order_pdf'), service_order_pdf_production_path(production), class: 'btn btn-secondary btn-sm mr-2', target: '_blank' %>
+            <%= link_to t('.payment_order_pdf'), payment_order_pdf_production_path(production), class: 'btn btn-success btn-sm', target: '_blank' %>
           </div>
         </div>
         <div class="card-body">

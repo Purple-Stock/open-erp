@@ -72,6 +72,8 @@ pt-BR:
       total: "Total"
       total_discount: "Total de Desconto"
       total_to_pay: "Total a Pagar"
+      service_order_pdf: "Ordem de Serviço PDF"
+      payment_order_pdf: "Ordem de Pagamento PDF"
     missing_pieces:
       title: "Produções com Peças Faltantes"
       filter_by_tailor: "Filtrar por Costureiro"
