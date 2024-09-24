@@ -121,7 +121,7 @@
                 <td><%= @production.production_products.sum(:quantity) %></td>
                 <td></td>
                 <td>
-                  <%= number_to_currency(@production.production_products.sum { |pp| pp.unit_price * (pp.dirty + pp.error + pp.discard) }) %>
+                  <%= number_to_currency(@production.production_products.sum { |pp| (pp.unit_price || 0) * (pp.dirty + pp.error + pp.discard) }) %>
                   <br>
                   <%= number_to_currency(@production.production_products.where(returned: true).sum(:total_price)) %>
                 </td>

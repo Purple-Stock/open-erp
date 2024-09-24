@@ -8,6 +8,9 @@
       <p><strong><%= Production.human_attribute_name(:cut_date) %>:</strong> <%= pt_only_date_format(production.cut_date) if production.cut_date %></p>
       <p><strong><%= Production.human_attribute_name(:expected_delivery_date) %>:</strong> <%= l(production.expected_delivery_date) if production.expected_delivery_date %></p>
       
+      <!-- Add payment_date -->
+      <p><strong><%= Production.human_attribute_name(:payment_date) %>:</strong> <%= l(production.payment_date) if production.payment_date %></p>
+      
       <% if production.expected_delivery_date %>
         <p>
           <strong>Status:</strong>
