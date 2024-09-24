@@ -39,7 +39,7 @@ module Services
         pdf.text "Costureiro: #{@production.tailor.name}", style: :bold
         pdf.text "Data de entrada: #{@production.cut_date&.strftime("%d/%m/%Y")}"
         pdf.text "Data de conclusão: #{@production.production_products.maximum(:delivery_date)&.strftime("%d/%m/%Y")}"
-        pdf.text "Data de pagamento: #{@production.payment_date.strftime("%d/%m/%Y")}"
+        pdf.text "Data de pagamento: #{@production.payment_date&.strftime("%d/%m/%Y")}"
         pdf.move_down 20
       end
       
@@ -53,19 +53,21 @@ module Services
         total_discount = 0
       
         @production.production_products.each do |pp|
+          unit_price = pp.unit_price || 0
+          total_price = pp.total_price || 0
           adjusted_quantity = pp.pieces_delivered - (pp.dirty + pp.error + pp.discard)
-          discount = pp.unit_price * (pp.dirty + pp.error + pp.discard)
-          returned_discount = pp.returned ? pp.total_price : 0
+          discount = unit_price * (pp.dirty + pp.error + pp.discard)
+          returned_discount = pp.returned ? total_price : 0
           total_discount_row = discount + returned_discount
-          adjusted_price = pp.unit_price * adjusted_quantity - total_discount_row
+          adjusted_price = unit_price * adjusted_quantity - total_discount_row
       
-          total_all_rows += pp.total_price
+          total_all_rows += total_price
           total_discount += total_discount_row
       
           data << [
             pp.product.name,
             pp.pieces_delivered,
-            number_to_currency(pp.unit_price),
+            number_to_currency(unit_price),
             pp.dirty,
             pp.error,
             pp.discard,
@@ -150,14 +152,14 @@ module Services
 
       def generate_totals(pdf)
         total_discount = @production.production_products.sum do |pp|
-          discount = pp.unit_price * (pp.dirty + pp.error + pp.discard)
-          discount += pp.total_price if pp.returned
+          discount = (pp.unit_price || 0) * (pp.dirty + pp.error + pp.discard)
+          discount += (pp.total_price || 0) if pp.returned
           discount
         end
-
-        total_price = @production.production_products.sum(&:total_price)
+      
+        total_price = @production.production_products.sum { |pp| pp.total_price || 0 }
         total_to_pay = total_price - total_discount
-
+      
         pdf.text "Total do corte: #{number_to_currency(total_price)}", style: :bold, align: :right
         pdf.move_down 10
         pdf.text "Total desconto: #{number_to_currency(total_discount)}", style: :bold, align: :right
