@@ -2,8 +2,12 @@
   <% productions.each do |production| %>
     <div class="col-12 mb-4">
       <div class="card">
-        <div class="card-header">
-          <h5 class="card-title"><%= t('.service_order_number') %>: <%= production.service_order_number %></h5>
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0"><%= t('.service_order_number') %>: <%= production.service_order_number %></h5>
+          <div>
+            <%= link_to t('helpers.links.edit'), edit_production_path(production), class: 'btn btn-primary btn-sm mr-2' %>
+            <%= link_to t('helpers.links.show'), production_path(production), class: 'btn btn-info btn-sm' %>
+          </div>
         </div>
         <div class="card-body">
           <div class="row mb-3">
