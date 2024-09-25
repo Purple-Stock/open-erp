@@ -83,6 +83,16 @@
     </div>
   </div>
 
+  <h3><%= t('.payments') %></h3>
+  <div id="payments">
+    <%= form.fields_for :payments do |payment_form| %>
+      <%= render 'payment_fields', f: payment_form %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association t('.add_payment'), form, :payments, class: 'btn btn-primary' %>
+    </div>
+  </div>
+
   <%= form.submit class: 'btn btn-primary' %>
   <%= link_to 'Verify', verify_account_production_path(@account, production), class: 'btn btn-secondary', method: :get if production.persisted? %>
 <% end %>

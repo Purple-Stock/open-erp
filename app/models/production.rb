@@ -40,6 +40,9 @@ class Production < ApplicationRecord
 
   accepts_nested_attributes_for :production_products, allow_destroy: true, reject_if: :all_blank
 
+  has_many :payments, dependent: :destroy
+  accepts_nested_attributes_for :payments, allow_destroy: true, reject_if: :all_blank
+
   validates :cut_date, presence: true
   validates :tailor, presence: true
   validates :account, presence: true
@@ -95,5 +98,13 @@ class Production < ApplicationRecord
 
   def total_price
     production_products.sum { |pp| pp.total_price || 0 }
+  end
+
+  def total_paid
+    payments.sum(:amount)
+  end
+
+  def remaining_balance
+    total_price - total_paid
   end
 end

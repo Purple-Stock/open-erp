@@ -40,7 +40,7 @@
               <%= form.date_field :expected_delivery_date, class: 'form-control' %>
             </div>
             <div class="col-md-3">
-              <%= form.label :payment_date, model_class.human_attribute_name(:payment_date), class: 'form-label' %>
+              <%= form.label :payment_date, t('productions.form.expected_payment_date'), class: 'form-label' %>
               <%= form.date_field :payment_date, class: 'form-control' %>
             </div>
           </div>
@@ -83,6 +83,16 @@
               <%= link_to_add_association 'Add Product', form, :production_products, 
                   partial: 'production_product_fields',
                   class: 'btn btn-success mb-3' %>
+            </div>
+          </div>
+
+          <h3><%= t('.payments') %></h3>
+          <div id="payments">
+            <%= form.fields_for :payments do |payment_form| %>
+              <%= render 'payment_fields', f: payment_form %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association t('.add_payment'), form, :payments, class: 'btn btn-primary' %>
             </div>
           </div>
 
