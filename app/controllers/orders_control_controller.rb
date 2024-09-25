@@ -90,8 +90,11 @@ class OrdersControlController < ApplicationController
     @stock_balances = Stock.joins(:product).where(products: { sku: skus }).pluck('products.sku', :total_balance).to_h
 
     # Fetch total pieces missing for all SKUs
-    @total_pieces_missing = @sorted_items.present? ? calculate_total_pieces_missing(@sorted_items) : {}
-    
+    @total_pieces_missing = ProductionProduct.joins(:product)
+                                           .where(products: { sku: skus })
+                                           .group('products.sku')
+                                           .sum('quantity - COALESCE(pieces_delivered, 0)')
+
     # Group items by SKU-pai + cor
     @sorted_items_by_color = @all_items.group_by do |item|
       sku_parts = item.sku.split('-')
@@ -104,8 +107,8 @@ class OrdersControlController < ApplicationController
     if @color_filter.present?
       @sorted_items_by_color = @sorted_items_by_color.select { |_, color| color.downcase == @color_filter.downcase }
     end
-  
-    @total_pieces_missing_by_color = @sorted_items_by_color.present? ? calculate_total_pieces_missing(@sorted_items_by_color) : {}
+
+    @total_pieces_missing_by_color = calculate_total_pieces_missing(@sorted_items_by_color)
 
     # Group items by SKU-pai
     @sorted_items_by_sku_pai = @all_items.group_by do |item|
@@ -114,7 +117,7 @@ class OrdersControlController < ApplicationController
       sku_pai
     end.sort_by { |_, sku_pai_items| -sku_pai_items.sum(&:quantity) }.to_h
 
-    @total_pieces_missing_by_sku_pai = @sorted_items_by_sku_pai.present? ? calculate_total_pieces_missing(@sorted_items_by_sku_pai) : {}
+    @total_pieces_missing_by_sku_pai = calculate_total_pieces_missing(@sorted_items_by_sku_pai)
 
     # Set the default tab to 'pending_missing'
     @active_tab = params[:tab] || 'pending_missing'
