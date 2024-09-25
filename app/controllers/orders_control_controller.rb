@@ -59,6 +59,7 @@ class OrdersControlController < ApplicationController
     situation_id = params[:situation_id]
     store_id = params[:store_id]
     @resolution_status = params[:resolution_status] || 'unresolved'
+    @color_filter = params[:color]
 
     cleaned_situation_ids = if situation_id.present?
                               situation_id.split(',').map(&:to_i)
@@ -89,10 +90,22 @@ class OrdersControlController < ApplicationController
     @stock_balances = Stock.joins(:product).where(products: { sku: skus }).pluck('products.sku', :total_balance).to_h
 
     # Fetch total pieces missing for all SKUs
-    @total_pieces_missing = ProductionProduct.joins(:product)
-                                             .where(products: { sku: skus })
-                                             .group('products.sku')
-                                             .sum('quantity - COALESCE(pieces_delivered, 0)')
+    @total_pieces_missing = @sorted_items.present? ? calculate_total_pieces_missing(@sorted_items) : {}
+    
+    # Group items by SKU-pai + cor
+    @sorted_items_by_color = @all_items.group_by do |item|
+      sku_parts = item.sku.split('-')
+      color = sku_parts[-2]
+      sku_pai_with_color = sku_parts[0..-3].join('-') + "-#{color}"
+      [sku_pai_with_color, color]
+    end.sort_by { |_, sku_color_items| -sku_color_items.sum(&:quantity) }.to_h
+
+    # Apply color filter if present
+    if @color_filter.present?
+      @sorted_items_by_color = @sorted_items_by_color.select { |_, color| color.downcase == @color_filter.downcase }
+    end
+  
+    @total_pieces_missing_by_color = @sorted_items_by_color.present? ? calculate_total_pieces_missing(@sorted_items_by_color) : {}
 
     # Set the default tab to 'pending_missing'
     @active_tab = params[:tab] || 'pending_missing'
@@ -157,5 +170,16 @@ class OrdersControlController < ApplicationController
       203_467_890 => 'Simplo 7',
       204_061_683 => 'Mercado Livre'
     }
+  end
+
+  def calculate_total_pieces_missing(sorted_items)
+    return {} if sorted_items.nil? || sorted_items.empty?
+
+    sorted_items.transform_values do |items|
+      total_quantity = items.sum(&:quantity)
+      production_products = ProductionProduct.where(product: Product.where(sku: items.first.sku))
+      total_produced = production_products.sum(:quantity)
+      [total_quantity - total_produced, 0].max
+    end
   end
 end
