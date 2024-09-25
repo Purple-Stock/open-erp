@@ -31,6 +31,9 @@
       <%= link_to 'Pendentes e Faltantes Cores', show_pending_product_planning_path(situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: @resolution_status, tab: 'pending_missing_colors'), class: "nav-link #{@active_tab == 'pending_missing_colors' ? 'active' : ''}" %>
     </li>
     <li class="nav-item">
+      <%= link_to 'Pendentes e Faltantes SKU-pai', show_pending_product_planning_path(situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: @resolution_status, tab: 'pending_missing_sku_pai'), class: "nav-link #{@active_tab == 'pending_missing_sku_pai' ? 'active' : ''}" %>
+    </li>
+    <li class="nav-item">
       <%= link_to 'Visão Resumida', show_pending_product_planning_path(situation_id: params[:situation_id], store_id: params[:store_id], resolution_status: @resolution_status, tab: 'summary'), class: "nav-link #{@active_tab == 'summary' ? 'active' : ''}" %>
     </li>
     <li class="nav-item">
@@ -206,6 +209,42 @@
               <tr>
                 <td><%= sku_color[0] %></td>
                 <td><%= sku_color[1] %></td>
+                <td><%= pending_quantity %></td>
+                <td><%= pieces_missing %></td>
+                <td><%= difference %></td>
+                <td>
+                  <% if difference > 0 %>
+                    <button class="btn btn-success btn-sm">Sim</button>
+                  <% else %>
+                    <button class="btn btn-danger btn-sm">Não</button>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-pane fade <%= @active_tab == 'pending_missing_sku_pai' ? 'show active' : '' %>" id="pending_missing_sku_pai" role="tabpanel">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="thead-light">
+            <tr>
+              <th>SKU-pai</th>
+              <th>Quantidade Pendente Total</th>
+              <th>Peças Faltantes na Produção</th>
+              <th>Quantidade Total</th>
+              <th>Sobrou Estoque?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sorted_items_by_sku_pai.each do |sku_pai, items| %>
+              <% pending_quantity = items.sum(&:quantity) %>
+              <% pieces_missing = @total_pieces_missing_by_sku_pai[sku_pai] || 0 %>
+              <% difference = pieces_missing - pending_quantity %>
+              <tr>
+                <td><%= sku_pai %></td>
                 <td><%= pending_quantity %></td>
                 <td><%= pieces_missing %></td>
                 <td><%= difference %></td>

@@ -107,6 +107,15 @@ class OrdersControlController < ApplicationController
   
     @total_pieces_missing_by_color = @sorted_items_by_color.present? ? calculate_total_pieces_missing(@sorted_items_by_color) : {}
 
+    # Group items by SKU-pai
+    @sorted_items_by_sku_pai = @all_items.group_by do |item|
+      sku_parts = item.sku.split('-')
+      sku_pai = sku_parts[0..-3].join('-')
+      sku_pai
+    end.sort_by { |_, sku_pai_items| -sku_pai_items.sum(&:quantity) }.to_h
+
+    @total_pieces_missing_by_sku_pai = @sorted_items_by_sku_pai.present? ? calculate_total_pieces_missing(@sorted_items_by_sku_pai) : {}
+
     # Set the default tab to 'pending_missing'
     @active_tab = params[:tab] || 'pending_missing'
 
@@ -177,7 +186,8 @@ class OrdersControlController < ApplicationController
 
     sorted_items.transform_values do |items|
       total_quantity = items.sum(&:quantity)
-      production_products = ProductionProduct.where(product: Product.where(sku: items.first.sku))
+      sku_to_check = items.first.is_a?(Item) ? items.first.sku : items.first.first
+      production_products = ProductionProduct.joins(:product).where(products: { sku: Product.where("sku LIKE ?", "#{sku_to_check}%").pluck(:sku) })
       total_produced = production_products.sum(:quantity)
       [total_quantity - total_produced, 0].max
     end
