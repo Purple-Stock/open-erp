@@ -39,7 +39,7 @@
           <dd class="col-sm-9"><%= pt_only_date_format(@production.cut_date) %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:expected_delivery_date) %>:</dt>
           <dd class="col-sm-9"><%= pt_only_date_format(@production.expected_delivery_date) %></dd>
-          <dt class="col-sm-3"><%= model_class.human_attribute_name(:payment_date) %>:</dt>
+          <dt class="col-sm-3"><%= t('productions.form.expected_payment_date') %>:</dt>
           <dd class="col-sm-9"><%= pt_only_date_format(@production.payment_date) if @production.payment_date %></dd>
           <dt class="col-sm-3"><%= model_class.human_attribute_name(:confirmed) %>:</dt>
           <dd class="col-sm-9"><%= @production.confirmed ? 'Sim' : 'Não' %></dd>
@@ -141,6 +141,39 @@
             </tfoot>
           </table>
         </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4><%= t('.payments') %></h4>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><%= t('activerecord.attributes.payment.amount') %></th>
+              <th><%= t('activerecord.attributes.payment.payment_date') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @production.payments.each do |payment| %>
+              <tr>
+                <td><%= number_to_currency(payment.amount) %></td>
+                <td><%= l(payment.payment_date, format: :long) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th><%= t('.total_paid') %></th>
+              <td><%= number_to_currency(@production.total_paid) %></td>
+            </tr>
+            <tr>
+              <th><%= t('.remaining_balance') %></th>
+              <td><%= number_to_currency(@production.remaining_balance) %></td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
   </div>

@@ -36,13 +36,6 @@
             </div>
           </div>
 
-          <!-- <div class="row mb-3">
-            <div class="col-md-4">
-              <%#= form.label :consider, model_class.human_attribute_name(:consider), class: 'form-check-label' %>
-              <%#= form.check_box :consider, class: 'form-check-input' %>
-            </div>
-          </div> -->
-
           <div class="row mb-3">
             <div class="col-md-6">
               <%= form.label :notions_cost, t('productions.form.notions_cost'), class: 'form-label' %>
@@ -51,13 +44,6 @@
             <div class="col-md-6">
               <%= form.label :fabric_cost, t('productions.form.fabric_cost'), class: 'form-label' %>
               <%= form.number_field :fabric_cost, step: 0.01, class: 'form-control' %>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <%= form.label :returned, 'Returned', class: 'form-label' %>
-              <%= form.number_field :returned, step: 1, class: 'form-control' %>
             </div>
           </div>
 
@@ -75,6 +61,16 @@
             <% end %>
             <div class="links">
               <%= link_to_add_association t('.add_product'), form, :production_products, class: 'btn btn-primary' %>
+            </div>
+          </div>
+
+          <h3><%= t('.payments') %></h3>
+          <div id="payments">
+            <%= form.fields_for :payments do |payment_form| %>
+              <%= render 'payment_fields', f: payment_form %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association t('.add_payment'), form, :payments, class: 'btn btn-primary' %>
             </div>
           </div>
 

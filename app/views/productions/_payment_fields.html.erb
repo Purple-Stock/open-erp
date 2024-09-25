@@ -1,0 +1,15 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :amount, t('activerecord.attributes.payment.amount') %>
+      <%= f.number_field :amount, step: 0.01, class: 'form-control' %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :payment_date, t('activerecord.attributes.payment.payment_date') %>
+      <%= f.date_field :payment_date, class: 'form-control' %>
+    </div>
+    <div class="col-md-4">
+      <%= link_to_remove_association t('actions.remove'), f, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>
