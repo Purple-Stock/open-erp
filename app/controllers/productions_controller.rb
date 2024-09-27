@@ -36,6 +36,7 @@ class ProductionsController < ApplicationController
     @production = Production.new
     @production.production_products.build
     @tailors = Tailor.all
+    @next_service_order_number = next_service_order_number
   end
 
   def create
@@ -269,6 +270,15 @@ class ProductionsController < ApplicationController
           products_summary
         ]
       end
+    end
+  end
+
+  def next_service_order_number
+    last_number = Production.maximum(:service_order_number)
+    if last_number.present?
+      last_number.next
+    else
+      "1000" # Starting number if no records exist
     end
   end
 end

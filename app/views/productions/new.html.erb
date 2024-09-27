@@ -13,7 +13,7 @@
           <div class="row mb-3">
             <div class="col-md-3">
               <%= form.label :service_order_number, model_class.human_attribute_name(:service_order_number), class: 'form-label' %>
-              <%= form.text_field :service_order_number, class: 'form-control' %>
+              <%= form.text_field :service_order_number, value: @next_service_order_number, class: 'form-control' %>
             </div>
             <div class="col-md-3">
               <%= form.label :tailor_id, model_class.human_attribute_name(:tailor), class: 'form-label' %>
