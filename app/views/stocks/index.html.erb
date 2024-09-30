@@ -28,8 +28,8 @@
               <th></th>
               <th><%= model_class.human_attribute_name(:id) %></th>
               <th><%= t('stocks.sku') %></th>
-              <th><%= t('stocks.total_balance') %></th>
-              <th><%= t('stocks.total_virtual_balance') %></th>
+              <th>Physical Balance</th>
+              <th>Virtual Balance</th>
               <th>Quantidade vendida dos últimos 30 dias</th>
               <th>Previsão para os próximos 30 dias</th>
               <th><%= t('stocks.product') %></th>
@@ -48,8 +48,13 @@
                 </td>
                 <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= stock.product.sku %></td>
-                <td><%= data[:total_balance] %></td>
-                <td><%= data[:total_virtual_balance] %></td>
+                <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
+                <td class="physical-balance">
+                  <%= sao_paulo_base ? stock.balance(sao_paulo_base) : 'N/A' %>
+                </td>
+                <td class="virtual-balance">
+                  <%= sao_paulo_base ? stock.virtual_balance(sao_paulo_base) : 'N/A' %>
+                </td>
                 <td><%= data[:total_sold] %></td>
                 <td><%= data[:total_forecast] %></td>
                 <td><%= stock.product.name %></td>
@@ -158,6 +163,15 @@
             
             physicalBalanceCell.textContent = data.discounted_physical_balance;
             virtualBalanceCell.textContent = data.discounted_virtual_balance;
+
+            // Update the main table row
+            if (warehouseId === '9023657532') {
+              const mainRow = row.closest('.collapse-row').previousElementSibling;
+              const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
+              const mainVirtualBalanceCell = mainRow.querySelector('.virtual-balance');
+              mainPhysicalBalanceCell.textContent = data.discounted_physical_balance;
+              mainVirtualBalanceCell.textContent = data.discounted_virtual_balance;
+            }
           }
         })
         .catch(error => console.error('Error:', error));
@@ -165,4 +179,3 @@
     });
   }
 <% end %>
-

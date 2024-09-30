@@ -70,16 +70,15 @@ class StocksController < ApplicationController
       total_sold = items_sold[stock.product.sku] || 0
       
       default_balance = stock.balances.find { |b| b.deposit_id.to_s == default_warehouse_id }
-      total_physical_balance = default_balance&.physical_balance || 0
+      total_physical_balance = default_balance ? stock.balance(default_balance) : 0
+
+      # Cálculo correto para total_forecast
       total_forecast = [total_sold - total_physical_balance, 0].max
 
       warehouse_forecasts = stock.balances.map do |balance|
-        warehouse_forecast = if balance.deposit_id.to_s == default_warehouse_id
-                               [total_sold - balance.physical_balance, 0].max
-                             else
-                               0
-                             end
-        [balance.deposit_id, { sold: balance.deposit_id.to_s == default_warehouse_id ? total_sold : 0, forecast: warehouse_forecast }]
+        warehouse_sold = balance.deposit_id.to_s == default_warehouse_id ? total_sold : 0
+        warehouse_forecast = [warehouse_sold - stock.balance(balance), 0].max
+        [balance.deposit_id, { sold: warehouse_sold, forecast: warehouse_forecast }]
       end.to_h
       
       [stock, { 
@@ -87,7 +86,7 @@ class StocksController < ApplicationController
         total_sold: total_sold, 
         total_forecast: total_forecast,
         total_balance: total_physical_balance,
-        total_virtual_balance: default_balance&.virtual_balance || 0
+        total_virtual_balance: default_balance ? stock.virtual_balance(default_balance) : 0
       }]
     end
   
