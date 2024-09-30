@@ -20,24 +20,26 @@ class StocksController < ApplicationController
   def collection
     @default_status_filter = params['status']
     @default_situation_balance_filter = params['balance_situation']
-  
+    @default_sku_filter = params['sku']
+
     stocks = Stock.where(account_id: current_tenant)
                   .includes(:product, :balances)
                   .only_positive_price(true)
                   .filter_by_status(params['status'])
                   .filter_by_total_balance_situation(params['balance_situation'])
-  
+                  .filter_by_sku(params['sku'])
+
     @warehouses = Warehouse.where(account_id: current_tenant).pluck(:bling_id, :description).to_h
-  
+
     start_date = 1.month.ago.to_date
     end_date = Date.today
-  
+
     items_sold = Item.joins(:bling_order_item)
                      .where(account_id: current_tenant,
                             bling_order_items: { date: start_date..end_date })
                      .group(:sku)
                      .sum(:quantity)
-  
+
     default_warehouse_id = '9023657532'
 
     stocks_with_forecasts = stocks.map do |stock|
