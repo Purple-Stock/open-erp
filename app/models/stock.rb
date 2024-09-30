@@ -2,14 +2,15 @@
 #
 # Table name: stocks
 #
-#  id                    :bigint           not null, primary key
-#  total_balance         :integer
-#  total_virtual_balance :integer
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  account_id            :integer
-#  bling_product_id      :bigint
-#  product_id            :integer
+#  id                          :bigint           not null, primary key
+#  total_balance               :integer
+#  total_virtual_balance       :integer
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  account_id                  :integer
+#  bling_product_id            :bigint
+#  discounted_warehouse_sku_id :string
+#  product_id                  :integer
 #
 class Stock < ApplicationRecord
   require 'forecasts/basic_stock'
@@ -116,5 +117,39 @@ class Stock < ApplicationRecord
     return all if sku.blank?
 
     joins(:product).where('products.sku ILIKE ?', "%#{sku}%")
+  end
+
+  def apply_discount(warehouse_id)
+    self.discounted_warehouse_sku_id = "#{warehouse_id}_#{self.product.sku}"
+    save
+  end
+
+  def remove_discount
+    self.discounted_warehouse_sku_id = nil
+    save
+  end
+
+  def balance(balance)
+    discounted_balance(balance)
+  end
+
+  def virtual_balance(balance)
+    discounted_virtual_balance(balance)
+  end
+
+  def discounted_balance(balance)
+    if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
+      balance.physical_balance - 1000
+    else
+      balance.physical_balance
+    end
+  end
+
+  def discounted_virtual_balance(balance)
+    if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
+      balance.virtual_balance - 1000
+    else
+      balance.virtual_balance
+    end
   end
 end

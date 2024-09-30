@@ -54,7 +54,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :stocks, only: %i[index show edit]
+  resources :stocks do
+    member do
+      patch :apply_discount
+    end
+  end
   resources :revenue_estimations
   resources :accounts
   resources :purchase_products

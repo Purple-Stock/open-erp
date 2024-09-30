@@ -15,6 +15,30 @@ class StocksController < ApplicationController
     end
   end
 
+  def apply_discount
+    @stock = Stock.find(params[:id])
+    warehouse_id = params[:warehouse_id]
+    sku = params[:sku]
+
+    if @stock.discounted_warehouse_sku_id == "#{warehouse_id}_#{sku}"
+      @stock.remove_discount
+    else
+      @stock.apply_discount(warehouse_id)
+    end
+
+    balance = @stock.balances.find_by(deposit_id: warehouse_id)
+
+    respond_to do |format|
+      format.json { 
+        render json: { 
+          success: true, 
+          discounted_physical_balance: @stock.discounted_balance(balance),
+          discounted_virtual_balance: @stock.discounted_virtual_balance(balance)
+        } 
+      }
+    end
+  end
+
   protected
   
   def collection
@@ -71,4 +95,5 @@ class StocksController < ApplicationController
   
     @pagy, @stocks_with_data = pagy_array(sorted_stocks)
   end
+
 end

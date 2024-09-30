@@ -63,6 +63,7 @@
                     <table class="table table-sm table-bordered mb-0">
                       <thead>
                         <tr>
+                          <th>Apply Discount</th>
                           <th>Warehouse</th>
                           <th>Physical Balance</th>
                           <th>Virtual Balance</th>
@@ -74,9 +75,18 @@
                         <% stock.balances.each do |balance| %>
                           <% warehouse_data = data[:warehouses][balance.deposit_id] %>
                           <tr>
+                            <td>
+                              <%= check_box_tag "discount_#{stock.id}_#{balance.deposit_id}", 1, stock.discounted_warehouse_sku_id == "#{balance.deposit_id}_#{stock.product.sku}", 
+                                  class: 'discount-checkbox',
+                                  data: { 
+                                    stock_id: stock.id,
+                                    warehouse_id: balance.deposit_id,
+                                    sku: stock.product.sku
+                                  } %>
+                            </td>
                             <td><%= @warehouses[balance.deposit_id.to_s] || "Unknown (ID: #{balance.deposit_id})" %></td>
-                            <td><%= balance.physical_balance %></td>
-                            <td><%= balance.virtual_balance %></td>
+                            <td class="physical-balance"><%= stock.balance(balance) %></td>
+                            <td class="virtual-balance"><%= stock.virtual_balance(balance) %></td>
                             <td><%= warehouse_data[:sold] %></td>
                             <td><%= warehouse_data[:forecast] %></td>
                           </tr>
@@ -99,10 +109,12 @@
 <%= javascript_tag do %>
   document.addEventListener('turbo:load', function() {
     setupCollapseButtons();
+    setupDiscountCheckboxes();
   });
 
   document.addEventListener('turbo:render', function() {
     setupCollapseButtons();
+    setupDiscountCheckboxes();
   });
 
   function setupCollapseButtons() {
@@ -117,6 +129,38 @@
           target.style.display = 'none';
           this.textContent = '+';
         }
+      });
+    });
+  }
+
+  function setupDiscountCheckboxes() {
+    const checkboxes = document.querySelectorAll('.discount-checkbox');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const stockId = this.dataset.stockId;
+        const warehouseId = this.dataset.warehouseId;
+        const sku = this.dataset.sku;
+
+        fetch(`/stocks/${stockId}/apply_discount`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+          },
+          body: JSON.stringify({ warehouse_id: warehouseId, sku: sku })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const row = this.closest('tr');
+            const physicalBalanceCell = row.querySelector('.physical-balance');
+            const virtualBalanceCell = row.querySelector('.virtual-balance');
+            
+            physicalBalanceCell.textContent = data.discounted_physical_balance;
+            virtualBalanceCell.textContent = data.discounted_virtual_balance;
+          }
+        })
+        .catch(error => console.error('Error:', error));
       });
     });
   }
