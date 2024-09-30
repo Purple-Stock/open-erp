@@ -160,17 +160,21 @@
             const row = this.closest('tr');
             const physicalBalanceCell = row.querySelector('.physical-balance');
             const virtualBalanceCell = row.querySelector('.virtual-balance');
+            const forecastCell = row.querySelector('td:nth-child(6)');
             
             physicalBalanceCell.textContent = data.discounted_physical_balance;
             virtualBalanceCell.textContent = data.discounted_virtual_balance;
+            forecastCell.textContent = data.new_forecast;
 
             // Update the main table row
             if (warehouseId === '9023657532') {
               const mainRow = row.closest('.collapse-row').previousElementSibling;
               const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
               const mainVirtualBalanceCell = mainRow.querySelector('.virtual-balance');
+              const mainForecastCell = mainRow.querySelector('td:nth-child(7)');
               mainPhysicalBalanceCell.textContent = data.discounted_physical_balance;
               mainVirtualBalanceCell.textContent = data.discounted_virtual_balance;
+              mainForecastCell.textContent = data.new_forecast;
             }
           }
         })
