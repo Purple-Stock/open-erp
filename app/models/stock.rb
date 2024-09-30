@@ -111,4 +111,10 @@ class Stock < ApplicationRecord
     Rails.logger.info "Bling stock synchronization completed successfully"
     { success: true }
   end
+
+  def self.filter_by_sku(sku = nil)
+    return all if sku.blank?
+
+    joins(:product).where('products.sku ILIKE ?', "%#{sku}%")
+  end
 end
