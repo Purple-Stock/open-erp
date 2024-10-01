@@ -28,8 +28,8 @@
               <th></th>
               <th><%= model_class.human_attribute_name(:id) %></th>
               <th><%= t('stocks.sku') %></th>
-              <th>Physical Balance</th>
-              <th>Virtual Balance</th>
+              <th><%= t('stocks.physical_balance') %></th>
+              <th><%= t('stocks.in_production') %></th>
               <th>Quantidade vendida dos últimos 30 dias</th>
               <th>Previsão para os próximos 30 dias</th>
               <th><%= t('stocks.product') %></th>
@@ -52,11 +52,9 @@
                 <td class="physical-balance">
                   <%= sao_paulo_base ? stock.balance(sao_paulo_base) : 'N/A' %>
                 </td>
-                <td class="virtual-balance">
-                  <%= sao_paulo_base ? stock.virtual_balance(sao_paulo_base) : 'N/A' %>
-                </td>
+                <td class="in-production"><%= data[:total_in_production] %></td>
                 <td><%= data[:total_sold] %></td>
-                <td><%= data[:total_forecast] %></td>
+                <td class="forecast"><%= data[:total_forecast] %></td>
                 <td><%= stock.product.name %></td>
                 <td>
                   <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
@@ -70,8 +68,8 @@
                         <tr>
                           <th>Apply Discount</th>
                           <th>Warehouse</th>
-                          <th>Physical Balance</th>
-                          <th>Virtual Balance</th>
+                          <th><%= t('stocks.physical_balance') %></th>
+                          <th><%= t('stocks.in_production') %></th>
                           <th>Quantidade vendida dos últimos 30 dias</th>
                           <th>Previsão para os próximos 30 dias</th>
                         </tr>
@@ -162,18 +160,16 @@
             const virtualBalanceCell = row.querySelector('.virtual-balance');
             const forecastCell = row.querySelector('td:nth-child(6)');
             
-            physicalBalanceCell.textContent = data.discounted_physical_balance;
-            virtualBalanceCell.textContent = data.discounted_virtual_balance;
+            physicalBalanceCell.textContent = data.physical_balance;
+            virtualBalanceCell.textContent = data.virtual_balance;
             forecastCell.textContent = data.new_forecast;
 
             // Update the main table row
             if (warehouseId === '9023657532') {
               const mainRow = row.closest('.collapse-row').previousElementSibling;
               const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
-              const mainVirtualBalanceCell = mainRow.querySelector('.virtual-balance');
               const mainForecastCell = mainRow.querySelector('td:nth-child(7)');
-              mainPhysicalBalanceCell.textContent = data.discounted_physical_balance;
-              mainVirtualBalanceCell.textContent = data.discounted_virtual_balance;
+              mainPhysicalBalanceCell.textContent = data.physical_balance;
               mainForecastCell.textContent = data.new_forecast;
             }
           }

@@ -138,18 +138,35 @@ class Stock < ApplicationRecord
   end
 
   def discounted_balance(balance)
-    if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
+    base_balance = if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
       balance.physical_balance - 1000
     else
       balance.physical_balance
     end
+    base_balance + total_in_production
   end
 
   def discounted_virtual_balance(balance)
-    if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
+    base_balance = if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
       balance.virtual_balance - 1000
     else
       balance.virtual_balance
     end
+    base_balance + total_in_production
+  end
+
+  def total_in_production
+    ProductionProduct.joins(:production)
+                     .where(product_id: self.product_id)
+                     .where(productions: { confirmed: [false, nil] })
+                     .sum('quantity - COALESCE(pieces_delivered, 0) - COALESCE(dirty, 0) - COALESCE(error, 0) - COALESCE(discard, 0)')
+  end
+
+  def adjusted_total_balance
+    total_balance + total_in_production
+  end
+
+  def adjusted_total_virtual_balance
+    total_virtual_balance + total_in_production
   end
 end
