@@ -30,18 +30,18 @@
               <th><%= t('stocks.sku') %></th>
               <th><%= t('stocks.physical_balance') %></th>
               <th><%= t('stocks.in_production') %></th>
-              <th>Quantidade vendida dos últimos 30 dias</th>
-              <th>Previsão para os próximos 30 dias</th>
+              <th><%= t('stocks.count_sold') %></th>
+              <th><%= t('stocks.calculate_basic_forecast') %></th>
               <th><%= t('stocks.product') %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
             <tbody>
-            <% @stocks_with_data.each_with_index do |(stock, data), index| %>
+            <% @stocks_with_data.each do |(stock, data)| %>
               <tr>
                 <td>
                   <% if stock.balances.any? %>
-                    <button class="btn btn-sm btn-outline-primary collapse-toggle" type="button" data-target="#collapse<%= index %>">
+                    <button class="btn btn-sm btn-outline-primary collapse-toggle" type="button" data-target="#collapse<%= stock.id %>">
                       +
                     </button>
                   <% end %>
@@ -50,7 +50,7 @@
                 <td><%= stock.product.sku %></td>
                 <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
                 <td class="physical-balance">
-                  <%= sao_paulo_base ? stock.balance(sao_paulo_base) : 'N/A' %>
+                  <%= sao_paulo_base ? data[:physical_balance] : 'N/A' %>
                 </td>
                 <td class="in-production"><%= data[:total_in_production] %></td>
                 <td><%= data[:total_sold] %></td>
@@ -60,8 +60,8 @@
                   <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                 </td>
               </tr>
-              <% if stock.balances.any? %>
-                <tr class="collapse-row" id="collapse<%= index %>" style="display: none;">
+              <% if sao_paulo_base %>
+                <tr class="collapse-row" id="collapse<%= stock.id %>" style="display: none;">
                   <td colspan="9" class="p-0">
                     <table class="table table-sm table-bordered mb-0">
                       <thead>
@@ -69,31 +69,28 @@
                           <th>Apply Discount</th>
                           <th>Warehouse</th>
                           <th><%= t('stocks.physical_balance') %></th>
-                          <th><%= t('stocks.in_production') %></th>
-                          <th>Quantidade vendida dos últimos 30 dias</th>
-                          <th>Previsão para os próximos 30 dias</th>
+                          <th><%= t('stocks.total_virtual_balance') %></th>
+                          <th><%= t('stocks.count_sold') %></th>
+                          <th><%= t('stocks.calculate_basic_forecast') %></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <% stock.balances.each do |balance| %>
-                          <% warehouse_data = data[:warehouses][balance.deposit_id] %>
-                          <tr>
-                            <td>
-                              <%= check_box_tag "discount_#{stock.id}_#{balance.deposit_id}", 1, stock.discounted_warehouse_sku_id == "#{balance.deposit_id}_#{stock.product.sku}", 
-                                  class: 'discount-checkbox',
-                                  data: { 
-                                    stock_id: stock.id,
-                                    warehouse_id: balance.deposit_id,
-                                    sku: stock.product.sku
-                                  } %>
-                            </td>
-                            <td><%= @warehouses[balance.deposit_id.to_s] || "Unknown (ID: #{balance.deposit_id})" %></td>
-                            <td class="physical-balance"><%= stock.balance(balance) %></td>
-                            <td class="virtual-balance"><%= stock.virtual_balance(balance) %></td>
-                            <td><%= warehouse_data[:sold] %></td>
-                            <td><%= warehouse_data[:forecast] %></td>
-                          </tr>
-                        <% end %>
+                        <tr>
+                          <td>
+                            <%= check_box_tag "discount_#{stock.id}_#{sao_paulo_base.deposit_id}", 1, stock.discounted_warehouse_sku_id == "#{sao_paulo_base.deposit_id}_#{stock.product.sku}", 
+                                class: 'discount-checkbox',
+                                data: { 
+                                  stock_id: stock.id,
+                                  warehouse_id: sao_paulo_base.deposit_id,
+                                  sku: stock.product.sku
+                                } %>
+                          </td>
+                          <td><%= @warehouses[sao_paulo_base.deposit_id.to_s] || "Estoque São Paulo Base" %></td>
+                          <td class="physical-balance"><%= stock.balance(sao_paulo_base) %></td>
+                          <td class="virtual-balance"><%= stock.virtual_balance(sao_paulo_base) %></td>
+                          <td><%= data[:total_sold] %></td>
+                          <td><%= data[:total_forecast] %></td>
+                        </tr>
                       </tbody>
                     </table>
                   </td>
@@ -165,13 +162,11 @@
             forecastCell.textContent = data.new_forecast;
 
             // Update the main table row
-            if (warehouseId === '9023657532') {
-              const mainRow = row.closest('.collapse-row').previousElementSibling;
-              const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
-              const mainForecastCell = mainRow.querySelector('td:nth-child(7)');
-              mainPhysicalBalanceCell.textContent = data.physical_balance;
-              mainForecastCell.textContent = data.new_forecast;
-            }
+            const mainRow = row.closest('.collapse-row').previousElementSibling;
+            const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
+            const mainForecastCell = mainRow.querySelector('td:nth-child(7)');
+            mainPhysicalBalanceCell.textContent = data.physical_balance;
+            mainForecastCell.textContent = data.new_forecast;
           }
         })
         .catch(error => console.error('Error:', error));
