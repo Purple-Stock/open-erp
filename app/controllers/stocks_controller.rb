@@ -35,20 +35,20 @@ class StocksController < ApplicationController
                      .where(account_id: current_tenant, sku: sku, bling_order_items: { date: start_date..end_date })
                      .sum(:quantity)
 
-    # Calculate the new forecast
-    new_balance = @stock.balance(balance)
-    new_forecast = if new_balance >= 0
-                     [total_sold - new_balance, 0].max
-                   else
-                     total_sold + new_balance.abs
-                   end
+    physical_balance = @stock.balance(balance)
+    virtual_balance = @stock.virtual_balance(balance)
+    in_production = @stock.total_in_production
+
+    # Calculate the new forecast using the correct formula
+    new_forecast = [total_sold - (physical_balance + in_production), 0].max
 
     respond_to do |format|
       format.json { 
         render json: { 
           success: true, 
-          discounted_physical_balance: new_balance,
-          discounted_virtual_balance: @stock.virtual_balance(balance),
+          physical_balance: physical_balance,
+          virtual_balance: virtual_balance,
+          in_production: in_production,
           new_forecast: new_forecast,
           total_sold: total_sold
         } 
@@ -87,24 +87,17 @@ class StocksController < ApplicationController
       total_sold = items_sold[stock.product.sku] || 0
       
       default_balance = stock.balances.find { |b| b.deposit_id.to_s == default_warehouse_id }
-      total_physical_balance = default_balance ? stock.balance(default_balance) : 0
+      physical_balance = default_balance ? stock.balance(default_balance) : 0
+      total_in_production = stock.total_in_production
 
-      # Separate calculation for total_forecast based on balance
-      total_forecast = if total_physical_balance >= 0
-                         [total_sold - total_physical_balance, 0].max
-                       else
-                         total_sold + total_physical_balance.abs
-                       end
+      # Calculate total_forecast using the correct formula
+      total_forecast = [total_sold - (physical_balance + total_in_production), 0].max
 
       warehouse_forecasts = stock.balances.map do |balance|
         warehouse_sold = balance.deposit_id.to_s == default_warehouse_id ? total_sold : 0
         balance_value = stock.balance(balance)
-        # Separate calculation for warehouse_forecast based on balance
-        warehouse_forecast = if balance_value >= 0
-                               [warehouse_sold - balance_value, 0].max
-                             else
-                               warehouse_sold + balance_value.abs
-                             end
+        # Calculate warehouse_forecast using the correct formula
+        warehouse_forecast = [warehouse_sold - (balance_value + total_in_production), 0].max
         [balance.deposit_id, { sold: warehouse_sold, forecast: warehouse_forecast }]
       end.to_h
       
@@ -112,8 +105,8 @@ class StocksController < ApplicationController
         warehouses: warehouse_forecasts, 
         total_sold: total_sold, 
         total_forecast: total_forecast,
-        total_balance: total_physical_balance,
-        total_virtual_balance: default_balance ? stock.virtual_balance(default_balance) : 0
+        physical_balance: physical_balance,
+        total_in_production: total_in_production
       }]
     end
   
