@@ -48,10 +48,7 @@
                 </td>
                 <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= stock.product.sku %></td>
-                <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
-                <td class="physical-balance">
-                  <%= sao_paulo_base ? data[:physical_balance] : 'N/A' %>
-                </td>
+                <td class="physical-balance"><%= data[:physical_balance] %></td>
                 <td class="in-production"><%= data[:total_in_production] %></td>
                 <td><%= data[:total_sold] %></td>
                 <td class="forecast"><%= data[:total_forecast] %></td>
@@ -60,6 +57,7 @@
                   <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                 </td>
               </tr>
+              <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
               <% if sao_paulo_base %>
                 <tr class="collapse-row" id="collapse<%= stock.id %>" style="display: none;">
                   <td colspan="9" class="p-0">
@@ -86,8 +84,8 @@
                                 } %>
                           </td>
                           <td><%= @warehouses[sao_paulo_base.deposit_id.to_s] || "Estoque São Paulo Base" %></td>
-                          <td class="physical-balance"><%= stock.balance(sao_paulo_base) %></td>
-                          <td class="virtual-balance"><%= stock.virtual_balance(sao_paulo_base) %></td>
+                          <td class="physical-balance"><%= sao_paulo_base.physical_balance %></td>
+                          <td class="virtual-balance"><%= sao_paulo_base.virtual_balance %></td>
                           <td><%= data[:total_sold] %></td>
                           <td><%= data[:total_forecast] %></td>
                         </tr>
@@ -110,11 +108,13 @@
   document.addEventListener('turbo:load', function() {
     setupCollapseButtons();
     setupDiscountCheckboxes();
+    applyInitialDiscounts();
   });
 
   document.addEventListener('turbo:render', function() {
     setupCollapseButtons();
     setupDiscountCheckboxes();
+    applyInitialDiscounts();
   });
 
   function setupCollapseButtons() {
@@ -133,44 +133,86 @@
     });
   }
 
+  function applyInitialDiscounts() {
+    const checkboxes = document.querySelectorAll('.discount-checkbox:checked');
+    checkboxes.forEach(checkbox => {
+      applyDiscount(checkbox, true, true);
+    });
+  }
+
   function setupDiscountCheckboxes() {
     const checkboxes = document.querySelectorAll('.discount-checkbox');
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', function() {
-        const stockId = this.dataset.stockId;
-        const warehouseId = this.dataset.warehouseId;
-        const sku = this.dataset.sku;
-
-        fetch(`/stocks/${stockId}/apply_discount`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-          },
-          body: JSON.stringify({ warehouse_id: warehouseId, sku: sku })
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            const row = this.closest('tr');
-            const physicalBalanceCell = row.querySelector('.physical-balance');
-            const virtualBalanceCell = row.querySelector('.virtual-balance');
-            const forecastCell = row.querySelector('td:nth-child(6)');
-            
-            physicalBalanceCell.textContent = data.physical_balance;
-            virtualBalanceCell.textContent = data.virtual_balance;
-            forecastCell.textContent = data.new_forecast;
-
-            // Update the main table row
-            const mainRow = row.closest('.collapse-row').previousElementSibling;
-            const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
-            const mainForecastCell = mainRow.querySelector('td:nth-child(7)');
-            mainPhysicalBalanceCell.textContent = data.physical_balance;
-            mainForecastCell.textContent = data.new_forecast;
-          }
-        })
-        .catch(error => console.error('Error:', error));
+        applyDiscount(this, this.checked, false);
       });
     });
+  }
+
+  function applyDiscount(checkbox, isApplying, isInitialLoad) {
+    const row = checkbox.closest('tr');
+    const physicalBalanceCell = row.querySelector('.physical-balance');
+    const virtualBalanceCell = row.querySelector('.virtual-balance');
+    const inProductionCell = row.querySelector('td:nth-child(5)');
+    const soldQuantityCell = row.querySelector('td:nth-child(6)');
+    const forecastCell = row.querySelector('td:nth-child(7)');
+    
+    let currentPhysicalBalance = parseInt(physicalBalanceCell.textContent);
+    let currentVirtualBalance = parseInt(virtualBalanceCell.textContent);
+    const inProduction = parseInt(inProductionCell.textContent);
+    const soldQuantity = parseInt(soldQuantityCell.textContent);
+
+    // Apply or remove the discount based on the checkbox state
+    const discountAmount = isApplying ? -1000 : 1000;
+    currentPhysicalBalance += discountAmount;
+    currentVirtualBalance += discountAmount;
+
+    physicalBalanceCell.textContent = currentPhysicalBalance;
+    virtualBalanceCell.textContent = currentVirtualBalance;
+
+    // Calculate new forecast
+    const newForecast = Math.max(currentPhysicalBalance + inProduction - soldQuantity, 0);
+    forecastCell.textContent = newForecast;
+
+    // Update the main table row
+    const mainRow = row.closest('.collapse-row').previousElementSibling;
+    const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
+    const mainForecastCell = mainRow.querySelector('td:nth-child(7)');
+    mainPhysicalBalanceCell.textContent = currentPhysicalBalance;
+    mainForecastCell.textContent = newForecast;
+
+    // Only make the API call if the change was triggered by a user action
+    if (!isInitialLoad) {
+      updateServerState(checkbox, isApplying, currentPhysicalBalance, newForecast);
+    }
+  }
+
+  function updateServerState(checkbox, isApplying, newPhysicalBalance, newForecast) {
+    const stockId = checkbox.dataset.stockId;
+    const warehouseId = checkbox.dataset.warehouseId;
+    const sku = checkbox.dataset.sku;
+
+    fetch(`/stocks/${stockId}/apply_discount`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ 
+        warehouse_id: warehouseId, 
+        sku: sku, 
+        is_applying: isApplying,
+        new_physical_balance: newPhysicalBalance,
+        new_forecast: newForecast
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (!data.success) {
+        console.error('Error updating server state:', data.error);
+        // Optionally, revert the UI changes here if the server update fails
+      }
+    })
+    .catch(error => console.error('Error:', error));
   }
 <% end %>

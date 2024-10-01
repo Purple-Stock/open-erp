@@ -4,15 +4,47 @@
       <h1 class="display-4"><%= t('stocks.one') %></h1>
       <hr>
       <dl class="row">
+        <dt class="col-sm-3"><%= t('stocks.id') %></dt>
+        <dd class="col-sm-9"><%= @stock.id %></dd>
+
         <dt class="col-sm-3"><%= t('stocks.name') %></dt>
         <dd class="col-sm-9"><%= @stock.product.name %></dd>
+
+        <dt class="col-sm-3"><%= t('stocks.sku') %></dt>
+        <dd class="col-sm-9"><%= @stock.product.sku %></dd>
 
         <dt class="col-sm-3"><%= t('stocks.total_balance') %></dt>
         <dd class="col-sm-9"><%= @stock.total_balance %></dd>
 
         <dt class="col-sm-3"><%= t('stocks.total_virtual_balance') %></dt>
         <dd class="col-sm-9"><%= @stock.total_virtual_balance %></dd>
+
+        <dt class="col-sm-3"><%= t('stocks.total_in_production') %></dt>
+        <dd class="col-sm-9"><%= @stock.total_in_production %></dd>
       </dl>
+
+      <h2><%= t('stocks.balances') %></h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= t('stocks.warehouse') %></th>
+            <th><%= t('stocks.physical_balance') %></th>
+            <th><%= t('stocks.virtual_balance') %></th>
+            <th><%= t('stocks.adjusted_balance') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stock.balances.each do |balance| %>
+            <tr>
+              <td><%= @warehouses[balance.deposit_id.to_s] || balance.deposit_id %></td>
+              <td><%= balance.physical_balance %></td>
+              <td><%= balance.virtual_balance %></td>
+              <td><%= @stock.balance(balance) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
       <%= link_to t('helpers.links.back'), stocks_path, class: 'btn btn-primary' %>
     </div>
   </div>
