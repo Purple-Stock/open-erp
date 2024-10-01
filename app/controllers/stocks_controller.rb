@@ -107,9 +107,9 @@ class StocksController < ApplicationController
 
     sorted_stocks = stocks_with_forecasts.sort_by { |_, data| -data[:total_sold] }
 
-    @pagy, paginated_stocks = pagy_array(sorted_stocks, items: 20)
+    @pagy, @stocks_with_data = pagy_array(sorted_stocks, items: 20)
 
-    paginated_stocks
+    @stocks_with_data
   end
 
   private
