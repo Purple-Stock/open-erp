@@ -2,6 +2,7 @@
 
 class StocksController < ApplicationController
   include Pagy::Backend
+  before_action :set_stock, only: [:show, :apply_discount]
 
   def index
     respond_to do |format|
@@ -16,8 +17,11 @@ class StocksController < ApplicationController
     end
   end
 
+  def show
+    # The @stock variable is now set by the before_action
+  end
+
   def apply_discount
-    @stock = Stock.find(params[:id])
     warehouse_id = params[:warehouse_id]
     sku = params[:sku]
 
@@ -29,7 +33,6 @@ class StocksController < ApplicationController
 
     balance = @stock.balances.find_by(deposit_id: warehouse_id)
     
-    # Fetch the total sold for this stock
     start_date = 1.month.ago.to_date
     end_date = Date.today
     total_sold = Item.joins(:bling_order_item)
@@ -40,7 +43,6 @@ class StocksController < ApplicationController
     virtual_balance = @stock.virtual_balance(balance)
     in_production = @stock.total_in_production
 
-    # Calculate the new forecast using the correct formula
     new_forecast = [total_sold - (physical_balance + in_production), 0].max
 
     respond_to do |format|
@@ -103,7 +105,6 @@ class StocksController < ApplicationController
       }]
     end
 
-    # Sort by total_sold in descending order
     sorted_stocks = stocks_with_forecasts.sort_by { |_, data| -data[:total_sold] }
 
     @pagy, paginated_stocks = pagy_array(sorted_stocks, items: 20)
@@ -111,4 +112,12 @@ class StocksController < ApplicationController
     paginated_stocks
   end
 
+  private
+
+  def set_stock
+    @stock = Stock.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Stock not found"
+    redirect_to stocks_path
+  end
 end
