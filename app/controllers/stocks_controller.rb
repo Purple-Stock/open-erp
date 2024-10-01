@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 class StocksController < ApplicationController
-  require 'pagy/extras/array'
-  include Pagy::ArrayExtra
-  inherit_resources
+  include Pagy::Backend
 
   def index
     respond_to do |format|
-      format.html { super }
+      format.html do
+        @stocks_with_data = collection
+      end
       format.csv do
-        @stocks_export = Stock.where(account_id: current_tenant)
-        send_data @stocks_export.to_csv, file_name: 'stock_forecast.csv'
+        GenerateStocksCsvJob.perform_later(current_tenant, current_user.email)
+        flash[:notice] = "CSV is being generated and will be emailed to you shortly."
+        redirect_to stocks_path
       end
     end
   end
@@ -83,36 +84,31 @@ class StocksController < ApplicationController
 
     default_warehouse_id = '9023657532'
 
+    total_in_production = Stock.total_in_production_for_all
+
     stocks_with_forecasts = stocks.map do |stock|
       total_sold = items_sold[stock.product.sku] || 0
       
       default_balance = stock.balances.find { |b| b.deposit_id.to_s == default_warehouse_id }
       physical_balance = default_balance ? stock.balance(default_balance) : 0
-      total_in_production = stock.total_in_production
+      in_production = total_in_production[stock.product_id] || 0
 
-      # Calculate total_forecast using the correct formula
-      total_forecast = [total_sold - (physical_balance + total_in_production), 0].max
+      total_forecast = [total_sold - (physical_balance + in_production), 0].max
 
-      warehouse_forecasts = stock.balances.map do |balance|
-        warehouse_sold = balance.deposit_id.to_s == default_warehouse_id ? total_sold : 0
-        balance_value = stock.balance(balance)
-        # Calculate warehouse_forecast using the correct formula
-        warehouse_forecast = [warehouse_sold - (balance_value + total_in_production), 0].max
-        [balance.deposit_id, { sold: warehouse_sold, forecast: warehouse_forecast }]
-      end.to_h
-      
       [stock, { 
-        warehouses: warehouse_forecasts, 
         total_sold: total_sold, 
         total_forecast: total_forecast,
         physical_balance: physical_balance,
-        total_in_production: total_in_production
+        total_in_production: in_production
       }]
     end
-  
+
+    # Sort by total_sold in descending order
     sorted_stocks = stocks_with_forecasts.sort_by { |_, data| -data[:total_sold] }
-  
-    @pagy, @stocks_with_data = pagy_array(sorted_stocks)
+
+    @pagy, paginated_stocks = pagy_array(sorted_stocks, items: 20)
+
+    paginated_stocks
   end
 
 end

@@ -156,10 +156,7 @@ class Stock < ApplicationRecord
   end
 
   def total_in_production
-    ProductionProduct.joins(:production)
-                     .where(product_id: self.product_id)
-                     .where(productions: { confirmed: [false, nil] })
-                     .sum('quantity - COALESCE(pieces_delivered, 0) - COALESCE(dirty, 0) - COALESCE(error, 0) - COALESCE(discard, 0)')
+    @total_in_production ||= self.class.total_in_production_for_all[self.product_id] || 0
   end
 
   def adjusted_total_balance
@@ -168,5 +165,12 @@ class Stock < ApplicationRecord
 
   def adjusted_total_virtual_balance
     total_virtual_balance + total_in_production
+  end
+
+  def self.total_in_production_for_all
+    ProductionProduct.joins(:production)
+                     .where(productions: { confirmed: [false, nil] })
+                     .group(:product_id)
+                     .sum('quantity - COALESCE(pieces_delivered, 0) - COALESCE(dirty, 0) - COALESCE(error, 0) - COALESCE(discard, 0)')
   end
 end
