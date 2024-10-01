@@ -155,3 +155,6 @@ pt-BR:
     remove: "Remover"
   yes: "Sim"
   no: "Não"
+  stocks:
+    physical_balance: "Saldo Físico"
+    in_production: "Em Produção"
