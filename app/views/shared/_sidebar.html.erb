@@ -71,17 +71,6 @@
             <%= link_to t("tailors.create"), new_tailor_path, class: 'nav-link' %>
           </li>
         <% end %>
-        <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-store' do %>
-          <li class="<%= active_nav_item('stores', 'index') %>">
-            <%= link_to t("stores.list"), stores_path, class: 'nav-link' %>
-          </li>
-          <li class="<%= active_nav_item('stores', 'new') %>">
-            <%= link_to t("stores.create"), new_store_path, class: 'nav-link' %>
-          </li>
-          <li class="<%= active_nav_item('bling_order_item_histories', 'index') %>">
-            <%= link_to 'Pedidos Diários', bling_order_item_owners_path, class: 'nav-link' %>
-          </li>
-        <% end %>
         <%= render 'shared/sidebar_dropdown', title: t("warehouses.two"), icon: 'fas fa-warehouse' do %>
           <li class="<%= active_nav_item('warehouses', 'index') %>">
             <%= link_to t("warehouses.list"), warehouses_path, class: 'nav-link' %>

@@ -14,3 +14,15 @@ pt-BR:
     calculate_basic_forecast: Previsão para os próximos 30 dias
     physical_balance: Saldo Físico
     in_production: Em Produção
+    discounted_warehouse_sku_id: "ID do Depósito com Desconto"
+    no_discount: "Sem desconto aplicado"
+    discounted_physical_balance: "Saldo Físico com Desconto"
+    discounted_virtual_balance: "Saldo Virtual com Desconto"
+    adjusted_total_balance: "Saldo Total Ajustado"
+    adjusted_total_virtual_balance: "Saldo Virtual Total Ajustado"
+    adjusted_physical_balance: "Saldo Físico Ajustado"
+    adjusted_virtual_balance: "Saldo Virtual Ajustado"
+    discount_applied: "Desconto aplicado"
+    discount_status: "Status do Desconto"
+    discounted: "Com desconto"
+    not_discounted: "Sem desconto"

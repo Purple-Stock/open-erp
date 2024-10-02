@@ -25,10 +25,10 @@
           <table id="stockTable" class="table table-striped">
             <thead>
             <tr>
-              <th></th>
+              <th>Apply Discount</th>
               <th><%= model_class.human_attribute_name(:id) %></th>
               <th><%= t('stocks.sku') %></th>
-              <th><%= t('stocks.physical_balance') %></th>
+              <th><%= t('stocks.balance') %></th>
               <th><%= t('stocks.in_production') %></th>
               <th><%= t('stocks.count_sold') %></th>
               <th><%= t('stocks.calculate_basic_forecast') %></th>
@@ -38,19 +38,25 @@
             </thead>
             <tbody>
             <% @stocks_with_data.each do |(stock, data)| %>
+              <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
               <tr>
                 <td>
-                  <% if stock.balances.any? %>
-                    <button class="btn btn-sm btn-outline-primary collapse-toggle" type="button" data-target="#collapse<%= stock.id %>">
-                      +
-                    </button>
+                  <% if sao_paulo_base %>
+                    <%= check_box_tag "discount_#{stock.id}_#{sao_paulo_base.deposit_id}", 1, 
+                        stock.discounted_warehouse_sku_id == "#{sao_paulo_base.deposit_id}_#{stock.product.sku}", 
+                        class: 'discount-checkbox',
+                        data: { 
+                          stock_id: stock.id,
+                          warehouse_id: sao_paulo_base.deposit_id,
+                          sku: stock.product.sku,
+                          initial_state: stock.discounted_warehouse_sku_id == "#{sao_paulo_base.deposit_id}_#{stock.product.sku}"
+                        } %>
                   <% end %>
                 </td>
                 <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= stock.product.sku %></td>
-                <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
-                <td class="physical-balance">
-                  <%= sao_paulo_base ? data[:physical_balance] : 'N/A' %>
+                <td class="balance-cell" data-physical="<%= data[:physical_balance] %>" data-discounted="<%= data[:discounted_physical_balance] %>">
+                  <%= stock.discounted_warehouse_sku_id ? data[:discounted_physical_balance] : data[:physical_balance] %>
                 </td>
                 <td class="in-production"><%= data[:total_in_production] %></td>
                 <td><%= data[:total_sold] %></td>
@@ -60,42 +66,6 @@
                   <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                 </td>
               </tr>
-              <% if sao_paulo_base %>
-                <tr class="collapse-row" id="collapse<%= stock.id %>" style="display: none;">
-                  <td colspan="9" class="p-0">
-                    <table class="table table-sm table-bordered mb-0">
-                      <thead>
-                        <tr>
-                          <th>Apply Discount</th>
-                          <th>Warehouse</th>
-                          <th><%= t('stocks.physical_balance') %></th>
-                          <th><%= t('stocks.total_virtual_balance') %></th>
-                          <th><%= t('stocks.count_sold') %></th>
-                          <th><%= t('stocks.calculate_basic_forecast') %></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <%= check_box_tag "discount_#{stock.id}_#{sao_paulo_base.deposit_id}", 1, stock.discounted_warehouse_sku_id == "#{sao_paulo_base.deposit_id}_#{stock.product.sku}", 
-                                class: 'discount-checkbox',
-                                data: { 
-                                  stock_id: stock.id,
-                                  warehouse_id: sao_paulo_base.deposit_id,
-                                  sku: stock.product.sku
-                                } %>
-                          </td>
-                          <td><%= @warehouses[sao_paulo_base.deposit_id.to_s] || "Estoque São Paulo Base" %></td>
-                          <td class="physical-balance"><%= stock.balance(sao_paulo_base) %></td>
-                          <td class="virtual-balance"><%= stock.virtual_balance(sao_paulo_base) %></td>
-                          <td><%= data[:total_sold] %></td>
-                          <td><%= data[:total_forecast] %></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              <% end %>
             <% end %>
             </tbody>
           </table>
@@ -108,69 +78,89 @@
 
 <%= javascript_tag do %>
   document.addEventListener('turbo:load', function() {
-    setupCollapseButtons();
     setupDiscountCheckboxes();
   });
 
   document.addEventListener('turbo:render', function() {
-    setupCollapseButtons();
     setupDiscountCheckboxes();
   });
-
-  function setupCollapseButtons() {
-    const collapseButtons = document.querySelectorAll('.collapse-toggle');
-    collapseButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const target = document.querySelector(this.dataset.target);
-        if (target.style.display === 'none' || target.style.display === '') {
-          target.style.display = 'table-row';
-          this.textContent = '-';
-        } else {
-          target.style.display = 'none';
-          this.textContent = '+';
-        }
-      });
-    });
-  }
 
   function setupDiscountCheckboxes() {
     const checkboxes = document.querySelectorAll('.discount-checkbox');
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', function() {
-        const stockId = this.dataset.stockId;
-        const warehouseId = this.dataset.warehouseId;
-        const sku = this.dataset.sku;
-
-        fetch(`/stocks/${stockId}/apply_discount`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-          },
-          body: JSON.stringify({ warehouse_id: warehouseId, sku: sku })
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            const row = this.closest('tr');
-            const physicalBalanceCell = row.querySelector('.physical-balance');
-            const virtualBalanceCell = row.querySelector('.virtual-balance');
-            const forecastCell = row.querySelector('td:nth-child(6)');
-            
-            physicalBalanceCell.textContent = data.physical_balance;
-            virtualBalanceCell.textContent = data.virtual_balance;
-            forecastCell.textContent = data.new_forecast;
-
-            // Update the main table row
-            const mainRow = row.closest('.collapse-row').previousElementSibling;
-            const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
-            const mainForecastCell = mainRow.querySelector('td:nth-child(7)');
-            mainPhysicalBalanceCell.textContent = data.physical_balance;
-            mainForecastCell.textContent = data.new_forecast;
-          }
-        })
-        .catch(error => console.error('Error:', error));
+        const isApplying = this.checked;
+        updateViewImmediately(this, isApplying);
+        updateServerState(this, isApplying);
       });
+    });
+  }
+
+  function updateViewImmediately(checkbox, isApplying) {
+    const row = checkbox.closest('tr');
+    const balanceCell = row.querySelector('.balance-cell');
+    const forecastCell = row.querySelector('.forecast');
+    const inProductionCell = row.querySelector('.in-production');
+    const totalSoldCell = row.cells[5]; // Assuming total sold is in the 6th column
+
+    const physicalBalance = parseInt(balanceCell.dataset.physical);
+    const discountedBalance = parseInt(balanceCell.dataset.discounted);
+    const inProduction = parseInt(inProductionCell.textContent);
+    const totalSold = parseInt(totalSoldCell.textContent);
+
+    const newBalance = isApplying ? discountedBalance : physicalBalance;
+    const adjustedBalance = newBalance + inProduction;
+    const newForecast = Math.max(totalSold - adjustedBalance, 0);
+
+    balanceCell.textContent = newBalance;
+    forecastCell.textContent = newForecast;
+  }
+
+  function updateServerState(checkbox, isApplying) {
+    const row = checkbox.closest('tr');
+    const stockId = checkbox.dataset.stockId;
+    const warehouseId = checkbox.dataset.warehouseId;
+    const sku = checkbox.dataset.sku;
+    const balanceCell = row.querySelector('.balance-cell');
+    const forecastCell = row.querySelector('.forecast');
+
+    fetch(`/stocks/${stockId}/apply_discount`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify({ 
+        warehouse_id: warehouseId, 
+        sku: sku, 
+        is_applying: isApplying
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log('Discount applied successfully');
+        // Update with server values if they differ from our calculation
+        if (isApplying && data.discounted_physical_balance !== balanceCell.textContent) {
+          balanceCell.textContent = data.discounted_physical_balance;
+        } else if (!isApplying && data.physical_balance !== balanceCell.textContent) {
+          balanceCell.textContent = data.physical_balance;
+        }
+        if (data.new_forecast !== forecastCell.textContent) {
+          forecastCell.textContent = data.new_forecast;
+        }
+      } else {
+        console.error('Error applying discount:', data.error);
+        // Revert changes
+        checkbox.checked = !isApplying;
+        updateViewImmediately(checkbox, !isApplying);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Revert changes
+      checkbox.checked = !isApplying;
+      updateViewImmediately(checkbox, !isApplying);
     });
   }
 <% end %>

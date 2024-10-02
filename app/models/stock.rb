@@ -130,7 +130,9 @@ class Stock < ApplicationRecord
   end
 
   def balance(balance)
-    discounted_balance(balance)
+    result = discounted_balance(balance)
+    Rails.logger.debug "Stock ##{id} balance: #{result} (base: #{balance.physical_balance}, in_production: #{total_in_production})"
+    result
   end
 
   def virtual_balance(balance)
@@ -138,25 +140,33 @@ class Stock < ApplicationRecord
   end
 
   def discounted_balance(balance)
-    base_balance = if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
+    if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
       balance.physical_balance - 1000
     else
       balance.physical_balance
     end
-    base_balance + total_in_production
   end
 
   def discounted_virtual_balance(balance)
-    base_balance = if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
+    if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
       balance.virtual_balance - 1000
     else
       balance.virtual_balance
     end
-    base_balance + total_in_production
+  end
+
+  def adjusted_balance(balance)
+    discounted_balance(balance) + total_in_production
+  end
+
+  def adjusted_virtual_balance(balance)
+    discounted_virtual_balance(balance) + total_in_production
   end
 
   def total_in_production
-    @total_in_production ||= self.class.total_in_production_for_all[self.product_id] || 0
+    result = @total_in_production ||= self.class.total_in_production_for_all[self.product_id] || 0
+    Rails.logger.debug "Stock ##{id} total_in_production: #{result}"
+    result
   end
 
   def adjusted_total_balance
