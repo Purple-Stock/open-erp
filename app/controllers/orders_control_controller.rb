@@ -122,6 +122,8 @@ class OrdersControlController < ApplicationController
     # Set the default tab to 'pending_missing'
     @active_tab = params[:tab] || 'pending_missing'
 
+    @sold_last_30_days = calculate_sold_last_30_days
+
     respond_to do |format|
       format.html
       format.csv { send_data generate_csv(@all_items), filename: "pending-products-#{Date.today}.csv" }
@@ -194,5 +196,15 @@ class OrdersControlController < ApplicationController
       total_produced = production_products.sum(:quantity)
       [total_quantity - total_produced, 0].max
     end
+  end
+
+  def calculate_sold_last_30_days
+    start_date = 30.days.ago.beginning_of_day
+    end_date = Time.current.end_of_day
+
+    Item.joins(:bling_order_item)
+        .where(account_id: current_tenant, bling_order_items: { date: start_date..end_date })
+        .group(:sku)
+        .sum(:quantity)
   end
 end
