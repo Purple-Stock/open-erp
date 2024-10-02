@@ -150,9 +150,11 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params['product']['account_id'] = current_tenant.id
-    params.require(:product).permit(:name, :price, :bar_code, :highlight, :account_id,
-                                    :category_id, :active, :image, :custom_id, :sku, :extra_sku)
+    params.require(:product).permit(
+      :name, :price, :bar_code, :highlight, :account_id,
+      :category_id, :active, :image, :custom_id, :sku, :extra_sku,
+      :number_of_pieces_per_fabric_roll
+    )
   end
 
   def datatable_searchable_columns

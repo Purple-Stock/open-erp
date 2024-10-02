@@ -32,6 +32,7 @@
               <th><%= t('stocks.in_production') %></th>
               <th><%= t('stocks.count_sold') %></th>
               <th><%= t('stocks.calculate_basic_forecast') %></th>
+              <th><%= t('stocks.number_of_rolls') %></th>
               <th><%= t('stocks.product') %></th>
               <th><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
@@ -61,6 +62,9 @@
                 <td class="in-production"><%= data[:total_in_production] %></td>
                 <td><%= data[:total_sold] %></td>
                 <td class="forecast"><%= data[:total_forecast] %></td>
+                <td class="number-of-rolls">
+                  <%= (data[:total_forecast].to_f / (stock.product.number_of_pieces_per_fabric_roll || 1)).ceil %>
+                </td>
                 <td><%= stock.product.name %></td>
                 <td>
                   <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
@@ -100,6 +104,7 @@
     const row = checkbox.closest('tr');
     const balanceCell = row.querySelector('.balance-cell');
     const forecastCell = row.querySelector('.forecast');
+    const numberOfRollsCell = row.querySelector('.number-of-rolls');
     const inProductionCell = row.querySelector('.in-production');
     const totalSoldCell = row.cells[5]; // Assuming total sold is in the 6th column
 
@@ -107,13 +112,16 @@
     const discountedBalance = parseInt(balanceCell.dataset.discounted);
     const inProduction = parseInt(inProductionCell.textContent);
     const totalSold = parseInt(totalSoldCell.textContent);
+    const numberOfPiecesPerRoll = parseInt(numberOfRollsCell.dataset.piecesPerRoll) || 1;
 
     const newBalance = isApplying ? discountedBalance : physicalBalance;
     const adjustedBalance = newBalance + inProduction;
     const newForecast = Math.max(totalSold - adjustedBalance, 0);
+    const newNumberOfRolls = Math.ceil(newForecast / numberOfPiecesPerRoll);
 
     balanceCell.textContent = newBalance;
     forecastCell.textContent = newForecast;
+    numberOfRollsCell.textContent = newNumberOfRolls;
   }
 
   function updateServerState(checkbox, isApplying) {
@@ -123,6 +131,7 @@
     const sku = checkbox.dataset.sku;
     const balanceCell = row.querySelector('.balance-cell');
     const forecastCell = row.querySelector('.forecast');
+    const numberOfRollsCell = row.querySelector('.number-of-rolls');
 
     fetch(`/stocks/${stockId}/apply_discount`, {
       method: 'PATCH',
@@ -148,6 +157,9 @@
         }
         if (data.new_forecast !== forecastCell.textContent) {
           forecastCell.textContent = data.new_forecast;
+          const numberOfPiecesPerRoll = data.number_of_pieces_per_fabric_roll || 1;
+          const newNumberOfRolls = Math.ceil(data.new_forecast / numberOfPiecesPerRoll);
+          numberOfRollsCell.textContent = newNumberOfRolls;
         }
       } else {
         console.error('Error applying discount:', data.error);
