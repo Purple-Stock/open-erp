@@ -35,6 +35,7 @@ class StocksController < ApplicationController
 
     balance = @stock.balances.find_by(deposit_id: warehouse_id)
     adjusted_balance = @stock.adjusted_balance(balance)
+    discounted_physical_balance = @stock.discounted_balance(balance)
 
     start_date = 1.month.ago.to_date
     end_date = Date.today
@@ -49,6 +50,7 @@ class StocksController < ApplicationController
         render json: { 
           success: true, 
           physical_balance: balance.physical_balance,
+          discounted_physical_balance: discounted_physical_balance,
           adjusted_balance: adjusted_balance,
           new_forecast: new_forecast
         } 

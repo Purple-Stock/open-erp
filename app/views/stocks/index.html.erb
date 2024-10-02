@@ -55,8 +55,8 @@
                 </td>
                 <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= stock.product.sku %></td>
-                <td class="balance-cell" data-physical="<%= data[:physical_balance] %>" data-discounted="<%= data[:discounted_virtual_balance] %>">
-                  <%= stock.discounted_warehouse_sku_id ? data[:discounted_virtual_balance] : data[:physical_balance] %>
+                <td class="balance-cell" data-physical="<%= data[:physical_balance] %>" data-discounted="<%= data[:discounted_physical_balance] %>">
+                  <%= stock.discounted_warehouse_sku_id ? data[:discounted_physical_balance] : data[:physical_balance] %>
                 </td>
                 <td class="in-production"><%= data[:total_in_production] %></td>
                 <td><%= data[:total_sold] %></td>
@@ -141,8 +141,10 @@
       if (data.success) {
         console.log('Discount applied successfully');
         // Update with server values if they differ from our calculation
-        if (data.adjusted_balance !== balanceCell.textContent) {
-          balanceCell.textContent = data.adjusted_balance;
+        if (isApplying && data.discounted_physical_balance !== balanceCell.textContent) {
+          balanceCell.textContent = data.discounted_physical_balance;
+        } else if (!isApplying && data.physical_balance !== balanceCell.textContent) {
+          balanceCell.textContent = data.physical_balance;
         }
         if (data.new_forecast !== forecastCell.textContent) {
           forecastCell.textContent = data.new_forecast;
