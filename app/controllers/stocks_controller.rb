@@ -26,8 +26,6 @@ class StocksController < ApplicationController
     warehouse_id = params[:warehouse_id]
     sku = params[:sku]
     is_applying = params[:is_applying]
-    new_physical_balance = params[:new_physical_balance]
-    new_forecast = params[:new_forecast]
 
     if is_applying
       @stock.apply_discount(warehouse_id)
@@ -36,13 +34,22 @@ class StocksController < ApplicationController
     end
 
     balance = @stock.balances.find_by(deposit_id: warehouse_id)
-    balance.update(physical_balance: new_physical_balance)
+    adjusted_balance = @stock.adjusted_balance(balance)
+
+    start_date = 1.month.ago.to_date
+    end_date = Date.today
+    total_sold = Item.joins(:bling_order_item)
+                     .where(account_id: current_tenant, sku: sku, bling_order_items: { date: start_date..end_date })
+                     .sum(:quantity)
+
+    new_forecast = [total_sold - adjusted_balance, 0].max
 
     respond_to do |format|
       format.json { 
         render json: { 
           success: true, 
-          physical_balance: new_physical_balance,
+          physical_balance: balance.physical_balance,
+          adjusted_balance: adjusted_balance,
           new_forecast: new_forecast
         } 
       }
@@ -83,20 +90,29 @@ class StocksController < ApplicationController
       
       default_balance = stock.balances.find { |b| b.deposit_id.to_s == default_warehouse_id }
       physical_balance = default_balance ? default_balance.physical_balance : 0
+      virtual_balance = default_balance ? default_balance.virtual_balance : 0
       in_production = stock.total_in_production
 
-      # Check if discount is applied
-      if stock.discounted_warehouse_sku_id == "#{default_warehouse_id}_#{stock.product.sku}"
-        physical_balance -= 1000
-      end
+      # Calculate discounted balances
+      discounted_physical_balance = stock.discounted_balance(default_balance) if default_balance
+      discounted_virtual_balance = stock.discounted_virtual_balance(default_balance) if default_balance
 
-      # Calculate forecast
-      total_forecast = [physical_balance + in_production - total_sold, 0].max
+      # Calculate adjusted balances
+      adjusted_physical_balance = stock.adjusted_balance(default_balance) if default_balance
+      adjusted_virtual_balance = stock.adjusted_virtual_balance(default_balance) if default_balance
+
+      # Calculate forecast: total_sold - adjusted_physical_balance
+      total_forecast = [total_sold - adjusted_physical_balance, 0].max if adjusted_physical_balance
 
       [stock, { 
         total_sold: total_sold, 
         total_forecast: total_forecast,
         physical_balance: physical_balance,
+        virtual_balance: virtual_balance,
+        discounted_physical_balance: discounted_physical_balance,
+        discounted_virtual_balance: discounted_virtual_balance,
+        adjusted_physical_balance: adjusted_physical_balance,
+        adjusted_virtual_balance: adjusted_virtual_balance,
         total_in_production: in_production,
         sao_paulo_base_balance: default_balance ? default_balance.physical_balance : 0
       }]

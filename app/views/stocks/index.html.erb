@@ -28,7 +28,7 @@
               <th>Apply Discount</th>
               <th><%= model_class.human_attribute_name(:id) %></th>
               <th><%= t('stocks.sku') %></th>
-              <th><%= t('stocks.physical_balance') %></th>
+              <th><%= t('stocks.balance') %></th>
               <th><%= t('stocks.in_production') %></th>
               <th><%= t('stocks.count_sold') %></th>
               <th><%= t('stocks.calculate_basic_forecast') %></th>
@@ -55,7 +55,9 @@
                 </td>
                 <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= stock.product.sku %></td>
-                <td class="physical-balance"><%= data[:physical_balance] %></td>
+                <td class="balance-cell" data-physical="<%= data[:physical_balance] %>" data-discounted="<%= data[:discounted_virtual_balance] %>">
+                  <%= stock.discounted_warehouse_sku_id ? data[:discounted_virtual_balance] : data[:physical_balance] %>
+                </td>
                 <td class="in-production"><%= data[:total_in_production] %></td>
                 <td><%= data[:total_sold] %></td>
                 <td class="forecast"><%= data[:total_forecast] %></td>
@@ -77,69 +79,50 @@
 <%= javascript_tag do %>
   document.addEventListener('turbo:load', function() {
     setupDiscountCheckboxes();
-    applyInitialDiscounts();
   });
 
   document.addEventListener('turbo:render', function() {
     setupDiscountCheckboxes();
-    applyInitialDiscounts();
   });
 
   function setupDiscountCheckboxes() {
     const checkboxes = document.querySelectorAll('.discount-checkbox');
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', function() {
-        applyDiscount(this, this.checked, false);
+        const isApplying = this.checked;
+        updateViewImmediately(this, isApplying);
+        updateServerState(this, isApplying);
       });
     });
   }
 
-  function applyInitialDiscounts() {
-    const checkboxes = document.querySelectorAll('.discount-checkbox');
-    checkboxes.forEach(checkbox => {
-      const isChecked = checkbox.getAttribute('data-initial-state') === 'true';
-      checkbox.checked = isChecked;
-      if (isChecked) {
-        applyDiscount(checkbox, true, true);
-      }
-    });
-  }
-
-  function applyDiscount(checkbox, isApplying, isInitialLoad) {
+  function updateViewImmediately(checkbox, isApplying) {
     const row = checkbox.closest('tr');
-    const physicalBalanceCell = row.querySelector('.physical-balance');
-    const inProductionCell = row.querySelector('.in-production');
-    const soldCell = row.cells[5]; // Count sold column
+    const balanceCell = row.querySelector('.balance-cell');
     const forecastCell = row.querySelector('.forecast');
-    
-    let currentPhysicalBalance = parseInt(physicalBalanceCell.textContent);
-    let inProduction = parseInt(inProductionCell.textContent);
-    let totalSold = parseInt(soldCell.textContent);
+    const inProductionCell = row.querySelector('.in-production');
+    const totalSoldCell = row.cells[5]; // Assuming total sold is in the 6th column
 
-    // Apply or remove the discount based on the checkbox state
-    const discountAmount = isApplying ? -1000 : 1000;
-    
-    // Only apply the discount if it's not an initial load or if it's applying the discount
-    if (!isInitialLoad || isApplying) {
-      currentPhysicalBalance += discountAmount;
-    }
+    const physicalBalance = parseInt(balanceCell.dataset.physical);
+    const discountedBalance = parseInt(balanceCell.dataset.discounted);
+    const inProduction = parseInt(inProductionCell.textContent);
+    const totalSold = parseInt(totalSoldCell.textContent);
 
-    // Calculate new forecast
-    const newForecast = Math.max(currentPhysicalBalance + inProduction - totalSold, 0);
+    const newBalance = isApplying ? discountedBalance : physicalBalance;
+    const adjustedBalance = newBalance + inProduction;
+    const newForecast = Math.max(totalSold - adjustedBalance, 0);
 
-    physicalBalanceCell.textContent = currentPhysicalBalance;
+    balanceCell.textContent = newBalance;
     forecastCell.textContent = newForecast;
-
-    // Only make the API call if the change was triggered by a user action
-    if (!isInitialLoad) {
-      updateServerState(checkbox, isApplying, currentPhysicalBalance, newForecast);
-    }
   }
 
-  function updateServerState(checkbox, isApplying, newPhysicalBalance, newForecast) {
+  function updateServerState(checkbox, isApplying) {
+    const row = checkbox.closest('tr');
     const stockId = checkbox.dataset.stockId;
     const warehouseId = checkbox.dataset.warehouseId;
     const sku = checkbox.dataset.sku;
+    const balanceCell = row.querySelector('.balance-cell');
+    const forecastCell = row.querySelector('.forecast');
 
     fetch(`/stocks/${stockId}/apply_discount`, {
       method: 'PATCH',
@@ -150,19 +133,32 @@
       body: JSON.stringify({ 
         warehouse_id: warehouseId, 
         sku: sku, 
-        is_applying: isApplying,
-        new_physical_balance: newPhysicalBalance,
-        new_forecast: newForecast
+        is_applying: isApplying
       })
     })
     .then(response => response.json())
     .then(data => {
       if (data.success) {
         console.log('Discount applied successfully');
+        // Update with server values if they differ from our calculation
+        if (data.adjusted_balance !== balanceCell.textContent) {
+          balanceCell.textContent = data.adjusted_balance;
+        }
+        if (data.new_forecast !== forecastCell.textContent) {
+          forecastCell.textContent = data.new_forecast;
+        }
       } else {
         console.error('Error applying discount:', data.error);
+        // Revert changes
+        checkbox.checked = !isApplying;
+        updateViewImmediately(checkbox, !isApplying);
       }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+      console.error('Error:', error);
+      // Revert changes
+      checkbox.checked = !isApplying;
+      updateViewImmediately(checkbox, !isApplying);
+    });
   }
 <% end %>
