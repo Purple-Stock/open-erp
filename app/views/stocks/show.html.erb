@@ -21,6 +21,22 @@
 
         <dt class="col-sm-3"><%= t('stocks.total_in_production') %></dt>
         <dd class="col-sm-9"><%= @stock.total_in_production %></dd>
+
+        <dt class="col-sm-3"><%= t('stocks.discounted_warehouse_sku_id') %></dt>
+        <dd class="col-sm-9">
+          <% if @stock.discounted_warehouse_sku_id %>
+            <strong class="text-danger"><%= @stock.discounted_warehouse_sku_id %></strong>
+            (<%= t('stocks.discount_applied') %>)
+          <% else %>
+            <%= t('stocks.no_discount') %>
+          <% end %>
+        </dd>
+
+        <dt class="col-sm-3"><%= t('stocks.adjusted_total_balance') %></dt>
+        <dd class="col-sm-9"><%= @stock.adjusted_total_balance %></dd>
+
+        <dt class="col-sm-3"><%= t('stocks.adjusted_total_virtual_balance') %></dt>
+        <dd class="col-sm-9"><%= @stock.adjusted_total_virtual_balance %></dd>
       </dl>
 
       <h2><%= t('stocks.balances') %></h2>
@@ -30,7 +46,11 @@
             <th><%= t('stocks.warehouse') %></th>
             <th><%= t('stocks.physical_balance') %></th>
             <th><%= t('stocks.virtual_balance') %></th>
-            <th><%= t('stocks.adjusted_balance') %></th>
+            <th><%= t('stocks.discounted_physical_balance') %></th>
+            <th><%= t('stocks.discounted_virtual_balance') %></th>
+            <th><%= t('stocks.adjusted_physical_balance') %></th>
+            <th><%= t('stocks.adjusted_virtual_balance') %></th>
+            <th><%= t('stocks.discount_status') %></th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +59,17 @@
               <td><%= @warehouses[balance.deposit_id.to_s] || balance.deposit_id %></td>
               <td><%= balance.physical_balance %></td>
               <td><%= balance.virtual_balance %></td>
-              <td><%= @stock.balance(balance) %></td>
+              <td><%= @stock.discounted_balance(balance) %></td>
+              <td><%= @stock.discounted_virtual_balance(balance) %></td>
+              <td><%= @stock.adjusted_balance(balance) %></td>
+              <td><%= @stock.adjusted_virtual_balance(balance) %></td>
+              <td>
+                <% if @stock.discounted_warehouse_sku_id == "#{balance.deposit_id}_#{@stock.product.sku}" %>
+                  <span class="badge bg-danger"><%= t('stocks.discounted') %></span>
+                <% else %>
+                  <span class="badge bg-secondary"><%= t('stocks.not_discounted') %></span>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

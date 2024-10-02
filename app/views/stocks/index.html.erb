@@ -25,7 +25,7 @@
           <table id="stockTable" class="table table-striped">
             <thead>
             <tr>
-              <th></th>
+              <th>Apply Discount</th>
               <th><%= model_class.human_attribute_name(:id) %></th>
               <th><%= t('stocks.sku') %></th>
               <th><%= t('stocks.physical_balance') %></th>
@@ -38,12 +38,19 @@
             </thead>
             <tbody>
             <% @stocks_with_data.each do |(stock, data)| %>
+              <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
               <tr>
                 <td>
-                  <% if stock.balances.any? %>
-                    <button class="btn btn-sm btn-outline-primary collapse-toggle" type="button" data-target="#collapse<%= stock.id %>">
-                      +
-                    </button>
+                  <% if sao_paulo_base %>
+                    <%= check_box_tag "discount_#{stock.id}_#{sao_paulo_base.deposit_id}", 1, 
+                        stock.discounted_warehouse_sku_id == "#{sao_paulo_base.deposit_id}_#{stock.product.sku}", 
+                        class: 'discount-checkbox',
+                        data: { 
+                          stock_id: stock.id,
+                          warehouse_id: sao_paulo_base.deposit_id,
+                          sku: stock.product.sku,
+                          initial_state: stock.discounted_warehouse_sku_id == "#{sao_paulo_base.deposit_id}_#{stock.product.sku}"
+                        } %>
                   <% end %>
                 </td>
                 <td><%= link_to stock.id, stock_path(stock), data: { toggle: 'tooltip', turbo: false } %></td>
@@ -57,43 +64,6 @@
                   <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                 </td>
               </tr>
-              <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
-              <% if sao_paulo_base %>
-                <tr class="collapse-row" id="collapse<%= stock.id %>" style="display: none;">
-                  <td colspan="9" class="p-0">
-                    <table class="table table-sm table-bordered mb-0">
-                      <thead>
-                        <tr>
-                          <th>Apply Discount</th>
-                          <th>Warehouse</th>
-                          <th><%= t('stocks.physical_balance') %></th>
-                          <th><%= t('stocks.total_virtual_balance') %></th>
-                          <th><%= t('stocks.count_sold') %></th>
-                          <th><%= t('stocks.calculate_basic_forecast') %></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <%= check_box_tag "discount_#{stock.id}_#{sao_paulo_base.deposit_id}", 1, stock.discounted_warehouse_sku_id == "#{sao_paulo_base.deposit_id}_#{stock.product.sku}", 
-                                class: 'discount-checkbox',
-                                data: { 
-                                  stock_id: stock.id,
-                                  warehouse_id: sao_paulo_base.deposit_id,
-                                  sku: stock.product.sku
-                                } %>
-                          </td>
-                          <td><%= @warehouses[sao_paulo_base.deposit_id.to_s] || "Estoque São Paulo Base" %></td>
-                          <td class="physical-balance"><%= sao_paulo_base.physical_balance %></td>
-                          <td class="virtual-balance"><%= sao_paulo_base.virtual_balance %></td>
-                          <td><%= data[:total_sold] %></td>
-                          <td><%= data[:total_forecast] %></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              <% end %>
             <% end %>
             </tbody>
           </table>
@@ -106,39 +76,14 @@
 
 <%= javascript_tag do %>
   document.addEventListener('turbo:load', function() {
-    setupCollapseButtons();
     setupDiscountCheckboxes();
     applyInitialDiscounts();
   });
 
   document.addEventListener('turbo:render', function() {
-    setupCollapseButtons();
     setupDiscountCheckboxes();
     applyInitialDiscounts();
   });
-
-  function setupCollapseButtons() {
-    const collapseButtons = document.querySelectorAll('.collapse-toggle');
-    collapseButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const target = document.querySelector(this.dataset.target);
-        if (target.style.display === 'none' || target.style.display === '') {
-          target.style.display = 'table-row';
-          this.textContent = '-';
-        } else {
-          target.style.display = 'none';
-          this.textContent = '+';
-        }
-      });
-    });
-  }
-
-  function applyInitialDiscounts() {
-    const checkboxes = document.querySelectorAll('.discount-checkbox:checked');
-    checkboxes.forEach(checkbox => {
-      applyDiscount(checkbox, true, true);
-    });
-  }
 
   function setupDiscountCheckboxes() {
     const checkboxes = document.querySelectorAll('.discount-checkbox');
@@ -149,37 +94,41 @@
     });
   }
 
+  function applyInitialDiscounts() {
+    const checkboxes = document.querySelectorAll('.discount-checkbox');
+    checkboxes.forEach(checkbox => {
+      const isChecked = checkbox.getAttribute('data-initial-state') === 'true';
+      checkbox.checked = isChecked;
+      if (isChecked) {
+        applyDiscount(checkbox, true, true);
+      }
+    });
+  }
+
   function applyDiscount(checkbox, isApplying, isInitialLoad) {
     const row = checkbox.closest('tr');
     const physicalBalanceCell = row.querySelector('.physical-balance');
-    const virtualBalanceCell = row.querySelector('.virtual-balance');
-    const inProductionCell = row.querySelector('td:nth-child(5)');
-    const soldQuantityCell = row.querySelector('td:nth-child(6)');
-    const forecastCell = row.querySelector('td:nth-child(7)');
+    const inProductionCell = row.querySelector('.in-production');
+    const soldCell = row.cells[5]; // Count sold column
+    const forecastCell = row.querySelector('.forecast');
     
     let currentPhysicalBalance = parseInt(physicalBalanceCell.textContent);
-    let currentVirtualBalance = parseInt(virtualBalanceCell.textContent);
-    const inProduction = parseInt(inProductionCell.textContent);
-    const soldQuantity = parseInt(soldQuantityCell.textContent);
+    let inProduction = parseInt(inProductionCell.textContent);
+    let totalSold = parseInt(soldCell.textContent);
 
     // Apply or remove the discount based on the checkbox state
     const discountAmount = isApplying ? -1000 : 1000;
-    currentPhysicalBalance += discountAmount;
-    currentVirtualBalance += discountAmount;
-
-    physicalBalanceCell.textContent = currentPhysicalBalance;
-    virtualBalanceCell.textContent = currentVirtualBalance;
+    
+    // Only apply the discount if it's not an initial load or if it's applying the discount
+    if (!isInitialLoad || isApplying) {
+      currentPhysicalBalance += discountAmount;
+    }
 
     // Calculate new forecast
-    const newForecast = Math.max(currentPhysicalBalance + inProduction - soldQuantity, 0);
-    forecastCell.textContent = newForecast;
+    const newForecast = Math.max(currentPhysicalBalance + inProduction - totalSold, 0);
 
-    // Update the main table row
-    const mainRow = row.closest('.collapse-row').previousElementSibling;
-    const mainPhysicalBalanceCell = mainRow.querySelector('.physical-balance');
-    const mainForecastCell = mainRow.querySelector('td:nth-child(7)');
-    mainPhysicalBalanceCell.textContent = currentPhysicalBalance;
-    mainForecastCell.textContent = newForecast;
+    physicalBalanceCell.textContent = currentPhysicalBalance;
+    forecastCell.textContent = newForecast;
 
     // Only make the API call if the change was triggered by a user action
     if (!isInitialLoad) {
@@ -208,9 +157,10 @@
     })
     .then(response => response.json())
     .then(data => {
-      if (!data.success) {
-        console.error('Error updating server state:', data.error);
-        // Optionally, revert the UI changes here if the server update fails
+      if (data.success) {
+        console.log('Discount applied successfully');
+      } else {
+        console.error('Error applying discount:', data.error);
       }
     })
     .catch(error => console.error('Error:', error));

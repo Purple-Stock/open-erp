@@ -140,21 +140,27 @@ class Stock < ApplicationRecord
   end
 
   def discounted_balance(balance)
-    base_balance = if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
+    if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
       balance.physical_balance - 1000
     else
       balance.physical_balance
     end
-    base_balance + total_in_production
   end
 
   def discounted_virtual_balance(balance)
-    base_balance = if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
+    if discounted_warehouse_sku_id == "#{balance.deposit_id}_#{self.product.sku}"
       balance.virtual_balance - 1000
     else
       balance.virtual_balance
     end
-    base_balance + total_in_production
+  end
+
+  def adjusted_balance(balance)
+    discounted_balance(balance) + total_in_production
+  end
+
+  def adjusted_virtual_balance(balance)
+    discounted_virtual_balance(balance) + total_in_production
   end
 
   def total_in_production
