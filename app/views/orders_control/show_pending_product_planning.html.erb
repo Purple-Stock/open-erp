@@ -160,7 +160,8 @@
               <th>SKU</th>
               <th>Quantidade Pendente Total</th>
               <th>Peças Faltantes na Produção</th>
-              <th>Quantidade Pendente Total</th>
+              <th>Quantidade vendida dos últimos 30 dias</th>
+              <th>Quantidade Total</th>
               <th>Sobrou Estoque?</th>
             </tr>
           </thead>
@@ -168,11 +169,13 @@
             <% @sorted_items.each do |sku, items| %>
               <% pending_quantity = items.sum(&:quantity) %>
               <% pieces_missing = @total_pieces_missing[sku] || 0 %>
+              <% sold_last_30_days = @sold_last_30_days[sku] || 0 %>
               <% difference = pieces_missing - pending_quantity %>
               <tr>
                 <td><%= sku %></td>
                 <td><%= pending_quantity %></td>
                 <td><%= pieces_missing %></td>
+                <td><%= sold_last_30_days %></td>
                 <td><%= difference %></td>
                 <td>
                   <% if difference > 0 %>
