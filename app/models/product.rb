@@ -4,21 +4,22 @@
 #
 # Table name: products
 #
-#  id          :bigint           not null, primary key
-#  active      :boolean
-#  bar_code    :string
-#  extra_sku   :string
-#  highlight   :boolean
-#  name        :string
-#  price       :float
-#  sku         :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  account_id  :integer
-#  bling_id    :bigint
-#  category_id :bigint
-#  custom_id   :integer
-#  store_id    :integer
+#  id                               :bigint           not null, primary key
+#  active                           :boolean
+#  bar_code                         :string
+#  extra_sku                        :string
+#  highlight                        :boolean
+#  name                             :string
+#  number_of_pieces_per_fabric_roll :integer
+#  price                            :float
+#  sku                              :string
+#  created_at                       :datetime         not null
+#  updated_at                       :datetime         not null
+#  account_id                       :integer
+#  bling_id                         :bigint
+#  category_id                      :bigint
+#  custom_id                        :integer
+#  store_id                         :integer
 #
 # Indexes
 #
@@ -51,6 +52,8 @@ class Product < ApplicationRecord
     validates :name
     validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
   end
+
+  validates :number_of_pieces_per_fabric_roll, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
 
   before_destroy :can_destroy?
 

@@ -26,3 +26,8 @@ pt-BR:
     discount_status: "Status do Desconto"
     discounted: "Com desconto"
     not_discounted: "Sem desconto"
+    number_of_rolls: "Número de Rolos"
+  activerecord:
+    attributes:
+      product:
+        number_of_pieces_per_fabric_roll: "Número de peças por rolo de tecido"

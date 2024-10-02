@@ -52,7 +52,8 @@ class StocksController < ApplicationController
           physical_balance: balance.physical_balance,
           discounted_physical_balance: discounted_physical_balance,
           adjusted_balance: adjusted_balance,
-          new_forecast: new_forecast
+          new_forecast: new_forecast,
+          number_of_pieces_per_fabric_roll: @stock.product.number_of_pieces_per_fabric_roll
         } 
       }
     end
