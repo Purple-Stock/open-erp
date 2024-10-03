@@ -40,9 +40,14 @@ module Services
         pdf.text "Cliente: #{@production.tailor.name}", style: :bold
         pdf.text "Endereço: Endereço do cliente" # Replace with actual address when available
         pdf.text "Número da OS: #{@production.service_order_number}"
-        pdf.text "Data de entrada: #{@production.cut_date&.strftime("%d/%m/%Y")}"
-        pdf.text "Data prevista: #{@production.expected_delivery_date&.strftime("%d/%m/%Y")}"
-        pdf.text "Data de conclusão: "
+        pdf.text "Data de entrada do corte: #{@production.cut_date&.strftime("%d/%m/%Y")}"
+        pdf.text "Data prevista para entrega: #{@production.expected_delivery_date&.strftime("%d/%m/%Y")}"
+        pdf.text "Data prevista para pagamento: #{@production.payment_date&.strftime("%d/%m/%Y")}"
+        
+        pdf.move_down 10
+        pdf.text "Cláusula de Pagamento:", style: :bold
+        pdf.text "Em caso de atraso na entrega, a data de pagamento será automaticamente adiada pelo mesmo período do atraso."
+        
         pdf.move_down 20
       end
       

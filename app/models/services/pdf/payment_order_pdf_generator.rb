@@ -37,9 +37,14 @@ module Services
 
       def generate_tailor_details(pdf)
         pdf.text "Costureiro: #{@production.tailor.name}", style: :bold
-        pdf.text "Data de entrada: #{@production.cut_date&.strftime("%d/%m/%Y")}"
-        pdf.text "Data de conclusão: #{@production.production_products.maximum(:delivery_date)&.strftime("%d/%m/%Y")}"
-        pdf.text "Data de pagamento: #{@production.payment_date&.strftime("%d/%m/%Y")}"
+        pdf.text "Data de entrada do corte: #{@production.cut_date&.strftime("%d/%m/%Y")}"
+        pdf.text "Data prevista para entrega: #{@production.expected_delivery_date&.strftime("%d/%m/%Y")}"
+        pdf.text "Data prevista para pagamento: #{@production.payment_date&.strftime("%d/%m/%Y")}"
+        
+        pdf.move_down 10
+        pdf.text "Cláusula de Pagamento:", style: :bold
+        pdf.text "Em caso de atraso na entrega, a data de pagamento será automaticamente adiada pelo mesmo período do atraso."
+        
         pdf.move_down 20
       end
       
