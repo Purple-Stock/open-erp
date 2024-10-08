@@ -81,6 +81,7 @@ class DashboardsController < ApplicationController
       { name: "Atendidos", items: grouped_fulfilled_order_items },
       { name: "Impressos", items: grouped_printed_order_items },
       { name: "Pendentes", items: grouped_pending_order_items },
+      { name: "Pedidos a enviar", items: pedidos_a_enviar },
       { name: "Feitos (checados e verificados)", items: current_done_order_items },
       { name: "Coletados", items: collected_orders },
       { name: "Cancelados", items: canceled_orders },
@@ -234,6 +235,18 @@ class DashboardsController < ApplicationController
 
   def grouped_error_order_items
     group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::ERROR, account_id: @account_id))
+  end
+
+  def pedidos_a_enviar
+    statuses = [
+      BlingOrderItem::Status::IN_PROGRESS,
+      BlingOrderItem::Status::FULFILLED,
+      BlingOrderItem::Status::PRINTED,
+      BlingOrderItem::Status::PENDING
+    ]
+    
+    orders = BlingOrderItem.where(situation_id: statuses, account_id: @account_id)
+    group_order_items(orders)
   end
 
   def group_order_items(base_query)
