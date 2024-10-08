@@ -1,7 +1,7 @@
 class DashboardsController < ApplicationController
   before_action :token_expires_at, :date_range, :bling_order_items, :canceled_orders, :get_in_progress_order_items,
                 :current_done_order_items, :set_monthly_revenue_estimation, :get_printed_order_items,
-                :get_pending_order_items, :collected_orders, only: :others_status
+                :get_pending_order_items, :collected_orders, only: :others_status, :metas_report
 
   include SheinOrdersHelper
 
