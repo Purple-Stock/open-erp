@@ -139,7 +139,9 @@ class BlingOrderItem < ApplicationRecord
   }
 
   scope :date_range, ->(start_date, end_date) { 
-    where(date: start_date.beginning_of_day..end_date.end_of_day) 
+    start_date = start_date.to_date.beginning_of_day if start_date.present?
+    end_date = end_date.to_date.end_of_day if end_date.present?
+    where(date: start_date..end_date)
   }
 
   def self.flexible_date_range(start_date, end_date)
@@ -259,7 +261,9 @@ class BlingOrderItem < ApplicationRecord
   end
 
   scope :date_range, ->(start_date, end_date) { 
-    where(date: start_date.beginning_of_day..end_date.end_of_day) 
+    start_date = start_date.to_date.beginning_of_day if start_date.present?
+    end_date = end_date.to_date.end_of_day if end_date.present?
+    where(date: start_date..end_date)
   }
 
   def self.flexible_date_range(start_date, end_date)
