@@ -1,0 +1,68 @@
+<div class="container-fluid mt-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">
+        Relatório de Metas
+        <button class="btn btn-sm btn-light float-end" id="toggle-visibility">
+          <i class="fas fa-eye-slash" id="eye-icon"></i>
+        </button>
+      </h2>
+    </div>
+    <div class="card-body">
+      <% if @monthly_revenue_estimation.present? %>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <h5>Meta de quantidade</h5>
+            <p class="h3 revenue-hidden text-hide"><%= @monthly_revenue_estimation.quantity %></p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h5>Meta de receita</h5>
+            <p class="h3 revenue-hidden text-hide"><%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h5>Ticket Médio</h5>
+            <p class="h3 revenue-hidden text-hide"><%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
+          </div>
+          <div class="col-md-3 mb-3">
+            <h5>Meta de quantidade/Contagem total</h5>
+            <% total_count = @bling_order_items.values.sum(&:count) %>
+            <% current_month_count = @bling_order_items.values.sum { |items| items.select { |item| item.date >= Date.today.beginning_of_month }.count } %>
+            <% ratio = (@monthly_revenue_estimation.quantity > 0 ? (current_month_count.to_f / @monthly_revenue_estimation.quantity * 100).round(2) : 0) %>
+            <p class="h3"><%= current_month_count %>/<%= @monthly_revenue_estimation.quantity %> (<%= ratio %>%)</p>
+            <div class="progress mb-2">
+              <div class="progress-bar" role="progressbar" style="width: <%= ratio %>%;" aria-valuenow="<%= ratio %>" aria-valuemin="0" aria-valuemax="100"><%= ratio %>%</div>
+            </div>
+            <p class="text-muted">Total acumulado: <%= total_count %></p>
+          </div>
+        </div>
+      <% else %>
+        <div class="alert alert-warning">
+          Não há estimativa de receita para o mês atual. 
+          <%= link_to 'Criar nova estimativa', new_revenue_estimation_path, class: 'btn btn-primary btn-sm' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggle-visibility');
+    const eyeIcon = document.getElementById('eye-icon');
+    const hiddenElements = document.querySelectorAll('.revenue-hidden');
+
+    toggleButton.addEventListener('click', function() {
+      hiddenElements.forEach(el => el.classList.toggle('text-hide'));
+      eyeIcon.classList.toggle('fa-eye');
+      eyeIcon.classList.toggle('fa-eye-slash');
+    });
+  });
+</script>
+
+<style>
+  .text-hide {
+    color: transparent;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    user-select: none;
+  }
+</style>

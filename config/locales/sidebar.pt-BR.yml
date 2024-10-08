@@ -57,3 +57,5 @@ pt-BR:
     daily: Relatório Diário de Vendas
     top_selling_products: Produtos mais vendidos
     pending_product_planning: Planejamento Pendentes
+  dashboards:
+    metas_report: "Relatório de Metas"

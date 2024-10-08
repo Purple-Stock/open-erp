@@ -159,4 +159,12 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'dashboards/metas_report', to: 'dashboards#metas_report', as: 'dashboards_metas_report'
+
+  resources :bling_order_items do
+    collection do
+      get :export_csv
+    end
+  end
+
 end

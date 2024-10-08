@@ -18,37 +18,6 @@
   </div>
 
   <div class="card shadow-sm mb-4">
-    <div class="card-header bg-primary text-white">
-      <h2 class="mb-0">
-        Metas
-        <button class="btn btn-sm btn-light float-end" id="toggle-visibility">
-          <i class="fas fa-eye-slash" id="eye-icon"></i>
-        </button>
-      </h2>
-    </div>
-    <div class="card-body">
-      <% if @monthly_revenue_estimation.present? %>
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <h5>Meta de quantidade</h5>
-            <p class="h3 revenue-hidden text-hide"><%= @monthly_revenue_estimation.quantity %></p>
-          </div>
-          <div class="col-md-4 mb-3">
-            <h5>Meta de receita</h5>
-            <p class="h3 revenue-hidden text-hide"><%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></p>
-          </div>
-          <div class="col-md-4 mb-3">
-            <h5>Ticket Médio</h5>
-            <p class="h3 revenue-hidden text-hide"><%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
-          </div>
-        </div>
-      <% else %>
-        <%= link_to 'Estimar quantidade esperadas para o mês atual', new_revenue_estimation_path, class: 'btn btn-primary' %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="card shadow-sm mb-4">
     <div class="card-header bg-light">
       <h3 class="mb-0">Filtrar por data</h3>
     </div>
