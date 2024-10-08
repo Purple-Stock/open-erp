@@ -140,4 +140,15 @@ class DashboardsController < ApplicationController
       204_061_683 => 'Mercado Livre'
     }
   end
+
+  def metas_report
+    @monthly_revenue_estimation = current_user.account.revenue_estimations.current_month.first
+    if @monthly_revenue_estimation.nil?
+      @monthly_revenue_estimation = current_user.account.revenue_estimations.order(created_at: :desc).first
+    end
+
+    @bling_order_items = BlingOrderItem.where(account_id: current_user.account.id)
+                                       .where('date >= ?', Date.today.beginning_of_month)
+                                       .group_by(&:store_id)
+  end
 end
