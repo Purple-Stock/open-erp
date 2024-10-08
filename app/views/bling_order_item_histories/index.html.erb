@@ -1,122 +1,104 @@
-<section class="card mt-5 section">
-  <div class="card">
-    <h1>Histórico de vendas dos últimos 15 dias</h1>
-    <div>
-      <canvas id="chartjs-bar"></canvas>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="card card-statistic-2">
-        <div class="card-icon shadow-primary bg-primary">
-          <i class="fas fa-dollar-sign"></i>
-        </div>
-        <div class="card-wrap">
-          <div class="card-header">
-            <h4>Pedidos Últimos 15 dias</h4>
+<div class="container mt-5">
+  <h1 class="mb-4">Histórico de Vendas</h1>
+
+  <!-- Last 15 Days Overview -->
+  <div class="card mb-5">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Resumo dos Últimos 15 Dias</h2>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5 class="card-title">Total de Pedidos</h5>
+              <p class="card-text display-4"><%= @sum_last_days %></p>
+            </div>
           </div>
-          <div class="card-body">
-            <%= @sum_last_days %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h5 class="card-title">Média Diária de Pedidos</h5>
+              <p class="card-text display-4"><%= @average_last_days %></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <div class="card card-statistic-2">
-        <div class="card-icon shadow-primary bg-primary">
-          <i class="fas fa-shopping-bag"></i>
-        </div>
-        <div class="card-wrap">
-          <div class="card-header">
-            <h4>Média Pedidos Últimos 15 dias</h4>
-          </div>
-          <div class="card-body">
-            <%= @average_last_days %>
-          </div>
-        </div>
+      <div class="mt-4">
+        <canvas id="chartjs-bar" height="300"></canvas>
       </div>
     </div>
   </div>
-  <div class="row p-4">
-    <h1>Pesquisar por data</h1>
-    <%= form_tag(bling_order_item_histories_path, method: :get) do %>
-      <div class="input-group mb-5">
-        <div class="col-sm">
-          Data inicial
-          <%= date_field('bling_order', 'initial_date', value: @initial_date) %>
+
+  <!-- Date Range Search -->
+  <div class="card mb-5">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Pesquisar por Período</h2>
+      <%= form_tag(bling_order_item_histories_path, method: :get, class: 'row g-3') do %>
+        <div class="col-md-3">
+          <%= label_tag 'bling_order[initial_date]', 'Data Inicial', class: 'form-label' %>
+          <%= date_field_tag 'bling_order[initial_date]', @initial_date, class: 'form-control' %>
         </div>
-        <div class="col-sm">
-          Data final
-          <%= date_field('bling_order', 'final_date', value: @final_date) %>
+        <div class="col-md-3">
+          <%= label_tag 'bling_order[final_date]', 'Data Final', class: 'form-label' %>
+          <%= date_field_tag 'bling_order[final_date]', @final_date, class: 'form-control' %>
         </div>
-        <div class="col-sm">
-          <%= button_tag('Pesquisar...', class: 'btn btn-primary mb-3', id: 'daily-revenue-search',
-                         data: { turbo_frame: 'daily-revenue-chart' }) %>
+        <div class="col-md-6 d-flex align-items-end">
+          <%= button_tag 'Pesquisar', class: 'btn btn-primary me-2', id: 'daily-revenue-search',
+                         data: { turbo_frame: 'daily-revenue-chart' } %>
+          <%= button_tag 'Mês Atual', type: 'button', class: 'btn btn-secondary me-2', id: 'current-month-button' %>
+          <%= button_tag 'Hoje', type: 'button', class: 'btn btn-secondary', id: 'today-button' %>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</section>
-<div class="row">
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-dollar-sign"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Faturamento</h4>
-        </div>
+
+  <!-- Revenue Statistics -->
+  <div class="row mb-5">
+    <div class="col-md-4 mb-3">
+      <div class="card bg-success text-white">
         <div class="card-body">
-          <%= number_to_currency(@revenue_paid, unit: "BRL", separator: ",", delimiter: ".") %>
+          <h5 class="card-title">Faturamento</h5>
+          <p class="card-text display-5"><%= number_to_currency(@revenue_paid, unit: "R$", separator: ",", delimiter: ".") %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card bg-info text-white">
+        <div class="card-body">
+          <h5 class="card-title">Vendas</h5>
+          <p class="card-text display-5"><%= @quantity_paid %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card bg-warning text-dark">
+        <div class="card-body">
+          <h5 class="card-title">Ticket Médio</h5>
+          <p class="card-text display-5"><%= number_to_currency(@average_ticket.round(2), unit: "R$", separator: ",", delimiter: ".") %></p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-shopping-bag"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Vendas</h4>
-        </div>
-        <div class="card-body">
-          <%= @quantity_paid %>
-        </div>
+
+  <!-- Daily Revenue Chart -->
+  <div class="card mb-5">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Faturamento Diário</h2>
+      <%= hidden_field_tag('daily_revenue', @daily_revenue) %>
+      <div style="height: 400px; width: 100%;">
+        <canvas id='chartjs-bar-daily-revenue'></canvas>
       </div>
     </div>
   </div>
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-dollar-sign"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Ticket Médio</h4>
-        </div>
-        <div class="card-body">
-          <%= number_to_currency(@average_ticket.round(2), unit: "BRL", separator: ",", delimiter: ".") %>
-        </div>
+
+  <!-- Canceled Orders Chart -->
+  <div class="card mb-5">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Custo de Oportunidade dos Pedidos Cancelados</h2>
+      <%= hidden_field_tag('canceled_revenue', @canceled_revenue) %>
+      <div style="height: 400px; width: 100%;">
+        <canvas id='canceled-revenue-chart'></canvas>
       </div>
     </div>
   </div>
 </div>
-
-<section class="card chart-container">
-  <h1>Faturamento diário</h1>
-  <div>
-    <%= hidden_field_tag('daily_revenue', @daily_revenue) %>
-    <canvas id='chartjs-bar-daily-revenue'></canvas>
-  </div>
-</section>
-
-<section class="card chart-container">
-  <h1>Custo de Oportunidade dos Pedidos Cancelados</h1>
-  <div>
-    <%= hidden_field_tag('canceled_revenue', @canceled_revenue) %>
-    <canvas id='canceled-revenue-chart'></canvas>
-  </div>
-</section>

@@ -104,4 +104,41 @@ document.addEventListener('turbolinks:load', function() {
   if (chartJsBarDailyRevenueDomElement.length) {
     observer.observe(chartJsBarDailyRevenueDomElement[0]);
   }
+
+  // Add event listener for the current month button
+  const currentMonthButton = document.getElementById('current-month-button');
+  if (currentMonthButton) {
+    currentMonthButton.addEventListener('click', function() {
+      const now = new Date();
+      const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+      document.getElementById('bling_order_initial_date').value = formatDate(firstDayOfMonth);
+      document.getElementById('bling_order_final_date').value = formatDate(lastDayOfMonth);
+
+      // Trigger the search
+      document.getElementById('daily-revenue-search').click();
+    });
+  }
+
+  // Add event listener for the today button
+  const todayButton = document.getElementById('today-button');
+  if (todayButton) {
+    todayButton.addEventListener('click', function() {
+      const today = new Date();
+
+      document.getElementById('bling_order_initial_date').value = formatDate(today);
+      document.getElementById('bling_order_final_date').value = formatDate(today);
+
+      // Trigger the search
+      document.getElementById('daily-revenue-search').click();
+    });
+  }
+
+  function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 });

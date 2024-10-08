@@ -14,8 +14,8 @@ class BlingOrderItemHistoriesController < ApplicationController
   end
 
   def daily_revenue
-    @initial_date = params.fetch('bling_order', initial_date: Time.current.strftime('%Y-%m-%d %H:%M')).fetch('initial_date')
-    @final_date = params.fetch('bling_order', final_date: Time.current.strftime('%Y-%m-%d %H:%M')).fetch('final_date')
+    @initial_date = params.dig('bling_order', 'initial_date') || Time.current.beginning_of_month.strftime('%Y-%m-%d')
+    @final_date = params.dig('bling_order', 'final_date') || Time.current.end_of_month.strftime('%Y-%m-%d')
     @daily_date_range_filter = { initial_date: @initial_date, final_date: @final_date }
     @bling_order_items = BlingOrderItem.where(situation_id: [BlingOrderItem::Status::PAID],
                                               account_id: current_user.account.id)
