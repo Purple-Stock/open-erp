@@ -35,7 +35,7 @@ class DashboardsController < ApplicationController
     @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
   end
 
-  def metas_report
+  def revenue_target_report
     @monthly_revenue_estimation = RevenueEstimation.current_month.take
     
     if @monthly_revenue_estimation.present?
