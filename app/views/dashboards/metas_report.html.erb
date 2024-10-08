@@ -25,14 +25,17 @@
           </div>
           <div class="col-md-3 mb-3">
             <h5>Meta de quantidade/Contagem total</h5>
-            <% total_count = @bling_order_items.values.sum(&:count) %>
-            <% current_month_count = @bling_order_items.values.sum { |items| items.select { |item| item.date >= Date.today.beginning_of_month }.count } %>
-            <% ratio = (@monthly_revenue_estimation.quantity > 0 ? (current_month_count.to_f / @monthly_revenue_estimation.quantity * 100).round(2) : 0) %>
-            <p class="h3"><%= current_month_count %>/<%= @monthly_revenue_estimation.quantity %> (<%= ratio %>%)</p>
+            <p class="h3"><%= @current_month_count %>/<%= @monthly_revenue_estimation.quantity %> (<%= @ratio %>%)</p>
             <div class="progress mb-2">
-              <div class="progress-bar" role="progressbar" style="width: <%= ratio %>%;" aria-valuenow="<%= ratio %>" aria-valuemin="0" aria-valuemax="100"><%= ratio %>%</div>
+              <div class="progress-bar" role="progressbar" style="width: <%= @ratio %>%;" aria-valuenow="<%= @ratio %>" aria-valuemin="0" aria-valuemax="100"><%= @ratio %>%</div>
             </div>
-            <p class="text-muted">Total acumulado: <%= total_count %></p>
+            <p class="text-muted">Total acumulado: <%= @total_count %></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <h5>Meta diária</h5>
+            <p class="h3"><%= @daily_quantity.round(2) %></p>
           </div>
         </div>
       <% else %>

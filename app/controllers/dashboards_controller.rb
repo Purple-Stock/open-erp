@@ -36,14 +36,18 @@ class DashboardsController < ApplicationController
   end
 
   def metas_report
-    @monthly_revenue_estimation = current_user.account.revenue_estimations.current_month.first
-    if @monthly_revenue_estimation.nil?
-      @monthly_revenue_estimation = current_user.account.revenue_estimations.order(created_at: :desc).first
+    @monthly_revenue_estimation = RevenueEstimation.current_month.take
+    
+    if @monthly_revenue_estimation.present?
+      @total_count = @bling_order_items.values.sum(&:count)
+      @current_month_count = @bling_order_items.values.sum do |items|
+        items.select { |item| item.date >= Date.today.beginning_of_month }.count
+      end
+      @ratio = calculate_ratio(@current_month_count, @monthly_revenue_estimation.quantity)
+      
+      # Calculate daily quantity
+      @daily_quantity = @monthly_revenue_estimation.daily_quantity
     end
-
-    @bling_order_items = BlingOrderItem.where(account_id: current_user.account.id)
-                                       .where('date >= ?', Date.today.beginning_of_month)
-                                       .group_by(&:store_id)
   end
 
   private
@@ -150,5 +154,10 @@ class DashboardsController < ApplicationController
       203_467_890 => 'Simplo 7',
       204_061_683 => 'Mercado Livre'
     }
+  end
+
+  def calculate_ratio(current_count, target_count)
+    return 0 if target_count.to_i.zero?
+    (current_count.to_f / target_count * 100).round(2)
   end
 end
