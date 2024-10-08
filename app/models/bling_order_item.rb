@@ -138,11 +138,11 @@ class BlingOrderItem < ApplicationRecord
     where(store_id: '204796870')
   }
 
-  scope :date_range, lambda { |initial_date, final_date|
-    initial_date = initial_date.try(:to_date).try(:beginning_of_day)
-    final_date = final_date.try(:to_date).try(:end_of_day)
-    date_range = initial_date..final_date
-    where(date: date_range)
+  scope :date_range, lambda { |start_date, end_date|
+    start_date = start_date.is_a?(String) ? Date.parse(start_date).beginning_of_day : start_date.try(:beginning_of_day) || Time.zone.at(0)
+    end_date = end_date.is_a?(String) ? Date.parse(end_date).end_of_day : end_date.try(:end_of_day) || Time.current.end_of_day
+
+    where(date: start_date..end_date)
   }
 
   scope :by_status, lambda { |status|

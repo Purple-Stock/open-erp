@@ -202,14 +202,11 @@ class DashboardsController < ApplicationController
   end
 
   def set_date_range
-    @default_initial_date = params[:initial_date].presence || Time.zone.today.beginning_of_month
-    @default_final_date = params[:final_date].presence || Time.zone.today
+    @default_initial_date = params[:initial_date].presence || Time.zone.today.beginning_of_month.to_date
+    @default_final_date = params[:final_date].presence || Time.zone.today.to_date
 
-    @first_date = @default_initial_date.is_a?(String) ? Date.parse(@default_initial_date) : @default_initial_date
-    @second_date = @default_final_date.is_a?(String) ? Date.parse(@default_final_date) : @default_final_date
-
-    @first_date = @first_date.in_time_zone.beginning_of_day
-    @second_date = @second_date.in_time_zone.end_of_day
+    @first_date = @default_initial_date
+    @second_date = @default_final_date
 
     @date_range = @first_date..@second_date
   end
@@ -219,11 +216,8 @@ class DashboardsController < ApplicationController
   end
 
   def grouped_in_progress_order_items
-    start_date = @default_initial_date.is_a?(String) ? Date.parse(@default_initial_date) : @default_initial_date
-    end_date = @default_final_date.is_a?(String) ? Date.parse(@default_final_date) : @default_final_date
-
     group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS, account_id: @account_id)
-                                    .date_range(start_date, end_date))
+                                    .date_range(@first_date, @second_date))
   end
 
   def grouped_printed_order_items
@@ -234,7 +228,7 @@ class DashboardsController < ApplicationController
   def grouped_pending_order_items
     query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING, 
                                account_id: @account_id)
-                        .where('date <= ?', @second_date)
+                        .date_range(@first_date, @second_date)
     puts "Pending Query: #{query.to_sql}"
     group_order_items(query)
   end
