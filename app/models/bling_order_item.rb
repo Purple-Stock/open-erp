@@ -249,4 +249,8 @@ class BlingOrderItem < ApplicationRecord
 
     self.collected_alteration_date = collected_alteration_date_was
   end
+
+  scope :date_range, ->(start_date, end_date) { 
+    where(date: start_date.beginning_of_day..end_date.end_of_day) 
+  }
 end

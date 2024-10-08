@@ -23,6 +23,9 @@
             <li class="<%= active_nav_item('bling_order_item_histories', 'verification') %>">
               <%= link_to 'Pedidos Status', verification_bling_order_item_owners_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('dashboards', 'status_summary') %>">
+              <%= link_to 'Resumo de Status', dashboards_status_summary_path, class: 'nav-link' %>
+            </li>
           <% end %>
           <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-chart-line' do %>
             <li class="<%= active_nav_menu_item([show_pending_orders_path]) %>">

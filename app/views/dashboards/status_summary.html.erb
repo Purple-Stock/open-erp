@@ -1,0 +1,53 @@
+<div class="container-fluid mt-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Resumo de Status dos Pedidos</h1>
+        <%= link_to 'Exportar CSV', dashboards_status_summary_path(format: :csv, initial_date: @default_initial_date, final_date: @default_final_date), class: 'btn btn-success' %>
+      </div>
+      
+      <%= form_tag dashboards_status_summary_path, method: :get, class: 'mb-4' do %>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= label_tag :initial_date, "Data Inicial", class: 'form-label' %>
+              <%= date_field_tag :initial_date, @default_initial_date, class: 'form-control', include_blank: true %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= label_tag :final_date, "Data Final", class: 'form-label' %>
+              <%= date_field_tag :final_date, @default_final_date, class: 'form-control', include_blank: true %>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex align-items-end">
+            <%= submit_tag "Filtrar", class: 'btn btn-primary btn-block' %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render 'status_summary_table' %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .card {
+    border: none;
+    border-radius: 10px;
+  }
+  .card-body {
+    padding: 2rem;
+  }
+  .form-label {
+    font-weight: 600;
+  }
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+</style>

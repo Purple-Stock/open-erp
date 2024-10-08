@@ -167,4 +167,6 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'dashboards/status_summary', to: 'dashboards#status_summary', as: 'dashboards_status_summary'
+
 end
