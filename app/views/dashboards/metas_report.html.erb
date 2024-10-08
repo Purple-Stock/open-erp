@@ -26,7 +26,7 @@
         </div>
         <div class="row">
           <div class="col-md-6 mb-3">
-            <h5>Meta de quantidade/Contagem total</h5>
+            <h5>Contagem Mensal/Meta de quantidade</h5>
             <p class="h3"><%= @current_month_count %>/<%= @monthly_revenue_estimation.quantity %> (<%= @ratio %>%)</p>
             <div class="progress mb-2">
               <div class="progress-bar" role="progressbar" style="width: <%= @ratio %>%;" aria-valuenow="<%= @ratio %>" aria-valuemin="0" aria-valuemax="100"><%= @ratio %>%</div>
@@ -35,10 +35,20 @@
           </div>
           <div class="col-md-6 mb-3">
             <h5>Meta diária</h5>
-            <p class="h3"><%= @today_sales %>/<%= @daily_quantity.round(2) %> (<%= @daily_ratio %>%)</p>
+            <p class="h3"><%= @today_sales %>/<%= @daily_quantity %> (<%= @daily_ratio %>%)</p>
             <div class="progress mb-2">
               <div class="progress-bar" role="progressbar" style="width: <%= @daily_ratio %>%;" aria-valuenow="<%= @daily_ratio %>" aria-valuemin="0" aria-valuemax="100"><%= @daily_ratio %>%</div>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <h5>Receita atual</h5>
+            <p class="h3"><%= number_to_currency_pt_br @current_month_revenue %></p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h5>Ticket Médio atual</h5>
+            <p class="h3"><%= number_to_currency_pt_br @current_average_ticket %></p>
           </div>
         </div>
       <% else %>
