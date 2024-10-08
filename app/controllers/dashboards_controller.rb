@@ -35,6 +35,37 @@ class DashboardsController < ApplicationController
     @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
   end
 
+  def metas_report
+    @monthly_revenue_estimation = RevenueEstimation.current_month.take
+    
+    if @monthly_revenue_estimation.present?
+      @initial_date = Date.today.beginning_of_month
+      @final_date = Date.today
+
+      @bling_order_items = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PAID,
+                                                account_id: current_user.account.id)
+      @date_order_items = @bling_order_items.where(date: @initial_date.to_time.beginning_of_day..@final_date.to_time.end_of_day)                               
+      @current_month_count = @date_order_items.count
+
+      @ratio = calculate_ratio(@current_month_count, @monthly_revenue_estimation.quantity)
+      
+      # Calculate daily quantity
+      @daily_quantity = (@monthly_revenue_estimation.quantity / Date.today.end_of_month.day).round(2)
+
+      # Calculate today's sales
+      @today_sales = @bling_order_items.where(date: Date.today.beginning_of_day..Date.today.end_of_day).count
+
+      # Calculate the ratio of today's sales to daily target
+      @daily_ratio = calculate_ratio(@today_sales, @daily_quantity)
+
+      # Calculate total revenue for the current month
+      @current_month_revenue = @date_order_items.sum(:value)
+
+      # Calculate current average ticket
+      @current_average_ticket = @current_month_count > 0 ? (@current_month_revenue / @current_month_count).round(2) : 0
+    end
+  end
+
   private
 
   def token_expires_at
@@ -141,14 +172,8 @@ class DashboardsController < ApplicationController
     }
   end
 
-  def metas_report
-    @monthly_revenue_estimation = current_user.account.revenue_estimations.current_month.first
-    if @monthly_revenue_estimation.nil?
-      @monthly_revenue_estimation = current_user.account.revenue_estimations.order(created_at: :desc).first
-    end
-
-    @bling_order_items = BlingOrderItem.where(account_id: current_user.account.id)
-                                       .where('date >= ?', Date.today.beginning_of_month)
-                                       .group_by(&:store_id)
+  def calculate_ratio(current_count, target_count)
+    return 0 if target_count.to_i.zero?
+    (current_count.to_f / target_count * 100).round(2)
   end
 end
