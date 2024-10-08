@@ -82,6 +82,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails', '>= 6.1.4'
   gem 'solargraph'
+  gem 'auto_reload', git: 'https://github.com/puppe1990/auto_reload'
 end
 
 group :development do

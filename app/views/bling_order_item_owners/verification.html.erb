@@ -1,67 +1,58 @@
-<div class="card mt-4">
-  <div class="card-header">
-    <h1>Situações dos pedidos</h1>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Em Andamento</h1>
-        <h2 class="card-stats-item-count"><span class="text-primary"></span> <%= @in_progress_order_items.count %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Atendido</h1>
-        <h2 class="card-stats-item-count"><span class="text-primary"></span> <%= @fulfilled_order_items.count %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Impresso</h1>
-        <h2 class="card-stats-item-count"><span class="text-primary"></span> <%= @printed_order_items.count %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Pendentes</h1>
-        <h2 class="card-stats-item-count"><span class="text-danger"></span> <%= @pending_order_items.count %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Verificados</h1>
-        <h2 class="card-stats-item-count"><%= @current_done_order_items %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Coletados</h1>
-        <h2 class="card-stats-item-count"><span class="text-primary"></span> <%= @colected_orders %></h2>
+<div class="container-fluid mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h1 class="mb-0">Situações dos pedidos</h1>
+    </div>
+    <div class="card-body">
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-6 g-4">
+        <% order_statuses = [
+          { title: "Em Andamento", count: @in_progress_order_items.count, color: "primary" },
+          { title: "Atendido", count: @fulfilled_order_items.count, color: "success" },
+          { title: "Impresso", count: @printed_order_items.count, color: "info" },
+          { title: "Pendentes", count: @pending_order_items.count, color: "warning" },
+          { title: "Verificados", count: @current_done_order_items, color: "secondary" },
+          { title: "Coletados", count: @colected_orders, color: "dark" }
+        ] %>
+        
+        <% order_statuses.each do |status| %>
+          <div class="col">
+            <div class="card h-100 text-center border-<%= status[:color] %>">
+              <div class="card-body">
+                <h5 class="card-title text-<%= status[:color] %>"><%= status[:title] %></h5>
+                <h2 class="card-text display-4 fw-bold"><%= status[:count] %></h2>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
+  </div>
+
+  <div class="row mt-4 g-4">
+    <% order_sections = [
+      { title: "Pedidos Atendidos", items: @grouped_fulfilled_order_items, status: BlingOrderItemStatus::FULFILLED, color: "success" },
+      { title: "Pedidos Impressos", items: @grouped_printed_order_items, status: BlingOrderItemStatus::PRINTED, color: "info" },
+      { title: "Pedidos Pendentes", items: @grouped_pending_order_items, status: BlingOrderItemStatus::PENDING, color: "warning" }
+    ] %>
+
+    <% order_sections.each do |section| %>
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-<%= section[:color] %> text-white">
+            <h3 class="mb-0"><%= section[:title] %></h3>
+          </div>
+          <div class="card-body">
+            <%= render 'order_items_with_filters', order_items: section[:items],
+                      show_revenue_estimation: false, highlighted: false, status: section[:status] %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<section class="section p-3">
-  <div class="row p-0">
-    <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
-      <div class="card-header"><h3>Pedidos Atendidos</h3></div>
-      <div class="card-body">
-        <%= render 'order_items_with_filters', order_items: @grouped_fulfilled_order_items,
-                  show_revenue_estimation: false, highlighted: false, status: BlingOrderItemStatus::FULFILLED %>
-      </div>
-    </div>
-
-    <div class="card col-sm border-danger">
-      <div class="card-header"><h3>Pedidos Impressos</h3></div>
-      <div class="card-body">
-        <%= render 'order_items_with_filters', order_items: @grouped_printed_order_items,
-                  show_revenue_estimation: false, highlighted: false, status: BlingOrderItemStatus::PRINTED %>
-      </div>    
-    </div>    
-
-    <div class="card col-sm-12 col-md-3 col-xl-4 col-3-grid">
-      <div class="card-header"><h3>Pedidos Pendentes</h3></div>
-      <div class="card-body">
-        <%= render 'order_items_with_filters', order_items: @grouped_pending_order_items, show_revenue_estimation: false,
-                  highlighted: false, status: BlingOrderItemStatus::PENDING %>
-      </div>
-    </div>
-  </div>
-</div> 
-
 <script>
-    setInterval(function() {
-        window.location.reload();
-    }, 300000);
+  setInterval(function() {
+    window.location.reload();
+  }, 300000);
 </script>

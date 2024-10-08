@@ -1,14 +1,16 @@
 $(document).ready(function (){
-    let charDomElement = document.getElementById('chartjs-bar')
+    let chartDomElement = document.getElementById('chartjs-bar')
     let options = {
         maintainAspectRatio: false,
-        aspectRatio: 1,
+        responsive: true,
+        aspectRatio: 2,
         scales: {
             y: {
+                beginAtZero: true,
                 stacked: false,
                 grid: {
                     display: true,
-                    color: "rgba(255,99,132,0.2)"
+                    color: "rgba(0,0,0,0.1)"
                 }
             },
             x: {
@@ -17,13 +19,24 @@ $(document).ready(function (){
                     display: false
                 }
             }
+        },
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Quantidade vendida nos últimos 15 dias'
+            }
         }
     };
 
-    if(charDomElement !== null) {
-        $.ajax({url: 'bling_order_item_histories/day_quantities', success: function(result){
+    if(chartDomElement !== null) {
+        $.ajax({
+            url: 'bling_order_item_histories/day_quantities', 
+            success: function(result){
                 new Chart(
-                    document.getElementById('chartjs-bar'),
+                    chartDomElement,
                     {
                         type: 'bar',
                         options: options,
@@ -31,16 +44,15 @@ $(document).ready(function (){
                             labels: result.map(row => row.day),
                             datasets: [
                                 {
-                                    label: 'Quantidade vendida nos últimos 15 dias',
-                                    data: result.map(row => row.quantity)
+                                    label: 'Quantidade vendida',
+                                    data: result.map(row => row.quantity),
+                                    backgroundColor: 'rgba(54, 162, 235, 0.8)'
                                 }
                             ]
                         }
                     }
                 )
             }
-        }
-        )
-
+        });
     }
 })
