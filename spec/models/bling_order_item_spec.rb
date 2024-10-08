@@ -5,6 +5,7 @@
 #  id                        :bigint           not null, primary key
 #  aliquotaIPI               :decimal(, )
 #  alteration_date           :datetime
+#  city                      :string(10485760)
 #  codigo                    :string
 #  collected_alteration_date :date
 #  date                      :datetime
@@ -13,6 +14,7 @@
 #  descricaoDetalhada        :text
 #  items                     :jsonb
 #  quantidade                :integer
+#  state                     :string(10485760)
 #  unidade                   :string
 #  valor                     :decimal(, )
 #  value                     :decimal(, )
@@ -28,8 +30,11 @@
 #
 # Indexes
 #
+#  bling_order_id_index_on_bling_order_items  (bling_order_id)
 #  index_bling_order_items_on_account_id      (account_id)
 #  index_bling_order_items_on_bling_order_id  (bling_order_id) UNIQUE
+#  index_bling_order_items_on_date            (date)
+#  situation_id_index_on_bling_order_items    (situation_id,store_id)
 #
 require 'rails_helper'
 
@@ -223,6 +228,57 @@ RSpec.describe BlingOrderItem, type: :model do
     end
   end
 
+  describe 'self.flexible_date_range' do
+    before do
+      described_class.destroy_all
+      [23, 24, 25].each do |day|
+        FactoryBot.create(:bling_order_item, date: "2023-10-#{day}", bling_order_id: day)
+      end
+    end
+
+    context 'when it has initial date' do
+      let(:initial_date) { '2023-10-23' }
+      let(:final_date) { nil }
+
+      it 'counts 3' do
+        expect(described_class.flexible_date_range(initial_date, final_date).length).to eq(3)
+      end
+    end
+
+    context 'when it has initial date and final_date' do
+      let(:initial_date) { '2023-10-23' }
+      let(:final_date) { '2023-10-24' }
+
+      it 'counts 2' do
+        expect(described_class.flexible_date_range(initial_date, final_date).length).to eq(2)
+      end
+    end
+
+    context 'when it has final_date only' do
+      let(:initial_date) { nil }
+      let(:final_date) { '2023-10-24' }
+
+      it 'counts orders up to and including the final date' do
+        result = described_class.flexible_date_range(initial_date, final_date)
+        expect(result.length).to eq(2)
+        expect(result.pluck(:date).map(&:to_date)).to all(be <= Date.parse(final_date))
+        expect(result.pluck(:bling_order_id)).to match_array(['23', '24'])
+      end
+    end
+
+    context 'when initial_date and final_date are nil' do
+      let(:initial_date) { nil }
+      let(:final_date) { nil }
+
+      it 'counts orders for today' do
+        today_order = FactoryBot.create(:bling_order_item, date: Time.zone.today)
+        result = described_class.flexible_date_range(initial_date, final_date)
+        expect(result).to include(today_order)
+        expect(result.length).to eq(1)
+      end
+    end
+  end
+
   describe '#group_order_items' do
     subject(:group_order_items) { described_class.group_order_items(described_class.all) }
 
@@ -337,7 +393,7 @@ RSpec.describe BlingOrderItem, type: :model do
         end
       end
 
-      it 'changes situation_id to DELETE_IN_PROGRESS' do
+      it 'changes situation_id to DELETED_AT_BLING' do
         expect(bling_order_item.reload.situation_id).to eq(BlingOrderItemStatus::DELETED_AT_BLING)
       end
     end

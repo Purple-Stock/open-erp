@@ -1,0 +1,53 @@
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th class="text-left">Status</th>
+        <th class="text-center">Shein</th>
+        <th class="text-center">Shopee</th>
+        <th class="text-center">Mercado Livre</th>
+        <th class="text-center">Nuvem Shop</th>
+        <th class="text-center">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @statuses.each do |status| %>
+        <tr>
+          <td class="text-left font-weight-bold"><%= status[:name] %></td>
+          <% if status[:items].present? %>
+            <td class="text-center"><%= status[:items]['Shein']&.count || 0 %></td>
+            <td class="text-center"><%= status[:items]['Shopee']&.count || 0 %></td>
+            <td class="text-center"><%= status[:items]['Mercado Livre']&.count || 0 %></td>
+            <td class="text-center"><%= status[:items]['Nuvem Shop']&.count || 0 %></td>
+            <td class="text-center font-weight-bold"><%= status[:items].values.sum(&:count) %></td>
+          <% else %>
+            <td colspan="5" class="text-center">N/A</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .table-responsive {
+    margin-top: 20px;
+  }
+  .table {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .table thead th {
+    background-color: #343a40;
+    color: white;
+    border-color: #454d55;
+  }
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  .table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+  }
+  .font-weight-bold {
+    font-weight: 600;
+  }
+</style>

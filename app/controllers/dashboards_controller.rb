@@ -1,7 +1,10 @@
+require 'csv'
+
 class DashboardsController < ApplicationController
   before_action :token_expires_at, :date_range, :bling_order_items, :canceled_orders, :get_in_progress_order_items,
                 :current_done_order_items, :set_monthly_revenue_estimation, :get_printed_order_items,
                 :get_pending_order_items, :collected_orders, only: [:others_status, :metas_report]
+  before_action :set_date_range, :set_account, only: [:status_summary]
 
   include SheinOrdersHelper
 
@@ -30,12 +33,15 @@ class DashboardsController < ApplicationController
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
 
-    @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
-    @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
-    @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
+    @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items || [])
+    @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items || [])
+    @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items || [])
+
+    # Add this line to ensure @order_items is always a hash
+    @order_items = {}
   end
 
-  def metas_report
+  def revenue_target_report
     @monthly_revenue_estimation = RevenueEstimation.current_month.take
     
     if @monthly_revenue_estimation.present?
@@ -63,6 +69,27 @@ class DashboardsController < ApplicationController
 
       # Calculate current average ticket
       @current_average_ticket = @current_month_count > 0 ? (@current_month_revenue / @current_month_count).round(2) : 0
+    end
+  end
+
+  def status_summary
+    set_date_range
+    set_account
+
+    @statuses = [
+      { name: "Em andamento (Pagos)", items: grouped_in_progress_order_items },
+      { name: "Atendidos", items: grouped_fulfilled_order_items },
+      { name: "Impressos", items: grouped_printed_order_items },
+      { name: "Pendentes", items: grouped_pending_order_items },
+      { name: "Feitos (checados e verificados)", items: current_done_order_items },
+      { name: "Coletados", items: collected_orders },
+      { name: "Cancelados", items: canceled_orders },
+      { name: "Com erro", items: grouped_error_order_items }
+    ]
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_csv, filename: "status_summary_#{Date.today}.csv" }
     end
   end
 
@@ -175,5 +202,92 @@ class DashboardsController < ApplicationController
   def calculate_ratio(current_count, target_count)
     return 0 if target_count.to_i.zero?
     (current_count.to_f / target_count * 100).round(2)
+  end
+
+  def set_date_range
+    @default_initial_date = params[:initial_date].presence || Time.zone.today.beginning_of_month.to_date
+    @default_final_date = params[:final_date].presence || Time.zone.today.to_date
+
+    @first_date = @default_initial_date
+    @second_date = @default_final_date
+
+    @date_range = @first_date..@second_date
+  end
+
+  def set_account
+    @account_id = current_user.account.id
+  end
+
+  def grouped_in_progress_order_items
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS, account_id: @account_id)
+                                    .flexible_date_range(@first_date, @second_date))
+  end
+
+  def grouped_printed_order_items
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED, account_id: @account_id)
+                                    .flexible_date_range(@first_date, @second_date))
+  end
+
+  def grouped_pending_order_items
+    query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING, 
+                               account_id: @account_id)
+                        .flexible_date_range(@first_date, @second_date)
+    puts "Pending Query: #{query.to_sql}"
+    group_order_items(query)
+  end
+
+  def grouped_fulfilled_order_items
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::FULFILLED, account_id: @account_id)
+                                    .flexible_date_range(@first_date, @second_date))
+  end
+
+  def current_done_order_items
+    group_order_items(BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED, BlingOrderItem::Status::CHECKED],
+                                           account_id: @account_id, alteration_date: @date_range))
+  end
+
+  def collected_orders
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
+                                           account_id: @account_id, collected_alteration_date: @date_range))
+  end
+
+  def grouped_error_order_items
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::ERROR, account_id: @account_id)
+                                    .flexible_date_range(@first_date, @second_date))
+  end
+
+  def canceled_orders
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::CANCELED, account_id: @account_id)
+                                    .flexible_date_range(@first_date, @second_date))
+  end
+
+  def group_order_items(base_query)
+    grouped_order_items = {}
+    BlingOrderItem::STORE_NAME_KEY_VALUE.each_value { |store| grouped_order_items[store] = [] }
+
+    grouped_order_items.merge!(
+      base_query.group_by(&:store_id)
+                .transform_keys { |store_id| BlingOrderItem::STORE_NAME_KEY_VALUE.fetch(store_id, 'Outros') }
+    )
+  end
+
+  def generate_csv
+    CSV.generate(headers: true) do |csv|
+      csv << ['Status', 'Shein', 'Shopee', 'Mercado Livre', 'Nuvem Shop', 'Total']
+
+      @statuses.each do |status|
+        row = [status[:name]]
+        if status[:items].present?
+          row << (status[:items]['Shein']&.count || 0)
+          row << (status[:items]['Shopee']&.count || 0)
+          row << (status[:items]['Mercado Livre']&.count || 0)
+          row << (status[:items]['Nuvem Shop']&.count || 0)
+          row << status[:items].values.sum(&:count)
+        else
+          row += [0, 0, 0, 0, 0]
+        end
+        csv << row
+      end
+    end
   end
 end
