@@ -49,14 +49,9 @@
             <li class="<%= active_nav_item('stocks', 'index') %>">
               <%= link_to t("stocks.shopping_suggestion"), stocks_path, class: 'nav-link' %>
             </li>
-            <!--
-            <li class="<%#= active_nav_menu_item([show_orders_products_stock_path]) %>">
-              <%#= link_to t("audits.products"), show_orders_products_stock_path, class: 'nav-link' %>
-            </li>
-            <li class="<%#= active_nav_menu_item([reports_daily_sale_path]) %>">
-              <%#= link_to t("audits.daily"), reports_daily_sale_path, class: 'nav-link' %>
-            </li>
-            -->
+            <li class="<%= active_nav_item('productions', 'price_per_piece_report') %>">
+            <%= link_to t("productions.price_per_piece_report"), price_per_piece_report_productions_path, class: 'nav-link' %>
+          </li>
           <% end %>
         <% end %>
         <li class="menu-header">Operação</li>

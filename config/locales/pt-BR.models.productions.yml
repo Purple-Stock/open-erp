@@ -139,6 +139,24 @@ pt-BR:
       fabric_cost: "Custo de Tecido"
       payments: "Pagamentos"
       add_payment: "Adicionar Pagamento"
+    price_per_piece_report:
+      title: "Relatório de Preço por Peça"
+      filters: "Filtros"
+      tailor: "Costureiro"
+      all_tailors: "Todos os Costureiros"
+      start_date: "Data Inicial"
+      end_date: "Data Final"
+      total_cost: "Custo Total"
+      total_quantity: "Quantidade Total"
+      price_per_piece: "Preço por Peça"
+      actions: "Ações"
+      show: "Mostrar"
+      edit: "Editar"
+    actions:
+      title: "Ações"
+      show: "Mostrar"
+      edit: "Editar"
+      destroy: "Excluir"
   helpers:
     submit:
       create: "Criar %{model}"

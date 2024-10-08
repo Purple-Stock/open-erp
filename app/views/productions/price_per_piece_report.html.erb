@@ -1,0 +1,73 @@
+<section class="section">
+  <div class="section-header">
+    <h1><%= t('.title') %></h1>
+  </div>
+
+  <div class="section-body">
+    <div class="card">
+      <div class="card-header">
+        <h4><%= t('.filters') %></h4>
+      </div>
+      <div class="card-body">
+        <%= form_tag price_per_piece_report_productions_path, method: :get, class: 'form-inline' do %>
+          <div class="form-group mr-2">
+            <%= label_tag :tailor_id, t('activerecord.attributes.production.tailor'), class: 'mr-1' %>
+            <%= select_tag :tailor_id, options_from_collection_for_select(Tailor.all, :id, :name, params[:tailor_id]), prompt: t('productions.missing_pieces.all_tailors'), class: 'form-control' %>
+          </div>
+          <div class="form-group mr-2">
+            <%= label_tag :start_date, t('.start_date'), class: 'mr-1' %>
+            <%= date_field_tag :start_date, params[:start_date], class: 'form-control' %>
+          </div>
+          <div class="form-group mr-2">
+            <%= label_tag :end_date, t('.end_date'), class: 'mr-1' %>
+            <%= date_field_tag :end_date, params[:end_date], class: 'form-control' %>
+          </div>
+          <%= submit_tag t('productions.missing_pieces.apply_filter'), class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h4><%= t('.title') %></h4>
+        <%= link_to t('productions.missing_pieces.download_csv'), price_per_piece_report_productions_path(format: :csv, tailor_id: params[:tailor_id], start_date: params[:start_date], end_date: params[:end_date]), class: 'btn btn-primary float-right' %>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><%= t('activerecord.attributes.production.service_order_number') %></th>
+                <th><%= t('activerecord.attributes.production.tailor') %></th>
+                <th><%= t('activerecord.attributes.production.cut_date') %></th>
+                <th><%= t('.total_cost') %></th>
+                <th><%= t('.total_quantity') %></th>
+                <th><%= t('activerecord.attributes.production.price_per_piece') %></th>
+                <th><%= t('productions.actions.title', default: 'Ações') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @productions.each do |production| %>
+                <% total_cost = (production.notions_cost || 0) + (production.fabric_cost || 0) + (production.total_price || 0) %>
+                <% total_quantity = production.production_products.sum(:quantity) %>
+                <% price_per_piece = total_quantity > 0 ? (total_cost / total_quantity) : 0 %>
+                <tr>
+                  <td><%= production.service_order_number %></td>
+                  <td><%= production.tailor.name %></td>
+                  <td><%= l(production.cut_date, format: :short) %></td>
+                  <td><%= number_to_currency(total_cost) %></td>
+                  <td><%= total_quantity %></td>
+                  <td><%= number_to_currency(price_per_piece) %></td>
+                  <td>
+                    <%= link_to t('productions.actions.show'), production_path(production), class: 'btn btn-info btn-sm' %>
+                    <%= link_to t('productions.actions.edit'), edit_production_path(production), class: 'btn btn-warning btn-sm' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
