@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get 'missing_pieces'
       get 'products_in_production_report'
       get 'unpaid_confirmed'  # Add this line
+      get 'price_per_piece_report'
     end
     member do
       patch :verify
