@@ -33,9 +33,12 @@ class DashboardsController < ApplicationController
 
     @loja_ids = [204_219_105, 203_737_982, 203_467_890, 204_061_683]
 
-    @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items)
-    @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items)
-    @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
+    @grouped_printed_order_items = BlingOrderItem.group_order_items(@printed_order_items || [])
+    @grouped_pending_order_items = BlingOrderItem.group_order_items(@pending_order_items || [])
+    @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items || [])
+
+    # Add this line to ensure @order_items is always a hash
+    @order_items = {}
   end
 
   def revenue_target_report

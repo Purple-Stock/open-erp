@@ -1,32 +1,47 @@
 <div class="row justify-content-center">
   <div class="col-md-12">
     <div class="card mb-12">
-      <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
+      <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items&.values&.flatten&.length&.zero? %>">
         <% if @monthly_revenue_estimation.present? && show_revenue_estimation %>
           <h5 class="card-title">
             Meta de Pedidos: <%= @monthly_revenue_estimation.daily_quantity %>
           </h5>
         <% end %>
-        <h5 class="card-title <%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
-          Contagem total: <%= order_items.values.flatten.length %>
+        <h5 class="card-title <%= 'text-success' if highlighted && order_items&.values&.flatten&.length&.zero? %>">
+          Contagem total: <%= order_items&.values&.flatten&.length || 0 %>
         </h5>
       </div>
     </div>
   </div>
-  <% order_items.each do |store_name, orders| %>
-     <div class="col-md-12">
-        <div class="card mb-12">
-          <div class="card-body text-center <%= 'bg-danger text-dark' if highlighted && !order_items.values.flatten.length.zero? %>">
-            <h5 class="card-title <%= 'text-success' if highlighted && order_items.values.flatten.length.zero? %>">
-              <%= store_name %>: <%= orders&.count %>
-            </h5>
-            <% if store_name.eql?('Mercado Livre') %>
-              <p>
-                Mercado Envios Flex: <%= @mercado_envios_flex_counts %>
-              </p>
-            <% end %>
-          </div>
-        </div>
-      </div>
-  <% end %>
+</div>
+
+<div class="row justify-content-center mt-3">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Loja</th>
+          <th>Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if order_items.present? && order_items.any? %>
+          <% order_items.each do |store, items| %>
+            <tr>
+              <td><%= store %></td>
+              <td><%= items.length %></td>
+            </tr>
+          <% end %>
+          <tr class="table-active">
+            <td><strong>Total</strong></td>
+            <td><strong><%= order_items.values.flatten.length %></strong></td>
+          </tr>
+        <% else %>
+          <tr>
+            <td colspan="2" class="text-center">No order items available</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
