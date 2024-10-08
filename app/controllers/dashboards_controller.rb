@@ -119,9 +119,9 @@ class DashboardsController < ApplicationController
   end
 
   def collected_orders
-    base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
-                                      account_id: current_user.account.id, collected_alteration_date: @first_date..@second_date)
-    @collected_orders = BlingOrderItem.group_order_items(base_query)
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
+                                         account_id: @account_id)
+                                  .flexible_date_range(@first_date, @second_date))
   end
 
   def finance_per_status
@@ -150,11 +150,9 @@ class DashboardsController < ApplicationController
   end
 
   def canceled_orders
-    base_query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::CANCELED,
-                                      account_id: current_user.account.id)
-                               .date_range(@first_date, @second_date)
-
-    @canceled_orders = BlingOrderItem.group_order_items(base_query)
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::CANCELED,
+                                         account_id: @account_id)
+                                  .flexible_date_range(@first_date, @second_date))
   end
 
   def set_monthly_revenue_estimation
@@ -205,13 +203,13 @@ class DashboardsController < ApplicationController
   end
 
   def set_date_range
-    @default_initial_date = params[:initial_date].presence || Time.zone.today.beginning_of_month.to_date
+    @default_initial_date = params[:initial_date].presence || Time.zone.today.to_date
     @default_final_date = params[:final_date].presence || Time.zone.today.to_date
 
     @first_date = @default_initial_date
     @second_date = @default_final_date
 
-    @date_range = @first_date..@second_date
+    @date_range = @first_date.beginning_of_day..@second_date.end_of_day
   end
 
   def set_account
@@ -219,46 +217,23 @@ class DashboardsController < ApplicationController
   end
 
   def grouped_in_progress_order_items
-    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS, account_id: @account_id)
-                                    .flexible_date_range(@first_date, @second_date))
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS, account_id: @account_id))
   end
 
   def grouped_printed_order_items
-    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED, account_id: @account_id)
-                                    .flexible_date_range(@first_date, @second_date))
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED, account_id: @account_id))
   end
 
   def grouped_pending_order_items
-    query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING, 
-                               account_id: @account_id)
-                        .flexible_date_range(@first_date, @second_date)
-    puts "Pending Query: #{query.to_sql}"
-    group_order_items(query)
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING, account_id: @account_id))
   end
 
   def grouped_fulfilled_order_items
-    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::FULFILLED, account_id: @account_id)
-                                    .flexible_date_range(@first_date, @second_date))
-  end
-
-  def current_done_order_items
-    group_order_items(BlingOrderItem.where(situation_id: [BlingOrderItem::Status::VERIFIED, BlingOrderItem::Status::CHECKED],
-                                           account_id: @account_id, alteration_date: @date_range))
-  end
-
-  def collected_orders
-    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::COLLECTED,
-                                           account_id: @account_id, collected_alteration_date: @date_range))
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::FULFILLED, account_id: @account_id))
   end
 
   def grouped_error_order_items
-    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::ERROR, account_id: @account_id)
-                                    .flexible_date_range(@first_date, @second_date))
-  end
-
-  def canceled_orders
-    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::CANCELED, account_id: @account_id)
-                                    .flexible_date_range(@first_date, @second_date))
+    group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::ERROR, account_id: @account_id))
   end
 
   def group_order_items(base_query)

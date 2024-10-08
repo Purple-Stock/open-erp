@@ -148,10 +148,14 @@ class BlingOrderItem < ApplicationRecord
     start_date = parse_date(start_date)
     end_date = parse_date(end_date)
 
-    if start_date == end_date
-      where(date: start_date.beginning_of_day..start_date.end_of_day)
+    if start_date && end_date
+      where(date: start_date.beginning_of_day..end_date.end_of_day)
+    elsif start_date
+      where('date >= ?', start_date.beginning_of_day)
+    elsif end_date
+      where('date <= ?', end_date.end_of_day)
     else
-      where(date: ..end_date.end_of_day)
+      all
     end
   end
 
@@ -266,19 +270,6 @@ class BlingOrderItem < ApplicationRecord
     where(date: start_date..end_date)
   }
 
-  def self.flexible_date_range(start_date, end_date)
-    start_date = parse_date(start_date)
-    end_date = parse_date(end_date)
-
-    if start_date == end_date
-      where(date: start_date.beginning_of_day..start_date.end_of_day)
-    else
-      where(date: ..end_date.end_of_day)
-    end
-  end
-
-  private
-
   def self.parse_date(date)
     case date
     when String
@@ -286,9 +277,9 @@ class BlingOrderItem < ApplicationRecord
     when Date, Time, DateTime
       date.to_date
     else
-      Time.zone.today
+      nil
     end
   rescue Date::Error
-    Time.zone.today
+    nil
   end
 end
