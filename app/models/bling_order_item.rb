@@ -155,7 +155,7 @@ class BlingOrderItem < ApplicationRecord
     elsif end_date
       where('date <= ?', end_date.end_of_day)
     else
-      all
+      where(date: Time.zone.today.beginning_of_day..Time.zone.today.end_of_day)
     end
   end
 
@@ -273,13 +273,11 @@ class BlingOrderItem < ApplicationRecord
   def self.parse_date(date)
     case date
     when String
-      Date.parse(date)
+      Date.parse(date) rescue nil
     when Date, Time, DateTime
       date.to_date
     else
       nil
     end
-  rescue Date::Error
-    nil
   end
 end
