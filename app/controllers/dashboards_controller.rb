@@ -217,25 +217,25 @@ class DashboardsController < ApplicationController
 
   def grouped_in_progress_order_items
     group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::IN_PROGRESS, account_id: @account_id)
-                                    .date_range(@first_date, @second_date))
+                                    .flexible_date_range(@first_date, @second_date))
   end
 
   def grouped_printed_order_items
     group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::PRINTED, account_id: @account_id)
-                                    .date_range(@first_date, @second_date))
+                                    .flexible_date_range(@first_date, @second_date))
   end
 
   def grouped_pending_order_items
     query = BlingOrderItem.where(situation_id: BlingOrderItem::Status::PENDING, 
                                account_id: @account_id)
-                        .date_range(@first_date, @second_date)
+                        .flexible_date_range(@first_date, @second_date)
     puts "Pending Query: #{query.to_sql}"
     group_order_items(query)
   end
 
   def grouped_fulfilled_order_items
     group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::FULFILLED, account_id: @account_id)
-                                    .date_range(@first_date, @second_date))
+                                    .flexible_date_range(@first_date, @second_date))
   end
 
   def current_done_order_items
@@ -250,12 +250,12 @@ class DashboardsController < ApplicationController
 
   def grouped_error_order_items
     group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::ERROR, account_id: @account_id)
-                                    .date_range(@first_date, @second_date))
+                                    .flexible_date_range(@first_date, @second_date))
   end
 
   def canceled_orders
     group_order_items(BlingOrderItem.where(situation_id: BlingOrderItem::Status::CANCELED, account_id: @account_id)
-                                    .date_range(@first_date, @second_date))
+                                    .flexible_date_range(@first_date, @second_date))
   end
 
   def group_order_items(base_query)

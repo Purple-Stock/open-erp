@@ -138,12 +138,20 @@ class BlingOrderItem < ApplicationRecord
     where(store_id: '204796870')
   }
 
-  scope :date_range, lambda { |start_date, end_date|
-    start_date = start_date.is_a?(String) ? Date.parse(start_date).beginning_of_day : start_date.try(:beginning_of_day) || Time.zone.at(0)
-    end_date = end_date.is_a?(String) ? Date.parse(end_date).end_of_day : end_date.try(:end_of_day) || Time.current.end_of_day
-
-    where(date: start_date..end_date)
+  scope :date_range, ->(start_date, end_date) { 
+    where(date: start_date.beginning_of_day..end_date.end_of_day) 
   }
+
+  def self.flexible_date_range(start_date, end_date)
+    start_date = parse_date(start_date)
+    end_date = parse_date(end_date)
+
+    if start_date == end_date
+      where(date: start_date.beginning_of_day..start_date.end_of_day)
+    else
+      where(date: ..end_date.end_of_day)
+    end
+  end
 
   scope :by_status, lambda { |status|
     return all if status.eql?(BlingOrderItemStatus::ALL)
@@ -253,4 +261,30 @@ class BlingOrderItem < ApplicationRecord
   scope :date_range, ->(start_date, end_date) { 
     where(date: start_date.beginning_of_day..end_date.end_of_day) 
   }
+
+  def self.flexible_date_range(start_date, end_date)
+    start_date = parse_date(start_date)
+    end_date = parse_date(end_date)
+
+    if start_date == end_date
+      where(date: start_date.beginning_of_day..start_date.end_of_day)
+    else
+      where(date: ..end_date.end_of_day)
+    end
+  end
+
+  private
+
+  def self.parse_date(date)
+    case date
+    when String
+      Date.parse(date)
+    when Date, Time, DateTime
+      date.to_date
+    else
+      Time.zone.today
+    end
+  rescue Date::Error
+    Time.zone.today
+  end
 end
