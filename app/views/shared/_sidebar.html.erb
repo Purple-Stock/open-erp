@@ -27,33 +27,35 @@
               <%= link_to 'Resumo de Status', dashboards_status_summary_path, class: 'nav-link' %>
             </li>
           <% end %>
-          <%= render 'shared/sidebar_dropdown', title: t("audits.two"), icon: 'fas fa-chart-line' do %>
+          
+          <%= render 'shared/sidebar_dropdown', title: t("reports.title"), icon: 'fas fa-chart-bar' do %>
+            <li class="<%= active_nav_item('productions', 'missing_pieces') %>">
+              <%= link_to t("productions.side_missing_pieces"), missing_pieces_productions_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('productions', 'unpaid_confirmed') %>">
+              <%= link_to t("productions.unpaid_confirmed.title"), unpaid_confirmed_productions_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('productions', 'products_in_production_report') %>">
+              <%= link_to t("productions.products_in_production_report"), products_in_production_report_productions_path, class: 'nav-link' %>
+            </li>
+            <li class="<%= active_nav_item('productions', 'price_per_piece_report') %>">
+              <%= link_to t("productions.price_per_piece_report"), price_per_piece_report_productions_path, class: 'nav-link' %>
+            </li>
             <li class="<%= active_nav_menu_item([show_pending_orders_path]) %>">
               <%= link_to t("audits.pendings"), show_pending_orders_path, class: 'nav-link' %>
             </li>
             <li class="<%= active_nav_menu_item([show_pending_product_planning_path]) %>">
               <%= link_to t("audits.pending_product_planning"), show_pending_product_planning_path, class: 'nav-link' %>
             </li>
-            <li class="<%= active_nav_item('productions', 'missing_pieces') %>">
-              <%= link_to t("productions.side_missing_pieces"), missing_pieces_productions_path, class: 'nav-link' %>
-            </li>
-            <li class="<%= active_nav_item('productions', 'unpaid_confirmed') %>">
-            <%= link_to t("productions.unpaid_confirmed.title"), unpaid_confirmed_productions_path, class: 'nav-link' %>
-          </li>
-            <li class="<%= active_nav_item('productions', 'products_in_production_report') %>">
-              <%= link_to t("productions.products_in_production_report"), products_in_production_report_productions_path, class: 'nav-link' %>
+            <li class="<%= active_nav_item('stocks', 'index') %>">
+              <%= link_to t("stocks.shopping_suggestion"), stocks_path, class: 'nav-link' %>
             </li>
             <li class="<%= active_nav_menu_item([top_selling_products_path]) %>">
               <%= link_to t("audits.top_selling_products"), top_selling_products_path, class: 'nav-link' %>
             </li>
-            <li class="<%= active_nav_item('stocks', 'index') %>">
-              <%= link_to t("stocks.shopping_suggestion"), stocks_path, class: 'nav-link' %>
-            </li>
-            <li class="<%= active_nav_item('productions', 'price_per_piece_report') %>">
-            <%= link_to t("productions.price_per_piece_report"), price_per_piece_report_productions_path, class: 'nav-link' %>
-          </li>
           <% end %>
         <% end %>
+        
         <li class="menu-header">Operação</li>
         <%= render 'shared/sidebar_dropdown', title: t("productions.one"), icon: 'fas fa-rocket' do %>
           <li class="<%= active_nav_item('productions', 'index') %>">
@@ -69,6 +71,7 @@
             <%= link_to t("tailors.create"), new_tailor_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("warehouses.two"), icon: 'fas fa-warehouse' do %>
           <li class="<%= active_nav_item('warehouses', 'index') %>">
             <%= link_to t("warehouses.list"), warehouses_path, class: 'nav-link' %>
@@ -77,6 +80,7 @@
             <%= link_to t("warehouses.create"), new_warehouse_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("categories.two"), icon: 'fas fa-th-list' do %>
           <li class="<%= active_nav_item('categories', 'index') %>">
             <%= link_to t("categories.list"), categories_path, class: 'nav-link' %>
@@ -85,6 +89,7 @@
             <%= link_to t("categories.create"), new_category_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("products.two"), icon: 'fas fa-box-open' do %>
           <li class="<%= active_nav_item('products', 'index') %>">
             <%= link_to t("products.list"), products_path, class: 'nav-link' %>
@@ -93,6 +98,7 @@
             <%= link_to t("products.create"), new_product_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <% if account_policy_enabled? %>
           <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-store' do %>
             <li class="<%= active_nav_item('stores', 'index') %>">
@@ -103,6 +109,7 @@
             </li>
           <% end %>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("suppliers.two"), icon: 'fas fa-truck' do %>
           <li class="<%= active_nav_item('suppliers', 'index') %>">
             <%= link_to t("suppliers.list"), suppliers_path, class: 'nav-link' %>
@@ -111,15 +118,16 @@
             <%= link_to t("suppliers.create"), new_supplier_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("entries.two"), icon: 'fas fa-warehouse' do %>
           <li class="<%= active_nav_item('purchase_products', 'index') %>">
             <%= link_to t("entries.list"), purchase_products_path, class: 'nav-link' %>
           </li>
           <li class="<%= active_nav_item('purchase_products', 'new') %>">
             <%= link_to t("entries.create"), new_purchase_product_path, class: 'nav-link' %>
-            <%#= link_to 'Transferência de estoque', stock_transfer_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("exits.two"), icon: 'fas fa-sign-out-alt' do %>
           <li class="<%= active_nav_item('sale_products', 'index') %>">
             <%= link_to t("exits.list"), sale_products_path, class: 'nav-link' %>
@@ -128,6 +136,7 @@
             <%= link_to t("exits.create"), new_sale_product_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("sales.two"), icon: 'fas fa-shopping-cart' do %>
           <li class="<%= active_nav_item('sales', 'index') %>">
             <%= link_to t("sales.list"), sales_path, class: 'nav-link' %>
@@ -139,6 +148,7 @@
             <%= link_to t("sales.create"), new_sale_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("dashboards.second_title"), icon: 'fas fa-shopping-bag' do %>
           <li class="<%= active_nav_item('checkout_orders', 'index') %>">
             <%= link_to t("sales.checkout"), checkout_orders_path, class: 'nav-link' %>
@@ -153,6 +163,7 @@
             <%= link_to t("audits.finance"), shein_dashboards_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("customers.two"), icon: 'fas fa-users' do %>
           <li class="<%= active_nav_item('customers', 'index') %>">
             <%= link_to t("customers.list"), customers_path, class: 'nav-link' %>
@@ -161,6 +172,7 @@
             <%= link_to t("customers.create"), new_customer_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <%= render 'shared/sidebar_dropdown', title: t("uploads.one"), icon: 'fas fa-upload' do %>
           <li class="<%= active_nav_item('customers', 'index') %>">
             <%= link_to t("uploads.shein_orders"), upload_shein_orders_path, class: 'nav-link' %>
@@ -169,6 +181,7 @@
             <%= link_to t("uploads.finance"), upload_finance_data_path, class: 'nav-link' %>
           </li>
         <% end %>
+        
         <% if account_policy_enabled? %>
           <li class="menu-header">Estimativas</li>
           <%= render 'shared/sidebar_dropdown', title: t("activerecord.models.revenue_estimations.other"), icon: 'fas fa-chart-line' do %>
