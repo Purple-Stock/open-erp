@@ -35,6 +35,17 @@ class DashboardsController < ApplicationController
     @grouped_in_progress_order_items = BlingOrderItem.group_order_items(@in_progress_order_items)
   end
 
+  def metas_report
+    @monthly_revenue_estimation = current_user.account.revenue_estimations.current_month.first
+    if @monthly_revenue_estimation.nil?
+      @monthly_revenue_estimation = current_user.account.revenue_estimations.order(created_at: :desc).first
+    end
+
+    @bling_order_items = BlingOrderItem.where(account_id: current_user.account.id)
+                                       .where('date >= ?', Date.today.beginning_of_month)
+                                       .group_by(&:store_id)
+  end
+
   private
 
   def token_expires_at
@@ -139,16 +150,5 @@ class DashboardsController < ApplicationController
       203_467_890 => 'Simplo 7',
       204_061_683 => 'Mercado Livre'
     }
-  end
-
-  def metas_report
-    @monthly_revenue_estimation = current_user.account.revenue_estimations.current_month.first
-    if @monthly_revenue_estimation.nil?
-      @monthly_revenue_estimation = current_user.account.revenue_estimations.order(created_at: :desc).first
-    end
-
-    @bling_order_items = BlingOrderItem.where(account_id: current_user.account.id)
-                                       .where('date >= ?', Date.today.beginning_of_month)
-                                       .group_by(&:store_id)
   end
 end
