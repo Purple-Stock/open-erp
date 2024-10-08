@@ -1,197 +1,78 @@
-<div class="row">
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-dollar-sign"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Faturamento Anual</h4>
+<div class="container-fluid mt-4">
+  <% revenue_cards = [
+    { title: "Faturamento Anual", value: number_to_currency(@anual_revenue_paid, unit: "R$", separator: ",", delimiter: "."), icon: "fa-chart-line" },
+    { title: "Vendas Anuais", value: @anual_quantity_paid, icon: "fa-shopping-cart" },
+    { title: "Ticket Médio Anual", value: number_to_currency(@anual_average_ticket.round(2), unit: "R$", separator: ",", delimiter: "."), icon: "fa-ticket-alt" },
+    { title: "Faturamento Mensal", value: number_to_currency(@monthly_revenue_paid, unit: "R$", separator: ",", delimiter: "."), icon: "fa-calendar-alt" },
+    { title: "Vendas Mensais", value: @monthly_quantity_paid, icon: "fa-store" },
+    { title: "Ticket Médio Mensal", value: number_to_currency(@monthly_average_ticket.round(2), unit: "R$", separator: ",", delimiter: "."), icon: "fa-receipt" },
+    { title: "Faturamento Diário", value: number_to_currency(@revenue_paid, unit: "R$", separator: ",", delimiter: "."), icon: "fa-coins" },
+    { title: "Vendas Diárias", value: @quantity_paid, icon: "fa-shopping-bag" },
+    { title: "Ticket Médio Diário", value: number_to_currency(@average_ticket.round(2), unit: "R$", separator: ",", delimiter: "."), icon: "fa-tag" }
+  ] %>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% revenue_cards.each do |card| %>
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-circle bg-primary text-white me-3">
+                <i class="fas <%= card[:icon] %>"></i>
+              </div>
+              <h5 class="card-title mb-0"><%= card[:title] %></h5>
+            </div>
+            <h3 class="card-text fw-bold"><%= card[:value] %></h3>
+          </div>
         </div>
-        <div class="card-body">
-          <%= number_to_currency(@anual_revenue_paid, unit: "BRL", separator: ",", delimiter: ".") %>
-        </div>
       </div>
-    </div>
+    <% end %>
   </div>
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-shopping-bag"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Vendas Anuais</h4>
-        </div>
-        <div class="card-body">
-          <%= @anual_quantity_paid %>
-        </div>
-      </div>
+
+  <div class="card mt-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Situações dos pedidos</h2>
     </div>
-  </div>
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-dollar-sign"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Ticket Médio Anual</h4>
-        </div>
-        <div class="card-body">
-          <%= number_to_currency(@anual_average_ticket.round(2), unit: "BRL", separator: ",", delimiter: ".") %>
-        </div>
+    <div class="card-body">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4">
+        <% order_statuses = [
+          { title: "Em Andamento", count: @in_progress_order_items, color: "primary" },
+          { title: "Atendidos", count: @fulfilled_order_items, color: "success" },
+          { title: "Impresso", count: @printed_order_items, color: "info" },
+          { title: "Pendentes", count: @pending_order_items, color: "warning" },
+          { title: "Verificados", count: @current_done_order_items, color: "secondary" },
+          { title: "Coletados", count: @colected_orders, color: "dark" }
+        ] %>
+        
+        <% order_statuses.each do |status| %>
+          <div class="col">
+            <div class="card h-100 text-center border-<%= status[:color] %>">
+              <div class="card-body">
+                <h5 class="card-title text-<%= status[:color] %>"><%= status[:title] %></h5>
+                <h2 class="card-text display-4 fw-bold"><%= status[:count] %></h2>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-dollar-sign"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Faturamento Mensal</h4>
-        </div>
-        <div class="card-body">
-          <%= number_to_currency(@monthly_revenue_paid, unit: "BRL", separator: ",", delimiter: ".") %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-shopping-bag"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Vendas Mensais</h4>
-        </div>
-        <div class="card-body">
-          <%= @monthly_quantity_paid %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-dollar-sign"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Ticket Médio Mensal</h4>
-        </div>
-        <div class="card-body">
-          <%= number_to_currency(@monthly_average_ticket.round(2), unit: "BRL", separator: ",", delimiter: ".") %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-dollar-sign"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Faturamento Diário</h4>
-        </div>
-        <div class="card-body">
-          <%= number_to_currency(@revenue_paid, unit: "BRL", separator: ",", delimiter: ".") %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-shopping-bag"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Vendas Diárias</h4>
-        </div>
-        <div class="card-body">
-          <%= @quantity_paid %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-4 col-md-4 col-sm-12">
-    <div class="card card-statistic-2">
-      <div class="card-icon shadow-primary bg-primary">
-        <i class="fas fa-dollar-sign"></i>
-      </div>
-      <div class="card-wrap">
-        <div class="card-header">
-          <h4>Ticket Médio Diário</h4>
-        </div>
-        <div class="card-body">
-          <%= number_to_currency(@average_ticket.round(2), unit: "BRL", separator: ",", delimiter: ".") %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<%
-=begin%>
- <section class="card chart-container">
-  <div class="text-small text-muted">Faturamento diário
-  <div>
-    <%= hidden_field_tag('daily_revenue', @daily_revenue) %>
-    <canvas id='chartjs-bar-daily-revenue'></canvas>
-  </div>
-</section> 
-<%
-=end%>
-
-<div class="card mt-4">
-  <div class="card-header">
-    <h1>Situações dos pedidos</h1>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Em Andamento</h1>
-        <h2 class="card-stats-item-count"><span class="text-primary"></span> <%= @in_progress_order_items %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Atendidos</h1>
-        <h2 class="card-stats-item-count"><span class="text-primary"></span> <%= @fulfilled_order_items %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Impresso</h1>
-        <h2 class="card-stats-item-count"><span class="text-primary"></span> <%= @printed_order_items %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Pendentes</h1>
-        <h2 class="card-stats-item-count"><span class="text-danger"></span> <%= @pending_order_items %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Verificados</h1>
-        <h2 class="card-stats-item-count"><%= @current_done_order_items %></h2>
-      </div>
-      <div class="col mb-4 mb-lg-0 text-center">
-        <h1 class="mt-2 font-weight-bold">Coletados</h1>
-        <h2 class="card-stats-item-count"><span class="text-primary"></span> <%= @colected_orders %></h2>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 <script>
-    setInterval(function() {
-        window.location.reload();
-    }, 300000);
+  setInterval(function() {
+    window.location.reload();
+  }, 300000);
 </script>
+
+<style>
+  .icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+</style>
