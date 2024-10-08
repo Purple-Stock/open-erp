@@ -40,13 +40,24 @@ class DashboardsController < ApplicationController
     
     if @monthly_revenue_estimation.present?
       @total_count = @bling_order_items.values.sum(&:count)
+      
+      # Correct calculation for current month count
       @current_month_count = @bling_order_items.values.sum do |items|
-        items.select { |item| item.date >= Date.today.beginning_of_month }.count
+        items.select { |item| item.date >= Date.today.beginning_of_month && item.date <= Date.today.end_of_day }.count
       end
+
       @ratio = calculate_ratio(@current_month_count, @monthly_revenue_estimation.quantity)
       
       # Calculate daily quantity
       @daily_quantity = @monthly_revenue_estimation.daily_quantity
+
+      # Calculate today's sales (this was correct)
+      @today_sales = @bling_order_items.values.sum do |items|
+        items.select { |item| item.date.to_date == Date.today }.count
+      end
+
+      # Calculate the ratio of today's sales to daily target
+      @daily_ratio = calculate_ratio(@today_sales, @daily_quantity)
     end
   end
 

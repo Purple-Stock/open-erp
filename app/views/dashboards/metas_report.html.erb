@@ -11,31 +11,34 @@
     <div class="card-body">
       <% if @monthly_revenue_estimation.present? %>
         <div class="row">
-          <div class="col-md-3 mb-3">
+          <div class="col-md-4 mb-3">
             <h5>Meta de quantidade</h5>
             <p class="h3 revenue-hidden text-hide"><%= @monthly_revenue_estimation.quantity %></p>
           </div>
-          <div class="col-md-3 mb-3">
+          <div class="col-md-4 mb-3">
             <h5>Meta de receita</h5>
             <p class="h3 revenue-hidden text-hide"><%= number_to_currency_pt_br @monthly_revenue_estimation.revenue %></p>
           </div>
-          <div class="col-md-3 mb-3">
+          <div class="col-md-4 mb-3">
             <h5>Ticket Médio</h5>
             <p class="h3 revenue-hidden text-hide"><%= number_to_currency_pt_br @monthly_revenue_estimation.average_ticket %></p>
           </div>
-          <div class="col-md-3 mb-3">
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
             <h5>Meta de quantidade/Contagem total</h5>
             <p class="h3"><%= @current_month_count %>/<%= @monthly_revenue_estimation.quantity %> (<%= @ratio %>%)</p>
             <div class="progress mb-2">
               <div class="progress-bar" role="progressbar" style="width: <%= @ratio %>%;" aria-valuenow="<%= @ratio %>" aria-valuemin="0" aria-valuemax="100"><%= @ratio %>%</div>
             </div>
-            <p class="text-muted">Total acumulado: <%= @total_count %></p>
+            <p class="text-muted">Total acumulado: <%= @current_month_count %></p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 mb-3">
+          <div class="col-md-6 mb-3">
             <h5>Meta diária</h5>
-            <p class="h3"><%= @daily_quantity.round(2) %></p>
+            <p class="h3"><%= @today_sales %>/<%= @daily_quantity.round(2) %> (<%= @daily_ratio %>%)</p>
+            <div class="progress mb-2">
+              <div class="progress-bar" role="progressbar" style="width: <%= @daily_ratio %>%;" aria-valuenow="<%= @daily_ratio %>" aria-valuemin="0" aria-valuemax="100"><%= @daily_ratio %>%</div>
+            </div>
           </div>
         </div>
       <% else %>
