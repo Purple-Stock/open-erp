@@ -152,6 +152,26 @@ class ProductionsController < ApplicationController
     end
   end
 
+  def price_per_piece_report
+    @productions = Production.includes(:tailor, production_products: :product)
+                             .order(service_order_number: :desc)
+
+    if params[:tailor_id].present?
+      @productions = @productions.where(tailor_id: params[:tailor_id])
+    end
+
+    if params[:start_date].present? && params[:end_date].present?
+      start_date = Date.parse(params[:start_date])
+      end_date = Date.parse(params[:end_date])
+      @productions = @productions.where(cut_date: start_date..end_date)
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_price_per_piece_csv, filename: "price_per_piece_report_#{Date.today}.csv" }
+    end
+  end
+
   private
 
   def set_production
@@ -268,6 +288,29 @@ class ProductionsController < ApplicationController
           summary[:productions_count],
           number_to_currency(summary[:total_value]),
           products_summary
+        ]
+      end
+    end
+  end
+
+  def generate_price_per_piece_csv
+    require 'csv'
+
+    CSV.generate(headers: true) do |csv|
+      csv << ['Service Order Number', 'Tailor', 'Cut Date', 'Total Cost', 'Total Quantity', 'Price per Piece']
+
+      @productions.each do |production|
+        total_cost = (production.notions_cost || 0) + (production.fabric_cost || 0) + (production.total_price || 0)
+        total_quantity = production.production_products.sum(:quantity)
+        price_per_piece = total_quantity > 0 ? (total_cost / total_quantity) : 0
+
+        csv << [
+          production.service_order_number,
+          production.tailor.name,
+          production.cut_date,
+          number_to_currency(total_cost),
+          total_quantity,
+          number_to_currency(price_per_piece)
         ]
       end
     end
