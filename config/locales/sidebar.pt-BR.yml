@@ -56,8 +56,35 @@ pt-BR:
     pendings: Produtos Faltantes
     finance: Financeiro Shein
     daily: Relatório Diário de Vendas
-    top_selling_products: Produtos mais vendidos
-    pending_product_planning: Planejamento Pendentes
+    top_selling_products: Produtos Mais Vendidos
+    pending_product_planning: Planejamento de Produtos Pendentes
   dashboards:
-    revenue_target_report: "Relatório de Metas"
+    title: Painel
+    one: Dashboard Principal
+    two: Pedidos Shein
+    three: Pedidos Shein/Bling
+    second_title: Shein
+    revenue_target_report: "Relatório de Metas de Receita"
     status_summary: "Resumo de Status"
+  reports:
+    title: "Relatórios"
+  warehouses:
+    two: Armazéns
+    list: Lista de Armazéns
+    create: Criar Armazém
+  stores:
+    two: Lojas
+    list: Lista de Lojas
+    create: Criar Loja
+  stocks:
+    shopping_suggestion: Sugestão de Compra
+  uploads:
+    one: Upload
+    shein_orders: Upload de Pedidos Shein
+    finance: Upload de Dados Financeiros
+  activerecord:
+    models:
+      revenue_estimations:
+        other: Estimativas de Receita
+      bling_order_items:
+        list: Lista de Itens de Pedido Bling
