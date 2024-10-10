@@ -17,13 +17,13 @@
 
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <a class="nav-link active" id="unpaid-tab" data-toggle="tab" href="#unpaid" role="tab" aria-controls="unpaid" aria-selected="true">Unpaid Productions</a>
+      <a class="nav-link active" id="unpaid-tab" data-toggle="tab" href="#unpaid" role="tab" aria-controls="unpaid" aria-selected="true"><%= t('.unpaid_productions') %></a>
     </li>
     <li class="nav-item" role="presentation">
-      <a class="nav-link" id="paid-tab" data-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="false">Paid Productions</a>
+      <a class="nav-link" id="paid-tab" data-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="false"><%= t('.paid_productions') %></a>
     </li>
     <li class="nav-item" role="presentation">
-      <a class="nav-link" id="tailors-tab" data-toggle="tab" href="#tailors" role="tab" aria-controls="tailors" aria-selected="false">Tailors Summary</a>
+      <a class="nav-link" id="tailors-tab" data-toggle="tab" href="#tailors" role="tab" aria-controls="tailors" aria-selected="false"><%= t('.tailors_summary') %></a>
     </li>
   </ul>
 
@@ -49,16 +49,17 @@
                 <p><strong><%= t('.total_value') %>:</strong> <%= number_to_currency(summary[:total_value]) %></p>
                 <p><strong><%= t('.total_pieces_delivered') %>:</strong> <%= number_to_currency(summary[:total_pieces_delivered]) %></p>
                 <p><strong><%= t('.total_discount') %>:</strong> <%= number_to_currency(summary[:total_discount]) %></p>
-                <p><strong><%= t('.total_to_pay') %>:</strong> <%= number_to_currency(summary[:total_pieces_delivered] - summary[:total_discount] - summary[:total_returned]) %></p>
+                <p><strong><%= t('.total_returned') %>:</strong> <%= number_to_currency(summary[:total_returned]) %></p>
+                <p><strong><%= t('.total_to_pay') %>:</strong> <%= number_to_currency(summary[:total_pieces_delivered] - summary[:total_discount]) %></p>
                 <h6 class="mt-3"><%= t('.products') %>:</h6>
                 <table class="table table-sm">
                   <thead>
                     <tr>
-                      <th>Product</th>
-                      <th>Quantity</th>
-                      <th>Value</th>
-                      <th>Returned</th>
-                      <th>Returned Value</th>
+                      <th><%= t('.product') %></th>
+                      <th><%= t('.quantity') %></th>
+                      <th><%= t('.value') %></th>
+                      <th><%= t('.returned') %></th>
+                      <th><%= t('.returned_value') %></th>
                     </tr>
                   </thead>
                   <tbody>
