@@ -97,7 +97,7 @@ class Production < ApplicationRecord
   end
 
   def total_price
-    production_products.sum { |pp| pp.total_price || 0 }
+    production_products.sum(:total_price)
   end
 
   def total_paid

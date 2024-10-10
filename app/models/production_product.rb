@@ -47,7 +47,7 @@ class ProductionProduct < ApplicationRecord
   end
 
   def calculate_total_price
-    self.total_price = quantity * unit_price if quantity.present? && unit_price.present?
+    self.total_price = quantity * product.price
   end
 
   def set_default_unit_price

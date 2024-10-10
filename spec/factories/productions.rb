@@ -30,8 +30,19 @@
 #
 FactoryBot.define do
   factory :production do
-    quantity { 1 }
-    cut_date { "2023-12-16 16:28:36" }
-    deliver_date { "2023-12-16 16:28:36" }
+    cut_date { Time.current }
+    expected_delivery_date { Time.current + 1.week }
+    service_order_number { SecureRandom.hex(5) }
+    fabric_cost { 0 }
+    notions_cost { 0 }
+    association :tailor
+    association :account
+
+    trait :with_production_products do
+      after(:create) do |production|
+        create(:production_product, production: production, quantity: 10, product: create(:product, price: 10))
+        create(:production_product, production: production, quantity: 5, product: create(:product, price: 10))
+      end
+    end
   end
 end
