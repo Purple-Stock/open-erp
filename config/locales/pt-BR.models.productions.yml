@@ -72,6 +72,7 @@ pt-BR:
       value: "Valor"
       returned: "Devolvido"
       returned_value: "Valor Devolvido"
+      unit_price: "Preço Un."
     production_list:
       service_order_number: "Número da Ordem de Serviço"
       payment_date: "Data de Pagamento"
