@@ -14,6 +14,7 @@
 #
 FactoryBot.define do
   factory :tailor do
-    name { "MyString" }
+    name { Faker::Name.name }
+    association :account
   end
 end

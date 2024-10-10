@@ -15,4 +15,6 @@
 class Tailor < ApplicationRecord
   acts_as_tenant :account
   has_many :productions
+  belongs_to :account
+  validates :name, presence: true
 end
