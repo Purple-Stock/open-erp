@@ -39,7 +39,7 @@ module Services
         pdf.text "Costureiro: #{@production.tailor.name}", style: :bold
         pdf.text "Data de entrada do corte: #{@production.cut_date&.strftime("%d/%m/%Y")}"
         pdf.text "Data prevista para entrega: #{@production.expected_delivery_date&.strftime("%d/%m/%Y")}"
-        pdf.text "Data prevista para pagamento: #{@production.payment_date&.strftime("%d/%m/%Y")}"
+        pdf.text "Data prevista para pagamento: #{@production.payment_date ? @production.payment_date.strftime("%d/%m/%Y") : "A definir"}"
         
         pdf.move_down 10
         pdf.text "Cláusula de Pagamento:", style: :bold
@@ -61,13 +61,11 @@ module Services
           unit_price = pp.unit_price || 0
           total_price = pp.total_price || 0
           adjusted_quantity = pp.pieces_delivered - (pp.dirty + pp.error + pp.discard)
-          discount = unit_price * (pp.dirty + pp.error + pp.discard)
-          returned_discount = pp.returned ? total_price : 0
-          total_discount_row = discount + returned_discount
-          adjusted_price = unit_price * adjusted_quantity - total_discount_row
+          discount = pp.returned ? 0 : unit_price * (pp.dirty + pp.error + pp.discard)
+          adjusted_price = pp.returned ? 0 : (unit_price * adjusted_quantity - discount)
 
           total_all_rows += total_price
-          total_discount += total_discount_row
+          total_discount += discount
 
           data << [
             pp.product.name,
@@ -78,8 +76,8 @@ module Services
             pp.error,
             pp.discard,
             pp.returned ? 'Sim' : 'Não',
-            number_to_currency(total_discount_row),
-            number_to_currency(adjusted_price)
+            pp.returned ? '-' : number_to_currency(discount),
+            pp.returned ? '-' : number_to_currency(adjusted_price)
           ]
         end
 
@@ -159,9 +157,11 @@ module Services
 
       def generate_totals(pdf)
         total_discount = @production.production_products.sum do |pp|
-          discount = (pp.unit_price || 0) * (pp.dirty + pp.error + pp.discard)
-          discount += (pp.total_price || 0) if pp.returned
-          discount
+          (pp.unit_price || 0) * (pp.dirty + pp.error + pp.discard)
+        end
+
+        total_returned = @production.production_products.sum do |pp|
+          pp.returned ? (pp.total_price || 0) : 0
         end
 
         total_price = @production.production_products.sum { |pp| pp.total_price || 0 }
@@ -177,6 +177,8 @@ module Services
         pdf.text "Total peças entregues: #{number_to_currency(total_pieces_delivered_price)}", style: :bold, align: :right
         pdf.move_down 10
         pdf.text "Total desconto: #{number_to_currency(total_discount)}", style: :bold, align: :right
+        pdf.move_down 10
+        pdf.text "Total devolvido: #{number_to_currency(total_returned)}", style: :bold, align: :right
         pdf.move_down 10
         pdf.text "Total a pagar: #{number_to_currency(total_to_pay)}", style: :bold, align: :right
         pdf.move_down 30
