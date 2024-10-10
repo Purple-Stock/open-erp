@@ -219,21 +219,35 @@ class ProductionsController < ApplicationController
   def calculate_tailors_summary_unpaid(productions)
     summary = productions.each_with_object({}) do |production, summary|
       tailor_id = production.tailor_id
-      summary[tailor_id] ||= { productions_count: 0, total_value: 0, products: {} }
+      summary[tailor_id] ||= { 
+        productions_count: 0, 
+        total_value: 0, 
+        total_pieces_delivered: 0,
+        total_discount: 0,
+        total_returned: 0, 
+        products: {} 
+      }
       summary[tailor_id][:productions_count] += 1
-
+  
       production.production_products.each do |pp|
         summary[tailor_id][:total_value] += pp.total_price if pp.total_price
-        summary[tailor_id][:products][pp.product_id] ||= { count: 0, value: 0 }
-        summary[tailor_id][:products][pp.product_id][:count] += pp.quantity
-        summary[tailor_id][:products][pp.product_id][:value] += pp.total_price if pp.total_price
+        summary[tailor_id][:total_pieces_delivered] += (pp.pieces_delivered || 0) * (pp.unit_price || 0)
+        summary[tailor_id][:total_discount] += (pp.unit_price || 0) * (pp.dirty + pp.error + pp.discard)
+        
+        if pp.returned
+          summary[tailor_id][:total_returned] += pp.total_price if pp.total_price
+        else
+          summary[tailor_id][:products][pp.product_id] ||= { count: 0, value: 0, returned: 0, returned_value: 0 }
+          summary[tailor_id][:products][pp.product_id][:count] += pp.quantity
+          summary[tailor_id][:products][pp.product_id][:value] += pp.total_price if pp.total_price
+        end
       end
     end
-
+  
     summary.each do |tailor_id, tailor_summary|
       tailor_summary[:products] = tailor_summary[:products].sort_by { |_, data| -data[:value] }.to_h
     end
-
+  
     summary
   end
 

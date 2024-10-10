@@ -26,7 +26,7 @@
               <p><strong><%= Production.human_attribute_name(:tailor) %>:</strong> <%= production.tailor.name %></p>
               <p><strong><%= Production.human_attribute_name(:cut_date) %>:</strong> <%= l(production.cut_date, format: :long) if production.cut_date %></p>
               <p><strong><%= Production.human_attribute_name(:expected_delivery_date) %>:</strong> <%= l(production.expected_delivery_date, format: :long) if production.expected_delivery_date %></p>
-              <p><strong>Data de entrega:</strong> <%= l(production.production_products.maximum(:delivery_date), format: :long) if production.production_products %></p>
+              <p><strong><%= t('.delivery_date') %>:</strong> <%= l(production.production_products.maximum(:delivery_date), format: :long) if production.production_products.maximum(:delivery_date) %></p>
               <p><strong><%= Production.human_attribute_name(:payment_date) %>:</strong> <%= l(production.payment_date, format: :long) if production.payment_date %></p>
             </div>
           </div>
@@ -48,19 +48,22 @@
                 </tr>
               </thead>
               <tbody>
-                <% total_all_rows = 0 %>
+                <% total_value = 0 %>
+                <% total_pieces_delivered = 0 %>
                 <% total_discount = 0 %>
+                <% total_returned = 0 %>
                 <% production.production_products.each do |pp| %>
                   <% unit_price = pp.unit_price || 0 %>
                   <% total_price = pp.total_price || 0 %>
-                  <% adjusted_quantity = pp.pieces_delivered - (pp.dirty + pp.error + pp.discard) %>
+                  <% pieces_delivered_value = pp.pieces_delivered * unit_price %>
                   <% discount = unit_price * (pp.dirty + pp.error + pp.discard) %>
-                  <% returned_discount = pp.returned ? total_price : 0 %>
-                  <% total_discount_row = discount + returned_discount %>
-                  <% adjusted_price = unit_price * adjusted_quantity - total_discount_row %>
+                  <% returned_value = pp.returned ? total_price : 0 %>
+                  <% adjusted_price = pp.returned ? 0 : (pieces_delivered_value - discount) %>
                   
-                  <% total_all_rows += total_price %>
-                  <% total_discount += total_discount_row %>
+                  <% total_value += total_price %>
+                  <% total_pieces_delivered += pp.returned ? 0 : pieces_delivered_value %>
+                  <% total_discount += discount %>
+                  <% total_returned += returned_value %>
                   
                   <tr>
                     <td><%= pp.product.name %></td>
@@ -71,19 +74,31 @@
                     <td><%= pp.error %></td>
                     <td><%= pp.discard %></td>
                     <td><%= pp.returned ? t('yes') : t('no') %></td>
-                    <td><%= number_to_currency(total_discount_row) %></td>
+                    <td><%= number_to_currency(discount) %></td>
                     <td><%= number_to_currency(adjusted_price) %></td>
                   </tr>
                 <% end %>
               </tbody>
               <tfoot>
                 <tr>
+                  <th colspan="9" class="text-right"><%= t('.total_value') %>:</th>
+                  <th><%= number_to_currency(total_value) %></th>
+                </tr>
+                <tr>
+                  <th colspan="9" class="text-right"><%= t('.total_pieces_delivered') %>:</th>
+                  <th><%= number_to_currency(total_pieces_delivered) %></th>
+                </tr>
+                <tr>
                   <th colspan="9" class="text-right"><%= t('.total_discount') %>:</th>
                   <th><%= number_to_currency(total_discount) %></th>
                 </tr>
                 <tr>
+                  <th colspan="9" class="text-right"><%= t('.total_returned') %>:</th>
+                  <th><%= number_to_currency(total_returned) %></th>
+                </tr>
+                <tr>
                   <th colspan="9" class="text-right"><%= t('.total_to_pay') %>:</th>
-                  <th><%= number_to_currency(total_all_rows - total_discount) %></th>
+                  <th><%= number_to_currency(total_pieces_delivered - total_discount) %></th>
                 </tr>
               </tfoot>
             </table>
