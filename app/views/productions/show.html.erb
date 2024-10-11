@@ -71,72 +71,72 @@
               <tr>
                 <th>Produto</th>
                 <th>Quantidade</th>
-                <th>Preço Unitário</th>
-                <th>Desconto</th>
-                <th>Preço Total</th>
                 <th>Peças Entregues</th>
+                <th>Preço Unitário</th>
                 <th>Sujo</th>
                 <th>Erro</th>
                 <th>Descarte</th>
-                <th>Quantidade Devolvida</th>
-                <th>Peças Faltantes</th>
-                <th>Data de Entrega</th>
                 <th>Devolvido</th>
+                <th>Desconto</th>
+                <th>Total</th>
               </tr>
             </thead>
             <tbody>
+              <% total_quantity = 0 %>
+              <% total_pieces_delivered = 0 %>
+              <% total_dirty = 0 %>
+              <% total_error = 0 %>
+              <% total_discard = 0 %>
+              <% total_returned = 0 %>
+              <% total_discount = 0 %>
+              <% total_price = 0 %>
+
               <% @production.production_products.each do |pp| %>
+                <% unit_price = pp.unit_price || 0 %>
+                <% quantity = pp.quantity || 0 %>
+                <% pieces_delivered = pp.pieces_delivered || 0 %>
+                <% dirty = pp.dirty || 0 %>
+                <% error = pp.error || 0 %>
+                <% discard = pp.discard || 0 %>
+
+                <% discount = pp.returned ? 0 : unit_price * (dirty + error + discard) %>
+                <% row_total = pp.returned ? 0 : (unit_price * pieces_delivered - discount) %>
+
+                <% total_quantity += quantity %>
+                <% total_pieces_delivered += pieces_delivered %>
+                <% total_dirty += dirty %>
+                <% total_error += error %>
+                <% total_discard += discard %>
+                <% total_returned += pp.returned ? 1 : 0 %>
+                <% total_discount += discount %>
+                <% total_price += row_total %>
+
                 <tr>
                   <td><%= pp.product&.name || 'Nenhum produto atribuído' %></td>
-                  <td><%= pp.quantity %></td>
-                  <td><%= number_to_currency(pp.unit_price) %></td>
-                  <td>
-                    <% if pp.unit_price %>
-                      <%= number_to_currency(pp.unit_price * ((pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))) %>
-                    <% else %>
-                      N/A
-                    <% end %>
-                    <% if pp.returned %>
-                      <br>
-                      <%= number_to_currency(pp.total_price) %>
-                    <% end %>
-                  </td>
-                  <td><%= number_to_currency(pp.total_price) %></td>
-                  <td><%= pp.pieces_delivered || 0 %></td>
-                  <td><%= pp.dirty || 0 %></td>
-                  <td><%= pp.error || 0 %></td>
-                  <td><%= pp.discard || 0 %></td>
-                  <td><%= pp.returned ? pp.quantity : 0 %></td>
-                  <td>
-                    <%= pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0)) %>
-                  </td>
-                  <td><%= pt_only_date_format(pp.delivery_date) || 'Não informado' %></td>
-                  <td><%= pp.returned ? 'Yes' : 'No' %></td>
+                  <td><%= quantity %></td>
+                  <td><%= pieces_delivered %></td>
+                  <td><%= number_to_currency(unit_price) %></td>
+                  <td><%= dirty %></td>
+                  <td><%= error %></td>
+                  <td><%= discard %></td>
+                  <td><%= pp.returned ? 'Sim' : 'Não' %></td>
+                  <td><%= pp.returned ? '-' : number_to_currency(discount) %></td>
+                  <td><%= pp.returned ? '-' : number_to_currency(row_total) %></td>
                 </tr>
               <% end %>
             </tbody>
             <tfoot>
               <tr>
                 <th>Total da Produção</th>
-                <td><%= @production.production_products.sum(:quantity) %></td>
+                <td><%= total_quantity %></td>
+                <td><%= total_pieces_delivered %></td>
                 <td></td>
-                <td>
-                  <%= number_to_currency(@production.production_products.sum { |pp| (pp.unit_price || 0) * (pp.dirty + pp.error + pp.discard) }) %>
-                  <br>
-                  <%= number_to_currency(@production.production_products.where(returned: true).sum(:total_price)) %>
-                </td>
-                <td><%= number_to_currency(@production.total_price) %></td>
-                <td><%= @production.production_products.sum(:pieces_delivered) %></td>
-                <td><%= @production.production_products.sum(:dirty) %></td>
-                <td><%= @production.production_products.sum(:error) %></td>
-                <td><%= @production.production_products.sum(:discard) %></td>
-                <td><%= @production.production_products.where(returned: true).sum(:quantity) %></td>
-                <td>
-                  <%= @production.production_products.sum { |pp| 
-                    pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
-                  } %>
-                </td>
-                <td></td>
+                <td><%= total_dirty %></td>
+                <td><%= total_error %></td>
+                <td><%= total_discard %></td>
+                <td><%= total_returned %></td>
+                <td><%= number_to_currency(total_discount) %></td>
+                <td><%= number_to_currency(total_price) %></td>
               </tr>
             </tfoot>
           </table>
@@ -163,16 +163,24 @@
               </tr>
             <% end %>
           </tbody>
-          <tfoot>
+        </table>
+
+        <table class="table table-striped mt-4">
+          <tbody>
             <tr>
               <th><%= t('.total_paid') %></th>
-              <td><%= number_to_currency(@production.total_paid) %></td>
+              <td><%= number_to_currency(@production.payments.sum(:amount)) %></td>
             </tr>
             <tr>
               <th><%= t('.remaining_balance') %></th>
-              <td><%= number_to_currency(@production.remaining_balance) %></td>
+              <td>
+                <% total_price = @production.production_products.sum { |pp| pp.returned ? 0 : (pp.pieces_delivered || 0) * (pp.unit_price || 0) } %>
+                <% total_discount = @production.production_products.sum { |pp| (pp.unit_price || 0) * ((pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0)) } %>
+                <% remaining_balance = (total_price - total_discount) - @production.payments.sum(:amount) %>
+                <%= number_to_currency(remaining_balance) %>
+              </td>
             </tr>
-          </tfoot>
+          </tbody>
         </table>
       </div>
     </div>
@@ -188,5 +196,6 @@
 </div>
 
 <% content_for(:page_title, 'Show Production') %>
+
 
 

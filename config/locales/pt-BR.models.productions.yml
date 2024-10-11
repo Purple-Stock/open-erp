@@ -32,6 +32,7 @@ pt-BR:
         discard: "Descarte"
         unit_price: "Preço Unitário"
         total_price: "Preço Total"
+        returned: "Devolvido"
       payment:
         amount: "Valor"
         payment_date: "Data do Pagamento"
