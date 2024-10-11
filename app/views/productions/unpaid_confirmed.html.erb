@@ -64,6 +64,7 @@
                       <tr>
                         <th><%= t('.product') %></th>
                         <th><%= t('.quantity') %></th>
+                        <th><%= t('.unit_price') %></th>
                         <th><%= t('.value') %></th>
                       </tr>
                     </thead>
@@ -72,6 +73,7 @@
                         <tr>
                           <td><%= Product.find(product_id).name %></td>
                           <td><%= data[:count] %></td>
+                          <td><%= number_to_currency(data[:unit_price]) %></td>
                           <td><%= number_to_currency(data[:value]) %></td>
                         </tr>
                       <% end %>

@@ -241,8 +241,9 @@ class ProductionsController < ApplicationController
           product_total = (pp.pieces_delivered || 0) * (pp.unit_price || 0) - discount
           production_total_to_pay += product_total
           
-          summary[tailor_id][:products][pp.product_id] ||= { count: 0, value: 0, returned: 0, returned_value: 0 }
+          summary[tailor_id][:products][pp.product_id] ||= { count: 0, unit_price: 0, value: 0 }
           summary[tailor_id][:products][pp.product_id][:count] += pp.quantity
+          summary[tailor_id][:products][pp.product_id][:unit_price] = pp.unit_price || 0
           summary[tailor_id][:products][pp.product_id][:value] += pp.total_price if pp.total_price
         end
       end
