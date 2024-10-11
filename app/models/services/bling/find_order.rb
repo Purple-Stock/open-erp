@@ -16,7 +16,7 @@ module Services
         when 'find_order'
           find_order
         else
-          { 'error' => { 'type' => 'INVALID_COMMAND', 'message' => 'Not a valid order command' } }
+          raise 'Not a order command'
         end
       end
 
@@ -38,18 +38,11 @@ module Services
 
         response = http.request(request)
 
-        parse_response(response)
-      rescue StandardError => e
-        { 'error' => { 'type' => 'REQUEST_ERROR', 'message' => e.message } }
-      end
+        data = JSON.parse(response.read_body)
 
-      def parse_response(response)
-        body = JSON.parse(response.body)
-        if response.is_a?(Net::HTTPSuccess)
-          { 'data' => body }
-        else
-          { 'error' => { 'type' => 'API_ERROR', 'message' => body['message'] || 'Unknown error' } }
-        end
+        data
+      rescue StandardError => e
+        "Error: #{e.message}"
       end
 
       def bling_token
