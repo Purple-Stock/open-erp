@@ -1,48 +1,50 @@
-<div class="nested-fields card mb-3">
+<div class="nested-fields card mb-3 shadow-sm">
   <div class="card-body">
-    <div class="row align-items-end">
+    <div class="row g-3">
       <div class="col-md-3">
         <%= f.label :product_id, Product.model_name.human, class: 'form-label' %>
-        <%= f.collection_select :product_id, Product.all, :id, :sku, { include_blank: true }, { class: 'form-control select2', required: true } %>
-      </div>
-      <div class="col-md-1">
-        <%= f.label :quantity, ProductionProduct.human_attribute_name(:quantity), class: 'form-label' %>
-        <%= f.number_field :quantity, class: 'form-control', min: 0 %>
-      </div>
-      <div class="col-md-1">
-        <%= f.label :unit_price, ProductionProduct.human_attribute_name(:unit_price), class: 'form-label' %>
-        <%= f.number_field :unit_price, step: 0.01, class: 'form-control price-input', min: 0 %>
-      </div>
-      <div class="col-md-1">
-        <%= f.label :total_price, ProductionProduct.human_attribute_name(:total_price), class: 'form-label' %>
-        <%= f.number_field :total_price, step: 0.01, class: 'form-control total-price', readonly: true %>
-      </div>
-      <div class="col-md-1">
-        <%= f.label :pieces_delivered, ProductionProduct.human_attribute_name(:pieces_delivered), class: 'form-label' %>
-        <%= f.number_field :pieces_delivered, class: 'form-control', min: 0 %>
-      </div>
-      <div class="col-md-1">
-        <%= f.label :dirty, ProductionProduct.human_attribute_name(:dirty), class: 'form-label' %>
-        <%= f.number_field :dirty, class: 'form-control', min: 0 %>
-      </div>
-      <div class="col-md-1">
-        <%= f.label :error, ProductionProduct.human_attribute_name(:error), class: 'form-label' %>
-        <%= f.number_field :error, class: 'form-control', min: 0 %>
-      </div>
-      <div class="col-md-1">
-        <%= f.label :discard, ProductionProduct.human_attribute_name(:discard), class: 'form-label' %>
-        <%= f.number_field :discard, class: 'form-control', min: 0 %>
+        <%= f.collection_select :product_id, Product.all, :id, :sku, { include_blank: true }, { class: 'form-select select2', required: true } %>
       </div>
       <div class="col-md-2">
-        <%= f.label :delivery_date, ProductionProduct.human_attribute_name(:delivery_date), class: 'form-label' %>
+        <%= f.label :quantity, class: 'form-label' %>
+        <%= f.number_field :quantity, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-2">
+        <%= f.label :unit_price, class: 'form-label' %>
+        <%= f.number_field :unit_price, step: 0.01, class: 'form-control price-input', min: 0 %>
+      </div>
+      <div class="col-md-2">
+        <%= f.label :total_price, class: 'form-label' %>
+        <%= f.number_field :total_price, step: 0.01, class: 'form-control total-price', readonly: true %>
+      </div>
+      <div class="col-md-2">
+        <%= f.label :pieces_delivered, class: 'form-label' %>
+        <%= f.number_field :pieces_delivered, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-2">
+        <%= f.label :dirty, class: 'form-label' %>
+        <%= f.number_field :dirty, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-2">
+        <%= f.label :error, class: 'form-label' %>
+        <%= f.number_field :error, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-2">
+        <%= f.label :discard, class: 'form-label' %>
+        <%= f.number_field :discard, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-3">
+        <%= f.label :delivery_date, class: 'form-label' %>
         <%= f.date_field :delivery_date, class: 'form-control' %>
       </div>
-      <div class="col-md-1 d-flex align-items-end">
-        <%= link_to_remove_association 'Remove', f, class: 'btn btn-danger btn-sm' %>
+      <div class="col-md-2">
+        <div class="form-check mt-4">
+          <%= f.check_box :returned, class: 'form-check-input' %>
+          <%= f.label :returned, class: 'form-check-label' %>
+        </div>
       </div>
-      <div class="col-md-1">
-        <%= f.label :returned, 'Returned', class: 'form-label' %>
-        <%= f.check_box :returned, class: 'form-check-input' %>
+      <div class="col-md-2 d-flex align-items-end">
+        <%= link_to_remove_association 'Remove', f, class: 'btn btn-outline-danger btn-sm' %>
       </div>
     </div>
   </div>
