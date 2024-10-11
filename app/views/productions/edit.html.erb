@@ -1,108 +1,82 @@
-<br><br>
-<h1>Verify Production</h1>
-
 <%- model_class = Production -%>
-<section class="section">
-  <div class="section-header d-mobile-none">
-    <h1><%= t '.title', :default => t("Edit #{model_class.model_name.human.titleize}") %></h1>
-    <div class="section-header-breadcrumb">
-      <div class="breadcrumb-item"><%= link_to 'Dashboard', root_path %></div>
-      <div class="breadcrumb-item"><%= link_to 'Productions', productions_path %></div>
-      <div class="breadcrumb-item">Edit Production</div>
+<div class="container mt-4">
+  <h1 class="mb-4"><%= t '.title', default: t("Edit #{model_class.model_name.human.titleize}") %></h1>
+
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Edit Production</h4>
     </div>
-  </div>
-
-  <div class="section-body">
-    <div class="card">
-      <div class="card-header">
-        <h4>Edit Production</h4>
-      </div>
-      <div class="card-body">
-        <%= form_with(model: @production, local: true) do |form| %>
-          <div class="row mb-3">
-            <div class="col-md-3">
-              <%= form.label :service_order_number, model_class.human_attribute_name(:service_order_number), class: 'form-label' %>
-              <%= form.text_field :service_order_number, class: 'form-control' %>
-            </div>
-            <div class="col-md-3">
-              <%= form.label :tailor_id, model_class.human_attribute_name(:tailor), class: 'form-label' %>
-              <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: 'Select a tailor' }, { class: 'form-control' } %>
-            </div>
+    <div class="card-body">
+      <%= form_with(model: @production, local: true) do |form| %>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <%= form.label :service_order_number, class: 'form-label' %>
+            <%= form.text_field :service_order_number, class: 'form-control' %>
           </div>
-
-          <div class="row mb-3">
-            <div class="col-md-3">
-              <%= form.label :cut_date, model_class.human_attribute_name(:cut_date), class: 'form-label' %>
-              <%= form.date_field :cut_date, class: 'form-control', readonly: true %>
-            </div>
-            <div class="col-md-3">
-              <%= form.label :expected_delivery_date, model_class.human_attribute_name(:expected_delivery_date), class: 'form-label' %>
-              <%= form.date_field :expected_delivery_date, class: 'form-control' %>
-            </div>
-            <div class="col-md-3">
-              <%= form.label :payment_date, t('productions.form.expected_payment_date'), class: 'form-label' %>
-              <%= form.date_field :payment_date, class: 'form-control' %>
-            </div>
+          <div class="col-md-4">
+            <%= form.label :tailor_id, class: 'form-label' %>
+            <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: 'Select a tailor' }, { class: 'form-select select2' } %>
           </div>
-
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <%= form.label :notions_cost, t('productions.form.notions_cost'), class: 'form-label' %>
-              <%= form.number_field :notions_cost, step: 0.01, class: 'form-control' %>
-            </div>
-            <div class="col-md-6">
-              <%= form.label :fabric_cost, t('productions.form.fabric_cost'), class: 'form-label' %>
-              <%= form.number_field :fabric_cost, step: 0.01, class: 'form-control' %>
-            </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <%= form.label :cut_date, class: 'form-label' %>
+            <%= form.date_field :cut_date, class: 'form-control' %>
           </div>
-
-          <div class="row mb-3">
-            <div class="col-12">
-              <%= form.label :observation, model_class.human_attribute_name(:observation), class: 'form-label' %>
-              <%= form.text_area :observation, class: 'form-control' %>
-            </div>
+          <div class="col-md-4">
+            <%= form.label :expected_delivery_date, class: 'form-label' %>
+            <%= form.date_field :expected_delivery_date, class: 'form-control' %>
           </div>
-
-          <div class="row mb-3">
-            <div class="col-md-4">
-              <%= form.label :confirmed, model_class.human_attribute_name(:confirmed), class: 'form-check-label' %>
-              <%= form.check_box :confirmed, class: 'form-check-input' %>
-            </div>
-            <div class="col-md-4">
-              <%= form.label :paid, model_class.human_attribute_name(:paid), class: 'form-check-label' %>
-              <%= form.check_box :paid, class: 'form-check-input' %>
-            </div>
+          <div class="col-md-4">
+            <%= form.label :payment_date, class: 'form-label' %>
+            <%= form.date_field :payment_date, class: 'form-control' %>
           </div>
-
-          <h3><%= t('productions.edit.products') %></h3>
-          <div id="production-products">
-            <%= form.fields_for :production_products do |pp_form| %>
-              <%= render 'production_product_fields', f: pp_form %>
-            <% end %>
-            <div class="links">
-              <%= link_to_add_association 'Add Product', form, :production_products, 
-                  partial: 'production_product_fields',
-                  class: 'btn btn-success mb-3' %>
-            </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <%= form.label :notions_cost, t('productions.form.notions_cost'), class: 'form-label' %>
+            <%= form.number_field :notions_cost, step: 0.01, class: 'form-control' %>
           </div>
-
-          <h3><%= t('.payments') %></h3>
-          <div id="payments">
-            <%= form.fields_for :payments do |payment_form| %>
-              <%= render 'payment_fields', f: payment_form %>
-            <% end %>
-            <div class="links">
-              <%= link_to_add_association t('.add_payment'), form, :payments, class: 'btn btn-primary' %>
-            </div>
+          <div class="col-md-4">
+            <%= form.label :fabric_cost, t('productions.form.fabric_cost'), class: 'form-label' %>
+            <%= form.number_field :fabric_cost, step: 0.01, class: 'form-control' %>
           </div>
+          <div class="col-12">
+            <%= form.label :observation, class: 'form-label' %>
+            <%= form.text_area :observation, class: 'form-control', rows: 3 %>
+          </div>
+        </div>
 
+        <h3 class="mt-4 mb-3"><%= t('productions.edit.products') %></h3>
+        <div id="production-products">
+          <%= form.fields_for :production_products do |pp_form| %>
+            <%= render 'production_product_fields', f: pp_form %>
+          <% end %>
+          <div class="mt-3">
+            <%= link_to_add_association 'Add Product', form, :production_products, 
+                partial: 'production_product_fields',
+                class: 'btn btn-outline-primary' %>
+          </div>
+        </div>
+
+        <h3 class="mt-4 mb-3"><%= t('.payments') %></h3>
+        <div id="payments">
+          <%= form.fields_for :payments do |payment_form| %>
+            <%= render 'payment_fields', f: payment_form %>
+          <% end %>
+          <div class="mt-3">
+            <%= link_to_add_association t('.add_payment'), form, :payments, class: 'btn btn-outline-primary' %>
+          </div>
+        </div>
+
+        <div class="mt-4">
           <%= form.submit t('helpers.submit.update'), class: 'btn btn-primary' %>
-          <%= link_to t('.cancel', :default => t("helpers.links.cancel")), production_path(@production), class: 'btn btn-secondary' %>
-        <% end %>
-      </div>
+          <%= link_to t('.cancel', default: t("helpers.links.cancel")), production_path(@production), class: 'btn btn-outline-secondary' %>
+        </div>
+      <% end %>
     </div>
   </div>
-</section>
+</div>
 
 <% content_for :javascript do %>
   <script>
