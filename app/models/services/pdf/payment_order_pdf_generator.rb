@@ -54,45 +54,61 @@ module Services
 
         data = [["Produto", "Quantidade", "Peças Entregues", "Preço Un.", "Sujo", "Erro", "Descarte", "Devolvido", "Desconto", "Total"]]
 
-        total_all_rows = 0
+        total_quantity = 0
+        total_pieces_delivered = 0
+        total_dirty = 0
+        total_error = 0
+        total_discard = 0
+        total_returned = 0
         total_discount = 0
+        total_price = 0
 
         @production.production_products.each do |pp|
           unit_price = pp.unit_price || 0
-          total_price = pp.total_price || 0
-          adjusted_quantity = pp.pieces_delivered - (pp.dirty + pp.error + pp.discard)
-          discount = pp.returned ? 0 : unit_price * (pp.dirty + pp.error + pp.discard)
-          adjusted_price = pp.returned ? 0 : (unit_price * adjusted_quantity - discount)
+          quantity = pp.quantity || 0
+          pieces_delivered = pp.pieces_delivered || 0
+          dirty = pp.dirty || 0
+          error = pp.error || 0
+          discard = pp.discard || 0
 
-          total_all_rows += total_price
+          discount = pp.returned ? 0 : unit_price * (dirty + error + discard)
+          row_total = pp.returned ? 0 : (unit_price * pieces_delivered - discount)
+
+          total_quantity += quantity
+          total_pieces_delivered += pieces_delivered
+          total_dirty += dirty
+          total_error += error
+          total_discard += discard
+          total_returned += pp.returned ? 1 : 0
           total_discount += discount
+          total_price += row_total
 
           data << [
             pp.product.name,
-            pp.quantity,
-            pp.pieces_delivered,
+            quantity,
+            pieces_delivered,
             number_to_currency(unit_price),
-            pp.dirty,
-            pp.error,
-            pp.discard,
+            dirty,
+            error,
+            discard,
             pp.returned ? 'Sim' : 'Não',
             pp.returned ? '-' : number_to_currency(discount),
-            pp.returned ? '-' : number_to_currency(adjusted_price)
+            pp.returned ? '-' : number_to_currency(row_total)
           ]
         end
 
         # Add a row for totals
         data << [
           "Total",
-          @production.production_products.sum(:quantity),
-          @production.production_products.sum(:pieces_delivered),
+          total_quantity,
+          total_pieces_delivered,
           "",
-          @production.production_products.sum(:dirty),
-          @production.production_products.sum(:error),
-          @production.production_products.sum(:discard),
-          @production.production_products.where(returned: true).count,
+          total_dirty,
+          total_error,
+          total_discard,
+          total_returned,
           number_to_currency(total_discount),
-          number_to_currency(total_all_rows - total_discount)
+          number_to_currency(total_price)
         ]
 
         column_widths = [100, 50, 50, 50, 40, 40, 40, 50, 60, 70]
@@ -157,16 +173,19 @@ module Services
 
       def generate_totals(pdf)
         total_discount = @production.production_products.sum do |pp|
-          (pp.unit_price || 0) * (pp.dirty + pp.error + pp.discard)
+          (pp.unit_price || 0) * ((pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
         end
 
         total_returned = @production.production_products.sum do |pp|
-          pp.returned ? (pp.total_price || 0) : 0
+          pp.returned ? (pp.quantity * (pp.unit_price || 0)) : 0
         end
 
-        total_price = @production.production_products.sum { |pp| pp.total_price || 0 }
+        total_price = @production.production_products.sum do |pp|
+          pp.quantity * (pp.unit_price || 0)
+        end
 
         total_pieces_delivered_price = @production.production_products.sum do |pp|
+          next 0 if pp.returned
           (pp.pieces_delivered || 0) * (pp.unit_price || 0)
         end
 
