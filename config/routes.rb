@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'products_in_production_report'
       get 'unpaid_confirmed'  # Add this line
       get 'price_per_piece_report'
+      get 'calendar'
     end
     member do
       patch :verify

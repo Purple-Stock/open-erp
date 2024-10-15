@@ -53,6 +53,9 @@
             <li class="<%= active_nav_menu_item([top_selling_products_path]) %>">
               <%= link_to t("audits.top_selling_products"), top_selling_products_path, class: 'nav-link' %>
             </li>
+              <li class="<%= active_nav_item('productions', 'calendar') %>">
+              <%= link_to t("productions.calendar"), calendar_productions_path, class: 'nav-link' %>
+            </li>
           <% end %>
         <% end %>
         

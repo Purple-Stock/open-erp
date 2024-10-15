@@ -18,6 +18,7 @@ pt-BR:
     create: Criar Produção
     products_in_production_report: "Produtos em Produção"
     price_per_piece_report: "Preço por Peça"
+    calendar: "Calendário de Produções"
   tailors:
     one: Costureiro
     two: Costureiros

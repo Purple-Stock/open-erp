@@ -1,0 +1,97 @@
+<br><br>
+<h1 class="mb-4">Productions Calendar</h1>
+
+<div class="card">
+  <div class="card-body">
+    <%= month_calendar(events: @productions, attribute: :calendar_date) do |date, productions| %>
+      <div class="calendar-date"><%= date.day %></div>
+
+      <% productions.each do |production| %>
+        <div class="production-item <%= production.confirmed ? 'confirmed' : 'unconfirmed' %>">
+          <%= link_to production_path(production), class: "production-link", title: "View details" do %>
+            <strong><%= production.service_order_number %></strong>
+            <div class="production-details">
+              <small><%= production.tailor.name %></small>
+              <small><%= production.production_products.sum(:quantity) %> pcs</small>
+              <% if production.confirmed %>
+                <span class="badge badge-success">Entregue</span>
+                <% if production.payment_date %>
+                  <% if production.payment_date < Date.today %>
+                    <span class="badge badge-danger">Pagamento Atrasado</span>
+                  <% else %>
+                    <span class="badge badge-info">Pagamento em Espera</span>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <span class="badge badge-warning">Não Entregue</span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .simple-calendar {
+    .day { height: 100px; }
+    .wday-0 { background-color: #f8d7da; }
+    .wday-6 { background-color: #f8d7da; }
+    .today { background-color: #e8f4f8; }
+    .past { opacity: 0.6; }
+    .future { }
+    .start-date { }
+    .prev-month { background-color: #f0f0f0; }
+    .next-month { background-color: #f0f0f0; }
+    .current-month { }
+    .has-events { }
+  }
+
+  .calendar-date {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .production-item {
+    margin-bottom: 5px;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 0.8em;
+  }
+
+  .production-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .production-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9em;
+  }
+
+  .confirmed {
+    background-color: #d4edda;
+  }
+
+  .unconfirmed {
+    background-color: #fff3cd;
+  }
+
+  .badge {
+    font-size: 0.7em;
+    padding: 2px 5px;
+    margin-top: 2px;
+  }
+
+  .badge-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .badge-info {
+    background-color: #17a2b8;
+    color: white;
+  }
+</style>
