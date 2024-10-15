@@ -172,6 +172,13 @@ class ProductionsController < ApplicationController
     end
   end
 
+  def calendar
+    start_date = params.fetch(:start_date, Date.today).to_date
+    @productions = Production.where(paid: false)
+                             .where("confirmed = ? OR expected_delivery_date >= ?", true, start_date)
+                             .order(confirmed: :desc, expected_delivery_date: :asc, payment_date: :asc)
+  end
+
   private
 
   def set_production

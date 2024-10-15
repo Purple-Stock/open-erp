@@ -107,4 +107,12 @@ class Production < ApplicationRecord
   def remaining_balance
     total_price - total_paid
   end
+
+  def calendar_date
+    if confirmed?
+      payment_date
+    else
+      expected_delivery_date
+    end
+  end
 end
