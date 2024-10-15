@@ -58,12 +58,16 @@ module Services
         data = [["Produto", "Código", "Quantidade", "Preço un.", "Valor total"]]
       
         @production.production_products.each do |pp|
+          quantity = pp.quantity || 0
+          unit_price = pp.unit_price || 0
+          total_price = quantity * unit_price
+
           data << [
             pp.product.name,
             pp.product.sku,
-            pp.quantity,
-            number_to_currency(pp.unit_price),
-            number_to_currency(pp.total_price)
+            quantity,
+            number_to_currency(unit_price),
+            number_to_currency(total_price)
           ]
         end
       
@@ -128,9 +132,13 @@ module Services
       end
 
       def generate_totals(pdf)
+        total_price = @production.production_products.sum do |pp|
+          (pp.quantity || 0) * (pp.unit_price || 0)
+        end
+
         pdf.text "Total serviços: #{number_to_currency(0)}", align: :right
-        pdf.text "Total peças: #{number_to_currency(@production.total_price)}", align: :right
-        pdf.text "Total da ordem de serviço: #{number_to_currency(@production.total_price)}", style: :bold, align: :right
+        pdf.text "Total peças: #{number_to_currency(total_price)}", align: :right
+        pdf.text "Total da ordem de serviço: #{number_to_currency(total_price)}", style: :bold, align: :right
         pdf.move_down 30
       end
 
