@@ -50,34 +50,27 @@ class Production < ApplicationRecord
 
   # Add a method to calculate total pieces delivered
   def total_pieces_delivered
-    production_products.sum(&:pieces_delivered)
+    production_products.sum { |pp| pp.pieces_delivered || 0 }
   end
 
   # Add a method to calculate total pieces missing
   def total_missing_pieces
     production_products.sum do |pp|
       next 0 if pp.returned
-      pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
+      (pp.quantity || 0) - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
     end
   end
 
   def total_dirty_pieces
-    production_products.sum(&:dirty)
+    production_products.sum { |pp| pp.dirty || 0 }
   end
 
   def total_error_pieces
-    production_products.sum(&:error)
+    production_products.sum { |pp| pp.error || 0 }
   end
 
   def total_discarded_pieces
-    production_products.sum(&:discard)
-  end
-
-  def total_missing_pieces
-    production_products.sum do |pp|
-      next 0 if pp.returned
-      pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
-    end
+    production_products.sum { |pp| pp.discard || 0 }
   end
 
   # Remove the before_save callback and the calculate_total_material_cost method
@@ -91,13 +84,18 @@ class Production < ApplicationRecord
 
   def price_per_piece
     total_cost = (notions_cost || 0) + (fabric_cost || 0)
-    total_quantity = production_products.sum(&:quantity)
+    total_quantity = production_products.sum { |pp| pp.quantity || 0 }
     
     total_quantity.zero? ? 0 : (total_cost / total_quantity)
   end
 
   def total_price
-    production_products.sum(:total_price)
+    production_products.sum do |pp|
+      next 0 if pp.returned
+      quantity = pp.quantity || 0
+      unit_price = pp.unit_price || 0
+      quantity * unit_price
+    end
   end
 
   def total_paid

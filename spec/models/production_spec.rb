@@ -66,11 +66,15 @@ RSpec.describe Production, type: :model do
 
     before do
       production.production_products.first.update(
+        quantity: 10,
+        unit_price: 10,
         pieces_delivered: 8, 
         dirty: 1, 
         error: 1
       )
       production.production_products.last.update(
+        quantity: 5,
+        unit_price: 10,
         pieces_delivered: 3, 
         discard: 2
       )
@@ -121,6 +125,11 @@ RSpec.describe Production, type: :model do
       it 'calculates the total price correctly' do
         expect(production.total_price).to eq(150) # (10 * 10) + (5 * 10)
       end
+
+      it 'excludes returned products from the total price' do
+        production.production_products.last.update(returned: true)
+        expect(production.total_price).to eq(100) # (10 * 10)
+      end
     end
 
     describe '#total_paid' do
@@ -134,7 +143,25 @@ RSpec.describe Production, type: :model do
     describe '#remaining_balance' do
       it 'calculates the remaining balance correctly' do
         create(:payment, production: production, amount: 75)
-        expect(production.remaining_balance).to be_within(0.01).of(75) # 150 - 75
+        expect(production.remaining_balance).to eq(75) # 150 - 75
+      end
+
+      it 'calculates the remaining balance correctly with returned products' do
+        production.production_products.last.update(returned: true)
+        create(:payment, production: production, amount: 75)
+        expect(production.remaining_balance).to eq(25) # 100 - 75
+      end
+    end
+
+    describe '#calendar_date' do
+      it 'returns payment_date when confirmed' do
+        production.update(confirmed: true, payment_date: Date.today + 7.days)
+        expect(production.calendar_date).to eq(production.payment_date)
+      end
+
+      it 'returns expected_delivery_date when not confirmed' do
+        production.update(confirmed: false, expected_delivery_date: Date.today + 14.days)
+        expect(production.calendar_date).to eq(production.expected_delivery_date)
       end
     end
   end
