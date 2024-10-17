@@ -132,12 +132,13 @@ module Services
       end
 
       def generate_totals(pdf)
+        total_quantity = @production.production_products.sum { |pp| pp.quantity || 0 }
         total_price = @production.production_products.sum do |pp|
           (pp.quantity || 0) * (pp.unit_price || 0)
         end
 
-        pdf.text "Total serviços: #{number_to_currency(0)}", align: :right
-        pdf.text "Total peças: #{number_to_currency(total_price)}", align: :right
+        pdf.text "Quantidade total de peças: #{total_quantity}", style: :bold, align: :right
+        pdf.move_down 10
         pdf.text "Total da ordem de serviço: #{number_to_currency(total_price)}", style: :bold, align: :right
         pdf.move_down 30
       end
