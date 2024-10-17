@@ -127,6 +127,14 @@
         if (addPaymentLink) {
           addPaymentLink.click();
         }
+
+        // Check the "Paid" checkbox
+        var paidCheckbox = document.querySelector('input[name="production[paid]"][type="checkbox"]');
+        if (paidCheckbox) {
+          paidCheckbox.checked = true;
+          // Trigger change event to ensure any listeners are notified
+          paidCheckbox.dispatchEvent(new Event('change'));
+        }
       });
 
       // Use Cocoon's after-insert callback to set the values
