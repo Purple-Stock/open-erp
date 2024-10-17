@@ -52,13 +52,14 @@ module Services
         pdf.text "Peças Entregues", size: 14, style: :bold
         pdf.move_down 10
 
-        data = [["Produto", "Quantidade", "Peças Entregues", "Preço Un.", "Sujo", "Erro", "Descarte", "Devolvido", "Desconto", "Total"]]
+        data = [["Produto", "Qtd", "Entregues", "Preço Un.", "Sujo", "Erro", "Descarte", "Perdido", "Devolvido", "Desconto", "Total"]]
 
         total_quantity = 0
         total_pieces_delivered = 0
         total_dirty = 0
         total_error = 0
         total_discard = 0
+        total_lost = 0
         total_returned = 0
         total_discount = 0
         total_price = 0
@@ -70,8 +71,9 @@ module Services
           dirty = pp.dirty || 0
           error = pp.error || 0
           discard = pp.discard || 0
+          lost = pp.lost_pieces || 0
 
-          discount = pp.returned ? 0 : unit_price * (dirty + error + discard)
+          discount = pp.returned ? 0 : unit_price * (dirty + error + discard + lost)
           row_total = pp.returned ? 0 : (unit_price * pieces_delivered - discount)
 
           total_quantity += quantity
@@ -79,6 +81,7 @@ module Services
           total_dirty += dirty
           total_error += error
           total_discard += discard
+          total_lost += lost
           total_returned += pp.returned ? 1 : 0
           total_discount += discount
           total_price += row_total
@@ -91,6 +94,7 @@ module Services
             dirty,
             error,
             discard,
+            lost,
             pp.returned ? 'Sim' : 'Não',
             pp.returned ? '-' : number_to_currency(discount),
             pp.returned ? '-' : number_to_currency(row_total)
@@ -106,17 +110,18 @@ module Services
           total_dirty,
           total_error,
           total_discard,
+          total_lost,
           total_returned,
           number_to_currency(total_discount),
           number_to_currency(total_price)
         ]
 
-        column_widths = [100, 50, 50, 50, 40, 40, 40, 50, 60, 70]
+        column_widths = [80, 30, 40, 45, 30, 30, 40, 35, 45, 50, 55]
 
         # Calculate row heights
         row_heights = data.map do |row|
           row.map.with_index do |cell, i|
-            pdf.height_of(cell.to_s, width: column_widths[i], size: 8) + 5 # Add some padding
+            pdf.height_of(cell.to_s, width: column_widths[i], size: 7) + 5 # Add some padding
           end.max
         end
 
@@ -142,7 +147,7 @@ module Services
               width = column_widths[col_index]
               pdf.bounding_box([x_position, y_position], width: width, height: row_height) do
                 pdf.text_box cell.to_s, 
-                             size: 8, 
+                             size: 7, 
                              align: :center,
                              valign: :center,
                              overflow: :shrink_to_fit,
@@ -173,7 +178,7 @@ module Services
 
       def generate_totals(pdf)
         total_discount = @production.production_products.sum do |pp|
-          (pp.unit_price || 0) * ((pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
+          (pp.unit_price || 0) * ((pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0) + (pp.lost_pieces || 0))
         end
 
         total_returned = @production.production_products.sum do |pp|
@@ -191,6 +196,8 @@ module Services
 
         total_to_pay = total_pieces_delivered_price - total_discount
 
+        total_lost_pieces = @production.production_products.sum { |pp| pp.lost_pieces || 0 }
+
         pdf.text "Total do corte: #{number_to_currency(total_price)}", style: :bold, align: :right
         pdf.move_down 10
         pdf.text "Total peças entregues: #{number_to_currency(total_pieces_delivered_price)}", style: :bold, align: :right
@@ -198,6 +205,8 @@ module Services
         pdf.text "Total desconto: #{number_to_currency(total_discount)}", style: :bold, align: :right
         pdf.move_down 10
         pdf.text "Total devolvido: #{number_to_currency(total_returned)}", style: :bold, align: :right
+        pdf.move_down 10
+        pdf.text "Total peças perdidas: #{total_lost_pieces}", style: :bold, align: :right
         pdf.move_down 10
         pdf.text "Total a pagar: #{number_to_currency(total_to_pay)}", style: :bold, align: :right
         pdf.move_down 30
