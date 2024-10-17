@@ -65,13 +65,14 @@
           <div class="mt-3">
             <%= link_to_add_association t('productions.edit.add_product'), form, :production_products, 
                 partial: 'production_product_fields',
-                class: 'btn btn-outline-primary' %>
+                class: 'btn btn-outline-primary add-product' %>
           </div>
         </div>
 
-        <div class="mt-3">
+        <div class="mt-3 d-flex align-items-center">
           <strong><%= t('productions.edit.total_value_delivered') %>:</strong>
-          <%= number_to_currency(@production.total_value_delivered) %>
+          <span id="total-value-delivered" class="ms-2"><%= number_to_currency(@production.total_value_delivered) %></span>
+          <%= link_to t('productions.edit.add_total_as_payment'), '#', class: 'btn btn-sm btn-outline-success ms-3', id: 'add-total-as-payment' %>
         </div>
 
         <h3 class="mt-4 mb-3"><%= t('productions.edit.payments') %></h3>
@@ -88,7 +89,8 @@
             <%= render 'payment_fields', f: payment_form %>
           <% end %>
           <div class="mt-3">
-            <%= link_to_add_association t('productions.form.add_payment'), form, :payments, class: 'btn btn-outline-primary' %>
+            <%= link_to_add_association t('productions.form.add_payment'), form, :payments, 
+                class: 'btn btn-outline-primary add-payment' %>
           </div>
         </div>
 
@@ -103,12 +105,62 @@
 
 <% content_for :javascript do %>
   <script>
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Select2
       $('.select2').select2();
+
+      // Initialize flatpickr for existing date fields
+      flatpickr("input[type=date]", {
+        dateFormat: "d/m/Y",
+        locale: "pt"
+      });
 
       // Initialize Select2 for dynamically added fields
       $('#production-products').on('cocoon:after-insert', function() {
         $('.select2').select2();
+      });
+
+      // Add total value as payment
+      document.getElementById('add-total-as-payment').addEventListener('click', function(e) {
+        e.preventDefault();
+        var totalValueText = document.getElementById('total-value-delivered').textContent.trim();
+        
+        // Parse the Brazilian currency format
+        var totalValue = parseFloat(totalValueText.replace(/[^\d,]/g, '').replace(',', '.'));
+
+        // Format today's date as dd/mm/yyyy
+        var today = new Date();
+        var formattedDate = today.toLocaleDateString('pt-BR');
+
+        // Trigger the add payment link
+        var addPaymentLink = document.querySelector('#payments .add-payment');
+        if (addPaymentLink) {
+          addPaymentLink.click();
+        }
+      });
+
+      // Use Cocoon's after-insert callback to set the values
+      $('#payments').on('cocoon:after-insert', function(e, insertedItem) {
+        var amountInput = insertedItem.find('input[name$="[amount]"]');
+        var dateInput = insertedItem.find('input[name$="[date]"]');
+        
+        if (amountInput.length) {
+          var totalValueText = document.getElementById('total-value-delivered').textContent.trim();
+          var totalValue = parseFloat(totalValueText.replace(/[^\d,]/g, '').replace(',', '.'));
+          amountInput.val(totalValue.toFixed(2));
+        }
+        
+        if (dateInput.length) {
+          var today = new Date();
+          var formattedDate = today.toLocaleDateString('pt-BR');
+          dateInput.val(formattedDate);
+          
+          flatpickr(dateInput[0], {
+            dateFormat: "d/m/Y",
+            locale: "pt",
+            defaultDate: formattedDate
+          });
+        }
       });
     });
   </script>
