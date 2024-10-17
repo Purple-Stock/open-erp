@@ -1,10 +1,10 @@
 <%- model_class = Production -%>
 <div class="container mt-4">
-  <h1 class="mb-4"><%= t '.title', default: t("Edit #{model_class.model_name.human.titleize}") %></h1>
+  <h1 class="mb-4"><%= t '.title', default: t("helpers.titles.edit", model: model_class.model_name.human.titleize) %></h1>
 
   <div class="card shadow-sm">
     <div class="card-header bg-primary text-white">
-      <h4 class="mb-0">Edit Production</h4>
+      <h4 class="mb-0"><%= t('productions.edit.title') %></h4>
     </div>
     <div class="card-body">
       <%= form_with(model: @production, local: true) do |form| %>
@@ -14,8 +14,8 @@
             <%= form.text_field :service_order_number, class: 'form-control' %>
           </div>
           <div class="col-md-4">
-            <%= form.label :tailor_id, class: 'form-label' %>
-            <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: 'Select a tailor' }, { class: 'form-select select2' } %>
+            <%= form.label :tailor_id, t('activerecord.attributes.production.tailor'), class: 'form-label' %>
+            <%= form.collection_select :tailor_id, @tailors, :id, :name, { prompt: t('productions.form.select_tailor') }, { class: 'form-select select2' } %>
           </div>
         </div>
         <div class="row g-3">
@@ -41,6 +41,16 @@
             <%= form.label :fabric_cost, t('productions.form.fabric_cost'), class: 'form-label' %>
             <%= form.number_field :fabric_cost, step: 0.01, class: 'form-control' %>
           </div>
+        </div>
+        <div class="row g-3 mt-2">
+          <div class="col-md-4">
+            <%= form.label :confirmed, t('productions.form.confirmed'), class: 'form-label' do %>
+              <%= form.check_box :confirmed, class: 'form-check-input large-checkbox' %>
+              <span class="ms-2"><%= t('productions.form.confirmed') %></span>
+            <% end %>
+          </div>
+        </div>
+        <div class="row g-3 mt-2">
           <div class="col-12">
             <%= form.label :observation, class: 'form-label' %>
             <%= form.text_area :observation, class: 'form-control', rows: 3 %>
@@ -53,25 +63,40 @@
             <%= render 'production_product_fields', f: pp_form %>
           <% end %>
           <div class="mt-3">
-            <%= link_to_add_association 'Add Product', form, :production_products, 
+            <%= link_to_add_association t('productions.edit.add_product'), form, :production_products, 
                 partial: 'production_product_fields',
-                class: 'btn btn-outline-primary' %>
+                class: 'btn btn-outline-primary add-product' %>
           </div>
         </div>
 
-        <h3 class="mt-4 mb-3"><%= t('.payments') %></h3>
+        <div class="mt-3 d-flex align-items-center">
+          <strong><%= t('productions.edit.total_value_delivered') %>:</strong>
+          <span id="total-value-delivered" class="ms-2"><%= number_to_currency(@production.total_value_delivered) %></span>
+          <%= link_to t('productions.edit.add_total_as_payment'), '#', class: 'btn btn-sm btn-outline-success ms-3', id: 'add-total-as-payment' %>
+        </div>
+
+        <h3 class="mt-4 mb-3"><%= t('productions.edit.payments') %></h3>
+        <div class="row g-3 mt-2">
+          <div class="col-md-4">
+            <%= form.label :paid, t('productions.form.paid'), class: 'form-label' do %>
+              <%= form.check_box :paid, class: 'form-check-input large-checkbox' %>
+              <span class="ms-2"><%= t('productions.form.paid') %></span>
+            <% end %>
+          </div>
+        </div>
         <div id="payments">
           <%= form.fields_for :payments do |payment_form| %>
             <%= render 'payment_fields', f: payment_form %>
           <% end %>
           <div class="mt-3">
-            <%= link_to_add_association t('.add_payment'), form, :payments, class: 'btn btn-outline-primary' %>
+            <%= link_to_add_association t('productions.form.add_payment'), form, :payments, 
+                class: 'btn btn-outline-primary add-payment' %>
           </div>
         </div>
 
         <div class="mt-4">
           <%= form.submit t('helpers.submit.update'), class: 'btn btn-primary' %>
-          <%= link_to t('.cancel', default: t("helpers.links.cancel")), production_path(@production), class: 'btn btn-outline-secondary' %>
+          <%= link_to t('helpers.links.cancel'), production_path(@production), class: 'btn btn-outline-secondary' %>
         </div>
       <% end %>
     </div>
@@ -80,12 +105,57 @@
 
 <% content_for :javascript do %>
   <script>
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Select2
       $('.select2').select2();
 
       // Initialize Select2 for dynamically added fields
       $('#production-products').on('cocoon:after-insert', function() {
         $('.select2').select2();
+      });
+
+      // Add total value as payment
+      document.getElementById('add-total-as-payment').addEventListener('click', function(e) {
+        e.preventDefault();
+        var totalValueText = document.getElementById('total-value-delivered').textContent.trim();
+        
+        // Parse the Brazilian currency format
+        var totalValue = parseFloat(totalValueText.replace(/[^\d,]/g, '').replace(',', '.'));
+
+        // Trigger the add payment link
+        var addPaymentLink = document.querySelector('#payments .add-payment');
+        if (addPaymentLink) {
+          addPaymentLink.click();
+        }
+
+        // Check the "Paid" checkbox
+        var paidCheckbox = document.querySelector('input[name="production[paid]"][type="checkbox"]');
+        if (paidCheckbox) {
+          paidCheckbox.checked = true;
+          // Trigger change event to ensure any listeners are notified
+          paidCheckbox.dispatchEvent(new Event('change'));
+        }
+      });
+
+      // Use Cocoon's after-insert callback to set the values
+      $('#payments').on('cocoon:after-insert', function(e, insertedItem) {
+        var amountInput = insertedItem.find('input[name$="[amount]"]');
+        var dateInput = insertedItem.find('input[name$="[payment_date]"]');
+        
+        if (amountInput.length) {
+          var totalValueText = document.getElementById('total-value-delivered').textContent.trim();
+          var totalValue = parseFloat(totalValueText.replace(/[^\d,]/g, '').replace(',', '.'));
+          amountInput.val(totalValue.toFixed(2));
+        }
+        
+        if (dateInput.length) {
+          var today = new Date();
+          var yyyy = today.getFullYear();
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+          var dd = String(today.getDate()).padStart(2, '0');
+          var formattedDate = yyyy + '-' + mm + '-' + dd; // Format as YYYY-MM-DD for date input
+          dateInput.val(formattedDate);
+        }
       });
     });
   </script>

@@ -113,4 +113,8 @@ class Production < ApplicationRecord
       expected_delivery_date
     end
   end
+
+  def total_value_delivered
+    production_products.sum { |pp| pp.pieces_delivered * pp.unit_price }
+  end
 end
