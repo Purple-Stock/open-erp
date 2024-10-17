@@ -109,12 +109,6 @@
       // Initialize Select2
       $('.select2').select2();
 
-      // Initialize flatpickr for existing date fields
-      flatpickr("input[type=date]", {
-        dateFormat: "d/m/Y",
-        locale: "pt"
-      });
-
       // Initialize Select2 for dynamically added fields
       $('#production-products').on('cocoon:after-insert', function() {
         $('.select2').select2();
@@ -128,10 +122,6 @@
         // Parse the Brazilian currency format
         var totalValue = parseFloat(totalValueText.replace(/[^\d,]/g, '').replace(',', '.'));
 
-        // Format today's date as dd/mm/yyyy
-        var today = new Date();
-        var formattedDate = today.toLocaleDateString('pt-BR');
-
         // Trigger the add payment link
         var addPaymentLink = document.querySelector('#payments .add-payment');
         if (addPaymentLink) {
@@ -142,7 +132,7 @@
       // Use Cocoon's after-insert callback to set the values
       $('#payments').on('cocoon:after-insert', function(e, insertedItem) {
         var amountInput = insertedItem.find('input[name$="[amount]"]');
-        var dateInput = insertedItem.find('input[name$="[date]"]');
+        var dateInput = insertedItem.find('input[name$="[payment_date]"]');
         
         if (amountInput.length) {
           var totalValueText = document.getElementById('total-value-delivered').textContent.trim();
@@ -152,14 +142,11 @@
         
         if (dateInput.length) {
           var today = new Date();
-          var formattedDate = today.toLocaleDateString('pt-BR');
+          var yyyy = today.getFullYear();
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+          var dd = String(today.getDate()).padStart(2, '0');
+          var formattedDate = yyyy + '-' + mm + '-' + dd; // Format as YYYY-MM-DD for date input
           dateInput.val(formattedDate);
-          
-          flatpickr(dateInput[0], {
-            dateFormat: "d/m/Y",
-            locale: "pt",
-            defaultDate: formattedDate
-          });
         }
       });
     });
