@@ -11,17 +11,18 @@
 #  notions_cost           :decimal(10, 2)
 #  observation            :text
 #  paid                   :boolean
+#  payment_date           :date
 #  pieces_missing         :integer
 #  service_order_number   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  account_id             :integer
 #  tailor_id              :bigint
-#  payment_date           :date
 #
 # Indexes
 #
 #  index_productions_on_account_id              (account_id)
+#  index_productions_on_confirmed               (confirmed)
 #  index_productions_on_cut_date                (cut_date)
 #  index_productions_on_expected_delivery_date  (expected_delivery_date)
 #  index_productions_on_tailor_id               (tailor_id)
@@ -57,7 +58,7 @@ class Production < ApplicationRecord
   def total_missing_pieces
     production_products.sum do |pp|
       next 0 if pp.returned
-      (pp.quantity || 0) - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
+      (pp.quantity || 0) - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0) + (pp.lost_pieces || 0))
     end
   end
 
@@ -71,6 +72,10 @@ class Production < ApplicationRecord
 
   def total_discarded_pieces
     production_products.sum { |pp| pp.discard || 0 }
+  end
+
+  def total_lost_pieces
+    production_products.sum { |pp| pp.lost_pieces || 0 }
   end
 
   # Remove the before_save callback and the calculate_total_material_cost method

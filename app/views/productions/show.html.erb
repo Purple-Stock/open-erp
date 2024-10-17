@@ -73,6 +73,7 @@
                 <th>Quantidade</th>
                 <th>Peças Entregues</th>
                 <th>Preço Unitário</th>
+                <th>Peças Perdidas</th>
                 <th>Sujo</th>
                 <th>Erro</th>
                 <th>Descarte</th>
@@ -90,6 +91,7 @@
               <% total_returned = 0 %>
               <% total_discount = 0 %>
               <% total_price = 0 %>
+              <% total_lost_pieces = 0 %>
 
               <% @production.production_products.each do |pp| %>
                 <% unit_price = pp.unit_price || 0 %>
@@ -110,12 +112,15 @@
                 <% total_returned += pp.returned ? 1 : 0 %>
                 <% total_discount += discount %>
                 <% total_price += row_total %>
+                <% lost_pieces = pp.lost_pieces || 0 %>
+                <% total_lost_pieces += lost_pieces %>
 
                 <tr>
                   <td><%= pp.product&.name || 'Nenhum produto atribuído' %></td>
                   <td><%= quantity %></td>
                   <td><%= pieces_delivered %></td>
                   <td><%= number_to_currency(unit_price) %></td>
+                  <td><%= lost_pieces %></td>
                   <td><%= dirty %></td>
                   <td><%= error %></td>
                   <td><%= discard %></td>
@@ -131,6 +136,7 @@
                 <td><%= total_quantity %></td>
                 <td><%= total_pieces_delivered %></td>
                 <td></td>
+                <td><%= total_lost_pieces %></td>
                 <td><%= total_dirty %></td>
                 <td><%= total_error %></td>
                 <td><%= total_discard %></td>

@@ -22,6 +22,10 @@
         <%= f.number_field :pieces_delivered, class: 'form-control', min: 0 %>
       </div>
       <div class="col-md-2">
+        <%= f.label :lost_pieces, class: 'form-label' %>
+        <%= f.number_field :lost_pieces, class: 'form-control', min: 0 %>
+      </div>
+      <div class="col-md-2">
         <%= f.label :dirty, class: 'form-label' %>
         <%= f.number_field :dirty, class: 'form-control', min: 0 %>
       </div>
