@@ -10,8 +10,8 @@
   </div>
 
   <div class="actions">
-    <%= link_to 'Download Service Order PDF', service_order_pdf_production_path(@production), class: 'btn btn-primary', target: '_blank' %>
-    <%= link_to 'Download Payment Order PDF', payment_order_pdf_production_path(@production), class: 'btn btn-success', target: '_blank' %>
+    <%= link_to t('.download_service_order_pdf'), service_order_pdf_production_path(@production), class: 'btn btn-primary', target: '_blank' %>
+    <%= link_to t('.download_payment_order_pdf'), payment_order_pdf_production_path(@production), class: 'btn btn-success', target: '_blank' %>
   </div>
   
   <div class="section-body">

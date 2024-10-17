@@ -142,6 +142,8 @@ pt-BR:
       payments: "Pagamentos"
       total_paid: "Total Pago"
       remaining_balance: "Saldo Restante"
+      download_service_order_pdf: "Baixar PDF da Ordem de Serviço"
+      download_payment_order_pdf: "Baixar PDF da Ordem de Pagamento"
     new:
       title: "Nova Produção"
       new_production: "Criar Nova Produção"
