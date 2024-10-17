@@ -42,6 +42,7 @@
                   <th><%= t('.dirty') %></th>
                   <th><%= t('.error') %></th>
                   <th><%= t('.discard') %></th>
+                  <th><%= t('.lost_pieces') %></th>
                   <th><%= t('.returned') %></th>
                   <th><%= t('.discount') %></th>
                   <th><%= t('.total') %></th>
@@ -52,11 +53,13 @@
                 <% total_pieces_delivered = 0 %>
                 <% total_discount = 0 %>
                 <% total_returned = 0 %>
+                <% total_lost_pieces = 0 %>
                 <% production.production_products.each do |pp| %>
-                  <% unit_price = pp.unit_price || 0 %>
-                  <% total_price = pp.total_price || 0 %>
-                  <% pieces_delivered_value = pp.pieces_delivered * unit_price %>
-                  <% discount = unit_price * (pp.dirty + pp.error + pp.discard) %>
+                  <% unit_price = pp.unit_price.to_f %>
+                  <% quantity = pp.quantity.to_i %>
+                  <% total_price = quantity * unit_price %>
+                  <% pieces_delivered_value = pp.pieces_delivered.to_i * unit_price %>
+                  <% discount = unit_price * (pp.dirty.to_i + pp.error.to_i + pp.discard.to_i) %>
                   <% returned_value = pp.returned ? total_price : 0 %>
                   <% adjusted_price = pp.returned ? 0 : (pieces_delivered_value - discount) %>
                   
@@ -64,15 +67,17 @@
                   <% total_pieces_delivered += pp.returned ? 0 : pieces_delivered_value %>
                   <% total_discount += discount %>
                   <% total_returned += returned_value %>
+                  <% total_lost_pieces += pp.lost_pieces.to_i %>
                   
                   <tr>
                     <td><%= pp.product.name %></td>
-                    <td><%= pp.quantity %></td>
+                    <td><%= quantity %></td>
                     <td><%= pp.pieces_delivered %></td>
                     <td><%= number_to_currency(unit_price) %></td>
                     <td><%= pp.dirty %></td>
                     <td><%= pp.error %></td>
                     <td><%= pp.discard %></td>
+                    <td><%= pp.lost_pieces %></td>
                     <td><%= pp.returned ? 'Sim' : 'Não' %></td>
                     <td><%= number_to_currency(discount) %></td>
                     <td><%= number_to_currency(adjusted_price) %></td>
@@ -81,23 +86,27 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th colspan="9" class="text-right"><%= t('.total_value') %>:</th>
+                  <th colspan="10" class="text-right"><%= t('.total_value') %>:</th>
                   <th><%= number_to_currency(total_value) %></th>
                 </tr>
                 <tr>
-                  <th colspan="9" class="text-right"><%= t('.total_pieces_delivered') %>:</th>
+                  <th colspan="10" class="text-right"><%= t('.total_pieces_delivered') %>:</th>
                   <th><%= number_to_currency(total_pieces_delivered) %></th>
                 </tr>
                 <tr>
-                  <th colspan="9" class="text-right"><%= t('.total_discount') %>:</th>
+                  <th colspan="10" class="text-right"><%= t('.total_discount') %>:</th>
                   <th><%= number_to_currency(total_discount) %></th>
                 </tr>
                 <tr>
-                  <th colspan="9" class="text-right"><%= t('.total_returned') %>:</th>
+                  <th colspan="10" class="text-right"><%= t('.total_returned') %>:</th>
                   <th><%= number_to_currency(total_returned) %></th>
                 </tr>
                 <tr>
-                  <th colspan="9" class="text-right"><%= t('.total_to_pay') %>:</th>
+                  <th colspan="10" class="text-right"><%= t('.total_lost_pieces') %>:</th>
+                  <th><%= total_lost_pieces %></th>
+                </tr>
+                <tr>
+                  <th colspan="10" class="text-right"><%= t('.total_to_pay') %>:</th>
                   <th><%= number_to_currency(total_pieces_delivered - total_discount) %></th>
                 </tr>
               </tfoot>
