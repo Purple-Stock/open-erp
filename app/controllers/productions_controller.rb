@@ -76,10 +76,10 @@ class ProductionsController < ApplicationController
   def missing_pieces
     @productions_with_missing_pieces = Production.includes(:tailor, production_products: :product)
                                                  .where(id: ProductionProduct.select(:production_id)
-                                                                             .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0)')
-                                                                             .where(returned: false))  # Add this line
+                                                                             .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0) + COALESCE(lost_pieces, 0)')
+                                                                             .where(returned: false))
                                                  .distinct
-                                                 .order(cut_date: :desc, service_order_number: :desc)  # Order by cut_date and service_order_number
+                                                 .order(cut_date: :desc, service_order_number: :desc)
 
     if params[:tailor_id].present?
       @productions_with_missing_pieces = @productions_with_missing_pieces.where(tailor_id: params[:tailor_id])
@@ -107,9 +107,9 @@ class ProductionsController < ApplicationController
 
   def products_in_production_report
     @products_summary = ProductionProduct.joins(:production, :product)
-      .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0)')
+      .where('quantity > COALESCE(pieces_delivered, 0) + COALESCE(dirty, 0) + COALESCE(error, 0) + COALESCE(discard, 0) + COALESCE(lost_pieces, 0)')
       .group('products.id, products.name')
-      .select('products.id, products.name, SUM(quantity) as total_quantity, SUM(quantity - COALESCE(pieces_delivered, 0) - COALESCE(dirty, 0) - COALESCE(error, 0) - COALESCE(discard, 0)) as total_missing')
+      .select('products.id, products.name, SUM(quantity) as total_quantity, SUM(quantity - COALESCE(pieces_delivered, 0) - COALESCE(dirty, 0) - COALESCE(error, 0) - COALESCE(discard, 0) - COALESCE(lost_pieces, 0)) as total_missing')
       .order('total_quantity DESC')  # Change this line to order by total_quantity in descending order
 
     respond_to do |format|
@@ -193,7 +193,7 @@ class ProductionsController < ApplicationController
     params.require(:production).permit(
       :service_order_number, :tailor_id, :cut_date, :expected_delivery_date, :payment_date,
       :notions_cost, :fabric_cost, :observation, :confirmed, :paid,
-      production_products_attributes: [:id, :product_id, :quantity, :unit_price, :total_price, :pieces_delivered, :dirty, :error, :discard, :returned, :delivery_date, :_destroy],
+      production_products_attributes: [:id, :product_id, :quantity, :unit_price, :total_price, :pieces_delivered, :dirty, :error, :discard, :lost_pieces, :delivery_date, :returned, :_destroy],
       payments_attributes: [:id, :amount, :payment_date, :_destroy]
     )
   end
@@ -205,8 +205,8 @@ class ProductionsController < ApplicationController
       summary[tailor_id][:productions_count] += 1
 
       production.production_products.each do |pp|
-        next if pp.returned  # Skip if the product is returned
-        missing_pieces = pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0))
+        next if pp.returned
+        missing_pieces = pp.quantity - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0) + (pp.lost_pieces || 0))
         if missing_pieces > 0
           summary[tailor_id][:total_missing_pieces] += missing_pieces
           summary[tailor_id][:products][pp.product_id] ||= 0

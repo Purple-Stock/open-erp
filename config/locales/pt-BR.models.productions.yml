@@ -33,6 +33,7 @@ pt-BR:
         unit_price: "Preço Unitário"
         total_price: "Preço Total"
         returned: "Devolvido"
+        lost_pieces: "Peças Perdidas"
       payment:
         amount: "Valor"
         payment_date: "Data do Pagamento"
@@ -94,6 +95,7 @@ pt-BR:
       total_to_pay: "Total a Pagar"
       service_order_pdf: "Ordem de Serviço PDF"
       payment_order_pdf: "Ordem de Pagamento PDF"
+      lost_pieces: "Peças Perdidas"
     missing_pieces:
       title: "Produções com Peças Faltantes"
       filter_by_tailor: "Filtrar por Costureiro"
@@ -129,6 +131,7 @@ pt-BR:
       dirty: "Sujo"
       error: "Erro"
       discard: "Descarte"
+      lost_pieces: "Peças Perdidas"
     show:
       title: "Detalhes da Produção"
       tailor_details: "Detalhes do Costureiro"
@@ -139,6 +142,8 @@ pt-BR:
       payments: "Pagamentos"
       total_paid: "Total Pago"
       remaining_balance: "Saldo Restante"
+      download_service_order_pdf: "Baixar PDF da Ordem de Serviço"
+      download_payment_order_pdf: "Baixar PDF da Ordem de Pagamento"
     new:
       title: "Nova Produção"
       new_production: "Criar Nova Produção"
