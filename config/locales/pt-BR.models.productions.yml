@@ -89,7 +89,6 @@ pt-BR:
       discount: "Desconto"
       total: "Total"
       total_value: "Valor Total"
-      total_pieces_delivered: "Total de Peças Entregues"
       total_discount: "Total de Desconto"
       total_returned: "Total Devolvido"
       total_to_pay: "Total a Pagar"
@@ -145,9 +144,13 @@ pt-BR:
       new_production: "Criar Nova Produção"
       products: "Produtos"
       add_product: "Adicionar Produto"
+      payments: "Pagamentos"
     edit:
       title: "Editar Produção"
       products: "Produtos"
+      payments: "Pagamentos"
+      total_value_delivered: "Valor Total Entregue"
+      add_product: "Adicionar Produto"
     actions:
       show: "Mostrar"
       edit: "Editar"
@@ -170,26 +173,21 @@ pt-BR:
     form:
       notions_cost: "Custo de Aviamentos"
       fabric_cost: "Custo de Tecido"
+      confirmed: "Recebimento Confirmado"
+      paid: "Pago"
+      select_tailor: "Selecione um costureiro"
       payments: "Pagamentos"
       add_payment: "Adicionar Pagamento"
     price_per_piece_report:
       title: "Relatório de Preço por Peça"
       filters: "Filtros"
       tailor: "Costureiro"
-      all_tailors: "Todos os Costureiros"
       start_date: "Data Inicial"
       end_date: "Data Final"
       total_cost: "Custo Total"
       total_quantity: "Quantidade Total"
       price_per_piece: "Preço por Peça"
       actions: "Ações"
-      show: "Mostrar"
-      edit: "Editar"
-    actions:
-      title: "Ações"
-      show: "Mostrar"
-      edit: "Editar"
-      destroy: "Excluir"
   helpers:
     submit:
       create: "Criar %{model}"

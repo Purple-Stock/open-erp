@@ -81,3 +81,14 @@ input::-webkit-inner-spin-button {
 .sorted-desc::after {
   content: " ▼";
 }
+
+.large-checkbox {
+  width: 1.5em;
+  height: 1.5em;
+  margin-top: 0.25em;
+}
+
+.large-checkbox + span {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
