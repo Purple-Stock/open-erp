@@ -58,7 +58,13 @@ class Production < ApplicationRecord
   def total_missing_pieces
     production_products.sum do |pp|
       next 0 if pp.returned
-      (pp.quantity || 0) - ((pp.pieces_delivered || 0) + (pp.dirty || 0) + (pp.error || 0) + (pp.discard || 0) + (pp.lost_pieces || 0))
+      (pp.quantity || 0) - (
+        (pp.pieces_delivered || 0) + 
+        (pp.dirty || 0) + 
+        (pp.error || 0) + 
+        (pp.discard || 0) + 
+        (pp.lost_pieces || 0)
+      )
     end
   end
 
