@@ -42,6 +42,7 @@
                   <th><%= t('.dirty') %></th>
                   <th><%= t('.error') %></th>
                   <th><%= t('.discard') %></th>
+                  <th><%= t('.remaining') %></th>
                 </tr>
               </thead>
               <tbody>
@@ -52,6 +53,7 @@
                   <td class="text-warning"><%= pp.dirty || 0 %></td>
                   <td class="text-danger"><%= pp.error || 0 %></td>
                   <td class="text-secondary"><%= pp.discard || 0 %></td>
+                  <td class="text-primary font-weight-bold"><%= pieces_missing %></td>
                 </tr>
               </tbody>
             </table>

@@ -80,6 +80,7 @@
                 <th>Devolvido</th>
                 <th>Desconto</th>
                 <th>Total</th>
+                <th>Peças Faltantes</th>
               </tr>
             </thead>
             <tbody>
@@ -100,6 +101,7 @@
                 <% dirty = pp.dirty || 0 %>
                 <% error = pp.error || 0 %>
                 <% discard = pp.discard || 0 %>
+                <% lost_pieces = pp.lost_pieces || 0 %>
 
                 <% discount = pp.returned ? 0 : unit_price * (dirty + error + discard) %>
                 <% row_total = pp.returned ? 0 : (unit_price * pieces_delivered - discount) %>
@@ -112,9 +114,9 @@
                 <% total_returned += pp.returned ? 1 : 0 %>
                 <% total_discount += discount %>
                 <% total_price += row_total %>
-                <% lost_pieces = pp.lost_pieces || 0 %>
                 <% total_lost_pieces += lost_pieces %>
 
+                <% missing_pieces = quantity - (pieces_delivered + dirty + error + discard + lost_pieces) %>
                 <tr>
                   <td><%= pp.product&.name || 'Nenhum produto atribuído' %></td>
                   <td><%= quantity %></td>
@@ -127,6 +129,7 @@
                   <td><%= pp.returned ? 'Sim' : 'Não' %></td>
                   <td><%= pp.returned ? '-' : number_to_currency(discount) %></td>
                   <td><%= pp.returned ? '-' : number_to_currency(row_total) %></td>
+                  <td><%= missing_pieces > 0 ? missing_pieces : 0 %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -143,6 +146,7 @@
                 <td><%= total_returned %></td>
                 <td><%= number_to_currency(total_discount) %></td>
                 <td><%= number_to_currency(total_price) %></td>
+                <td><%= @production.total_missing_pieces %></td>
               </tr>
             </tfoot>
           </table>
@@ -202,6 +206,7 @@
 </div>
 
 <% content_for(:page_title, 'Show Production') %>
+
 
 
 

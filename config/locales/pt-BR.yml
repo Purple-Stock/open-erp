@@ -339,4 +339,5 @@ helpers:
   productions:
     show:
       price_per_piece: "Preço por Peça"
-
+    production_card:
+      remaining: "Restante"

@@ -89,11 +89,7 @@ class OrdersControlController < ApplicationController
     skus = @sorted_items.keys
     @stock_balances = Stock.joins(:product).where(products: { sku: skus }).pluck('products.sku', :total_balance).to_h
 
-    # Fetch total pieces missing for all SKUs
-    @total_pieces_missing = ProductionProduct.joins(:product)
-                                           .where(products: { sku: skus })
-                                           .group('products.sku')
-                                           .sum('quantity - COALESCE(pieces_delivered, 0)')
+    @total_pieces_missing = calculate_total_pieces_missing
 
     # Group items by SKU-pai + cor
     @sorted_items_by_color = @all_items.group_by do |item|
@@ -108,7 +104,7 @@ class OrdersControlController < ApplicationController
       @sorted_items_by_color = @sorted_items_by_color.select { |_, color| color.downcase == @color_filter.downcase }
     end
 
-    @total_pieces_missing_by_color = calculate_total_pieces_missing(@sorted_items_by_color)
+    @total_pieces_missing_by_color = calculate_total_pieces_missing_by_color
 
     # Group items by SKU-pai
     @sorted_items_by_sku_pai = @all_items.group_by do |item|
@@ -117,12 +113,12 @@ class OrdersControlController < ApplicationController
       sku_pai
     end.sort_by { |_, sku_pai_items| -sku_pai_items.sum(&:quantity) }.to_h
 
-    @total_pieces_missing_by_sku_pai = calculate_total_pieces_missing(@sorted_items_by_sku_pai)
+    @total_pieces_missing_by_sku_pai = calculate_total_pieces_missing_by_sku_pai
+
+    @sold_last_30_days = calculate_sold_last_30_days
 
     # Set the default tab to 'pending_missing'
     @active_tab = params[:tab] || 'pending_missing'
-
-    @sold_last_30_days = calculate_sold_last_30_days
 
     respond_to do |format|
       format.html
@@ -186,15 +182,54 @@ class OrdersControlController < ApplicationController
     }
   end
 
-  def calculate_total_pieces_missing(sorted_items)
-    return {} if sorted_items.nil? || sorted_items.empty?
+  def calculate_total_pieces_missing
+    Production.where(confirmed: false).includes(:production_products).each_with_object({}) do |production, missing_pieces|
+      production.production_products.each do |pp|
+        sku = pp.product.sku
+        missing_pieces[sku] ||= 0
+        missing_pieces[sku] += pp.quantity - (
+          (pp.pieces_delivered || 0) +
+          (pp.lost_pieces || 0) +
+          (pp.dirty || 0) +
+          (pp.error || 0) +
+          (pp.discard || 0)
+        )
+      end
+    end
+  end
 
-    sorted_items.transform_values do |items|
-      total_quantity = items.sum(&:quantity)
-      sku_to_check = items.first.is_a?(Item) ? items.first.sku : items.first.first
-      production_products = ProductionProduct.joins(:product).where(products: { sku: Product.where("sku LIKE ?", "#{sku_to_check}%").pluck(:sku) })
-      total_produced = production_products.sum(:quantity)
-      [total_quantity - total_produced, 0].max
+  def calculate_total_pieces_missing_by_color
+    Production.where(confirmed: false).includes(:production_products).each_with_object({}) do |production, missing_pieces|
+      production.production_products.each do |pp|
+        sku_parts = pp.product.sku.split('-')
+        color = sku_parts[-2]
+        sku_pai_with_color = sku_parts[0..-3].join('-') + "-#{color}"
+        missing_pieces[sku_pai_with_color] ||= 0
+        missing_pieces[sku_pai_with_color] += pp.quantity - (
+          (pp.pieces_delivered || 0) +
+          (pp.lost_pieces || 0) +
+          (pp.dirty || 0) +
+          (pp.error || 0) +
+          (pp.discard || 0)
+        )
+      end
+    end
+  end
+
+  def calculate_total_pieces_missing_by_sku_pai
+    Production.where(confirmed: false).includes(:production_products).each_with_object({}) do |production, missing_pieces|
+      production.production_products.each do |pp|
+        sku_parts = pp.product.sku.split('-')
+        sku_pai = sku_parts[0..-3].join('-')
+        missing_pieces[sku_pai] ||= 0
+        missing_pieces[sku_pai] += pp.quantity - (
+          (pp.pieces_delivered || 0) +
+          (pp.lost_pieces || 0) +
+          (pp.dirty || 0) +
+          (pp.error || 0) +
+          (pp.discard || 0)
+        )
+      end
     end
   end
 

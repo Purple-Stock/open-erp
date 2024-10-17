@@ -38,6 +38,13 @@ class ProductionProduct < ApplicationRecord
   validates :returned, inclusion: { in: [true, false] }
   validates :lost_pieces, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
+  attribute :dirty, :integer, default: 0
+  attribute :error, :integer, default: 0
+  attribute :discard, :integer, default: 0
+  attribute :pieces_delivered, :integer, default: 0
+  attribute :unit_price, :decimal, default: 0
+  attribute :total_price, :decimal, default: 0
+
   before_save :set_default_pieces_delivered
   before_save :calculate_total_price
   before_save :set_default_unit_price
