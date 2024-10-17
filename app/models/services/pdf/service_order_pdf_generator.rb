@@ -54,9 +54,9 @@ module Services
       def generate_products_table(pdf)
         pdf.text "Peças", size: 14, style: :bold
         pdf.move_down 10
-      
+
         data = [["Produto", "Código", "Quantidade", "Preço un.", "Valor total"]]
-      
+
         @production.production_products.each do |pp|
           quantity = pp.quantity || 0
           unit_price = pp.unit_price || 0
@@ -70,8 +70,8 @@ module Services
             number_to_currency(total_price)
           ]
         end
-      
-        column_widths = [200, 100, 60, 60, 80]
+
+        column_widths = [180, 90, 70, 70, 90]  # Adjusted column widths
         
         # Calculate row heights
         row_heights = data.map do |row|
@@ -79,10 +79,10 @@ module Services
             pdf.height_of(cell.to_s, width: column_widths[i], size: 10) + 10 # Add some padding
           end.max
         end
-      
+
         pdf.bounding_box([0, pdf.cursor], width: pdf.bounds.width, height: row_heights.sum + 1) do
           y_position = pdf.bounds.top
-      
+
           data.each_with_index do |row, row_index|
             row_height = row_heights[row_index]
             
@@ -92,10 +92,10 @@ module Services
               pdf.fill_rectangle [0, y_position], pdf.bounds.width, row_height
               pdf.fill_color "000000"
             end
-      
+
             # Draw horizontal line
             pdf.stroke_horizontal_line 0, pdf.bounds.width, at: y_position
-      
+
             # Draw cell contents
             x_position = 0
             row.each_with_index do |cell, col_index|
@@ -113,31 +113,32 @@ module Services
               end
               x_position += width
             end
-      
+
             y_position -= row_height
           end
-      
+
           # Draw vertical lines
           column_widths.reduce(0) do |x_position, width|
             pdf.stroke_vertical_line pdf.bounds.top, pdf.bounds.bottom, at: x_position
             x_position + width
           end
           pdf.stroke_vertical_line pdf.bounds.top, pdf.bounds.bottom, at: pdf.bounds.width
-      
+
           # Draw bottom line
           pdf.stroke_horizontal_line 0, pdf.bounds.width, at: pdf.bounds.bottom
         end
-      
+
         pdf.move_down 20
       end
 
       def generate_totals(pdf)
+        total_quantity = @production.production_products.sum { |pp| pp.quantity || 0 }
         total_price = @production.production_products.sum do |pp|
           (pp.quantity || 0) * (pp.unit_price || 0)
         end
 
-        pdf.text "Total serviços: #{number_to_currency(0)}", align: :right
-        pdf.text "Total peças: #{number_to_currency(total_price)}", align: :right
+        pdf.text "Quantidade total de peças: #{total_quantity}", style: :bold, align: :right
+        pdf.move_down 10
         pdf.text "Total da ordem de serviço: #{number_to_currency(total_price)}", style: :bold, align: :right
         pdf.move_down 30
       end
