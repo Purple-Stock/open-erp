@@ -54,6 +54,7 @@
                   <div class="col-md-6">
                     <p><strong><%= t('.total_discount') %>:</strong> <%= number_to_currency(summary[:total_discount]) %></p>
                     <p><strong><%= t('.total_returned') %>:</strong> <%= number_to_currency(summary[:total_returned]) %></p>
+                    <p><strong><%= t('.total_lost_pieces') %>:</strong> <%= summary[:total_lost_pieces] %></p>
                     <p><strong><%= t('.total_to_pay') %>:</strong> <%= number_to_currency(summary[:total_pieces_delivered]) %></p>
                   </div>
                 </div>
@@ -66,6 +67,7 @@
                         <th><%= t('.quantity') %></th>
                         <th><%= t('.unit_price') %></th>
                         <th><%= t('.value') %></th>
+                        <th><%= t('.lost_pieces') %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -75,6 +77,7 @@
                           <td><%= data[:count] %></td>
                           <td><%= number_to_currency(data[:unit_price]) %></td>
                           <td><%= number_to_currency(data[:value]) %></td>
+                          <td><%= data[:lost_pieces] %></td>
                         </tr>
                       <% end %>
                     </tbody>

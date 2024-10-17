@@ -75,6 +75,8 @@ pt-BR:
       returned: "Devolvido"
       returned_value: "Valor Devolvido"
       unit_price: "Preço Un."
+      total_lost_pieces: "Total de Peças Perdidas"
+      lost_pieces: "Peças Perdidas"
     production_list:
       service_order_number: "Número da Ordem de Serviço"
       payment_date: "Data de Pagamento"
@@ -96,6 +98,7 @@ pt-BR:
       service_order_pdf: "Ordem de Serviço PDF"
       payment_order_pdf: "Ordem de Pagamento PDF"
       lost_pieces: "Peças Perdidas"
+      total_lost_pieces: "Total de Peças Perdidas"
     missing_pieces:
       title: "Produções com Peças Faltantes"
       filter_by_tailor: "Filtrar por Costureiro"

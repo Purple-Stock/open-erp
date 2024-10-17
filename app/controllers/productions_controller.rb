@@ -144,12 +144,62 @@ class ProductionsController < ApplicationController
       @paid_productions = @paid_productions.where(tailor_id: params[:tailor_id])
     end
 
-    @tailors_summary = calculate_tailors_summary_unpaid(@unpaid_confirmed_productions)
+    @tailors_summary = calculate_tailors_summary_unpaid
 
     respond_to do |format|
       format.html
       format.csv { send_data generate_unpaid_confirmed_csv, filename: "unpaid_confirmed_productions_#{Date.today}.csv" }
     end
+  end
+
+  def calculate_tailors_summary_unpaid
+    summary = {}
+
+    @unpaid_confirmed_productions.each do |production|
+      tailor_id = production.tailor_id
+      summary[tailor_id] ||= {
+        productions_count: 0,
+        total_value: 0,
+        total_pieces_delivered: 0,
+        total_discount: 0,
+        total_returned: 0,
+        total_to_pay: 0,
+        total_lost_pieces: 0,
+        products: {}
+      }
+
+      summary[tailor_id][:productions_count] += 1
+      
+      production_total_to_pay = 0
+      production.production_products.each do |pp|
+        quantity = pp.quantity.to_i
+        unit_price = pp.unit_price.to_f
+        total_price = quantity * unit_price
+        
+        summary[tailor_id][:total_value] += total_price
+        discount = unit_price * (pp.dirty.to_i + pp.error.to_i + pp.discard.to_i)
+        summary[tailor_id][:total_discount] += discount
+        summary[tailor_id][:total_lost_pieces] += pp.lost_pieces.to_i
+        
+        if pp.returned
+          summary[tailor_id][:total_returned] += total_price
+        else
+          delivered_value = (pp.pieces_delivered.to_i * unit_price) - discount
+          summary[tailor_id][:total_pieces_delivered] += delivered_value
+          production_total_to_pay += delivered_value
+
+          product_id = pp.product_id
+          summary[tailor_id][:products][product_id] ||= { count: 0, value: 0, unit_price: unit_price, lost_pieces: 0 }
+          summary[tailor_id][:products][product_id][:count] += pp.pieces_delivered.to_i
+          summary[tailor_id][:products][product_id][:value] += delivered_value
+          summary[tailor_id][:products][product_id][:lost_pieces] += pp.lost_pieces.to_i
+        end
+      end
+
+      summary[tailor_id][:total_to_pay] += production_total_to_pay
+    end
+
+    summary
   end
 
   def price_per_piece_report
@@ -220,48 +270,6 @@ class ProductionsController < ApplicationController
       tailor_summary[:products] = tailor_summary[:products].sort_by { |_, count| -count }.to_h
     end
 
-    summary
-  end
-
-  def calculate_tailors_summary_unpaid(productions)
-    summary = productions.each_with_object({}) do |production, summary|
-      tailor_id = production.tailor_id
-      summary[tailor_id] ||= { 
-        productions_count: 0, 
-        total_value: 0, 
-        total_pieces_delivered: 0,
-        total_discount: 0,
-        total_returned: 0, 
-        products: {} 
-      }
-      summary[tailor_id][:productions_count] += 1
-      
-      production_total_to_pay = 0
-      production.production_products.each do |pp|
-        summary[tailor_id][:total_value] += pp.total_price if pp.total_price
-        discount = (pp.unit_price || 0) * (pp.dirty + pp.error + pp.discard)
-        summary[tailor_id][:total_discount] += discount
-        
-        if pp.returned
-          summary[tailor_id][:total_returned] += pp.total_price if pp.total_price
-        else
-          product_total = (pp.pieces_delivered || 0) * (pp.unit_price || 0) - discount
-          production_total_to_pay += product_total
-          
-          summary[tailor_id][:products][pp.product_id] ||= { count: 0, unit_price: 0, value: 0 }
-          summary[tailor_id][:products][pp.product_id][:count] += pp.quantity
-          summary[tailor_id][:products][pp.product_id][:unit_price] = pp.unit_price || 0
-          summary[tailor_id][:products][pp.product_id][:value] += pp.total_price if pp.total_price
-        end
-      end
-      
-      summary[tailor_id][:total_pieces_delivered] += production_total_to_pay
-    end
-  
-    summary.each do |tailor_id, tailor_summary|
-      tailor_summary[:products] = tailor_summary[:products].sort_by { |_, data| -data[:value] }.to_h
-    end
-  
     summary
   end
 
