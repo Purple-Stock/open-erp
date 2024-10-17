@@ -164,5 +164,41 @@ RSpec.describe Production, type: :model do
         expect(production.calendar_date).to eq(production.expected_delivery_date)
       end
     end
+
+    describe '#total_value_delivered' do
+      it 'calculates the total value of delivered pieces correctly' do
+        production.production_products.first.update(
+          pieces_delivered: 8,
+          unit_price: 10
+        )
+        production.production_products.last.update(
+          pieces_delivered: 3,
+          unit_price: 15
+        )
+
+        expected_total = (8 * 10) + (3 * 15)
+        expect(production.total_value_delivered).to eq(expected_total)
+      end
+
+      it 'returns 0 when no pieces have been delivered' do
+        production.production_products.update_all(pieces_delivered: 0)
+        expect(production.total_value_delivered).to eq(0)
+      end
+
+      it 'excludes non-delivered pieces from the calculation' do
+        production.production_products.first.update(
+          quantity: 10,
+          pieces_delivered: 5,
+          unit_price: 10
+        )
+        production.production_products.last.update(
+          quantity: 8,
+          pieces_delivered: 0,
+          unit_price: 15
+        )
+
+        expect(production.total_value_delivered).to eq(50) # Only 5 * 10 for the first product
+      end
+    end
   end
 end
