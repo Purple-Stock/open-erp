@@ -99,6 +99,9 @@ pt-BR:
       payment_order_pdf: "Ordem de Pagamento PDF"
       lost_pieces: "Peças Perdidas"
       total_lost_pieces: "Total de Peças Perdidas"
+      delivery_dates: "Datas de Entrega"
+      no_deliveries: "Nenhuma produção entregue"
+      date_to_be_defined: "Data a ser definida"
     missing_pieces:
       title: "Produções com Peças Faltantes"
       filter_by_tailor: "Filtrar por Costureiro"
