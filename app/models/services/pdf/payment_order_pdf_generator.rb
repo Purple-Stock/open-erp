@@ -204,8 +204,6 @@ module Services
         pdf.move_down 10
         pdf.text "Total desconto: #{number_to_currency(total_discount)}", style: :bold, align: :right
         pdf.move_down 10
-        pdf.text "Total devolvido: #{number_to_currency(total_returned)}", style: :bold, align: :right
-        pdf.move_down 10
         pdf.text "Total peças perdidas: #{total_lost_pieces}", style: :bold, align: :right
         pdf.move_down 10
         pdf.text "Total a pagar: #{number_to_currency(total_to_pay)}", style: :bold, align: :right

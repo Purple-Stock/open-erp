@@ -26,8 +26,20 @@
               <p><strong><%= Production.human_attribute_name(:tailor) %>:</strong> <%= production.tailor.name %></p>
               <p><strong><%= Production.human_attribute_name(:cut_date) %>:</strong> <%= l(production.cut_date, format: :long) if production.cut_date %></p>
               <p><strong><%= Production.human_attribute_name(:expected_delivery_date) %>:</strong> <%= l(production.expected_delivery_date, format: :long) if production.expected_delivery_date %></p>
-              <p><strong><%= t('.delivery_date') %>:</strong> <%= l(production.production_products.maximum(:delivery_date), format: :long) if production.production_products.maximum(:delivery_date) %></p>
-              <p><strong><%= Production.human_attribute_name(:payment_date) %>:</strong> <%= l(production.payment_date, format: :long) if production.payment_date %></p>
+              <p><strong><%= Production.human_attribute_name(:payment_date) %>:</strong> <%= production.payment_date ? l(production.payment_date, format: :long) : t('.date_to_be_defined') %></p>
+            </div>
+            <div class="col-md-8">
+              <p><strong><%= t('.delivery_dates') %>:</strong></p>
+              <% delivery_dates = production.production_products.map(&:delivery_date).compact.uniq %>
+              <% if delivery_dates.any? %>
+                <ul>
+                  <% delivery_dates.sort.each do |date| %>
+                    <li><%= l(date, format: :long) %></li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <p><%= t('.no_deliveries') %></p>
+              <% end %>
             </div>
           </div>
           <h6 class="mt-4"><%= t('.products') %>:</h6>
