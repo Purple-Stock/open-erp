@@ -216,6 +216,20 @@ RSpec.describe Production, type: :model do
         expected_total = production.production_products.first.pieces_delivered * production.production_products.first.unit_price
         expect(production.total_value_delivered).to be_within(0.01).of(expected_total)
       end
+
+      it 'handles nil unit_price correctly' do
+        production.production_products.first.update(
+          pieces_delivered: 5,
+          unit_price: nil
+        )
+        production.production_products.last.update(
+          pieces_delivered: 3,
+          unit_price: 10.0
+        )
+
+        expected_total = 0 + (3 * 10.0)
+        expect(production.total_value_delivered).to be_within(0.01).of(expected_total)
+      end
     end
   end
 end
