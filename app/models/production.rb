@@ -126,6 +126,8 @@ class Production < ApplicationRecord
   end
 
   def total_value_delivered
-    production_products.sum { |pp| pp.pieces_delivered * pp.unit_price }
+    production_products.sum do |pp|
+      (pp.pieces_delivered || 0) * (pp.unit_price || 0)
+    end
   end
 end
