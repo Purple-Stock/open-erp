@@ -196,6 +196,16 @@
             </li>
           <% end %>
         <% end %>
+        
+        <!-- Add this new dropdown menu item after the "Shein" dropdown -->
+        <%= render 'shared/sidebar_dropdown', title: t("bling_module_situations.two"), icon: 'fas fa-cogs' do %>
+          <li class="<%= active_nav_item('bling_module_situations', 'index') %>">
+            <%= link_to t("bling_module_situations.list"), bling_module_situations_path, class: 'nav-link' %>
+          </li>
+          <li class="<%= active_nav_item('bling_module_situations', 'new') %>">
+            <%= link_to t("bling_module_situations.create"), new_bling_module_situation_path, class: 'nav-link' %>
+          </li>
+        <% end %>
       </ul>
     </aside>
   </div>

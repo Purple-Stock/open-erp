@@ -66,6 +66,15 @@ pt-BR:
         notions_cost: "Custo de Aviamentos"
         fabric_cost: "Custo de Tecido"
         # Remove the total_material_cost line
+    models:
+      bling_module_situation: "Situação do Módulo Bling"
+    attributes:
+      bling_module_situation:
+        module_id: "ID do Módulo"
+        situation_id: "ID da Situação"
+        name: "Nome"
+        inherited_id: "ID Herdado"
+        color: "Cor"
   actions:
     remove_product: "Remover Produto"
   errors:
@@ -232,6 +241,10 @@ pt-BR:
       new: Criar %{model}
       edit: Editar %{model}
     actions: Ações
+    submit:
+      bling_module_situation:
+        create: "Criar Situação do Módulo Bling"
+        update: "Atualizar Situação do Módulo Bling"
   number:
     currency:
       format:
@@ -341,3 +354,11 @@ helpers:
       price_per_piece: "Preço por Peça"
     production_card:
       remaining: "Restante"
+  bling_module_situations:
+    title: "Situações dos Módulos Bling"
+    new: "Nova Situação do Módulo Bling"
+    edit: "Editar Situação do Módulo Bling"
+    create_success: "Situação do Módulo Bling criada com sucesso."
+    update_success: "Situação do Módulo Bling atualizada com sucesso."
+    destroy_success: "Situação do Módulo Bling excluída com sucesso."
+    confirm_destroy: "Tem certeza que deseja excluir esta Situação do Módulo Bling?"

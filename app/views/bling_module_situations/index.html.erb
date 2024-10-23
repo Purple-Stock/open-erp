@@ -1,0 +1,35 @@
+<h1><%= t('bling_module_situations.title') %></h1>
+
+<%= link_to t('bling_module_situations.new'), new_bling_module_situation_path %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= BlingModuleSituation.human_attribute_name(:module_id) %></th>
+      <th><%= BlingModuleSituation.human_attribute_name(:situation_id) %></th>
+      <th><%= BlingModuleSituation.human_attribute_name(:name) %></th>
+      <th><%= BlingModuleSituation.human_attribute_name(:inherited_id) %></th>
+      <th><%= BlingModuleSituation.human_attribute_name(:color) %></th>
+      <th><%= t('actions') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bling_module_situations.each do |situation| %>
+      <tr>
+        <td><%= situation.module_id %></td>
+        <td><%= situation.situation_id %></td>
+        <td><%= situation.name %></td>
+        <td><%= situation.inherited_id %></td>
+        <td>
+          <span class="color-swatch" style="background-color: <%= situation.color %>; display: inline-block; width: 20px; height: 20px; margin-right: 5px;"></span>
+          <%= situation.color %>
+        </td>
+        <td>
+          <%= link_to t('show'), situation %>
+          <%= link_to t('edit'), edit_bling_module_situation_path(situation) %>
+          <%= link_to t('destroy'), situation, method: :delete, data: { confirm: t('bling_module_situations.confirm_destroy') } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

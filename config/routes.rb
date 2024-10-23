@@ -171,4 +171,6 @@ Rails.application.routes.draw do
 
   get 'dashboards/status_summary', to: 'dashboards#status_summary', as: 'dashboards_status_summary'
 
+  resources :bling_module_situations
+
 end
