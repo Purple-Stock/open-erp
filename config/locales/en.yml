@@ -70,10 +70,14 @@ en:
       production_updated: "Production was successfully updated."
     show:
       price_per_piece: "Price per Piece"
+    production_card:
+      total_quantity: "Total Quantity"
+      missing_quantity: "Missing Quantity"
   activerecord:
     models:
       production: "Production"
       production_product: "Production Product"
+      bling_module_situation: "Bling Module Situation"
     attributes:
       production:
         number: "Number"
@@ -98,6 +102,12 @@ en:
         dirty: "Dirty"
         error: "Error"
         discard: "Discard"
+      bling_module_situation:
+        module_id: "Module ID"
+        situation_id: "Situation ID"
+        name: "Name"
+        inherited_id: "Inherited ID"
+        color: "Color"
     errors:
       models:
         production:
@@ -107,11 +117,23 @@ en:
   helpers:
     submit:
       update: "Update"
+      bling_module_situation:
+        create: "Create Bling Module Situation"
+        update: "Update Bling Module Situation"
     links:
       back: "Back"
       edit: "Edit"
       destroy: "Destroy"
       cancel: "Cancel"
       confirm: "Are you sure?"
-  actions:
-    remove: "Remove"
+    actions:
+      remove: "Remove"
+
+  bling_module_situations:
+    title: "Bling Module Situations"
+    new: "New Bling Module Situation"
+    edit: "Edit Bling Module Situation"
+    create_success: "Bling Module Situation was successfully created."
+    update_success: "Bling Module Situation was successfully updated."
+    destroy_success: "Bling Module Situation was successfully destroyed."
+    confirm_destroy: "Are you sure you want to delete this Bling Module Situation?"

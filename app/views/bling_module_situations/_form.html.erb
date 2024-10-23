@@ -1,0 +1,42 @@
+<%= form_with(model: bling_module_situation, local: true) do |form| %>
+  <% if bling_module_situation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bling_module_situation.errors.count, "error") %> prohibited this bling_module_situation from being saved:</h2>
+
+      <ul>
+        <% bling_module_situation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :module_id %>
+    <%= form.number_field :module_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :situation_id %>
+    <%= form.number_field :situation_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :inherited_id %>
+    <%= form.number_field :inherited_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :color %>
+    <%= form.color_field :color %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -92,3 +92,8 @@ pt-BR:
         other: Estimativas de Receita
       bling_order_items:
         list: Lista de Itens de Pedido Bling
+  bling_module_situations:
+    one: Situação
+    two: Situações Bling
+    list: Lista de Situações
+    create: Criar Situação

@@ -1,0 +1,14 @@
+<h1><%= t('bling_module_situations.title') %></h1>
+
+<p><strong><%= BlingModuleSituation.human_attribute_name(:module_id) %>:</strong> <%= @bling_module_situation.module_id %></p>
+<p><strong><%= BlingModuleSituation.human_attribute_name(:situation_id) %>:</strong> <%= @bling_module_situation.situation_id %></p>
+<p><strong><%= BlingModuleSituation.human_attribute_name(:name) %>:</strong> <%= @bling_module_situation.name %></p>
+<p><strong><%= BlingModuleSituation.human_attribute_name(:inherited_id) %>:</strong> <%= @bling_module_situation.inherited_id %></p>
+<p>
+  <strong><%= BlingModuleSituation.human_attribute_name(:color) %>:</strong>
+  <span class="color-swatch" style="background-color: <%= @bling_module_situation.color %>; display: inline-block; width: 20px; height: 20px; margin-right: 5px;"></span>
+  <%= @bling_module_situation.color %>
+</p>
+
+<%= link_to t('edit'), edit_bling_module_situation_path(@bling_module_situation) %> |
+<%= link_to t('back'), bling_module_situations_path %>
