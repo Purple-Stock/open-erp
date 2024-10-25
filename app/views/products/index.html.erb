@@ -7,6 +7,14 @@
 </div>
 
 <div class="section-body">
+  <%= form_tag products_path, method: :get, class: 'mb-3' do %>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search by name or SKU' %>
+      <div class="input-group-append">
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
 
   <%= link_to t('.new', :default => t("helpers.links.new")), new_product_path, :class => 'btn btn-primary mb-3' %>
 
@@ -48,13 +56,14 @@
                   <%= link_to icon('fas fa-eye'), product, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-clone'), meeting_duplicate_path(product), title: t('duplicate'), class: 'btn btn-warning', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-sync'), update_product_active_path(product), title: t('update_active'), class: 'btn btn-success', data: { toggle: 'tooltip', turbo: false } %>
+                  <%= link_to icon('fas fa-qrcode'), download_qr_code_product_path(product), title: t('download_qr_code'), class: 'btn btn-secondary', data: { toggle: 'tooltip', turbo: false } %>
                   <% link_to icon('fas fa-trash'), destroy_from_index_product_path(product), title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
                 </td>
               <% end %>
             <% end %>
             </tbody>
           </table>
-          <%== pagy_bootstrap_nav(@pagy) %>
+          <%== pagy_bootstrap_nav(@pagy, link_extra: "data-turbo-frame='products'") %>
         </div>
       <% end %>
     </div>
