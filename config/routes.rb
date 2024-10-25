@@ -85,6 +85,7 @@ Rails.application.routes.draw do
   resources :products do
     member do
       delete :destroy_from_index
+      get 'download_qr_code'
     end
   end
   resources :bling_data, only: %i[index show]

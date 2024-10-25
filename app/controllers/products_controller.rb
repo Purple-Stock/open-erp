@@ -10,7 +10,14 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     products = Product.includes(:category)
-                      .where(account_id: current_tenant).order('created_at DESC')
+                      .where(account_id: current_tenant)
+                      .order('created_at DESC')
+
+    if params[:search].present?
+      search_term = "%#{params[:search]}%"
+      products = products.where("name ILIKE ? OR sku ILIKE ?", search_term, search_term)
+    end
+
     @pagy, @products = pagy(products)
   end
 
@@ -139,6 +146,13 @@ class ProductsController < ApplicationController
         format.html { redirect_to products_path }
       end
     end
+  end
+
+  def download_qr_code
+    @product = Product.find(params[:id])
+    qr_code = RQRCode::QRCode.new(@product.sku)
+    png = qr_code.as_png(size: 300)
+    send_data png, type: 'image/png', disposition: 'attachment', filename: "#{@product.name}_qr_code.png"
   end
 
   private
