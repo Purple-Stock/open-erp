@@ -12,7 +12,7 @@ module Services
       end
 
       def call
-        object = { id: @product.id, custom_id: @product.custom_id, name: @product.name }
+        object = { id: @product.id, account_id: @product.account_id }
         RQRCode::QRCode.new(object.to_json).to_img.resize(@width, @height).to_data_url
       end
     end

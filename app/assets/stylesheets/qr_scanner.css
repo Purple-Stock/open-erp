@@ -1,0 +1,133 @@
+#reader {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+}
+
+#raw-data {
+  background: #f8f9fa;
+  border-radius: 4px;
+  padding: 10px;
+  word-break: break-all;
+}
+
+.modal-body pre {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Remove modal backdrop and adjust modal styling */
+.modal-backdrop {
+  display: none !important;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1050 !important;
+}
+
+.modal-dialog {
+  z-index: 1051 !important;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.modal-content {
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  border-radius: 12px 12px 0 0;
+  padding: 1.2rem;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.product-info-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.product-header {
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.product-header h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: #2d3748;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.info-item i {
+  font-size: 1.2rem;
+  padding-top: 0.2rem;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-content label {
+  display: block;
+  font-size: 0.875rem;
+  color: #718096;
+  margin-bottom: 0.25rem;
+}
+
+.info-content .value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.action-buttons {
+  margin-top: 2rem;
+}
+
+.action-buttons .btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+}
+
+.modal-footer {
+  border-radius: 0 0 12px 12px;
+  padding: 1rem 1.5rem;
+}
+
+/* Hide the HTML5 QR scanner's continue button when modal is shown */
+.modal.show ~ #reader__dashboard_section_csr button {
+  display: none !important;
+}
+
+/* Ensure scanner elements don't overlap modal */
+#reader__dashboard_section_csr,
+#reader__dashboard_section_swaplink,
+#reader__scan_region {
+  z-index: 1 !important;
+} 

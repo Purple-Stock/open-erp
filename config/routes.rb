@@ -86,6 +86,8 @@ Rails.application.routes.draw do
     member do
       delete :destroy_from_index
       get 'download_qr_code'
+      get 'scan_qr_code'  # Page with camera scanner
+      post 'update_stock_from_qr' # Endpoint to update stock
     end
   end
   resources :bling_data, only: %i[index show]
@@ -142,6 +144,8 @@ Rails.application.routes.draw do
       post 'sale_products/remove_products', to: 'sale_products#remove_products', as: 'remove_products'
       post 'purchase_products/add_inventory_quantity', to: 'purchase_products#add_inventory_quantity',
                                                        as: 'add_inventory_quantity'
+      get 'products/find_by_sku/:sku', to: 'products#find_by_sku', as: 'find_product_by_sku'
+      get 'products/:id/show_by_id', to: 'products#show_by_id', as: 'show_product_by_id'
     end
   end
   root to: 'home#index'
@@ -173,5 +177,7 @@ Rails.application.routes.draw do
   get 'dashboards/status_summary', to: 'dashboards#status_summary', as: 'dashboards_status_summary'
 
   resources :bling_module_situations
+
+  get 'qr_scanner', to: 'qr_scanner#index', as: 'qr_scanner'
 
 end

@@ -31,33 +31,28 @@
 #  fk_rails_...  (category_id => categories.id)
 #
 class ProductSerializer
-  include FastJsonapi::ObjectSerializer
+  include JSONAPI::Serializer
 
-  attributes :id, :custom_id, :name, :count_purchase_product, :count_sale_product, :active, :sku
-
-  attribute :price do |object|
-    "R$ #{object.price}"
-  end
-
-  attribute :balance, &:balance
-
-  attribute :custom_id do |object|
-    object.custom_id.to_i
-  end
+  attributes :id, :name, :sku, :price, :active, :custom_id
 
   attribute :category do |object|
-    object.category.name
+    object.category&.name
   end
 
-  attribute :image_url do |object|
-    object.image.attached? ? Rails.application.routes.url_helpers.rails_blob_path(object.image, only_path: true) : 'https://purple-stock.s3-sa-east-1.amazonaws.com/images.png'
-  end
-
-  attribute :active do |object|
-    if object.active
-      'Sim'
+  attribute :stock do |object|
+    if object.stock
+      object.stock.try(:quantity) || 0
     else
-      'Não'
+      0
     end
+  end
+
+  attribute :formatted_price do |object|
+    ActionController::Base.helpers.number_to_currency(
+      object.price,
+      unit: "R$",
+      separator: ",",
+      delimiter: "."
+    )
   end
 end

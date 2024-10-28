@@ -1,0 +1,72 @@
+<div class="section-header">
+  <div class="page-header">
+    <h1>Scan QR Code</h1>
+  </div>
+</div>
+
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
+      <div id="reader"></div>
+      
+      <div id="result-container" class="mt-4" style="display: none;">
+        <div class="form-group">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" class="form-control" min="0">
+        </div>
+        <button id="submit-quantity" class="btn btn-primary mt-3">Update Stock</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "https://unpkg.com/html5-qrcode" %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader", { fps: 10, qrbox: 250 });
+
+    function onScanSuccess(decodedText, decodedResult) {
+      // Stop scanning
+      html5QrcodeScanner.clear();
+      
+      // Show the quantity input
+      document.getElementById('result-container').style.display = 'block';
+      
+      // Handle submit button click
+      document.getElementById('submit-quantity').addEventListener('click', function() {
+        const quantity = document.getElementById('quantity').value;
+        
+        // Send the data to the server
+        fetch(`/products/${decodedText}/update_stock_from_qr`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+          },
+          body: JSON.stringify({ quantity: quantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Stock updated successfully!');
+            window.location.href = '/products';
+          } else {
+            alert('Error updating stock: ' + data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Error updating stock');
+        });
+      });
+    }
+
+    function onScanError(errorMessage) {
+      // handle scan error
+    }
+
+    html5QrcodeScanner.render(onScanSuccess, onScanError);
+  });
+</script> 
