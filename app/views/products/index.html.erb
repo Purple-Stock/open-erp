@@ -17,6 +17,7 @@
   <% end %>
 
   <%= link_to t('.new', :default => t("helpers.links.new")), new_product_path, :class => 'btn btn-primary mb-3' %>
+  <%= link_to icon('fas fa-camera') + ' Scan QR Code', qr_scanner_path, class: 'btn btn-info mb-3 ml-2' %>
 
   <div class="card">
     <div class="card-body">
@@ -43,7 +44,10 @@
               <%= tag.tr id: dom_id(product) do %>
                 <td><%= link_to (product.image.attached? ? image_tag(rails_blob_path(product.image.variant(:thumb)), class: "thumb-image #{'thumb-image-mobile' if (platform.mobile? || platform.mobile_app?) }") : image_tag('products/product-5-50.png', size: '50', class: "thumb-image #{'thumb-image-mobile' if (platform.mobile? || platform.mobile_app?) }" )), product_path(product), data: { toggle: 'tooltip', turbo: false } %></td>
                 <td><%= product.name %></td>
-                <td><%= product.sku %></td>
+                <td>
+                  <%= product.sku %>
+                  <%= image_tag Services::Product::GenerateQrCode.new(product: product).call, size: '50' %>
+                </td>
                 <td><%= product.custom_id %></td>
                 <td><%= number_to_currency_pt_br(product.price) %></td>
                 <td><%= Services::Product::CountQuantity.call(product: product, product_command: 'purchase_product') %></td>

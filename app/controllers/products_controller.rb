@@ -150,9 +150,39 @@ class ProductsController < ApplicationController
 
   def download_qr_code
     @product = Product.find(params[:id])
-    qr_code = RQRCode::QRCode.new(@product.sku)
-    png = qr_code.as_png(size: 300)
-    send_data png, type: 'image/png', disposition: 'attachment', filename: "#{@product.name}_qr_code.png"
+    qr_code_data_url = Services::Product::GenerateQrCode.new(product: @product).call
+    
+    # Convert data URL to binary
+    png_data = Base64.decode64(qr_code_data_url.split(',')[1])
+    
+    send_data png_data, 
+      type: 'image/png', 
+      disposition: 'attachment', 
+      filename: "#{@product.name}_qr_code.png"
+  end
+
+  def scan_qr_code
+    # Just renders the view with the QR scanner
+  end
+
+  def update_stock_from_qr
+    @product = Product.find(params[:id])
+    quantity = params[:quantity].to_i
+
+    begin
+      ActiveRecord::Base.transaction do
+        # Create a new stock record or update existing
+        if @product.stock.nil?
+          @product.create_stock(quantity: quantity)
+        else
+          @product.stock.update!(quantity: quantity)
+        end
+
+        render json: { success: true, message: 'Stock updated successfully' }
+      end
+    rescue StandardError => e
+      render json: { success: false, error: e.message }, status: :unprocessable_entity
+    end
   end
 
   private

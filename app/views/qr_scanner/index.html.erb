@@ -1,0 +1,186 @@
+<div class="section-header">
+  <div class="page-header">
+    <h1>QR Code Scanner</h1>
+  </div>
+</div>
+
+<div class="section-body">
+  <div class="card">
+    <div class="card-body">
+      <div id="reader"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="qrDataModal" tabindex="-1" role="dialog" aria-labelledby="qrDataModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="qrDataModalLabel">
+          <i class="fas fa-box-open mr-2"></i>Product Details
+        </h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="qr-result">
+          <div id="product-data">
+            <div class="product-info-card">
+              <div class="product-header mb-4">
+                <h4 id="product-name" class="mb-2"></h4>
+                <span id="product-sku" class="text-muted"></span>
+              </div>
+              
+              <div class="info-grid">
+                <div class="info-item">
+                  <i class="fas fa-tag text-primary"></i>
+                  <div class="info-content">
+                    <label>Price</label>
+                    <span id="product-price" class="value"></span>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <i class="fas fa-boxes text-success"></i>
+                  <div class="info-content">
+                    <label>Stock</label>
+                    <span id="product-stock" class="value"></span>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <i class="fas fa-folder text-info"></i>
+                  <div class="info-content">
+                    <label>Category</label>
+                    <span id="product-category" class="value"></span>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <i class="fas fa-circle-check text-warning"></i>
+                  <div class="info-content">
+                    <label>Status</label>
+                    <span id="product-status" class="value"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="action-buttons mt-4 text-center">
+              <a id="product-link" href="#" class="btn btn-primary btn-lg mr-2">
+                <i class="fas fa-eye mr-1"></i> View
+              </a>
+              <a id="product-edit" href="#" class="btn btn-warning btn-lg">
+                <i class="fas fa-pencil-alt mr-1"></i> Edit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <i class="fas fa-times mr-1"></i> Close
+        </button>
+        <button type="button" class="btn btn-primary" id="scan-new">
+          <i class="fas fa-camera mr-1"></i> Scan New Code
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "https://unpkg.com/html5-qrcode" %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", { fps: 10, qrbox: 250 });
+
+  function formatPrice(price) {
+    return new Intl.NumberFormat('pt-BR', { 
+      style: 'currency', 
+      currency: 'BRL' 
+    }).format(price);
+  }
+
+  function displayProductData(product) {
+    console.log('Displaying product:', product);
+    
+    document.getElementById('product-name').textContent = product.name;
+    document.getElementById('product-sku').textContent = product.sku;
+    document.getElementById('product-price').textContent = product.formatted_price || formatPrice(product.price);
+    document.getElementById('product-stock').textContent = product.stock || '0';
+    document.getElementById('product-category').textContent = product.category || 'N/A';
+    document.getElementById('product-status').textContent = product.active ? 'Active' : 'Inactive';
+    
+    document.getElementById('product-link').href = `/products/${product.id}`;
+    document.getElementById('product-edit').href = `/products/${product.id}/edit`;
+    
+    $('#qrDataModal').modal('show');
+  }
+
+  function onScanSuccess(decodedText, decodedResult) {
+    // Stop scanning
+    html5QrcodeScanner.clear();
+    
+    console.log('Scanned QR code:', decodedText);
+    
+    try {
+      // Parse the QR code data as JSON
+      const qrData = JSON.parse(decodedText);
+      console.log('Parsed QR data:', qrData);
+      
+      // Use the correct API endpoint path
+      const url = `/api/v1/products/${qrData.id}/show_by_id`;
+      console.log('Fetching from URL:', url);
+      
+      fetch(url, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => {
+          console.log('Response status:', response.status);
+          if (!response.ok) {
+            throw new Error('Product not found');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Product data:', data);
+          displayProductData(data.data.attributes);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Error finding product: ' + error.message);
+          location.reload();
+        });
+    } catch (e) {
+      console.error('Invalid QR code format:', e);
+      alert('Invalid QR code format');
+      location.reload();
+    }
+  }
+
+  function onScanError(errorMessage) {
+    console.warn(`QR error: ${errorMessage}`);
+  }
+
+  // Initialize scanner
+  html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+  // Handle "Scan New Code" button
+  document.getElementById('scan-new').addEventListener('click', function() {
+    $('#qrDataModal').modal('hide');
+    location.reload(); // Reload page to restart scanner
+  });
+
+  // Handle modal close
+  $('#qrDataModal').on('hidden.bs.modal', function () {
+    location.reload(); // Reload page to restart scanner
+  });
+});
+</script> 
