@@ -146,7 +146,7 @@ gem 'rails-i18n', '~> 7.0.9'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
 gem 'rubocop-rails', '>= 2.26.0', require: false
-gem 'rubocop-rspec', '>= 2.24.1', require: false
+gem 'rubocop-rspec', '>= 3.0.0', require: false
 gem 'rubocop-performance', '>= 1.20.0', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
