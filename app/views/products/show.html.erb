@@ -8,7 +8,15 @@
       <table>
         <tr class="row">
           <td><%= @product.image.attached? ? image_tag(rails_blob_path(@product.image), size: 300) : image_tag('products/product-5-50.png', size: '300') %></td>
-          <td><%= image_tag Services::Product::GenerateQrCode.new(product: @product).call if platform.desktop? %></td>
+          <td>
+            <% if platform.desktop? %>
+              <%= image_tag Services::Product::GenerateQrCode.new(product: @product).call %>
+              <div class="text-center mt-2">
+                <small class="text-muted">SKU</small><br>
+                <strong><%= @product.decorate.sku %></strong>
+              </div>
+            <% end %>
+          </td>
           <td class="mt-md-5">
             <table>
               <tr>

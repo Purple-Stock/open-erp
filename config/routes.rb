@@ -88,6 +88,7 @@ Rails.application.routes.draw do
       get 'download_qr_code'
       get 'scan_qr_code'  # Page with camera scanner
       post 'update_stock_from_qr' # Endpoint to update stock
+      get :qr_code
     end
   end
   resources :bling_data, only: %i[index show]
