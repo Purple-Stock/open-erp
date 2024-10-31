@@ -45,7 +45,7 @@
                 <div class="info-item">
                   <i class="fas fa-boxes text-success"></i>
                   <div class="info-content">
-                    <label>Stock</label>
+                    <label>Current Stock</label>
                     <span id="product-stock" class="value"></span>
                   </div>
                 </div>
@@ -65,6 +65,40 @@
                     <span id="product-status" class="value"></span>
                   </div>
                 </div>
+              </div>
+
+              <!-- Stock Management Section -->
+              <div class="stock-management mt-4 border-top pt-4">
+                <h5 class="mb-3">Stock Management</h5>
+                <div class="form-group">
+                  <label for="warehouse-select">Warehouse</label>
+                  <select id="warehouse-select" class="form-control">
+                    <% Warehouse.where(account_id: current_tenant).each do |warehouse| %>
+                      <option value="<%= warehouse.bling_id %>" <%= 'selected' if warehouse.is_default %>>
+                        <%= warehouse.description %>
+                      </option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="stock-operation">Operation Type</label>
+                  <select id="stock-operation" class="form-control">
+                    <option value="B">Balance (Balanço)</option>
+                    <option value="E">Entry (Entrada)</option>
+                    <option value="S">Exit (Saída)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="stock-quantity">Quantity</label>
+                  <input type="number" id="stock-quantity" class="form-control" min="0" step="1">
+                </div>
+                <div class="form-group">
+                  <label for="stock-notes">Notes</label>
+                  <textarea id="stock-notes" class="form-control" rows="2"></textarea>
+                </div>
+                <button id="update-stock" class="btn btn-success btn-block">
+                  <i class="fas fa-save mr-1"></i> Update Stock
+                </button>
               </div>
             </div>
             
@@ -86,6 +120,33 @@
         <button type="button" class="btn btn-primary" id="scan-new">
           <i class="fas fa-camera mr-1"></i> Scan New Code
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateStockModal" tabindex="-1" role="dialog" aria-labelledby="updateStockModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateStockModalLabel">Update Stock</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="product-info">
+          <p><strong>SKU:</strong> <span id="productSku"></span></p>
+          <p><strong>Current Stock:</strong> <span id="currentStock"></span></p>
+        </div>
+        <div class="form-group">
+          <label for="newQuantity">New Quantity:</label>
+          <input type="number" class="form-control" id="newQuantity" min="0">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="updateStock()">Update Stock</button>
       </div>
     </div>
   </div>
@@ -117,9 +178,75 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById('product-link').href = `/products/${product.id}`;
     document.getElementById('product-edit').href = `/products/${product.id}/edit`;
+
+    // Store product ID for stock update
+    document.getElementById('update-stock').dataset.productId = product.id;
     
     $('#qrDataModal').modal('show');
   }
+
+  // Handle stock update
+  document.getElementById('update-stock').addEventListener('click', function() {
+    const productId = this.dataset.productId;
+    const blingId = this.dataset.blingId;
+    const warehouseId = document.getElementById('warehouse-select').value;
+    const operation = document.getElementById('stock-operation').value;
+    const quantity = document.getElementById('stock-quantity').value;
+    const notes = document.getElementById('stock-notes').value;
+
+    if (!quantity) {
+      alert('Please enter a quantity');
+      return;
+    }
+
+    if (!warehouseId) {
+      alert('Please select a warehouse');
+      return;
+    }
+
+    if (!blingId) {
+      alert('No Bling ID found for this product');
+      return;
+    }
+
+    // Update stock in both local system and Bling
+    fetch(`/products/${productId}/update_stock_from_qr`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      },
+      body: JSON.stringify({
+        quantity: quantity,
+        operation: operation,
+        notes: notes,
+        warehouse_id: warehouseId,
+        bling_id: blingId
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('Stock updated successfully' + (data.bling_sync ? ' (Synced with Bling)' : ''));
+        location.reload();
+      } else {
+        if (data.retry_allowed) {
+          if (confirm(data.error + '\n\nWould you like to try again?')) {
+            // Wait 2 seconds and retry
+            setTimeout(() => {
+              this.click();
+            }, 2000);
+            return;
+          }
+        }
+        alert('Error: ' + data.error);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Error updating stock: ' + error.message);
+    });
+  });
 
   function onScanSuccess(decodedText, decodedResult) {
     // Stop scanning
@@ -151,6 +278,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
           console.log('Product data:', data);
+          // Store the bling_id in the button's dataset
+          document.getElementById('update-stock').dataset.blingId = qrData.bling_id;
           displayProductData(data.data.attributes);
         })
         .catch(error => {
@@ -183,4 +312,57 @@ document.addEventListener('DOMContentLoaded', function() {
     location.reload(); // Reload page to restart scanner
   });
 });
+
+let currentProductId = null;
+
+function handleQrCode(qrData) {
+  try {
+    const data = JSON.parse(qrData);
+    currentProductId = data.id;
+    
+    // Fetch current product info
+    fetch(`/api/v1/products/${data.id}/show_by_id`)
+      .then(response => response.json())
+      .then(product => {
+        document.getElementById('productSku').textContent = product.sku;
+        document.getElementById('currentStock').textContent = product.current_stock;
+        $('#updateStockModal').modal('show');
+      })
+      .catch(error => {
+        alert('Error fetching product information: ' + error.message);
+      });
+  } catch (e) {
+    alert('Invalid QR code format');
+  }
+}
+
+function updateStock() {
+  const quantity = document.getElementById('newQuantity').value;
+  
+  if (!quantity) {
+    alert('Please enter a quantity');
+    return;
+  }
+
+  fetch(`/products/${currentProductId}/update_stock_from_qr`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+    },
+    body: JSON.stringify({ quantity: quantity })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('Stock updated successfully' + (data.bling_sync ? ' (Synced with Bling)' : ''));
+      $('#updateStockModal').modal('hide');
+    } else {
+      alert('Error: ' + data.error);
+    }
+  })
+  .catch(error => {
+    alert('Error updating stock: ' + error.message);
+  });
+}
 </script> 

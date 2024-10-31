@@ -165,20 +165,46 @@ class ProductsController < ApplicationController
   def update_stock_from_qr
     @product = Product.find(params[:id])
     quantity = params[:quantity].to_i
+    operation = params[:operation]
 
     begin
-      ActiveRecord::Base.transaction do
-        # Create a new stock record or update existing
-        if @product.stock.nil?
-          @product.create_stock(quantity: quantity)
-        else
-          @product.stock.update!(quantity: quantity)
+      # Only update stock in Bling if bling_id is present
+      if @product.bling_id.present?
+        result = Services::Bling::CreateStockRecord.call(
+          warehouse_id: params[:warehouse_id],
+          product_id: @product.bling_id,
+          quantity: quantity,
+          operation: operation,
+          tenant: current_tenant,
+          notes: params[:notes]
+        )
+
+        unless result.success?
+          error_message = if result.error.include?('TOO_MANY_REQUESTS')
+                           'Rate limit exceeded. Please wait a few seconds and try again.'
+                         else
+                           "Bling API Error: #{result.error}"
+                         end
+          raise StandardError, error_message
         end
 
-        render json: { success: true, message: 'Stock updated successfully' }
+        render json: { 
+          success: true, 
+          message: 'Stock updated successfully in Bling',
+          bling_sync: true
+        }
+      else
+        render json: { 
+          success: false, 
+          error: 'Product does not have a Bling ID'
+        }, status: :unprocessable_entity
       end
     rescue StandardError => e
-      render json: { success: false, error: e.message }, status: :unprocessable_entity
+      render json: { 
+        success: false, 
+        error: e.message,
+        retry_allowed: e.message.include?('Rate limit exceeded')
+      }, status: :unprocessable_entity
     end
   end
 
