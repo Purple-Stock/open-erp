@@ -8,12 +8,35 @@
   </div>
 </div>
 
-<div class="form-group">
-  <%= form_with(url: stocks_path, method: :get) do %>
-    <%= select_tag "status", options_for_select([['Situação', ''], ['Ativo', 1], ['Inativo', 0]], @default_status_filter) %>
-    <%= select_tag "balance_situation", options_for_select([['Saldo total', ''], ['Maior do que zero', 1], ['Igual a zero', 0], ['Menor do que zero', -1]], @default_situation_balance_filter) %>
-    <%= text_field_tag "sku", @default_sku_filter, placeholder: "Filtrar por SKU" %>
-    <%= submit_tag "Filtro", class: 'btn btn-primary' %>
+<div class="form-group mb-3">
+  <%= form_with(url: stocks_path, method: :get, class: "row g-3 align-items-end") do %>
+    <div class="col-md-2">
+      <%= select_tag "status", 
+          options_for_select([['Situação', ''], ['Ativo', 1], ['Inativo', 0]], @default_status_filter),
+          class: "form-select" %>
+    </div>
+    
+    <div class="col-md-2">
+      <%= select_tag "balance_situation", 
+          options_for_select([['Saldo total', ''], ['Maior do que zero', 1], ['Igual a zero', 0], ['Menor do que zero', -1]], @default_situation_balance_filter),
+          class: "form-select" %>
+    </div>
+    
+    <div class="col-md-2">
+      <%= select_tag "period", 
+          options_for_select([['30 dias', '30'], ['15 dias', '15'], ['7 dias', '7']], @default_period_filter),
+          class: "form-select" %>
+    </div>
+    
+    <div class="col-md-3">
+      <%= text_field_tag "sku", @default_sku_filter, 
+          placeholder: "Filtrar por SKU",
+          class: "form-control" %>
+    </div>
+    
+    <div class="col-md-2">
+      <%= submit_tag "Filtro", class: 'btn btn-primary w-100' %>
+    </div>
   <% end %>
 </div>
 

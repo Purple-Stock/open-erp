@@ -65,6 +65,7 @@ class StocksController < ApplicationController
     @default_status_filter = params['status']
     @default_situation_balance_filter = params['balance_situation']
     @default_sku_filter = params['sku']
+    @default_period_filter = params['period'] || '30'
 
     stocks = Stock.where(account_id: current_tenant)
                   .includes(:product, :balances)
@@ -75,7 +76,8 @@ class StocksController < ApplicationController
 
     @warehouses = Warehouse.where(account_id: current_tenant).pluck(:bling_id, :description).to_h
 
-    start_date = 1.month.ago.to_date
+    days = @default_period_filter.to_i
+    start_date = days.days.ago.to_date
     end_date = Date.today
 
     items_sold = Item.joins(:bling_order_item)
