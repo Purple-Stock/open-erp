@@ -18,7 +18,8 @@ module Services
         object = {
           id: @product.id,
           account_id: @product.account_id,
-          sku: @product.decorate.sku
+          sku: @product.decorate.sku,
+          bling_id: @product.bling_id
         }
         
         qr_code = RQRCode::QRCode.new(object.to_json)

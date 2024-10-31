@@ -147,6 +147,7 @@ Rails.application.routes.draw do
                                                        as: 'add_inventory_quantity'
       get 'products/find_by_sku/:sku', to: 'products#find_by_sku', as: 'find_product_by_sku'
       get 'products/:id/show_by_id', to: 'products#show_by_id', as: 'show_product_by_id'
+      post 'bling/stock', to: 'bling#update_stock'
     end
   end
   root to: 'home#index'
