@@ -87,6 +87,14 @@ module ApplicationHelper
 
   alias l localize
 
+  def active_class(controller_name)
+    if controller_name.is_a?(Array)
+      'active' if controller_name.include?(controller.controller_name)
+    else
+      'active' if controller.controller_name == controller_name
+    end
+  end
+
   private
 
   def active_actions?(controller, actions)
