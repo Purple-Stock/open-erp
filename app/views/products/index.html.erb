@@ -46,7 +46,10 @@
                 <td><%= product.name %></td>
                 <td>
                   <%= product.sku %>
-                  <%= image_tag Services::Product::GenerateQrCode.new(product: product).call, size: '50' %>
+                  <%= image_tag Services::Product::GenerateQrCode.new(product: product).call, 
+                                size: '100', 
+                                onclick: "showQrCode(#{product.id}, '#{product.decorate.sku}')", 
+                                style: "cursor: pointer" %>
                 </td>
                 <td><%= product.custom_id %></td>
                 <td><%= number_to_currency_pt_br(product.price) %></td>
@@ -60,7 +63,9 @@
                   <%= link_to icon('fas fa-eye'), product, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-clone'), meeting_duplicate_path(product), title: t('duplicate'), class: 'btn btn-warning', data: { toggle: 'tooltip', turbo: false } %>
                   <%= link_to icon('fas fa-sync'), update_product_active_path(product), title: t('update_active'), class: 'btn btn-success', data: { toggle: 'tooltip', turbo: false } %>
-                  <%= link_to icon('fas fa-qrcode'), download_qr_code_product_path(product), title: t('download_qr_code'), class: 'btn btn-secondary', data: { toggle: 'tooltip', turbo: false } %>
+                  <button onclick="showQrCode(<%= product.id %>, '<%= product.decorate.sku %>')" class="btn btn-info btn-sm">
+                    <i class="fas fa-qrcode"></i>
+                  </button>
                   <% link_to icon('fas fa-trash'), destroy_from_index_product_path(product), title: t('destroy'), class: 'btn btn-danger', method: :delete, data: { toggle: 'tooltip', turbo: true, turbo_method: :delete, turbo_confirm: t('confirm') } %>
                 </td>
               <% end %>
@@ -73,3 +78,44 @@
     </div>
   </div>
 </div>
+
+<!-- Add this modal at the end of the file -->
+<div class="modal fade" id="qrCodeModal" tabindex="-1" role="dialog" aria-labelledby="qrCodeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="qrCodeModalLabel">Product QR Code</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <div id="qrCodeImage"></div>
+        <div class="mt-2">
+          <h5 class="text-muted">SKU</h5>
+          <h4 id="qrCodeSku" class="font-weight-bold"></h4>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a id="downloadQrCode" href="#" class="btn btn-primary">
+          <i class="fas fa-download"></i> Download QR Code
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showQrCode(productId, sku) {
+    fetch(`/products/${productId}/qr_code`)
+      .then(response => response.text())
+      .then(qrCodeUrl => {
+        document.getElementById('qrCodeImage').innerHTML = `<img src="${qrCodeUrl}" alt="QR Code">`;
+        document.getElementById('qrCodeSku').textContent = sku;
+        document.getElementById('downloadQrCode').href = `/products/${productId}/download_qr_code`;
+        $('#qrCodeModal').modal('show');
+      })
+      .catch(error => console.error('Error:', error));
+  }
+</script>

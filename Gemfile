@@ -22,6 +22,8 @@ gem "puma", "~> 6.4", ">= 6.4.2"
 # For police pattern
 gem 'pundit'
 
+gem 'mini_magick'
+
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", ">= 1.3.1"
 

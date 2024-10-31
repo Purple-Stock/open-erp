@@ -150,15 +150,12 @@ class ProductsController < ApplicationController
 
   def download_qr_code
     @product = Product.find(params[:id])
-    qr_code_data_url = Services::Product::GenerateQrCode.new(product: @product).call
+    qr_code_data = Services::Product::GenerateQrCode.new(product: @product).call(for_download: true)
     
-    # Convert data URL to binary
-    png_data = Base64.decode64(qr_code_data_url.split(',')[1])
-    
-    send_data png_data, 
+    send_data qr_code_data, 
       type: 'image/png', 
       disposition: 'attachment', 
-      filename: "#{@product.name}_qr_code.png"
+      filename: "#{@product.sku}_qr_code.png"
   end
 
   def scan_qr_code
@@ -183,6 +180,12 @@ class ProductsController < ApplicationController
     rescue StandardError => e
       render json: { success: false, error: e.message }, status: :unprocessable_entity
     end
+  end
+
+  def qr_code
+    product = Product.find(params[:id])
+    qr_code = Services::Product::GenerateQrCode.new(product: product).call
+    render plain: qr_code
   end
 
   private
