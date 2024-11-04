@@ -10,6 +10,8 @@ module Services
       QR_CODE_HEIGHT = 250  # Total height including QR code and text
       HORIZONTAL_SPACING = 50
       VERTICAL_SPACING = 30
+      TEXT_MARGIN = 15      # Space between QR code and text
+      TEXT_LINE_HEIGHT = 20 # Space between SKU and name
 
       def initialize(products, copies)
         @products = products
@@ -62,19 +64,31 @@ module Services
             # Add QR code image at current position
             image temp_file.path, at: [@current_x, @current_y], width: QR_CODE_WIDTH
 
-            # Add SKU and name below QR code
-            text_box product.sku,
-                    at: [@current_x, @current_y - 210],
-                    width: QR_CODE_WIDTH,
-                    align: :center,
-                    size: 12,
-                    style: :bold
+            # Calculate text positions
+            sku_y = @current_y - QR_CODE_WIDTH - TEXT_MARGIN
+            name_y = sku_y - TEXT_LINE_HEIGHT
 
-            text_box product.name,
-                    at: [@current_x, @current_y - 230],
+            # Add SKU below QR code
+            text_box product.sku,
+                    at: [@current_x, sku_y],
                     width: QR_CODE_WIDTH,
+                    height: TEXT_LINE_HEIGHT,
                     align: :center,
-                    size: 10
+                    valign: :center,
+                    size: 12,
+                    style: :bold,
+                    overflow: :shrink_to_fit
+
+            # Add name below SKU with automatic text wrapping
+            name_text = product.name.to_s
+            text_box name_text,
+                    at: [@current_x, name_y],
+                    width: QR_CODE_WIDTH,
+                    height: TEXT_LINE_HEIGHT,
+                    align: :center,
+                    valign: :center,
+                    size: 10,
+                    overflow: :shrink_to_fit
 
             # Clean up temporary file
             temp_file.close
@@ -93,17 +107,14 @@ module Services
       end
 
       def more_qr_codes?(current_product)
-        # Check if there are more QR codes to generate after the current position
         current_index = @products.index(current_product)
         remaining_copies = @copies
         
         return false unless current_index
 
         if current_index < @products.length - 1
-          # There are more products after this one
-          return true
+          true
         elsif current_index == @products.length - 1
-          # This is the last product, check if there are more copies to make
           remaining_copies > 1
         else
           false

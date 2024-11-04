@@ -232,6 +232,27 @@ class ProductsController < ApplicationController
     end
   end
 
+  def print_tags_by_skus
+    skus = params[:sku_list].to_s.split(/\r?\n/).map(&:strip).reject(&:blank?)
+    @products = Product.where(account_id: current_tenant, sku: skus)
+    @copies = params[:copies].to_i
+
+    if @products.empty?
+      redirect_to product_print_tags_products_path, alert: 'Nenhum produto encontrado com os SKUs fornecidos.'
+      return
+    end
+
+    respond_to do |format|
+      format.pdf do
+        pdf = Services::Product::GenerateQrCodePdf.new(@products, @copies)
+        send_data pdf.render,
+                  filename: "qr_codes_#{Time.current.strftime('%Y%m%d_%H%M')}.pdf",
+                  type: 'application/pdf',
+                  disposition: 'inline'
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
