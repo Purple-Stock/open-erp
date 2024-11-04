@@ -1,10 +1,48 @@
 <div class="page-header">
   <h1><%=t '.title', :default => 'Gerador de etiquetas'%></h1>
 </div>
-<%= form_with url: generate_print_tags_path do |form| %>
-  <%= form.label :product_name %>
-  <%= form.text_field :product_name %>
-  <%= form.label t(:quantity) %>
-  <%= form.number_field :quantity %>
-  <%= form.submit nil, :class => 'btn btn-primary' %>
-<% end %>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_tag print_tags_products_path(format: :pdf), method: :post do %>
+      <div class="table-responsive mb-4">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><%= check_box_tag 'select_all', nil, false, onclick: 'toggleAll(this)' %></th>
+              <th><%=t 'activerecord.attributes.product.name' %></th>
+              <th><%=t 'activerecord.attributes.product.sku' %></th>
+              <th><%=t 'activerecord.attributes.product.category' %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Product.where(account_id: current_tenant).each do |product| %>
+              <tr>
+                <td><%= check_box_tag 'product_ids[]', product.id, false, class: 'product-checkbox' %></td>
+                <td><%= product.name %></td>
+                <td><%= product.sku %></td>
+                <td><%= product.category&.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="form-group">
+        <label for="copies"><%=t :copies_per_product %></label>
+        <%= number_field_tag :copies, 1, min: 1, class: 'form-control w-auto' %>
+      </div>
+
+      <%= submit_tag t(:generate_tags), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  function toggleAll(source) {
+    const checkboxes = document.getElementsByClassName('product-checkbox');
+    for (let checkbox of checkboxes) {
+      checkbox.checked = source.checked;
+    }
+  }
+</script>

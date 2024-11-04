@@ -90,6 +90,10 @@ Rails.application.routes.draw do
       post 'update_stock_from_qr' # Endpoint to update stock
       get :qr_code
     end
+    collection do
+      get :product_print_tags
+      post :print_tags
+    end
   end
   resources :bling_data, only: %i[index show]
   get 'products_defer', to: 'products#index_defer'

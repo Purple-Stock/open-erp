@@ -97,3 +97,7 @@ pt-BR:
     two: Situações Bling
     list: Lista de Situações
     create: Criar Situação
+  qr_code:
+    title: "QR Code"
+    generate: "Gerar QR Codes"
+    scan: "Escanear QR Code"
