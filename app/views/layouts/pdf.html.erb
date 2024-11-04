@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "application" %>
+    <style>
+      .qr-codes-container {
+        padding: 20px;
+      }
+
+      .qr-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .qr-item {
+        text-align: center;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        break-inside: avoid;
+      }
+
+      .qr-item img {
+        max-width: 200px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .qr-sku {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .qr-name {
+        font-size: 14px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body onload='number_pages'>
+    <%= yield %>
+  </body>
+</html> 

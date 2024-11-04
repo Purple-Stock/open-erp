@@ -1,0 +1,68 @@
+<div class="qr-codes-container">
+  <% @products.each_slice(4).each do |product_group| %>
+    <div class="qr-grid">
+      <% product_group.each do |product| %>
+        <% @copies.times do %>
+          <div class="qr-item">
+            <%= wicked_pdf_image_tag Services::Product::GenerateQrCode.new(product: product).call %>
+            <div class="qr-sku"><%= product.sku %></div>
+            <div class="qr-name"><%= product.name %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .qr-codes-container {
+    padding: 20px;
+  }
+
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+  }
+
+  .qr-item {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .qr-item img {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .qr-sku {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .qr-name {
+    font-size: 14px;
+    color: #666;
+  }
+
+  @media print {
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .qr-grid {
+      page-break-inside: avoid;
+    }
+
+    .qr-item {
+      break-inside: avoid;
+    }
+  }
+</style> 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Print QR Codes</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <style>
+      @page {
+        margin: 0.5cm;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      
+      @media print {
+        .no-print {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="no-print">
+      <button onclick="window.print()">Print</button>
+      <%= link_to 'Back', product_print_tags_products_path, class: 'btn btn-secondary' %>
+    </div>
+    
+    <%= yield %>
+  </body>
+</html> 

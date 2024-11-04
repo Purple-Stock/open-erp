@@ -214,6 +214,24 @@ class ProductsController < ApplicationController
     render plain: qr_code
   end
 
+  def print_tags
+    @products = Product.where(id: params[:product_ids])
+    @copies = params[:copies].to_i
+
+    respond_to do |format|
+      format.html do
+        render :print_tags, layout: 'print'
+      end
+      format.pdf do
+        pdf = Services::Product::GenerateQrCodePdf.new(@products, @copies)
+        send_data pdf.render,
+                  filename: "qr_codes_#{Time.current.strftime('%Y%m%d_%H%M')}.pdf",
+                  type: 'application/pdf',
+                  disposition: 'inline'
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

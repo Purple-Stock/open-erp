@@ -102,7 +102,7 @@
           </li>
         <% end %>
         
-        <%= render 'shared/sidebar_qr_scanner' %>
+        <%= render 'shared/sidebar_qr_code_generator' %>
         <% if account_policy_enabled? %>
           <%= render 'shared/sidebar_dropdown', title: t("stores.two"), icon: 'fas fa-store' do %>
             <li class="<%= active_nav_item('stores', 'index') %>">

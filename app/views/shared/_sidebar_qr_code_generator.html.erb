@@ -1,0 +1,8 @@
+<%= render 'shared/sidebar_dropdown', title: t("qr_code.title"), icon: 'fas fa-qrcode' do %>
+  <li class="<%= active_nav_item('products', 'product_print_tags') %>">
+    <%= link_to t("qr_code.generate"), product_print_tags_products_path, class: 'nav-link' %>
+  </li>
+  <li class="<%= active_nav_item('qr_scanner', 'index') %>">
+    <%= link_to t("qr_code.scan"), qr_scanner_path, class: 'nav-link' %>
+  </li>
+<% end %> 
