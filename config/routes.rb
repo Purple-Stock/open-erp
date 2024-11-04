@@ -93,6 +93,7 @@ Rails.application.routes.draw do
     collection do
       get :product_print_tags
       post :print_tags
+      post :print_tags_by_skus
     end
   end
   resources :bling_data, only: %i[index show]
