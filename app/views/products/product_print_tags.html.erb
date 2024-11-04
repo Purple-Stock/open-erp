@@ -76,10 +76,17 @@
 </div>
 
 <script>
-  function toggleAll(source) {
-    const checkboxes = document.getElementsByClassName('product-checkbox');
-    for (let checkbox of checkboxes) {
-      checkbox.checked = source.checked;
+  $(document).ready(function() {
+    $('#qrCodeTabs a').on('click', function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+    
+    function toggleAll(source) {
+      const checkboxes = document.getElementsByClassName('product-checkbox');
+      for (let checkbox of checkboxes) {
+        checkbox.checked = source.checked;
+      }
     }
-  }
+  });
 </script>
