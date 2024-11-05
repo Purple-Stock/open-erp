@@ -234,7 +234,9 @@ class ProductsController < ApplicationController
 
   def print_tags_by_skus
     skus = params[:sku_list].to_s.split(/\r?\n/).map(&:strip).reject(&:blank?)
-    @products = Product.where(account_id: current_tenant, sku: skus)
+    # Using ILIKE for case-insensitive matching
+    @products = Product.where(account_id: current_tenant)
+                      .where("sku ILIKE ANY (ARRAY[?])", skus.map { |sku| sku })
     @copies = params[:copies].to_i
 
     if @products.empty?
