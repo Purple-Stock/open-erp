@@ -63,6 +63,7 @@ class BlingOrderItem < ApplicationRecord
     '204061683' => 'Mercado Livre',
     '204796870' => 'Nuvem Shop',
     '204824954' => 'Feira da Madrugada',
+    '205002864' => 'Magazine Luiza',
     '0' => 'Sem Loja'
   }.freeze
 
@@ -136,6 +137,10 @@ class BlingOrderItem < ApplicationRecord
 
   scope :nuvem_shop, lambda {
     where(store_id: '204796870')
+  }
+
+  scope :magazine_luiza, lambda {
+    where(store_id: '205002864')
   }
 
   scope :date_range, ->(start_date, end_date) { 
