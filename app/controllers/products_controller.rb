@@ -234,14 +234,29 @@ class ProductsController < ApplicationController
 
   def print_tags_by_skus
     skus = params[:sku_list].to_s.split(/\r?\n/).map(&:strip).reject(&:blank?)
-    # Using ILIKE for case-insensitive matching
+    
+    # Using ILIKE for case-insensitive matching, with exact matches
     @products = Product.where(account_id: current_tenant)
-                      .where("sku ILIKE ANY (ARRAY[?])", skus.map { |sku| sku })
+                      .where("sku ILIKE ANY (ARRAY[?])", skus)
+    
+    # Sort products based on the order of input SKUs
+    @products = @products.sort_by do |product|
+      # Find the index of the matching SKU in the original input list
+      skus.index { |sku| sku.casecmp(product.sku) == 0 } || Float::INFINITY
+    end
+    
     @copies = params[:copies].to_i
 
+    # Find SKUs that weren't matched (preserving original case for display)
+    found_skus = @products.map(&:sku)
+    not_found_skus = skus.reject { |sku| found_skus.any? { |found| found.casecmp(sku) == 0 } }
+
     if @products.empty?
-      redirect_to product_print_tags_products_path, alert: 'Nenhum produto encontrado com os SKUs fornecidos.'
+      redirect_to product_print_tags_products_path, 
+                  alert: "Nenhum produto encontrado com os SKUs fornecidos.\nSKUs não encontrados: #{not_found_skus.join(', ')}"
       return
+    elsif not_found_skus.any?
+      flash[:warning] = "Alguns SKUs não foram encontrados: #{not_found_skus.join(', ')}"
     end
 
     respond_to do |format|
