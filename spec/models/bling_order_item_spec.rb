@@ -288,6 +288,8 @@ RSpec.describe BlingOrderItem, type: :model do
       let!(:simplo7_order_item) { FactoryBot.create(:bling_order_item, store_id: 203_467_890) }
       let!(:mercado_livre_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_061_683) }
       let!(:nuvem_shop) { FactoryBot.create(:bling_order_item, store_id: 204_796_870) }
+      let!(:feira_da_madrugada) { FactoryBot.create(:bling_order_item, store_id: 204_824_954) }
+      let!(:magazine_luiza) { FactoryBot.create(:bling_order_item, store_id: 205_002_864) }
       let!(:without_store) { FactoryBot.create(:bling_order_item, store_id: 0) }
 
       it 'return a hash with all stores' do
@@ -295,7 +297,8 @@ RSpec.describe BlingOrderItem, type: :model do
                                              'Simplo 7' => [simplo7_order_item],
                                              'Mercado Livre' => [mercado_livre_order_item],
                                              'Nuvem Shop' => [nuvem_shop],
-                                             'Feira da Madrugada' => [],
+                                             'Feira da Madrugada' => [feira_da_madrugada],
+                                             'Magazine Luiza' => [magazine_luiza],
                                              'Sem Loja' => [without_store] }))
       end
     end
@@ -307,7 +310,8 @@ RSpec.describe BlingOrderItem, type: :model do
       let!(:old_shein_order_item) { FactoryBot.create(:bling_order_item, store_id: 204_114_350) }
       let(:grouped_hash) do
         { 'Shein' => [shein_order_item, old_shein_order_item], 'Shopee' => [], 'Simplo 7' => [], 'Mercado Livre' => [],
-          'Nuvem Shop' => [], 'Feira da Madrugada' => [], 'Sem Loja' => [] }
+          'Nuvem Shop' => [], 'Feira da Madrugada' => [], 'Magazine Luiza' => [],
+          'Sem Loja' => [] }
       end
 
       it 'return the corresponding store with empty array' do
@@ -323,6 +327,7 @@ RSpec.describe BlingOrderItem, type: :model do
                                              'Mercado Livre' => [],
                                              'Nuvem Shop' => [],
                                              'Feira da Madrugada' => [],
+                                             'Magazine Luiza' => [],
                                              'Sem Loja' => [] }))
       end
     end
