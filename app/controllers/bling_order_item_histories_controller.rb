@@ -7,7 +7,22 @@ class BlingOrderItemHistoriesController < ApplicationController
                 only: %i[day_quantities]
   before_action :daily_revenue, :canceled_revenue, only: :index
 
-  def index;end
+  def index
+    @total_balance = 0
+    @total_virtual_balance = 0
+    
+    Stock.where(account_id: current_user.account.id)
+         .includes(:balances, :product)
+         .each do |stock|
+      # Skip if product is tipo_estoque: "V"
+      next if stock.product.tipo_estoque == 'V'
+      
+      stock.balances.each do |balance|
+        @total_balance += stock.discounted_balance(balance)
+        @total_virtual_balance += stock.discounted_virtual_balance(balance)
+      end
+    end
+  end
 
   def day_quantities
     render json: @paid_items_presentable

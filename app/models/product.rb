@@ -7,12 +7,15 @@
 #  id                               :bigint           not null, primary key
 #  active                           :boolean
 #  bar_code                         :string
+#  componentes                      :jsonb
 #  extra_sku                        :string
 #  highlight                        :boolean
+#  lancamento_estoque               :string
 #  name                             :string
 #  number_of_pieces_per_fabric_roll :integer
 #  price                            :float
 #  sku                              :string
+#  tipo_estoque                     :string
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
 #  account_id                       :integer
@@ -63,6 +66,7 @@ class Product < ApplicationRecord
     attributes = []
     response = Services::Bling::Product.call(product_command: 'find_products', tenant:, options:)
     products = Product.where(account_id: tenant)
+    
     response['data'].each do |bling_product|
       if products.exists?(bling_id: bling_product['id'])
         update_product(bling_product)
@@ -73,12 +77,20 @@ class Product < ApplicationRecord
           sku: bling_product['codigo'],
           active: bling_product['situacao'].eql?('A'),
           account_id: tenant,
-          bling_id: bling_product['id']
+          bling_id: bling_product['id'],
+          tipo_estoque: bling_product.dig('estrutura', 'tipoEstoque'),
+          lancamento_estoque: bling_product.dig('estrutura', 'lancamentoEstoque'),
+          componentes: bling_product.dig('estrutura', 'componentes')
         }
       end
     end
 
     Product.create(attributes)
+  end
+
+  def self.update_product_from_bling(product_id, tenant)
+    response = Services::Bling::ProductDetails.call(product_id:, tenant:)
+    update_product(response['data'])
   end
 
   def self.update_product(bling_product)
@@ -87,6 +99,9 @@ class Product < ApplicationRecord
       price: bling_product['preco'],
       sku: bling_product['codigo'],
       active: bling_product['situacao'].eql?('A'),
+      tipo_estoque: bling_product.dig('estrutura', 'tipoEstoque'),
+      lancamento_estoque: bling_product.dig('estrutura', 'lancamentoEstoque'),
+      componentes: bling_product.dig('estrutura', 'componentes')
     }
     product = where(bling_id: bling_product['id'])
     product.update(attributes)
@@ -142,6 +157,30 @@ class Product < ApplicationRecord
       order_column_index = 1 if order_column_index == 4
       order("#{Product::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
     end
+  end
+
+  # Add these methods to the Product class
+
+  # Get component products
+  def component_products
+    return [] if componentes.blank?
+    
+    product_ids = componentes.map { |comp| comp.dig('produto', 'id') }
+    Product.where(bling_id: product_ids)
+  end
+
+  # Get component quantities
+  def component_quantities
+    return {} if componentes.blank?
+    
+    componentes.each_with_object({}) do |comp, hash|
+      hash[comp.dig('produto', 'id')] = comp['quantidade']
+    end
+  end
+
+  # Check if product is composed of other products
+  def composed?
+    tipo_estoque == 'V' && componentes.present?
   end
 
   private
