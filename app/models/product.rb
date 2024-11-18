@@ -7,15 +7,12 @@
 #  id                               :bigint           not null, primary key
 #  active                           :boolean
 #  bar_code                         :string
-#  componentes                      :jsonb
 #  extra_sku                        :string
 #  highlight                        :boolean
-#  lancamento_estoque               :string
 #  name                             :string
 #  number_of_pieces_per_fabric_roll :integer
 #  price                            :float
 #  sku                              :string
-#  tipo_estoque                     :string
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
 #  account_id                       :integer
@@ -180,6 +177,9 @@ class Product < ApplicationRecord
 
   # Check if product is composed of other products
   def composed?
+    # Return false if tipo_estoque is nil
+    return false if tipo_estoque.nil?
+    
     tipo_estoque == 'V' && componentes.present?
   end
 

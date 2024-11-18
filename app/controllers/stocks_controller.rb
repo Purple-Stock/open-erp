@@ -66,6 +66,7 @@ class StocksController < ApplicationController
     @default_situation_balance_filter = params['balance_situation']
     @default_sku_filter = params['sku']
     @default_period_filter = params['period'] || '30'
+    @default_tipo_estoque = params['tipo_estoque'] || 'null'
 
     stocks = Stock.where(account_id: current_tenant)
                   .includes(:product, :balances)
@@ -73,6 +74,18 @@ class StocksController < ApplicationController
                   .filter_by_status(params['status'])
                   .filter_by_total_balance_situation(params['balance_situation'])
                   .filter_by_sku(params['sku'])
+                  .joins(:product)
+
+    stocks = case @default_tipo_estoque
+            when 'null'
+              stocks.where(products: { tipo_estoque: nil })
+            when 'V'
+              stocks.where(products: { tipo_estoque: 'V' })
+            when 'P'
+              stocks.where(products: { tipo_estoque: 'P' })
+            else
+              stocks
+            end
 
     @warehouses = Warehouse.where(account_id: current_tenant).pluck(:bling_id, :description).to_h
 
@@ -98,16 +111,20 @@ class StocksController < ApplicationController
       virtual_balance = default_balance ? default_balance.virtual_balance : 0
       in_production = stock.total_in_production
 
-      # Calculate discounted balances
-      discounted_physical_balance = stock.discounted_balance(default_balance) if default_balance
-      discounted_virtual_balance = stock.discounted_virtual_balance(default_balance) if default_balance
+      # Calculate discounted balances if default_balance exists
+      discounted_physical_balance = default_balance ? stock.discounted_balance(default_balance) : 0
+      discounted_virtual_balance = default_balance ? stock.discounted_virtual_balance(default_balance) : 0
 
-      # Calculate adjusted balances
-      adjusted_physical_balance = stock.adjusted_balance(default_balance) if default_balance
-      adjusted_virtual_balance = stock.adjusted_virtual_balance(default_balance) if default_balance
+      # Calculate adjusted balances if default_balance exists
+      adjusted_physical_balance = default_balance ? stock.adjusted_balance(default_balance) : 0
+      adjusted_virtual_balance = default_balance ? stock.adjusted_virtual_balance(default_balance) : 0
 
-      # Calculate forecast: total_sold - adjusted_physical_balance
-      total_forecast = [total_sold - adjusted_physical_balance, 0].max if adjusted_physical_balance
+      # Calculate forecast only if we have adjusted_physical_balance
+      total_forecast = if adjusted_physical_balance && !stock.product.composed?
+                        [total_sold - adjusted_physical_balance, 0].max
+                      else
+                        0
+                      end
 
       [stock, { 
         total_sold: total_sold, 
@@ -123,7 +140,8 @@ class StocksController < ApplicationController
       }]
     end
 
-    sorted_stocks = stocks_with_forecasts.sort_by { |_, data| -data[:total_sold] }
+    # Sort by total_sold, but handle nil values
+    sorted_stocks = stocks_with_forecasts.sort_by { |_, data| -(data[:total_sold] || 0) }
 
     @pagy, @stocks_with_data = pagy_array(sorted_stocks, items: 20)
 
