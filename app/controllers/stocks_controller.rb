@@ -10,9 +10,31 @@ class StocksController < ApplicationController
         @stocks_with_data = collection
       end
       format.csv do
-        GenerateStocksCsvJob.perform_later(current_tenant, current_user.email)
-        flash[:notice] = "CSV is being generated and will be emailed to you shortly."
-        redirect_to stocks_path
+        if params[:detailed]
+          begin
+            csv_data = generate_detailed_csv
+            send_data csv_data, 
+              filename: "detailed_stock_calculations_#{Date.today}.csv",
+              type: 'text/csv; charset=utf-8',
+              disposition: 'attachment'
+          rescue => e
+            Rails.logger.error "Error generating CSV: #{e.message}"
+            flash[:error] = "Erro ao gerar o CSV. Por favor, tente novamente."
+            redirect_to stocks_path
+          end
+        else
+          begin
+            csv_data = generate_regular_csv
+            send_data csv_data,
+              filename: "stock_calculations_#{Date.today}.csv",
+              type: 'text/csv; charset=utf-8',
+              disposition: 'attachment'
+          rescue => e
+            Rails.logger.error "Error generating CSV: #{e.message}"
+            flash[:error] = "Erro ao gerar o CSV. Por favor, tente novamente."
+            redirect_to stocks_path
+          end
+        end
       end
     end
   end
@@ -76,6 +98,48 @@ class StocksController < ApplicationController
                   .filter_by_sku(params['sku'])
                   .joins(:product)
 
+    # Calculate total balance for null tipo_estoque products
+    default_warehouse_id = '9023657532'  # ID for Estoque São Paulo Base
+    null_tipo_stocks = Stock.where(account_id: current_tenant)
+                           .joins(:product)
+                           .includes(:product)
+                           .where(products: { tipo_estoque: nil })
+                           .includes(:balances)
+                           .to_a
+
+    Rails.logger.info "Starting balance calculations..."
+    
+    @total_null_balance = null_tipo_stocks.sum do |stock|
+      balance = stock.balances.find { |b| b.deposit_id.to_s == default_warehouse_id }
+      next 0 unless balance
+      
+      # Get the base physical balance
+      physical_balance = balance.physical_balance
+      
+      # Calculate the actual balance based on conditions
+      actual_balance = if stock.discounted_warehouse_sku_id == "#{default_warehouse_id}_#{stock.product.sku}"
+                        # If discounted, subtract 1000 first
+                        discounted = physical_balance - 1000
+                        # If the discounted value is negative, don't count this stock
+                        discounted <= 0 ? 0 : discounted
+                      else
+                        # If not discounted, apply the regular rules
+                        if physical_balance >= 1000
+                          physical_balance - 1000
+                        elsif physical_balance <= 0
+                          0
+                        else
+                          physical_balance
+                        end
+                      end
+      
+      Rails.logger.info "SKU: #{stock.product.sku} | Physical Balance: #{physical_balance} | Actual Balance: #{actual_balance} | Discounted?: #{stock.discounted_warehouse_sku_id.present?}"
+      
+      actual_balance
+    end
+
+    Rails.logger.info "Total balance calculated: #{@total_null_balance}"
+
     stocks = case @default_tipo_estoque
             when 'null'
               stocks.where(products: { tipo_estoque: nil })
@@ -98,8 +162,6 @@ class StocksController < ApplicationController
                             bling_order_items: { date: start_date..end_date })
                      .group(:sku)
                      .sum(:quantity)
-
-    default_warehouse_id = '9023657532'  # ID for Estoque São Paulo Base
 
     total_in_production = Stock.total_in_production_for_all
 
@@ -157,5 +219,65 @@ class StocksController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = "Stock not found"
     redirect_to stocks_path
+  end
+
+  def generate_detailed_csv
+    require 'csv'
+
+    default_warehouse_id = '9023657532'
+    stocks = Stock.where(account_id: current_tenant)
+                  .includes(:product, :balances)
+                  .joins(:product)
+                  .where(products: { tipo_estoque: nil })
+
+    CSV.generate(headers: true, col_sep: ';', encoding: 'UTF-8') do |csv|
+      csv << [
+        'SKU', 'Saldo Físico'
+      ]
+
+      stocks.each do |stock|
+        begin
+          balance = stock.balances.find { |b| b.deposit_id.to_s == default_warehouse_id }
+          next unless balance
+
+          physical_balance = if stock.discounted_warehouse_sku_id == "#{default_warehouse_id}_#{stock.product.sku}"
+                             stock.discounted_balance(balance)
+                           else
+                             balance.physical_balance
+                           end
+
+          csv << [
+            stock.product.sku,
+            physical_balance || 0
+          ]
+        rescue => e
+          Rails.logger.error "Error processing stock #{stock.id}: #{e.message}"
+          next
+        end
+      end
+    end
+  end
+
+  def generate_regular_csv
+    CSV.generate(headers: true, col_sep: ';', encoding: 'UTF-8') do |csv|
+      csv << ['id', 'SKU', 'Saldo Total', 'Saldo Virtual Total', 'Quantidade Vendida dos Últimos 30 dias',
+              'Previsão para os Próximos 30 dias', 'Produto']
+      
+      stocks = Stock.where(account_id: current_tenant)
+                   .includes(:product, :balances)
+                   .joins(:product)
+                   .where(products: { tipo_estoque: nil })
+                   .sort_by(&:calculate_basic_forecast)
+                   .reverse!
+
+      stocks.each do |stock|
+        next if stock.total_balance.zero? && stock.count_sold.zero?
+
+        row = [stock.id, stock.sku, stock.total_balance, stock.total_virtual_balance, stock.count_sold,
+               stock.calculate_basic_forecast,
+               stock.product.name]
+        csv << row
+      end
+    end
   end
 end

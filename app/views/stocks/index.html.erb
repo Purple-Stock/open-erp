@@ -1,10 +1,25 @@
 <%- model_class = Stock -%>
-<div class="section-header row-cols-2">
-  <div class="page-header">
-    <h1><%= t('stocks.two') %></h1>
-  </div>
-  <div class="d-flex justify-content-end">
-    <%= button_to "Gerar Previsão de Venda", stocks_path(format: "csv"), class: "btn btn-success", method: :get %>
+<div class="section-header">
+  <div class="d-flex justify-content-between align-items-center w-100">
+    <div class="d-flex align-items-center">
+      <h1 class="me-3"><%= t('stocks.two') %></h1>
+      <div class="total-balance-counter">
+        <h4>Total de Estoque (Tipo Null): <span class="badge bg-primary"><%= number_with_delimiter(@total_null_balance) %></span></h4>
+      </div>
+    </div>
+    <div class="d-flex gap-2">
+      <%= button_to stocks_path(format: "csv", detailed: true), 
+          class: "btn btn-info", 
+          method: :get,
+          form: { target: '_blank' } do %>
+        <i class="fas fa-download"></i> Cálculo Detalhado
+      <% end %>
+      <%= button_to stocks_path(format: "csv"), 
+          class: "btn btn-success", 
+          method: :get do %>
+        Gerar Previsão de Venda
+      <% end %>
+    </div>
   </div>
 </div>
 
@@ -27,8 +42,19 @@
           options_for_select([['30 dias', '30'], ['15 dias', '15'], ['7 dias', '7']], @default_period_filter),
           class: "form-select" %>
     </div>
+
+    <div class="col-md-2">
+      <%= select_tag "tipo_estoque", 
+          options_for_select([
+            ['Tipo Null', 'null'],
+            ['Tipo V', 'V'],
+            ['Tipo P', 'P'],
+            ['Todos', 'all']
+          ], @default_tipo_estoque),
+          class: "form-select" %>
+    </div>
     
-    <div class="col-md-3">
+    <div class="col-md-2">
       <%= text_field_tag "sku", @default_sku_filter, 
           placeholder: "Filtrar por SKU",
           class: "form-control" %>
@@ -65,7 +91,7 @@
               <% sao_paulo_base = stock.balances.find { |b| b.deposit_id.to_s == '9023657532' } %>
               <tr>
                 <td>
-                  <% if sao_paulo_base %>
+                  <% if sao_paulo_base && !stock.product.composed? %>
                     <%= check_box_tag "discount_#{stock.id}_#{sao_paulo_base.deposit_id}", 1, 
                         stock.discounted_warehouse_sku_id == "#{sao_paulo_base.deposit_id}_#{stock.product.sku}", 
                         class: 'discount-checkbox',
@@ -84,11 +110,16 @@
                 </td>
                 <td class="in-production"><%= data[:total_in_production] %></td>
                 <td><%= data[:total_sold] %></td>
-                <td class="forecast"><%= data[:total_forecast] %></td>
+                <td class="forecast"><%= stock.product.composed? ? 'N/A' : data[:total_forecast] %></td>
                 <td class="number-of-rolls">
-                  <%= (data[:total_forecast].to_f / (stock.product.number_of_pieces_per_fabric_roll || 1)).ceil %>
+                  <%= stock.product.composed? ? 'N/A' : (data[:total_forecast].to_f / (stock.product.number_of_pieces_per_fabric_roll || 1)).ceil %>
                 </td>
-                <td><%= stock.product.name %></td>
+                <td>
+                  <%= stock.product.name %>
+                  <% if stock.product.composed? %>
+                    <span class="badge bg-info">Composto</span>
+                  <% end %>
+                </td>
                 <td>
                   <%= link_to icon('fas fa-eye'), stock, title: t('show'), class: 'btn btn-info', data: { toggle: 'tooltip', turbo: false } %>
                 </td>
