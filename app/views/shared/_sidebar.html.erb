@@ -50,6 +50,9 @@
             <li class="<%= active_nav_item('stocks', 'index') %>">
               <%= link_to t("stocks.shopping_suggestion"), stocks_path, class: 'nav-link' %>
             </li>
+            <li class="<%= active_nav_item('stocks', 'null_stock_details') %>">
+              <%= link_to t("stocks.null_stock_details"), null_stock_details_stocks_path, class: 'nav-link' %>
+            </li>
             <li class="<%= active_nav_menu_item([top_selling_products_path]) %>">
               <%= link_to t("audits.top_selling_products"), top_selling_products_path, class: 'nav-link' %>
             </li>

@@ -82,6 +82,7 @@ pt-BR:
     create: Criar Loja
   stocks:
     shopping_suggestion: Sugestão de Compra
+    null_stock_details: Contagem de Estoque
   uploads:
     one: Upload
     shein_orders: Upload de Pedidos Shein

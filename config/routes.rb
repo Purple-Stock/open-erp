@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     member do
       patch :apply_discount
     end
+    get :null_stock_details, on: :collection
   end
   resources :revenue_estimations
   resources :accounts

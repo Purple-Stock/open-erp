@@ -81,6 +81,56 @@ class StocksController < ApplicationController
     end
   end
 
+  def null_stock_details
+    default_warehouse_id = '9023657532'  # ID for Estoque São Paulo Base
+    
+    @null_tipo_stocks = Stock.where(account_id: current_tenant)
+                            .joins(:product)
+                            .includes(:product, :balances)
+                            .where(products: { tipo_estoque: nil })
+                            .to_a
+
+    @stock_details = @null_tipo_stocks.map do |stock|
+      balance = stock.balances.find { |b| b.deposit_id.to_s == default_warehouse_id }
+      physical_balance = balance&.physical_balance || 0
+      
+      actual_balance = if stock.discounted_warehouse_sku_id == "#{default_warehouse_id}_#{stock.product.sku}"
+                        discounted = physical_balance - 1000
+                        discounted <= 0 ? 0 : discounted
+                      else
+                        if physical_balance >= 1000
+                          physical_balance - 1000
+                        elsif physical_balance <= 0
+                          0
+                        else
+                          physical_balance
+                        end
+                      end
+
+      {
+        sku: stock.product.sku,
+        physical_balance: physical_balance,
+        actual_balance: actual_balance,
+        discounted: stock.discounted_warehouse_sku_id.present?
+      }
+    end
+
+    # Sort by actual_balance in descending order
+    @stock_details = @stock_details.sort_by { |detail| -detail[:actual_balance] }
+    @total_null_balance = @stock_details.sum { |detail| detail[:actual_balance] }
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        csv_data = generate_null_stock_details_csv(@stock_details)
+        send_data csv_data,
+          filename: "null_stock_details_#{Date.today}.csv",
+          type: 'text/csv; charset=utf-8',
+          disposition: 'attachment'
+      end
+    end
+  end
+
   protected
   
   def collection
@@ -277,6 +327,23 @@ class StocksController < ApplicationController
                stock.calculate_basic_forecast,
                stock.product.name]
         csv << row
+      end
+    end
+  end
+
+  def generate_null_stock_details_csv(stock_details)
+    require 'csv'
+    
+    CSV.generate(headers: true, col_sep: ';', encoding: 'UTF-8') do |csv|
+      csv << ['SKU', 'Saldo Físico', 'Saldo Atual', 'Desconto Aplicado']
+      
+      stock_details.each do |detail|
+        csv << [
+          detail[:sku],
+          detail[:physical_balance],
+          detail[:actual_balance],
+          detail[:discounted] ? 'Sim' : 'Não'
+        ]
       end
     end
   end
