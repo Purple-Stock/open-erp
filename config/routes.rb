@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     member do
       patch :apply_discount
     end
+    get :null_stock_details, on: :collection
   end
   resources :revenue_estimations
   resources :accounts
@@ -186,5 +187,13 @@ Rails.application.routes.draw do
   resources :bling_module_situations
 
   get 'qr_scanner', to: 'qr_scanner#index', as: 'qr_scanner'
+
+  resources :excel_processors, only: [:index] do
+    collection do
+      post :process_file
+      get :download_excel
+      get :download_image
+    end
+  end
 
 end

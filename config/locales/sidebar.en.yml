@@ -41,3 +41,6 @@ en:
     products: Orders controls
     daily: Sale daily audits
     top_selling_products: Top Selling Products
+  stocks:
+    shopping_suggestion: Shopping Suggestion
+    null_stock_details: Null Stock Details
