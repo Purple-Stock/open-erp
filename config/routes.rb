@@ -188,12 +188,4 @@ Rails.application.routes.draw do
 
   get 'qr_scanner', to: 'qr_scanner#index', as: 'qr_scanner'
 
-  resources :excel_processors, only: [:index] do
-    collection do
-      post :process_file
-      get :download_excel
-      get :download_image
-    end
-  end
-
 end
