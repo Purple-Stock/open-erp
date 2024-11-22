@@ -17,7 +17,7 @@ gem "sprockets-rails", ">= 3.5.2"
 gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 6.4", ">= 6.4.2"
+gem "puma", "~> 6.4", ">= 6.4.3"
 
 # For police pattern
 gem 'pundit'
