@@ -12,8 +12,8 @@
   <div class="actions">
     <%= link_to t('.download_service_order_pdf'), service_order_pdf_production_path(@production), class: 'btn btn-primary', target: '_blank' %>
     <%= link_to t('.download_payment_order_pdf'), payment_order_pdf_production_path(@production), class: 'btn btn-success', target: '_blank' %>
+    <%= link_to t("productions.side_missing_pieces"), missing_pieces_productions_path, class: 'btn btn-info' %>
   </div>
-  
   <div class="section-body">
     <div class="card">
       <div class="card-header">
