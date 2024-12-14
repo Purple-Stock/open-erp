@@ -71,7 +71,7 @@ gem 'factory_bot_rails', '>= 6.4.2'
 
 gem 'faker'
 
-gem "rubycritic", require: false
+gem "rubycritic", ">= 4.8.1", require: false
 
 gem 'net-smtp', require: false
 
@@ -106,7 +106,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver", ">= 4.11.0"
+  gem "selenium-webdriver", ">= 4.22.0"
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 5.3', '>= 5.3.0'
   # Easy installation and use of web drivers to run system tests with browsers
@@ -147,9 +147,9 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.9'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
+gem 'rubocop-rspec', '>= 2.31.0', require: false
+gem 'rubocop-performance', '>= 1.21.1', require: false
 gem 'rubocop-rails', '>= 2.26.0', require: false
-gem 'rubocop-rspec', '>= 2.24.1', require: false
-gem 'rubocop-performance', '>= 1.20.0', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
 gem "good_job", github: 'bensheldon/good_job', branch: 'main'
