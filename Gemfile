@@ -84,7 +84,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
-  gem 'rspec-rails', '>= 6.1.4'
+  gem 'rspec-rails', '>= 6.1.5'
   gem 'solargraph'
   gem 'auto_reload', git: 'https://github.com/puppe1990/auto_reload'
 end
