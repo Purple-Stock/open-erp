@@ -15,16 +15,16 @@ GIT
 
 GIT
   remote: https://github.com/bensheldon/good_job.git
-  revision: 58a6605b899abb3f6a8c1232704f7950510cc201
+  revision: 43ec2ad42c46c116f5ee203310d91aa7d17eaa68
   branch: main
   specs:
-    good_job (3.29.5)
-      activejob (>= 6.0.0)
-      activerecord (>= 6.0.0)
-      concurrent-ruby (>= 1.0.2)
-      fugit (>= 1.1)
-      railties (>= 6.0.0)
-      thor (>= 0.14.1)
+    good_job (4.2.0)
+      activejob (>= 6.1.0)
+      activerecord (>= 6.1.0)
+      concurrent-ruby (>= 1.3.1)
+      fugit (>= 1.11.0)
+      railties (>= 6.1.0)
+      thor (>= 1.0.0)
 
 GIT
   remote: https://github.com/puppe1990/auto_reload
@@ -265,7 +265,7 @@ GEM
       path_expander (~> 1.0)
       ruby_parser (~> 3.1, > 3.1.0)
       sexp_processor (~> 4.8)
-    fugit (1.11.0)
+    fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
     geared_pagination (1.2.0)
