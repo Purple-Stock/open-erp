@@ -143,7 +143,7 @@ gem 'aws-sdk-s3', require: false
 gem 'cocoon'
 # gem 'jquery-rails'
 gem 'jsonapi-serializer'
-gem 'rack-cors', require: 'rack/cors'
+gem 'rack-cors', '>= 3.0.0', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0.9'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
