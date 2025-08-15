@@ -9,7 +9,7 @@ gem 'dotenv-rails', '>= 3.0.0', groups: %i[development test]
 gem 'inherited_resources', '1.14.0'
 
 # Bundle Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.8", ">= 7.0.8.4"
+gem "rails", "~> 7.1.5", ">= 7.1.5.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", ">= 3.5.2"
 
@@ -77,7 +77,7 @@ gem 'net-smtp', require: false
 
 gem 'csv-importer'
 
-gem "simple_calendar"
+gem "simple_calendar", ">= 3.1.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -124,7 +124,7 @@ end
 
 gem 'geared_pagination'
 gem 'platform_agent'
-gem 'ransack'
+gem 'ransack', '>= 4.2.0'
 gem 'spreadsheet_architect'
 
 gem 'httparty', '>= 0.21.0'
@@ -156,7 +156,7 @@ gem "good_job", github: 'bensheldon/good_job', branch: 'main'
 
 gem 'roo'
 gem 'roo-xls'
-gem 'activerecord-import'
+gem 'activerecord-import', '>= 1.8.0'
 gem 'appsignal', '>= 3.7.6'
 
 gem 'rubyzip'
