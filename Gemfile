@@ -4,12 +4,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.3.4'
 
 # dotenv-rails must be on the top
-gem 'dotenv-rails', '>= 3.0.0', groups: %i[development test]
+gem 'dotenv-rails', '>= 3.1.3', groups: %i[development test]
 
-gem 'inherited_resources', '1.14.0'
+gem 'inherited_resources', '2.0.0'
 
 # Bundle Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.8", ">= 7.0.8.4"
+gem "rails", "~> 7.0.8", ">= 7.0.8.5"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", ">= 3.5.2"
 
@@ -28,13 +28,13 @@ gem 'mini_magick'
 gem "jsbundling-rails", ">= 1.3.1"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", ">= 2.0.6"
+gem "turbo-rails", ">= 2.0.7"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails", ">= 1.3.4"
 
 gem "sentry-ruby"
-gem "sentry-rails", ">= 5.18.0"
+gem "sentry-rails", ">= 5.18.1"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -63,11 +63,11 @@ gem "image_processing", "~> 1.2"
 gem 'devise', '>= 4.9.4'
 
 # for decorator pattern https://github.com/drapergem/draper
-gem 'draper'
+gem 'draper', '>= 4.0.4'
 
 gem 'enumerate_it'
 
-gem 'factory_bot_rails', '>= 6.4.2'
+gem 'factory_bot_rails', '>= 6.4.4'
 
 gem 'faker'
 
@@ -77,15 +77,15 @@ gem 'net-smtp', require: false
 
 gem 'csv-importer'
 
-gem "simple_calendar"
+gem "simple_calendar", ">= 3.1.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
-  gem 'rspec-rails', '>= 6.1.4'
-  gem 'solargraph'
+  gem 'rspec-rails', '>= 6.1.5'
+  gem 'solargraph', '>= 0.51.0'
   gem 'auto_reload', git: 'https://github.com/puppe1990/auto_reload'
 end
 
@@ -143,21 +143,21 @@ gem 'aws-sdk-s3', require: false
 gem 'cocoon'
 # gem 'jquery-rails'
 gem 'jsonapi-serializer'
-gem 'rack-cors', require: 'rack/cors'
-gem 'rails-i18n', '~> 7.0.9'
+gem 'rack-cors', '>= 3.0.0', require: 'rack/cors'
+gem 'rails-i18n', '~> 7.0.10'
 gem 'rqrcode_png', git: "https://github.com/DCarper/rqrcode_png.git"
 gem 'serviceworker-rails'
-gem 'rubocop-rails', '>= 2.26.0', require: false
-gem 'rubocop-rspec', '>= 2.24.1', require: false
-gem 'rubocop-performance', '>= 1.20.0', require: false
+gem 'rubocop-rails', '>= 2.26.1', require: false
+gem 'rubocop-rspec', '>= 2.31.0', require: false
+gem 'rubocop-performance', '>= 1.21.1', require: false
 gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 
 gem "good_job", github: 'bensheldon/good_job', branch: 'main'
 
-gem 'roo'
+gem 'roo', '>= 3.0.0'
 gem 'roo-xls'
 gem 'activerecord-import'
-gem 'appsignal', '>= 3.7.6'
+gem 'appsignal', '>= 3.8.0'
 
 gem 'rubyzip'
 
