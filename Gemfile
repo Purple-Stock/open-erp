@@ -127,7 +127,7 @@ gem 'platform_agent'
 gem 'ransack'
 gem 'spreadsheet_architect'
 
-gem 'httparty', '>= 0.21.0'
+gem 'httparty', '>= 0.24.0'
 
 gem 'nokogiri'
 
