@@ -155,7 +155,7 @@ gem 'bling_api', git: 'https://github.com/Purple-Stock/bling_api'
 gem "good_job", github: 'bensheldon/good_job', branch: 'main'
 
 gem 'roo'
-gem 'roo-xls'
+gem 'roo-xls', '>= 2.0.0'
 gem 'activerecord-import'
 gem 'appsignal', '>= 3.7.6'
 
