@@ -7,7 +7,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
     "@hotwired/stimulus": "^3.1.1",
-    "@hotwired/turbo-rails": "^8.0.0",
+    "@hotwired/turbo-rails": "^8.0.23",
     "@nathanvda/cocoon": "^1.2.14",
     "@popperjs/core": "^2.11.8",
     "@rails/actioncable": "^7.0.8",
@@ -30,6 +30,10 @@
     "webpack-cli": "^5.1.4"
   },
   "version": "0.1.0",
+  "resolutions": {
+    "ajv": "^8.18.0",
+    "cross-spawn": "^7.0.6"
+  },
   "devDependencies": {
     "webpack-dev-server": "^4.11.1"
   },
