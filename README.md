@@ -1,17 +1,12 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/08231e31f9e94ae977af/maintainability)](https://codeclimate.com/github/Purple-Stock/open-erp/maintainability)
-[![Ruby](https://github.com/Purple-Stock/open-erp/actions/workflows/main.yml/badge.svg)](https://github.com/Purple-Stock/open-erp/actions/workflows/main.yml)
+# Casa do Celular ERP
 
-# OPEN ERP
+> _É barato e sempre será!_
 
-[README TO ENGLISH SPEAKERS](https://github.com/Purple-Stock/open-erp/blob/main/README-english-version.MD)
+ERP especializado em **lojas de celulares e assistência técnica**, com controle de estoque por **IMEI / número de série**, ordens de serviço, garantias, NFe e integração com marketplaces.
 
-O **Open ERP** é utilizado para controle de estoque, gerador de notas fiscais, financeiro. Integrações com eccomerce e diversos ERPs. É uma alternativa Open Source para o Bling ERP. Desenvolvido em Ruby on Rails a ideia do projeto é seguir o Rails Way de desenvolvimento mantendo o projeto um monolíto utilizando as últimas novidades da comunidade Rails como Stimulus, Turbo Frames, Turbo Streams.
+Desenvolvido em **Ruby on Rails 7** (Stimulus, Turbo Frames/Streams) sobre PostgreSQL. Fork adaptado de [Purple-Stock/open-erp](https://github.com/Purple-Stock/open-erp) — manteremos atribuição ao projeto de origem.
 
-A página oficial do projeto está em [página institucional](https://purplestock.com.br/)
-
-Este Projeto também é integrado com o aplicativo de QR CODE https://github.com/Purple-Stock/open-erp-qr-code-reader e o sistema gerador de etiquetas PIMACO de produtos com QR CODE https://github.com/Purple-Stock/open-erp-pimaco-print-tags.
-
-![Screenshot 2024-10-08 at 15 20 50](https://github.com/user-attachments/assets/73f40b63-ef55-431f-bbb3-cac7a5e377f5)
+A página oficial da Casa do Celular está em <https://casadocelular.com.br>.
 
 ## Desenvolvimento
 
@@ -105,28 +100,15 @@ executando o robocop e corrigindo qualquer alerta evidenciado:
 bundle exec rubocop
 ```
 
-## Demo
+## Roadmap
 
-Você pode testar o Open Erp com um clique no Heroku:
+O roadmap completo de adaptação do ERP genérico para o setor de celulares está em [CLAUDE.md](CLAUDE.md) e nas [issues](https://github.com/caiomonteirovf-bot/open-erp-celulares/issues) do repositório.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Purple-Stock/open-erp)
+## Atribuição (upstream)
 
-## Contribuindo
-
-Este projeto existe graças a todas as pessoas que contribuem. Fique a vontade para contribuir! Essas aqui são boas [issues](https://github.com/Purple-Stock/open-erp/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) para começar! Se tiver dúvidas ou interesse em utilizar em algum negócio entre em contato em matheus.puppe@purplestock.com.br
-
-
-## Contribuidores
-
-Esse projeto existe graças ao esforço e dedicação dessas pessoas:
-
-**Desenvolvimento**
-
-<a href="https://github.com/Purple-Stock/open-erp/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Purple-Stock/open-erp" />
-</a>
+Este projeto é um fork de [Purple-Stock/open-erp](https://github.com/Purple-Stock/open-erp) sob licença MIT. Os contribuidores originais estão listados em <https://github.com/Purple-Stock/open-erp/graphs/contributors>.
 
 ## Licença
 
-[MIT](https://github.com/Purple-Stock/open-erp/blob/master/LICENSE)
+[MIT](LICENSE) — herdada do projeto upstream.
 

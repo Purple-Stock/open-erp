@@ -46,7 +46,7 @@ class PurchaseProductSerializer
       Rails.application.routes.url_helpers.rails_blob_path(object.product.image,
                                                            only_path: true)
     else
-      'https://purple-stock.s3-sa-east-1.amazonaws.com/images.png'
+      ActionController::Base.helpers.image_path('product-placeholder.png')
     end
   end
 

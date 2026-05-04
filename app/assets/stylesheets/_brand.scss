@@ -1,0 +1,12 @@
+// Paleta institucional Casa do Celular
+// Mantida em sincronia com config/initializers/brand.rb
+$brand-primary:   #01297c; // Azul
+$brand-secondary: #f7b521; // Amarelo hover
+$brand-accent:    #e8aa20; // Amarelo botão / preço
+$brand-dark:      #000000;
+$brand-light:     #ffffff;
+
+// Aliases utilitários
+$brand-link:        $brand-primary;
+$brand-link-hover:  $brand-accent;
+$brand-text-on-dark: $brand-light;

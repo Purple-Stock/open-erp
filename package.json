@@ -1,5 +1,5 @@
 {
-  "name": "purple_stock",
+  "name": "casa_do_celular",
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.config.js"

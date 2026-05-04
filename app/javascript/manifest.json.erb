@@ -1,18 +1,18 @@
 <% icon_sizes = Rails.configuration.serviceworker.icon_sizes %>
 {
-  "name": "Purchase Purple Stock",
-  "short_name": "Purple Stock",
+  "name": "Casa do Celular ERP",
+  "short_name": "CDC ERP",
   "start_url": "/",
   "icons": [
   <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
     {
-      "src": "<%= image_path "https://purple-stock.s3-sa-east-1.amazonaws.com/purple-stock.png" %>",
+      "src": "<%= image_path 'cdc-logo.png' %>",
       "sizes": "<%= dim %>",
       "type": "image/png"
     }<%= i == (icon_sizes.length - 1) ? '' : ',' %>
   <% end %>
   ],
-  "theme_color": "#000000",
+  "theme_color": "#01297c",
   "background_color": "#FFFFFF",
   "display": "fullscreen",
   "orientation": "portrait"

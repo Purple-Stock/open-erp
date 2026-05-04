@@ -11,7 +11,7 @@ if [ -n "$DATABASE_URL"]; then
     echo "Tente iniciar o container usando --env DATABASE_URL=<string de conexão>"
     echo "A string de conexão precisa estar no seguinte formato: postgres://<nome do usuário>:<senha do usuário>@<host>:<porta>/<nome do banco>"
     echo "Exemplo:"
-    echo "  postgres://server_app:P4s5w0rD@database:5432/openerp"
+    echo "  postgres://server_app:P4s5w0rD@database:5432/casa_do_celular"
     exit 1
 fi
 

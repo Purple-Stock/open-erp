@@ -8,14 +8,16 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <title>Purple Stock</title>
+  <title><%= Brand::NAME %></title>
+  <meta name="description" content="<%= Brand::NAME %> — <%= Brand::TAGLINE %>">
+  <meta name="theme-color" content="<%= Brand::COLORS[:primary] %>">
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
   <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbo-track': 'reload' if platform.mobile_app? %>
 
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
-  <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico"/>
+  <link rel="icon" type="image/png" href="<%= asset_path(Brand::ASSETS[:favicon]) %>"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css"/>
 
@@ -29,7 +31,7 @@
         <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
 
           <div class="login-brand">
-            <%= image_tag('purple-logo.png', alt: 'logo', width: 100, class: 'shadow-light rounded-circle') %>
+            <%= image_tag(Brand::ASSETS[:logo], alt: "#{Brand::NAME} — #{Brand::TAGLINE}", width: 220, class: 'shadow-light') %>
           </div>
 
           <%= yield %>

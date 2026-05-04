@@ -1,14 +1,12 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/08231e31f9e94ae977af/maintainability)](https://codeclimate.com/github/Purple-Stock/open-erp/maintainability)
-[![Ruby](https://github.com/Purple-Stock/open-erp/actions/workflows/main.yml/badge.svg)](https://github.com/Purple-Stock/open-erp/actions/workflows/main.yml)
-# OPEN ERP
+# Casa do Celular ERP
 
-**Open ERP** is used for inventory management, invoice generation, and financial management. It integrates with e-commerce platforms and various ERPs. Open ERP is an open-source alternative to Bling ERP and is developed using Ruby on Rails. The project aims to follow the Rails Way of development, maintaining a monolithic architecture while utilizing the latest Rails community innovations such as Stimulus, Turbo Frames, and Turbo Streams.
+> _Cheap and always will be!_
 
-The official project page is available at [institutional page](https://purplestock.com.br/)
+ERP specialized in **mobile phone retail and repair**, with **IMEI / serial-number** stock tracking, service orders, warranties, NFe (Brazilian e-invoice) and marketplace integrations.
 
-This project is also integrated with the QR CODE app https://github.com/Purple-Stock/open-erp-qr-code-reader and the PIMACO product label generator with QR CODE https://github.com/Purple-Stock/open-erp-pimaco-print-tags.
+Built on **Ruby on Rails 7** (Stimulus, Turbo Frames/Streams) over PostgreSQL. Adapted fork of [Purple-Stock/open-erp](https://github.com/Purple-Stock/open-erp) — upstream attribution preserved.
 
-![Screenshot from 2022-11-04 19-30-07](https://user-images.githubusercontent.com/8432835/200084193-5c591172-c698-4e95-a849-f49f781a2b25.png)
+Casa do Celular's official site: <https://casadocelular.com.br>.
 
 ## Development
 
@@ -96,26 +94,14 @@ You can check if the code complies with project standards by running RuboCop and
 bundle exec rubocop
 ```
 
-## Demo
+## Roadmap
 
-You can test Open ERP with one click on Heroku:
+The full adaptation roadmap from the generic ERP to the mobile-phone vertical lives in [CLAUDE.md](CLAUDE.md) and the repository [issues](https://github.com/caiomonteirovf-bot/open-erp-celulares/issues).
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/puppe1990/open-erp)
+## Upstream attribution
 
-## Contributing
-
-This project exists thanks to all the people who contribute. Feel free to contribute! These are good [issues](https://github.com/puppe1990/open-erp/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) to start with! If you have any questions or are interested in using it in a business, please contact matheus.puppe@gmail.com.
-
-## Contributors
-
-This project exists thanks to the effort and dedication of these people:
-
-**Development**
-
-<a href="https://github.com/puppe1990/open-erp/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=puppe1990/open-erp" />
-</a>
+This project is a fork of [Purple-Stock/open-erp](https://github.com/Purple-Stock/open-erp) released under the MIT license. Original contributors are listed at <https://github.com/Purple-Stock/open-erp/graphs/contributors>.
 
 ## License
 
-[MIT](https://github.com/puppe1990/open-erp/blob/master/LICENSE)
+[MIT](LICENSE) — inherited from upstream.

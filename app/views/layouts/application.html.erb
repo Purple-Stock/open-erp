@@ -8,13 +8,15 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <title>Purple Stock</title>
+  <title><%= Brand::NAME %></title>
+  <meta name="description" content="<%= Brand::NAME %> — <%= Brand::TAGLINE %>">
+  <meta name="theme-color" content="<%= Brand::COLORS[:primary] %>">
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
   <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbo-track': 'reload' if platform.mobile_app? %>
   <%= stylesheet_link_tag 'dashboard', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico"/>
+  <link rel="icon" type="image/png" href="<%= asset_path(Brand::ASSETS[:favicon]) %>"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

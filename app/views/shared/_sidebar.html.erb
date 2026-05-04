@@ -2,10 +2,13 @@
   <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
-        <%= link_to current_user.account.company_name, root_path %>
+        <%= link_to root_path, title: "#{Brand::NAME} — #{Brand::TAGLINE}" do %>
+          <%= image_tag(Brand::ASSETS[:logo], alt: Brand::NAME, height: 28, class: 'sidebar-brand-logo me-2') %>
+          <%= current_user.account.company_name %>
+        <% end %>
       </div>
       <div class="sidebar-brand sidebar-brand-sm">
-        <%= link_to 'OP', root_path %>
+        <%= link_to Brand::SHORT_NAME, root_path, title: Brand::NAME %>
       </div>
       <ul class="sidebar-menu" data-controller="sidebar">
         <% if account_policy_enabled? %>
